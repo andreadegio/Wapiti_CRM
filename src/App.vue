@@ -1,28 +1,41 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <router-view
+  id="new_home"></router-view>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss">
+// Import Main styles for this application
+@import "assets/scss/style";
+.c-main {
+  padding-top: 0 !important;
 }
+// Header fissa e body shift di 50px in basso
+.fixed-nav {
+  position: fixed !important;
+  top: 0;
+}
+.c-body {
+  margin-top: 56px;
+}
+//STILE PER IL PULSANTE RESET DELLA MODALE ADD-NEWS
+#reset-btn {
+  color: #e55353 !important;
+  border-color: #e55353 !important;
+  background-color: white;
+  margin-right: 1em;
+}
+#reset-btn:active {
+  color: #ffffff !important;
+  border-color: #e55353 !important;
+  background-color:#e47373 !important;
+  margin-right: 1em;
+}
+
+
 </style>
