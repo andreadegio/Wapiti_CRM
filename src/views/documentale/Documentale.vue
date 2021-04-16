@@ -14,7 +14,8 @@
           :key="folder.slug"
           class="folder parent pt-0 pl-5"
         >
-          <span @click="call_intermediario_list(folder)" class="icon_folder h4">
+          <!-- <span @click="call_intermediario_list(folder)" class="icon_folder h4"> -->
+          <span @click="call_folder_list(folder.slug, folder)" class="icon_folder h4">
             {{ folder.nome }}</span
           >
         </div>
@@ -110,7 +111,7 @@
             una selezione
           </div>
           <!-- DATA TABLE PER INTERMEDIARIO -->
-          <div class="pt-5" v-if="settore === 'INTERMEDIARIO'">
+          <div class="pt-5" v-if="settore === 'INTERMEDIARIO' || settore === 'DOCUMENTAZIONE'">
             <CDataTable
               id="int_table"
               :items="files"
@@ -183,6 +184,38 @@
                   </CButton>
                 </td>
               </template>
+              <template #visualizza="{ item }">
+                <td class="py-2 text-center">
+                  <CButton
+                    v-if="item.Nomefile !== ''"
+                    color="primary"
+                    variant="outline"
+                    square
+                    size="sm"
+                    @click="preview(item.Nomefile)"
+                  >
+                    Visualizza
+                  </CButton>
+                </td>
+              </template>
+            </CDataTable>
+          </div>
+          <!-- DATA TABLE PER SERVIZI NON ASSICURATIVI -->
+          <div class="pt-5" v-if="settore === 'SERVIZI NON ASSICURATIVI'">
+            <CDataTable
+              id="altre_table"
+              :items="files"
+              :fields="fields_SERVIZI"
+              sorter
+              pagination
+              :column-filter-value="{ Tipo: filtro_gar }"
+              :table-filter="{
+                placeholder: 'Ricerca...',
+                label: 'Ricerca:',
+              }"
+              striped
+              :items-per-page-select="{ label: 'Risultati per pagina' }"
+            >
               <template #visualizza="{ item }">
                 <td class="py-2 text-center">
                   <CButton
@@ -317,7 +350,7 @@ const fields_INTERMEDIARIO = [
   },
   {
     key: "visualizza",
-    label: "Documento",
+    label: "Fascicolo  Informativo",
     sorter: false,
     filter: false,
     _style: "text-align:center;",
@@ -384,15 +417,7 @@ const fields_SERVIZI = [
   {
     key: "Descrizione",
     _style: "font-weight: bold; text-align: center;",
-    label: "Compagnia",
-  },
-
-  {
-    key: "visualizza",
-    label: "POG",
-    sorter: false,
-    filter: false,
-    _style: "text-align: center;",
+    label: "Descrizione",
   },
   {
     key: "visualizza",
@@ -436,23 +461,38 @@ export default {
       this.file_name = "";
       this.select = true;
       // this.timer= 0;
-      if (slug == "RC_AUTO") {
-        this.files = [];
-        target_api = "RCA";
-        this.settore = "RC AUTO";
-        this.load_documentale(target_api);
+      switch (slug) {
+        case "INTERMEDIARIO":
+          this.files = [];
+          target_api = "DocumentiIntermediario";
+          this.settore = "INTERMEDIARIO";
+          break;
+        case "PRECONTRATTUALE":
+          this.files = [];
+          target_api = "PreContrattuale";
+          this.settore = "DOCUMENTAZIONE";
+          break;
+        case "RC_AUTO":
+          this.files = [];
+          target_api = "RCA";
+          this.settore = "RC AUTO";
+          break;
+        case "ALTRE_GARANZIE":
+          this.files = [];
+          this.settore = "ALTRE GARANZIE";
+          target_api = "AltreGaranzie";
+          this.call_garanzie_list(); // chiamata per popolare il sotto elenco delle garanzie
+          break;
+        case "ALTRI_SERVIZI":
+          this.settore = "SERVIZI NON ASSICURATIVI";
+          target_api = "ServiziNonAssicurativi";
+          // AGGANCIARE SERVIZIO PER ELENCO SERVIZI NON ASSICURATIVI
+          break;
+          default:
+            target_api="";
       }
-      if (slug == "ALTRE_GARANZIE") {
-        this.files = [];
-        this.settore = "ALTRE GARANZIE";
-        target_api = "AltreGaranzie";
-        this.load_documentale(target_api);
-        this.call_garanzie_list();
-      }
-      if (slug == "ALTRI_SERVIZI") {
-        this.settore = "ALTRI SERVIZI";
-      }
-      // return this.files;
+      this.load_documentale(target_api);
+    
     },
 
     async load_documentale(target) {
@@ -517,6 +557,7 @@ export default {
 
       this.altre_gar = lista_gar;
     },
+
     filter_garanzie(tipo) {
       // console.log(tipo);
       this.select = true;
@@ -537,6 +578,8 @@ export default {
       // this.files= temp_file;
       this.filtro_gar = tipo;
     },
+
+    // CHIAMATA PER LE SOTTOCARTELLE E PER FILTRARE 
     call_parent_list(folder_name, filtro = "") {
       this.select = true;
       // this.timer= 0;
@@ -548,35 +591,8 @@ export default {
       this.file_name = "";
       this.files = [];
     },
-    call_intermediario_list(folder_name, filtro = "") {
-      this.select = true;
-      // this.timer= 0;
-      this.filtro_gar = filtro;
-      this.breadcrumbs = [];
-      this.breadcrumbs.push([folder_name.nome, folder_name.ico]);
-      // alert(index);
-      this.settore = "INTERMEDIARIO";
-      this.file_name = "";
-      this.files = [
-        {
-          idCompagnia: 1165,
-          Tipo: "DOCUMENTO ABY",
-          Descrizione: "MECCANISMI DI DISTRIBUZIONE DI ABY BROKER",
-          Nomefile: "1165_CondizioniPolizza_PATENTEPUNTI.pdf",
-          Pog: "",
-        },
 
-        {
-          idCompagnia: 1165,
-          Tipo: "DOCUMENTO ABY",
-          Descrizione: "MECCANISMI DI DISTRIBUZIONE DELL'INTERMEDIARIO",
-          Nomefile: "1165_CondizioniPolizza_PATENTEPUNTI.pdf",
-          Pog: "",
-        },
-      ];
-
-      // this.load_documentale('Intermediario');  // Chiamata API -> Broker
-    },
+    // CHIAMATA PER VISUALIZZARE I PDF
     preview(url) {
       if (this.timer == 0) {
         this.select = false;

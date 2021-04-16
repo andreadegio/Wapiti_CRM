@@ -9,10 +9,19 @@
 const documenti_list = [
   {
     nome: "DOCUMENTI DELL'INTERMEDIARIO",
+    slug: "INTERMEDIARIO",
     tipo: "folder",
     ico: "edit",
     childs: [],
   },
+  {
+    nome: "PRECONTRATTUALE",
+    slug: "PRECONTRATTUALE",
+    tipo: "folder",
+    ico: "edit",
+    childs: [],
+  },
+
 ];
 
 const folder_list = [
@@ -35,7 +44,7 @@ const folder_list = [
         ico: "car",
       },
       {
-        nome: "ALTRI SERVIZI",
+        nome: "SERVIZI NON ASSICURATIVI",
         slug: "ALTRI_SERVIZI",
         tipo: "folder",
         ico: "car",

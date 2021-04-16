@@ -25,7 +25,7 @@
         <NewsOperative class="h-100" :key="triggerNews" />
       </CCol>
       <CCol md="4">
-        <NewsMondo class="h-100" v-show="show_async != 0" />
+        <NewsMondo class="h-100" v-show="show_async != 0"/>
       </CCol>
       <CCol md="1"> </CCol>
     </CRow>
@@ -151,6 +151,7 @@ export default {
       show_async: 0,
       news_operative: null,
       triggerNews: 0,
+      news_mondo: null,
     };
   },
 
@@ -195,11 +196,14 @@ export default {
         "unitaoperativaID",
         risposta_chisono.data.idUnitaOperativa
       );
-      // alert(risposta_chisono.data.idUtente);
+      
       this.triggerNews += 1;
-      this.latest_news();
+      this.latest_news(); // ultime news operative
+      this.load_news(); // ultime news mondo
     },
+
     async latest_news() {
+      // CARICO LE ULTIME 3 NEWS OPERATIVE PER LA HOME
       var config = {
         method: "post",
         url: config_data.servizi_broker + "LatestNewsOperative",
@@ -209,12 +213,7 @@ export default {
           unitaoperativaID: localStorage.getItem("unitaoperativaID"),
         },
       };
-      // alert("richiesta con " +localStorage.getItem("userID") +" " +localStorage.getItem("anagraficaID"));
       const risposta_latestNews = await axios(config);
-
-      // console.log(
-      //   "risposta api news" + JSON.stringify(risposta_latestNews.data)
-      // );
       this.triggerNews += 1;
       this.news_operative = risposta_latestNews.data.map((item, id) => {
         return { ...item, id };
@@ -223,11 +222,34 @@ export default {
         "news_operative",
         JSON.stringify(this.news_operative)
       );
-      // alert(localStorage.getItem("news_operative"));
-      this.$forceUpdate;
+      
       this.show_async = 1;
       this.triggerNews += 1;
     },
+
+    async load_news() {
+      console.log("caricamento news mondo.........")
+      // CARICO LE ULTIME 3 NEWS MONDO PER LA HOME
+      var chiamata_news = [];
+      await axios
+        .get(config_data.api_url + "listanewshome")
+        .then((response) => {
+          chiamata_news = response.data;
+        });
+      this.news_mondo = chiamata_news.map((item, id) => {
+        return { ...item, id };
+      });
+       localStorage.setItem(
+        "news_mondo",
+        JSON.stringify(this.news_mondo)
+      );
+      console.log(this.news_mondo);
+      
+      this.show_async = 1;
+      this.triggerNews += 1;
+    },
+
+
   },
 };
 </script>

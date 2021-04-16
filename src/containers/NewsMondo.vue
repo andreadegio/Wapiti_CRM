@@ -8,7 +8,9 @@
       size="lg"
     >
       <template #header>
-        <strong style="text-transform: uppercase">{{ news[newsNum].titolo }}</strong>
+        <strong style="text-transform: uppercase">{{
+          news[newsNum].titolo
+        }}</strong>
         <CButton class="close" @click="newsModal = false">
           <!-- <button type="button" class="close" aria-label="Close"> -->
           <span aria-hidden="true">&times;</span>
@@ -16,7 +18,10 @@
       </template>
       <template>
         <div style="text-align: center">
-          <CImg :src="$parent.config_data.img_news_url + news[newsNum].immagine" style="max-width: 760px; max-height: 500px;" />
+          <CImg
+            :src="$parent.config_data.img_news_url + news[newsNum].immagine"
+            style="max-width: 760px; max-height: 500px"
+          />
         </div>
         <div class="text-justify">
           {{ news[newsNum].contenuto }}
@@ -54,7 +59,11 @@
           >
             <CMedia aside-right aside-vertical-position="center">
               <template #aside>
-                <CImg :src="$parent.config_data.img_news_url + item.immagine" width="100px" height="100px" />
+                <CImg
+                  :src="$parent.config_data.img_news_url + item.immagine"
+                  width="100px"
+                  height="100px"
+                />
               </template>
 
               <h5 class="mt-0 text-justify" style="text-transform: uppercase">
@@ -83,7 +92,7 @@
         </CListGroup>
       </CCardBody>
       <CCardFooter>
-        <div class="card-header-actions"  v-if="admin">
+        <div class="card-header-actions" v-if="admin">
           <CLink to="Gestione_news_Mondo" class="card-header-action btn-setting"
             ><CIcon name="cil-settings" /><strong> Gestione</strong>
           </CLink>
@@ -93,43 +102,39 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+// import axios from "axios";
 
 export default {
   name: "NewsMondo",
 
   data() {
     return {
-      news: [],
+      news: JSON.parse(localStorage.getItem("news_mondo")),
       newsNum: 0,
       newsModal: false,
-      user_storage:[],
+      user_storage: [],
       admin: JSON.parse(localStorage.getItem("chisono_data")).Is_Sede,
-      
     };
   },
   mounted() {
-    this.load_news();
-    this.user_storage= JSON.parse(localStorage.getItem("chisono_data"));
-    // console.log(this.user_storage);
-    // console.log(this.user_storage.Nominativo);
+    this.user_storage = JSON.parse(localStorage.getItem("chisono_data"));
   },
   methods: {
     showModal(indice) {
       this.newsModal = true;
       this.newsNum = indice;
     },
-    async load_news() {
-      var chiamata_news = [];
-      await axios
-        .get(this.$parent.config_data.api_url + "listanewshome")
-        .then((response) => {
-          chiamata_news = response.data;
-        });
-      this.news = chiamata_news.map((item, id) => {
-        return { ...item, id };
-      });
-    },
+    // async load_news() {
+    //   var chiamata_news = [];
+    //   await axios
+    //     .get(this.$parent.config_data.api_url + "listanewshome")
+    //     .then((response) => {
+    //       chiamata_news = response.data;
+    //     });
+    //   this.news = chiamata_news.map((item, id) => {
+    //     return { ...item, id };
+    //   });
+    // },
   },
 };
 </script>
