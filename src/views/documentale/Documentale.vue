@@ -158,6 +158,7 @@
                               border-left: 0 !important;
                               border-right: 0 !important;
                             "
+                            class="text-center"
                           >
                             Tipologia
                           </th>
@@ -241,14 +242,9 @@
               id="int_table"
               :items="files"
               :fields="fields_INTERMEDIARIO"
-              sorter
-              pagination
-              :table-filter="{
-                placeholder: 'Ricerca...',
-                label: 'Ricerca:',
-              }"
+              
               striped
-              :items-per-page-select="{ label: 'Risultati per pagina' }"
+             
               :noItemsView="{ noItems: ' ' }"
             >
               <template #visualizza_POG="{ item }">

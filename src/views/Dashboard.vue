@@ -227,7 +227,7 @@ export default {
     },
 
     async load_news() {
-      console.log("caricamento news mondo.........")
+      // console.log("caricamento news mondo.........")
       // CARICO LE ULTIME 3 NEWS MONDO PER LA HOME
       var chiamata_news = [];
       await axios
@@ -242,7 +242,7 @@ export default {
         "news_mondo",
         JSON.stringify(this.news_mondo)
       );
-      console.log(this.news_mondo);
+      // console.log(this.news_mondo);
       
       this.show_async = 1;
       this.triggerNews += 1;
