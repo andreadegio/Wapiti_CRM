@@ -14,8 +14,15 @@
           :key="folder.slug"
           class="folder parent pt-0 pl-5"
         >
-          <!-- <span @click="call_intermediario_list(folder)" class="icon_folder h4"> -->
-          <span @click="call_folder_list(folder.slug, folder)" class="icon_folder h4">
+          <span
+            @click="
+              call_folder_list(folder);
+              dove_sono = folder.slug;
+            "
+            style="white-space: nowrap"
+            class="icon_folder h4"
+            :class="{ highlight: dove_sono == folder.slug }"
+          >
             {{ folder.nome }}</span
           >
         </div>
@@ -26,92 +33,210 @@
           :key="folder.slug"
           class="folder parent pt-0 pl-5"
         >
-          <span @click="call_parent_list(folder)" class="icon_folder h4">
+          <span
+            @click="
+              call_folder_list(folder);
+              dove_sono = folder.slug;
+            "
+            style="white-space: nowrap"
+            class="icon_folder h4"
+            :class="{ highlight: dove_sono == folder.slug }"
+          >
             {{ folder.nome }}</span
           >
           <li
             v-for="items in folder.childs"
             :key="items.slug"
-            class="folder h5"
+            class="folder h5 pl-3"
           >
             └
             <span
-              @click="call_folder_list(items.slug, folder)"
+              @click="
+                call_subfolder_list(items, folder);
+                dove_sono = items.slug;
+              "
               class="icon_folder"
+              :class="{ highlight: dove_sono == items.slug }"
+              style="white-space: nowrap"
               >{{ items.nome }}</span
             >
             <div class="pl-4" v-show="items.slug == 'ALTRE_GARANZIE'">
               <li
                 v-for="tipo in altre_gar"
                 :key="tipo.index"
-                @click="filter_garanzie(tipo, folder)"
+                class="folder h6 pl-3"
+              >
+                └
+                <span
+                  class="icon_folder"
+                  style="white-space: nowrap"
+                  @click="
+                    filter_garanzie(tipo);
+                    dove_sono = tipo;
+                  "
+                  :class="{ highlight: dove_sono == tipo }"
+                  >{{ tipo }}</span
+                >
+              </li>
+            </div>
+            <div class="pl-4" v-show="items.slug == 'ALTRI_SERVIZI'">
+              <li
+                v-for="tipo in altri_servizi"
+                :key="tipo.index"
                 class="folder h6"
               >
-                └ <span class="icon_folder">{{ tipo }}</span>
+                └
+                <span
+                  class="icon_folder"
+                  style="white-space: nowrap"
+                  @click="
+                    filter_servizi(tipo);
+                    dove_sono = tipo;
+                  "
+                  :class="{ highlight: dove_sono == tipo }"
+                  >{{ tipo }}</span
+                >
               </li>
             </div>
           </li>
         </div>
       </CCol>
 
-      <!-- colonna elenco file browser -->
+      <!-- colonna centrale elenco file browser -->
       <CCol
         md="5"
         style="background-color: white; border-right: 1px solid lightgrey"
       >
         <div>
           <!-- <span class="h2"> Documenti</span><br /> -->
-          <!-- breadrumbs -->
+          <!-- breadcrumbs -->
           <div v-if="breadcrumbs.length > 0" id="breadcrumbs" class="pt-3">
             <span style="border: 1px solid; border-radius: 3px; padding: 2px">
               <font-awesome-icon :icon="breadcrumbs[0][1]"></font-awesome-icon>
               {{ breadcrumbs[0][0] }}
             </span>
-            <span style="padding: 2px"
+            <span v-if="breadcrumbs.length >= 2" style="padding: 2px"
               ><i class="fas fa-chevron-right"></i
             ></span>
             <span
-              v-if="settore !== ''"
+              v-if="breadcrumbs.length >= 2"
               style="border: 1px solid; border-radius: 3px; padding: 2px"
-              >{{ settore }}</span
+              >{{ breadcrumbs[1][0] }}</span
             >
-            <span v-if="filtro_gar !== ''" style="padding: 2px"
+            <span v-if="breadcrumbs.length == 3" style="padding: 2px"
+              ><i class="fas fa-chevron-right"></i
+            ></span>
+            <span
+              v-if="breadcrumbs.length == 3"
+              style="border: 1px solid; border-radius: 3px; padding: 2px"
+              >{{ breadcrumbs[2][0] }}</span
+            >
+            <!-- <span v-if="filtro_gar !== ''" style="padding: 2px"
               ><i class="fas fa-chevron-right"></i>
               <span
                 style="border: 1px solid; border-radius: 3px; padding: 2px"
                 >{{ filtro_gar }}</span
               ></span
-            >
-            <div class="pt-5 h2" v-if="settore == ''">
-              <span v-if="breadcrumbs[0][0] == 'SETTORI 1 E 2'">
+            > -->
+            <div class="pt-5" v-if="settore == 'SETTORI 1 E 2'">
+              <!-- <div class="pt-5 h2"> -->
+              <span>
                 <div
                   v-for="folder in folder_list"
                   :key="folder.name"
-                  class="folder parent pt-0 pl-5"
-                  style="background-color: #ebedef"
+                  class="pt-0"
                 >
-                  <li
+                  <div v-show="folder.subFolder">
+                    <table
+                      class="table table-striped table-bordered"
+                      style="border: 0 !important"
+                    >
+                      <thead>
+                        <tr>
+                          <th
+                            style="
+                              border-left: 0 !important;
+                              border-right: 0 !important;
+                            "
+                          >
+                            Tipologia
+                          </th>
+                          <th
+                            style="
+                              border-left: 0 !important;
+                              border-right: 0 !important;
+                            "
+                          ></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          v-for="items in folder.childs"
+                          :key="items.nome"
+                          @click="
+                            call_subfolder_list(items, folder);
+                            dove_sono = items.slug;
+                          "
+                          style="cursor: pointer"
+                        >
+                          <td
+                            style="
+                              border-left: 0 !important;
+                              border-right: 0 !important;
+                            "
+                          >
+                            <span class="icon_folder pr-2"></span
+                            >{{ items.nome }}
+                          </td>
+
+                          <td
+                          class="text-right"
+                            style="
+                              border-left: 0 !important;
+                              border-right: 0 !important;
+                            "
+                          >
+                            <CButton
+                              color="primary"
+                              variant="outline"
+                              square
+                              size="sm"
+                            >
+                              Visualizza
+                            </CButton>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- <li
                     v-for="items in folder.childs"
                     :key="items.nome"
                     class="p-2 folder h5"
                   >
                     <span
-                      @click="call_folder_list(items.slug, folder)"
+                      @click="call_subfolder_list(items, folder)"
                       class="icon_folder"
                       >{{ items.nome }}</span
                     >
-                  </li>
+                  </li> -->
                 </div>
               </span>
-              <span v-else> Al momento non ci sono documenti disponibili </span>
+              
             </div>
           </div>
           <div v-else class="pt-5 display-4">
             <font-awesome-icon icon="arrow-left"></font-awesome-icon> Effettua
             una selezione
           </div>
+          <div v-show="vuoto" class="pt-5 h4 text-center">
+               - Al momento non ci sono documenti disponibili -
+              </div>
           <!-- DATA TABLE PER INTERMEDIARIO -->
-          <div class="pt-5" v-if="settore === 'INTERMEDIARIO' || settore === 'DOCUMENTAZIONE'">
+          <div
+            class="pt-5"
+            v-if="settore === 'INTERMEDIARIO' || settore === 'PRECONTRATTUALE'"
+          >
             <CDataTable
               id="int_table"
               :items="files"
@@ -124,6 +249,7 @@
               }"
               striped
               :items-per-page-select="{ label: 'Risultati per pagina' }"
+              :noItemsView="{ noItems: ' ' }"
             >
               <template #visualizza_POG="{ item }">
                 <td class="py-2 text-center">
@@ -169,6 +295,7 @@
               }"
               striped
               :items-per-page-select="{ label: 'Risultati per pagina' }"
+              :noItemsView="{ noItems: ' ' }"
             >
               <template #visualizza_POG="{ item }">
                 <td class="py-2 text-center">
@@ -215,6 +342,7 @@
               }"
               striped
               :items-per-page-select="{ label: 'Risultati per pagina' }"
+              :noItemsView="{ noItems: ' ' }"
             >
               <template #visualizza="{ item }">
                 <td class="py-2 text-center">
@@ -247,6 +375,7 @@
               }"
               striped
               :items-per-page-select="{ label: 'Risultati per pagina' }"
+              :noItemsView="{ noItems: ' ' }"
             >
               <template #visualizza_POG="{ item }">
                 <td class="py-2 text-center">
@@ -339,7 +468,6 @@
 import axios from "axios";
 import { folder_list, documenti_list } from "./folder";
 import { config_data } from "../../../public/config/config";
-// import pdf from "vue-pdf";
 
 // NOMI DELLE COLONNE DELLA TABELLA PER INTERMEDIARIO
 const fields_INTERMEDIARIO = [
@@ -393,7 +521,7 @@ const fields_ALTRE = [
   },
 
   {
-    key: "visualizza",
+    key: "visualizza_POG",
     label: "POG",
     sorter: false,
     filter: false,
@@ -427,6 +555,23 @@ const fields_SERVIZI = [
     _style: "text-align: center;",
   },
 ];
+// NOMI DELLE COLONNE PER LA TABELLA SETTORE12 (ELENCO SUBFOLDER)
+const fields_SETTORE12 = [
+  {
+    key: "Nome",
+    _style: "font-weight: bold; text-align: center;",
+    label: "Tipologia",
+  },
+
+  {
+    key: "visualizza",
+    label: "Set Informativo",
+    sorter: false,
+    filter: false,
+    _style: "text-align: center;",
+  },
+];
+
 export default {
   name: "Documentale",
 
@@ -435,71 +580,150 @@ export default {
     return {
       file_name: "", // Usato per passare l'url alla preview
       folder_list, // Albero dei documenti (veicoli->rca->altre garanzie / rami / energia)
-      select: true,
-      documenti_list,
+      documenti_list, // Documenti intermediario e precontrattuale
+      vuoto: false, // Usato per controllare il messaggio "Non ci sono documenti"
+      settore: "", // utilizzato per assegnare il data table
+      subfolder: "", // utilizzato per il breadcrumb delle cartelle di secondo livello
+      breadcrumbs: [], // breadcrumbs di navigazione
+      timer: 0, // Utilizzato per temporizzare il passaggio dall'apertura di un documento a l'altro
+      select: true, // utilizzato per la visualizzazione del file per far partire il loader o meno
       files: [].map((item, id) => {
         return { ...item, id };
       }),
+      dove_sono: undefined,
+
       fields_RCA,
       fields_ALTRE,
       fields_SERVIZI,
       fields_INTERMEDIARIO,
-      settore: "",
-      breadcrumbs: [],
+      fields_SETTORE12,
+
       altre_gar: [],
+      altri_servizi: [],
       filtro_gar: "",
-      timer: 0,
     };
   },
 
   methods: {
-    call_folder_list(slug, folder_name, filtro = "") {
-      this.filtro_gar = filtro;
-      this.breadcrumbs = [];
-      this.breadcrumbs.push([folder_name.nome, folder_name.ico]);
-      let target_api = "";
-      this.file_name = "";
-      this.select = true;
-      // this.timer= 0;
-      switch (slug) {
-        case "INTERMEDIARIO":
-          this.files = [];
-          target_api = "DocumentiIntermediario";
-          this.settore = "INTERMEDIARIO";
-          break;
-        case "PRECONTRATTUALE":
-          this.files = [];
-          target_api = "PreContrattuale";
-          this.settore = "DOCUMENTAZIONE";
-          break;
+    call_folder_list(folder) {
+      // Funzione chiamata dalle cartelle di primo livello (documenti intermediario, precontrattuale, ecc)
+      
+      this.vuoto = false; // Inizializzo il messaggio "non ci sono file"
+      // Inizializzo le sottocartelle
+      this.altre_gar = [];
+      this.altri_servizi = [];
+      this.filtro_gar = "";
+
+      this.breadcrumbs = []; // per popolare il Breadcrumbs
+      this.breadcrumbs.push([folder.nome, folder.ico]);
+
+      this.settore = folder.slug; // Per identificare il data-table
+      this.files = []; // array dei risultati
+      if (folder.URL) {
+        // Chiamo la funzione per recuperare le informazioni dai servizi
+        this.load_documentale(folder.URL);
+      } else {
+        if (folder.subFolder == false) {
+          // console.log("vuoto");
+          this.vuoto = true;
+        }
+      }
+    },
+
+    call_subfolder_list(subfolder, folder) {
+      // Funzione chiamata dalle cartelle di secondo livello (RCA, Altre garanzie, ecc)
+      this.vuoto = false; // Inizializzo il messaggio "non ci sono file"
+
+      // Inizializzo le sottocartelle
+      this.altre_gar = [];
+      this.altri_servizi = [];
+      this.filtro_gar = "";
+
+      this.breadcrumbs = []; // per popolare il Breadcrumbs
+      this.breadcrumbs.push([folder.nome, folder.ico]);
+      this.breadcrumbs.push([subfolder.nome]);
+      
+      this.subfolder = subfolder.slug; // Per identificare il data-table
+      switch (subfolder.slug) {
         case "RC_AUTO":
           this.files = [];
-          target_api = "RCA";
           this.settore = "RC AUTO";
           break;
         case "ALTRE_GARANZIE":
           this.files = [];
           this.settore = "ALTRE GARANZIE";
-          target_api = "AltreGaranzie";
-          this.call_garanzie_list(); // chiamata per popolare il sotto elenco delle garanzie
+          this.call_garanzie_list("", "AltreGaranzie"); // chiamata per popolare il sotto elenco delle garanzie
           break;
         case "ALTRI_SERVIZI":
           this.settore = "SERVIZI NON ASSICURATIVI";
-          target_api = "ServiziNonAssicurativi";
-          // AGGANCIARE SERVIZIO PER ELENCO SERVIZI NON ASSICURATIVI
+          this.call_garanzie_list("", "ServiziNonAssicurativi"); // chiamata per popolare il sotto elenco delle garanzie
           break;
-          default:
-            target_api="";
       }
-      this.load_documentale(target_api);
-    
+      this.files = []; // array dei risultati
+      if (subfolder.URL) {
+        // Chiamo la funzione per recuperare le informazioni dai servizi
+        this.load_documentale(subfolder.URL);
+      } else {
+        if (subfolder.subFolder == false) {
+          this.vuoto = true;
+        }
+      }
+    },
+
+    async call_garanzie_list(filtro = "", target = "") {
+      // FUNZIONE PER GENERARE LE SOTTO CARTELLE DI TERZO LIVELLO DI ALTRE GARANZIE E SERVIZI
+      this.select = true;
+      this.file_name = "";
+      this.filtro_gar = filtro; //utilizzato per filtrare i risultati nel datatable
+      var elenco = [];
+      var lista_gar = [];
+      if (target !== "") {
+        var config = {
+          method: "post",
+          url: config_data.servizi_broker + "Documentale_" + target,
+          headers: {
+            userID: localStorage.getItem("userID"),
+            anagraficaID: localStorage.getItem("anagraficaID"),
+          },
+        };
+        await axios(config)
+          .then(function (response) {
+            // console.log(JSON.stringify(response.data));
+            elenco = response.data;
+            var lookup = {};
+            var items = elenco;
+            for (var item, i = 0; (item = items[i++]); ) {
+              var name = item.Tipo;
+
+              if (!(name in lookup)) {
+                lookup[name] = 1;
+                lista_gar.push(name);
+              }
+            }
+          })
+          .catch(function (error) {
+            elenco = [];
+            console.log(error);
+          });
+      }
+      switch (target) {
+        case "AltreGaranzie":
+          this.altre_gar = lista_gar;
+          break;
+        case "ServiziNonAssicurativi":
+          this.altri_servizi = lista_gar;
+          break;
+        default:
+          this.altre_gar = lista_gar;
+      }
     },
 
     async load_documentale(target) {
+      this.vuoto = false; // Inizializzo in modo da non mostrare il messaggio "nessun documento" in fase di caricamento
       var elenco = [];
       var config = {
         method: "post",
-        url: config_data.servizi_broker + "Documentale_" + target,
+        url: config_data.servizi_broker + target,
         headers: {
           userID: localStorage.getItem("userID"),
           anagraficaID: localStorage.getItem("anagraficaID"),
@@ -507,79 +731,45 @@ export default {
       };
       await axios(config)
         .then(function (response) {
-          // console.log(JSON.stringify(response.data));
           elenco = response.data;
-          //  console.log("valore di elenco " + elenco);
         })
         .catch(function (error) {
           elenco = [];
           console.log(error);
         });
       this.files = elenco;
-    },
-
-    async call_garanzie_list(filtro = "") {
-      this.select = true;
-      // this.timer= 0;
-      this.file_name = "";
-      this.filtro_gar = filtro;
-      this.altre_gar = [];
-      var elenco = [];
-      var lista_gar = [];
-      let target = "AltreGaranzie";
-      var config = {
-        method: "post",
-        url: config_data.servizi_broker + "Documentale_" + target,
-        headers: {
-          userID: localStorage.getItem("userID"),
-          anagraficaID: localStorage.getItem("anagraficaID"),
-        },
-      };
-      await axios(config)
-        .then(function (response) {
-          // console.log(JSON.stringify(response.data));
-          elenco = response.data;
-          var lookup = {};
-          var items = elenco;
-          for (var item, i = 0; (item = items[i++]); ) {
-            var name = item.Tipo;
-
-            if (!(name in lookup)) {
-              lookup[name] = 1;
-              lista_gar.push(name);
-            }
-          }
-        })
-        .catch(function (error) {
-          elenco = [];
-          console.log(error);
-        });
-
-      this.altre_gar = lista_gar;
+      if (this.files.length <= 0) {
+        this.vuoto = true; // Variabile usata per il messaggio "non ci sono documenti"
+      }
     },
 
     filter_garanzie(tipo) {
-      // console.log(tipo);
       this.select = true;
-      if (this.settore !== "ALTRE GARANZIE") {
-        this.filtro_gar = tipo;
-        this.breadcrumbs = [];
-        this.breadcrumbs.push(["SETTORE 1 E 2", "car"]);
-        let target_api = "";
-        this.file_name = "";
-        this.settore = "ALTRE GARANZIE";
-        target_api = "AltreGaranzie";
-        this.load_documentale(target_api);
-        this.call_garanzie_list();
-      }
+      this.breadcrumbs.length == 3
+        ? (this.breadcrumbs[2][0] = tipo)
+        : this.breadcrumbs.push([tipo]);
       // svuotamento dell'array files necessario per reimpostare la paginazione
-      // let temp_file= this.files;
-      // this.files =[];
-      // this.files= temp_file;
+      let temp_file = this.files;
+      this.files = [];
+      this.files = temp_file;
       this.filtro_gar = tipo;
     },
 
-    // CHIAMATA PER LE SOTTOCARTELLE E PER FILTRARE 
+    filter_servizi(tipo) {
+      // console.log(tipo);
+      this.select = true;
+      // console.log("settore: "+ this.settore);
+      this.breadcrumbs.length == 3
+        ? (this.breadcrumbs[2][0] = tipo)
+        : this.breadcrumbs.push([tipo]);
+      // svuotamento dell'array files necessario per reimpostare la paginazione
+      let temp_file = this.files;
+      this.files = [];
+      this.files = temp_file;
+      this.filtro_gar = tipo;
+    },
+
+    // CHIAMATA PER LE SOTTOCARTELLE E PER FILTRARE
     call_parent_list(folder_name, filtro = "") {
       this.select = true;
       // this.timer= 0;
@@ -603,7 +793,7 @@ export default {
         }, 8000);
       } else {
         this.file_name = "";
-        console.log("riprovo");
+        // console.log("riprovo");
         setTimeout(() => {
           this.preview(url);
         }, 1000);
@@ -637,4 +827,17 @@ export default {
   font-weight: 900;
   padding-right: 5px;
 }
+.icon_folder.highlight::before {
+  content: "\f07c";
+  font-family: "Font Awesome 5 free";
+  color: rgb(252, 198, 3);
+  font-size: 2em;
+  font-weight: 900;
+  padding-right: 5px;
+}
+.highlight {
+  font-weight: bold;
+}
+
+
 </style>

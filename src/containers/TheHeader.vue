@@ -5,7 +5,7 @@
     <CHeaderNav class="d-md-down-none mr-auto">
       <CHeaderNavLink to="/dashboard" exact>
       <CHeaderNavItem class="px-3">
-       <img src="img/abyway_logo.png" width="200px">
+       <img src="img/logo_abyway.png" width="200px">
       </CHeaderNavItem>
       </CHeaderNavLink>
       

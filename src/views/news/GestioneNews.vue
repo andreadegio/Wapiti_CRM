@@ -37,13 +37,13 @@
         >
           <!-- testa  -->
           <template #thead-top>
-            <div class="text-left" style="color: white">
+            <div class="text-left" >
               <br />
               <CButton
                 @click="onAggiungiClick()"
-                color="info"
+                color="primary"
                 size="s"
-                variant="square"
+                variant="outline"
               >
                 Aggiungi News
               </CButton>

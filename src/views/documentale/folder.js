@@ -4,6 +4,7 @@
 //   SETTORE 1 E 2
 //     |- RCA
 //     |- ALTRE GARANZIE <- SOTTO ALBERATURA DINAMICA DAL JSON
+//     |- SERVIZI NON ASSICURATIVI <- SOTTO ALBERATURA DINAMICA DAL JSON
 //   RAMI
 //   GAS E LUCE
 const documenti_list = [
@@ -12,14 +13,18 @@ const documenti_list = [
     slug: "INTERMEDIARIO",
     tipo: "folder",
     ico: "edit",
+    URL: "Documentale_DocumentiIntermediario",
     childs: [],
+    subFolder: false,
   },
   {
     nome: "PRECONTRATTUALE",
     slug: "PRECONTRATTUALE",
     tipo: "folder",
     ico: "edit",
+    URL: "Documentale_PreContrattuale",
     childs: [],
+    subFolder: false,
   },
 
 ];
@@ -27,27 +32,35 @@ const documenti_list = [
 const folder_list = [
   {
     nome: "SETTORI 1 E 2",
+    slug: "SETTORI 1 E 2",
     tipo: "folder",
     ico: "car",
+    subFolder: true,
     childs: [
       {
         nome: "RC AUTO",
         slug: "RC_AUTO",
         tipo: "folder",
         ico: "car",
+        URL: "Documentale_RCA",
         childs: [],
+        subFolder: false,
       },
       {
         nome: "ALTRE GARANZIE ASSICURATIVE",
         slug: "ALTRE_GARANZIE",
         tipo: "folder",
         ico: "car",
+        URL: "Documentale_AltreGaranzie",
+        subFolder: true,
       },
       {
         nome: "SERVIZI NON ASSICURATIVI",
         slug: "ALTRI_SERVIZI",
         tipo: "folder",
         ico: "car",
+        URL: "Documentale_ServiziNonAssicurativi",
+        subFolder: true,
       },
     ],
   },
@@ -58,6 +71,8 @@ const folder_list = [
     tipo: "folder",
     childs: [],
     ico: "user-shield",
+    URL: undefined,
+    subFolder: false,
   },
   // {
   //   nome: "GAS E LUCE",

@@ -1,51 +1,44 @@
 <template>
   <div class="c-app flex-row align-items-center sfondo_gradiente">
     <CContainer>
-      <h1 class="display-3 text-center" style="color: white">
-        Benvenuti in
-        <img class="login-img" src="img/abyway_logo.png" />
+      <h1 class="display-3 text-center" style="color: white; font-weight: bold">
+        Benvenuto in
+        <img class="login-img" src="img/logo_abyway.png" />
       </h1>
       <br />
       <div id="scritta"><hr /></div>
       <CRow class="justify-content-center">
         <CCol md="1"> </CCol>
-        <CCol md="4">
-          <CCardGroup class="pt-5">
+        <CCol md="5">
+          <CCardGroup class="pt-5" style="padding-top: 15% !important">
             <CCard
               id="gruppo_card"
               class="p-4"
               style="
-                background-color: #012f82;
-                color: white;
+                background-color: rgba(249, 249, 249, 0.42);
                 color: white;
                 box-shadow: 5px 5px 7px 0px rgba(0, 0, 0, 0.4);
               "
             >
-              <CCardBody
-                style="
-                  background-color: #012f82;
-                  color: white;
-                  border-color: #3c74d0;
-                "
-              >
+              <CCardBody style="color: #1f2f55; border-color: #3c74d0">
                 <div
                   v-show="messaggio_errore"
                   style="color: darkred; font-weight: bold"
                 >
                   <CAlert color="danger" closeButton>
-                    Credenziali errate
+                    Credenziali errate--+
                   </CAlert>
                 </div>
-               
-                <form
-                  @submit="getUserValue"
-                  :action="login_url"
-                  method="post"
-                >
-                  <CRow align-horizontal="center" class="pb-3">
-                    <span class="h2"> ACCEDI</span>
+
+                <form @submit="getUserValue" :action="login_url" method="post">
+                  <CRow align-horizontal="center" class="pb-3 text-center">
+                    <span class="h1"> Benvenuto</span>
                   </CRow>
-                  <CRow align-horizontal="center">
+                  <CRow class="text-center" align-horizontal="center">
+                    <span
+                      >Inserisci username e password per accedere ai servizi
+                      online di AbyWay.it</span
+                    >
                     <CInput
                       id="user"
                       class="col-sm-10 pl-0 pr-0"
@@ -57,8 +50,7 @@
                         ><CIcon name="cil-user"
                       /></template>
                     </CInput>
-                  </CRow>
-                  <CRow align-horizontal="center">
+
                     <CInput
                       id="password"
                       class="col-sm-10 pl-0 pr-0"
@@ -82,7 +74,7 @@
                     <input
                       class="entra_btn col-sm-10"
                       type="submit"
-                      value="Entra"
+                      value="Accedi"
                     />
                   </CRow>
                 </form>
@@ -132,12 +124,15 @@ export default {
       localStorage.setItem("pwd", submitEvent.target.elements.password.value);
       return true;
     },
-    
   },
 };
 </script>
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"); */
+@font-face {
+  font-family: FreeStyle;
+  src: url("/img/fonts/FREESCPT.TTF");
+}
 .sfondo_gradiente {
   background: url("/img/slide_1_bg.jpg") bottom right,
     linear-gradient(to right bottom, #1cc7d0, #013ca6, #013ca6, #1cc7d0) !important;
@@ -160,10 +155,12 @@ hr {
 }
 hr:after {
   content: "La nuova piattaforma operativa";
-  font-size: 2em;
+  font-size: 3.5em;
   position: relative;
   left: -0.5em;
-  font-family: "Indie Flower", cursive;
+  /* font-family: "Indie Flower", cursive; */
+  font-family: "FreeStyle",cursive;
+
   padding-top: 5px;
   padding-left: 1em;
   padding-right: 1em;
@@ -173,7 +170,7 @@ hr:after {
   border-radius: 3px;
   font-weight: bold;
   width: 30%;
-  background: #19b9cc;
+  background: #1f2f55;
   border: none;
   margin: 1.5em 0 1.5em;
   outline: none;
@@ -190,6 +187,6 @@ hr:after {
   cursor: pointer;
 }
 .entra_btn:hover {
-  background: #00e5ff;
+  background: #1255a6;
 }
 </style>

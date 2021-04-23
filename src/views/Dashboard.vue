@@ -8,10 +8,9 @@
           style="text-align: center; padding-bottom: 15px"
         >
           <h1 class="display-3">
-            Benvenuti in <span style="color: #01295c">Aby</span
-            ><span style="color: #eb2226">Way</span>
+            Benvenuto in <img class="login-img" src="img/logo_abyway.png" height="50px" />
           </h1>
-          <div id="scritta"><hr /></div>
+          <div id="scritta"><hr class="mt-4" /></div>
         </div>
       </CCol>
       <CCol md="1"> </CCol>
@@ -25,7 +24,7 @@
         <NewsOperative class="h-100" :key="triggerNews" />
       </CCol>
       <CCol md="4">
-        <NewsMondo class="h-100" v-show="show_async != 0"/>
+        <NewsMondo class="h-100" :key="triggerNews"/>
       </CCol>
       <CCol md="1"> </CCol>
     </CRow>
@@ -254,8 +253,11 @@ export default {
 };
 </script>
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
-
+/* @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"); */
+@font-face {
+  font-family: FreeStyle;
+  src: url("/img/fonts/FREESCPT.TTF");
+}
 .elevation-6 {
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
     0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12) !important;
@@ -284,13 +286,15 @@ hr {
 }
 hr:after {
   content: "La nuova piattaforma operativa";
-  font-size: 1.25em;
+  font-size: 2.5em;
   position: relative;
   left: -0.5em;
-  font-family: "Indie Flower", cursive;
-  font-size: 1.5em;
+  /* font-family: "Indie Flower", cursive; */
+   font-family: "FreeStyle",cursive;
+  
   background-color: #ebedef;
   padding-left: 1em;
   padding-right: 1em;
+  
 }
 </style>
