@@ -1,7 +1,7 @@
 <template>
   <div>
     <CModal
-      color="info"
+      color="dark"
       centered
       :show.sync="newsModal"
       style="z-index: 30"
@@ -9,13 +9,21 @@
     >
       <template #header>
         <strong>{{ news_operative[newsNum].Titolo }}</strong>
+      
         <CButton class="close" @click="newsModal = false">
           <!-- <button type="button" class="close" aria-label="Close"> -->
           <span aria-hidden="true">&times;</span>
         </CButton>
       </template>
       <template>
-        <div class="text-justify">
+           <CBadge
+              :style="
+                'background-color:' + news_operative[newsNum].Colore + '!important; color: white;'
+              "
+            >
+              {{ news_operative[newsNum].Categoria }}
+            </CBadge>
+        <div class="pt-2 text-justify">
           {{ news_operative[newsNum].Contenuto }}
         </div>
       </template>
@@ -64,7 +72,7 @@
               </h5>
             </div>
             <p class="mb-1 text-justify">
-              {{ item.Contenuto | truncate(150, "...") }}
+              {{ item.Contenuto | truncate(150, " [...]") }}
             </p>
             <div class="mt-2 mb-2 d-flex justify-content-between">
               <CButton

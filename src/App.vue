@@ -41,6 +41,19 @@ export default {
   display: none !important;
 }
 
+// Colori Modali
+.close:hover {
+  color: white;
+}
+.close {
+  opacity: 1;
+}
+
+.modal-header{
+  background-color: #1e2f56 !important;
+}
+
+
 // SOVRASCRITTURA COLORI ABY SU PRIMARY
 .btn-outline-primary:hover {
   color: #fff;

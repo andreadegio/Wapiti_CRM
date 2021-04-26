@@ -3,7 +3,7 @@
     <keep-alive>
       <AddNews
         :news_originale="news_da_modificare"
-        color="info"
+        color="dark"
         :centered="true"
         v-if="modale_is_visible"
         style="z-index: 30"

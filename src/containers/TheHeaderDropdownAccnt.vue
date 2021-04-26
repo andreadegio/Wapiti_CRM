@@ -4,10 +4,10 @@
       color="dark"
       centered
       :show.sync="show_profile"
-      style="z-index: 30"
+      style="z-index: 30; "
       size="lg"
     >
-      <template #header>
+      <template #header style="background-color: #1F4B6B !important;">
         <strong style="text-transform: uppercase">Profilo Utente</strong>
         <CButton class="close" @click="show_profile = false">
           <!-- <button type="button" class="close" aria-label="Close"> -->

@@ -31,7 +31,7 @@ const documenti_list = [
 
 const folder_list = [
   {
-    nome: "SETTORI 1 E 2",
+    nome: "SET INFORMATIVI SETTORI 1 E 2",
     slug: "SETTORI 1 E 2",
     tipo: "folder",
     ico: "car",
@@ -66,7 +66,7 @@ const folder_list = [
   },
 
   {
-    nome: "SETTORI 3 E 4",
+    nome: "SET INFORMATIVI SETTORI 3 E 4",
     slug: "RAMI",
     tipo: "folder",
     childs: [],

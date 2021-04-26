@@ -1,17 +1,18 @@
 <template>
   <div>
     <CModal
-      color="primary"
+      color="dark"
       centered
       :show.sync="newsModal"
       style="z-index: 30"
       size="lg"
+      
     >
       <template #header>
         <strong style="text-transform: uppercase">{{
           news[newsNum].titolo
         }}</strong>
-        <CButton class="close" @click="newsModal = false">
+        <CButton style="color: white" class="close" @click="newsModal = false">
           <!-- <button type="button" class="close" aria-label="Close"> -->
           <span aria-hidden="true">&times;</span>
         </CButton>
@@ -70,7 +71,7 @@
                 <strong>{{ item.titolo }}</strong>
               </h5>
               <p class="text-justify">
-                {{ item.contenuto | truncate(100, "...") }}
+                {{ item.contenuto | truncate(100, " [...]") }}
               </p>
             </CMedia>
             <div class="d-flex justify-content-between">

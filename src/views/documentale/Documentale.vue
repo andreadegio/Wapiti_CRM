@@ -1,18 +1,20 @@
 <template>
   <div style="margin-top: 50px">
-    <CRow>
+    <VisualizzaDocumento />
+    
+    <CRow style="margin: 0 20px 0 20px; border-radius: 10px;">
       <!-- <CCol md="1"> </CCol> -->
 
       <!-- colonna file manager -->
       <CCol
-        md="3"
+        md="4"
         style="background-color: white; border-right: 1px solid lightgrey"
       >
         <!-- Documenti Broker -->
         <div
           v-for="folder in documenti_list"
           :key="folder.slug"
-          class="folder parent pt-0 pl-5"
+          class="folder parent pt-0 pl-2"
         >
           <span
             @click="
@@ -31,7 +33,7 @@
         <div
           v-for="folder in folder_list"
           :key="folder.slug"
-          class="folder parent pt-0 pl-5"
+          class="folder parent pt-0 pl-2"
         >
           <span
             @click="
@@ -104,7 +106,7 @@
 
       <!-- colonna centrale elenco file browser -->
       <CCol
-        md="5"
+        md="8"
         style="background-color: white; border-right: 1px solid lightgrey"
       >
         <div>
@@ -148,7 +150,7 @@
                 >
                   <div v-show="folder.subFolder">
                     <table
-                      class="table table-striped table-bordered"
+                      class="table table-striped table-bordered table-hover"
                       style="border: 0 !important"
                     >
                       <thead>
@@ -191,7 +193,7 @@
                           </td>
 
                           <td
-                          class="text-right"
+                            class="text-right"
                             style="
                               border-left: 0 !important;
                               border-right: 0 !important;
@@ -223,7 +225,6 @@
                   </li> -->
                 </div>
               </span>
-              
             </div>
           </div>
           <div v-else class="pt-5 display-4">
@@ -231,8 +232,8 @@
             una selezione
           </div>
           <div v-show="vuoto" class="pt-5 h4 text-center">
-               - Al momento non ci sono documenti disponibili -
-              </div>
+            - Al momento non ci sono documenti disponibili -
+          </div>
           <!-- DATA TABLE PER INTERMEDIARIO -->
           <div
             class="pt-5"
@@ -242,9 +243,8 @@
               id="int_table"
               :items="files"
               :fields="fields_INTERMEDIARIO"
-              
+              hover
               striped
-             
               :noItemsView="{ noItems: ' ' }"
             >
               <template #visualizza_POG="{ item }">
@@ -284,6 +284,7 @@
               :items="files"
               :fields="fields_RCA"
               sorter
+              hover
               pagination
               :table-filter="{
                 placeholder: 'Ricerca...',
@@ -330,6 +331,7 @@
               :items="files"
               :fields="fields_SERVIZI"
               sorter
+              hover
               pagination
               :column-filter-value="{ Tipo: filtro_gar }"
               :table-filter="{
@@ -363,6 +365,7 @@
               :items="files"
               :fields="fields_ALTRE"
               sorter
+              hover
               pagination
               :column-filter-value="{ Tipo: filtro_gar }"
               :table-filter="{
@@ -407,7 +410,7 @@
       </CCol>
 
       <!-- colonna preview pdf -->
-      <CCol md="4" style="background-color: white; height: 800px">
+      <!-- <CCol md="4" style="background-color: white; height: 800px">
         <span class="h2"> Anteprima</span>
         <div
           class="pt-5"
@@ -423,16 +426,7 @@
             type="application/pdf"
             :key="file_name"
           ></object>
-          <!-- <embed
-            :src="file_name"
-            type="application/pdf"
-            width="90%"
-            height="700px;"
-          /> -->
-          <!-- <div v-if="loadedRatio > 0 && loadedRatio < 1" style="background-color: green; color: white; text-align: center" :style="{ width: loadedRatio * 100 + '%' }">{{ Math.floor(loadedRatio * 100) }}%</div>
-            <pdf v-if="show" ref="pdf" style="border: 1px solid red"  @error="notifica_errore" :src="file_name"  @progress="loadedRatio = $event" ></pdf> -->
-
-          <!-- <pdf @error="notifica_errore" :src="file_name"></pdf> -->
+         
         </div>
         <div
           class="pt-5 text-center"
@@ -454,7 +448,7 @@
             <span class="h4">Seleziona un documento</span>
           </div>
         </div>
-      </CCol>
+      </CCol> -->
 
       <!-- <CCol md="1"> </CCol> -->
     </CRow>
@@ -464,6 +458,7 @@
 import axios from "axios";
 import { folder_list, documenti_list } from "./folder";
 import { config_data } from "../../../public/config/config";
+import VisualizzaDocumento from "../../containers/VisualizzaDocumento";
 
 // NOMI DELLE COLONNE DELLA TABELLA PER INTERMEDIARIO
 const fields_INTERMEDIARIO = [
@@ -571,9 +566,12 @@ const fields_SETTORE12 = [
 export default {
   name: "Documentale",
 
-  components: {},
+  components: {
+    VisualizzaDocumento,
+  },
   data() {
     return {
+      viewFile: false, // Usato per mostrare la modale con l'antprima del file
       file_name: "", // Usato per passare l'url alla preview
       folder_list, // Albero dei documenti (veicoli->rca->altre garanzie / rami / energia)
       documenti_list, // Documenti intermediario e precontrattuale
@@ -603,7 +601,7 @@ export default {
   methods: {
     call_folder_list(folder) {
       // Funzione chiamata dalle cartelle di primo livello (documenti intermediario, precontrattuale, ecc)
-      
+
       this.vuoto = false; // Inizializzo il messaggio "non ci sono file"
       // Inizializzo le sottocartelle
       this.altre_gar = [];
@@ -638,7 +636,7 @@ export default {
       this.breadcrumbs = []; // per popolare il Breadcrumbs
       this.breadcrumbs.push([folder.nome, folder.ico]);
       this.breadcrumbs.push([subfolder.nome]);
-      
+
       this.subfolder = subfolder.slug; // Per identificare il data-table
       switch (subfolder.slug) {
         case "RC_AUTO":
@@ -780,6 +778,7 @@ export default {
 
     // CHIAMATA PER VISUALIZZARE I PDF
     preview(url) {
+      this.viewFile = true;
       if (this.timer == 0) {
         this.select = false;
         this.file_name = config_data.documentale_broker + url;
@@ -834,6 +833,4 @@ export default {
 .highlight {
   font-weight: bold;
 }
-
-
 </style>

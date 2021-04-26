@@ -39,7 +39,7 @@ Vue.prototype.$log = console.log.bind(console);
 
 //#region FILTRO PER RIDURRE LA LUNGHEZZA DEI TESTI ED AGGIUNGERE "..."
 var filter = function(text, length, clamp) {
-  clamp = clamp || "...";
+  clamp = clamp || " [...]";
   var node = document.createElement("div");
   node.innerHTML = text;
   var content = node.textContent;
