@@ -1,7 +1,7 @@
 <template>
   <CModal v-bind="$attrs" v-on="$listeners" :show="true">
     <template #header>
-      <span class="h4">
+      <span class="h4 text-uppercase">
         <strong v-if="$parent.add_edit == 'edit'">Modifica News</strong>
         <strong v-else>Aggiungi News</strong>
       </span>

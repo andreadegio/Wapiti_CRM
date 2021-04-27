@@ -1,10 +1,13 @@
 <template>
   <div class="c-app flex-row align-items-center sfondo_gradiente">
     <CContainer>
-      <h1 class="display-3 text-center" style="color: white; font-weight: bold">
-        Benvenuto in
-        <img class="login-img" src="img/logo_abyway.png" />
-      </h1>
+      <CRow class="justify-content-center">
+        <span class="display-3" style="color: white; font-weight: bold">
+          Benvenuto in</span
+        >
+        <img class="login-img ml-2" src="img/logo_abyway.png" />
+      </CRow>
+
       <br />
       <div id="scritta"><hr /></div>
       <CRow class="justify-content-center">
@@ -99,9 +102,11 @@
 <script>
 import store from "../../store";
 import { config_data } from "../../../public/config/config";
+// import CoreUIIcons from "../icons/CoreUIIcons.vue";
 // import axios from "axios";
 
 export default {
+  // components: { CoreUIIcons },
   name: "Login",
   data() {
     return {
@@ -159,7 +164,7 @@ hr:after {
   position: relative;
   left: -0.5em;
   /* font-family: "Indie Flower", cursive; */
-  font-family: "FreeStyle",cursive;
+  font-family: "FreeStyle", cursive;
 
   padding-top: 5px;
   padding-left: 1em;

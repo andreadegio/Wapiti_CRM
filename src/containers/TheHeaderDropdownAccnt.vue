@@ -59,7 +59,7 @@
     >
       <template #toggler>
         <CHeaderNavLink>
-          <div class="c-avatar" style="background-color: #0b4a9b; color: white">
+          <div class="c-avatar" style="background-color: #0b4a9b; color: white" v-c-tooltip="{content:'OPZIONI', placement:'bottom-end'}">
             <CIcon name="cil-user" style="margin-right: 0 !important" />
             <!-- <img src="img/avatars/7.jpg" class="c-avatar-img" /> -->
           </div>

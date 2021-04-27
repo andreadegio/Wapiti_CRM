@@ -3,8 +3,12 @@
 </template>
 
 <script>
+import store from "./store"
 export default {
   name: "App",
+  beforeDestroy(){
+    store.commit("user_logout");
+  }
 };
 </script>
 
@@ -47,12 +51,27 @@ export default {
 }
 .close {
   opacity: 1;
+  color: white;
 }
 
-.modal-header{
+.modal-header {
   background-color: #1e2f56 !important;
 }
 
+// SOVRASCRITTURA COLORI ABY SU TOOLTIP
+.arrow {
+  border-right-color: #1e2f56 !important;
+}
+.tooltip-old-inner{
+  background-color: #1e2f56 !important;
+}
+
+#icona_indietro{ 
+	width: 2.5rem;
+	height: 2.5rem;
+	font-size: 2.5rem;
+	margin-top: 7px;
+}
 
 // SOVRASCRITTURA COLORI ABY SU PRIMARY
 .btn-outline-primary:hover {
@@ -78,13 +97,14 @@ export default {
   color: #1f4b6b;
 }
 
-.table td{
+.table td {
   vertical-align: middle !important;
 }
 
-::after, ::before {
-	text-decoration: inherit !important;
-	vertical-align: middle !important;
+::after,
+::before {
+  text-decoration: inherit !important;
+  vertical-align: middle !important;
 }
 
 // Paginazione

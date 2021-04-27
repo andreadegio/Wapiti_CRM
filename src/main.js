@@ -33,7 +33,7 @@ Vue.use(VueFormulate, {
   uploadUrl: "",
 });
 
-Vue.use(axios);
+// Vue.use(axios);
 Vue.use(iconsSet);
 Vue.prototype.$log = console.log.bind(console);
 

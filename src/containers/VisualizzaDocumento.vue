@@ -47,7 +47,7 @@
                   <img src="img/search-folder.gif" style="width: 50px" /><br />
                   <span class="h4">... Recupero documento in corso ...</span>
                 </div>
-                <div v-show="select">
+                <div v-show="$parent.select">
                   <span class="h4">Seleziona un documento</span>
                 </div>
               </div>

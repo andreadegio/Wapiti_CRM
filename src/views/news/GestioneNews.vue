@@ -15,7 +15,7 @@
     </keep-alive>
 
     <CRow class="mt-2">
-      <h1 class="mb-3 mt-3 display-4">Gestione News</h1>
+      <h1 class="mb-3 display-4">Gestione News</h1>
     </CRow>
 
     <CRow>

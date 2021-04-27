@@ -1,8 +1,12 @@
 <template>
-  <div style="margin-top: 50px">
+  <div >
+    <CRow class="pl-3 mt-2">
+      
+      <h1 class="mb-3 display-4">Documentale</h1>
+    </CRow>
     <VisualizzaDocumento />
     
-    <CRow style="margin: 0 20px 0 20px; border-radius: 10px;">
+    <CRow id="RowExplorer" >
       <!-- <CCol md="1"> </CCol> -->
 
       <!-- colonna file manager -->
@@ -798,6 +802,13 @@ export default {
 };
 </script>
 <style scoped>
+#RowExplorer{
+margin: 0 10px 0 10px;
+height: 80%;
+position: absolute;
+width: 99%;
+}
+
 .parent {
   padding-top: 3em;
 }
