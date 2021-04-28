@@ -8,6 +8,7 @@ config_data = {
     broker_veicoli:"http://broker.abybroker.it/ea2019/AreaOperazioni_Veicoli.aspx",
     documentale_broker: "https://servizi.documentale.cloud/aibajsonea/CondizioniContrattuali/",
     login_url: "http://broker.abybroker.it/accesso/login.aspx?r=abyway",
+    logout_url: "http://broker.abybroker.it/ea2019/logout.aspx",
     
 }
 

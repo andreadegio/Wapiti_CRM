@@ -1,12 +1,11 @@
 <template>
-  <div >
+  <div>
     <CRow class="pl-3 mt-2">
-      
       <h1 class="mb-3 display-4">Documentale</h1>
     </CRow>
     <VisualizzaDocumento />
-    
-    <CRow id="RowExplorer" >
+
+    <CRow id="RowExplorer">
       <!-- <CCol md="1"> </CCol> -->
 
       <!-- colonna file manager -->
@@ -259,7 +258,7 @@
                     variant="outline"
                     square
                     size="sm"
-                    @click="preview(item.Pog)"
+                    @click="preview(item.Pog, 'INTERMEDIARIO')"
                   >
                     Visualizza
                   </CButton>
@@ -273,7 +272,7 @@
                     variant="outline"
                     square
                     size="sm"
-                    @click="preview(item.Nomefile)"
+                    @click="preview(item.Nomefile, 'INTERMEDIARIO')"
                   >
                     Visualizza
                   </CButton>
@@ -306,7 +305,7 @@
                     variant="outline"
                     square
                     size="sm"
-                    @click="preview(item.Pog)"
+                    @click="preview(item.Pog, 'RCA')"
                   >
                     Visualizza
                   </CButton>
@@ -320,7 +319,7 @@
                     variant="outline"
                     square
                     size="sm"
-                    @click="preview(item.Nomefile)"
+                    @click="preview(item.Nomefile, 'RCA')"
                   >
                     Visualizza
                   </CButton>
@@ -354,7 +353,7 @@
                     variant="outline"
                     square
                     size="sm"
-                    @click="preview(item.Nomefile)"
+                    @click="preview(item.Nomefile, 'NON_ASSICURATIVI')"
                   >
                     Visualizza
                   </CButton>
@@ -388,7 +387,7 @@
                     variant="outline"
                     square
                     size="sm"
-                    @click="preview(item.Pog)"
+                    @click="preview(item.Pog, 'ALTRE_GARANZIE')"
                   >
                     Visualizza
                   </CButton>
@@ -402,7 +401,7 @@
                     variant="outline"
                     square
                     size="sm"
-                    @click="preview(item.Nomefile)"
+                    @click="preview(item.Nomefile, 'ALTRE_GARANZIE')"
                   >
                     Visualizza
                   </CButton>
@@ -682,6 +681,7 @@ export default {
           headers: {
             userID: localStorage.getItem("userID"),
             anagraficaID: localStorage.getItem("anagraficaID"),
+            unitaoperativaID: localStorage.getItem("unitaoperativaID"),
           },
         };
         await axios(config)
@@ -725,6 +725,7 @@ export default {
         headers: {
           userID: localStorage.getItem("userID"),
           anagraficaID: localStorage.getItem("anagraficaID"),
+          unitaoperativaID: localStorage.getItem("unitaoperativaID"),
         },
       };
       await axios(config)
@@ -781,11 +782,28 @@ export default {
     },
 
     // CHIAMATA PER VISUALIZZARE I PDF
-    preview(url) {
+    preview(url, dest) {
+      var end_point = "";
+      switch (dest) {
+        case "INTERMEDIARIO":
+          end_point = config_data.documentale_DocumentiIntermediario;
+          break;
+        case "RCA":
+          end_point = config_data.documentale_RCA;
+          break;
+        case "NON_ASSICURATIVI":
+          end_point = config_data.documentale_ServiziNonAssicurativi;
+          break;
+        case "ALTRE_GARANZIE":
+          end_point = config_data.documentale_AltreGaranzie;
+          break;
+        default:
+          end_point = config_data.documentale_broker;
+      }
       this.viewFile = true;
       if (this.timer == 0) {
         this.select = false;
-        this.file_name = config_data.documentale_broker + url;
+        this.file_name = end_point + url;
         this.timer = 1;
         setTimeout(() => {
           this.timer = 0;
@@ -802,11 +820,11 @@ export default {
 };
 </script>
 <style scoped>
-#RowExplorer{
-margin: 0 10px 0 10px;
-height: 80%;
-position: absolute;
-width: 99%;
+#RowExplorer {
+  margin: 0 10px 0 10px;
+  height: 80%;
+  position: absolute;
+  width: 99%;
 }
 
 .parent {

@@ -4,10 +4,10 @@
       color="dark"
       centered
       :show.sync="show_profile"
-      style="z-index: 30; "
+      style="z-index: 30"
       size="lg"
     >
-      <template #header style="background-color: #1F4B6B !important;">
+      <template #header style="background-color: #1f4b6b !important">
         <strong style="text-transform: uppercase">Profilo Utente</strong>
         <CButton class="close" @click="show_profile = false">
           <!-- <button type="button" class="close" aria-label="Close"> -->
@@ -51,6 +51,45 @@
       </template>
     </CModal>
 
+    <CModal
+      id="logout_modale"
+      color="dark"
+      centered
+      :show.sync="logout_modale"
+      style="z-index: 30"
+      size="sm"
+      :closeOnBackdrop="false"
+    >
+      <template #header style="background-color: #1f4b6b !important">
+        <strong style="text-transform: uppercase">Logout ...</strong>
+      </template>
+      <template>
+        <div class="d-flex align-items-center">
+          <CContainer fluid>
+            <CRow class="justify-content-center">
+              <img src="img/logout.gif" />
+              <cite class="text-center"
+                >Chiusura in corso...<br />Attendi 5 secondi e sarai
+                reindirizzato alla pagina di login.
+              </cite>
+              <iframe
+                style="display: none"
+                id="stats_frame"
+                :src="url_logout"
+                width="100%"
+                frameborder="0"
+              >
+              </iframe>
+            </CRow>
+          </CContainer>
+        </div>
+      </template>
+
+      <template #footer>
+        <span></span>
+      </template>
+    </CModal>
+
     <CDropdown
       inNav
       class="c-header-nav-items"
@@ -59,7 +98,11 @@
     >
       <template #toggler>
         <CHeaderNavLink>
-          <div class="c-avatar" style="background-color: #0b4a9b; color: white" v-c-tooltip="{content:'OPZIONI', placement:'bottom-end'}">
+          <div
+            class="c-avatar"
+            style="background-color: #0b4a9b; color: white"
+            v-c-tooltip="{ content: 'OPZIONI', placement: 'bottom-end' }"
+          >
             <CIcon name="cil-user" style="margin-right: 0 !important" />
             <!-- <img src="img/avatars/7.jpg" class="c-avatar-img" /> -->
           </div>
@@ -110,7 +153,7 @@
     <CDropdownItem>
       <CIcon name="cil-shield-alt" /> Lock Account
     </CDropdownItem> -->
-      <CDropdownItem @click="$router.push('login')">
+      <CDropdownItem @click="Logout()">
         <!-- <CHeaderNavLink to="login"> -->
         <CIcon :content="$options.logout_ico" /> Logout
         <!-- </CHeaderNavLink> -->
@@ -121,7 +164,8 @@
 
 <script>
 import { cilAccountLogout } from "@coreui/icons";
-import store from "../store";
+import { config_data } from "../../public/config/config";
+// import axios from "axios";
 export default {
   name: "TheHeaderDropdownAccnt",
   logout_ico: cilAccountLogout,
@@ -142,20 +186,29 @@ export default {
           Stato: "OK",
         },
       ],
+      logout_modale: false,
       show_profile: false,
+      url_logout: "",
       // itemsCount: 42,
     };
   },
 
   methods: {
     Get_user() {
-      
       this.user = JSON.parse(localStorage.getItem("chisono_data"));
-      this.show_profile= true;
+      this.show_profile = true;
     },
-  },
-  beforeDestroy() {
-    store.commit("user_logout");
+    Logout() {
+      
+
+      // funzione di logout. Viene chiamata la pagina del broker e dopo 5 secondi viene effettuato il redirect alla login
+      this.logout_modale = true;
+      this.url_logout = config_data.logout_url;
+     
+      setTimeout(() => {
+        this.$router.push("login");
+      }, 4000);
+    },
   },
 };
 </script>

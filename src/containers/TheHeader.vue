@@ -13,6 +13,7 @@
     </CHeaderNav>
     
     <CHeaderNav class="mr-4">
+     
       <CHeaderNavItem class="d-md-down-none mx-2" v-c-tooltip="{content:'Clicca qui per tornare INDIETRO', placement:'bottom-end'}" >
         <button @click="$router.go(-1)"  >
         <CHeaderNavLink v-show="this.$route.path != '/dashboard'" >
@@ -20,6 +21,7 @@
         </CHeaderNavLink>
         </button>
       </CHeaderNavItem>
+     
        <!-- <CHeaderNavItem class="d-md-down-none mx-2">
         <CHeaderNavLink>
           <CIcon name="cil-envelope-open" />

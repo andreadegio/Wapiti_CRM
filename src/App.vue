@@ -74,6 +74,12 @@ export default {
 }
 
 // SOVRASCRITTURA COLORI ABY SU PRIMARY
+.dropdown-item.active, .dropdown-item:active {
+	text-decoration: none;
+	color: #fff;
+	background-color: #1f4b6b !important;
+}
+
 .btn-outline-primary:hover {
   color: #fff;
   background-color: #1f4b6b;

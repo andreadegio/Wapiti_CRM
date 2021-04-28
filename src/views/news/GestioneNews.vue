@@ -42,7 +42,7 @@
               <CButton
                 @click="onAggiungiClick()"
                 color="primary"
-                size="s"
+                size="sm"
                 variant="outline"
               >
                 Aggiungi News
@@ -69,8 +69,7 @@
             <CCollapse :show="item._toggled" :duration="collapseDuration">
               <CCardBody>
                 <CMedia
-                  :aside-image-props="{
-                    
+                  :aside-image-props="{                    
                     src: config_data.img_news_url + item.immagine,
                   }"
                 >

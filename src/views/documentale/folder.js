@@ -17,15 +17,15 @@ const documenti_list = [
     childs: [],
     subFolder: false,
   },
-  {
-    nome: "PRECONTRATTUALE",
-    slug: "PRECONTRATTUALE",
-    tipo: "folder",
-    ico: "edit",
-    URL: "Documentale_PreContrattuale",
-    childs: [],
-    subFolder: false,
-  },
+  // {
+  //   nome: "PRECONTRATTUALE",
+  //   slug: "PRECONTRATTUALE",
+  //   tipo: "folder",
+  //   ico: "edit",
+  //   URL: "Documentale_PreContrattuale",
+  //   childs: [],
+  //   subFolder: false,
+  // },
 
 ];
 

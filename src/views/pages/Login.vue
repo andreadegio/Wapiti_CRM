@@ -29,7 +29,7 @@
                   style="color: darkred; font-weight: bold"
                 >
                   <CAlert color="danger" closeButton>
-                    Credenziali errate--+
+                    Credenziali errate---
                   </CAlert>
                 </div>
 
@@ -103,7 +103,7 @@
 import store from "../../store";
 import { config_data } from "../../../public/config/config";
 // import CoreUIIcons from "../icons/CoreUIIcons.vue";
-// import axios from "axios";
+
 
 export default {
   // components: { CoreUIIcons },
@@ -116,10 +116,12 @@ export default {
     };
   },
   created() {
+    // Al caricamento della login controllo: se arrivo con un errore di autenticazione lo mostro altrimenti svuoto il local storage chiamando la funzione "user_logout"
     if (this.$route.query.errore) {
       this.messaggio_errore = true;
       this.$router.push("login");
     }
+    
     store.commit("user_logout");
   },
 
