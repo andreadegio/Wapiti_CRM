@@ -21,6 +21,7 @@
                 background-color: rgba(249, 249, 249, 0.42);
                 color: white;
                 box-shadow: 5px 5px 7px 0px rgba(0, 0, 0, 0.4);
+                border: 0;
               "
             >
               <CCardBody style="color: #1f2f55; border-color: #3c74d0">
@@ -32,53 +33,66 @@
                     Credenziali errate---
                   </CAlert>
                 </div>
-
-                <form @submit="getUserValue" :action="login_url" method="post">
-                  <CRow align-horizontal="center" class="pb-3 text-center">
-                    <span class="h1"> Benvenuto</span>
-                  </CRow>
-                  <CRow class="text-center" align-horizontal="center">
-                    <span
-                      >Inserisci username e password per accedere ai servizi
-                      online di AbyWay.it</span
-                    >
+                <CRow align-horizontal="center" class="pb-3 text-center">
+                  <span class="h1"><strong> Benvenuto</strong></span>
+                </CRow>
+                <CRow class="pb-3 text-center" align-horizontal="center">
+                  <span
+                    >Inserisci username e password per accedere ai servizi
+                    online di AbyWay.it</span
+                  >
+                </CRow>
+                <form
+                  id="formLogin"
+                  @submit="getUserValue"
+                  :action="login_url"
+                  method="post"
+                >
+                  <CRow align-horizontal="center" class="pt-3 pb-3 text-center">
                     <CInput
                       id="user"
-                      class="col-sm-10 pl-0 pr-0"
+                      class="col-sm-10 pl-0 pr-0 mb-0"
                       placeholder="Username"
                       name="user"
                       size="lg"
                     >
-                      <template #prepend-content
-                        ><CIcon name="cil-user"
-                      /></template>
+                      <template #prepend-content>
+                        <i class="fas fa-user"></i>
+                        <!-- <CIcon name="cil-user"/> -->
+                      </template>
                     </CInput>
 
                     <CInput
                       id="password"
-                      class="col-sm-10 pl-0 pr-0"
+                      class="col-sm-10 pl-0 pr-0 mb-0"
                       placeholder="Password"
                       type="password"
                       autocomplete="current-password"
                       name="password"
                       size="lg"
                     >
-                      <template #prepend-content
-                        ><CIcon name="cil-shield-alt"
-                      /></template>
+                      <template #prepend-content>
+                        <i class="fas fa-unlock-alt"></i>
+                        <!-- <CIcon name="cil-shield-alt"/> -->
+                      </template>
                     </CInput>
                     <input
                       name="72aeb0fc-7bd8-11e5-b78d-00505693441e"
                       type="hidden"
                       value="securetoken"
                     />
-                  </CRow>
-                  <CRow align-horizontal="center">
-                    <input
-                      class="entra_btn col-sm-10"
+                    <CInput
+                    id="accedi_btn"
+                    type="submit"
+                    color="primary"
+                    class="col-sm-10 mt-0 mb-0 px-0"
+                    value="Accedi">
+                    <!-- <input
+                      class="entra_btn col-sm-10 mt-0 mb-0"
                       type="submit"
                       value="Accedi"
-                    />
+                    /> -->
+                    </CInput>
                   </CRow>
                 </form>
               </CCardBody>
@@ -104,7 +118,6 @@ import store from "../../store";
 import { config_data } from "../../../public/config/config";
 // import CoreUIIcons from "../icons/CoreUIIcons.vue";
 
-
 export default {
   // components: { CoreUIIcons },
   name: "Login",
@@ -121,7 +134,7 @@ export default {
       this.messaggio_errore = true;
       this.$router.push("login");
     }
-    
+
     store.commit("user_logout");
   },
 
@@ -193,7 +206,17 @@ hr:after {
   -ms-transition: 0.5s ease-in;
   cursor: pointer;
 }
+
+
 .entra_btn:hover {
   background: #1255a6;
+}
+
+#formLogin {
+  margin-top: 10px;
+  border-radius: 5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border: solid 1px #d8dbe07d;
 }
 </style>

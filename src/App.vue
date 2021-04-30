@@ -3,12 +3,12 @@
 </template>
 
 <script>
-import store from "./store"
+import store from "./store";
 export default {
   name: "App",
-  beforeDestroy(){
+  beforeDestroy() {
     store.commit("user_logout");
-  }
+  },
 };
 </script>
 
@@ -18,11 +18,22 @@ export default {
 .c-main {
   padding-top: 0 !important;
 }
-// Header fissa e body shift di 50px in basso
+// Header fissa e body shift di 50px in basso e con ombreggiatura
 .fixed-nav {
   position: fixed !important;
   top: 0;
 }
+// #header {
+//   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+// }
+.c-header-nav-link{
+  color: #0b4a9b !important;
+}
+.c-header-nav-link:hover{
+  color: #ef7a12 !important;
+}
+
+
 .c-body {
   margin-top: 56px;
 }
@@ -62,22 +73,23 @@ export default {
 .arrow {
   border-right-color: #1e2f56 !important;
 }
-.tooltip-old-inner{
+.tooltip-old-inner {
   background-color: #1e2f56 !important;
 }
 
-#icona_indietro{ 
-	width: 2.5rem;
-	height: 2.5rem;
-	font-size: 2.5rem;
-	margin-top: 7px;
+#icona_indietro {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 2.5rem;
+  margin-top: 7px;
 }
 
 // SOVRASCRITTURA COLORI ABY SU PRIMARY
-.dropdown-item.active, .dropdown-item:active {
-	text-decoration: none;
-	color: #fff;
-	background-color: #1f4b6b !important;
+.dropdown-item.active,
+.dropdown-item:active {
+  text-decoration: none;
+  color: #fff;
+  background-color: #1f4b6b !important;
 }
 
 .btn-outline-primary:hover {
@@ -129,5 +141,22 @@ export default {
 }
 :root {
   --primary: #1f4b6b !important;
+}
+
+#accedi_btn {
+  background-color: #1f2f55;
+  border: 0;
+  color: white;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-weight: 900;
+  font-size: 1.4em;
+  text-transform: uppercase;
+}
+#accedi_btn:hover{
+  background: #1255a6;
+}
+.container{
+  max-width: 1320px !important;
 }
 </style>

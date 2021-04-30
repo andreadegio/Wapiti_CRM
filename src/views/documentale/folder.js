@@ -7,26 +7,56 @@
 //     |- SERVIZI NON ASSICURATIVI <- SOTTO ALBERATURA DINAMICA DAL JSON
 //   RAMI
 //   GAS E LUCE
+// const documenti_list = [
+//   {
+//     nome: "DOCUMENTI DELL'INTERMEDIARIO",
+//     slug: "INTERMEDIARIO",
+//     tipo: "folder",
+//     ico: "edit",
+//     URL: "Documentale_DocumentiIntermediario",
+//     childs: [],
+//     subFolder: false,
+//   },
+//   // {
+//   //   nome: "PRECONTRATTUALE",
+//   //   slug: "PRECONTRATTUALE",
+//   //   tipo: "folder",
+//   //   ico: "edit",
+//   //   URL: "Documentale_PreContrattuale",
+//   //   childs: [],
+//   //   subFolder: false,
+//   // },
+
+// ];
 const documenti_list = [
   {
     nome: "DOCUMENTI DELL'INTERMEDIARIO",
-    slug: "INTERMEDIARIO",
+    slug: "DOCUMENTI",
     tipo: "folder",
     ico: "edit",
-    URL: "Documentale_DocumentiIntermediario",
-    childs: [],
-    subFolder: false,
+    subFolder: true,
+    childs: [
+      {
+        nome: "MECCANISMI DI DISTRIBUZIONE",
+        slug: "INTERMEDIARIO",
+        tipo: "folder",
+        ico: "edit",
+        URL: "Documentale_DocumentiIntermediario",
+        childs: [],
+        subFolder: false,
+      },
+      {
+        nome: "PRECONTRATTUALE",
+        slug: "PRECONTRATTUALE",
+        tipo: "folder",
+        ico: "edit",
+        URL: "Documentale_PreContrattuale",
+        childs: [],
+        subFolder: false,
+      },
+    ],
+    
   },
-  // {
-  //   nome: "PRECONTRATTUALE",
-  //   slug: "PRECONTRATTUALE",
-  //   tipo: "folder",
-  //   ico: "edit",
-  //   URL: "Documentale_PreContrattuale",
-  //   childs: [],
-  //   subFolder: false,
-  // },
-
 ];
 
 const folder_list = [
@@ -82,4 +112,4 @@ const folder_list = [
   // },
 ];
 
-export  {folder_list, documenti_list};
+export { folder_list, documenti_list };

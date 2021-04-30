@@ -7,7 +7,7 @@
           data-aos="flip-up"
           style="text-align: center; padding-bottom: 15px"
         >
-          <h1 class="display-3">
+          <h1 class="display-3" style="color: #1e2f56; font-weight: 900 ">
             Benvenuto in <img class="login-img" src="img/logo_abyway.png" height="50px" />
           </h1>
           <div id="scritta"><hr class="mt-4" /></div>

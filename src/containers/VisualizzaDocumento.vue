@@ -7,7 +7,10 @@
     :show.sync="$parent.viewFile"
   >
     <template #header>
-      <strong style="text-transform: uppercase">Anteprima </strong>
+      <strong v-show="$parent.tipologia != null" class="pr-2" style="text-transform: uppercase">{{$parent.tipologia}}</strong>
+      <strong v-show="$parent.descrizione != null" class="pr-2" style="text-transform: uppercase">-  {{$parent.descrizione}} </strong>
+      <strong v-show="$parent.tipoFile != null" class="pr-2"  style="text-transform: uppercase">-  {{$parent.tipoFile}}</strong>
+      
       <CButton class="close" @click="$parent.viewFile = false">
         <span aria-hidden="true">&times;</span>
       </CButton>
@@ -48,7 +51,8 @@
                   <span class="h4">... Recupero documento in corso ...</span>
                 </div>
                 <div v-show="$parent.select">
-                  <span class="h4">Seleziona un documento</span>
+                 <img src="img/search-folder.gif" style="width: 50px" /><br />
+                  <span class="h4">... Recupero documento in corso ...</span>
                 </div>
               </div>
             </CCol>

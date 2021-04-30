@@ -89,7 +89,7 @@ function configRoutes() {
           path: "Profilo",
           name: "Profilo",
           component: Profilo,
-        }
+        },
       ],
       meta: { requiresAuth: true },
     },
@@ -127,7 +127,16 @@ function configRoutes() {
   ];
 }
 router.beforeEach((to, from, next) => {
+  // console.log(localStorage.getItem("userID"));
+  // console.log("from:" + from.path);
+  // console.log("to:" + to.path);
   if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (localStorage.getItem("userID") == -1) {
+      next({
+        name: "Login",
+      });
+    }
+
     if (to.query.auth == "1" || localStorage.getItem("utente") == "ok") {
       next();
     } else {

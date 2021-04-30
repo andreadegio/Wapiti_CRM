@@ -5,7 +5,13 @@
     </CRow>
     <VisualizzaDocumento />
 
-    <CRow id="RowExplorer">
+    <CRow
+      id="RowExplorer"
+      style="
+        background: rgb(255, 255, 255) url('img/filigrana.jpg') no-repeat scroll
+          0% 0%;
+      "
+    >
       <!-- <CCol md="1"> </CCol> -->
 
       <!-- colonna file manager -->
@@ -23,6 +29,7 @@
             @click="
               call_folder_list(folder);
               dove_sono = folder.slug;
+              color = '';
             "
             style="white-space: nowrap"
             class="icon_folder h4"
@@ -30,6 +37,23 @@
           >
             {{ folder.nome }}</span
           >
+          <li
+            v-for="items in folder.childs"
+            :key="items.slug"
+            class="folder h5 pl-3"
+          >
+            └
+            <span
+              @click="
+                call_subfolder_list(items, folder);
+                dove_sono = items.slug;
+              "
+              class="icon_folder"
+              :class="{ highlight: dove_sono == items.slug }"
+              style="white-space: nowrap"
+              >{{ items.nome }}</span
+            >
+          </li>
         </div>
 
         <!-- Settori -->
@@ -42,6 +66,7 @@
             @click="
               call_folder_list(folder);
               dove_sono = folder.slug;
+              color = '';
             "
             style="white-space: nowrap"
             class="icon_folder h4"
@@ -110,7 +135,8 @@
       <!-- colonna centrale elenco file browser -->
       <CCol
         md="8"
-        style="background-color: white; border-right: 1px solid lightgrey"
+        style="border-right: 1px solid lightgrey"
+        :style="{ 'background-color': color }"
       >
         <div>
           <!-- <span class="h2"> Documenti</span><br /> -->
@@ -143,11 +169,11 @@
                 >{{ filtro_gar }}</span
               ></span
             > -->
-            <div class="pt-5" v-if="settore == 'SETTORI 1 E 2'">
+            <div class="pt-5" v-if="settore == 'DOCUMENTI'">
               <!-- <div class="pt-5 h2"> -->
               <span>
                 <div
-                  v-for="folder in folder_list"
+                  v-for="folder in documenti_list"
                   :key="folder.name"
                   class="pt-0"
                 >
@@ -165,7 +191,7 @@
                             "
                             class="text-center"
                           >
-                            Tipologia
+                            Seleziona una cartella
                           </th>
                           <th
                             style="
@@ -202,14 +228,100 @@
                               border-right: 0 !important;
                             "
                           >
-                            <CButton
+                            <!-- <CButton
                               color="primary"
                               variant="outline"
                               square
                               size="sm"
                             >
                               Visualizza
-                            </CButton>
+                            </CButton> -->
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- <li
+                    v-for="items in folder.childs"
+                    :key="items.nome"
+                    class="p-2 folder h5"
+                  >
+                    <span
+                      @click="call_subfolder_list(items, folder)"
+                      class="icon_folder"
+                      >{{ items.nome }}</span
+                    >
+                  </li> -->
+                </div>
+              </span>
+            </div>
+            <div class="pt-5" v-if="settore == 'SETTORI 1 E 2'">
+              <!-- <div class="pt-5 h2"> -->
+              <span>
+                <div
+                  v-for="folder in folder_list"
+                  :key="folder.name"
+                  class="pt-0"
+                >
+                  <div v-show="folder.subFolder">
+                    <table
+                      class="table table-striped table-bordered table-hover"
+                      style="border: 0 !important"
+                    >
+                      <thead>
+                        <tr>
+                          <th
+                            style="
+                              border-left: 0 !important;
+                              border-right: 0 !important;
+                            "
+                            class="text-center"
+                          >
+                            Seleziona una cartella
+                          </th>
+                          <th
+                            style="
+                              border-left: 0 !important;
+                              border-right: 0 !important;
+                            "
+                          ></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          v-for="items in folder.childs"
+                          :key="items.nome"
+                          @click="
+                            call_subfolder_list(items, folder);
+                            dove_sono = items.slug;
+                          "
+                          style="cursor: pointer"
+                        >
+                          <td
+                            style="
+                              border-left: 0 !important;
+                              border-right: 0 !important;
+                            "
+                          >
+                            <span class="icon_folder pr-2"></span
+                            >{{ items.nome }}
+                          </td>
+
+                          <td
+                            class="text-right"
+                            style="
+                              border-left: 0 !important;
+                              border-right: 0 !important;
+                            "
+                          >
+                            <!-- <CButton
+                              color="primary"
+                              variant="outline"
+                              square
+                              size="sm"
+                            >
+                              Visualizza
+                            </CButton> -->
                           </td>
                         </tr>
                       </tbody>
@@ -240,7 +352,10 @@
           <!-- DATA TABLE PER INTERMEDIARIO -->
           <div
             class="pt-5"
-            v-if="settore === 'INTERMEDIARIO' || settore === 'PRECONTRATTUALE'"
+            v-if="
+              settore === 'INTERMEDIARIO' ||
+              (settore === 'PRECONTRATTUALE' && vuoto == false)
+            "
           >
             <CDataTable
               id="int_table"
@@ -250,20 +365,6 @@
               striped
               :noItemsView="{ noItems: ' ' }"
             >
-              <template #visualizza_POG="{ item }">
-                <td class="py-2 text-center">
-                  <CButton
-                    v-if="item.Pog !== ''"
-                    color="primary"
-                    variant="outline"
-                    square
-                    size="sm"
-                    @click="preview(item.Pog, 'INTERMEDIARIO')"
-                  >
-                    Visualizza
-                  </CButton>
-                </td>
-              </template>
               <template #visualizza="{ item }">
                 <td class="py-2 text-center">
                   <CButton
@@ -272,7 +373,10 @@
                     variant="outline"
                     square
                     size="sm"
-                    @click="preview(item.Nomefile, 'INTERMEDIARIO')"
+                    @click="
+                      preview(item.Nomefile, 'INTERMEDIARIO');
+                      titoloModale(dove_sono, item.Descrizione);
+                    "
                   >
                     Visualizza
                   </CButton>
@@ -305,7 +409,10 @@
                     variant="outline"
                     square
                     size="sm"
-                    @click="preview(item.Pog, 'RCA')"
+                    @click="
+                      preview(item.Pog, 'RCA');
+                      titoloModale('RC AUTO', item.Descrizione, 'POG');
+                    "
                   >
                     Visualizza
                   </CButton>
@@ -319,7 +426,14 @@
                     variant="outline"
                     square
                     size="sm"
-                    @click="preview(item.Nomefile, 'RCA')"
+                    @click="
+                      preview(item.Nomefile, 'RCA');
+                      titoloModale(
+                        'RC AUTO',
+                        item.Descrizione,
+                        'SET INFORMATIVO'
+                      );
+                    "
                   >
                     Visualizza
                   </CButton>
@@ -353,7 +467,14 @@
                     variant="outline"
                     square
                     size="sm"
-                    @click="preview(item.Nomefile, 'NON_ASSICURATIVI')"
+                    @click="
+                      preview(item.Nomefile, 'NON_ASSICURATIVI');
+                      titoloModale(
+                        item.Tipo,
+                        item.Descrizione,
+                        'SET INFORMATIVO'
+                      );
+                    "
                   >
                     Visualizza
                   </CButton>
@@ -387,7 +508,10 @@
                     variant="outline"
                     square
                     size="sm"
-                    @click="preview(item.Pog, 'ALTRE_GARANZIE')"
+                    @click="
+                      preview(item.Pog, 'ALTRE_GARANZIE');
+                      titoloModale(item.Tipo, item.Descrizione, 'POG');
+                    "
                   >
                     Visualizza
                   </CButton>
@@ -401,7 +525,14 @@
                     variant="outline"
                     square
                     size="sm"
-                    @click="preview(item.Nomefile, 'ALTRE_GARANZIE')"
+                    @click="
+                      preview(item.Nomefile, 'ALTRE_GARANZIE');
+                      titoloModale(
+                        item.Tipo,
+                        item.Descrizione,
+                        'SET INFORMATIVO'
+                      );
+                    "
                   >
                     Visualizza
                   </CButton>
@@ -411,49 +542,6 @@
           </div>
         </div>
       </CCol>
-
-      <!-- colonna preview pdf -->
-      <!-- <CCol md="4" style="background-color: white; height: 800px">
-        <span class="h2"> Anteprima</span>
-        <div
-          class="pt-5"
-          v-if="file_name !== ''"
-          style="background-color: #ebedef"
-          :key="file_name"
-        >
-          <div id="viewer"></div>
-          <object
-            width="100%"
-            height="600"
-            :data="file_name"
-            type="application/pdf"
-            :key="file_name"
-          ></object>
-         
-        </div>
-        <div
-          class="pt-5 text-center"
-          style="
-            background-color: #ebedef !important;
-            height: 600px;
-            width: 95%;
-          "
-          v-if="file_name == ''"
-        >
-          <div
-            v-if="timer != 0 && select == false"
-            style="background-color: #fff"
-          >
-            <img src="img/search-folder.gif" style="width: 50px" /><br />
-            <span class="h4">... Recupero documento in corso ...</span>
-          </div>
-          <div v-show="select">
-            <span class="h4">Seleziona un documento</span>
-          </div>
-        </div>
-      </CCol> -->
-
-      <!-- <CCol md="1"> </CCol> -->
     </CRow>
   </div>
 </template>
@@ -598,14 +686,52 @@ export default {
       altre_gar: [],
       altri_servizi: [],
       filtro_gar: "",
+
+      // titolo per la modale di anteprima
+      tipologia: null,
+      descrizione: null,
+      tipoFile: null,
+
+      color: "", // colore di sfondo documentale
+      array_link: [], // array contenente l'elenco file per ciascuna cartella del documentale
     };
   },
-
+  mounted() {
+    // console.log("caricato");
+    // elenco file ottenuto dalle chiamate
+    this.documenti_list.forEach((item) =>
+      item.childs.forEach((link) =>
+        this.array_link.push({
+          ["SLUG"]: link.slug,
+          ["URL"]: link.URL,
+          ["FILE"]: [],
+        })
+      )
+    );
+    this.folder_list.forEach((item) =>
+      item.childs.forEach((link) =>
+        this.array_link.push({
+          ["SLUG"]: link.slug,
+          ["URL"]: link.URL,
+          ["FILE"]: [],
+        })
+      )
+    );
+    this.array_link.forEach((item) =>
+      this.recupera_documentale(item.SLUG, item.URL)
+    );
+    // console.log(this.array_link);
+  },
   methods: {
+    // async popolaFile(SLUG, URL) {
+    //   await this.recupera_documentale(SLUG, URL);
+
+    // },
     call_folder_list(folder) {
       // Funzione chiamata dalle cartelle di primo livello (documenti intermediario, precontrattuale, ecc)
 
       this.vuoto = false; // Inizializzo il messaggio "non ci sono file"
+
       // Inizializzo le sottocartelle
       this.altre_gar = [];
       this.altri_servizi = [];
@@ -618,11 +744,12 @@ export default {
       this.files = []; // array dei risultati
       if (folder.URL) {
         // Chiamo la funzione per recuperare le informazioni dai servizi
-        this.load_documentale(folder.URL);
+        this.load_documentale(folder.slug);
       } else {
         if (folder.subFolder == false) {
           // console.log("vuoto");
           this.vuoto = true;
+          this.color = "";
         }
       }
     },
@@ -630,7 +757,7 @@ export default {
     call_subfolder_list(subfolder, folder) {
       // Funzione chiamata dalle cartelle di secondo livello (RCA, Altre garanzie, ecc)
       this.vuoto = false; // Inizializzo il messaggio "non ci sono file"
-
+      this.color = "white";
       // Inizializzo le sottocartelle
       this.altre_gar = [];
       this.altri_servizi = [];
@@ -641,7 +768,16 @@ export default {
       this.breadcrumbs.push([subfolder.nome]);
 
       this.subfolder = subfolder.slug; // Per identificare il data-table
+      console.log(subfolder.slug);
       switch (subfolder.slug) {
+        case "INTERMEDIARIO":
+          this.files = [];
+          this.settore = "INTERMEDIARIO";
+          break;
+        case "PRECONTRATTUALE":
+          this.files = [];
+          this.settore = "PRECONTRATTUALE";
+          break;
         case "RC_AUTO":
           this.files = [];
           this.settore = "RC AUTO";
@@ -659,10 +795,11 @@ export default {
       this.files = []; // array dei risultati
       if (subfolder.URL) {
         // Chiamo la funzione per recuperare le informazioni dai servizi
-        this.load_documentale(subfolder.URL);
+        this.load_documentale(subfolder.slug);
       } else {
         if (subfolder.subFolder == false) {
           this.vuoto = true;
+          this.color = "";
         }
       }
     },
@@ -716,12 +853,11 @@ export default {
       }
     },
 
-    async load_documentale(target) {
-      this.vuoto = false; // Inizializzo in modo da non mostrare il messaggio "nessun documento" in fase di caricamento
+    async recupera_documentale(SLUG, URL) {
       var elenco = [];
       var config = {
         method: "post",
-        url: config_data.servizi_broker + target,
+        url: config_data.servizi_broker + URL,
         headers: {
           userID: localStorage.getItem("userID"),
           anagraficaID: localStorage.getItem("anagraficaID"),
@@ -736,9 +872,32 @@ export default {
           elenco = [];
           console.log(error);
         });
+      for (var i in this.array_link) {
+        if (this.array_link[i].SLUG == SLUG) {
+          this.array_link[i].FILE = elenco;
+          break;
+        }
+      }
+      // console.log(elenco);
+      return elenco;
+    },
+    async load_documentale(target) {
+      console.log(target);
+      this.vuoto = false; // Inizializzo in modo da non mostrare il messaggio "nessun documento" in fase di caricamento
+      this.color = "white";
+      var elenco = [];
+
+      for (var i in this.array_link) {
+        if (this.array_link[i].SLUG == target) {
+          elenco = this.array_link[i].FILE;
+          break;
+        }
+      }
+
       this.files = elenco;
       if (this.files.length <= 0) {
         this.vuoto = true; // Variabile usata per il messaggio "non ci sono documenti"
+        this.color = "";
       }
     },
 
@@ -812,9 +971,14 @@ export default {
         this.file_name = "";
         // console.log("riprovo");
         setTimeout(() => {
-          this.preview(url);
+          this.preview(url, dest);
         }, 1000);
       }
+    },
+    titoloModale(tipologia, descrizione, tipoFile) {
+      this.tipologia = tipologia;
+      this.descrizione = descrizione;
+      this.tipoFile = tipoFile;
     },
   },
 };
@@ -825,6 +989,9 @@ export default {
   height: 80%;
   position: absolute;
   width: 99%;
+  background-position: right !important;
+
+  background-size: contain !important;
 }
 
 .parent {

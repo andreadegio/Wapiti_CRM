@@ -61,25 +61,17 @@
       :closeOnBackdrop="false"
     >
       <template #header style="background-color: #1f4b6b !important">
-        <strong style="text-transform: uppercase">Logout ...</strong>
+        <strong style="text-transform: uppercase">Logout</strong>
       </template>
       <template>
         <div class="d-flex align-items-center">
           <CContainer fluid>
             <CRow class="justify-content-center">
               <img src="img/logout.gif" />
-              <cite class="text-center"
-                >Chiusura in corso...<br />Attendi 5 secondi e sarai
-                reindirizzato alla pagina di login.
-              </cite>
-              <iframe
-                style="display: none"
-                id="stats_frame"
-                :src="url_logout"
-                width="100%"
-                frameborder="0"
-              >
-              </iframe>
+              <span class="text-center"
+                ><strong>Chiusura in corso...<br />Attendi 5 secondi e sarai
+                reindirizzato alla pagina di login.</strong>
+              </span>
             </CRow>
           </CContainer>
         </div>
@@ -99,8 +91,8 @@
       <template #toggler>
         <CHeaderNavLink>
           <div
+          id="user_option"
             class="c-avatar"
-            style="background-color: #0b4a9b; color: white"
             v-c-tooltip="{ content: 'OPZIONI', placement: 'bottom-end' }"
           >
             <CIcon name="cil-user" style="margin-right: 0 !important" />
@@ -165,6 +157,7 @@
 <script>
 import { cilAccountLogout } from "@coreui/icons";
 import { config_data } from "../../public/config/config";
+import store from "../store";
 // import axios from "axios";
 export default {
   name: "TheHeaderDropdownAccnt",
@@ -198,22 +191,26 @@ export default {
       this.user = JSON.parse(localStorage.getItem("chisono_data"));
       this.show_profile = true;
     },
-    Logout() {
-      
 
-      // funzione di logout. Viene chiamata la pagina del broker e dopo 5 secondi viene effettuato il redirect alla login
+    Logout() {
+      // // funzione di logout. Viene chiamata la pagina del broker e dopo 5 secondi viene effettuato il redirect alla login
       this.logout_modale = true;
-      this.url_logout = config_data.logout_url;
-     
+      store.commit("user_logout");
       setTimeout(() => {
-        this.$router.push("login");
-      }, 4000);
+        window.open(config_data.logout_url, "_self");
+      }, 3000);
     },
   },
 };
 </script>
 
 <style scoped>
+#user_option {
+  background-color: #0b4a9b; color: white;
+}
+#user_option:hover{
+  background-color: rgb(239, 122, 18);
+}
 .c-icon {
   margin-right: 0.3rem;
 }
