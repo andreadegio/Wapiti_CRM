@@ -26,13 +26,12 @@ export default {
 // #header {
 //   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 // }
-.c-header-nav-link{
+.c-header-nav-link {
   color: #0b4a9b !important;
 }
-.c-header-nav-link:hover{
+.c-header-nav-link:hover {
   color: #ef7a12 !important;
 }
-
 
 .c-body {
   margin-top: 56px;
@@ -153,10 +152,15 @@ export default {
   font-size: 1.4em;
   text-transform: uppercase;
 }
-#accedi_btn:hover{
+#accedi_btn:hover {
   background: #1255a6;
 }
-.container{
+.container {
   max-width: 1320px !important;
+}
+.titolo_sezione {
+  font-weight: 700;
+  font-size: xx-large;
+  text-transform: uppercase;
 }
 </style>

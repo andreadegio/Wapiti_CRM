@@ -20,6 +20,9 @@ const Documentale = () => import("@/views/documentale/Documentale");
 // Views - Statistiche
 const Statistiche = () => import("@/views/statistiche/Statistiche");
 
+// Views - Page - Gas
+const Comingsoon_gas = () => import("@/views/pages/Comingsoon_gas");
+
 // Views - Pages
 const Comingsoon = () => import("@/views/pages/Comingsoon");
 const Profilo = () => import("@/views/pages/Profilo");
@@ -84,6 +87,11 @@ function configRoutes() {
           path: "Comingsoon",
           name: "Comingsoon",
           component: Comingsoon,
+        },
+        {
+          path: "Comingsoon_gas",
+          name: "Comingsoon_gas",
+          component: Comingsoon_gas,
         },
         {
           path: "Profilo",

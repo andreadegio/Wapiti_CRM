@@ -30,7 +30,7 @@
                   style="color: darkred; font-weight: bold"
                 >
                   <CAlert color="danger" closeButton>
-                    Credenziali errate---
+                    Credenziali errate
                   </CAlert>
                 </div>
                 <CRow align-horizontal="center" class="pb-3 text-center">
@@ -82,12 +82,13 @@
                       value="securetoken"
                     />
                     <CInput
-                    id="accedi_btn"
-                    type="submit"
-                    color="primary"
-                    class="col-sm-10 mt-0 mb-0 px-0"
-                    value="Accedi">
-                    <!-- <input
+                      id="accedi_btn"
+                      type="submit"
+                      color="primary"
+                      class="col-sm-10 mt-0 mb-0 px-0"
+                      value="Accedi"
+                    >
+                      <!-- <input
                       class="entra_btn col-sm-10 mt-0 mb-0"
                       type="submit"
                       value="Accedi"
@@ -207,7 +208,6 @@ hr:after {
   cursor: pointer;
 }
 
-
 .entra_btn:hover {
   background: #1255a6;
 }
@@ -215,8 +215,8 @@ hr:after {
 #formLogin {
   margin-top: 10px;
   border-radius: 5px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	border: solid 1px #d8dbe07d;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: solid 1px #d8dbe07d;
 }
 </style>

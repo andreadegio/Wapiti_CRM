@@ -1,6 +1,6 @@
 <template>
-  <div id="elenco_mondo">
-    <h1 class="mb-3 mt-3 display-4">Elenco News dal mondo</h1>
+  <div id="elenco_mondo"  >
+    <h1 class="mb-3 mt-3 text-center titolo_sezione">Elenco News dal mondo</h1>
 
     <vue-masonry-wall :items="news" :options="options">
       <template v-slot:default="{ item }">

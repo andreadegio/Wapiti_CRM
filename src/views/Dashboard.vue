@@ -90,7 +90,7 @@
             </CCardLink> -->
           <!-- </div> -->
           <div class="col-sm">
-            <CCardLink to="Comingsoon" target="_self">
+            <CCardLink to="Comingsoon_gas" target="_self">
               <CCard
                 class="text-center elevation-6 portali-btn"
                 body-wrapper
@@ -286,7 +286,7 @@ hr {
 }
 hr:after {
   content: "La nuova piattaforma operativa";
-  font-size: 2.5em;
+  font-size: 2.9em;
   position: relative;
   left: -0.5em;
   /* font-family: "Indie Flower", cursive; */

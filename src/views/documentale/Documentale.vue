@@ -1,7 +1,7 @@
 <template>
   <div>
-    <CRow class="pl-3 mt-2">
-      <h1 class="mb-3 display-4">Documentale</h1>
+    <CRow class=" pl-3 mt-2" style="justify-content: center" >
+      <h1 class="mb-3 titolo_sezione" >Documentale</h1>
     </CRow>
     <VisualizzaDocumento />
 

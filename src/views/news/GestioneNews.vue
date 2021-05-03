@@ -14,8 +14,8 @@
       />
     </keep-alive>
 
-    <CRow class="mt-2">
-      <h1 class="mb-3 display-4">Gestione News</h1>
+    <CRow class="mt-2 justify-content-center">
+      <h1 class="mb-3 titolo_sezione ">Gestione News</h1>
     </CRow>
 
     <CRow>

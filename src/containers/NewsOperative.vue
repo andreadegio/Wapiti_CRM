@@ -38,7 +38,7 @@
 
     <CCard data-aos="fade-right" class="h-100" style="z-index: 10">
       <CCardHeader class="d-flex justify-content-between">
-        <strong class="h4">ULTIME NEWS OPERATIVE </strong>
+        <strong class="h4">NEWS OPERATIVE </strong>
         <div class="card-header-actions">
           <CLink to="./NewsOperative" class="card-header-action btn-setting">
             <strong>
