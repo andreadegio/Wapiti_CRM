@@ -1,33 +1,5 @@
 //  Struttura del documentale
-//   DOCUMENTI BROKER
-//   DOCUMENTI INTERMEDIARIO
-//   SETTORE 1 E 2
-//     |- RCA
-//     |- ALTRE GARANZIE <- SOTTO ALBERATURA DINAMICA DAL JSON
-//     |- SERVIZI NON ASSICURATIVI <- SOTTO ALBERATURA DINAMICA DAL JSON
-//   RAMI
-//   GAS E LUCE
-// const documenti_list = [
-//   {
-//     nome: "DOCUMENTI DELL'INTERMEDIARIO",
-//     slug: "INTERMEDIARIO",
-//     tipo: "folder",
-//     ico: "edit",
-//     URL: "Documentale_DocumentiIntermediario",
-//     childs: [],
-//     subFolder: false,
-//   },
-//   // {
-//   //   nome: "PRECONTRATTUALE",
-//   //   slug: "PRECONTRATTUALE",
-//   //   tipo: "folder",
-//   //   ico: "edit",
-//   //   URL: "Documentale_PreContrattuale",
-//   //   childs: [],
-//   //   subFolder: false,
-//   // },
 
-// ];
 const documenti_list = [
   {
     nome: "DOCUMENTI DELL'INTERMEDIARIO",

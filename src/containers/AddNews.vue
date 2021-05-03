@@ -192,6 +192,7 @@ export default {
             required: "Contenuto obbligatorio",
           },
           placeholder: "Contenuto della news",
+          style: "height: 200px",
           // value: this.items.contenuto,
         },
       ],
