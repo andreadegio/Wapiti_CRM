@@ -8,9 +8,7 @@
         class="text-center elevation-6 pulsanti-azioni"
         body-wrapper
         style="background-image: url('img/buttons/statistiche.png')"
-        data-aos="flip-right"
-        data-aos-duration="500"
-        data-aos-easing="ease-in-sine"
+  
       >
         <CCardTitle>
           <h1>STATISTICHE</h1>
@@ -21,9 +19,7 @@
       <CCard
         class="text-center elevation-6 pulsanti-azioni"
         style="background-image: url('img/buttons/marketing.png')"
-        data-aos="flip-right"
-        data-aos-duration="600"
-        data-aos-easing="ease-in-sine"
+    
       >
         <CCardTitle>
           <h1>AREA COMMERCIALE</h1>
@@ -34,9 +30,7 @@
       <CCard
         class="text-center elevation-6 pulsanti-azioni"
         style="background-image: url('img/buttons/amministrazione.png')"
-        data-aos="flip-right"
-        data-aos-duration="800"
-        data-aos-easing="ease-in-sine"
+     
       >
         <CCardTitle>
           <h1 style="font-size: 1.4vw; line-height: 3em">AMMINISTRAZIONE</h1>
@@ -48,9 +42,7 @@
         class="text-center elevation-6 pulsanti-azioni"
         body-wrapper
         style="background-image: url('img/buttons/formazione.png')"
-        data-aos="flip-right"
-        data-aos-duration="1000"
-        data-aos-easing="ease-in-sine"
+       
       >
         <CCardTitle>
           <h1>FORMAZIONE</h1>
@@ -62,9 +54,7 @@
         class="text-center elevation-6 pulsanti-azioni"
         body-wrapper
         style="background-image: url('img/buttons/documentale.png'); z-index: 10;"
-        data-aos="flip-right"
-        data-aos-duration="1200"
-        data-aos-easing="ease-in-sine"
+        
       >
         <CCardTitle>
           <h1>DOCUMENTALE</h1>

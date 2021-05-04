@@ -37,7 +37,7 @@
     </CModal>
     <CCard
       id="world-list"
-      data-aos="fade-left"
+     
       md="8"
       class="h-100"
       style="z-index: 10"

@@ -4,7 +4,7 @@
       <CCol md="1"> </CCol>
       <CCol md="10">
         <div
-          data-aos="flip-up"
+          
           style="text-align: center; padding-bottom: 15px"
         >
           <h1 class="display-3" style="color: #1e2f56; font-weight: 900 ">
@@ -44,7 +44,7 @@
                   z-index: 0;
                   background-size: cover;
                 "
-                data-aos="fade-down-right"
+                
               >
                 <h1
                   style="
@@ -72,7 +72,7 @@
                   background-position: center;
                   z-index: 0;
                 "
-                data-aos="fade-down"
+              
               >
                 <h1
                   style="
@@ -101,7 +101,7 @@
                   z-index: 0;
                   background-size: cover;
                 "
-                data-aos="fade-down-left"
+                
               >
                 <h1
                   style="

@@ -218,7 +218,8 @@ export default {
         if (
           this.formValues.titolo == "" ||
           this.formValues.contenuto == "" ||
-          this.formValues.immagine.files[0] == null
+          this.formValues.immagine.files[0] == null ||
+          this.formValues.immagine.files[0]['previewData'] == false
         ) {
           /* se mancano parametri non procedo */
           console.log("dati incompleti");

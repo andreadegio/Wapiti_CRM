@@ -36,7 +36,7 @@
       </template>
     </CModal>
 
-    <CCard data-aos="fade-right" class="h-100" style="z-index: 10">
+    <CCard  class="h-100" style="z-index: 10">
       <CCardHeader class="d-flex justify-content-between">
         <strong class="h4">NEWS OPERATIVE </strong>
         <div class="card-header-actions">

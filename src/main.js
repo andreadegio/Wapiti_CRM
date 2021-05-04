@@ -5,7 +5,7 @@ import router from "./router";
 import CoreuiVue from "@coreui/vue";
 import { iconsSet as icons, iconsSet } from "./assets/icons/icons.js";
 import store from "./store";
-import AOS from "aos";
+// import AOS from "aos";
 import "aos/dist/aos.css";
 import vuetify from "./plugins/vuetify";
 import VueFormulate from "@braid/vue-formulate";
@@ -33,7 +33,7 @@ Vue.use(VueFormulate, {
   uploadUrl: "",
 });
 
-// Vue.use(axios);
+
 Vue.use(iconsSet);
 Vue.prototype.$log = console.log.bind(console);
 
@@ -62,9 +62,9 @@ new Vue({
   vuetify,
   axios,
 
-  created() {
-    AOS.init({ disable: "phone" });
-  },
+  // created() {
+  //   AOS.init({ disable: "phone" });
+  // },
   beforeDestroy() {},
 
   template: "<App/>",
