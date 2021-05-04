@@ -5,7 +5,7 @@ config_data = {
     img_news_url: "https://www.abyway.it/upload/news/",
     api_url: "https://www.abyway.it/API/",
     servizi_broker:"https://servizi.documentale.cloud/aibajsonea/",
-    broker_veicoli:"http://broker.abybroker.it/ea2019/AreaOperazioni_Veicoli.aspx",
+    broker_veicoli:"http://broker.abybroker.it/ea2019/AreaOperazioni.aspx",
     documentale_broker: "https://servizi.documentale.cloud/aibajsonea/CondizioniContrattuali/",
     documentale_RCA: "https://servizi.documentale.cloud/aibajsonea/Download_Documentale_RCA/",
     documentale_AltreGaranzie: "https://servizi.documentale.cloud/aibajsonea/Download_Documentale_AltreGaranzie/",
