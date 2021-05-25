@@ -18,11 +18,17 @@ import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import "regenerator-runtime/runtime";
 // import { config_data } from "../public/config/config";
+import VueAnalytics from "vue-analytics";
 
 library.add(faUserSecret);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.performance = true;
 Vue.use(CoreuiVue, vuetify);
+
+Vue.use(VueAnalytics, {
+  id: "G-9K7CHTRVSF",
+  router,
+});
 
 const axiosFileUploader = axios.create({
   baseURL: "https://www.abyway.it/API",
@@ -32,7 +38,6 @@ Vue.use(VueFormulate, {
   uploader: axiosFileUploader,
   uploadUrl: "",
 });
-
 
 Vue.use(iconsSet);
 Vue.prototype.$log = console.log.bind(console);
@@ -48,28 +53,31 @@ var filter = function(text, length, clamp) {
 Vue.filter("truncate", filter);
 //#endregion
 
-
 Vue.mixin({
-  methods:{
-  }
-})
-
-new Vue({
-  el: "#app",
-  router,
-  store,
-  icons,
-  vuetify,
-  axios,
-
-  // created() {
-  //   AOS.init({ disable: "phone" });
-  // },
-  beforeDestroy() {},
-
-  template: "<App/>",
-
-  components: {
-    App,
-  },
+  methods: {},
 });
+fetch("./config/config.json")
+  .then((response) => response.json())
+  .then((custom_json) => {
+    Vue.prototype.$custom_json = custom_json;
+    alert("main");
+    new Vue({
+      el: "#app",
+      router,
+      store,
+      icons,
+      vuetify,
+      axios,
+
+      // created() {
+      //   AOS.init({ disable: "phone" });
+      // },
+      beforeDestroy() {},
+
+      template: "<App/>",
+
+      components: {
+        App,
+      },
+    });
+  });
