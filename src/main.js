@@ -5,7 +5,6 @@ import router from "./router";
 import CoreuiVue from "@coreui/vue";
 import { iconsSet as icons, iconsSet } from "./assets/icons/icons.js";
 import store from "./store";
-// import AOS from "aos";
 import "aos/dist/aos.css";
 import vuetify from "./plugins/vuetify";
 import VueFormulate from "@braid/vue-formulate";
@@ -26,9 +25,10 @@ Vue.config.performance = true;
 Vue.use(CoreuiVue, vuetify);
 
 Vue.use(VueAnalytics, {
-  id: "G-9K7CHTRVSF",
+  id: "UA-197949487-1",
   router,
 });
+
 
 const axiosFileUploader = axios.create({
   baseURL: "https://www.abyway.it/API",
@@ -42,7 +42,7 @@ Vue.use(VueFormulate, {
 Vue.use(iconsSet);
 Vue.prototype.$log = console.log.bind(console);
 
-//#region FILTRO PER RIDURRE LA LUNGHEZZA DEI TESTI ED AGGIUNGERE "..."
+//#region FILTRO PER RIDURRE LA LUNGHEZZA DEI TESTI ED AGGIUNGERE " [...]"
 var filter = function(text, length, clamp) {
   clamp = clamp || " [...]";
   var node = document.createElement("div");
@@ -60,7 +60,7 @@ fetch("./config/config.json")
   .then((response) => response.json())
   .then((custom_json) => {
     Vue.prototype.$custom_json = custom_json;
-    alert("main");
+    
     new Vue({
       el: "#app",
       router,
@@ -68,10 +68,8 @@ fetch("./config/config.json")
       icons,
       vuetify,
       axios,
+      VueAnalytics,
 
-      // created() {
-      //   AOS.init({ disable: "phone" });
-      // },
       beforeDestroy() {},
 
       template: "<App/>",

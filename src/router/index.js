@@ -32,7 +32,7 @@ const Login = () => import("@/views/pages/Login");
 
 Vue.use(Router);
 
-// export default new Router({
+
 const router = new Router({
   mode: "history",
   linkActiveClass: "active",
@@ -135,9 +135,7 @@ function configRoutes() {
   ];
 }
 router.beforeEach((to, from, next) => {
-  // console.log(localStorage.getItem("userID"));
-  // console.log("from:" + from.path);
-  // console.log("to:" + to.path);
+
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (localStorage.getItem("userID") == -1) {
       next({
