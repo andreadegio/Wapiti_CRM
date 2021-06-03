@@ -11,7 +11,7 @@
             <h5 class="text-ellipsis-1l pb-2">
               <strong>{{ item.titolo }}</strong>
             </h5>
-            <p class="text-ellipsis-2l text-justify">{{ item.contenuto }}</p>
+            <p class="text-ellipsis-2l text-justify" v-html= item.contenuto> </p>
             <p style="text-align: right">
               <em
                 ><small class="text-muted" style=""
@@ -31,6 +31,7 @@ import VueMasonryWall from "vue-masonry-wall";
 import axios from "axios";
 import { config_data } from "../../../public/config/config";
 
+// eslint-disable-next-line no-unused-vars
 function content() {
   const length = Math.random() * 300 + 30;
   let result = "";

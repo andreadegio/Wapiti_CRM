@@ -35,6 +35,7 @@
           :schema="schema_news"
           @submit="salva()"
         >
+          <vue-editor v-model="content" class="pb-3"></vue-editor>
           <div style="display: flex">
             <FormulateInput
               id="reset-btn"
@@ -50,7 +51,12 @@
               @click="salva()"
             />
 
-            <CButton v-if="$parent.add_edit == 'edit'" id="elimina_btn" color="danger" @click="ask_elimina()">
+            <CButton
+              v-if="$parent.add_edit == 'edit'"
+              id="elimina_btn"
+              color="danger"
+              @click="ask_elimina()"
+            >
               Elimina
             </CButton>
           </div>
@@ -105,7 +111,10 @@
                   <button
                     type="button"
                     class="btn btn-secondary"
-                    @click="ask_delete = false; add = true;"
+                    @click="
+                      ask_delete = false;
+                      add = true;
+                    "
                   >
                     Annulla
                   </button>
@@ -132,10 +141,14 @@
 <script>
 import { cilX } from "@coreui/icons";
 import axios from "../../node_modules/axios";
+import { VueEditor } from "vue2-editor";
 
 export default {
   name: "AddNewsModale",
   icon_close: cilX,
+  components: {
+    VueEditor,
+  },
   props: {
     news_originale: {
       type: Object,
@@ -153,7 +166,7 @@ export default {
   data() {
     return {
       add: true,
-      
+      content: "",
       ask_delete: false,
       loading: false,
       messaggio_esito: "",
@@ -170,7 +183,8 @@ export default {
             required: "Immagine obbligatoria",
             mime: "Formato errato si accetta solo jpg, png o gif ",
           },
-          help: "Formati accettati png, jpg o gif",
+          help:
+            "Clicca o trascina qui l'immagine da caricare - Formati accettati png, jpg o gif",
         },
         {
           type: "text",
@@ -183,26 +197,30 @@ export default {
           placeholder: "Inserirsci il titolo",
           // value: this.items.titolo,
         },
-        {
-          type: "textarea",
-          name: "contenuto",
-          label: "Contenuto della News",
-          validation: "required",
-          "validation-messages": {
-            required: "Contenuto obbligatorio",
-          },
-          placeholder: "Contenuto della news",
-          style: "height: 200px",
-          // value: this.items.contenuto,
-        },
+        // {
+        //   type: "textarea",
+        //   name: "contenuto",
+        //   label: "Contenuto della News",
+        //   validation: "required",
+        //   "validation-messages": {
+        //     required: "Contenuto obbligatorio",
+        //   },
+        //   placeholder: "Contenuto della news",
+        //   style: "height: 200px",
+        //   // value: this.items.contenuto,
+        // },
       ],
     };
   },
   computed: {
     vuole_modificare() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.content = this.news_originale.contenuto;
       return this.news_originale !== -1;
     },
     vuole_aggiungere() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.content = this.news_originale.contenuto;
       return this.news_originale === -1;
     },
   },
@@ -214,12 +232,12 @@ export default {
       /* Controllo se devo inserire o modificare, */
       if (this.$parent.add_edit == "add") {
         /* AGGIUNGO NEWS */
-        
+
         if (
           this.formValues.titolo == "" ||
-          this.formValues.contenuto == "" ||
+          this.content == "" ||
           this.formValues.immagine.files[0] == null ||
-          this.formValues.immagine.files[0]['previewData'] == false
+          this.formValues.immagine.files[0]["previewData"] == false
         ) {
           /* se mancano parametri non procedo */
           console.log("dati incompleti");
@@ -235,7 +253,7 @@ export default {
                 {
                   params: {
                     titolo: this.formValues.titolo,
-                    contenuto: this.formValues.contenuto,
+                    contenuto: this.content,
                     file: this.formValues.immagine.files[0],
                     utente: JSON.parse(localStorage.getItem("chisono_data"))
                       .Nominativo,
@@ -261,7 +279,6 @@ export default {
       } else {
         /* MODIFICO NEWS */
         this.add = false;
-        
         this.loading = true;
         this.messaggio_esito = "";
         var immagine_edit;
@@ -273,7 +290,7 @@ export default {
           stessa_img = false;
           params = {
             titolo: this.formValues.titolo,
-            contenuto: this.formValues.contenuto,
+            contenuto: this.content,
             file: this.formValues.immagine.files[0],
             immagine: immagine_edit,
             id_news: this.$parent.news_da_modificare.id_db_news,
@@ -287,7 +304,7 @@ export default {
           stessa_img = true;
           params = {
             titolo: this.formValues.titolo,
-            contenuto: this.formValues.contenuto,
+            contenuto: this.content,
             file: [],
             immagine: immagine_edit,
             id_news: this.$parent.news_da_modificare.id_db_news,
@@ -309,7 +326,7 @@ export default {
               }
             )
             .then((response) => {
-              this.del_btn=false;
+              this.del_btn = false;
               this.formValues = this.news_originale;
               this.messaggio_esito = response.data.message;
               this.esito_add_edit = response.data.status;
@@ -391,14 +408,14 @@ export default {
   color: white;
 }
 
-.modal-header.delete{
+.modal-header.delete {
   background-color: red;
   border-color: red;
 }
-.modal-content.delete{
+.modal-content.delete {
   border-color: red;
 }
-.btn.btn-danger.delete{
+.btn.btn-danger.delete {
   color: white;
 }
 

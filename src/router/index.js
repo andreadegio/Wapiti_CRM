@@ -17,6 +17,10 @@ const GestioneNewsBroker = () => import("@/views/news/GestioneNewsBroker");
 // Views - Documentale
 const Documentale = () => import("@/views/documentale/Documentale");
 
+// Views - Formazione
+const AdminFormazione = () => import("@/views/formazione/AdminFormazione");
+const Formazione = () => import("@/views/formazione/Formazione");
+
 // Views - Statistiche
 const Statistiche = () => import("@/views/statistiche/Statistiche");
 
@@ -31,7 +35,6 @@ const Page500 = () => import("@/views/pages/Page500");
 const Login = () => import("@/views/pages/Login");
 
 Vue.use(Router);
-
 
 const router = new Router({
   mode: "history",
@@ -82,6 +85,16 @@ function configRoutes() {
           path: "GestioneNewsBroker",
           name: "GestioneNewsBroker",
           component: GestioneNewsBroker,
+        },
+        {
+          path: "Formazione",
+          name: "Formazione",
+          component: Formazione,
+        },
+        {
+          path: "AdminFormazione",
+          name: "AdminFormazione",
+          component: AdminFormazione,
         },
         {
           path: "Comingsoon",
@@ -135,7 +148,6 @@ function configRoutes() {
   ];
 }
 router.beforeEach((to, from, next) => {
-
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (localStorage.getItem("userID") == -1) {
       next({

@@ -24,8 +24,8 @@
             style="max-width: 760px; max-height: 500px"
           />
         </div>
-        <div class="text-justify">
-          {{ news[newsNum].contenuto }}
+        <div class="text-justify" v-html="news[newsNum].contenuto">
+          
         </div>
       </template>
 
@@ -70,8 +70,8 @@
               <h5 class="mt-0 text-justify" style="text-transform: uppercase">
                 <strong>{{ item.titolo }}</strong>
               </h5>
-              <p class="text-justify">
-                {{ item.contenuto | truncate(100, " [...]") }}
+              <p class="text-justify" v-html="$options.filters.truncate(item.contenuto, 150, ' [...]')">
+                
               </p>
             </CMedia>
             <div class="d-flex justify-content-between">

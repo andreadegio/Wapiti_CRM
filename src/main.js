@@ -46,8 +46,9 @@ Vue.prototype.$log = console.log.bind(console);
 var filter = function(text, length, clamp) {
   clamp = clamp || " [...]";
   var node = document.createElement("div");
-  node.innerHTML = text;
-  var content = node.textContent;
+    node.innerHTML = text;
+  var content = node.innerHTML;
+  // console.log(node.innerHTML);
   return content.length > length ? content.slice(0, length) + clamp : content;
 };
 Vue.filter("truncate", filter);

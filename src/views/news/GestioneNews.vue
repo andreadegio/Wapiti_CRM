@@ -82,7 +82,7 @@
                   <div>
                     <span class="text-muted"
                       ><strong>Testo della news:</strong></span
-                    ><br />{{ item.contenuto }}
+                    ><br /><p v-html= item.contenuto> </p>
                   </div>
 
                   <CButton
@@ -170,7 +170,7 @@ export default {
     },
 
     modificaNews(news_modificata) {
-      // console.log("GestioneNews modificaNews", news_modificata);
+      console.log("GestioneNews modificaNews", news_modificata);
       this.news[news_modificata.id] = news_modificata;
     },
 
@@ -218,6 +218,7 @@ export default {
     },
     onModificaClick(news_da_modificare) {
       this.news_da_modificare = news_da_modificare;
+      
       this.add_edit = "edit";
       this.mostraModale();
       this.$forceUpdate();
