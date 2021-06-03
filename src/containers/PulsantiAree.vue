@@ -1,14 +1,10 @@
 <template>
   <div>
-    <CCardLink
-      to="Statistiche"
-      target="_self"
-    >
+    <CCardLink to="Statistiche" target="_self">
       <CCard
         class="text-center elevation-6 pulsanti-azioni"
         body-wrapper
         style="background-image: url('img/buttons/statistiche.png')"
-  
       >
         <CCardTitle>
           <h1>STATISTICHE</h1>
@@ -19,7 +15,6 @@
       <CCard
         class="text-center elevation-6 pulsanti-azioni"
         style="background-image: url('img/buttons/marketing.png')"
-    
       >
         <CCardTitle>
           <h1>AREA COMMERCIALE</h1>
@@ -30,7 +25,6 @@
       <CCard
         class="text-center elevation-6 pulsanti-azioni"
         style="background-image: url('img/buttons/amministrazione.png')"
-     
       >
         <CCardTitle>
           <h1 style="font-size: 1.4vw; line-height: 3em">AMMINISTRAZIONE</h1>
@@ -42,7 +36,6 @@
         class="text-center elevation-6 pulsanti-azioni"
         body-wrapper
         style="background-image: url('img/buttons/formazione.png')"
-       
       >
         <CCardTitle>
           <h1>FORMAZIONE</h1>
@@ -53,8 +46,10 @@
       <CCard
         class="text-center elevation-6 pulsanti-azioni"
         body-wrapper
-        style="background-image: url('img/buttons/documentale.png'); z-index: 10;"
-        
+        style="
+          background-image: url('img/buttons/documentale.png');
+          z-index: 10;
+        "
       >
         <CCardTitle>
           <h1>DOCUMENTALE</h1>
@@ -98,5 +93,4 @@ export default {};
   font-size: 1.5vw;
   margin-bottom: 0 !important;
 }
-
 </style>
