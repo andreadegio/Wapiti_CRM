@@ -35,7 +35,7 @@
           :schema="schema_news"
           @submit="salva()"
         >
-          <vue-editor v-model="content" class="pb-3"></vue-editor>
+          <vue-editor v-model="content" :editorToolbar="customToolbar" class="pb-3"></vue-editor>
           <div style="display: flex">
             <FormulateInput
               id="reset-btn"
@@ -167,6 +167,21 @@ export default {
     return {
       add: true,
       content: "",
+       // ToolBar personalizzata per l'editor di testo
+      customToolbar: [
+        [{ header: [false, 1, 2, 3, 4, 5, 6] }],
+        ["bold", "italic", "underline"],
+        [{ color: [] }, { background: [] }],
+        [
+          { align: "" },
+          { align: "center" },
+          { align: "right" },
+          { align: "justify" },
+        ],
+        [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
+        [{ indent: "-1" }, { indent: "+1" }],
+        ["link"],
+      ],
       ask_delete: false,
       loading: false,
       messaggio_esito: "",
