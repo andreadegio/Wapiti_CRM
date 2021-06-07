@@ -167,11 +167,7 @@ export default {
     return {
       add: true,
       content: "",
-<<<<<<< HEAD
       // ToolBar personalizzata per l'editor di testo
-=======
-       // ToolBar personalizzata per l'editor di testo
->>>>>>> master
       customToolbar: [
         [{ header: [false, 1, 2, 3, 4, 5, 6] }],
         ["bold", "italic", "underline"],
