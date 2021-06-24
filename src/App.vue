@@ -163,4 +163,8 @@ export default {
   font-size: xx-large;
   text-transform: uppercase;
 }
+.c-body{
+  flex-grow: initial !important;
+}
+
 </style>

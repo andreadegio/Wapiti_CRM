@@ -11,7 +11,7 @@
           </CContainer>
         </main>
       </div>
-      <TheFooter id="footer" />
+      <TheFooter id="footer" v-show="this.$route.path == '/dashboard'"  />
     </CWrapper>
   </div>
 </template>

@@ -106,10 +106,10 @@
       <CDropdownItem @click="Get_user()">
         <CIcon name="cil-user" /> Profilo
       </CDropdownItem>
-      <!-- <CDropdownItem>
+      <CDropdownItem>
       <CIcon name="cil-bell"/> Updates
       <CBadge color="info" class="mfs-auto">{{ itemsCount }}</CBadge>
-    </CDropdownItem>
+    </CDropdownItem><!-- 
     <CDropdownItem>
       <CIcon name="cil-envelope-open" /> Messages
       <CBadge color="success" class="mfs-auto">{{ itemsCount }}</CBadge>
