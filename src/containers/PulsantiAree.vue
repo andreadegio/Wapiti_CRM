@@ -1,5 +1,5 @@
-<template>
-  <div>
+<template >
+  <div id="elenco_pulsanti">
     <CCardLink to="Statistiche" target="_self">
       <CCard
         class="text-center elevation-6 pulsanti-azioni"
@@ -14,6 +14,7 @@
     <CCardLink to="Comingsoon" target="_self">
       <CCard
         class="text-center elevation-6 pulsanti-azioni"
+        body-wrapper
         style="background-image: url('img/buttons/marketing.png')"
       >
         <CCardTitle>
@@ -21,13 +22,15 @@
         </CCardTitle>
       </CCard>
     </CCardLink>
+
     <CCardLink to="Comingsoon" target="_self">
       <CCard
         class="text-center elevation-6 pulsanti-azioni"
+        body-wrapper
         style="background-image: url('img/buttons/amministrazione.png')"
       >
         <CCardTitle>
-          <h1 style="font-size: 1.4vw; line-height: 3em">AMMINISTRAZIONE</h1>
+          <h1>AMMINISTRAZIONE</h1>
         </CCardTitle>
       </CCard>
     </CCardLink>
@@ -64,6 +67,18 @@ export default {};
 </script>
 
 <style scoped>
+#elenco_pulsanti{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+
+}
+.card-link{
+  margin-left: 0px !important;
+}
 .elevation-6 {
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
     0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12) !important;
@@ -75,22 +90,29 @@ export default {};
 }
 
 .pulsanti-azioni {
-  background-position: center;
-  background-size: auto;
+  background-position: center center;
+  background-size: cover;
   max-width: 290px;
   -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
   filter: grayscale(0%);
+  word-wrap: initial !important;
 }
 .pulsanti-azioni:hover {
   -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
   filter: grayscale(100%);
 }
-
 .pulsanti-azioni h1 {
   color: white;
   font-weight: 800;
   text-shadow: 1px 1px midnightblue;
-  font-size: 1.5vw;
+  font-size: 1.5rem;
   margin-bottom: 0 !important;
+}
+.pulsanti-azioni .card-body {
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+}
+.pulsanti-azioni h4 {
+  margin-bottom: 0px !important;
 }
 </style>

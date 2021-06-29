@@ -1,7 +1,7 @@
 <template>
   <div>
-    <CRow class=" pl-3 mt-2" style="justify-content: center" >
-      <h1 class="mb-3 titolo_sezione" >Documentale</h1>
+    <CRow class="pl-3 mt-2" style="justify-content: center">
+      <h1 class="mb-3 titolo_sezione">Documentale</h1>
     </CRow>
     <VisualizzaDocumento />
 
@@ -15,10 +15,7 @@
       <!-- <CCol md="1"> </CCol> -->
 
       <!-- colonna file manager -->
-      <CCol
-        md="4"
-        style="background-color: white; border-right: 1px solid lightgrey"
-      >
+      <CCol class="file_manager" md="4">
         <!-- Documenti Broker -->
         <div
           v-for="folder in documenti_list"
@@ -984,13 +981,23 @@ export default {
 };
 </script>
 <style scoped>
+.c-body {
+  flex-grow: initial !important;
+}
+
+.file_manager {
+  background-color: white;
+  border-right: 1px solid lightgrey;
+  border-radius: 5px;
+}
+
 #RowExplorer {
   margin: 0 10px 0 10px;
   height: 80%;
   position: absolute;
   width: 99%;
   background-position: right !important;
-
+  border-radius: 5px;
   background-size: contain !important;
 }
 

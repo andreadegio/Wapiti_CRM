@@ -163,6 +163,11 @@ export default {
   font-size: xx-large;
   text-transform: uppercase;
 }
+
+
+// .c-wrapper{
+//   flex-grow: initial !important;
+// }
 .c-body{
   flex-grow: initial !important;
 }

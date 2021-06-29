@@ -47,7 +47,7 @@
           </CLink>
         </div>
       </CCardHeader>
-      <CCardBody id="news-list" class="news_card">
+      <CCardBody id="news-list" class="news_card py-0">
         <CListGroup>
           <CListGroupItem
             class="flex-column align-items-start"
