@@ -11,7 +11,7 @@
         </CCardTitle>
       </CCard>
     </CCardLink>
-    <CCardLink to="Comingsoon" target="_self">
+    <CCardLink to="Commerciale" target="_self">
       <CCard
         class="text-center elevation-6 pulsanti-azioni"
         body-wrapper
@@ -34,7 +34,7 @@
         </CCardTitle>
       </CCard>
     </CCardLink>
-    <CCardLink to="AdminFormazione" target="_self">
+    <CCardLink to="Comingsoon" target="_self">
       <CCard
         class="text-center elevation-6 pulsanti-azioni"
         body-wrapper
