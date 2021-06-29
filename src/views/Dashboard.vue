@@ -3,12 +3,10 @@
     <CRow>
       <CCol md="1"> </CCol>
       <CCol md="10">
-        <div
-          
-          style="text-align: center; padding-bottom: 15px"
-        >
-          <h1 class="display-3" style="color: #1e2f56; font-weight: 900 ">
-            Benvenuto in <img class="login-img" src="img/logo_abyway.png" height="50px" />
+        <div style="text-align: center; padding-bottom: 15px">
+          <h1 class="display-3" style="color: #1e2f56; font-weight: 900">
+            Benvenuto in
+            <img class="login-img" src="img/logo_abyway.png" height="50px" />
           </h1>
           <div id="scritta"><hr class="mt-4" /></div>
         </div>
@@ -17,14 +15,14 @@
     </CRow>
     <CRow>
       <CCol md="1"> </CCol>
-      <CCol align-horizontal="center" md="2" class="h-100">
-        <PulsantiAree class="h-100" />
+      <CCol id="pulsanti_aree" align-horizontal="center" md="2" >
+        <PulsantiAree />
       </CCol>
       <CCol md="4">
         <NewsOperative class="h-100" :key="triggerNews" />
       </CCol>
       <CCol md="4">
-        <NewsMondo class="h-100" :key="triggerNews"/>
+        <NewsMondo class="h-100" :key="triggerNews" />
       </CCol>
       <CCol md="1"> </CCol>
     </CRow>
@@ -44,8 +42,8 @@
                   z-index: 0;
                   background-size: cover;
                 "
-                
-              >
+              ><CCardTitle>
+          
                 <h1
                   style="
                     color: white;
@@ -58,6 +56,7 @@
                 >
                   ASSICURAZIONI
                 </h1>
+        </CCardTitle>
               </CCard>
             </CCardLink>
           </div>
@@ -101,7 +100,6 @@
                   z-index: 0;
                   background-size: cover;
                 "
-                
               >
                 <h1
                   style="
@@ -195,7 +193,7 @@ export default {
         "unitaoperativaID",
         risposta_chisono.data.idUnitaOperativa
       );
-      
+
       this.triggerNews += 1;
       this.latest_news(); // ultime news operative
       this.load_news(); // ultime news mondo
@@ -221,7 +219,7 @@ export default {
         "news_operative",
         JSON.stringify(this.news_operative)
       );
-      
+
       this.show_async = 1;
       this.triggerNews += 1;
     },
@@ -238,17 +236,12 @@ export default {
       this.news_mondo = chiamata_news.map((item, id) => {
         return { ...item, id };
       });
-       localStorage.setItem(
-        "news_mondo",
-        JSON.stringify(this.news_mondo)
-      );
+      localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
       // console.log(this.news_mondo);
-      
+
       this.show_async = 1;
       this.triggerNews += 1;
     },
-
-
   },
 };
 </script>
@@ -290,11 +283,14 @@ hr:after {
   position: relative;
   left: -0.5em;
   /* font-family: "Indie Flower", cursive; */
-   font-family: "FreeStyle",cursive;
-  
+  font-family: "FreeStyle", cursive;
+
   background-color: #ebedef;
   padding-left: 1em;
   padding-right: 1em;
-  
+}
+#pulsanti_aree {
+  display: flex;
+  justify-content: center;
 }
 </style>
