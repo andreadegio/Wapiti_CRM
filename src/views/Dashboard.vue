@@ -288,7 +288,7 @@ hr:after {
   padding-right: 1em;
 }
 #pulsanti_aree {
-  display: flex;
+  display: grid;
   justify-content: center;
 }
 </style>
