@@ -16,7 +16,6 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import "regenerator-runtime/runtime";
-// import { config_data } from "../public/config/config";
 import VueAnalytics from "vue-analytics";
 
 library.add(faUserSecret);
@@ -61,6 +60,8 @@ fetch("./config/config.json")
   .then((response) => response.json())
   .then((custom_json) => {
     Vue.prototype.$custom_json = custom_json;
+    // console.log(custom_json.ep_api.secondo);
+    // console.log('main');
     
     new Vue({
       el: "#app",
