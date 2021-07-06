@@ -69,8 +69,10 @@
             <CRow class="justify-content-center">
               <img src="img/logout.gif" />
               <span class="text-center"
-                ><strong>Chiusura in corso...<br />Attendi 5 secondi e sarai
-                reindirizzato alla pagina di login.</strong>
+                ><strong
+                  >Chiusura in corso...<br />Attendi 5 secondi e sarai
+                  reindirizzato alla pagina di login.</strong
+                >
               </span>
             </CRow>
           </CContainer>
@@ -91,7 +93,7 @@
       <template #toggler>
         <CHeaderNavLink>
           <div
-          id="user_option"
+            id="user_option"
             class="c-avatar"
             v-c-tooltip="{ content: 'OPZIONI', placement: 'bottom-end' }"
           >
@@ -106,10 +108,13 @@
       <CDropdownItem @click="Get_user()">
         <CIcon name="cil-user" /> Profilo
       </CDropdownItem>
-      <CDropdownItem>
-      <CIcon name="cil-bell"/> Updates
-      <CBadge color="info" class="mfs-auto">{{ itemsCount }}</CBadge>
-    </CDropdownItem><!-- 
+      <!-- <CDropdownItem>
+        <CIcon name="cil-bell" /> Updates
+        <CBadge color="info" class="mfs-auto">{{
+          itemsCount
+        }}</CBadge> </CDropdownItem> -->
+        
+        <!-- 
     <CDropdownItem>
       <CIcon name="cil-envelope-open" /> Messages
       <CBadge color="success" class="mfs-auto">{{ itemsCount }}</CBadge>
@@ -156,9 +161,7 @@
 
 <script>
 import { cilAccountLogout } from "@coreui/icons";
-import { config_data } from "../../public/config/config";
 import store from "../store";
-// import axios from "axios";
 export default {
   name: "TheHeaderDropdownAccnt",
   logout_ico: cilAccountLogout,
@@ -182,7 +185,7 @@ export default {
       logout_modale: false,
       show_profile: false,
       url_logout: "",
-      // itemsCount: 42,
+      itemsCount: 42,
     };
   },
 
@@ -197,7 +200,7 @@ export default {
       this.logout_modale = true;
       store.commit("user_logout");
       setTimeout(() => {
-        window.open(config_data.logout_url, "_self");
+        window.open(this.$custom_json.logout_url, "_self");
       }, 3000);
     },
   },
@@ -206,9 +209,10 @@ export default {
 
 <style scoped>
 #user_option {
-  background-color: #0b4a9b; color: white;
+  background-color: #0b4a9b;
+  color: white;
 }
-#user_option:hover{
+#user_option:hover {
   background-color: rgb(239, 122, 18);
 }
 .c-icon {

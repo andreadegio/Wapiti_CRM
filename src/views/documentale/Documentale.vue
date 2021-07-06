@@ -545,7 +545,7 @@
 <script>
 import axios from "axios";
 import { folder_list, documenti_list } from "./folder";
-import { config_data } from "../../../public/config/config";
+
 import VisualizzaDocumento from "../../containers/VisualizzaDocumento";
 
 // NOMI DELLE COLONNE DELLA TABELLA PER INTERMEDIARIO
@@ -694,6 +694,7 @@ export default {
     };
   },
   mounted() {
+    // console.log('documentale ' + this.$custom_json);
     // console.log("caricato");
     // elenco file ottenuto dalle chiamate
     this.documenti_list.forEach((item) =>
@@ -765,7 +766,7 @@ export default {
       this.breadcrumbs.push([subfolder.nome]);
 
       this.subfolder = subfolder.slug; // Per identificare il data-table
-      console.log(subfolder.slug);
+      // console.log(subfolder.slug);
       switch (subfolder.slug) {
         case "INTERMEDIARIO":
           this.files = [];
@@ -811,7 +812,7 @@ export default {
       if (target !== "") {
         var config = {
           method: "post",
-          url: config_data.servizi_broker + "Documentale_" + target,
+          url: this.$custom_json.servizi_broker + "Documentale_" + target,
           headers: {
             userID: localStorage.getItem("userID"),
             anagraficaID: localStorage.getItem("anagraficaID"),
@@ -854,7 +855,7 @@ export default {
       var elenco = [];
       var config = {
         method: "post",
-        url: config_data.servizi_broker + URL,
+        url: this.$custom_json.servizi_broker + URL,
         headers: {
           userID: localStorage.getItem("userID"),
           anagraficaID: localStorage.getItem("anagraficaID"),
@@ -879,7 +880,7 @@ export default {
       return elenco;
     },
     async load_documentale(target) {
-      console.log(target);
+      // console.log(target);
       this.vuoto = false; // Inizializzo in modo da non mostrare il messaggio "nessun documento" in fase di caricamento
       this.color = "white";
       var elenco = [];
@@ -942,19 +943,29 @@ export default {
       var end_point = "";
       switch (dest) {
         case "INTERMEDIARIO":
-          end_point = config_data.documentale_DocumentiIntermediario;
+          end_point =
+            this.$custom_json.servizi_broker +
+            this.$custom_json.ep_broker.documentale_DocumentiIntermediario;
           break;
         case "RCA":
-          end_point = config_data.documentale_RCA;
+          end_point =
+            this.$custom_json.servizi_broker +
+            this.$custom_json.ep_broker.documentale_RCA;
           break;
         case "NON_ASSICURATIVI":
-          end_point = config_data.documentale_ServiziNonAssicurativi;
+          end_point =
+            this.$custom_json.servizi_broker +
+            this.$custom_json.ep_broker.documentale_ServiziNonAssicurativi;
           break;
         case "ALTRE_GARANZIE":
-          end_point = config_data.documentale_AltreGaranzie;
+          end_point =
+            this.$custom_json.servizi_broker +
+            this.$custom_json.ep_broker.documentale_AltreGaranzie;
           break;
         default:
-          end_point = config_data.documentale_broker;
+          end_point =
+            this.$custom_json.servizi_broker +
+            this.$custom_json.ep_broker.documentale_broker;
       }
       this.viewFile = true;
       if (this.timer == 0) {

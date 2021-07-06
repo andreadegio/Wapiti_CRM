@@ -20,7 +20,7 @@
       <template>
         <div style="text-align: center">
           <CImg
-            :src="$parent.config_data.img_news_url + news[newsNum].immagine"
+            :src="$custom_json.img_news_url + news[newsNum].immagine"
             style="max-width: 760px; max-height: 500px"
           />
         </div>
@@ -61,7 +61,7 @@
             <CMedia aside-right aside-vertical-position="center">
               <template #aside>
                 <CImg
-                  :src="$parent.config_data.img_news_url + item.immagine"
+                  :src="$custom_json.img_news_url + item.immagine"
                   width="100px"
                   height="100px"
                 />
@@ -125,17 +125,6 @@ export default {
       this.newsModal = true;
       this.newsNum = indice;
     },
-    // async load_news() {
-    //   var chiamata_news = [];
-    //   await axios
-    //     .get(this.$parent.config_data.api_url + "listanewshome")
-    //     .then((response) => {
-    //       chiamata_news = response.data;
-    //     });
-    //   this.news = chiamata_news.map((item, id) => {
-    //     return { ...item, id };
-    //   });
-    // },
   },
 };
 </script>

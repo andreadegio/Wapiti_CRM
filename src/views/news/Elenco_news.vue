@@ -5,7 +5,7 @@
     <vue-masonry-wall :items="news" :options="options">
       <template v-slot:default="{ item }">
         <div class="Item elevation-6">
-          <img :src="config_data.img_news_url + item.immagine" />
+          <img :src="$custom_json.img_news_url + item.immagine" />
 
           <div class="Content" style="text-align: center">
             <h5 class="text-ellipsis-1l pb-2">
@@ -29,7 +29,7 @@
 <script>
 import VueMasonryWall from "vue-masonry-wall";
 import axios from "axios";
-import { config_data } from "../../../public/config/config";
+
 
 // eslint-disable-next-line no-unused-vars
 function content() {
@@ -56,14 +56,6 @@ export default {
         },
       },
       news:[],
-      config_data,
-      // news: news
-      //   .sort((a, b) => {
-      //     return new Date(b.data) - new Date(a.data);
-      //   })
-      //   .map((item, id) => {
-      //     return { ...item, id };
-      //   }),
     };
   },
   mounted() {
@@ -73,7 +65,7 @@ export default {
     async load_news() {
       var chiamata_news = [];
       await axios
-        .get(config_data.api_url + "listanews")
+        .get(this.$custom_json.api_url + this.$custom_json.ep_api.listanews)
         .then((response) => {
           chiamata_news = response.data;
         });

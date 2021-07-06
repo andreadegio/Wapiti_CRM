@@ -70,7 +70,7 @@
               <CCardBody>
                 <CMedia
                   :aside-image-props="{                    
-                    src: config_data.img_news_url + item.immagine,
+                    src: $custom_json.img_news_url + item.immagine,
                   }"
                 >
                   <h4>
@@ -110,7 +110,7 @@
 <script>
 import axios from "axios";
 import AddNews from "./../../containers/AddNews";
-import { config_data } from "../../../public/config/config";
+
 
 const fields = [
   { key: "titolo", _style: "min-width:200px; font-weight: bold;" },
@@ -135,7 +135,7 @@ export default {
       news_da_modificare: {},
       news_per_pagina: 10,
       add_edit: "",
-      config_data,
+
     };
   },
   computed: {
@@ -158,7 +158,7 @@ export default {
     async load_news() {
       var chiamata_news = [];
       await axios
-        .get(config_data.api_url + "listanews")
+        .get(this.$custom_json.api_url + this.$custom_json.ep_api.listanews)
         .then((response) => {
           chiamata_news = response.data;
         });

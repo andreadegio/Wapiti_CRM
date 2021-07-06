@@ -31,7 +31,7 @@
       <CCol sm="10" md="10">
         <div class="row">
           <div class="col-sm">
-            <CCardLink :href="config_data.broker_veicoli" target="_self">
+            <CCardLink :href="$custom_json.broker_veicoli" target="_self">
               <CCard
                 class="text-center elevation-6 portali-btn"
                 body-wrapper
@@ -129,7 +129,6 @@ import NewsMondo from "./../containers/NewsMondo";
 import NewsOperative from "./../containers/NewsOperative";
 import PulsantiAree from "./../containers/PulsantiAree";
 import store from "./../store";
-import { config_data } from "../../public/config/config";
 
 export default {
   name: "Dashboard",
@@ -144,7 +143,6 @@ export default {
       userID: "",
       anagraficaID: "",
       unitaoperativaID: "",
-      config_data,
       show_async: 0,
       news_operative: null,
       triggerNews: 0,
@@ -154,6 +152,7 @@ export default {
 
   beforeCreate() {},
   created() {
+    
     if (this.$route.query.auth == "1") {
       store.commit("user_login");
       this.$router.push("dashboard");
@@ -173,7 +172,7 @@ export default {
       //  chiamo il chisono per recuperare i dati dell'utente loggato
       var config = {
         method: "post",
-        url: config_data.servizi_broker + "chisono",
+        url: this.$custom_json.servizi_broker + "chisono",
         headers: {
           utente: localStorage.getItem("user"),
           password: localStorage.getItem("pwd"),
@@ -203,7 +202,7 @@ export default {
       // CARICO LE ULTIME 3 NEWS OPERATIVE PER LA HOME
       var config = {
         method: "post",
-        url: config_data.servizi_broker + "LatestNewsOperative",
+        url: this.$custom_json.servizi_broker + "LatestNewsOperative",
         headers: {
           userID: localStorage.getItem("userID"),
           anagraficaID: localStorage.getItem("anagraficaID"),
@@ -229,7 +228,7 @@ export default {
       // CARICO LE ULTIME 3 NEWS MONDO PER LA HOME
       var chiamata_news = [];
       await axios
-        .get(config_data.api_url + "listanewshome")
+        .get(this.$custom_json.api_url + this.$custom_json.ep_api.listanews_home)
         .then((response) => {
           chiamata_news = response.data;
         });
@@ -246,7 +245,6 @@ export default {
 };
 </script>
 <style scoped>
-/* @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"); */
 @font-face {
   font-family: FreeStyle;
   src: url("/img/fonts/FREESCPT.TTF");

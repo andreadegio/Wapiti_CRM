@@ -16,7 +16,7 @@
         <div v-show="$parent.add_edit == 'edit'">
           <div class="row justify-content-center">
             <CImg
-              :src="$parent.config_data.img_news_url + news_originale.immagine"
+              :src="$custom_json.img_news_url + news_originale.immagine"
               block
               class="pb-2"
               width="20%"
@@ -264,7 +264,7 @@ export default {
           try {
             axios
               .post(
-                this.$parent.config_data.api_url + "addnews",
+                this.$custom_json.api_url + "addnews",
                 {
                   params: {
                     titolo: this.formValues.titolo,
@@ -332,7 +332,7 @@ export default {
         try {
           axios
             .post(
-              this.$parent.config_data.api_url + "editnews",
+              this.$custom_json.api_url + "editnews",
               { params },
               {
                 header: {
@@ -367,7 +367,7 @@ export default {
       try {
         axios
           .post(
-            this.$parent.config_data.api_url + "delete",
+            this.$custom_json.api_url + "delete",
             { params },
             {
               header: {

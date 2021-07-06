@@ -116,8 +116,6 @@
 
 <script>
 import store from "../../store";
-import { config_data } from "../../../public/config/config";
-// import CoreUIIcons from "../icons/CoreUIIcons.vue";
 
 export default {
   // components: { CoreUIIcons },
@@ -126,7 +124,7 @@ export default {
     return {
       jsonUtente: [],
       messaggio_errore: false,
-      login_url: config_data.login_url,
+      login_url: this.$custom_json.login_url,
     };
   },
   created() {
