@@ -176,13 +176,13 @@ hr:after {
   content: "La nuova piattaforma operativa";
   font-size: 3.5em;
   position: relative;
-  left: -0.5em;
+  /* left: -0.5em; */
   /* font-family: "Indie Flower", cursive; */
   font-family: "FreeStyle", cursive;
 
   padding-top: 5px;
-  padding-left: 1em;
-  padding-right: 1em;
+  /* padding-left: 1em; */
+  /* padding-right: 1em; */
 }
 
 .entra_btn {
