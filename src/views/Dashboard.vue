@@ -15,7 +15,7 @@
     </CRow>
     <CRow>
       <CCol md="1"> </CCol>
-      <CCol id="pulsanti_aree" align-horizontal="center" md="2" >
+      <CCol id="pulsanti_aree" align-horizontal="center" md="2">
         <PulsantiAree />
       </CCol>
       <CCol md="4">
@@ -42,21 +42,14 @@
                   z-index: 0;
                   background-size: cover;
                 "
-              ><CCardTitle>
-          
-                <h1
-                  style="
-                    color: white;
-                    font-weight: 800;
-                    text-shadow: 1px 1px midnightblue;
-                    font-size: 2vw;
-                    margin-bottom: 0 !important;
-                    margin-top: 10%;
-                  "
-                >
-                  ASSICURAZIONI
-                </h1>
-        </CCardTitle>
+                ><CCardTitle>
+                  <h1
+                  class="pulsante_portali"
+                    
+                  >
+                    ASSICURAZIONI
+                  </h1>
+                </CCardTitle>
               </CCard>
             </CCardLink>
           </div>
@@ -65,12 +58,7 @@
               <CCard
                 class="text-center elevation-6 portali-btn"
                 body-wrapper
-                style="
-                  height: 200px;
-                  background-image: url('img/buttons/rami.png');
-                  background-position: center;
-                  z-index: 0;
-                "
+                
               
               >
                 <h1
@@ -101,18 +89,7 @@
                   background-size: cover;
                 "
               >
-                <h1
-                  style="
-                    color: white;
-                    font-weight: 800;
-                    text-shadow: 1px 1px midnightblue;
-                    font-size: 2vw;
-                    margin-bottom: 0 !important;
-                    margin-top: 10%;
-                  "
-                >
-                  GAS E LUCE
-                </h1>
+                <h1 class="pulsante_portali">GAS E LUCE</h1>
               </CCard>
             </CCardLink>
           </div>
@@ -152,7 +129,6 @@ export default {
 
   beforeCreate() {},
   created() {
-    
     if (this.$route.query.auth == "1") {
       store.commit("user_login");
       this.$router.push("dashboard");
@@ -228,7 +204,9 @@ export default {
       // CARICO LE ULTIME 3 NEWS MONDO PER LA HOME
       var chiamata_news = [];
       await axios
-        .get(this.$custom_json.api_url + this.$custom_json.ep_api.listanews_home)
+        .get(
+          this.$custom_json.api_url + this.$custom_json.ep_api.listanews_home
+        )
         .then((response) => {
           chiamata_news = response.data;
         });
@@ -290,5 +268,14 @@ hr:after {
 #pulsanti_aree {
   display: grid;
   justify-content: center;
+}
+
+.pulsante_portali {
+  color: white;
+  font-weight: 800;
+  text-shadow: 1px 1px midnightblue;
+  font-size: 2.5rem;
+  margin-bottom: 0 !important;
+  margin-top: 10%;
 }
 </style>
