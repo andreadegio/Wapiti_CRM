@@ -3,7 +3,9 @@
   "api_url": "https://www.abyway.it/API/",
   "ep_api": {
     "listanews_home": "listanewshome",
-    "listanews": "listanews"
+    "listanews": "listanews",
+    "cloudRC": "Commerciale/treeCloudRC"
+
   },
   "servizi_broker": "https://servizi.documentale.cloud/aibajsonea/",
   "broker_veicoli": "http://broker.abybroker.it/ea2019/AreaOperazioni.aspx",

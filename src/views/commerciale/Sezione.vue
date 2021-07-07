@@ -1,7 +1,7 @@
 
 <template>
   <div class="my-3 mx-3">
-    <div v-show="sezione == 'Assicurazioni'">
+    <div v-show="contenuto == 'Assicurazioni'">
       <CTabs variant="tabs" :active-tab="0">
         <CTab title="Comunicazioni">
           <CCardGroup class="latest container">
@@ -9,7 +9,7 @@
               <CCardHeader>
                 <strong> <u>ASSICURAZIONI</u> </strong>
               </CCardHeader>
-              <CCardImg variant="none" src="../upload/auto1.jpg"> </CCardImg>
+              <CCardImg src="../upload/auto1.jpg"> </CCardImg>
               <CCardBody class="pb-2"
                 ><h2>Arriva ABYONE</h2>
                 <cite>01 Luglio 2021</cite>
@@ -24,7 +24,7 @@
               <CCardHeader
                 ><strong> <u>ASSICURAZIONI</u> </strong>
               </CCardHeader>
-              <CCardImg variant="none" src="../upload/auto2.jpg"> </CCardImg>
+              <CCardImg src="../upload/auto2.jpg"> </CCardImg>
               <CCardBody class="pb-2"
                 ><h2>Materiale Grafico</h2>
                 <cite>01 Luglio 2021</cite>
@@ -36,7 +36,7 @@
               <CCardHeader
                 ><strong> <u>ASSICURAZIONI</u> </strong>
               </CCardHeader>
-              <CCardImg variant="none" src="../upload/auto3.jpg"> </CCardImg>
+              <CCardImg src="../upload/auto3.jpg"> </CCardImg>
               <CCardBody class="pb-2"
                 ><h2>Titolo di prova</h2>
                 <cite>01 Luglio 2021</cite>
@@ -49,7 +49,7 @@
               <CCardHeader
                 ><strong> <u>ASSICURAZIONI</u> </strong>
               </CCardHeader>
-              <CCardImg variant="none" src="../upload/auto2.jpg"> </CCardImg>
+              <CCardImg src="../upload/auto2.jpg"> </CCardImg>
               <CCardBody class="pb-2"
                 ><h2>Materiale Grafico</h2>
                 <cite>01 Luglio 2021</cite>
@@ -61,7 +61,7 @@
               <CCardHeader
                 ><strong> <u>ASSICURAZIONI</u> </strong>
               </CCardHeader>
-              <CCardImg variant="none" src="../upload/auto3.jpg"> </CCardImg>
+              <CCardImg src="../upload/auto3.jpg"> </CCardImg>
               <CCardBody class="pb-2"
                 ><h2>Titolo di prova</h2>
                 <cite>01 Luglio 2021</cite>
@@ -73,23 +73,19 @@
         </CTab>
         <CTab title="Allegati">
           <div class="container">
-            
+            {{ tree_RC }}
             Materiale a disposizione da scaricare
           </div>
         </CTab>
       </CTabs>
     </div>
-    <div v-show="sezione == 'Energy'">
+    <div v-show="contenuto == 'Energy'">
       <CCardGroup class="latest">
         <CCard class="mx-2" accent-color="success">
           <CCardHeader
             ><strong> <u>GAS & LUCE</u> </strong></CCardHeader
           >
-          <CCardImg
-            variant="none"
-            src="../upload/energy1.jpg"
-            style="min-height: 200px"
-          >
+          <CCardImg src="../upload/energy1.jpg" style="min-height: 200px">
           </CCardImg>
           <CCardBody class="pb-2"
             ><h2>Titolo di prova</h2>
@@ -103,7 +99,7 @@
           <CCardHeader
             ><strong> <u>GAS & LUCE</u> </strong></CCardHeader
           >
-          <CCardImg variant="none" src="../upload/energy2.jpg"> </CCardImg>
+          <CCardImg src="../upload/energy2.jpg"> </CCardImg>
           <CCardBody class="pb-2"
             ><h2>Titolo di prova</h2>
             <cite>01 Luglio 2021</cite>
@@ -115,7 +111,7 @@
           <CCardHeader
             ><strong> <u>GAS & LUCE</u> </strong></CCardHeader
           >
-          <CCardImg variant="none" src="../upload/energy2.jpg"> </CCardImg>
+          <CCardImg src="../upload/energy2.jpg"> </CCardImg>
           <CCardBody class="pb-2"
             ><h2>Titolo di prova</h2>
             <cite>01 Luglio 2021</cite>
@@ -127,7 +123,7 @@
           <CCardHeader
             ><strong> <u>GAS & LUCE</u> </strong></CCardHeader
           >
-          <CCardImg variant="none" src="../upload/energy2.jpg"> </CCardImg>
+          <CCardImg src="../upload/energy2.jpg"> </CCardImg>
           <CCardBody class="pb-2"
             ><h2>Titolo di prova</h2>
             <cite>01 Luglio 2021</cite>
@@ -139,7 +135,7 @@
           <CCardHeader
             ><strong> <u>GAS & LUCE</u> </strong></CCardHeader
           >
-          <CCardImg variant="none" src="../upload/energy2.jpg"> </CCardImg>
+          <CCardImg src="../upload/energy2.jpg"> </CCardImg>
           <CCardBody class="pb-2"
             ><h2>Titolo di prova</h2>
             <cite>01 Luglio 2021</cite>
@@ -152,17 +148,28 @@
   </div>
 </template>
 <script>
-
-
+import axios from "axios";
 
 export default {
-  props: ["sezione"],
+  props: ["contenuto"],
 
   data() {
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      sezione: {},
+      tree_RC: {},
     };
+  },
+  created() {
+    this.get_tree_rc();
+  },
+  methods: {
+    async get_tree_rc() {
+      await axios
+        .get(this.$custom_json.api_url + this.$custom_json.ep_api.cloudRC)
+        .then((response) => {
+          this.tree_RC = response.data;
+          console.log(response.data);
+        });
+    },
   },
 };
 </script>

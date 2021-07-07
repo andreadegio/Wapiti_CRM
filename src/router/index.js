@@ -108,7 +108,7 @@ function configRoutes() {
           component: Commerciale,
         },
         {
-          path: "Commerciale/:sezione",
+          path: "Commerciale/:contenuto",
           name: "Sezione",
           props: true,
           component: Sezione,

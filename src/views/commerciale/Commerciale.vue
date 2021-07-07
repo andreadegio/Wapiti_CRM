@@ -10,7 +10,7 @@
             ><strong> <u>GAS & LUCE</u> </strong></CCardHeader
           >
           <CCardImg
-            variant="none"
+            
             src="upload/energy1.jpg"
             style="min-height: 200px"
           >
@@ -26,7 +26,7 @@
           <CCardHeader>
             <strong> <u>ASSICURAZIONI</u> </strong>
           </CCardHeader>
-          <CCardImg variant="none" src="upload/auto1.jpg"> </CCardImg>
+          <CCardImg  src="upload/auto1.jpg"> </CCardImg>
           <CCardBody class="pb-2"
             ><h2>Arriva ABYONE</h2>
             <cite>01 Luglio 2021</cite>
@@ -40,7 +40,7 @@
           <CCardHeader
             ><strong> <u>ASSICURAZIONI</u> </strong>
           </CCardHeader>
-          <CCardImg variant="none" src="upload/auto2.jpg"> </CCardImg>
+          <CCardImg  src="upload/auto2.jpg"> </CCardImg>
           <CCardBody class="pb-2"
             ><h2>Materiale Grafico</h2>
             <cite>01 Luglio 2021</cite>
@@ -52,7 +52,7 @@
           <CCardHeader
             ><strong> <u>ASSICURAZIONI</u> </strong>
           </CCardHeader>
-          <CCardImg variant="none" src="upload/auto3.jpg"> </CCardImg>
+          <CCardImg  src="upload/auto3.jpg"> </CCardImg>
           <CCardBody class="pb-2"
             ><h2>Titolo di prova</h2>
             <cite>01 Luglio 2021</cite>
@@ -64,7 +64,7 @@
           <CCardHeader
             ><strong> <u>GAS & LUCE</u> </strong></CCardHeader
           >
-          <CCardImg variant="none" src="upload/energy2.jpg"> </CCardImg>
+          <CCardImg src="upload/energy2.jpg"> </CCardImg>
           <CCardBody class="pb-2"
             ><h2>Titolo di prova</h2>
             <cite>01 Luglio 2021</cite>
