@@ -74,6 +74,25 @@
         <CTab title="Allegati">
           <div class="container">
             {{ tree_RC }}
+            <div
+              v-for="elemento in tree_RC"
+              :key="elemento.descrizione"
+              :class="elemento.ext"
+              class="cloud"
+            >
+              {{ elemento.descrizione }}
+              <cite style="font-size: 0.7rem" v-show="elemento.tipo != 'directory'"
+                >({{ elemento.size }}byte)</cite
+              >
+              <cite
+                style="font-size: 0.7rem"
+                v-show="
+                  elemento.tipo == 'directory' && elemento.contenuto == null
+                "
+                >(cartella vuota)</cite
+              >
+            </div>
+
             Materiale a disposizione da scaricare
           </div>
         </CTab>
@@ -160,6 +179,7 @@ export default {
   },
   created() {
     this.get_tree_rc();
+    alert(this.contenuto);
   },
   methods: {
     async get_tree_rc() {
@@ -167,13 +187,67 @@ export default {
         .get(this.$custom_json.api_url + this.$custom_json.ep_api.cloudRC)
         .then((response) => {
           this.tree_RC = response.data;
-          console.log(response.data);
+          // console.log(response.data); nb
         });
     },
   },
 };
 </script>
 <style scoped>
+/* CLASSI PER LA VISUALIZZAZIONE DEI FILE DEL CLOUD  */
+.cloud {
+  cursor: pointer;
+  list-style-type: none;
+}
+.jpg::before {
+  content: "\f1c5";
+  font-family: "Font Awesome 5 free";
+  color: rgb(103, 103, 104);
+  font-size: 2em;
+  font-weight: 900;
+  padding-right: 5px;
+}
+.pdf::before {
+  content: "\f1c1";
+  font-family: "Font Awesome 5 free";
+  color: rgb(103, 103, 104);
+  font-size: 2em;
+  font-weight: 900;
+  padding-right: 5px;
+}
+.txt::before {
+  content: "\f15c";
+  font-family: "Font Awesome 5 free";
+  color: rgb(103, 103, 104);
+  font-size: 2em;
+  font-weight: 900;
+  padding-right: 5px;
+}
+.directory::before {
+  content: "\f07b";
+  font-family: "Font Awesome 5 free";
+  color: rgb(252, 198, 3);
+  font-size: 2em;
+  font-weight: 900;
+  padding-right: 5px;
+}
+.directory:hover::before {
+  content: "\f07c";
+  font-family: "Font Awesome 5 free";
+  color: rgb(252, 198, 3);
+  font-size: 2em;
+  font-weight: 900;
+  padding-right: 5px;
+}
+.directory.highlight::before {
+  content: "\f07c";
+  font-family: "Font Awesome 5 free";
+  color: rgb(252, 198, 3);
+  font-size: 2em;
+  font-weight: 900;
+  padding-right: 5px;
+}
+
 .latest {
   color: #3c4b64;
 }

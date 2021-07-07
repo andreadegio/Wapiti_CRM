@@ -1,5 +1,5 @@
 <template>
-  <div id="elenco_mondo"  >
+  <div id="elenco_mondo" v-if="news == null">
     <h1 class="mb-3 mt-3 text-center titolo_sezione">Elenco News dal mondo</h1>
 
     <vue-masonry-wall :items="news" :options="options">
@@ -11,7 +11,10 @@
             <h5 class="text-ellipsis-1l pb-2">
               <strong>{{ item.titolo }}</strong>
             </h5>
-            <p class="text-ellipsis-2l text-justify" v-html= item.contenuto> </p>
+            <p
+              class="text-ellipsis-2l text-justify"
+              v-html="item.contenuto"
+            ></p>
             <p style="text-align: right">
               <em
                 ><small class="text-muted" style=""
@@ -24,12 +27,21 @@
       </template>
     </vue-masonry-wall>
   </div>
+  <div v-else class=" text-center">
+    
+      <h1 class="mb-3 mt-5 mb-5 text-center titolo_sezione">
+        Nessuna news presente
+      </h1>
+      <CButton to="dashboard" color="primary" size="lg" variant="outline" >
+        < Indietro
+      </CButton>
+    
+  </div>
 </template>
 
 <script>
 import VueMasonryWall from "vue-masonry-wall";
 import axios from "axios";
-
 
 // eslint-disable-next-line no-unused-vars
 function content() {
@@ -55,7 +67,7 @@ export default {
           default: 12,
         },
       },
-      news:[],
+      news: [],
     };
   },
   mounted() {

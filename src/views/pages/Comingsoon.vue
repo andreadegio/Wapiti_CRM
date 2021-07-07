@@ -1,8 +1,5 @@
 <template>
-  <CContainer id="cover" class="d-flex align-items-center min-vh-100"style="
-        background: rgb(255, 255, 255) url('img/comingsoon.jpg') no-repeat scroll
-          0% 0%;
-      ">
+  <CContainer id="cover" class="d-flex align-items-center min-vh-100" style="background: rgb(255, 255, 255) url('img/comingsoon.jpg') no-repeat scroll 0% 0%;">
     <CRow class="w-100 justify-content-center">
       <CCol md="6">
         <div class="w-100 justify-content-center text-center pb-5">
