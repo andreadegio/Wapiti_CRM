@@ -1,12 +1,11 @@
 <template>
-  <div>
+  <div v-if="news != null && news !=''">
     <CModal
       color="dark"
       centered
       :show.sync="newsModal"
       style="z-index: 30"
       size="lg"
-      
     >
       <template #header>
         <strong style="text-transform: uppercase">{{
@@ -24,9 +23,7 @@
             style="max-width: 760px; max-height: 500px"
           />
         </div>
-        <div class="text-justify" v-html="news[newsNum].contenuto">
-          
-        </div>
+        <div class="text-justify" v-html="news[newsNum].contenuto"></div>
       </template>
 
       <template #footer>
@@ -35,13 +32,7 @@
         >
       </template>
     </CModal>
-    <CCard
-      id="world-list"
-     
-      md="8"
-      class="h-100"
-      style="z-index: 10"
-    >
+    <CCard id="world-list" md="8" class="h-100" style="z-index: 10" :show.sync="news">
       <CCardHeader class="d-flex justify-content-between">
         <strong class="h4">NEWS DAL MONDO</strong>
         <div class="card-header-actions">
@@ -70,9 +61,12 @@
               <h5 class="mt-0 text-justify" style="text-transform: uppercase">
                 <strong>{{ item.titolo }}</strong>
               </h5>
-              <p class="text-justify" v-html="$options.filters.truncate(item.contenuto, 150, ' [...]')">
-                
-              </p>
+              <p
+                class="text-justify"
+                v-html="
+                  $options.filters.truncate(item.contenuto, 150, ' [...]')
+                "
+              ></p>
             </CMedia>
             <div class="d-flex justify-content-between">
               <CButton
@@ -101,16 +95,62 @@
       </CCardFooter>
     </CCard>
   </div>
+  <div v-else>
+    <CCard
+      id="world-list"
+      md="8"
+      class="h-100"
+      style="z-index: 10;"
+    >
+      <CCardHeader class="d-flex justify-content-between">
+        <strong class="h4">NEWS DAL MONDO</strong>
+        <div class="card-header-actions">
+          <CLink to="./Elenco_news" class="card-header-action btn-setting">
+            <strong
+              ><CIcon name="cil-justify-center" /> Elenco completo...</strong
+            >
+          </CLink>
+        </div>
+      </CCardHeader>
+      <CCardBody md="4" class="news_card py-0">
+        <div class="errore_caricamento px-5 py-3 mt-5">
+          <i class="far fa-frown fa-10x"></i>
+          <p class="py-3 px-3">
+            Spiacenti si è verificato un errore durante il caricamento delle
+            news prova a ricaricare
+          </p>
+          <CButton
+          @click = load_news() color="primary" size="lg" variant="outline">
+            <i class="fas fa-redo-alt"></i> Ricarica
+          </CButton>
+        </div>
+      </CCardBody>
+      <CCardFooter>
+        <div class="card-header-actions" v-if="admin">
+          <CLink to="Gestione_news_Mondo" class="card-header-action btn-setting"
+            ><CIcon name="cil-settings" /><strong> Gestione</strong>
+          </CLink>
+        </div>
+      </CCardFooter>
+    </CCard>
+  </div>
 </template>
 <script>
 // import axios from "axios";
 
 export default {
   name: "NewsMondo",
+  props: ["newsParent"],
+  watch: {
+    newsParent: function(newVal, oldVal){
+      // console.log(JSON.stringify(newVal));
+      this.news = newVal;
+    }
+  },
 
   data() {
     return {
-      news: JSON.parse(localStorage.getItem("news_mondo")),
+      news: [],
       newsNum: 0,
       newsModal: false,
       user_storage: [],
@@ -118,9 +158,19 @@ export default {
     };
   },
   mounted() {
+    if (localStorage.getItem("news_mondo") == null) {
+      this.news = null;
+    }
+    else{
+      this.news= JSON.parse(localStorage.getItem("news_mondo"));
+    }
     this.user_storage = JSON.parse(localStorage.getItem("chisono_data"));
   },
   methods: {
+    load_news(){
+      this.$emit("reload_mondo");
+     
+    },
     showModal(indice) {
       this.newsModal = true;
       this.newsNum = indice;
@@ -147,5 +197,15 @@ export default {
 img {
   object-fit: cover;
   border-radius: 3px;
+}
+.errore_caricamento {
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #3c4b64;
+  font-weight: 600;
+}
+.errore_caricamento p{
+  font-size: 1.5rem;
+  font-weight: 300;
 }
 </style>

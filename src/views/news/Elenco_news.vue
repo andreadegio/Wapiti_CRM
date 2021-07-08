@@ -1,5 +1,5 @@
 <template>
-  <div id="elenco_mondo"  >
+  <div v-if="news != null" id="elenco_mondo"  >
     <h1 class="mb-3 mt-3 text-center titolo_sezione">Elenco News dal mondo</h1>
 
     <vue-masonry-wall :items="news" :options="options">
@@ -23,6 +23,19 @@
         </div>
       </template>
     </vue-masonry-wall>
+  </div>
+  <div v-else style="display:flex;justify-content:center;" class="my-5">
+    <div class="lds-grid">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </div>
 </template>
 
@@ -55,7 +68,7 @@ export default {
           default: 12,
         },
       },
-      news:[],
+      news:null,
     };
   },
   mounted() {

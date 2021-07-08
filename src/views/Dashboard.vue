@@ -1,5 +1,5 @@
 <template >
-  <div v-show="show_async != 0">
+  <div v-if="show_async == 2">
     <CRow>
       <CCol md="1"> </CCol>
       <CCol md="10">
@@ -22,7 +22,7 @@
         <NewsOperative class="h-100" :key="triggerNews" />
       </CCol>
       <CCol md="4">
-        <NewsMondo class="h-100" :key="triggerNews" />
+        <NewsMondo class="h-100" :newsParent="news_mondo" :key="triggerNews" @reload_mondo="reload_mondo()"/>
       </CCol>
       <CCol md="1"> </CCol>
     </CRow>
@@ -43,12 +43,7 @@
                   background-size: cover;
                 "
                 ><CCardTitle>
-                  <h1
-                  class="pulsante_portali"
-                    
-                  >
-                    ASSICURAZIONI
-                  </h1>
+                  <h1 class="pulsante_portali">ASSICURAZIONI</h1>
                 </CCardTitle>
               </CCard>
             </CCardLink>
@@ -97,6 +92,19 @@
       </CCol>
       <CCol md="1"> </CCol>
     </CRow>
+  </div>
+  <div v-else style="display: flex; justify-content: center" class="my-5">
+    <div class="lds-grid">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </div>
 </template>
 
@@ -174,8 +182,12 @@ export default {
       this.load_news(); // ultime news mondo
     },
 
+
+// CARICO LE ULTIME 3 NEWS OPERATIVE PER LA HOME
     async latest_news() {
-      // CARICO LE ULTIME 3 NEWS OPERATIVE PER LA HOME
+      
+      // alert(localStorage.getItem("news_operative"));
+
       var config = {
         method: "post",
         url: this.$custom_json.servizi_broker + "LatestNewsOperative",
@@ -195,29 +207,113 @@ export default {
         JSON.stringify(this.news_operative)
       );
 
-      this.show_async = 1;
+      this.show_async++;
       this.triggerNews += 1;
     },
 
+// CARICO LE ULTIME 3 NEWS MONDO PER LA HOME
     async load_news() {
-      // console.log("caricamento news mondo.........")
+      
+      
+      var chiamata_news = [];
+      try {
+        await axios
+          .get(
+            this.$custom_json.api_url + this.$custom_json.ep_api.listanews_home
+          )
+          .then((response) => {
+            chiamata_news = response.data;
+          });
+        this.news_mondo = chiamata_news.map((item, id) => {
+          return { ...item, id };
+        });
+        
+        localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
+
+      } catch (error) {
+        alert(JSON.parse(localStorage.getItem("news_mondo")));
+        if (localStorage.getItem("news_mondo") != null) {
+          this.news_mondo = JSON.parse(localStorage.getItem("news_mondo"));
+        } else {
+          // in caso di chiamata fallita e contenuto non presente nello storage tento una seconda volta
+          try {
+            await axios
+              .get(
+                this.$custom_json.api_url +
+                  this.$custom_json.ep_api.listanews_home
+              )
+              .then((response) => {
+                chiamata_news = response.data;
+              });
+            this.news_mondo = chiamata_news.map((item, id) => {
+              return { ...item, id };
+            });
+
+            localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
+          } catch (error) {
+            // se ricevo il secondo errore allora mosto la sezione vuota
+            this.news_mondo = "";
+          }
+        }
+      }
+
+      
+        this.show_async++;
+      this.triggerNews += 1;
+      
+    },
+
+
+
+    async reload_mondo() {
+    
       // CARICO LE ULTIME 3 NEWS MONDO PER LA HOME
       var chiamata_news = [];
-      await axios
-        .get(
-          this.$custom_json.api_url + this.$custom_json.ep_api.listanews_home
-        )
-        .then((response) => {
-          chiamata_news = response.data;
+      try {
+        await axios
+          .get(
+            this.$custom_json.api_url + this.$custom_json.ep_api.listanews_home
+          )
+          .then((response) => {
+            chiamata_news = response.data;
+          });
+        this.news_mondo = chiamata_news.map((item, id) => {
+          return { ...item, id };
         });
-      this.news_mondo = chiamata_news.map((item, id) => {
-        return { ...item, id };
-      });
-      localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
-      // console.log(this.news_mondo);
+        localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
+        // alert("ok");
+      } catch (error) {
+        if (localStorage.getItem("news_mondo") != null) {
+          // this.news_mondo = JSON.parse(localStorage.getItem("news_mondo"));
+          this.news_mondo = null;
+          // alert("notizie  presenti");
+        } else {
+          // in caso di chiamata fallita e contenuto non presente nello storage tento una seconda volta
+          try {
+            await axios
+              .get(
+                this.$custom_json.api_url +
+                  this.$custom_json.ep_api.listanews_home
+              )
+              .then((response) => {
+                chiamata_news = response.data;
+              });
+            this.news_mondo = chiamata_news.map((item, id) => {
+              return { ...item, id };
+            });
 
-      this.show_async = 1;
-      this.triggerNews += 1;
+            localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
+          } catch (error) {
+            // se ricevo il secondo errore allora mosto la sezione vuota
+            this.news_mondo = "";
+          }
+        }
+      }
+
+      // // console.log(this.news_mondo);
+
+      // this.show_async++;
+      // this.triggerNews += 1;
     },
   },
 };
