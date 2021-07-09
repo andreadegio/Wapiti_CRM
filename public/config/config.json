@@ -9,15 +9,14 @@
   },
   "servizi_broker": "https://servizi.documentale.cloud/aibajsonea/",
   "broker_veicoli": "http://broker.abybroker.it/ea2019/AreaOperazioni.aspx",
-  
   "ep_broker": {
     "documentale_broker": "CondizioniContrattuali/",
     "documentale_RCA": "Download_Documentale_RCA/",
     "documentale_AltreGaranzie": "Download_Documentale_AltreGaranzie/",
     "documentale_ServiziNonAssicurativi": "Download_Documentale_ServiziNonAssicurativi/",
-    "documentale_DocumentiIntermediario": "Download_Documentale_DocumentiIntermediario/"
+    "documentale_DocumentiIntermediario": "Download_Documentale_DocumentiIntermediario/",
+    "LatestNewsOperative": "LatestNewsOperative"
   },
-  
   "login_url": "http://broker.abybroker.it/accesso/login.aspx?r=abyway",
   "logout_url": "http://broker.abybroker.it/ea2019/logout.aspx"
 }

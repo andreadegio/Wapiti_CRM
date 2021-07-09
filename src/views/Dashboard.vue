@@ -1,5 +1,5 @@
 <template >
-  <div v-show="show_async != 0">
+  <div v-if="show_async == 2">
     <CRow>
       <CCol md="1"> </CCol>
       <CCol md="10">
@@ -19,10 +19,20 @@
         <PulsantiAree />
       </CCol>
       <CCol md="4">
-        <NewsOperative class="h-100" :key="triggerNews" />
+        <NewsOperative
+          class="h-100"
+          :operativeParent="news_operative"
+          @reload_operative="reload_operative()"
+          :key="triggerNews"
+        />
       </CCol>
       <CCol md="4">
-        <NewsMondo class="h-100" :key="triggerNews" />
+        <NewsMondo
+          class="h-100"
+          :newsParent="news_mondo"
+          :key="triggerNews"
+          @reload_mondo="reload_mondo()"
+        />
       </CCol>
       <CCol md="1"> </CCol>
     </CRow>
@@ -43,12 +53,7 @@
                   background-size: cover;
                 "
                 ><CCardTitle>
-                  <h1
-                  class="pulsante_portali"
-                    
-                  >
-                    ASSICURAZIONI
-                  </h1>
+                  <h1 class="pulsante_portali">ASSICURAZIONI</h1>
                 </CCardTitle>
               </CCard>
             </CCardLink>
@@ -98,6 +103,19 @@
       <CCol md="1"> </CCol>
     </CRow>
   </div>
+  <div v-else style="position: fixed; top: 50%; left: 50%" class="my-5">
+    <div class="lds-grid">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -146,78 +164,233 @@ export default {
   methods: {
     async chisono() {
       //  chiamo il chisono per recuperare i dati dell'utente loggato
-      var config = {
-        method: "post",
-        url: this.$custom_json.servizi_broker + "chisono",
-        headers: {
-          utente: localStorage.getItem("user"),
-          password: localStorage.getItem("pwd"),
-        },
-      };
+      // prima verifico di non averli già nello storage, altrimenti effettuo la chiamata
+      if (localStorage.getItem("chisono_data") == null) {
+        try {
+          // console.log("chiamata");
+          var config = {
+            method: "post",
+            url: this.$custom_json.servizi_broker + "chisono",
+            headers: {
+              utente: localStorage.getItem("user"),
+              password: localStorage.getItem("pwd"),
+            },
+          };
 
-      const risposta_chisono = await axios(config);
+          const risposta_chisono = await axios(config);
 
-      // alert(JSON.stringify(risposta_chisono.data));
-      localStorage.setItem(
-        "chisono_data",
-        JSON.stringify(risposta_chisono.data)
-      );
-      localStorage.setItem("userID", risposta_chisono.data.idUtente);
-      localStorage.setItem("anagraficaID", risposta_chisono.data.idAnagrafica);
-      localStorage.setItem(
-        "unitaoperativaID",
-        risposta_chisono.data.idUnitaOperativa
-      );
+          // alert(JSON.stringify(risposta_chisono.data));
+          localStorage.setItem(
+            "chisono_data",
+            JSON.stringify(risposta_chisono.data)
+          );
+          localStorage.setItem("userID", risposta_chisono.data.idUtente);
+          localStorage.setItem(
+            "anagraficaID",
+            risposta_chisono.data.idAnagrafica
+          );
+          localStorage.setItem(
+            "unitaoperativaID",
+            risposta_chisono.data.idUnitaOperativa
+          );
+        } catch (error) {
+          console.log("errore");
+          this.$router.push("login");
+        }
+      }
 
-      this.triggerNews += 1;
+      // this.triggerNews += 1;
       this.latest_news(); // ultime news operative
       this.load_news(); // ultime news mondo
     },
 
+    // CARICO LE ULTIME 3 NEWS OPERATIVE PER LA HOME
     async latest_news() {
-      // CARICO LE ULTIME 3 NEWS OPERATIVE PER LA HOME
-      var config = {
-        method: "post",
-        url: this.$custom_json.servizi_broker + "LatestNewsOperative",
-        headers: {
-          userID: localStorage.getItem("userID"),
-          anagraficaID: localStorage.getItem("anagraficaID"),
-          unitaoperativaID: localStorage.getItem("unitaoperativaID"),
-        },
-      };
-      const risposta_latestNews = await axios(config);
-      this.triggerNews += 1;
-      this.news_operative = risposta_latestNews.data.map((item, id) => {
-        return { ...item, id };
-      });
-      localStorage.setItem(
-        "news_operative",
-        JSON.stringify(this.news_operative)
-      );
+      try {
+        var config = {
+          method: "post",
+          url: this.$custom_json.servizi_broker + "LatestNewsOperative", //non recupero l'end-point dal config perchè genera cors error
+          headers: {
+            userID: localStorage.getItem("userID"),
+            anagraficaID: localStorage.getItem("anagraficaID"),
+            unitaoperativaID: localStorage.getItem("unitaoperativaID"),
+          },
+        };
+        const risposta_latestNews = await axios(config);
+        // this.triggerNews += 1;
+        this.news_operative = risposta_latestNews.data.map((item, id) => {
+          return { ...item, id };
+        });
+        localStorage.setItem(
+          "news_operative",
+          JSON.stringify(this.news_operative)
+        );
+      } catch (error) {
+        //se non ricevo una risposta valida allora guardo se nello storage c'è un salvataggio dei dati e recupero
+        // provvisoriamente quelli
 
-      this.show_async = 1;
+        if (localStorage.getItem("news_operative")) {
+          this.news_operative = JSON.parse(localStorage.getItem("news_operative"));      
+        } else {
+          // in caso di chiamata fallita e contenuto non presente nello storage tento una seconda volta
+          try {
+            const risposta_latestNews = await axios(config);
+
+            this.news_operative = risposta_latestNews.data.map((item, id) => {
+              return { ...item, id };
+            });
+            localStorage.setItem(
+              "news_operative",
+              JSON.stringify(this.news_operative)
+            );
+          } catch (error) {
+            // se ricevo il secondo errore allora mosto la sezione vuota
+            this.news_operative = "";
+          }
+        }
+      }
+      this.show_async++;
       this.triggerNews += 1;
     },
 
+    // Funzione che richiamo in caso di mancato caricamento delle news al primo accesso
+    async reload_operative() {
+      // alert("ricarico");
+      //provo la chiamata all'end-point se l'esito è OK assegno il valore e scrivo nello storage
+      try {
+        var config = {
+          method: "post",
+          url: this.$custom_json.servizi_broker + "LatestNewsOperative", //non recupero l'end-point dal config perchè genera cors error
+          headers: {
+            userID: localStorage.getItem("userID"),
+            anagraficaID: localStorage.getItem("anagraficaID"),
+            unitaoperativaID: localStorage.getItem("unitaoperativaID"),
+          },
+        };
+        const risposta_latestNews = await axios(config);
+
+        this.news_operative = risposta_latestNews.data.map((item, id) => {
+          return { ...item, id };
+        });
+        localStorage.setItem(
+          "news_operative",
+          JSON.stringify(this.news_operative)
+        );
+        // alert(this.news_operative);
+      } catch (error) {
+        //se non ricevo una risposta valida allora guardo se nello storage c'è un salvataggio dei dati e recupero
+        // provvisoriamente quelli
+        if (localStorage.getItem("news_operative") != null) {
+          this.news_mondo = JSON.parse(localStorage.getItem("news_operative"));
+        } else {
+          // in caso di chiamata fallita e contenuto non presente nello storage tento una seconda volta
+          try {
+            const risposta_latestNews = await axios(config);
+
+            this.news_operative = risposta_latestNews.data.map((item, id) => {
+              return { ...item, id };
+            });
+            localStorage.setItem(
+              "news_operative",
+              JSON.stringify(this.news_operative)
+            );
+          } catch (error) {
+            // se ricevo il secondo errore allora mosto la sezione vuota
+            this.news_operative = "";
+          }
+        }
+      }
+    },
+
+    // CARICO LE ULTIME 3 NEWS MONDO PER LA HOME
     async load_news() {
-      // console.log("caricamento news mondo.........")
+      var chiamata_news = [];
+      try {
+        await axios
+          .get(
+            this.$custom_json.api_url + this.$custom_json.ep_api.listanews_home
+          )
+          .then((response) => {
+            chiamata_news = response.data;
+          });
+        this.news_mondo = chiamata_news.map((item, id) => {
+          return { ...item, id };
+        });
+
+        localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
+      } catch (error) {
+        // alert(JSON.parse(localStorage.getItem("news_mondo")));
+        if (localStorage.getItem("news_mondo") != null) {
+          this.news_mondo = JSON.parse(localStorage.getItem("news_mondo"));
+        } else {
+          // in caso di chiamata fallita e contenuto non presente nello storage tento una seconda volta
+          try {
+            await axios
+              .get(
+                this.$custom_json.api_url +
+                  this.$custom_json.ep_api.listanews_home
+              )
+              .then((response) => {
+                chiamata_news = response.data;
+              });
+            this.news_mondo = chiamata_news.map((item, id) => {
+              return { ...item, id };
+            });
+
+            localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
+          } catch (error) {
+            // se ricevo il secondo errore allora mosto la sezione vuota
+            this.news_mondo = "";
+          }
+        }
+      }
+
+      this.show_async++;
+      this.triggerNews += 1;
+    },
+
+    // Funzione che richiamo in caso di mancato caricamento delle news al primo accesso
+    async reload_mondo() {
       // CARICO LE ULTIME 3 NEWS MONDO PER LA HOME
       var chiamata_news = [];
-      await axios
-        .get(
-          this.$custom_json.api_url + this.$custom_json.ep_api.listanews_home
-        )
-        .then((response) => {
-          chiamata_news = response.data;
+      //provo la chiamata all'end-point se l'esito è OK assegno il valore e scrivo nello storage
+      try {
+        await axios
+          .get(this.$custom_json.api_url + "listanewshome")
+          .then((response) => {
+            chiamata_news = response.data;
+          });
+        this.news_mondo = chiamata_news.map((item, id) => {
+          return { ...item, id };
         });
-      this.news_mondo = chiamata_news.map((item, id) => {
-        return { ...item, id };
-      });
-      localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
-      // console.log(this.news_mondo);
+        localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
+      } catch (error) {
+        //se non ricevo una risposta valida allora guardo se nello storage c'è un salvataggio dei dati e recupero
+        // provvisoriamente quelli
+        if (localStorage.getItem("news_mondo") != null) {
+          this.news_mondo = JSON.parse(localStorage.getItem("news_mondo"));
+        } else {
+          // in caso di chiamata fallita e contenuto non presente nello storage tento una seconda volta
+          try {
+            await axios
+              .get(
+                this.$custom_json.api_url +
+                  this.$custom_json.ep_api.listanews_home
+              )
+              .then((response) => {
+                chiamata_news = response.data;
+              });
+            this.news_mondo = chiamata_news.map((item, id) => {
+              return { ...item, id };
+            });
 
-      this.show_async = 1;
-      this.triggerNews += 1;
+            localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
+          } catch (error) {
+            // se ricevo il secondo errore allora mosto la sezione vuota
+            this.news_mondo = "";
+          }
+        }
+      }
     },
   },
 };
