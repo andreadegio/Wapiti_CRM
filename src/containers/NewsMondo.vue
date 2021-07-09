@@ -136,13 +136,13 @@
   </div>
 </template>
 <script>
-// import axios from "axios";
+
 
 export default {
   name: "NewsMondo",
   props: ["newsParent"],
   watch: {
-    newsParent: function(newVal, oldVal){
+    newsParent: function(newVal){
       // console.log(JSON.stringify(newVal));
       this.news = newVal;
     }
@@ -158,18 +158,11 @@ export default {
     };
   },
   mounted() {
-    if (localStorage.getItem("news_mondo") == null) {
-      this.news = null;
-    }
-    else{
-      this.news= JSON.parse(localStorage.getItem("news_mondo"));
-    }
-    this.user_storage = JSON.parse(localStorage.getItem("chisono_data"));
+ this.news= this.newsParent;
   },
   methods: {
     load_news(){
-      this.$emit("reload_mondo");
-     
+      this.$emit("reload_mondo");   
     },
     showModal(indice) {
       this.newsModal = true;
