@@ -50,6 +50,54 @@ export default {
   margin-right: 1em;
 }
 
+/* CARD CONTENUTI COMMERCIALE */
+.card_materiale:hover {
+  box-shadow: 0 12px 19px -7px rgba(0, 0, 0, 0.3);
+  transform: translateY(-10px);
+  -webkit-transform: translateY(-10px);
+  -ms-transform: translateY(-10px);
+  -moz-transform: translateY(-10px);
+  cursor: pointer;
+}
+.latest {
+  color: #3c4b64;
+}
+.card-accent-success {
+  border-top: 0px solid #0e7731 !important;
+}
+.card-accent-info {
+  border-top: 0px solid #223560 !important;
+}
+div.card-accent-info:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 5px;
+  width: 50%;
+  border-top: 6px solid #223560 !important;
+}
+div.card-accent-success:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 5px;
+  width: 50%;
+  border-top: 6px solid #0e7731 !important;
+}
+
+.card-img-none {
+  max-height: 200px !important;
+  min-height: 200px;
+  object-fit: cover;
+}
+
+cite {
+  color: #ef7a12;
+  font-size: 0.8rem;
+}
+
 //ICONA ROSSA NELLE TABELLE IN CASO DI NESSUN RISULTATO
 .text-danger.mb-2.c-icon.c-icon-custom-size {
   display: none !important;
@@ -90,7 +138,15 @@ export default {
   color: #fff;
   background-color: #1f4b6b !important;
 }
-
+a {
+  color: #1e2f56 !important;
+  font-size: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 400;
+}
+a.active{
+  background: #ef7a12 !important;
+}
 .btn-outline-primary:hover {
   color: #fff;
   background-color: #1f4b6b;
@@ -173,9 +229,6 @@ export default {
 }
 
 
-<<<<<<< HEAD
-
-=======
 /* LOADER*/
 .attendere{
   width: 10rem !important;
@@ -248,5 +301,4 @@ export default {
     opacity: 0.5;
   }
 }
->>>>>>> master
 </style>

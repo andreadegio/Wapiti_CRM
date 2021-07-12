@@ -5,7 +5,7 @@
         Ultimi contenuti caricati
       </p>
       <CCardGroup class="latest">
-        <CCard class="mx-2" accent-color="success">
+        <CCard class="mx-2 card_materiale" accent-color="success">
           <CCardHeader
             ><strong> <u>GAS & LUCE</u> </strong></CCardHeader
           >
@@ -165,43 +165,6 @@
   color: white;
   padding: 3px;
 }
-.latest {
-  color: #3c4b64;
-}
-.card-accent-success {
-  border-top: 0px solid #0e7731 !important;
-}
-.card-accent-info {
-  border-top: 0px solid #223560 !important;
-}
-div.card-accent-info:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 5px;
-  width: 50%;
-  border-top: 6px solid #223560 !important;
-}
-div.card-accent-success:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 5px;
-  width: 50%;
-  border-top: 6px solid #0e7731 !important;
-}
 
-.card-img-none {
-  max-height: 200px !important;
-  min-height: 200px;
-  object-fit: cover;
-}
-
-cite {
-  color: #ef7a12;
-  font-size: 0.8rem;
-}
 </style>
 

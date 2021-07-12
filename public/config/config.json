@@ -4,7 +4,8 @@
   "ep_api": {
     "listanews_home": "listanewshome",
     "listanews": "listanews",
-    "cloudRC": "Commerciale/treeCloudRC"
+    "cloudRC": "Commerciale/treeCloudRC",
+    "cloudEnergy": "Commerciale/treeCloudEnergy"
 
   },
   "servizi_broker": "https://servizi.documentale.cloud/aibajsonea/",
