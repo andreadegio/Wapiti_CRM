@@ -3,12 +3,14 @@
   <div class="my-3 mx-3">
     <div v-show="contenuto == 'Assicurazioni'">
       <CTabs variant="tabs" :active-tab="0">
-        <CTab >
-          <template slot="title" style="font-size: 1.5rem;font-weight: 400;">
-            <i class="fas fa-rss"></i> Comunicazioni
+        <CTab>
+          <template slot="title"  >
+            <i class="fas fa-rss fa-2x"></i> <span class="tabs-nav"> Comunicazioni</span>
           </template>
           <CCardGroup class="latest container">
-            <CCard class="mx-2 card_materiale" accent-color="info">
+            <CCard class="mx-2 card_materiale" accent-color="info"
+              >
+              <CLink to="Comunicazione/Abyway">
               <CCardHeader>
                 <strong> <u>ASSICURAZIONI</u> </strong>
               </CCardHeader>
@@ -22,7 +24,9 @@
                 </div>
               </CCardBody>
               <CCardFooter><strong>Mostra Contenuto</strong> </CCardFooter>
+              </CLink>
             </CCard>
+
             <CCard class="mx-2 card_materiale" accent-color="info">
               <CCardHeader
                 ><strong> <u>ASSICURAZIONI</u> </strong>
@@ -75,8 +79,8 @@
           </CCardGroup>
         </CTab>
         <CTab>
-          <template slot="title" style="font-size: 1.5rem;font-weight: 400;">
-            <i class="fas fa-paperclip"></i> Allegati
+          <template slot="title" >
+            <i class="fas fa-paperclip fa-2x"></i> <span class="tabs-nav"> Materiale</span>
           </template>
           <PersonalCloud :area="contenuto" />
         </CTab>
@@ -84,9 +88,9 @@
     </div>
     <div v-show="contenuto == 'Energy'">
       <CTabs variant="tabs" :active-tab="0">
-        <CTab >
-          <template slot="title" style="font-size: 1.5rem;font-weight: 400;">
-            <i class="fas fa-rss"></i> Comunicazioni
+        <CTab>
+          <template slot="title" >
+            <i class="fas fa-rss fa-2x"></i> <span class="tabs-nav"> Comunicazioni</span>
           </template>
           <CCardGroup class="latest container">
             <CCard class="mx-2" accent-color="success">
@@ -153,9 +157,9 @@
             </CCard>
           </CCardGroup>
         </CTab>
-       <CTab>
-          <template slot="title" style="font-size: 1.5rem;font-weight: 400;">
-            <i class="fas fa-paperclip"></i> Allegati
+        <CTab>
+          <template slot="title" >
+            <i class="fas fa-paperclip fa-2x"></i> <span class="tabs-nav"> Materiale</span>
           </template>
           <PersonalCloud :area="contenuto" />
         </CTab>
@@ -180,4 +184,10 @@ export default {
 };
 </script>
 <style scoped>
+.latest a:hover{
+  text-decoration: none;
+}
+.tabs-nav{
+  font-size: 1.5rem !important;
+}
 </style>

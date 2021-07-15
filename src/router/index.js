@@ -26,6 +26,7 @@ const Formazione = () => import("@/views/formazione/Formazione");
 const AdminCommerciale = () => import("@/views/commerciale/AdminCommerciale");
 const Commerciale = () => import("@/views/commerciale/Commerciale");
 const Sezione = () => import("@/views/commerciale/Sezione");
+const Comunicazione =() => import("@/views/commerciale/Comunicazione");
 
 // Views - Statistiche
 const Statistiche = () => import("@/views/statistiche/Statistiche");
@@ -112,6 +113,12 @@ function configRoutes() {
           name: "Sezione",
           props: true,
           component: Sezione,
+        },
+        {
+          path: "Commerciale/Comunicazione/:notizia",
+          name: "Comunicazione",
+          props: true,
+          component: Comunicazione,
         },
         {
           path: "AdminCommerciale",

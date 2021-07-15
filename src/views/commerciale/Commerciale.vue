@@ -9,11 +9,7 @@
           <CCardHeader
             ><strong> <u>GAS & LUCE</u> </strong></CCardHeader
           >
-          <CCardImg
-            
-            src="upload/energy1.jpg"
-            style="min-height: 200px"
-          >
+          <CCardImg src="upload/energy1.jpg" style="min-height: 200px">
           </CCardImg>
           <CCardBody class="pb-2"
             ><h2>Titolo di prova</h2>
@@ -22,25 +18,27 @@
           </CCardBody>
           <CCardFooter><strong>Mostra Contenuto</strong> </CCardFooter>
         </CCard>
-        <CCard class="mx-2" accent-color="info">
-          <CCardHeader>
-            <strong> <u>ASSICURAZIONI</u> </strong>
-          </CCardHeader>
-          <CCardImg  src="upload/auto1.jpg"> </CCardImg>
-          <CCardBody class="pb-2"
-            ><h2>Arriva ABYONE</h2>
-            <cite>01 Luglio 2021</cite>
-            <div>
-              Ti presentiamo tutti i servizi inclusi nel nuovo prodotto ABYONE
-            </div>
-          </CCardBody>
-          <CCardFooter><strong>Mostra Contenuto</strong> </CCardFooter>
+        <CCard class="mx-2 card_materiale" accent-color="info">
+          <CLink to="Commerciale/Comunicazione/Abyway">
+            <CCardHeader>
+              <strong> <u>ASSICURAZIONI</u> </strong>
+            </CCardHeader>
+            <CCardImg src="upload/auto1.jpg"> </CCardImg>
+            <CCardBody class="pb-2"
+              ><h2>Arriva ABYONE</h2>
+              <cite>01 Luglio 2021</cite>
+              <div>
+                Ti presentiamo tutti i servizi inclusi nel nuovo prodotto ABYONE
+              </div>
+            </CCardBody>
+            <CCardFooter><strong>Mostra Contenuto</strong> </CCardFooter>
+          </CLink>
         </CCard>
-        <CCard class="mx-2" accent-color="info">
+        <CCard class="mx-2 card_materiale" accent-color="info">
           <CCardHeader
             ><strong> <u>ASSICURAZIONI</u> </strong>
           </CCardHeader>
-          <CCardImg  src="upload/auto2.jpg"> </CCardImg>
+          <CCardImg src="upload/auto2.jpg"> </CCardImg>
           <CCardBody class="pb-2"
             ><h2>Materiale Grafico</h2>
             <cite>01 Luglio 2021</cite>
@@ -48,11 +46,11 @@
           </CCardBody>
           <CCardFooter><strong>Mostra Contenuto</strong> </CCardFooter>
         </CCard>
-        <CCard class="mx-2" accent-color="info">
+        <CCard class="mx-2 card_materiale" accent-color="info">
           <CCardHeader
             ><strong> <u>ASSICURAZIONI</u> </strong>
           </CCardHeader>
-          <CCardImg  src="upload/auto3.jpg"> </CCardImg>
+          <CCardImg src="upload/auto3.jpg"> </CCardImg>
           <CCardBody class="pb-2"
             ><h2>Titolo di prova</h2>
             <cite>01 Luglio 2021</cite>
@@ -60,7 +58,7 @@
           </CCardBody>
           <CCardFooter><strong>Mostra Contenuto</strong></CCardFooter>
         </CCard>
-        <CCard class="mx-2" accent-color="success">
+        <CCard class="mx-2 card_materiale" accent-color="success">
           <CCardHeader
             ><strong> <u>GAS & LUCE</u> </strong></CCardHeader
           >
@@ -99,6 +97,11 @@
           to="Commerciale/Assicurazioni"
           >Accedi ai contenuti</CButton
         >
+        <div class="mt-3" v-if="admin">
+          <CLink to="AdminCommerciale" class="" style="color: white !important"
+            ><CIcon name="cil-settings" /><strong> Gestione</strong>
+          </CLink>
+        </div>
       </CCol>
     </CJumbotron>
     <CJumbotron
@@ -118,12 +121,18 @@
           Materiale e comunicazioni commerciali per il mondo Energy
         </p>
         <p>Gas & Luce</p>
+
         <CButton
           size="lg"
           style="color: white; background-color: #ef7a12"
           to="Commerciale/Energy"
           >Accedi ai contenuti</CButton
         >
+        <div class="mt-3" v-if="admin">
+          <CLink to="AdminCommerciale" class="" style="color: white !important"
+            ><CIcon name="cil-settings" /><strong> Gestione</strong>
+          </CLink>
+        </div>
       </CCol>
       <CCol
         md="5"
@@ -144,9 +153,19 @@
 </template>
 
 <script>
+export default {
+  data() {
+    return {
+      admin: JSON.parse(localStorage.getItem("chisono_data")).Is_Sede,
+    };
+  },
+};
 </script>
 
 <style scoped>
+.latest a:hover{
+  text-decoration: none;
+}
 .jumbotron {
   margin-bottom: 1rem !important;
   display: flex;
@@ -165,6 +184,5 @@
   color: white;
   padding: 3px;
 }
-
 </style>
 

@@ -4,9 +4,7 @@
   "ep_api": {
     "listanews_home": "listanewshome",
     "listanews": "listanews",
-    "cloudRC": "Commerciale/treeCloudRC",
-    "cloudEnergy": "Commerciale/treeCloudEnergy"
-
+    "cloud": "Commerciale/treeCloud"
   },
   "servizi_broker": "https://servizi.documentale.cloud/aibajsonea/",
   "broker_veicoli": "http://broker.abybroker.it/ea2019/AreaOperazioni.aspx",

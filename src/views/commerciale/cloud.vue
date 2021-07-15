@@ -1,15 +1,16 @@
 <template>
   <div>
     <div>
+      <!-- Pulsanti di navigazione -->
       <hr />
       <CButton
-      class="mr-3"
+        class="mr-3"
         color="primary"
         variant="outline"
         square
         size="sm"
         @click="get_tree('reset')"
-        ><i class="fas fa-home fa-2x"></i><br>{{ area }}
+        ><i class="fas fa-home fa-2x"></i><br />{{ area }}
       </CButton>
       <CButton
         color="primary"
@@ -17,21 +18,26 @@
         square
         size="sm"
         @click="get_tree(percorso)"
-        ><i class="fas fa-sync-alt fa-2x"></i><br> Aggiorna
+        ><i class="fas fa-sync-alt fa-2x"></i><br />
+        Aggiorna
       </CButton>
       <hr />
+      <!-- BREADCRUMBS -->
       <cite v-show="percorso != ''" style="color: #1e2f56"
-        >{{area}} > {{ breadcrumbs.join(' > ') }}</cite
+        >{{ area }} > {{ breadcrumbs.join(" > ") }}</cite
       >
     </div>
-    <div class="area_cloud row">
+    <div class="area_cloud row text-center">
+      <!-- INDICATORE -> LIVELLO SUPERIORE -->
       <div
-        class="cloud m-3 col-lg-2 col-md-3 col-xs-6 upper"
+        class=" cloud ml-5 mt-3 col-lg-2 col-md-3 col-xs-6 upper"
         v-show="sub != ''"
         @click="rem_breadcrumbs()"
       >
         <div class="desc_elemento">..</div>
       </div>
+
+      <!-- FRONTEND -> CARTELLE E FILE -->
       <div
         v-for="elemento in tree_RC"
         :key="elemento.descrizione"
@@ -82,6 +88,10 @@
           </div>
         </div>
       </div>
+      <!-- FINE EXPLORER FILE -->
+      <div class="cloud m-3 col-lg-2 col-md-3 col-xs-6">
+        <span v-show="tree_RC == null"> Nessun elemento presente </span>
+      </div>
     </div>
 
     <br />
@@ -111,56 +121,63 @@ export default {
   methods: {
     add_breadcrumbs(dest) {
       this.breadcrumbs.push(dest);
+      // console.log(this.breadcrumbs);
+      this.percorso = this.area + "/" + this.breadcrumbs.join("/");
 
-      this.percorso = this.breadcrumbs.join("/");
-
-      // console.log("percorso "+this.percorso);
+      // console.log("percorso " + this.percorso);
       this.get_tree(this.percorso);
     },
+
     rem_breadcrumbs() {
       this.breadcrumbs.pop();
       // console.log(this.breadcrumbs);
-      this.percorso = this.breadcrumbs.join("/");
-      // console.log("percorso "+this.percorso);
+      this.percorso = this.area + "/" + this.breadcrumbs.join("/");
+      // console.log("percorso " + this.percorso);
       this.get_tree(this.percorso);
     },
     async get_tree(subfolder = "") {
+      //chiamata per il recupero dell'albero dei file
+      // controllo se è stato premuto il tasto home -> reset
+      url_cloud = this.$custom_json.ep_api.cloud;
       if (subfolder == "reset") {
         subfolder = "";
         this.percorso = "";
         this.breadcrumbs = [];
       }
-      // console.log(subfolder);
 
       this.sub = subfolder;
       var url_cloud;
+      var UO_tipo = JSON.parse(localStorage.getItem("chisono_data")).idUtente;
+      var param;
       try {
-        switch (this.area) {
-          case "Assicurazioni":
-            url_cloud = this.$custom_json.ep_api.cloudRC;
-            break;
-          case "Energy":
-            url_cloud = this.$custom_json.ep_api.cloudEnergy;
-            break;
-
-          default:
-            url_cloud = this.$custom_json.ep_api.cloudRC;
-            break;
-        }
-        if (subfolder != "") {
-          subfolder = { subfolder: subfolder };
+        if (subfolder != "" && subfolder != this.area + "/") {
+          // subfolder == this.area+"/" ? console.log("uguale") : console.log("diverso");
+          // console.log("percorso " + subfolder + " " + this.area);
+          param = {
+            subfolder: subfolder,
+            UO_tipo: UO_tipo,
+            settore: this.area,
+          };
           // console.log("subfolder " + JSON.stringify(subfolder));
           this.subTipo = "directory";
         } else {
+          subfolder = "";
+          this.percorso = "";
+          this.breadcrumbs = [];
+          param = {
+            subfolder: subfolder,
+            UO_tipo: UO_tipo,
+            settore: this.area,
+          };
           this.sub = "";
           this.subTipo = "";
         }
-
+        // console.log(param);
         await axios
-          .post(this.$custom_json.api_url + url_cloud, subfolder)
+          .post(this.$custom_json.api_url + url_cloud, param)
           .then((response) => {
             this.tree_RC = response.data;
-            // console.log(response.data); nb
+            // console.log(JSON.stringify(response.data));
           });
       } catch (error) {
         console.log("impossibile accedere al cloud");
