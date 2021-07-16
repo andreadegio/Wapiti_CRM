@@ -5,10 +5,10 @@
     <div v-show="home" class="container">
       <div class="row text-center mt-5 riga">
         <div class="col-md-3 action" @click="addCom=true, home=false">
-          <i class="fas fa-rss fa-4x"></i><br />Inserisci una Comunicazione
+          <i class="fas fa-rss fa-4x animate__animated animate__bounce animate__slow"></i><br />Inserisci una Comunicazione
         </div>
         <div class="col-md-3 action" @click="addFile=true, home=false" >
-          <i class="fas fa-cloud-upload-alt fa-4x"></i><br /><span>Carica Materiale</span>
+          <i class="fas fa-cloud-upload-alt fa-4x animate__animated animate__bounce"></i><br /><span >Carica Materiale</span>
         </div>
       </div>
     </div>
@@ -18,6 +18,7 @@
 <script>
 import NewCom from './newCom.vue';
 import NewUpload from './newUpload.vue';
+import 'animate.css';
 
 export default {
   name: "AdminCommerciale",
@@ -26,11 +27,10 @@ export default {
     NewUpload
   },
   data(){
-    return{
+    return {
       addCom: false, // trigger per visualizzare il componente di aggiunta comunicazione
       addFile: false, // trigger per visualizzare il componente di aggiunta file
       home:true, // trigger per visualizzare i pulsanti di scelta 
-
     }
   }
 
@@ -38,6 +38,11 @@ export default {
 </script>
 
 <style scoped>
+:root {
+  --animate-duration: 800ms;
+  --animate-delay: 0.9s;
+}
+
 .riga {
   justify-content: center;
 }

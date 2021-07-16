@@ -46,7 +46,7 @@ export default {
           title: "Descrizione allegati",
           subtitle: "Informazioni preliminari",
           component: StepOne,
-          completed: true,
+          completed: false,
         },
         {
           icon: "note_add",
@@ -54,7 +54,7 @@ export default {
           title: "Caricamento File",
           subtitle: "Scelta file e destinazione",
           component: StepTwo,
-          completed: true,
+          completed: false,
         },
         {
           icon: "cloud_done",
@@ -62,10 +62,26 @@ export default {
           title: "Conferma",
           subtitle: "Esito del caricamento",
           component: StepThree,
-          completed: true,
+          completed: false,
         },
       ],
     };
+  },
+  computed: {
+    enterAnimation() {
+      if (this.currentStep.index < this.previousStep.index) {
+        return "animated quick fadeInLeft";
+      } else {
+        return "animated quick fadeInRight";
+      }
+    },
+    leaveAnimation() {
+      if (this.currentStep.index > this.previousStep.index) {
+        return "animated quick fadeOutLeft";
+      } else {
+        return "animated quick fadeOutRight";
+      }
+    }
   },
   methods: {
     // Executed when @completed-step event is triggered
@@ -86,11 +102,67 @@ export default {
         }
       });
     },
+nextStepAction() {
+      this.nextButton[this.currentStep.name] = true;
+      if (this.canContinue) {
+        if (this.finalStep) {
+          this.$emit("stepper-finished", this.currentStep);
+        }
+        let currentIndex = this.currentStep.index + 1;
+
+        this.activateStep(currentIndex);
+      }
+      this.canContinue = false;
+      this.$forceUpdate();
+    },
+
+    nextStep () {
+
+      if (!this.$listeners || !this.$listeners['before-next-step']) {
+        this.nextStepAction()
+      }
+
+      this.canContinue = false;
+
+      this.$emit("before-next-step", { currentStep: this.currentStep }, (next = true) => {
+        this.canContinue = true;
+        if (next) {
+          this.nextStepAction()
+        }
+      });
+    },
+    backStep() {
+      this.$emit("clicking-back");
+      let currentIndex = this.currentStep.index - 1;
+      if (currentIndex >= 0) {
+        this.activateStep(currentIndex, true);
+      }
+    },
+
     // Executed when @stepper-finished event is triggered
     alert(payload) {
       alert("end");
     },
   },
+  watch: {
+    reset(val) {
+      if(!val) {
+        return;
+      }
+
+      this.keepAliveData = false;
+
+      this.init();
+      this.previousStep = {};
+
+      this.$nextTick(() => {
+        this.keepAliveData = this.keepAlive;
+        this.$emit('reset', true);
+      });
+
+    }
+  }
+
 };
 </script>
 
