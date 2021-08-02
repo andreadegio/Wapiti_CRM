@@ -36,6 +36,12 @@ export default {
 .c-body {
   margin-top: 56px;
 }
+// profondità modale
+.modal-backdrop{
+  z-index: auto !important;
+}
+
+
 //STILE PER IL PULSANTE RESET DELLA MODALE ADD-NEWS
 #reset-btn {
   color: #e55353 !important;

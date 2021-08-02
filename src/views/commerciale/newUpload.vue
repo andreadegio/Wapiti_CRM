@@ -1,36 +1,31 @@
 <template>
-  <div class="container">
+  <div>
     <div class="text-center">
-      <section class="section">
-        <div class="container">
-          <div class="columns">
-            <div class="column is-8 is-offset-2">
-              <horizontal-stepper
-                :steps="demoSteps"
-                @completed-step="completeStep"
-                @active-step="isStepActive"
-                @stepper-finished="alert"
-              >
-              </horizontal-stepper>
-            </div>
-          </div>
-        </div>
-      </section>
+      <cite>- Ti trovi nel settore - {{ $route.params.settore }} - </cite>
     </div>
+    <horizontal-stepper
+      :steps="uploadSteps"
+      @completed-step="completeStep"
+      :top-buttons="true"
+      @active-step="isStepActive"
+      @uploadFiles="uploadFiles"
+      @stepper-finished="uploadFiles"
+      :uploadObject="uploadObject"
+    ></horizontal-stepper>
   </div>
 </template>
 
 <script>
-import VueFileAgent from "vue-file-agent";
-import VueFileAgentStyles from "vue-file-agent/dist/vue-file-agent.css";
-import HorizontalStepper from "vue-stepper";
+import axios from "axios";
+import Vue from "vue";
 
-// This components will have the content for each stepper step.
+import HorizontalStepper from "../../../node_modules/vue-stepper/src/HorizontalStepper.vue";
+
+// Componenti che compongono i vari step
 import StepOne from "./stepper/StepOneUpload.vue";
 import StepTwo from "./stepper/StepTwoUpload.vue";
 import StepThree from "./stepper/StepThreeUpload.vue";
-
-// Vue.use(VueFileAgent);
+import StepFour from "./stepper/StepFourUpload.vue";
 
 export default {
   name: "newUpload",
@@ -39,62 +34,125 @@ export default {
   },
   data() {
     return {
-      demoSteps: [
+      uploadObject: {
+        titolo: "",
+        descrizione: "",
+        percorso: "",
+        permessi: [],
+        file: [],
+      },
+      uploadSteps: [
         {
-          icon: "format_list_numbered",
-          name: "first",
-          title: "Descrizione allegati",
-          subtitle: "Informazioni preliminari",
+          icon: "format_list_bulleted",
+          name: "First",
+          title: "Informazioni",
+          subtitle: "Descrizione e permessi per i file",
           component: StepOne,
           completed: false,
         },
         {
           icon: "note_add",
           name: "second",
-          title: "Caricamento File",
-          subtitle: "Scelta file e destinazione",
+          title: "Scelta file",
+          subtitle: "Seleziona i file da caricare",
           component: StepTwo,
           completed: false,
         },
         {
-          icon: "cloud_done",
-          name: "three",
-          title: "Conferma",
-          subtitle: "Esito del caricamento",
+          icon: "folder",
+          name: "third",
+          title: "Destinazione",
+          subtitle: "Scegli dove caricare o crea nuove cartelle",
           component: StepThree,
           completed: false,
         },
+        {
+          icon: "cloud_done",
+          name: "four",
+          title: "Upload",
+          subtitle: "Conferma caricamento",
+          component: StepFour,
+          completed: false,
+        },
       ],
+      activeStep: 0,
+      uploadHeaders: "",
     };
   },
-  computed: {
-    enterAnimation() {
-      if (this.currentStep.index < this.previousStep.index) {
-        return "animated quick fadeInLeft";
+  computed: {},
+  methods: {
+    uploadFiles() {
+      //  var destinazione = this.$custom_json.cloud_abyway + this.uploadObject.percorso;
+      var messaggio_esito = "";
+      var destinazione =
+        this.$custom_json.api_url + this.$custom_json.ep_api.upload_cloud;
+      if (this.uploadObject.file.length > 0) {
+        // console.log("ci sono " + this.uploadObject.file.length + " file");
+        //Recupero il nome del file dal parametro name e lo assegno al nuovo valore 'nome_file'
+        this.uploadObject.file.forEach((element) => {
+          // console.log(element.name(true));
+          // console.log(element.ext);
+          Vue.set(element, "nome_file", element.name(true));
+        });
+
+        try {
+          axios
+            .post(
+              destinazione,
+              {
+                params: {
+                  settore: this.$route.params.settore,
+                  titolo: this.uploadObject.titolo,
+                  contenuto: this.uploadObject.descrizione,
+                  percorso: this.uploadObject.percorso,
+                  permessi: this.uploadObject.permessi,
+                  file: this.uploadObject.file,
+                  utente: JSON.parse(localStorage.getItem("chisono_data"))
+                    .Nominativo,
+                  idUtente: JSON.parse(localStorage.getItem("chisono_data"))
+                    .idUtente,
+                },
+              },
+              {
+                header: {
+                  "Content-Type": "multipart/form-data",
+                },
+              }
+            )
+            .then((response) => {
+              // console.log(JSON.stringify(response));
+              messaggio_esito = response.data.message;
+              this.esito_add_edit = response.data.status;
+              if (response.data.status == "KO") {
+                this.$alert(messaggio_esito, "Attenzione", "warning");
+              } else {
+                this.$alert(messaggio_esito, "OK", "success");
+                this.$router.go(-1);
+              }
+            });
+        } catch {
+          console.log("Impossibile comunicare con il server");
+        }
+
+        // this.$refs.vueFileAgent.upload(
+        //   destinazione,
+        //   this.uploadHeaders,
+        //   this.uploadObject.file
+        // );
+        // this.uploadObject.file;
       } else {
-        return "animated quick fadeInRight";
+        this.$alert("Non è stato scelto nessun file", "Attenzione", "warning");
       }
     },
-    leaveAnimation() {
-      if (this.currentStep.index > this.previousStep.index) {
-        return "animated quick fadeOutLeft";
-      } else {
-        return "animated quick fadeOutRight";
-      }
-    }
-  },
-  methods: {
-    // Executed when @completed-step event is triggered
     completeStep(payload) {
-      this.demoSteps.forEach((step) => {
+      this.uploadSteps.forEach((step) => {
         if (step.name === payload.name) {
           step.completed = true;
         }
       });
     },
-    // Executed when @active-step event is triggered
     isStepActive(payload) {
-      this.demoSteps.forEach((step) => {
+      this.uploadSteps.forEach((step) => {
         if (step.name === payload.name) {
           if (step.completed === true) {
             step.completed = false;
@@ -102,67 +160,11 @@ export default {
         }
       });
     },
-nextStepAction() {
-      this.nextButton[this.currentStep.name] = true;
-      if (this.canContinue) {
-        if (this.finalStep) {
-          this.$emit("stepper-finished", this.currentStep);
-        }
-        let currentIndex = this.currentStep.index + 1;
-
-        this.activateStep(currentIndex);
-      }
-      this.canContinue = false;
-      this.$forceUpdate();
-    },
-
-    nextStep () {
-
-      if (!this.$listeners || !this.$listeners['before-next-step']) {
-        this.nextStepAction()
-      }
-
-      this.canContinue = false;
-
-      this.$emit("before-next-step", { currentStep: this.currentStep }, (next = true) => {
-        this.canContinue = true;
-        if (next) {
-          this.nextStepAction()
-        }
-      });
-    },
-    backStep() {
-      this.$emit("clicking-back");
-      let currentIndex = this.currentStep.index - 1;
-      if (currentIndex >= 0) {
-        this.activateStep(currentIndex, true);
-      }
-    },
-
-    // Executed when @stepper-finished event is triggered
-    alert(payload) {
-      alert("end");
-    },
+    // eslint-disable-next-line no-unused-vars
+    // alert(payload) {
+    //   this.uploadFiles();
+    // },
   },
-  watch: {
-    reset(val) {
-      if(!val) {
-        return;
-      }
-
-      this.keepAliveData = false;
-
-      this.init();
-      this.previousStep = {};
-
-      this.$nextTick(() => {
-        this.keepAliveData = this.keepAlive;
-        this.$emit('reset', true);
-      });
-
-    }
-  }
-
 };
 </script>
 

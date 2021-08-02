@@ -88,17 +88,18 @@
       <CCol md="7" class="py-5">
         <h1 class="display-3">Assicurazioni</h1>
         <p class="lead">
-          Materiale e comunicazioni commerciali per il mondo assicurativo
+          Materiale e comunicazioni commerciali per il mondo assicurativo (RCA - Rami Elementari)
         </p>
-        <p>RCA - Rami Elementari</p>
+        <p></p>
         <CButton
+        class="mt-3"
           size="lg"
           style="color: white; background-color: #ef7a12"
           to="Commerciale/Assicurazioni"
           >Accedi ai contenuti</CButton
         >
         <div class="mt-3" v-if="admin">
-          <CLink to="AdminCommerciale" class="" style="color: white !important"
+          <CLink to="AdminCommerciale/Assicurazioni" class="" style="color: white !important"
             ><CIcon name="cil-settings" /><strong> Gestione</strong>
           </CLink>
         </div>
@@ -120,16 +121,17 @@
         <p class="lead">
           Materiale e comunicazioni commerciali per il mondo Energy
         </p>
-        <p>Gas & Luce</p>
+        
 
         <CButton
+        class="mt-3"
           size="lg"
           style="color: white; background-color: #ef7a12"
           to="Commerciale/Energy"
           >Accedi ai contenuti</CButton
         >
         <div class="mt-3" v-if="admin">
-          <CLink to="AdminCommerciale" class="" style="color: white !important"
+          <CLink to="AdminCommerciale/Energy" class="" style="color: white !important"
             ><CIcon name="cil-settings" /><strong> Gestione</strong>
           </CLink>
         </div>

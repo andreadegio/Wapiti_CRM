@@ -21,12 +21,11 @@ const Documentale = () => import("@/views/documentale/Documentale");
 const AdminFormazione = () => import("@/views/formazione/AdminFormazione");
 const Formazione = () => import("@/views/formazione/Formazione");
 
-
 // Views - Commerciale
 const AdminCommerciale = () => import("@/views/commerciale/AdminCommerciale");
 const Commerciale = () => import("@/views/commerciale/Commerciale");
 const Sezione = () => import("@/views/commerciale/Sezione");
-const Comunicazione =() => import("@/views/commerciale/Comunicazione");
+const Comunicazione = () => import("@/views/commerciale/Comunicazione");
 
 // Views - Statistiche
 const Statistiche = () => import("@/views/statistiche/Statistiche");
@@ -123,6 +122,12 @@ function configRoutes() {
         {
           path: "AdminCommerciale",
           name: "AdminCommerciale",
+          component: AdminCommerciale,
+        },
+        {
+          path: "AdminCommerciale/:settore",
+          name: "AdminCommerciale",
+          props: true,
           component: AdminCommerciale,
         },
         {

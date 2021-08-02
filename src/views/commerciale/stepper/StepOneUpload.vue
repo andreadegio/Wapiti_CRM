@@ -1,99 +1,162 @@
 <template>
-  <div style="padding: 2rem 3rem; text-align: left">
-    <div class="field">
-      <label class="label">Username</label>
-      <div class="control">
-        <input
-          :class="['input', $v.form.username.$error ? 'is-danger' : '']"
-          type="text"
-          placeholder="Text input"
-          v-model="form.username"
-        />
+  <div
+    style="
+      padding: 3rem 3rem;
+      text-align: left;
+      display: flex;
+      margin-bottom: 6rem;
+    "
+  >
+    <div class="col-sm-6">
+      <div class="field">
+        <label class="label">Dai un titolo a questo caricamento!</label>
+        <div class="control">
+          <CInput
+            type="text"
+            placeholder="Assegna un titolo a questo caricamento Es. Set Informativo ABC"
+            v-model="uploadObject.titolo"
+            @change="check_next"
+          />
+        </div>
+        <p v-if="errore_titolo" class="help is-danger">
+          Inserire un titolo valido
+        </p>
       </div>
-      <p v-if="$v.form.username.$error" class="help is-danger">
-        This username is invalid
-      </p>
-    </div>
-    <div class="field">
-      <label class="label">Email</label>
-      <div class="control">
-        <input
-          :class="['input', $v.form.demoEmail.$error ? 'is-danger' : '']"
-          type="text"
-          placeholder="Email input"
-          v-model="form.demoEmail"
-        />
+      <!-- <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+                <input :class="['input', ($v.form.demoEmail.$error) ? 'is-danger' : '']"  type="text" placeholder="Email input" v-model="form.demoEmail">
+            </div>
+            <p v-if="$v.form.demoEmail.$error" class="help is-danger">This email is invalid</p>
+        </div> -->
+      <div class="field">
+        <label class="label">Descrivimi il contenuto del materiale!</label>
+        <div class="control">
+          <CTextarea
+            placeholder="Descrivi il contenuto di ciò che andrai a caricare"
+            v-model="uploadObject.descrizione"
+            @change="check_next"
+          />
+        </div>
+        <p v-if="errore_descrizione" class="help is-danger">
+          Inserire una descrizione
+        </p>
       </div>
-      <p v-if="$v.form.demoEmail.$error" class="help is-danger">
-        This email is invalid
-      </p>
     </div>
-    <div class="field">
-      <label class="label">Message</label>
-      <div class="control">
-        <textarea
-          :class="['textarea', $v.form.message.$error ? 'is-danger' : '']"
-          placeholder="Textarea"
-          v-model="form.message"
-        ></textarea>
+    <div class="col-sm-6">
+      <div class="field">
+        <label class="label">Chi può accedere a questi contenuti?</label>
+        <div class="control">
+          <treeselect
+            v-model="uploadObject.permessi"
+            :multiple="true"
+            :always-open="true"
+            :options="options"
+            :max-height="300"
+            @input="check_next"
+            placeholder="Seleziona per tipologia di rapporto"
+          />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { validationMixin } from "vuelidate";
-import { required, email } from "vuelidate/lib/validators";
+// import { validationMixin } from "vuelidate";
+// import { required } from "vuelidate/lib/validators";
+// import the component
+import Treeselect from "@riophae/vue-treeselect";
+// import the styles
+import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
 export default {
-  props: ["clickedNext", "currentStep"],
-  mixins: [validationMixin],
+  name:"StepOne",
+  props: ["clickedNext", "currentStep", "uploadObject"],
+  // mixins: [validationMixin],
+  components: { Treeselect },
   data() {
     return {
-      form: {
-        username: "",
-        demoEmail: "",
-        message: "",
-      },
+      errore_titolo: false,
+      errore_descrizione: false,
+      errore_permessi: false,
+
+      // form: {
+      //   titolo: this.uploadObject.titolo,
+      //   descrizione: this.uploadObject,
+
+      // },
+
+      //options della select delle tipologie di rapporto
+      options: [
+        {
+          id: "999",
+          label: "TUTTI",
+          isDefaultExpanded: true,
+          children: JSON.parse(localStorage.getItem("tipologie")),
+        },
+      ],
     };
   },
-  validations: {
-    form: {
-      username: {
-        required,
-      },
-      demoEmail: {
-        required,
-        email,
-      },
-      message: {
-        required,
-      },
-    },
-  },
+  // validations: {
+  //   form: {
+  //     titolo: {
+  //       required,
+  //     },
+  //     descrizione: {
+  //       required,
+  //     },
+
+  //   },
+  // },
+  // watch: {
+  //   $v: {
+  //     handler: function (val) {
+  //       if (!val.$invalid) {
+
+  //         this.$emit("can-continue", { value: true });
+  //       } else {
+  //         this.$emit("can-continue", { value: false });
+  //         setTimeout(() => {
+  //           this.$emit("change-next", { nextBtnValue: false });
+  //         }, 3000);
+  //       }
+  //     },
+  //     deep: true,
+  //   },
   watch: {
-    $v: {
-      handler: function (val) {
-        if (!val.$invalid) {
-          this.$emit("can-continue", { value: true });
-        } else {
-          this.$emit("can-continue", { value: false });
-        }
-      },
-      deep: true,
-    },
+    // eslint-disable-next-line no-unused-vars
     clickedNext(val) {
-      if (val === true) {
-        this.$v.form.$touch();
-      }
+      this.uploadObject.titolo =="" ? this.errore_titolo : !this.errore_titolo;
+      this.uploadObject.descrizione =="" ? this.errore_descrizione : !this.errore_descrizione;
+
+      //console.log(val);
+      // if (val === true) {
+      //   // this.$v.form.$touch();
+      // }
     },
+    
+  },
+ methods:{
+    check_next(){
+      // console.log("titolo" + this.uploadObject.titolo);
+      // console.log(this.uploadObject.permessi);
+      // console.log("desc" + this.uploadObject.descrizione);
+      // console.log("permessi" + this.uploadObject.permessi.length);
+      if (this.uploadObject.titolo!= "" && this.uploadObject.descrizione != "" && this.uploadObject.permessi.length > 0 ){
+        this.$emit("can-continue", { value: true });
+      }else{
+        this.$emit("can-continue", { value: false });
+      }
+     this.errore_titolo=false;
+    }
   },
   mounted() {
-    // if (!this.$v.$invalid) {
+    if (this.uploadObject.titolo != "") {
       this.$emit("can-continue", { value: true });
-    // } else {
-    //   this.$emit("can-continue", { value: false });
-    // }
+    } else {
+      this.$emit("can-continue", { value: false });
+    }
   },
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div v-if="uso">
       <!-- Pulsanti di navigazione -->
       <hr />
       <CButton
@@ -13,6 +13,17 @@
         ><i class="fas fa-home fa-2x"></i><br />{{ area }}
       </CButton>
       <CButton
+        
+        class="mr-3"
+        color="primary"
+        variant="outline"
+        square
+        size="sm"
+        @click="new_folder()"
+        ><i class="fas fa-folder-plus fa-2x"></i><br />
+        Crea Cartella
+      </CButton>
+      <CButton
         color="primary"
         variant="outline"
         square
@@ -21,16 +32,19 @@
         ><i class="fas fa-sync-alt fa-2x"></i><br />
         Aggiorna
       </CButton>
+
       <hr />
+      </div>
       <!-- BREADCRUMBS -->
-      <cite v-show="percorso != ''" style="color: #1e2f56"
+      <cite v-show="percorso != ''" style="color: #1e2f56;"
         >{{ area }} > {{ breadcrumbs.join(" > ") }}</cite
       >
-    </div>
-    <div class="area_cloud row text-center">
+    
+    <div class="area_cloud row text-center mt-3">
       <!-- INDICATORE -> LIVELLO SUPERIORE -->
       <div
-        class=" cloud ml-5 mt-3 col-lg-2 col-md-3 col-xs-6 upper"
+        class="cloud ml-5 mt-3 col-lg-2 col-md-3 col-xs-6 upper"
+        :class="uso"
         v-show="sub != ''"
         @click="rem_breadcrumbs()"
       >
@@ -42,6 +56,7 @@
         v-for="elemento in tree_RC"
         :key="elemento.descrizione"
         class="cloud m-3 col-lg-2 col-md-3 col-xs-6"
+        :class="uso"
       >
         <div
           :class="elemento.ext"
@@ -72,11 +87,11 @@
             {{ elemento.descrizione }}
 
             <div class="info_elemento">
-              <cite
+              <!-- <cite
                 style="font-size: 0.7rem"
                 v-show="elemento.tipo != 'directory'"
                 >({{ elemento.size }}byte)</cite
-              >
+              > -->
               <cite
                 style="font-size: 0.7rem"
                 v-show="
@@ -106,13 +121,13 @@ import axios from "axios";
 
 export default {
   name: "PersonalCloud",
-  props: ["area"],
+  props: ["area", "uso"],
   data() {
     return {
       tree_RC: {},
       sub: "",
       breadcrumbs: [],
-      percorso: "",
+      percorso: this.path,
     };
   },
   created() {
@@ -123,7 +138,7 @@ export default {
       this.breadcrumbs.push(dest);
       // console.log(this.breadcrumbs);
       this.percorso = this.area + "/" + this.breadcrumbs.join("/");
-
+      this.$emit("get_percorso", this.percorso);
       // console.log("percorso " + this.percorso);
       this.get_tree(this.percorso);
     },
@@ -132,22 +147,75 @@ export default {
       this.breadcrumbs.pop();
       // console.log(this.breadcrumbs);
       this.percorso = this.area + "/" + this.breadcrumbs.join("/");
+      this.$emit("get_percorso", this.percorso);
       // console.log("percorso " + this.percorso);
       this.get_tree(this.percorso);
     },
+    async new_folder() {
+      // Funzione per creare una nuova cartella
+      // premendo il pulsante "nuova cartella" si apre una modale dove inserire
+      // il nome per la nuova cartella. Cliccando OK si controlla che non esista già una
+      // cartella con lo stesso nome se tutto ok creo la cartella altrimenti avviso che non è
+      // possibile creare la cartella
+
+      this.$prompt("Inserisci il nome della cartella").then(async (text) => {
+        if (text != "") {
+          var param = {
+            filePath: this.percorso ? this.percorso : this.area,
+            newFolderName: text,
+            idUtente: JSON.parse(localStorage.getItem("chisono_data")).idUtente,
+            nomeUtente: JSON.parse(localStorage.getItem("chisono_data"))
+              .Nominativo,
+          };
+          // console.log(param);
+          try {
+            await axios
+              .post(
+                this.$custom_json.api_url + this.$custom_json.ep_api.new_folder,
+                param
+              )
+              .then((response) => {
+                this.get_tree(this.percorso);
+                var message = "";
+                switch (response.data) {
+                  case "ok":
+                    message = "Cartella " + text + " creata correttamente";
+                    this.$alert(message, "OK", "success");
+                    break;
+                  case "ko":
+                    message =
+                      "Cartella " + text + " presente, scegli un nome diverso";
+                    this.$alert(message, "Attenzione", "warning");
+                    break;
+                }
+              });
+          } catch (error) {
+            console.log("impossibile accedere al cloud");
+          }
+        } else {
+          this.$alert("Inserire un nome valido", "Attenzione", "warning");
+        }
+      });
+    },
     async get_tree(subfolder = "") {
-      //chiamata per il recupero dell'albero dei file
+      // chiamata per il recupero dell'albero dei file
       // controllo se è stato premuto il tasto home -> reset
       url_cloud = this.$custom_json.ep_api.cloud;
       if (subfolder == "reset") {
         subfolder = "";
         this.percorso = "";
+        this.$emit("get_percorso", this.percorso);
         this.breadcrumbs = [];
       }
 
       this.sub = subfolder;
       var url_cloud;
-      var UO_tipo = JSON.parse(localStorage.getItem("chisono_data")).idUtente;
+      var UO_tipo;
+      // Verifico se esiste la props "uso" -> se esiste passo come unità operativa 999 altrimenti
+      // passo quella recuperata dallo storage
+      this.uso
+        ? (UO_tipo = 999)
+        : (UO_tipo = JSON.parse(localStorage.getItem("chisono_data")).UnitaOperativa_Tipo_ID);
       var param;
       try {
         if (subfolder != "" && subfolder != this.area + "/") {
@@ -163,6 +231,7 @@ export default {
         } else {
           subfolder = "";
           this.percorso = "";
+          this.$emit("get_percorso", this.percorso);
           this.breadcrumbs = [];
           param = {
             subfolder: subfolder,
@@ -188,6 +257,11 @@ export default {
 </script>
 <style scoped>
 /* CLASSI PER LA VISUALIZZAZIONE DEI FILE DEL CLOUD  */
+.gestione{
+  font-size: 1rem !important;
+  margin: 0px !important;
+  padding: 0px !important;
+}
 .area_cloud {
   display: flex;
 }

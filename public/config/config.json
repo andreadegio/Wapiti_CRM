@@ -4,7 +4,10 @@
   "ep_api": {
     "listanews_home": "listanewshome",
     "listanews": "listanews",
-    "cloud": "Commerciale/treeCloud"
+    "cloud": "Commerciale/treeCloud",
+    "tipologie_rapporto":"Commerciale/getTipologiaRapporto",
+    "new_folder":"Cloud/creaFolder",
+    "upload_cloud":"Cloud/upload"
   },
   "servizi_broker": "https://servizi.documentale.cloud/aibajsonea/",
   "broker_veicoli": "http://broker.abybroker.it/ea2019/AreaOperazioni.aspx",

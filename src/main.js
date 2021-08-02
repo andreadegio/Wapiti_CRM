@@ -17,6 +17,11 @@ import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import "regenerator-runtime/runtime";
 import VueAnalytics from "vue-analytics";
+import VueSimpleAlert from "vue-simple-alert";
+import VueFileAgent from 'vue-file-agent';
+// import VueFileAgentStyles from 'vue-file-agent/dist/vue-file-agent.css';
+
+
 
 library.add(faUserSecret);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
@@ -28,6 +33,9 @@ Vue.use(VueAnalytics, {
   router,
 });
 
+Vue.use(VueFileAgent);
+
+Vue.use(VueSimpleAlert);
 
 const axiosFileUploader = axios.create({
   baseURL: "https://www.abyway.it/API",
@@ -39,6 +47,7 @@ Vue.use(VueFormulate, {
 });
 
 Vue.use(iconsSet);
+
 Vue.prototype.$log = console.log.bind(console);
 
 //#region FILTRO PER RIDURRE LA LUNGHEZZA DEI TESTI ED AGGIUNGERE " [...]"
