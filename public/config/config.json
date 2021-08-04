@@ -6,6 +6,7 @@
     "listanews": "listanews",
     "cloud": "Commerciale/treeCloud",
     "tipologie_rapporto":"Commerciale/getTipologiaRapporto",
+    "lista_post":"Commerciale/lista_post",
     "new_folder":"Cloud/creaFolder",
     "upload_cloud":"Cloud/upload"
   },

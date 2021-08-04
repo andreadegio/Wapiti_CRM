@@ -5,20 +5,34 @@
         Ultimi contenuti caricati
       </p>
       <CCardGroup class="latest">
-        <CCard class="mx-2 card_materiale" accent-color="success">
-          <CCardHeader
-            ><strong> <u>GAS & LUCE</u> </strong></CCardHeader
+        <CCard
+          class="mx-2 card_materiale card_post"
+          v-for="(item, index) in post.slice(0, 5)"
+          :key="index"
+          :style="{ '--bgColor': item.color_settore }"
+        >
+          <CLink
+            :to="{
+              name: 'Comunicazione',
+              params: { notizia: item.titolo, id: item.id, lista_post: post },
+            }"
           >
-          <CCardImg src="upload/energy1.jpg" style="min-height: 200px">
-          </CCardImg>
-          <CCardBody class="pb-2"
-            ><h2>Titolo di prova</h2>
-            <cite>01 Luglio 2021</cite>
-            <div>Contenuto di prova nella sezione Gas & Luce</div>
-          </CCardBody>
-          <CCardFooter><strong>Mostra Contenuto</strong> </CCardFooter>
+            <CCardHeader class="text-uppercase"
+              ><strong>
+                <u>{{ item.settore }}</u>
+              </strong></CCardHeader
+            >
+            <CCardImg :src="item.copertina" style="min-height: 200px">
+            </CCardImg>
+            <CCardBody class="pb-2"
+              ><h2>{{ item.titolo }}</h2>
+              <cite> {{ item.data_ins | formatDate }}</cite>
+              <div>{{ item.contenuto }}</div>
+            </CCardBody>
+            <CCardFooter><strong>Leggi di più...</strong> </CCardFooter>
+          </CLink>
         </CCard>
-        <CCard class="mx-2 card_materiale" accent-color="info">
+        <!--      <CCard class="mx-2 card_materiale" accent-color="info">
           <CLink to="Commerciale/Comunicazione/Abyway">
             <CCardHeader>
               <strong> <u>ASSICURAZIONI</u> </strong>
@@ -69,7 +83,7 @@
             <div>Contenuto di prova nella sezione Gas & Luce</div>
           </CCardBody>
           <CCardFooter><strong>Mostra Contenuto</strong> </CCardFooter>
-        </CCard>
+        </CCard> -->
       </CCardGroup>
     </CJumbotron>
     <CJumbotron style="" class="blue_logo">
@@ -88,18 +102,22 @@
       <CCol md="7" class="py-5">
         <h1 class="display-3">Assicurazioni</h1>
         <p class="lead">
-          Materiale e comunicazioni commerciali per il mondo assicurativo (RCA - Rami Elementari)
+          Materiale e comunicazioni commerciali per il mondo assicurativo (RCA -
+          Rami Elementari)
         </p>
         <p></p>
         <CButton
-        class="mt-3"
+          class="mt-3"
           size="lg"
           style="color: white; background-color: #ef7a12"
           to="Commerciale/Assicurazioni"
           >Accedi ai contenuti</CButton
         >
         <div class="mt-3" v-if="admin">
-          <CLink to="AdminCommerciale/Assicurazioni" class="" style="color: white !important"
+          <CLink
+            to="AdminCommerciale/Assicurazioni"
+            class=""
+            style="color: white !important"
             ><CIcon name="cil-settings" /><strong> Gestione</strong>
           </CLink>
         </div>
@@ -121,17 +139,19 @@
         <p class="lead">
           Materiale e comunicazioni commerciali per il mondo Energy
         </p>
-        
 
         <CButton
-        class="mt-3"
+          class="mt-3"
           size="lg"
           style="color: white; background-color: #ef7a12"
           to="Commerciale/Energy"
           >Accedi ai contenuti</CButton
         >
         <div class="mt-3" v-if="admin">
-          <CLink to="AdminCommerciale/Energy" class="" style="color: white !important"
+          <CLink
+            to="AdminCommerciale/Energy"
+            class=""
+            style="color: white !important"
             ><CIcon name="cil-settings" /><strong> Gestione</strong>
           </CLink>
         </div>
@@ -155,17 +175,66 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
       admin: JSON.parse(localStorage.getItem("chisono_data")).Is_Sede,
+      post: [],
+      bgColor: "#1e2f56",
     };
+  },
+  mounted() {
+    this.get_lista_post();
+  },
+  methods: {
+    async get_lista_post() {
+      // Chiamata per recuperare la lista dei post
+      let params = {
+        UO_tipo: JSON.parse(localStorage.getItem("chisono_data"))
+          .UnitaOperativa_Tipo_ID,
+      };
+      var lista_post = [];
+      try {
+        await axios
+          .post(
+            this.$custom_json.api_url + this.$custom_json.ep_api.lista_post,
+            { params },
+            {
+              header: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          )
+          .then((response) => {
+            lista_post = response.data;
+          });
+        this.post = lista_post.map((item, id) => {
+          return { ...item, id };
+        });
+        // console.log(this.post);
+      } catch (error) {
+        console.log("impossibile accedere al cloud");
+      }
+      // console.log(JSON.stringify(this.post));
+    },
   },
 };
 </script>
 
 <style scoped>
-.latest a:hover{
+.card_post::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 50%;
+
+  border-top: 6px solid var(--bgColor);
+}
+
+.latest a:hover {
   text-decoration: none;
 }
 .jumbotron {

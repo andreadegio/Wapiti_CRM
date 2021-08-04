@@ -278,11 +278,36 @@ export default {
   font-weight: 900;
   padding-right: 5px;
 }
+
 .jpg::before {
   content: "\f1c5";
   font-family: "Font Awesome 5 free";
   color: rgb(103, 103, 104);
+ font-size: 2em;
+  font-weight: 900;
+  padding-right: 5px;
+}
+.JPG::before {
+  content: "\f1c5";
+  font-family: "Font Awesome 5 free";
+  color: rgb(103, 103, 104);
   font-size: 2em;
+  font-weight: 900;
+  padding-right: 5px;
+}
+.PNG::before {
+  content: "\f1c5";
+  font-family: "Font Awesome 5 free";
+  color: rgb(103, 103, 104);
+  font-size: 2em;
+  font-weight: 900;
+  padding-right: 5px;
+}
+.png::before {
+  content: "\f1c5";
+  font-family: "Font Awesome 5 free";
+  color: rgb(103, 103, 104);
+font-size: 2em;
   font-weight: 900;
   padding-right: 5px;
 }
