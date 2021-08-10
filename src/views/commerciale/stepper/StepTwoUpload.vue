@@ -10,8 +10,8 @@
         :multiple="true"
         :deletable="true"
         :meta="true"
-        :accept="'image/*,.zip,.pdf,.doc,.xls'"
-        :maxSize="'10MB'"
+        :accept="'image/*,.zip,.pdf,.doc,.xls,.xlsx,.docx,.ppt,.pptx,video/*'"
+        :maxSize="'200MB'"
         :maxFiles="14"
         :helpText="'Seleziona o trascina qui i file'"
         :errorText="{
@@ -40,7 +40,7 @@ export default {
   data: function () {
     return {
       fileRecords: [],
-      uploadUrl: "",
+      uploadUrl: "https://www.abyway.it/API/Cloud/upload",
       uploadHeaders: {},
       fileRecordsForUpload: [],
       // contenuto : this.$route.params.settore,
@@ -60,6 +60,26 @@ export default {
         fileRecord
       );
     },
+    uploadFiles: function () {
+        // PASSO I VALORI AL PARENT (HORIZONTAL) che li passerà all'ultimo step newUpload
+        console.log("file nello step 2", this.fileRecordsForUpload);
+        // this.$emit("uploadFiles",this.uploadHeaders, this.fileRecordsForUpload);
+        let params= {
+                settore: this.$route.params.settore,
+                titolo: this.uploadObject.titolo,
+                contenuto: this.uploadObject.descrizione,
+                percorso: this.uploadObject.percorso,
+                permessi: this.uploadObject.permessi,
+                utente: JSON.parse(localStorage.getItem("chisono_data"))
+                  .Nominativo,
+                idUtente: JSON.parse(localStorage.getItem("chisono_data"))
+                  .idUtente,
+              };
+              // console.log(params);
+
+         this.$refs.vueFileAgent.upload(this.uploadUrl, this.uploadHeaders, this.fileRecordsForUpload, params);
+         this.fileRecordsForUpload = [];
+      },
     filesSelected: function (fileRecordsNewlySelected) {
       var validFileRecords = fileRecordsNewlySelected.filter(
         (fileRecord) => !fileRecord.error

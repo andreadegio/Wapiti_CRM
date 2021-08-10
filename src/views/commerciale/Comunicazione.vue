@@ -15,7 +15,10 @@
       <div class="contenuto">
         {{ lista_post[id].contenuto }}
       </div>
-      <div class="allegati" v-show="lista_post[id].allegati && lista_post[id].files.length > 0">
+      <div
+        class="allegati"
+        v-show="lista_post[id].allegati && lista_post[id].files.length > 0"
+      >
         <i class="text-muted fas fa-paperclip fa-2x"></i>
         <span class="text-muted h4 ml-3">Documenti allegati:</span>
         <hr
@@ -32,7 +35,18 @@
             v-for="allegato in lista_post[id].files"
             :key="allegato.nome_file"
           >
-            <div class="cloud">
+            <div
+              class="cloud"
+              @click="
+                (showDoc = true),
+                  (file =
+                    $custom_json.cloud_url +
+                    allegato.percorso_file +
+                    '/' +
+                    allegato.nome_file),
+                  (ext = allegato.ext_file.toUpperCase())
+              "
+            >
               <div :class="allegato.ext_file">
                 <div class="desc_elemento mx-3">
                   {{ allegato.nome_file }}
@@ -43,6 +57,12 @@
         </div>
       </div>
     </div>
+    <Visualizzatore
+      :showDoc="showDoc"
+      :file="file"
+      :ext="ext"
+      @aggiorna_modale="aggiorna_modale"
+    />
     <div class="container">
       <div class="navigazione">
         <hr />
@@ -66,7 +86,9 @@
                   },
                 }"
               >
-                <em>{{ lista_post[lista_post[id].id - 1].titolo }}</em>
+                <em v-if="lista_post[id].id != 0">{{
+                  lista_post[lista_post[id].id - 1].titolo
+                }}</em>
               </CLink></span
             >
           </div>
@@ -74,10 +96,10 @@
             <span
               class="text-muted"
               style="font-size: 1rem"
-              v-if="lista_post[id].id <= last"
+              v-if="lista_post[id].id < last"
               >Successiva <br
             /></span>
-            <span v-if="lista_post[id].id <= last" class="next text-muted h6">
+            <span v-if="lista_post[id].id < last" class="next text-muted h6">
               <CLink
                 :to="{
                   name: 'Comunicazione',
@@ -88,7 +110,9 @@
                   },
                 }"
               >
-                <em>{{ lista_post[lista_post[id].id + 1].titolo }}</em>
+                <em v-if="lista_post[id].id < last">{{
+                  lista_post[lista_post[id].id + 1].titolo
+                }}</em>
               </CLink>
             </span>
           </div>
@@ -100,23 +124,38 @@
 </template>
 
 <script>
+import Visualizzatore from "../../components/visualizzaDocumenti.vue";
+
 export default {
   name: "Comunicazione",
   // ricevo dalla pagina Commerciale.vue il titolo della notizia utilizzato per l'url, l'id e la lista completa dei post
   props: ["notizia", "id", "lista_post"],
-
+  components: {
+    Visualizzatore: Visualizzatore,
+  },
   data() {
     return {
+      showDoc: false,
       last: "",
       first: 0,
+      file: "",
+      ext: "",
     };
   },
   mounted() {
-    if (!this.lista_post){
+    if (!this.lista_post) {
       console.log("parametri mancanti");
       this.$router.push("..");
     }
     this.last = this.lista_post[this.lista_post.length - 1].id;
+  },
+  methods: {
+    aggiorna_modale(value) {
+      this.showDoc = value;
+      if (value == false) {
+        this.file = null;
+      }
+    },
   },
 };
 </script>
@@ -194,7 +233,7 @@ export default {
 /* SEZIONE ALLEGATI  */
 
 .cloud {
-  font-size: 1.5rem;
+  font-size: 1rem;
   cursor: pointer;
   list-style-type: none;
 }
@@ -209,7 +248,7 @@ export default {
   content: "\f1c5";
   font-family: "Font Awesome 5 free";
   color: rgb(103, 103, 104);
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 900;
   padding-right: 5px;
 }
@@ -217,7 +256,7 @@ export default {
   content: "\f1c5";
   font-family: "Font Awesome 5 free";
   color: rgb(103, 103, 104);
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 900;
   padding-right: 5px;
 }
@@ -225,7 +264,7 @@ export default {
   content: "\f1c5";
   font-family: "Font Awesome 5 free";
   color: rgb(103, 103, 104);
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 900;
   padding-right: 5px;
 }
@@ -233,15 +272,31 @@ export default {
   content: "\f1c5";
   font-family: "Font Awesome 5 free";
   color: rgb(103, 103, 104);
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 900;
   padding-right: 5px;
 }
 .pdf::before {
+  content: "\f1c4";
+  font-family: "Font Awesome 5 free";
+  color: rgb(103, 103, 104);
+  font-size: 2rem;
+  font-weight: 900;
+  padding-right: 5px;
+}
+.pptx::before {
   content: "\f1c1";
   font-family: "Font Awesome 5 free";
   color: rgb(103, 103, 104);
-  font-size: 1.5rem;
+  font-size: 2rem;
+  font-weight: 900;
+  padding-right: 5px;
+}
+.docx::before {
+  content: "\f1c2";
+  font-family: "Font Awesome 5 free";
+  color: rgb(103, 103, 104);
+  font-size: 2rem;
   font-weight: 900;
   padding-right: 5px;
 }
@@ -249,7 +304,7 @@ export default {
   content: "\f15c";
   font-family: "Font Awesome 5 free";
   color: rgb(103, 103, 104);
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 900;
   padding-right: 5px;
 }

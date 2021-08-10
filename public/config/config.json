@@ -1,6 +1,7 @@
 {
   "img_news_url": "https://www.abyway.it/upload/news/",
   "api_url": "https://www.abyway.it/API/",
+  "cloud_url":"https://www.abyway.it/cloud/",
   "ep_api": {
     "listanews_home": "listanewshome",
     "listanews": "listanews",
