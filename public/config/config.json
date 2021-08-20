@@ -9,7 +9,8 @@
     "tipologie_rapporto":"Commerciale/getTipologiaRapporto",
     "lista_post":"Commerciale/lista_post",
     "new_folder":"Cloud/creaFolder",
-    "upload_cloud":"Cloud/upload"
+    "upload_cloud":"Cloud/upload",
+    "pre_upload_cloud":"Cloud/pre_upload"
   },
   "servizi_broker": "https://servizi.documentale.cloud/aibajsonea/",
   "broker_veicoli": "http://broker.abybroker.it/ea2019/AreaOperazioni.aspx",

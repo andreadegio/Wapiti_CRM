@@ -17,7 +17,7 @@
     </div>
   </div>
   <div v-else>
-    <div v-if="news != null" id="elenco_mondo">
+    <div v-if="news != null" id="elenco_mondo" style="display: grid !important;">
       <h1 class="mb-3 mt-3 text-center titolo_sezione">
         Elenco News dal mondo
       </h1>

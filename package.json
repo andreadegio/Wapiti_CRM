@@ -19,6 +19,7 @@
     "release": "npm-run-all clearCache lint build test:unit test:e2e"
   },
   "dependencies": {
+    "@algoz098/vue-player": "^0.4.3",
     "@babel/plugin-transform-runtime": "^7.13.10",
     "@braid/vue-formulate": "^2.5.0",
     "@coreui/coreui": "^3.4.0",

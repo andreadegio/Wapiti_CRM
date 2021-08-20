@@ -6,7 +6,7 @@
       </p>
       <CCardGroup class="latest">
         <CCard
-          class="mx-2 card_materiale card_post"
+          class="mx-2 card_materiale card_post col-md-3"
           v-for="(item, index) in post.slice(0, 5)"
           :key="index"
           :style="{ '--bgColor': item.color_settore }"
@@ -32,58 +32,7 @@
             <CCardFooter><strong>Leggi di più...</strong> </CCardFooter>
           </CLink>
         </CCard>
-        <!--      <CCard class="mx-2 card_materiale" accent-color="info">
-          <CLink to="Commerciale/Comunicazione/Abyway">
-            <CCardHeader>
-              <strong> <u>ASSICURAZIONI</u> </strong>
-            </CCardHeader>
-            <CCardImg src="upload/auto1.jpg"> </CCardImg>
-            <CCardBody class="pb-2"
-              ><h2>Arriva ABYONE</h2>
-              <cite>01 Luglio 2021</cite>
-              <div>
-                Ti presentiamo tutti i servizi inclusi nel nuovo prodotto ABYONE
-              </div>
-            </CCardBody>
-            <CCardFooter><strong>Mostra Contenuto</strong> </CCardFooter>
-          </CLink>
-        </CCard>
-        <CCard class="mx-2 card_materiale" accent-color="info">
-          <CCardHeader
-            ><strong> <u>ASSICURAZIONI</u> </strong>
-          </CCardHeader>
-          <CCardImg src="upload/auto2.jpg"> </CCardImg>
-          <CCardBody class="pb-2"
-            ><h2>Materiale Grafico</h2>
-            <cite>01 Luglio 2021</cite>
-            <div>Loghi e Carta intestata ABY</div>
-          </CCardBody>
-          <CCardFooter><strong>Mostra Contenuto</strong> </CCardFooter>
-        </CCard>
-        <CCard class="mx-2 card_materiale" accent-color="info">
-          <CCardHeader
-            ><strong> <u>ASSICURAZIONI</u> </strong>
-          </CCardHeader>
-          <CCardImg src="upload/auto3.jpg"> </CCardImg>
-          <CCardBody class="pb-2"
-            ><h2>Titolo di prova</h2>
-            <cite>01 Luglio 2021</cite>
-            <div>Contenuto di prova nella sezione Assicurazioni</div>
-          </CCardBody>
-          <CCardFooter><strong>Mostra Contenuto</strong></CCardFooter>
-        </CCard>
-        <CCard class="mx-2 card_materiale" accent-color="success">
-          <CCardHeader
-            ><strong> <u>GAS & LUCE</u> </strong></CCardHeader
-          >
-          <CCardImg src="upload/energy2.jpg"> </CCardImg>
-          <CCardBody class="pb-2"
-            ><h2>Titolo di prova</h2>
-            <cite>01 Luglio 2021</cite>
-            <div>Contenuto di prova nella sezione Gas & Luce</div>
-          </CCardBody>
-          <CCardFooter><strong>Mostra Contenuto</strong> </CCardFooter>
-        </CCard> -->
+       
       </CCardGroup>
     </CJumbotron>
     <CJumbotron style="" class="blue_logo">

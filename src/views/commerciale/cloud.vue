@@ -82,7 +82,14 @@
             </div>
           </div>
         </div>
-        <div v-else :class="elemento.ext">
+        <div v-else :class="elemento.ext.toUpperCase()" @click="(showDoc = true),
+                  (file =
+                    $custom_json.cloud_url +
+                    elemento.filePath +
+                    '/' +
+                    elemento.descrizione),
+                  (ext = elemento.ext.toUpperCase()),
+                  (nome_file = elemento.descrizione)">
           <div class="desc_elemento">
             {{ elemento.descrizione }}
 
@@ -107,6 +114,13 @@
       <div class="cloud m-3 col-lg-2 col-md-3 col-xs-6">
         <span v-show="tree_RC == null"> Nessun elemento presente </span>
       </div>
+      <Visualizzatore
+      :showDoc="showDoc"
+      :file="file"
+      :ext="ext"
+      :nome_file="nome_file"
+      @aggiorna_modale="aggiorna_modale"
+    />
     </div>
 
     <br />
@@ -118,22 +132,34 @@
 </template>
 <script>
 import axios from "axios";
+import Visualizzatore from "../../components/visualizzaDocumenti.vue";
 
 export default {
   name: "PersonalCloud",
   props: ["area", "uso"],
+  components:{
+    Visualizzatore: Visualizzatore
+  },
   data() {
     return {
       tree_RC: {},
       sub: "",
       breadcrumbs: [],
       percorso: this.path,
+      showDoc: false,
+      file:"",
+      ext:"",
+      nome_file:""
     };
   },
   created() {
     this.get_tree();
   },
   methods: {
+    aggiorna_modale(value) {
+      this.showDoc = value;
+      
+    },
     add_breadcrumbs(dest) {
       this.breadcrumbs.push(dest);
       // console.log(this.breadcrumbs);
@@ -257,6 +283,8 @@ export default {
 </script>
 <style scoped>
 /* CLASSI PER LA VISUALIZZAZIONE DEI FILE DEL CLOUD  */
+@import "/css/cloud.css";
+
 .gestione{
   font-size: 1rem !important;
   margin: 0px !important;
@@ -265,91 +293,6 @@ export default {
 .area_cloud {
   display: flex;
 }
-.cloud {
-  font-size: 2rem;
-  cursor: pointer;
-  list-style-type: none;
-}
-.upper::before {
-  content: "\f3bf";
-  font-family: "Font Awesome 5 free";
-  color: rgb(103, 103, 104);
-  font-size: 2em;
-  font-weight: 900;
-  padding-right: 5px;
-}
 
-.jpg::before {
-  content: "\f1c5";
-  font-family: "Font Awesome 5 free";
-  color: rgb(103, 103, 104);
- font-size: 2em;
-  font-weight: 900;
-  padding-right: 5px;
-}
-.JPG::before {
-  content: "\f1c5";
-  font-family: "Font Awesome 5 free";
-  color: rgb(103, 103, 104);
-  font-size: 2em;
-  font-weight: 900;
-  padding-right: 5px;
-}
-.PNG::before {
-  content: "\f1c5";
-  font-family: "Font Awesome 5 free";
-  color: rgb(103, 103, 104);
-  font-size: 2em;
-  font-weight: 900;
-  padding-right: 5px;
-}
-.png::before {
-  content: "\f1c5";
-  font-family: "Font Awesome 5 free";
-  color: rgb(103, 103, 104);
-font-size: 2em;
-  font-weight: 900;
-  padding-right: 5px;
-}
-.pdf::before {
-  content: "\f1c1";
-  font-family: "Font Awesome 5 free";
-  color: rgb(103, 103, 104);
-  font-size: 2em;
-  font-weight: 900;
-  padding-right: 5px;
-}
-.txt::before {
-  content: "\f15c";
-  font-family: "Font Awesome 5 free";
-  color: rgb(103, 103, 104);
-  font-size: 2em;
-  font-weight: 900;
-  padding-right: 5px;
-}
-.directory::before {
-  content: "\f07b";
-  font-family: "Font Awesome 5 free";
-  color: rgb(252, 198, 3);
-  font-size: 2em;
-  font-weight: 900;
-  padding-right: 5px;
-}
-.directory:hover::before {
-  content: "\f07c";
-  font-family: "Font Awesome 5 free";
-  color: rgb(252, 198, 3);
-  font-size: 2em;
-  font-weight: 900;
-  padding-right: 5px;
-}
-.directory.highlight::before {
-  content: "\f07c";
-  font-family: "Font Awesome 5 free";
-  color: rgb(252, 198, 3);
-  font-size: 2em;
-  font-weight: 900;
-  padding-right: 5px;
-}
 /* FINE CLOUD */
 </style>
