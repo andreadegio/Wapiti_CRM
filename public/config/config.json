@@ -10,7 +10,8 @@
     "lista_post":"Commerciale/lista_post",
     "new_folder":"Cloud/creaFolder",
     "upload_cloud":"Cloud/upload",
-    "pre_upload_cloud":"Cloud/pre_upload"
+    "pre_upload_cloud":"Cloud/pre_upload",
+    "getUrlRami":"Rami/getUrl"
   },
   "servizi_broker": "https://servizi.documentale.cloud/aibajsonea/",
   "broker_veicoli": "http://broker.abybroker.it/ea2019/AreaOperazioni.aspx",

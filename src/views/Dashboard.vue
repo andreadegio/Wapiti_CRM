@@ -58,29 +58,24 @@
               </CCard>
             </CCardLink>
           </div>
-          <!-- <div class="col-sm"> -->
-          <!-- <CCardLink href="#" target="_self">
+          <div v-if="urlRami != ''" class="col-sm">
+          <CCardLink :href="urlRami" target="_self">
               <CCard
                 class="text-center elevation-6 portali-btn"
                 body-wrapper
-                
-              
-              >
-                <h1
-                  style="
-                    color: white;
-                    font-weight: 800;
-                    text-shadow: 1px 1px midnightblue;
-                    font-size: 2vw;
-                    margin-bottom: 0 !important;
-                    margin-top: 10%;
-                  "
-                >
-                  RAMI ASSICURATIVI
-                </h1>
+                style="
+                  height: 200px;
+                  background-image: url('img/buttons/rami.png');
+                  background-position: center;
+                  z-index: 0;
+                  background-size: cover;
+                "
+                ><CCardTitle>
+                  <h1 class="pulsante_portali">RAMI</h1>
+                </CCardTitle>
               </CCard>
-            </CCardLink> -->
-          <!-- </div> -->
+            </CCardLink>
+          </div>
           <div class="col-sm">
             <CCardLink to="Comingsoon_gas" target="_self">
               <CCard
@@ -142,6 +137,7 @@ export default {
       news_operative: null,
       triggerNews: 0,
       news_mondo: null,
+      urlRami : localStorage.getItem("urlRami"),
     };
   },
 
@@ -167,7 +163,6 @@ export default {
       // prima verifico di non averli già nello storage, altrimenti effettuo la chiamata
       if (localStorage.getItem("chisono_data") == null) {
         try {
-          // console.log("chiamata");
           var config = {
             method: "post",
             url: this.$custom_json.servizi_broker + "chisono",
@@ -193,6 +188,27 @@ export default {
             "unitaoperativaID",
             risposta_chisono.data.idUnitaOperativa
           );
+          // controllo se sono abilitato all'utilizzo del portale rami
+          if (risposta_chisono.data.Abilitato_Rami) {
+            // se sono abilitato chiamo il servizio per recuperare l'url da inserire nel pulsante
+            try {
+              var param = {
+                id_persona_operativa: risposta_chisono.data.idUtente,
+              };
+              await axios
+                .post(
+                  this.$custom_json.api_url +
+                    this.$custom_json.ep_api.getUrlRami,
+                  param
+                )
+                .then((response) => {
+                  localStorage.setItem("urlRami", response.data);
+                  this.urlRami = response.data;
+                });
+            } catch (error) {
+              console.log("impossibile recuperare jwt rami " + error);
+            }
+          }
         } catch (error) {
           console.log("errore");
           this.$router.push("login");
@@ -230,7 +246,9 @@ export default {
         // provvisoriamente quelli
 
         if (localStorage.getItem("news_operative")) {
-          this.news_operative = JSON.parse(localStorage.getItem("news_operative"));      
+          this.news_operative = JSON.parse(
+            localStorage.getItem("news_operative")
+          );
         } else {
           // in caso di chiamata fallita e contenuto non presente nello storage tento una seconda volta
           try {

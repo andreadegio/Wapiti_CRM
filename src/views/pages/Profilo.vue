@@ -18,7 +18,7 @@
                 size="lg"
                 variant="outline"                
               >
-                < Indietro
+                 Indietro
               </CButton>
 
               
