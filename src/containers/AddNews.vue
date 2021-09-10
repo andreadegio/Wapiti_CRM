@@ -105,7 +105,7 @@
                   </button>
                 </div>
                 <div class="modal-body text-center">
-                  <h3><strong>Vuoi davvero eliminare la news ?</strong></h3>
+                  <h3><strong>Vuoi davvero eliminare la news?</strong></h3>
                 </div>
                 <div class="modal-footer">
                   <button

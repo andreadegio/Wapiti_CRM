@@ -101,12 +101,11 @@ export default {
       );
     },
     uploadFiles: async function () {
-      // PASSO I VALORI AL PARENT (HORIZONTAL) che li passerà all'ultimo step newUpload
+      
       // All'avvio del caricamento faccio un primo check per capire se il/i file esistono già
       // creo un'array con i nomi dei file e chiamo il backend se tutto ok mi risponde con l'id del post che verrà creato
       this.showModaleUpload = true;
       let cerca_file = [];
-
       this.uploadObject.file.forEach((file) => {
         cerca_file.push(file.name(true) + "." + file.ext);
       });
@@ -131,8 +130,7 @@ export default {
         let messaggio_esito = response.data.message;
 
         if (response.data.status == "OK") {
-          // se OK allora vuol dire che posso caricare, ed in risposta ottengo i nuovi nomi dei file ripuliti
-          // memorizzati sul db
+          // se OK allora vuol dire che posso caricare
 
           // a questo punto posso inviare tutto alla funzione di upload
 

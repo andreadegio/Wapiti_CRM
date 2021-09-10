@@ -58,7 +58,7 @@
               </CCard>
             </CCardLink>
           </div>
-          <div v-if="urlRami != ''" class="col-sm">
+          <div v-if="urlRami" class="col-sm">
           <CCardLink :href="urlRami" target="_self">
               <CCard
                 class="text-center elevation-6 portali-btn"

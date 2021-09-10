@@ -3,7 +3,6 @@
     <new-com v-show="addCom" />
     <new-upload v-show="addFile" class="animate__animated animate__fadeIn" />
     <div v-show="home" class="container">
-      Settore {{$attrs.settore}}
       <div class="row text-center mt-5 riga">
         <div class="col-md-3 action" @click="(addCom = true), (home = false)">
           <i class="fas fa-rss fa-4x animate__animated animate__bounce"></i
@@ -30,7 +29,6 @@ import NewUpload from "./newUpload.vue"; // componente per l'inserimento di un n
 // import "bulma";
 import "animate.css";
 import axios from "axios";
-
 
 export default {
   name: "AdminCommerciale",
@@ -59,14 +57,14 @@ export default {
               this.$custom_json.ep_api.tipologie_rapporto
           )
           .then((response) => {
-      //       this.tipologie =  [
-      //   {
-      //     id: "ALL",
-      //     label: "TUTTI",
-      //     isDefaultExpanded: true,
-      //     children: ,
-      //   },
-      // ],
+            //       this.tipologie =  [
+            //   {
+            //     id: "ALL",
+            //     label: "TUTTI",
+            //     isDefaultExpanded: true,
+            //     children: ,
+            //   },
+            // ],
             // la risposta con l'elenco delle tipologie di rapporto la salvo nello storage
             localStorage.setItem("tipologie", JSON.stringify(response.data));
             // console.log(JSON.stringify(response.data));

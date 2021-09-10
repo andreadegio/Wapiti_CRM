@@ -81,8 +81,6 @@ export default {
     uploadFiles: function () {
       // console.log("NEW-UPLOAD -> HORIZZONTAL ");
       this.$refs.horizzontal.uploadFiles();
-
-
     },
     completeStep(payload) {
       this.uploadSteps.forEach((step) => {
