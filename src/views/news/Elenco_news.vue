@@ -1,9 +1,5 @@
 <template>
-  <div
-    v-if="loader"
-    style="position: fixed; top:50%; left:50%;"
-    class="my-5"
-  >
+  <div v-if="loader" style="position: fixed; top: 50%; left: 50%" class="my-5">
     <div class="lds-grid">
       <div></div>
       <div></div>
@@ -17,7 +13,7 @@
     </div>
   </div>
   <div v-else>
-    <div v-if="news != null" id="elenco_mondo" style="display: grid !important;">
+    <div v-if="news != null" id="elenco_mondo" style="display: grid !important">
       <h1 class="mb-3 mt-3 text-center titolo_sezione">
         Elenco News dal mondo
       </h1>
@@ -104,7 +100,7 @@ export default {
   },
   methods: {
     async load_news() {
-      this.loader= true;
+      this.loader = true;
       var chiamata_news = [];
       try {
         await axios
@@ -115,10 +111,10 @@ export default {
         this.news = chiamata_news.map((item, id) => {
           return { ...item, id };
         });
-        this.loader= false;
+        this.loader = false;
       } catch {
-        this.news=null;
-        this.loader=false;
+        this.news = null;
+        this.loader = false;
       }
     },
   },
@@ -157,7 +153,7 @@ img {
   color: #3c4b64;
   font-weight: 600;
 }
-.errore_caricamento p{
+.errore_caricamento p {
   font-size: 1.5rem;
   font-weight: 300;
 }

@@ -8,7 +8,73 @@
             <span class="tabs-nav"> Comunicazioni</span>
           </template>
           <CCardGroup class="latest container">
-            <div class="col-lg-3 col-sm-6" v-for="(item, index) in post" :key="index">
+            <div
+              class="col-lg-3 col-sm-6"
+              v-for="(item, index) in post"
+              :key="index"
+            >
+              <CCard
+                class="mx-2 card_materiale card_post"
+                :style="{ '--bgColor': item.color_settore }"
+              >
+                <CLink
+                  :to="{
+                    name: 'Comunicazione',
+                    params: {
+                      notizia: item.titolo,
+                      id: item.id,
+                      lista_post: post,
+                    },
+                  }"
+                >
+                  <CCardHeader class="text-uppercase"
+                    ><strong>
+                      <u>{{ item.settore }}</u>
+                    </strong></CCardHeader
+                  >
+                  <CCardImg
+                    :src="'../' + item.copertina"
+                    style="min-height: 200px"
+                    alt="- IMPOSSIBILE CARICARE -"
+                  >
+                  </CCardImg>
+                  <CCardBody class="pb-2"
+                    ><h2>{{ item.titolo }}</h2>
+                    <cite> {{ item.data_ins | formatDate }}</cite>
+                    <div
+                      v-html="
+                        $options.filters.truncate(item.contenuto, 50, ' [...]')
+                      "
+                    ></div>
+                  </CCardBody>
+                  <CCardFooter><strong>Leggi di più...</strong> </CCardFooter>
+                </CLink>
+              </CCard>
+            </div>
+          </CCardGroup>
+        </CTab>
+        <CTab>
+          <template slot="title">
+            <i class="fas fa-paperclip fa-2x"></i>
+            <span class="tabs-nav"> Materiale</span>
+          </template>
+          <PersonalCloud :area="contenuto" />
+        </CTab>
+      </CTabs>
+    </div>
+    <div v-show="contenuto == 'Energy'">
+      <CTabs variant="tabs" :active-tab="0">
+        <CTab>
+          <template slot="title">
+            <i class="fas fa-rss fa-2x"></i>
+            <span class="tabs-nav"> Comunicazioni</span>
+          </template>
+          <CCardGroup class="latest container">
+            <div
+              class="col-lg-3 col-sm-6"
+              v-for="(item, index) in post"
+              :key="index"
+            >
               <CCard
                 class="mx-2 card_materiale card_post"
                 :style="{ '--bgColor': item.color_settore }"
@@ -36,164 +102,16 @@
                   <CCardBody class="pb-2"
                     ><h2>{{ item.titolo }}</h2>
                     <cite> {{ item.data_ins | formatDate }}</cite>
-                    <div>{{ item.contenuto }}</div>
+                    <div
+                      v-html="
+                        $options.filters.truncate(item.contenuto, 50, ' [...]')
+                      "
+                    ></div>
                   </CCardBody>
                   <CCardFooter><strong>Leggi di più...</strong> </CCardFooter>
                 </CLink>
               </CCard>
             </div>
-          </CCardGroup>
-
-          <!-- <CCardGroup class="latest container">
-            <CCard class="mx-2 card_materiale" accent-color="info"
-              >
-              <CLink to="Comunicazione/Abyway">
-              <CCardHeader>
-                <strong> <u>ASSICURAZIONI</u> </strong>
-              </CCardHeader>
-              <CCardImg src="../upload/auto1.jpg"> </CCardImg>
-              <CCardBody class="pb-2"
-                ><h2>Arriva ABYONE</h2>
-                <cite>01 Luglio 2021</cite>
-                <div>
-                  Ti presentiamo tutti i servizi inclusi nel nuovo prodotto
-                  ABYONE
-                </div>
-              </CCardBody>
-              <CCardFooter><strong>Mostra Contenuto</strong> </CCardFooter>
-              </CLink>
-            </CCard>
-
-            <CCard class="mx-2 card_materiale" accent-color="info">
-              <CCardHeader
-                ><strong> <u>ASSICURAZIONI</u> </strong>
-              </CCardHeader>
-              <CCardImg src="../upload/auto2.jpg"> </CCardImg>
-              <CCardBody class="pb-2"
-                ><h2>Materiale Grafico</h2>
-                <cite>01 Luglio 2021</cite>
-                <div>Loghi e Carta intestata ABY</div>
-              </CCardBody>
-              <CCardFooter><strong>Mostra Contenuto</strong> </CCardFooter>
-            </CCard>
-            <CCard class="mx-2 card_materiale" accent-color="info">
-              <CCardHeader
-                ><strong> <u>ASSICURAZIONI</u> </strong>
-              </CCardHeader>
-              <CCardImg src="../upload/auto3.jpg"> </CCardImg>
-              <CCardBody class="pb-2"
-                ><h2>Titolo di prova</h2>
-                <cite>01 Luglio 2021</cite>
-                <div>Contenuto di prova nella sezione Assicurazioni</div>
-              </CCardBody>
-              <CCardFooter><strong>Mostra Contenuto</strong></CCardFooter>
-            </CCard>
-
-            <CCard class="mx-2 card_materiale" accent-color="info">
-              <CCardHeader
-                ><strong> <u>ASSICURAZIONI</u> </strong>
-              </CCardHeader>
-              <CCardImg src="../upload/auto2.jpg"> </CCardImg>
-              <CCardBody class="pb-2"
-                ><h2>Materiale Grafico</h2>
-                <cite>01 Luglio 2021</cite>
-                <div>Loghi e Carta intestata ABY</div>
-              </CCardBody>
-              <CCardFooter><strong>Mostra Contenuto</strong> </CCardFooter>
-            </CCard>
-            <CCard class="mx-2 card_materiale" accent-color="info">
-              <CCardHeader
-                ><strong> <u>ASSICURAZIONI</u> </strong>
-              </CCardHeader>
-              <CCardImg src="../upload/auto3.jpg"> </CCardImg>
-              <CCardBody class="pb-2"
-                ><h2>Titolo di prova</h2>
-                <cite>01 Luglio 2021</cite>
-                <div>Contenuto di prova nella sezione Assicurazioni</div>
-              </CCardBody>
-              <CCardFooter><strong>Mostra Contenuto</strong></CCardFooter>
-            </CCard>
-          </CCardGroup> -->
-        </CTab>
-        <CTab>
-          <template slot="title">
-            <i class="fas fa-paperclip fa-2x"></i>
-            <span class="tabs-nav"> Materiale</span>
-          </template>
-          <PersonalCloud :area="contenuto" />
-        </CTab>
-      </CTabs>
-    </div>
-    <div v-show="contenuto == 'Energy'">
-      <CTabs variant="tabs" :active-tab="0">
-        <CTab>
-          <template slot="title">
-            <i class="fas fa-rss fa-2x"></i>
-            <span class="tabs-nav"> Comunicazioni</span>
-          </template>
-          <CCardGroup class="latest container">
-            <CCard class="mx-2" accent-color="success">
-              <CCardHeader
-                ><strong> <u>GAS & LUCE</u> </strong></CCardHeader
-              >
-              <CCardImg src="../upload/energy1.jpg" style="min-height: 200px">
-              </CCardImg>
-              <CCardBody class="pb-2"
-                ><h2>Titolo di prova</h2>
-                <cite>01 Luglio 2021</cite>
-                <div>Contenuto di prova nella sezione Gas & Luce</div>
-              </CCardBody>
-              <CCardFooter><strong>Mostra Contenuto</strong> </CCardFooter>
-            </CCard>
-
-            <CCard class="mx-2" accent-color="success">
-              <CCardHeader
-                ><strong> <u>GAS & LUCE</u> </strong></CCardHeader
-              >
-              <CCardImg src="../upload/energy2.jpg"> </CCardImg>
-              <CCardBody class="pb-2"
-                ><h2>Titolo di prova</h2>
-                <cite>01 Luglio 2021</cite>
-                <div>Contenuto di prova nella sezione Gas & Luce</div>
-              </CCardBody>
-              <CCardFooter><strong>Mostra Contenuto</strong> </CCardFooter>
-            </CCard>
-            <CCard class="mx-2" accent-color="success">
-              <CCardHeader
-                ><strong> <u>GAS & LUCE</u> </strong></CCardHeader
-              >
-              <CCardImg src="../upload/energy2.jpg"> </CCardImg>
-              <CCardBody class="pb-2"
-                ><h2>Titolo di prova</h2>
-                <cite>01 Luglio 2021</cite>
-                <div>Contenuto di prova nella sezione Gas & Luce</div>
-              </CCardBody>
-              <CCardFooter><strong>Mostra Contenuto</strong> </CCardFooter>
-            </CCard>
-            <CCard class="mx-2" accent-color="success">
-              <CCardHeader
-                ><strong> <u>GAS & LUCE</u> </strong></CCardHeader
-              >
-              <CCardImg src="../upload/energy2.jpg"> </CCardImg>
-              <CCardBody class="pb-2"
-                ><h2>Titolo di prova</h2>
-                <cite>01 Luglio 2021</cite>
-                <div>Contenuto di prova nella sezione Gas & Luce</div>
-              </CCardBody>
-              <CCardFooter><strong>Mostra Contenuto</strong> </CCardFooter>
-            </CCard>
-            <CCard class="mx-2" accent-color="success">
-              <CCardHeader
-                ><strong> <u>GAS & LUCE</u> </strong></CCardHeader
-              >
-              <CCardImg src="../upload/energy2.jpg"> </CCardImg>
-              <CCardBody class="pb-2"
-                ><h2>Titolo di prova</h2>
-                <cite>01 Luglio 2021</cite>
-                <div>Contenuto di prova nella sezione Gas & Luce</div>
-              </CCardBody>
-              <CCardFooter><strong>Mostra Contenuto</strong> </CCardFooter>
-            </CCard>
           </CCardGroup>
         </CTab>
         <CTab>
@@ -232,6 +150,7 @@ export default {
       let params = {
         UO_tipo: JSON.parse(localStorage.getItem("chisono_data"))
           .UnitaOperativa_Tipo_ID,
+        is_sede: JSON.parse(localStorage.getItem("chisono_data")).Is_Sede,
         settore: this.contenuto,
       };
       var lista_post = [];
@@ -271,7 +190,6 @@ export default {
   position: absolute;
   top: 0;
   width: 50%;
-
   border-top: 6px solid var(--bgColor);
 }
 

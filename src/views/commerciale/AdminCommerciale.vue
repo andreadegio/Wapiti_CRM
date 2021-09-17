@@ -4,11 +4,15 @@
     <new-upload v-show="addFile" class="animate__animated animate__fadeIn" />
     <div v-show="home" class="container">
       <div class="row text-center mt-5 riga">
-        <div class="col-md-3 action" @click="(addCom = true), (home = false)">
+        <div
+          class="col-md-3 action"
+          :style="{ '--bgColor': coloreSettore }"
+          @click="(addCom = true), (home = false)"
+        >
           <i class="fas fa-rss fa-4x animate__animated animate__bounce"></i
           ><br />Inserisci una Comunicazione
         </div>
-        <div class="col-md-3 action" @click="(addFile = true), (home = false)">
+        <div class="col-md-3 action" :style="{ '--bgColor': coloreSettore }" @click="(addFile = true), (home = false)">
           <i
             class="
               fas
@@ -42,10 +46,12 @@ export default {
       addCom: false, // trigger per visualizzare il componente di aggiunta comunicazione
       addFile: false, // trigger per visualizzare il componente di aggiunta file
       home: true, // trigger per visualizzare i pulsanti di scelta
+      coloreSettore: "",
     };
   },
   mounted() {
     this.get_tipologie();
+    this.get_color_settore(this.$attrs.settore);
   },
   methods: {
     async get_tipologie() {
@@ -73,6 +79,25 @@ export default {
         console.log("impossibile accedere al cloud");
       }
     },
+    async get_color_settore(desc_settore) {
+      // console.log(desc_settore);
+      let params = {
+        settore: desc_settore,
+      };
+      try {
+        await axios
+          .post(
+            this.$custom_json.api_url + this.$custom_json.ep_api.color_settore,
+            { params }
+          )
+          .then((response) => {
+            this.coloreSettore =response.data;
+            
+          });
+      } catch (error) {
+        console.log("errore: " + error);
+      }
+    },
   },
 };
 </script>
@@ -90,7 +115,7 @@ export default {
   cursor: pointer;
   margin: 5rem;
   padding: 5rem;
-  background-color: #1e2f56;
+  background-color:  var(--bgColor);
   font-size: 1.5rem;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: lighter;

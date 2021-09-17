@@ -16,7 +16,8 @@
     "searchImg":"Utility/searchImg",
     "categorie":"Commerciale/getCategorie",
     "pre_upload_post":"Commerciale/preUploadPost",
-    "upload_post":"Commerciale/uploadPostAllegati"
+    "upload_post":"Commerciale/uploadPostAllegati",
+    "color_settore":"Utility/color_settore"
   },
   "servizi_broker": "https://servizi.documentale.cloud/aibajsonea/",
   "broker_veicoli": "http://broker.abybroker.it/ea2019/AreaOperazioni.aspx",

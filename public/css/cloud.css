@@ -20,6 +20,14 @@
     font-weight: 900;
     padding-right: 5px;
   }
+  .JPEG::before {
+    content: "\f1c5";
+    font-family: "Font Awesome 5 free";
+    color: rgb(103, 103, 104);
+    font-size: 2rem;
+    font-weight: 900;
+    padding-right: 5px;
+  }
   .PNG::before {
     content: "\f1c5";
     font-family: "Font Awesome 5 free";

@@ -1,5 +1,24 @@
 <template>
   <div>
+    <CModal :show="showModaleUpload" centered>
+      <template #header>
+        <span class="h4 text-uppercase" style="color: white">
+          <strong>Upload</strong>
+        </span>
+
+        <CButton class="close" @click="chiudi()">
+          <span aria-hidden="true">&times;</span>
+        </CButton>
+      </template>
+      <template>
+        <div id="uploadInCorso" class="h3 text-center pb-2">
+          Caricamento in corso, attendere:
+        </div>
+      </template>
+      <template #footer-wrapper>
+        <span></span>
+      </template>
+    </CModal>
     <CModal
       :show.sync="selezionaImmagini"
       color="dark"
@@ -17,9 +36,26 @@
         </CButton>
       </template>
 
-      <div class="row">
-        <div v-show="elencoImg.length == 0">
-          Non è stata trovata nessuna immagine, cambia il termine di ricerca
+      <div class="row" style="min-height: 20rem">
+        <div v-if="searchResult != null">
+          {{ searchResult }}
+        </div>
+        <div
+          v-if="loader == true"
+          style="position: fixed; top: 50%; left: 50%"
+          class="my-5"
+        >
+          <div class="lds-grid">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
         </div>
         <div
           class="m-3 col-lg-3 col-sm-6"
@@ -43,15 +79,31 @@
       style="background-color: white; border-radius: 0.3rem"
       class="container mt-2"
     >
-      <div class="row">
+      <div class="row justify-content-center">
+        <h2 class="pl-2 text-center">Inserimento di una nuova comunicazione</h2>
         <div class="p-3 rounded col-8">
-          <h2 class="pl-2">Inserimento di una nuova comunicazione</h2>
-          <span><strong>Titolo:</strong></span>
-          <CInput
-            type="text"
-            v-model="titolo_post"
-            placeholder="Assegna un titolo"
-          />
+          
+          <div class="row cover_box mb-3">
+            <span class="mb-2"><strong>Seleziona la categoria:</strong></span>
+            <div class="control">
+              <treeselect
+                :multiple="false"
+                :always-open="false"
+                :options="lista_categorie"
+                :max-height="300"
+                placeholder="Seleziona la categoria"
+                v-model="categoria_post"
+              />
+            </div>
+          </div>
+          <div class="cover_box mb-3">
+            <span><strong>Titolo:</strong></span>
+            <CInput
+              type="text"
+              v-model="titolo_post"
+              placeholder="Assegna un titolo"
+            />
+          </div>
           <span><strong>Sottotitolo:</strong></span>
           <CInput
             type="text"
@@ -197,7 +249,10 @@ export default {
       idUnsplash: null, // utilizzato per poi recuperare il download link
       elencoImg: [],
       selezionaImmagini: false,
-      permessi: [],
+      searchResult: null,
+      showModaleUpload: false,
+      loader: false,
+      permessi: null,
       lista_categorie: JSON.parse(localStorage.getItem("categorie")),
       options: [
         {
@@ -285,6 +340,7 @@ export default {
         );
         return;
       }
+      this.loader = true;
       var array_img = [];
       this.elencoImg = [];
       this.selezionaImmagini = true;
@@ -299,10 +355,14 @@ export default {
             param
           )
           .then((response) => {
+            this.loader = false;
             array_img = response.data.results;
             this.elencoImg = array_img;
           });
       } catch (error) {
+        this.loader = false;
+        this.searchResult =
+          "Non è stata trovata nessuna immagine, prova a cambiare il termine di ricerca";
         console.log("Impossibile recuperare le immagini " + error);
       }
     },
@@ -320,6 +380,30 @@ export default {
       this.selezionaImmagini = false;
     },
     salva: async function () {
+      /*controllo inserimento campi*/
+      if (
+        this.titolo_post == "" ||
+        this.subtitle_post == "" ||
+        this.contenuto_post == "" ||
+        this.categoria_post == null ||
+        this.permessi == null
+      ) {
+        this.$alert(
+          "Verifica di aver compilato correttamente tutti i campi",
+          "Dati incompleti",
+          "warning"
+        );
+        return;
+      }
+      if (this.thumb == "" && this.thumb2 == "") {
+        this.$alert(
+          "Verifica di aver scelto o caricato una copertina per la comunicazione",
+          "Copertina mancante",
+          "warning"
+        );
+        return;
+      }
+      this.showModaleUpload = true;
       let file = this.$refs.file.files[0];
       var formData = new FormData();
       formData.append("file", file);
@@ -352,16 +436,16 @@ export default {
             "Content-Type": "multipart/form-data",
           },
         })
-        .then((response) => {
-          // console.log(response.data);
-          if (response.data.status == "OK") {
+        .then((response2) => {
+          // console.log(response2.data.status);
+          if (response2.data.status == "OK") {
             // se ok allora carico gli allegati (se esistono) passandogli l'id del post
             if (this.fileRecordsForUpload.length > 0) {
               let params_allegati = {
                 settore: this.$route.params.settore,
-                percorso: response.data.post_id + "_Com",
+                percorso: response2.data.post_id + "_Com",
                 permessi: this.permessi,
-                post_id: response.data.post_id,
+                post_id: response2.data.post_id,
                 utente: JSON.parse(localStorage.getItem("chisono_data"))
                   .Nominativo,
                 idUtente: JSON.parse(localStorage.getItem("chisono_data"))
@@ -375,11 +459,52 @@ export default {
                   params_allegati
                 )
                 .then((response) => {
-                  console.log(response);
+                  console.log(response.data);
+                  this.$alert(
+                    "Comunicazione pubblicata correttamente",
+                    "Completato",
+                    "success"
+                  ).then(
+                    // eslint-disable-next-line no-unused-vars
+                    (result) => {
+                      this.$router.go(-1);
+                      this.showModaleUpload = false;
+                    }
+                  );
+                  return;
                 });
+            } else {
+              /* Non ci sono allegati -> ritorno */
+              this.$alert(
+                "Comunicazione pubblicata correttamente",
+                "Completato",
+                "success"
+              ).then(
+                // eslint-disable-next-line no-unused-vars
+                (result) => {
+                  this.$router.go(-1);
+                  this.showModaleUpload = false;
+                }
+              );
+              return;
             }
           } else {
-            console.log(response);
+            /*
+             IMPOSSIBILE PROCEDERE AL CARICAMENTO
+            */
+            console.log("Caricamento non riuscito");
+            //visualizzo il messaggio di errore
+            this.$alert(
+              "Caricamento non riuscito",
+              "Attenzione",
+              "warning"
+            ).then(
+              // eslint-disable-next-line no-unused-vars
+              (result) => {
+                this.showModaleUpload = false;
+              }
+            );
+            return;
           }
         });
     },

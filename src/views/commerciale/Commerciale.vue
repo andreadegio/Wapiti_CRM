@@ -1,10 +1,7 @@
 <template>
-  <div id="aree" class="pt-4 px-4">
+  <div id="aree" class="pt-4 px-5">
     <CJumbotron class="px-0 py-2 latest">
-      <p class="pl-3 h3" style="font-weight: lighter; font-size: 2rem">
-        Ultimi contenuti caricati
-      </p>
-      <CCardGroup class="latest">
+      <CCardGroup class="latest p-3">
         <CCard
           class="mx-2 card_materiale card_post col-md-3"
           v-for="(item, index) in post.slice(0, 5)"
@@ -22,22 +19,27 @@
                 <u>{{ item.settore }}</u>
               </strong></CCardHeader
             >
-            <CCardImg :src="item.copertina" style="min-height: 200px">
+            <CCardImg
+              :src="item.copertina"
+              style="min-height: 200px"
+              alt="- IMPOSSIBILE CARICARE -"
+            >
             </CCardImg>
             <CCardBody class="pb-2"
               ><h2>{{ item.titolo }}</h2>
               <cite> {{ item.data_ins | formatDate }}</cite>
-              <div>{{ item.contenuto }}</div>
+              <div
+                v-html="$options.filters.truncate(item.contenuto, 50, ' [...]')"
+              ></div>
             </CCardBody>
             <CCardFooter><strong>Leggi di più...</strong> </CCardFooter>
           </CLink>
         </CCard>
-       
       </CCardGroup>
     </CJumbotron>
     <CJumbotron style="" class="blue_logo">
       <CCol
-        md="5"
+        md="8"
         style="
           background-image: url('img/buttons/auto.png');
           background-position: center;
@@ -48,19 +50,19 @@
           border-bottom-right-radius: 0px;
         "
       ></CCol>
-      <CCol md="7" class="py-5">
-        <h1 class="display-3">Assicurazioni</h1>
-        <p class="lead">
-          Materiale e comunicazioni commerciali per il mondo assicurativo (RCA -
-          Rami Elementari)
-        </p>
-        <p></p>
+      <CCol md="4" class="py-5 justify-content-center">
+        <h1
+          class="display-3 text-center"
+          style="font-weight: initial !important"
+        >
+          Assicurazioni
+        </h1>
+
         <CButton
-          class="mt-3"
+          class="btnAssicurazioni mt-3"
           size="lg"
-          style="color: white; background-color: #ef7a12"
           to="Commerciale/Assicurazioni"
-          >Accedi ai contenuti</CButton
+          >Scopri di più...</CButton
         >
         <div class="mt-3" v-if="admin">
           <CLink
@@ -72,29 +74,20 @@
         </div>
       </CCol>
     </CJumbotron>
-    <CJumbotron
-      style="
-        display: flex;
-        color: white;
-        padding: 3px;
-
-        background: linear-gradient(180deg, #0e7731, #139e42) !important;
-        box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
-          0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12) !important;
-      "
-    >
-      <CCol md="7" class="py-5 text-right">
-        <h1 class="display-3">Gas & Luce</h1>
-        <p class="lead">
+    <CJumbotron class="Gas">
+      <CCol md="4" class="py-5 text-right">
+        <h1
+          class="display-3 text-center"
+          style="font-weight: initial !important"
+        >
+          Gas & Luce
+        </h1>
+        <!-- <p class="lead">
           Materiale e comunicazioni commerciali per il mondo Energy
-        </p>
+        </p> -->
 
-        <CButton
-          class="mt-3"
-          size="lg"
-          style="color: white; background-color: #ef7a12"
-          to="Commerciale/Energy"
-          >Accedi ai contenuti</CButton
+        <CButton class="mt-3 btnGas" size="lg" to="Commerciale/Energy"
+          >Scopri di più...</CButton
         >
         <div class="mt-3" v-if="admin">
           <CLink
@@ -106,7 +99,7 @@
         </div>
       </CCol>
       <CCol
-        md="5"
+        md="8"
         style="
           background-image: url('img/buttons/energy.jpg');
           background-position: center;
@@ -143,6 +136,7 @@ export default {
       let params = {
         UO_tipo: JSON.parse(localStorage.getItem("chisono_data"))
           .UnitaOperativa_Tipo_ID,
+        is_sede: JSON.parse(localStorage.getItem("chisono_data")).Is_Sede,
       };
       var lista_post = [];
       try {
@@ -162,7 +156,7 @@ export default {
         this.post = lista_post.map((item, id) => {
           return { ...item, id };
         });
-        // console.log(this.post);
+        // console.log(this.post[0].color_settore);
       } catch (error) {
         console.log("impossibile accedere al cloud");
       }
@@ -186,10 +180,22 @@ export default {
 .latest a:hover {
   text-decoration: none;
 }
+.btnAssicurazioni {
+  color: #1e2f56 !important;
+  background-color: #ffffff;
+  margin: 0 auto;
+  display: block;
+  max-width: max-content;
+}
+.btnAssicurazioni:hover {
+  color: rgb(255, 255, 255) !important;
+  background-color: #eba133;
+
+}
 .jumbotron {
   margin-bottom: 1rem !important;
   display: flex;
-  background: linear-gradient(180deg, #1e2f56, #2e467c) !important;
+  background: linear-gradient(0deg, #1e2f56, #798ebd) !important;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
     0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12) !important;
   color: white;
@@ -198,11 +204,35 @@ export default {
 .jumbotron.latest {
   margin-bottom: 1rem !important;
   display: flex;
-  background: linear-gradient(180deg, #807e7e, #cecece) !important;
+  background: linear-gradient(0deg, #595858, #cecece) !important;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
     0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12) !important;
   color: white;
   padding: 3px;
+}
+.jumbotron.Gas {
+  display: flex;
+  color: white;
+  padding: 3px;
+
+  background: rgba(0, 0, 0, 0)
+    linear-gradient(0deg, rgb(14, 119, 49), rgb(81, 213, 126)) repeat scroll 0%
+    0% !important;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12) !important;
+}
+
+.btnGas {
+  color: rgb(14, 119, 49) !important;
+  background-color: #ffffff;
+  margin: 0 auto;
+  display: block;
+  max-width: max-content;
+}
+.btnGas:hover {
+  color: rgb(255, 255, 255) !important;
+  background-color: #eba133;
+
 }
 </style>
 

@@ -13,7 +13,10 @@
     </div>
     <div class="container">
       <div class="contenuto">
-        {{ lista_post[id].contenuto }}
+        <div
+          class="text-ellipsis-2l text-justify"
+          v-html="lista_post[id].contenuto"
+        ></div>
       </div>
       <div
         class="allegati"
@@ -92,18 +95,16 @@
                   lista_post[lista_post[id].id + 1].titolo
                 }}</em>
               </CLink>
-              </span
-            >
+            </span>
           </div>
           <div class="col-6">
             <span
               class="text-muted"
               style="font-size: 1rem"
               v-if="lista_post[id].id != 0"
-              
               >Successiva <br
             /></span>
-            <span  class="next text-muted h6"  v-if="lista_post[id].id != 0">
+            <span class="next text-muted h6" v-if="lista_post[id].id != 0">
               <CLink
                 :to="{
                   name: 'Comunicazione',
@@ -118,7 +119,6 @@
                   lista_post[lista_post[id].id - 1].titolo
                 }}</em>
               </CLink>
-              
             </span>
           </div>
         </div>
@@ -145,7 +145,7 @@ export default {
       first: 0,
       file: "",
       ext: "",
-      nome_file:""      
+      nome_file: "",
     };
   },
   mounted() {
@@ -158,7 +158,6 @@ export default {
   methods: {
     aggiorna_modale(value) {
       this.showDoc = value;
-      
     },
   },
 };
@@ -236,5 +235,4 @@ export default {
 
 /* SEZIONE ALLEGATI  */
 @import "/css/cloud.css";
-
 </style>
