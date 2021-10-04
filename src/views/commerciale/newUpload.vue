@@ -1,6 +1,15 @@
 <template>
-  <div>
-    
+  <div
+    style="background-color: white; border-radius: 0.3rem"
+    class="container mt-2 card_post"
+    :style="{ '--bgColor': $attrs.colore }"
+  >
+    <div class="breadcrumbs">
+      <CLink @click="back()" class="breadcrumbs_link"
+        >Gestione {{ $route.params.settore }}</CLink
+      >
+      > Nuovo Materiale
+    </div>
     <horizontal-stepper
       ref="horizzontal"
       :steps="uploadSteps"
@@ -11,12 +20,12 @@
       @stepper-finished="uploadFiles"
       :uploadObject="uploadObject"
       :keep-alive="true"
+      :coloreTasti="$attrs.colore"
     ></horizontal-stepper>
-    <div class="text-center">
+    <!-- <div class="text-center">
       <cite>- Ti trovi nel settore - {{ $route.params.settore }} - </cite>
-    </div>
+    </div> -->
   </div>
-  
 </template>
 
 <script>
@@ -53,6 +62,7 @@ export default {
           subtitle: "Descrizione e permessi per i file",
           component: StepOne,
           completed: false,
+          coloreTasti: this.$attrs.colore,
         },
         {
           icon: "folder",
@@ -69,7 +79,7 @@ export default {
           subtitle: "Seleziona i file da caricare",
           component: StepThree,
           completed: false,
-        }    
+        },
       ],
       activeStep: 0,
       uploadHeaders: "",
@@ -77,6 +87,9 @@ export default {
   },
   computed: {},
   methods: {
+    back() {
+      this.$emit("back");
+    },
     // uploadFiles: function (uploadHeaders, fileRecordsForUpload) {
     uploadFiles: function () {
       // console.log("NEW-UPLOAD -> HORIZZONTAL ");
@@ -168,4 +181,31 @@ i.top-left {
 .vertical-separator .line {
   border-right: 1px solid #cccccc;
 }
+.breadcrumbs_link {
+  color: var(--bgColor) !important;
+  text-decoration: underline;
+  font-size: 14px;
+  line-height: 19px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  margin-left: 0.8rem;
+  padding-top: 0.5rem;
+  padding-bottom: 1.5rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+}
+.breadcrumbs {
+  color: var(--bgColor);
+  font-size: 14px;
+  line-height: 19px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  margin-left: 0.8rem;
+  padding-top: 0.5rem;
+  padding-bottom: 1.5rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+}
+
+
 </style>

@@ -70,7 +70,7 @@
               <CCardBody>
                 <CMedia
                   :aside-image-props="{                    
-                    src: $custom_json.img_news_url + item.immagine,
+                    src: $custom_json.base_url + $custom_json.img_news_url + item.immagine,
                   }"
                 >
                   <h4>
@@ -158,7 +158,7 @@ export default {
     async load_news() {
       var chiamata_news = [];
       await axios
-        .get(this.$custom_json.api_url + this.$custom_json.ep_api.listanews)
+        .get(this.$custom_json.base_url + this.$custom_json.api_url + this.$custom_json.ep_api.listanews)
         .then((response) => {
           chiamata_news = response.data;
         });

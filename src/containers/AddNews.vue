@@ -16,7 +16,8 @@
         <div v-show="$parent.add_edit == 'edit'">
           <div class="row justify-content-center">
             <CImg
-              :src="$custom_json.img_news_url + news_originale.immagine"
+              :src="$custom_json.base_url + $custom_json.img_news_url + news_originale.immagine"
+              
               block
               class="pb-2"
               width="20%"
@@ -111,10 +112,7 @@
                   <button
                     type="button"
                     class="btn btn-secondary"
-                    @click="
-                      ask_delete = false;
-                      add = true;
-                    "
+                    @click="$router.go(-1)"
                   >
                     Annulla
                   </button>
@@ -264,7 +262,7 @@ export default {
           try {
             axios
               .post(
-                this.$custom_json.api_url + "addnews",
+                this.$custom_json.base_url + this.$custom_json.api_url + "addnews",
                 {
                   params: {
                     titolo: this.formValues.titolo,
@@ -332,7 +330,7 @@ export default {
         try {
           axios
             .post(
-              this.$custom_json.api_url + "editnews",
+              this.$custom_json.base_url + this.$custom_json.api_url + "editnews",
               { params },
               {
                 header: {
@@ -367,7 +365,7 @@ export default {
       try {
         axios
           .post(
-            this.$custom_json.api_url + "delete",
+            this.$custom_json.base_url + this.$custom_json.api_url + "delete",
             { params },
             {
               header: {

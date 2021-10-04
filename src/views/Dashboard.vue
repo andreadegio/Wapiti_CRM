@@ -59,7 +59,7 @@
             </CCardLink>
           </div>
           <div v-if="urlRami" class="col-sm">
-          <CCardLink :href="urlRami" target="_self">
+            <CCardLink :href="urlRami" target="_blank">
               <CCard
                 class="text-center elevation-6 portali-btn"
                 body-wrapper
@@ -77,7 +77,7 @@
             </CCardLink>
           </div>
           <div class="col-sm">
-            <CCardLink to="Comingsoon_gas" target="_self">
+            <CCardLink :href="$custom_json.urlEnergy" target="_blank">
               <CCard
                 class="text-center elevation-6 portali-btn"
                 body-wrapper
@@ -89,7 +89,7 @@
                   background-size: cover;
                 "
               >
-                <h1 class="pulsante_portali">GAS E LUCE</h1>
+                <h1 class="pulsante_portali">ENERGY</h1>
               </CCard>
             </CCardLink>
           </div>
@@ -137,7 +137,7 @@ export default {
       news_operative: null,
       triggerNews: 0,
       news_mondo: null,
-      urlRami : localStorage.getItem("urlRami"),
+      urlRami: localStorage.getItem("urlRami"),
     };
   },
 
@@ -197,7 +197,8 @@ export default {
               };
               await axios
                 .post(
-                  this.$custom_json.api_url +
+                  this.$custom_json.base_url +
+                    this.$custom_json.api_url +
                     this.$custom_json.ep_api.getUrlRami,
                   param
                 )
@@ -326,7 +327,9 @@ export default {
       try {
         await axios
           .get(
-            this.$custom_json.api_url + this.$custom_json.ep_api.listanews_home
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.listanews_home
           )
           .then((response) => {
             chiamata_news = response.data;
@@ -345,7 +348,8 @@ export default {
           try {
             await axios
               .get(
-                this.$custom_json.api_url +
+                this.$custom_json.base_url +
+                  this.$custom_json.api_url +
                   this.$custom_json.ep_api.listanews_home
               )
               .then((response) => {
@@ -374,7 +378,11 @@ export default {
       //provo la chiamata all'end-point se l'esito è OK assegno il valore e scrivo nello storage
       try {
         await axios
-          .get(this.$custom_json.api_url + "listanewshome")
+          .get(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              "listanewshome"
+          )
           .then((response) => {
             chiamata_news = response.data;
           });
@@ -392,7 +400,8 @@ export default {
           try {
             await axios
               .get(
-                this.$custom_json.api_url +
+                this.$custom_json.base_url +
+                  this.$custom_json.api_url +
                   this.$custom_json.ep_api.listanews_home
               )
               .then((response) => {

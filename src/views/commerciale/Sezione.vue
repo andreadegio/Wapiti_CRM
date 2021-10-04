@@ -1,19 +1,57 @@
 <template>
-  <div class="my-3 mx-3">
-    <div v-show="contenuto == 'Assicurazioni'">
+  <div class="my-3 row">
+    <div class="col-md-1"></div>
+    <div v-show="contenuto == 'Assicurazioni'" class="col-md-10">
       <CTabs variant="tabs" :active-tab="0">
         <CTab>
           <template slot="title">
             <i class="fas fa-rss fa-2x"></i>
             <span class="tabs-nav"> Comunicazioni</span>
           </template>
-          <CCardGroup class="latest container">
+          <CCardGroup class="latest">
             <div
-              class="col-lg-3 col-sm-6"
+              class="col-lg-3 col-sm-6 px-0"
               v-for="(item, index) in post"
               :key="index"
             >
-              <CCard
+             <CCard
+          class="mx-1 pt-2 card_materiale card_post "
+          
+          :style="{ '--bgColor': item.color_settore }"
+        >
+          <CLink
+            :to="{
+              name: 'Comunicazione',
+              params: { notizia: item.titolo, id: item.id, lista_post: post },
+            }"
+          >
+            <CCardHeader class="text-uppercase pt-0 titolo_color"
+              ><strong class="titolo_color">
+                <u>{{ item.settore }}</u>
+              </strong></CCardHeader
+            >
+            <CCardImg
+              :src="$custom_json.base_url + item.copertina"
+              style="height: 15rem; object-fit: cover"
+              alt="- IMPOSSIBILE CARICARE -"
+            >
+            </CCardImg>
+            <CCardBody class="py-0 px-1" style="min-height: 10rem">
+              <div class="text-right">
+                <cite> {{ item.data_ins | formatDate }}</cite>
+              </div>
+              <h2 class="text-center">{{ item.titolo }}</h2>
+
+              <!-- <div
+                v-html="$options.filters.truncate(item.contenuto, 50, ' [...]')"
+              ></div> -->
+            </CCardBody>
+            <CCardFooter class="text-center py-2"
+              ><strong>Leggi di più...</strong>
+            </CCardFooter>
+          </CLink>
+        </CCard>
+              <!-- <CCard
                 class="mx-2 card_materiale card_post"
                 :style="{ '--bgColor': item.color_settore }"
               >
@@ -33,7 +71,7 @@
                     </strong></CCardHeader
                   >
                   <CCardImg
-                    :src="'../' + item.copertina"
+                    :src="$custom_json.base_url + item.copertina"
                     style="min-height: 200px"
                     alt="- IMPOSSIBILE CARICARE -"
                   >
@@ -49,7 +87,7 @@
                   </CCardBody>
                   <CCardFooter><strong>Leggi di più...</strong> </CCardFooter>
                 </CLink>
-              </CCard>
+              </CCard> -->
             </div>
           </CCardGroup>
         </CTab>
@@ -75,42 +113,43 @@
               v-for="(item, index) in post"
               :key="index"
             >
-              <CCard
-                class="mx-2 card_materiale card_post"
-                :style="{ '--bgColor': item.color_settore }"
-              >
-                <CLink
-                  :to="{
-                    name: 'Comunicazione',
-                    params: {
-                      notizia: item.titolo,
-                      id: item.id,
-                      lista_post: post,
-                    },
-                  }"
-                >
-                  <CCardHeader class="text-uppercase"
-                    ><strong>
-                      <u>{{ item.settore }}</u>
-                    </strong></CCardHeader
-                  >
-                  <CCardImg
-                    :src="'../' + item.copertina"
-                    style="min-height: 200px"
-                  >
-                  </CCardImg>
-                  <CCardBody class="pb-2"
-                    ><h2>{{ item.titolo }}</h2>
-                    <cite> {{ item.data_ins | formatDate }}</cite>
-                    <div
-                      v-html="
-                        $options.filters.truncate(item.contenuto, 50, ' [...]')
-                      "
-                    ></div>
-                  </CCardBody>
-                  <CCardFooter><strong>Leggi di più...</strong> </CCardFooter>
-                </CLink>
-              </CCard>
+             <CCard
+          class="mx-2 px-0 pt-2 card_materiale card_post "
+          
+          :style="{ '--bgColor': item.color_settore }"
+        >
+          <CLink
+            :to="{
+              name: 'Comunicazione',
+              params: { notizia: item.titolo, id: item.id, lista_post: post },
+            }"
+          >
+            <CCardHeader class="text-uppercase pt-0 titolo_color"
+              ><strong class="titolo_color">
+                <u>{{ item.settore }}</u>
+              </strong></CCardHeader
+            >
+            <CCardImg
+              :src="$custom_json.base_url + item.copertina"
+              style="height: 15rem; object-fit: cover"
+              alt="- IMPOSSIBILE CARICARE -"
+            >
+            </CCardImg>
+            <CCardBody class="py-0 px-1" style="min-height: 10rem">
+              <div class="text-right">
+                <cite> {{ item.data_ins | formatDate }}</cite>
+              </div>
+              <h2 class="text-center">{{ item.titolo }}</h2>
+
+              <!-- <div
+                v-html="$options.filters.truncate(item.contenuto, 50, ' [...]')"
+              ></div> -->
+            </CCardBody>
+            <CCardFooter class="text-center py-2"
+              ><strong>Leggi di più...</strong>
+            </CCardFooter>
+          </CLink>
+        </CCard>
             </div>
           </CCardGroup>
         </CTab>
@@ -157,7 +196,7 @@ export default {
       try {
         await axios
           .post(
-            this.$custom_json.api_url + this.$custom_json.ep_api.lista_post,
+           this.$custom_json.base_url + this.$custom_json.api_url + this.$custom_json.ep_api.lista_post,
             { params },
             {
               header: {
@@ -189,10 +228,13 @@ export default {
   display: block;
   position: absolute;
   top: 0;
+  left:0;
   width: 50%;
   border-top: 6px solid var(--bgColor);
 }
-
+.titolo_color {
+  color: var(--bgColor) !important;
+}
 .latest a:hover {
   text-decoration: none;
 }

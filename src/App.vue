@@ -307,4 +307,7 @@ a.active{
     opacity: 0.5;
   }
 }
+.content{
+margin-bottom: 0px !important;
+}
 </style>

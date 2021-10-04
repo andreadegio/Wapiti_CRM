@@ -117,3 +117,25 @@
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
   }
+  .stepper-box .bottom .stepper-button.next {
+      background-color: #2eb85c !important;
+
+      border-radius: 3px !important;
+  }
+
+  .stepper-button.previous:hover {
+    background-color: #1e2f56;
+    color: white !important;
+    border-radius: 0.35rem !important;
+  }
+  .stepper-button.previous {
+    border: 1px solid #1e2f56;
+    
+    border-radius: 0.35rem !important;
+  }
+  .content{
+    margin-bottom: 0px !important;
+    }
+
+    
+  

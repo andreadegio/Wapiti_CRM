@@ -2,44 +2,49 @@
   <div>
     <div v-if="uso">
       <!-- Pulsanti di navigazione -->
-      <hr />
-      <CButton
-        class="mr-3"
-        color="primary"
-        variant="outline"
-        square
-        size="sm"
-        @click="get_tree('reset')"
-        ><i class="fas fa-home fa-2x"></i><br />{{ area }}
-      </CButton>
-      <CButton
-        
-        class="mr-3"
-        color="primary"
-        variant="outline"
-        square
-        size="sm"
-        @click="new_folder()"
-        ><i class="fas fa-folder-plus fa-2x"></i><br />
-        Crea Cartella
-      </CButton>
-      <CButton
-        color="primary"
-        variant="outline"
-        square
-        size="sm"
-        @click="get_tree(percorso)"
-        ><i class="fas fa-sync-alt fa-2x"></i><br />
-        Aggiorna
-      </CButton>
 
-      <hr />
+      <div class="row">
+        <div class="col-md-6 text-left">
+          <CButton
+            v-show="percorso != ''"
+            class="mr-3"
+            color="primary"
+            variant="outline"
+            square
+            size="sm"
+            @click="get_tree('reset')"
+            ><i class="fas fa-home fa-2x"></i><br />{{ area }}
+          </CButton>
+        </div>
+        <div class="col-md-6 text-right">
+          <CButton
+            class="mr-3"
+            color="primary"
+            variant="outline"
+            square
+            size="sm"
+            @click="new_folder()"
+            ><i class="fas fa-folder-plus fa-2x"></i><br />
+            Crea Cartella
+          </CButton>
+          <CButton
+            color="primary"
+            variant="outline"
+            square
+            size="sm"
+            @click="get_tree(percorso)"
+            ><i class="fas fa-sync-alt fa-2x"></i><br />
+            Aggiorna
+          </CButton>
+        </div>
       </div>
-      <!-- BREADCRUMBS -->
-      <cite v-show="percorso != ''" style="color: #1e2f56;"
-        >{{ area }} > {{ breadcrumbs.join(" > ") }}</cite
-      >
-    
+      <hr />
+    </div>
+    <!-- BREADCRUMBS -->
+    <cite v-show="percorso != ''" style="color: #1e2f56"
+      >{{ area }} > {{ breadcrumbs.join(" > ") }}</cite
+    >
+
     <div class="area_cloud row text-center mt-3">
       <!-- INDICATORE -> LIVELLO SUPERIORE -->
       <div
@@ -82,14 +87,21 @@
             </div>
           </div>
         </div>
-        <div v-else :class="elemento.ext.toUpperCase()" @click="(showDoc = true),
-                  (file =
-                    $custom_json.cloud_url +
-                    elemento.filePath +
-                    '/' +
-                    elemento.descrizione),
-                  (ext = elemento.ext.toUpperCase()),
-                  (nome_file = elemento.descrizione)">
+        <div
+          v-else
+          :class="elemento.ext.toUpperCase()"
+          @click="
+            (showDoc = true),
+              (file =
+                $custom_json.base_url +
+                
+                elemento.filePath +
+                '/' +
+                elemento.descrizione),
+              (ext = elemento.ext.toUpperCase()),
+              (nome_file = elemento.descrizione)
+          "
+        >
           <div class="desc_elemento">
             {{ elemento.descrizione }}
 
@@ -115,12 +127,12 @@
         <span v-show="tree_RC == null"> Nessun elemento presente </span>
       </div>
       <Visualizzatore
-      :showDoc="showDoc"
-      :file="file"
-      :ext="ext"
-      :nome_file="nome_file"
-      @aggiorna_modale="aggiorna_modale"
-    />
+        :showDoc="showDoc"
+        :file="file"
+        :ext="ext"
+        :nome_file="nome_file"
+        @aggiorna_modale="aggiorna_modale"
+      />
     </div>
 
     <br />
@@ -137,8 +149,8 @@ import Visualizzatore from "../../components/visualizzaDocumenti.vue";
 export default {
   name: "PersonalCloud",
   props: ["area", "uso"],
-  components:{
-    Visualizzatore: Visualizzatore
+  components: {
+    Visualizzatore: Visualizzatore,
   },
   data() {
     return {
@@ -147,9 +159,9 @@ export default {
       breadcrumbs: [],
       percorso: this.path,
       showDoc: false,
-      file:"",
-      ext:"",
-      nome_file:""
+      file: "",
+      ext: "",
+      nome_file: "",
     };
   },
   created() {
@@ -158,7 +170,6 @@ export default {
   methods: {
     aggiorna_modale(value) {
       this.showDoc = value;
-      
     },
     add_breadcrumbs(dest) {
       this.breadcrumbs.push(dest);
@@ -187,6 +198,7 @@ export default {
       this.$prompt("Inserisci il nome della cartella").then(async (text) => {
         if (text != "") {
           var param = {
+            settore: this.area,
             filePath: this.percorso ? this.percorso : this.area,
             newFolderName: text,
             idUtente: JSON.parse(localStorage.getItem("chisono_data")).idUtente,
@@ -197,7 +209,9 @@ export default {
           try {
             await axios
               .post(
-                this.$custom_json.api_url + this.$custom_json.ep_api.new_folder,
+                this.$custom_json.base_url +
+                  this.$custom_json.api_url +
+                  this.$custom_json.ep_api.new_folder,
                 param
               )
               .then((response) => {
@@ -224,6 +238,9 @@ export default {
       });
     },
     async get_tree(subfolder = "") {
+      var url_cloud;
+      var UO_tipo;
+      var param;
       // chiamata per il recupero dell'albero dei file
       // controllo se è stato premuto il tasto home -> reset
       url_cloud = this.$custom_json.ep_api.cloud;
@@ -235,14 +252,15 @@ export default {
       }
 
       this.sub = subfolder;
-      var url_cloud;
-      var UO_tipo;
+
       // Verifico se esiste la props "uso" -> se esiste passo come unità operativa 999 altrimenti
       // passo quella recuperata dallo storage
       this.uso
         ? (UO_tipo = 999)
-        : (UO_tipo = JSON.parse(localStorage.getItem("chisono_data")).UnitaOperativa_Tipo_ID);
-      var param;
+        : (UO_tipo = JSON.parse(
+            localStorage.getItem("chisono_data")
+          ).UnitaOperativa_Tipo_ID);
+
       try {
         if (subfolder != "" && subfolder != this.area + "/") {
           // subfolder == this.area+"/" ? console.log("uguale") : console.log("diverso");
@@ -269,7 +287,10 @@ export default {
         }
         // console.log(param);
         await axios
-          .post(this.$custom_json.api_url + url_cloud, param)
+          .post(
+            this.$custom_json.base_url + this.$custom_json.api_url + url_cloud,
+            param
+          )
           .then((response) => {
             this.tree_RC = response.data;
             // console.log(JSON.stringify(response.data));
@@ -285,7 +306,7 @@ export default {
 /* CLASSI PER LA VISUALIZZAZIONE DEI FILE DEL CLOUD  */
 @import "/css/cloud.css";
 
-.gestione{
+.gestione {
   font-size: 1rem !important;
   margin: 0px !important;
   padding: 0px !important;

@@ -1,9 +1,9 @@
 <template>
   <div id="aree" class="pt-4 px-5">
-    <CJumbotron class="px-0 py-2 latest">
+    <CJumbotron class="px-0 py-2 latest" v-show="post.length > 0">
       <CCardGroup class="latest p-3">
         <CCard
-          class="mx-2 card_materiale card_post col-md-3"
+          class="mx-2 px-0 card_materiale card_post col-md-3"
           v-for="(item, index) in post.slice(0, 5)"
           :key="index"
           :style="{ '--bgColor': item.color_settore }"
@@ -14,30 +14,35 @@
               params: { notizia: item.titolo, id: item.id, lista_post: post },
             }"
           >
-            <CCardHeader class="text-uppercase"
+            <CCardHeader class="text-uppercase pt-0 titolo_color"
               ><strong>
                 <u>{{ item.settore }}</u>
               </strong></CCardHeader
             >
             <CCardImg
-              :src="item.copertina"
-              style="min-height: 200px"
+              :src="$custom_json.base_url + item.copertina"
+              style="height: 15rem; object-fit: cover"
               alt="- IMPOSSIBILE CARICARE -"
             >
             </CCardImg>
-            <CCardBody class="pb-2"
-              ><h2>{{ item.titolo }}</h2>
-              <cite> {{ item.data_ins | formatDate }}</cite>
-              <div
+            <CCardBody class="py-0 px-1" style="min-height: 10rem">
+              <div class="text-right">
+                <cite> {{ item.data_ins | formatDate }}</cite>
+              </div>
+              <h2 class="text-center">{{ item.titolo }}</h2>
+
+              <!-- <div
                 v-html="$options.filters.truncate(item.contenuto, 50, ' [...]')"
-              ></div>
+              ></div> -->
             </CCardBody>
-            <CCardFooter><strong>Leggi di più...</strong> </CCardFooter>
+            <CCardFooter class="text-center pb-0"
+              ><span style="font-weight: 400">Leggi di più...</span>
+            </CCardFooter>
           </CLink>
         </CCard>
       </CCardGroup>
     </CJumbotron>
-    <CJumbotron style="" class="blue_logo">
+    <CJumbotron style="" class="blue_logo" v-if="isAuto">
       <CCol
         md="8"
         style="
@@ -74,13 +79,13 @@
         </div>
       </CCol>
     </CJumbotron>
-    <CJumbotron class="Gas">
+    <CJumbotron class="Gas" v-if="isEnergy">
       <CCol md="4" class="py-5 text-right">
         <h1
           class="display-3 text-center"
           style="font-weight: initial !important"
         >
-          Gas & Luce
+          Energy
         </h1>
         <!-- <p class="lead">
           Materiale e comunicazioni commerciali per il mondo Energy
@@ -123,6 +128,9 @@ export default {
   data() {
     return {
       admin: JSON.parse(localStorage.getItem("chisono_data")).Is_Sede,
+      isEnergy: JSON.parse(localStorage.getItem("chisono_data"))
+        .Abilitato_Energy,
+      isAuto: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Auto,
       post: [],
       bgColor: "#1e2f56",
     };
@@ -142,7 +150,9 @@ export default {
       try {
         await axios
           .post(
-            this.$custom_json.api_url + this.$custom_json.ep_api.lista_post,
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.lista_post,
             { params },
             {
               header: {
@@ -173,8 +183,11 @@ export default {
   position: absolute;
   top: 0;
   width: 50%;
-
+  left: 0;
   border-top: 6px solid var(--bgColor);
+}
+.titolo_color {
+  color: var(--bgColor);
 }
 
 .latest a:hover {
@@ -190,7 +203,6 @@ export default {
 .btnAssicurazioni:hover {
   color: rgb(255, 255, 255) !important;
   background-color: #eba133;
-
 }
 .jumbotron {
   margin-bottom: 1rem !important;
@@ -204,7 +216,7 @@ export default {
 .jumbotron.latest {
   margin-bottom: 1rem !important;
   display: flex;
-  background: linear-gradient(0deg, #595858, #cecece) !important;
+  background: linear-gradient(0deg, #7b7b7b, #cecece) !important;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
     0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12) !important;
   color: white;
@@ -232,7 +244,6 @@ export default {
 .btnGas:hover {
   color: rgb(255, 255, 255) !important;
   background-color: #eba133;
-
 }
 </style>
 

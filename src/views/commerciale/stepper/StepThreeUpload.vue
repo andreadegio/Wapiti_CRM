@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="text-align: left; padding-left: 3rem; padding-right: 3rem">
     <CModal :show="showModaleUpload" centered>
       <template #header>
         <span class="h4 text-uppercase" style="color: white">
@@ -29,10 +29,7 @@
     </CModal>
 
     <div class="text-center" style="display: flex">
-      <div class="col-md-12">
-        <div>
-          <strong>Scegli i file</strong>
-        </div>
+      <div class="col-md-12 cover_box mb-3">
         <!-- <div v-if="this.$refs.vueFileAgent.overallProgress.toFixed(2) == 100"></div> -->
         <VueFileAgent
           class="mx-5"
@@ -73,7 +70,7 @@ export default {
   data: function () {
     return {
       fileRecords: [],
-      uploadUrl: "https://www.abyway.it/API/Cloud/upload",
+      uploadUrl: this.$custom_json.base_url + this.$custom_json.api_url + this.$custom_json.ep_api.upload_cloud,
       uploadHeaders: {},
       fileRecordsForUpload: [],
       progressBar: 0,
@@ -101,7 +98,6 @@ export default {
       );
     },
     uploadFiles: async function () {
-      
       // All'avvio del caricamento faccio un primo check per capire se il/i file esistono già
       // creo un'array con i nomi dei file e chiamo il backend se tutto ok mi risponde con l'id del post che verrà creato
       this.showModaleUpload = true;
@@ -122,7 +118,7 @@ export default {
       };
       // preUploadCloud per fare il check e salvare su db setto l'end-point su destinazione
       var destinazione =
-        this.$custom_json.api_url + this.$custom_json.ep_api.pre_upload_cloud;
+        this.$custom_json.base_url + this.$custom_json.api_url + this.$custom_json.ep_api.pre_upload_cloud;
       // chiamo l'API
       await axios.post(destinazione, params).then((response) => {
         // console.log(response);

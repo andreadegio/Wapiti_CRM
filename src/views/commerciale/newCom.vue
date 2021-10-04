@@ -77,12 +77,18 @@
     </CModal>
     <div
       style="background-color: white; border-radius: 0.3rem"
-      class="container mt-2"
+      class="container mt-2 card_post"
+      :style="{ '--bgColor': $attrs.colore }"
     >
+      <div class="breadcrumbs">
+        <CLink @click="back()" class="breadcrumbs_link"
+          >Gestione {{ $route.params.settore }}</CLink
+        >
+        > Nuova Comunicazione
+      </div>
       <div class="row justify-content-center">
         <h2 class="pl-2 text-center">Inserimento di una nuova comunicazione</h2>
-        <div class="p-3 rounded col-8">
-          
+        <div class="p-3 rounded col-10">
           <div class="row cover_box mb-3">
             <span class="mb-2"><strong>Seleziona la categoria:</strong></span>
             <div class="control">
@@ -101,90 +107,90 @@
             <CInput
               type="text"
               v-model="titolo_post"
-              placeholder="Assegna un titolo"
+              placeholder="Assegna un titolo a questo caricamento Es. Set Informativo ABC"
+              maxlength="100"
             />
           </div>
-          <span><strong>Sottotitolo:</strong></span>
-          <CInput
-            type="text"
-            v-model="subtitle_post"
-            placeholder="Assegna un sottotitolo"
-          />
-          <span><strong>Contenuto:</strong></span>
-          <vue-editor v-model="contenuto_post" class="pb-3"></vue-editor>
-        </div>
-        <div class="col-4">
-          <div class="row cover_box">
-            <span class="mb-2"
-              ><strong
-                >Carica o cerca un'immagine per la copertina:</strong
-              ></span
-            >
-            <div
-              class="col-4 justify-content-center"
-              style="background-color: #f0f0f0; border-radius: 0.3rem"
-            >
-              <img v-if="thumb" :src="thumb" class="p-0 m-0 thumbImg" />
-              <img v-if="thumb2" :src="thumb2" class="p-0 m-0 thumbImg" />
-            </div>
-            <div id="carica_cover" class="col-8">
-              <input type="file" @change="previewFiles" ref="file" />
-              <div class="input-group mt-2">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Che immagine vuoi cercare?"
-                  ref="query"
-                  v-on:keyup.enter="searchImg($refs.query.value)"
-                />
-                <div class="input-group-append">
-                  <button
-                    class="btn btn-secondary"
-                    type="button"
-                    @click="searchImg($refs.query.value)"
+          <div class="cover_box mb-3">
+            <span><strong>Sottotitolo:</strong></span>
+            <CInput
+              type="text"
+              v-model="subtitle_post"
+              placeholder="Assegna un sottotitolo"
+              maxlength="200"
+            />
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="row cover_box">
+                <span class="mb-2"
+                  ><strong
+                    >Carica o cerca un'immagine per la copertina:</strong
+                  ></span
+                >
+                <div class="row m-0">
+                  <div
+                    class="col-sm-4 justify-content-center"
+                    style="background-color: #f0f0f0; border-radius: 0.3rem"
                   >
-                    <i class="fa fa-search"></i>
-                  </button>
+                    <img v-if="thumb" :src="thumb" class="p-0 m-0 thumbImg" />
+                    <img v-if="thumb2" :src="thumb2" class="p-0 m-0 thumbImg" />
+                  </div>
+                  <div id="carica_cover" class="col-sm-8">
+                    <input type="file" @change="previewFiles" ref="file" />
+                    <div class="input-group mt-2">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Che immagine vuoi cercare?"
+                        ref="query"
+                        v-on:keyup.enter="searchImg($refs.query.value)"
+                      />
+                      <div class="input-group-append">
+                        <button
+                          class="btn btn-secondary"
+                          type="button"
+                          @click="searchImg($refs.query.value)"
+                        >
+                          <i class="fa fa-search"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  v-if="thumb || thumb2"
+                  @click="resetCover"
+                  style="color: darkred; margin-right: auto; margin-left: 50%"
+                >
+                  <i class="far fa-trash-alt fa-2x"></i>
+                </button>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="row cover_box">
+                <span class="mb-2"
+                  ><strong>Chi può accedere a questi contenuti?</strong></span
+                >
+
+                <div class="control">
+                  <treeselect
+                    v-model="permessi"
+                    :multiple="true"
+                    :always-open="false"
+                    :options="options"
+                    :max-height="300"
+                    placeholder="Seleziona per tipologia di rapporto"
+                  />
                 </div>
               </div>
             </div>
-            <button
-              v-if="thumb || thumb2"
-              @click="resetCover"
-              style="color: darkred; margin-right: auto; margin-left: 50%"
-            >
-              <i class="far fa-trash-alt fa-2x"></i>
-            </button>
           </div>
-          <div class="row cover_box">
-            <span class="mb-2"
-              ><strong>Chi può accedere a questi contenuti?</strong></span
-            >
+          <div class="cover_box mb-3">
+            <span><strong>Contenuto:</strong></span>
+            <vue-editor v-model="contenuto_post" class="pb-3"></vue-editor>
+          </div>
 
-            <div class="control">
-              <treeselect
-                v-model="permessi"
-                :multiple="true"
-                :always-open="false"
-                :options="options"
-                :max-height="300"
-                placeholder="Seleziona per tipologia di rapporto"
-              />
-            </div>
-          </div>
-          <div class="row cover_box">
-            <span class="mb-2"><strong>Seleziona la categoria:</strong></span>
-            <div class="control">
-              <treeselect
-                :multiple="false"
-                :always-open="false"
-                :options="lista_categorie"
-                :max-height="300"
-                placeholder="Seleziona la categoria"
-                v-model="categoria_post"
-              />
-            </div>
-          </div>
           <div class="row cover_box">
             <span class="mb-2"><strong>Aggiungi allegati:</strong></span>
             <div class="control">
@@ -213,15 +219,28 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <FormulateInput
-          class="text-center m-3"
-          style="margin-left: 50% !important; margin-right: auto !important"
-          type="submit"
-          label="Salva"
-          name="salva"
-          @click="salva()"
-        />
+      <div class="row text-center">
+        <div class="col-6 text-right">
+          <CButton
+            class="m-3"
+            color="primary"
+            variant="outline"
+            @click="back()"
+          >
+            Annulla
+          </CButton>
+        </div>
+        <div class="col-6 text-left">
+          <CButton
+            class="m-3"
+            style="color: white"
+            name="salva"
+            color="success"
+            @click="salva()"
+          >
+            Salva</CButton
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -238,6 +257,7 @@ export default {
     VueEditor,
     Treeselect,
   },
+
   data() {
     return {
       contenuto_post: "",
@@ -272,6 +292,9 @@ export default {
     this.get_categorie();
   },
   methods: {
+    back() {
+      this.$emit("back");
+    },
     filesSelected: function (fileRecordsNewlySelected) {
       var validFileRecords = fileRecordsNewlySelected.filter(
         (fileRecord) => !fileRecord.error
@@ -304,7 +327,7 @@ export default {
       // Chiamata per recuperare le categorie
       try {
         await axios
-          .post(this.$custom_json.api_url + this.$custom_json.ep_api.categorie)
+          .post(this.$custom_json.base_url + this.$custom_json.api_url + this.$custom_json.ep_api.categorie)
           .then((response) => {
             // la risposta con l'elenco delle categorie  la salvo nello storage
             localStorage.setItem("categorie", JSON.stringify(response.data));
@@ -351,7 +374,7 @@ export default {
         };
         await axios
           .post(
-            this.$custom_json.api_url + this.$custom_json.ep_api.searchImg,
+           this.$custom_json.base_url + this.$custom_json.api_url + this.$custom_json.ep_api.searchImg,
             param
           )
           .then((response) => {
@@ -411,10 +434,10 @@ export default {
      Effettuo l'upload dei record del post, rispondo con l'id utilizzato per l'inserimento del post da utilizzare per l'upload dei file
      */
       let preUploadPostUrl =
-        this.$custom_json.api_url + this.$custom_json.ep_api.pre_upload_post;
+        this.$custom_json.base_url + this.$custom_json.api_url + this.$custom_json.ep_api.pre_upload_post;
 
       let uploadUrl =
-        this.$custom_json.api_url + this.$custom_json.ep_api.upload_post;
+       this.$custom_json.base_url + this.$custom_json.api_url + this.$custom_json.ep_api.upload_post;
 
       let params = JSON.stringify({
         settore: this.$route.params.settore,
@@ -513,6 +536,12 @@ export default {
 </script>
 
 <style>
+.card_post::before {
+  content: "";
+  display: block;
+  width: 15%;
+  border-top: 15px solid var(--bgColor);
+}
 .thumbImg {
   max-width: 100%;
   max-height: 100%;
@@ -525,11 +554,38 @@ export default {
   padding: 0.4rem;
   margin: 0.4rem;
   border-radius: 0.3rem;
+  background-color: #ebedef;
 }
 .ql-container.ql-snow {
   border-radius: 0 0 0.5rem 0.5rem !important;
+  background-color: white;
 }
 .ql-toolbar.ql-snow {
   border-radius: 0.5rem 0.5rem 0 0 !important;
+}
+.breadcrumbs_link {
+  color: var(--bgColor) !important;
+  text-decoration: underline;
+  font-size: 14px;
+  line-height: 19px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  margin-left: 0.8rem;
+  padding-top: 0.5rem;
+  padding-bottom: 1.5rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+}
+.breadcrumbs {
+  color: var(--bgColor);
+  font-size: 14px;
+  line-height: 19px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  margin-left: 0.8rem;
+  padding-top: 0.5rem;
+  padding-bottom: 1.5rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
 }
 </style>

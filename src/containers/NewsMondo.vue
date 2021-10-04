@@ -19,7 +19,7 @@
       <template>
         <div style="text-align: center">
           <CImg
-            :src="$custom_json.img_news_url + news[newsNum].immagine"
+            :src="$custom_json.base_url + $custom_json.img_news_url + news[newsNum].immagine"
             style="max-width: 760px; max-height: 500px"
           />
         </div>
@@ -52,7 +52,7 @@
             <CMedia aside-right aside-vertical-position="center">
               <template #aside>
                 <CImg
-                  :src="$custom_json.img_news_url + item.immagine"
+                  :src="$custom_json.base_url + $custom_json.img_news_url + item.immagine"
                   width="100px"
                   height="100px"
                 />

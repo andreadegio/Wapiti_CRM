@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="copertina">
-      <CImg :src="'../../' + lista_post[id].copertina" />
+      <CImg :src="$custom_json.base_url + lista_post[id].copertina" />
     </div>
     <div class="container">
       <div class="contenuto">
@@ -42,11 +42,7 @@
               class="cloud"
               @click="
                 (showDoc = true),
-                  (file =
-                    $custom_json.cloud_url +
-                    allegato.percorso_file +
-                    '/' +
-                    allegato.nome_file),
+                  (file = $custom_json.base_url + allegato.percorso_file + '/' + allegato.nome_file),
                   (ext = allegato.ext_file.toUpperCase()),
                   (nome_file = allegato.nome_file)
               "
@@ -69,7 +65,7 @@
       @aggiorna_modale="aggiorna_modale"
     />
     <div class="container">
-      <div class="navigazione">
+      <div class="navigazione" v-show="lista_post.length > 1">
         <hr />
         <div class="row">
           <div class="col-6 text-right navigazione-col">

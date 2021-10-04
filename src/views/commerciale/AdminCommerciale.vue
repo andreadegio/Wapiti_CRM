@@ -1,36 +1,65 @@
 <template>
-  <div>
-    <new-com v-show="addCom" />
-    <new-upload v-show="addFile" class="animate__animated animate__fadeIn" />
+<CContainer id="cover_admin" class="align-items-center min-vh-100">
+  <div  >
+    <new-com
+      v-show="addCom"
+      @back="step_back"
+      :colore="coloreSettore"
+      class="animate__animated animate__fadeIn"
+    />
+    <new-upload
+      v-show="addFile"
+      @back="step_back"
+      :colore="coloreSettore"
+      class="animate__animated animate__fadeIn"
+    />
+    <archivio
+      v-show="showArchivio"
+      @back="step_back"
+      class="animate__animated animate__fadeIn"
+    />
     <div v-show="home" class="container">
       <div class="row text-center mt-5 riga">
         <div
-          class="col-md-3 action"
+          class="col-md-2 action justify-content-center"
           :style="{ '--bgColor': coloreSettore }"
           @click="(addCom = true), (home = false)"
         >
-          <i class="fas fa-rss fa-4x animate__animated animate__bounce"></i
-          ><br />Inserisci una Comunicazione
+          <i class="fas fa-rss fa-3x animate__animated animate__bounce"></i>
+          <br /><span>Nuova<br />Comunicazione</span>
         </div>
-        <div class="col-md-3 action" :style="{ '--bgColor': coloreSettore }" @click="(addFile = true), (home = false)">
+        <div
+          class="col-md-2 action"
+          :style="{ '--bgColor': coloreSettore }"
+          @click="(addFile = true), (home = false)"
+        >
           <i
             class="
               fas
-              fa-cloud-upload-alt fa-4x
+              fa-cloud-upload-alt fa-3x
               animate__animated animate__bounce
             "
           ></i
-          ><br /><span>Carica Materiale</span>
+          ><br /><span>Carica<br />Materiale</span>
+        </div>
+        <div
+          class="col-md-2 action"
+          :style="{ '--bgColor': coloreSettore }"
+          @click="(showArchivio = true), (home = false)"
+        >
+          <i class="fas fa-archive fa-3x animate__animated animate__bounce"></i
+          ><br /><span>Visualizza<br />Archivio</span>
         </div>
       </div>
     </div>
   </div>
+</CContainer>
 </template>
 
 <script>
 import NewCom from "./newCom.vue"; // componente per l'inserimento di una nuova comunicazione
 import NewUpload from "./newUpload.vue"; // componente per l'inserimento di un nuovo contenuto (file)
-// import "bulma";
+import Archivio from "./gestMateriale.vue"; //componente per la gestione dei post(materiale + comunicazioni)
 import "animate.css";
 import axios from "axios";
 
@@ -39,6 +68,7 @@ export default {
   components: {
     NewCom,
     NewUpload,
+    Archivio,
   },
   data() {
     return {
@@ -47,19 +77,30 @@ export default {
       addFile: false, // trigger per visualizzare il componente di aggiunta file
       home: true, // trigger per visualizzare i pulsanti di scelta
       coloreSettore: "",
+      showArchivio: false,
     };
   },
   mounted() {
     this.get_tipologie();
     this.get_color_settore(this.$attrs.settore);
   },
+  updated() {
+    this.get_color_settore(this.$attrs.settore);
+  },
   methods: {
+    step_back() {
+      this.addCom = false;
+      this.addFile = false;
+      this.showArchivio = false;
+      this.home = true;
+    },
     async get_tipologie() {
       // Chiamata per recuperare le tipologie di rapporto
       try {
         await axios
           .post(
-            this.$custom_json.api_url +
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
               this.$custom_json.ep_api.tipologie_rapporto
           )
           .then((response) => {
@@ -87,12 +128,15 @@ export default {
       try {
         await axios
           .post(
-            this.$custom_json.api_url + this.$custom_json.ep_api.color_settore,
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.color_settore,
             { params }
           )
           .then((response) => {
-            this.coloreSettore =response.data;
-            
+            this.coloreSettore = response.data;
+            localStorage.setItem("settore", desc_settore);
+            localStorage.setItem("col_settore", this.coloreSettore);
           });
       } catch (error) {
         console.log("errore: " + error);
@@ -112,15 +156,17 @@ export default {
   justify-content: center;
 }
 .action {
+  text-align: center;
   cursor: pointer;
   margin: 5rem;
-  padding: 5rem;
-  background-color:  var(--bgColor);
+  padding: 2rem;
+  background-color: var(--bgColor);
   font-size: 1.5rem;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: lighter;
   border-radius: 25%;
   color: rgb(255, 255, 255);
+  max-width: 15rem;
 }
 .action:hover {
   -webkit-box-shadow: 5px 5px 12px 0px #747474;
@@ -131,4 +177,13 @@ export default {
 .action:hover svg {
   transform: translateY(-2rem);
 }
+
+#cover_admin{
+  background-size: cover !important;
+  background-position: right !important;
+  max-width: none !important;
+  /* background: rgb(255, 255, 255) url("../img/filigranaAuto.png") no-repeat scroll 0% 0%; */
+  background-image: url("http://localhost:8080/img/filigranaAuto.png");
+}
+
 </style>

@@ -1,23 +1,29 @@
 <template>
-  <div
-    style="
-      padding: 3rem 3rem;
-      text-align: left;
-      display: flex;
-      margin-bottom: 6rem;
-    "
-  >
-    <div class="col-sm-6">
+  <div style="text-align: left; display: flex">
+    <div>
       <div class="field">
-        <label class="label">Dai un titolo a questo caricamento!</label>
+        <div class="cover_box mb-3">
+          <span><strong>Titolo:</strong></span>
+          <div class="control">
+            <CInput
+              type="text"
+              placeholder="Assegna un titolo a questo caricamento Es. Set Informativo ABC"
+              v-model="uploadObject.titolo"
+              @change="check_next"
+              maxlength="100"
+            />
+          </div>
+        </div>
+        <!-- <label class="label">Dai un titolo a questo caricamento!</label>
         <div class="control">
           <CInput
             type="text"
             placeholder="Assegna un titolo a questo caricamento Es. Set Informativo ABC"
             v-model="uploadObject.titolo"
             @change="check_next"
+
           />
-        </div>
+        </div> -->
         <p v-if="errore_titolo" class="help is-danger">
           Inserire un titolo valido
         </p>
@@ -29,34 +35,38 @@
             </div>
             <p v-if="$v.form.demoEmail.$error" class="help is-danger">This email is invalid</p>
         </div> -->
+
+      <div class="cover_box mb-3">
+        <div class="field">
+          <label class="label"
+            ><strong>Chi può accedere a questi contenuti?</strong></label
+          >
+          <div class="control">
+            <treeselect
+              v-model="uploadObject.permessi"
+              :multiple="true"
+              :options="options"
+              :max-height="300"
+              @input="check_next"
+              placeholder="Seleziona per tipologia di rapporto"
+            />
+          </div>
+        </div>
+      </div>
       <div class="field">
-        <label class="label">Descrivimi il contenuto del materiale!</label>
-        <div class="control">
-          <CTextarea
-            placeholder="Descrivi il contenuto di ciò che andrai a caricare"
-            v-model="uploadObject.descrizione"
-            @change="check_next"
-          />
+        <div class="cover_box mb-3">
+          <label class="label"><strong>Contenuto:</strong></label>
+          <div class="control">
+            <CTextarea
+              placeholder="Descrivi il contenuto di ciò che andrai a caricare"
+              v-model="uploadObject.descrizione"
+              @change="check_next"
+            />
+          </div>
         </div>
         <p v-if="errore_descrizione" class="help is-danger">
           Inserire una descrizione
         </p>
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="field">
-        <label class="label">Chi può accedere a questi contenuti?</label>
-        <div class="control">
-          <treeselect
-            v-model="uploadObject.permessi"
-            :multiple="true"
-            :always-open="true"
-            :options="options"
-            :max-height="300"
-            @input="check_next"
-            placeholder="Seleziona per tipologia di rapporto"
-          />
-        </div>
       </div>
     </div>
   </div>
@@ -71,8 +81,8 @@ import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
 export default {
-  name:"StepOne",
-  props: ["clickedNext", "currentStep", "uploadObject"],
+  name: "StepOne",
+  props: ["clickedNext", "currentStep", "uploadObject","coloreTasti","pippo"],
   // mixins: [validationMixin],
   components: { Treeselect },
   data() {
@@ -127,29 +137,34 @@ export default {
   watch: {
     // eslint-disable-next-line no-unused-vars
     clickedNext(val) {
-      this.uploadObject.titolo =="" ? this.errore_titolo : !this.errore_titolo;
-      this.uploadObject.descrizione =="" ? this.errore_descrizione : !this.errore_descrizione;
+      this.uploadObject.titolo == "" ? this.errore_titolo : !this.errore_titolo;
+      this.uploadObject.descrizione == ""
+        ? this.errore_descrizione
+        : !this.errore_descrizione;
 
       //console.log(val);
       // if (val === true) {
       //   // this.$v.form.$touch();
       // }
     },
-    
   },
- methods:{
-    check_next(){
+  methods: {
+    check_next() {
       // console.log("titolo" + this.uploadObject.titolo);
       // console.log(this.uploadObject.permessi);
       // console.log("desc" + this.uploadObject.descrizione);
       // console.log("permessi" + this.uploadObject.permessi.length);
-      if (this.uploadObject.titolo!= "" && this.uploadObject.descrizione != "" && this.uploadObject.permessi.length > 0 ){
+      if (
+        this.uploadObject.titolo != "" &&
+        this.uploadObject.descrizione != "" &&
+        this.uploadObject.permessi.length > 0
+      ) {
         this.$emit("can-continue", { value: true });
-      }else{
+      } else {
         this.$emit("can-continue", { value: false });
       }
-     this.errore_titolo=false;
-    }
+      this.errore_titolo = false;
+    },
   },
   mounted() {
     if (this.uploadObject.titolo != "") {

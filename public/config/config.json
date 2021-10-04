@@ -1,8 +1,9 @@
 {
-  "img_news_url": "https://www.abyway.it/upload/news/",
-  "img_com_url": "https://www.abyway.it/upload/Comunicazioni",
-  "api_url": "https://www.abyway.it/API/",
-  "cloud_url":"https://www.abyway.it/cloud/",
+  "base_url":"https://www.abyway.it/",
+  "urlEnergy":"https://abyenergy.it/gestionale/login.aspx",
+  "img_news_url": "upload/news/",
+  "api_url": "API/",
+  "cloud_url":"cloud/",
   "ep_api": {
     "listanews_home": "listanewshome",
     "listanews": "listanews",

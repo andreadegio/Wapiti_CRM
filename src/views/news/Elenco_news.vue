@@ -21,7 +21,13 @@
       <vue-masonry-wall :items="news" :options="options">
         <template v-slot:default="{ item }">
           <div class="Item elevation-6">
-            <img :src="$custom_json.img_news_url + item.immagine" />
+            <img
+              :src="
+                $custom_json.base_url +
+                $custom_json.img_news_url +
+                item.immagine
+              "
+            />
 
             <div class="Content" style="text-align: center">
               <h5 class="text-ellipsis-1l pb-2">
@@ -104,7 +110,11 @@ export default {
       var chiamata_news = [];
       try {
         await axios
-          .get(this.$custom_json.api_url + this.$custom_json.ep_api.listanews)
+          .get(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.listanews
+          )
           .then((response) => {
             chiamata_news = response.data;
           });
