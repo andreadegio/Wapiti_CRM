@@ -81,7 +81,7 @@
               </CCard>
             </CCardLink> -->
           <!-- </div> -->
-          <div class="col-sm" v-if="!isEnergy">
+          <div class="col-sm" v-if="isEnergy != true">
             <CCardLink to="Comingsoon_gas" target="_self">
               <CCard
                 class="text-center elevation-6 portali-btn"
@@ -159,7 +159,7 @@ export default {
       news_operative: null,
       triggerNews: 0,
       news_mondo: null,
-      isEnergy: false,
+      isEnergy: "",
     };
   },
 
@@ -211,12 +211,17 @@ export default {
             "unitaoperativaID",
             risposta_chisono.data.idUnitaOperativa
           );
-          this.isEnergy = JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Energy;
+          this.isEnergy = JSON.parse(
+            localStorage.getItem("chisono_data")
+          ).Abilitato_Energy;
         } catch (error) {
           console.log("errore");
           this.$router.push("login");
         }
       }
+      this.isEnergy = JSON.parse(
+        localStorage.getItem("chisono_data")
+      ).Abilitato_Energy;
 
       // this.triggerNews += 1;
       this.latest_news(); // ultime news operative
@@ -249,7 +254,9 @@ export default {
         // provvisoriamente quelli
 
         if (localStorage.getItem("news_operative")) {
-          this.news_operative = JSON.parse(localStorage.getItem("news_operative"));      
+          this.news_operative = JSON.parse(
+            localStorage.getItem("news_operative")
+          );
         } else {
           // in caso di chiamata fallita e contenuto non presente nello storage tento una seconda volta
           try {

@@ -1,13 +1,7 @@
 {
-  "name": "@coreui/coreui-free-vue-admin-template",
-  "version": "3.1.2",
-  "description": "Open Source Bootstrap Admin Template",
-  "author": {
-    "name": "CoreUI",
-    "url": "https://coreui.io",
-    "github": "https://github.com/coreui",
-    "twitter": "https://twitter.com/core_ui"
-  },
+  "name": "abyway",
+  "version": "1.7.2",
+  "description": "Portale Abyway",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
