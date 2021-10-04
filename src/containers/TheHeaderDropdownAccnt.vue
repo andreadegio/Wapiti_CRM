@@ -31,6 +31,9 @@
                     <p>
                       Abilitazione Rami: {{ user.Abilitato_Rami ? "SI" : "NO" }}
                     </p>
+                    <p>
+                      Abilitazione Gas & Luce: {{ user.Abilitato_Energy ? "SI" : "NO" }}
+                    </p>
                   </CCardBody>
                 </CCard>
               </CCol>
@@ -167,21 +170,7 @@ export default {
   logout_ico: cilAccountLogout,
   data() {
     return {
-      user: [
-        {
-          idUtente: "",
-          idAnagrafica: "",
-          Nominativo: "",
-          idUnitaOperativa: "",
-          UnitaOperativa: "",
-          idIntermediarioUO: "",
-          Intermediario: "",
-          Is_Sede: false,
-          Abilitato_Auto: true,
-          Abilitato_Rami: true,
-          Stato: "OK",
-        },
-      ],
+      user: [],
       logout_modale: false,
       show_profile: false,
       url_logout: "",

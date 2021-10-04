@@ -1,6 +1,7 @@
 {
   "img_news_url": "https://www.abyway.it/upload/news/",
   "api_url": "https://www.abyway.it/API/",
+  "urlEnergy":"https://abyenergy.it/gestionale/login.aspx",
   "ep_api": {
     "listanews_home": "listanewshome",
     "listanews": "listanews"

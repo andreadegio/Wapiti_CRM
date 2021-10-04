@@ -18,7 +18,7 @@
                 size="lg"
                 variant="outline"                
               >
-                < Indietro
+                <i class="fas fa-angle-left"></i> Indietro
               </CButton>
 
               
