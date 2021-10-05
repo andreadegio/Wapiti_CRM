@@ -31,6 +31,9 @@
                     <p>
                       Abilitazione Rami: {{ user.Abilitato_Rami ? "SI" : "NO" }}
                     </p>
+                    <p>
+                      Abilitazione Gas & Luce: {{ user.Abilitato_Energy ? "SI" : "NO" }}
+                    </p>
                   </CCardBody>
                 </CCard>
               </CCol>

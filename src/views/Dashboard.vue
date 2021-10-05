@@ -76,7 +76,25 @@
               </CCard>
             </CCardLink>
           </div>
-          <div class="col-sm">
+          
+          <div class="col-sm" v-if="!isEnergy">
+            <CCardLink to="Comingsoon_gas" target="_self">
+              <CCard
+                class="text-center elevation-6 portali-btn"
+                body-wrapper
+                style="
+                  height: 200px;
+                  background-image: url('img/buttons/energy.png');
+                  background-position: center;
+                  z-index: 0;
+                  background-size: cover;
+                "
+              >
+                <h1 class="pulsante_portali">GAS E LUCE</h1>
+              </CCard>
+            </CCardLink>
+          </div>
+          <div class="col-sm" v-else>
             <CCardLink :href="$custom_json.urlEnergy" target="_blank">
               <CCard
                 class="text-center elevation-6 portali-btn"
@@ -89,7 +107,7 @@
                   background-size: cover;
                 "
               >
-                <h1 class="pulsante_portali">ENERGY</h1>
+                <h1 class="pulsante_portali">GAS E LUCE</h1>
               </CCard>
             </CCardLink>
           </div>
@@ -138,6 +156,7 @@ export default {
       triggerNews: 0,
       news_mondo: null,
       urlRami: localStorage.getItem("urlRami"),
+      isEnergy: false,
     };
   },
 
