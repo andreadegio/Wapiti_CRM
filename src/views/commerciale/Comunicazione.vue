@@ -1,7 +1,11 @@
 <template>
   <div style="background-color: white">
     <div class="container">
-      <div class="area">{{ lista_post[id].settore }}</div>
+      <div class="area" >
+        <CLink class="area" :style="{ '--bgColor': lista_post[id].color_settore }" :to="'../../Commerciale/'+lista_post[id].settore"
+          >{{ lista_post[id].settore }}
+        </CLink>
+      </div>
       <div class="data">{{ lista_post[id].data_ins | formatDate }}</div>
       <div class="titolo">{{ lista_post[id].titolo }}</div>
       <div class="sottotitolo">
@@ -42,7 +46,11 @@
               class="cloud"
               @click="
                 (showDoc = true),
-                  (file = $custom_json.base_url + allegato.percorso_file + '/' + allegato.nome_file),
+                  (file =
+                    $custom_json.base_url +
+                    allegato.percorso_file +
+                    '/' +
+                    allegato.nome_file),
                   (ext = allegato.ext_file.toUpperCase()),
                   (nome_file = allegato.nome_file)
               "
@@ -161,7 +169,7 @@ export default {
 
 <style scoped>
 .area {
-  color: #0f3250;
+  color: var(--bgColor) !important;
   text-decoration: underline;
   font-size: 16px;
   line-height: 19px;

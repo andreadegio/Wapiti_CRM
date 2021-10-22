@@ -76,7 +76,7 @@
               </CCard>
             </CCardLink>
           </div>
-          
+
           <div class="col-sm" v-if="!isEnergy">
             <CCardLink to="Comingsoon_gas" target="_self">
               <CCard
@@ -156,7 +156,7 @@ export default {
       triggerNews: 0,
       news_mondo: null,
       urlRami: localStorage.getItem("urlRami"),
-      isEnergy: false,
+      isEnergy: "",
     };
   },
 
@@ -229,12 +229,17 @@ export default {
               console.log("impossibile recuperare jwt rami " + error);
             }
           }
+          this.isEnergy = JSON.parse(
+            localStorage.getItem("chisono_data")
+          ).Abilitato_Energy;
         } catch (error) {
           console.log("errore");
           this.$router.push("login");
         }
       }
-
+      this.isEnergy = JSON.parse(
+        localStorage.getItem("chisono_data")
+      ).Abilitato_Energy;
       // this.triggerNews += 1;
       this.latest_news(); // ultime news operative
       this.load_news(); // ultime news mondo

@@ -120,20 +120,21 @@ function configRoutes() {
           props: true,
           component: Comunicazione,
         },
+        // {
+        //   path: "Commerciale/Modifica/:post",
+        //   name: "ModificaContenuti",
+        //   props: true,
+        //   component: ModificaContenuti,
+        // },
         {
-          path: "Commerciale/Modifica/:post",
+          path: "AdminCommerciale/Modifica/",
           name: "ModificaContenuti",
           props: true,
           component: ModificaContenuti,
         },
         {
-          path: "AdminCommerciale",
-          name: "AdminCommerciale",
-          component: AdminCommerciale,
-        },
-        {
           path: "AdminCommerciale/:settore",
-          name: "AdminCommerciale",
+          name: "AdminCommerciale_settore",
           props: true,
           component: AdminCommerciale,
         },

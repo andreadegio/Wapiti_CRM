@@ -89,7 +89,7 @@
       <div class="row justify-content-center">
         <h2 class="pl-2 text-center">Inserimento di una nuova comunicazione</h2>
         <div class="p-3 rounded col-10">
-          <div class="row cover_box mb-3">
+          <!-- <div class="row cover_box mb-3">
             <span class="mb-2"><strong>Seleziona la categoria:</strong></span>
             <div class="control">
               <treeselect
@@ -99,6 +99,21 @@
                 :max-height="300"
                 placeholder="Seleziona la categoria"
                 v-model="categoria_post"
+              />
+            </div>
+          </div> -->
+          <div class="row cover_box mb-3">
+            <span class="mb-2"
+              ><strong>Seleziona l'area di competenza:</strong></span
+            >
+            <div class="control">
+              <treeselect
+                :multiple="false"
+                :always-open="false"
+                :options="$attrs.lista_aree"
+                :max-height="300"
+                placeholder="Seleziona l'area"
+                v-model="area_post"
               />
             </div>
           </div>
@@ -257,13 +272,16 @@ export default {
     VueEditor,
     Treeselect,
   },
+  props: "lista_aree",
 
   data() {
     return {
       contenuto_post: "",
       titolo_post: "",
       subtitle_post: "",
-      categoria_post: null,
+      // categoria_post: null,
+
+      area_post: null,
       thumb: "",
       thumb2: "", //utilizzato per l'anteprima della ricerca
       idUnsplash: null, // utilizzato per poi recuperare il download link
@@ -273,7 +291,8 @@ export default {
       showModaleUpload: false,
       loader: false,
       permessi: null,
-      lista_categorie: JSON.parse(localStorage.getItem("categorie")),
+      // lista_categorie: JSON.parse(localStorage.getItem("categorie")),
+
       options: [
         {
           id: "999",
@@ -288,8 +307,11 @@ export default {
       uploadHeaders: {},
     };
   },
+
   mounted() {
-    this.get_categorie();
+    // this.lista_area = JSON.parse(localStorage.getItem("area"));
+    // console.log("NewCom - Aree " + this.lista_aree);
+    // this.get_categorie();
   },
   methods: {
     back() {
@@ -327,14 +349,18 @@ export default {
       // Chiamata per recuperare le categorie
       try {
         await axios
-          .post(this.$custom_json.base_url + this.$custom_json.api_url + this.$custom_json.ep_api.categorie)
+          .post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.categorie
+          )
           .then((response) => {
             // la risposta con l'elenco delle categorie  la salvo nello storage
             localStorage.setItem("categorie", JSON.stringify(response.data));
             // console.log(JSON.stringify(response.data));
           });
       } catch (error) {
-        console.log("impossibile accedere al cloud");
+        console.log("impossibile recuperare le categorie");
       }
     },
 
@@ -374,7 +400,9 @@ export default {
         };
         await axios
           .post(
-           this.$custom_json.base_url + this.$custom_json.api_url + this.$custom_json.ep_api.searchImg,
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.searchImg,
             param
           )
           .then((response) => {
@@ -408,7 +436,8 @@ export default {
         this.titolo_post == "" ||
         this.subtitle_post == "" ||
         this.contenuto_post == "" ||
-        this.categoria_post == null ||
+        // this.categoria_post == null ||
+        this.area_post == null ||
         this.permessi == null
       ) {
         this.$alert(
@@ -434,10 +463,14 @@ export default {
      Effettuo l'upload dei record del post, rispondo con l'id utilizzato per l'inserimento del post da utilizzare per l'upload dei file
      */
       let preUploadPostUrl =
-        this.$custom_json.base_url + this.$custom_json.api_url + this.$custom_json.ep_api.pre_upload_post;
+        this.$custom_json.base_url +
+        this.$custom_json.api_url +
+        this.$custom_json.ep_api.pre_upload_post;
 
       let uploadUrl =
-       this.$custom_json.base_url + this.$custom_json.api_url + this.$custom_json.ep_api.upload_post;
+        this.$custom_json.base_url +
+        this.$custom_json.api_url +
+        this.$custom_json.ep_api.upload_post;
 
       let params = JSON.stringify({
         settore: this.$route.params.settore,
@@ -447,7 +480,8 @@ export default {
         permessi: this.permessi,
         utente: JSON.parse(localStorage.getItem("chisono_data")).Nominativo,
         idUtente: JSON.parse(localStorage.getItem("chisono_data")).idUtente,
-        categoria: this.categoria_post,
+        // categoria: this.categoria_post,
+        area: this.area_post,
         copertinaUnsplash: this.idUnsplash,
         numeroAllegati: this.fileRecordsForUpload.length,
       });

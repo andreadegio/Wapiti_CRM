@@ -178,6 +178,7 @@ export default {
     };
   },
   mounted() {
+    console.log("contenuto" + this.contenuto);
     this.get_lista_post();
   },
   components: {

@@ -57,7 +57,7 @@
       ></CCol>
       <CCol md="4" class="py-5 justify-content-center">
         <h1
-          class="display-3 text-center"
+          class="titolo-display text-center"
           style="font-weight: initial !important"
         >
           Assicurazioni
@@ -81,8 +81,8 @@
     </CJumbotron>
     <CJumbotron class="Gas" v-if="isEnergy">
       <CCol md="4" class="py-5 text-right">
-        <h1
-          class="display-3 text-center"
+              <h1
+          class="titolo-display text-center"
           style="font-weight: initial !important"
         >
           Energy
@@ -97,7 +97,6 @@
         <div class="mt-3" v-if="admin">
           <CLink
             to="AdminCommerciale/Energy"
-            class=""
             style="color: white !important"
             ><CIcon name="cil-settings" /><strong> Gestione</strong>
           </CLink>

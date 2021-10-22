@@ -1,18 +1,17 @@
 <template>
   <div id="Archivio">
-    <div class="breadcrumbs">
-      <CLink @click="back()" class="breadcrumbs_link"
-        >Gestione {{ $route.params.settore }}</CLink
-      >
-      > Archivio
-    </div>
-
-    <CRow class="justify-content-center">
-      <h1 class="mb-3 titolo_sezione">Archivio</h1>
-    </CRow>
     <div class="row">
       <div class="col-md-1"></div>
-      <div class="col-md-10">
+      <div class="col-md-10 ">
+        <div class="breadcrumbs card_post" :style="{ '--bgColor': $attrs.colore }">
+          <CLink @click="back()" class="breadcrumbs_link"
+            >Gestione {{ $route.params.settore }}</CLink
+          >
+          > Archivio
+        </div>
+        <CRow class="justify-content-center">
+          <h1 class="mb-3 titolo_sezione">Archivio</h1>
+        </CRow>
         <CCardBody color="white" class="mt-2">
           <CDataTable
             ref="tabella_post"
@@ -31,22 +30,6 @@
             clickableRows
             @row-clicked="myRowClickHandler"
           >
-            <!-- testa  -->
-            <!-- <template #thead-top>
-            <div class="text-left">
-              <br />
-              <CButton
-                @click="back()"
-                color="primary"
-                size="sm"
-                variant="outline"
-              >
-                Aggiungi Post
-              </CButton>
-            </div>
-            <br />
-          </template> -->
-
             <template #show_details="{ item }">
               <td class="py-2">
                 <CButton
@@ -80,12 +63,6 @@
                   >
                     <div class="row">
                       <div class="col-sm-4">
-                        <!-- <h4>Titolo: {{ item.titolo }}</h4>
-                      <h5>Sottotitolo: {{ item.sottotitolo }}</h5>
-                      <p class="text-muted">
-                        <strong> Pubblicata il: </strong
-                        >{{ item.data_ins | formatDate }}
-                      </p> -->
                         <div>
                           <span class="text-muted"><h4>Contenuto:</h4></span>
                           <p v-html="item.contenuto"></p>
@@ -100,15 +77,6 @@
                         <div></div>
                       </div>
                     </div>
-                    <!-- <CButton
-                    :id="'ModificaPost' + item.id"
-                    size="sm"
-                    color="warning"
-                    class="mt-3"
-                    @click="onModificaClick(item)"
-                  >
-                    Modifica
-                  </CButton> -->
                   </CMedia>
                 </CCardBody>
               </CCollapse>
@@ -120,10 +88,6 @@
     </div>
   </div>
 </template>
-
-
-
-
 
 <script>
 import axios from "axios";
@@ -166,10 +130,10 @@ export default {
       return post_vuota;
     },
   },
-
   mounted() {
     this.get_lista_post();
   },
+
   methods: {
     myRowClickHandler(record, index, column, e) {
       // console.log(column);
@@ -217,35 +181,6 @@ export default {
       // console.log(JSON.stringify(this.post));
     },
 
-    // modificaPost(post_modificata) {
-    //   //   console.log("GestionePost modificaPost", post_modificata);
-    //   this.post[post_modificata.id] = post_modificata;
-    // },
-
-    // aggiungiPost(post_da_aggiungere) {
-    //   post_da_aggiungere._toggled = false;
-    //   //alert ("salvo questo" + JSON.stringify(post_da_aggiungere));
-    //   post_da_aggiungere.id = this.post.length;
-    //   this.post.push(post_da_aggiungere);
-    // },
-
-    // postEsisteGia(post_da_controllare) {
-    //   return post_da_controllare.id in this.post;
-    // },
-
-    // salvaPost() {
-    //   this.forzaUpdateTabella();
-    // },
-    // getBadge(stato) {
-    //   switch (stato) {
-    //     case "Attiva":
-    //       return "success";
-    //     case "Disattivata":
-    //       return "secondary";
-    //     default:
-    //       "primary";
-    //   }
-    // },
     togglePost(id_post_da_togglare) {
       //   console.log(id_post_da_togglare);
       this.post[id_post_da_togglare]._toggled =
@@ -255,31 +190,14 @@ export default {
       this.togglePost(id_post_da_togglare);
       this.$forceUpdate();
     },
-    // mostraModale() {
-    //   this.modale_is_visible = true;
-    // },
-    // nascondiModale() {
-    //   this.modale_is_visible = false;
-    //   console.log("Aggiorno tabella");
-    //   this.load_post();
-    // },
     onModificaClick(post_da_modificare) {
-      console.log("modifica del post " + post_da_modificare.categoria);
+      // console.log("modifica del post " + post_da_modificare.categoria);
       console.log("modifica del post " + JSON.stringify(post_da_modificare));
       this.$router.push({
-        path: "Commerciale/Modifica",
-        params: { editPost: post_da_modificare },
+        name: "ModificaContenuti",
+        params: { post: post_da_modificare.id_post, editPost: post_da_modificare},
       });
-      this.$forceUpdate();
     },
-    // onAggiungiClick() {
-    //   this.post_da_modificare = this.post_template;
-    //   this.add_edit = "add";
-    //   this.mostraModale();
-
-    //   this.$forceUpdate();
-    // },
-
     cambiaPaginazioneTabella(per_page_items) {
       // crea oggetto da inviare alla CDataTable per cambiare la paginazione
       let pagination_object = {

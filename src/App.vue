@@ -41,6 +41,14 @@ export default {
   z-index: auto !important;
 }
 
+// STILE PER EMULARE LA CLASSE BOOTSTRAP DISPLAY CHE MA RENDERLA RESPONSIVE
+// UTILIZZATO PER I TITOLI
+
+.titolo-display{
+  font-size: 4.5rem;
+  letter-spacing: 0.1rem;
+  font-weight: initial !important;
+}
 
 //STILE PER IL PULSANTE RESET DELLA MODALE ADD-NEWS
 #reset-btn {

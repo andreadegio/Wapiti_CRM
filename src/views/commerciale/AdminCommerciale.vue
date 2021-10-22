@@ -1,59 +1,67 @@
 <template>
-<CContainer id="cover_admin" class="align-items-center min-vh-100">
-  <div  >
-    <new-com
-      v-show="addCom"
-      @back="step_back"
-      :colore="coloreSettore"
-      class="animate__animated animate__fadeIn"
-    />
-    <new-upload
-      v-show="addFile"
-      @back="step_back"
-      :colore="coloreSettore"
-      class="animate__animated animate__fadeIn"
-    />
-    <archivio
-      v-show="showArchivio"
-      @back="step_back"
-      class="animate__animated animate__fadeIn"
-    />
-    <div v-show="home" class="container">
-      <div class="row text-center mt-5 riga">
-        <div
-          class="col-md-2 action justify-content-center"
-          :style="{ '--bgColor': coloreSettore }"
-          @click="(addCom = true), (home = false)"
-        >
-          <i class="fas fa-rss fa-3x animate__animated animate__bounce"></i>
-          <br /><span>Nuova<br />Comunicazione</span>
-        </div>
-        <div
-          class="col-md-2 action"
-          :style="{ '--bgColor': coloreSettore }"
-          @click="(addFile = true), (home = false)"
-        >
-          <i
-            class="
-              fas
-              fa-cloud-upload-alt fa-3x
-              animate__animated animate__bounce
-            "
-          ></i
-          ><br /><span>Carica<br />Materiale</span>
-        </div>
-        <div
-          class="col-md-2 action"
-          :style="{ '--bgColor': coloreSettore }"
-          @click="(showArchivio = true), (home = false)"
-        >
-          <i class="fas fa-archive fa-3x animate__animated animate__bounce"></i
-          ><br /><span>Visualizza<br />Archivio</span>
+  <CContainer
+    id="cover_admin"
+    :style="{ '--urlImg': urlImgSettore }"
+    class="align-items-center min-vh-100"
+  >
+    <div>
+      <new-com
+        v-show="addCom"
+        @back="step_back"
+        :colore="coloreSettore"
+        class="animate__animated animate__fadeIn"
+        :lista_aree="lista_aree"
+      />
+      <new-upload
+        v-show="addFile"
+        @back="step_back"
+        :colore="coloreSettore"
+        class="animate__animated animate__fadeIn"
+      />
+      <archivio
+        v-show="showArchivio"
+        :colore="coloreSettore"
+        @back="step_back"
+        class="animate__animated animate__fadeIn"
+      />
+      <div v-show="home" class="container">
+        <div class="row text-center mt-5 riga">
+          <div
+            class="col-md-2 action justify-content-center"
+            :style="{ '--bgColor': coloreSettore }"
+            @click="(addCom = true), (home = false)"
+          >
+            <i class="fas fa-rss fa-3x animate__animated animate__bounce"></i>
+            <br /><span>Nuova<br />Comunicazione</span>
+          </div>
+          <div
+            class="col-md-2 action"
+            :style="{ '--bgColor': coloreSettore }"
+            @click="(addFile = true), (home = false)"
+          >
+            <i
+              class="
+                fas
+                fa-cloud-upload-alt fa-3x
+                animate__animated animate__bounce
+              "
+            ></i
+            ><br /><span>Carica<br />Materiale</span>
+          </div>
+          <div
+            class="col-md-2 action"
+            :style="{ '--bgColor': coloreSettore }"
+            @click="(showArchivio = true), (home = false)"
+          >
+            <i
+              class="fas fa-archive fa-3x animate__animated animate__bounce"
+            ></i
+            ><br /><span>Visualizza<br />Archivio</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</CContainer>
+  </CContainer>
 </template>
 
 <script>
@@ -78,22 +86,63 @@ export default {
       home: true, // trigger per visualizzare i pulsanti di scelta
       coloreSettore: "",
       showArchivio: false,
+      lista_aree: [],
+      urlImgSettore: "",
     };
   },
-  mounted() {
+
+  created() {
+    // console.log("AdminCommerciale " + this.$attrs.settore);
     this.get_tipologie();
     this.get_color_settore(this.$attrs.settore);
+    this.get_area();
+    this.set_background();
   },
   updated() {
     this.get_color_settore(this.$attrs.settore);
   },
   methods: {
+    set_background() {
+      if (this.$attrs.settore == "Assicurazioni") {
+        this.urlImgSettore =
+          'url("http://localhost:8080/img/filigranaAuto.png")';
+      }
+      if (this.$attrs.settore == "Energy") {
+        this.urlImgSettore =
+          'url("http://localhost:8080/img/filigranaGas.png")';
+      }
+    },
     step_back() {
       this.addCom = false;
       this.addFile = false;
       this.showArchivio = false;
       this.home = true;
     },
+
+    async get_area() {
+      // Chiamata per recuperare le aree
+      let params = {
+        settore: this.$route.params.settore,
+      };
+      try {
+        await axios
+          .post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.area,
+            { params }
+          )
+          .then((response) => {
+            // la risposta con l'elenco delle aree  la salvo nello storage
+            localStorage.setItem("area", JSON.stringify(response.data));
+            this.lista_aree = response.data;
+            // console.log(JSON.stringify(response.data));
+          });
+      } catch (error) {
+        console.log("impossibile recuperare le aree");
+      }
+    },
+
     async get_tipologie() {
       // Chiamata per recuperare le tipologie di rapporto
       try {
@@ -178,12 +227,11 @@ export default {
   transform: translateY(-2rem);
 }
 
-#cover_admin{
+#cover_admin {
   background-size: cover !important;
   background-position: right !important;
   max-width: none !important;
-  /* background: rgb(255, 255, 255) url("../img/filigranaAuto.png") no-repeat scroll 0% 0%; */
-  background-image: url("http://localhost:8080/img/filigranaAuto.png");
-}
 
+  background-image: var(--urlImg);
+}
 </style>
