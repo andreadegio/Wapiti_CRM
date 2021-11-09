@@ -112,6 +112,7 @@ export default {
         contenuto: this.uploadObject.descrizione,
         percorso: this.uploadObject.percorso,
         permessi: this.uploadObject.permessi,
+        area: this.uploadObject.area_post,
         file_check: cerca_file,
         utente: JSON.parse(localStorage.getItem("chisono_data")).Nominativo,
         idUtente: JSON.parse(localStorage.getItem("chisono_data")).idUtente,

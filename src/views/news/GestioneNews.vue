@@ -34,6 +34,8 @@
           sorter
           pagination
           striped
+          clickableRows
+          @row-clicked="myRowClickHandler"
         >
           <!-- testa  -->
           <template #thead-top>
@@ -155,6 +157,14 @@ export default {
     this.load_news();
   },
   methods: {
+     myRowClickHandler(record, index, column, e) {
+      // console.log(column);
+      if (e.target.tagName == "BUTTON") {
+        this.onModificaClick;
+      } else {
+        this.onToggleDetailsClicked(index);
+      }
+    },
     async load_news() {
       var chiamata_news = [];
       await axios

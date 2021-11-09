@@ -16,8 +16,11 @@
         <div v-show="$parent.add_edit == 'edit'">
           <div class="row justify-content-center">
             <CImg
-              :src="$custom_json.base_url + $custom_json.img_news_url + news_originale.immagine"
-              
+              :src="
+                $custom_json.base_url +
+                $custom_json.img_news_url +
+                news_originale.immagine
+              "
               block
               class="pb-2"
               width="20%"
@@ -36,30 +39,36 @@
           :schema="schema_news"
           @submit="salva()"
         >
-          <vue-editor v-model="content" :editorToolbar="customToolbar" class="pb-3"></vue-editor>
+          <vue-editor
+            v-model="content"
+            :editorToolbar="customToolbar"
+            class="pb-3"
+          ></vue-editor>
           <div style="display: flex">
-            <FormulateInput
-              id="reset-btn"
-              type="button"
-              label="Reset"
-              data-ghost
-              @click="reset()"
-            />
-            <FormulateInput
-              type="submit"
-              label="Salva"
-              name="salva"
+            <CButton
+              style="color: white"
+              color="primary"
+              class="ml-2"
               @click="salva()"
-            />
+              ><i class="far fa-save"></i> Salva</CButton
+            >
 
             <CButton
-              v-if="$parent.add_edit == 'edit'"
-              id="elimina_btn"
+              color="primary"
+              class="ml-2"
+              variant="outline"
+              @click="reset()"
+              ><i class="fas fa-times"></i> Annulla</CButton
+            >
+
+            <CButton
               color="danger"
+              class="ml-2"
+              variant="ghost"
               @click="ask_elimina()"
             >
-              Elimina
-            </CButton>
+              <i class="far fa-trash-alt"></i> Elimina</CButton
+            >
           </div>
         </FormulateForm>
       </div>
@@ -196,8 +205,7 @@ export default {
             required: "Immagine obbligatoria",
             mime: "Formato errato si accetta solo jpg, png o gif ",
           },
-          help:
-            "Clicca o trascina qui l'immagine da caricare - Formati accettati png, jpg o gif",
+          help: "Clicca o trascina qui l'immagine da caricare - Formati accettati png, jpg o gif",
         },
         {
           type: "text",
@@ -240,6 +248,7 @@ export default {
   methods: {
     reset() {
       this.formValues = this.news_originale;
+      this.chiudi();
     },
     salva() {
       /* Controllo se devo inserire o modificare, */
@@ -262,7 +271,9 @@ export default {
           try {
             axios
               .post(
-                this.$custom_json.base_url + this.$custom_json.api_url + "addnews",
+                this.$custom_json.base_url +
+                  this.$custom_json.api_url +
+                  "addnews",
                 {
                   params: {
                     titolo: this.formValues.titolo,
@@ -330,7 +341,9 @@ export default {
         try {
           axios
             .post(
-              this.$custom_json.base_url + this.$custom_json.api_url + "editnews",
+              this.$custom_json.base_url +
+                this.$custom_json.api_url +
+                "editnews",
               { params },
               {
                 header: {
@@ -401,6 +414,10 @@ export default {
 };
 </script>
 <style scoped>
+.btn-primary:hover {
+  background-color: #1a6eb9 !important;
+  border-color: #1a6eb9 !important;
+}
 .add-news-form {
   padding: 2em;
   background-color: white;

@@ -2,6 +2,21 @@
   <div style="text-align: left; display: flex">
     <div>
       <div class="field">
+        <div class="row cover_box mb-3">
+            <span class="mb-2"
+              ><strong>Seleziona l'area di competenza:</strong></span
+            >
+            <div class="control">
+              <treeselect
+                :multiple="false"
+                :always-open="false"
+                :options="$attrs.lista_aree"
+                :max-height="300"
+                placeholder="Seleziona l'area"
+                v-model="uploadObject.area_post"
+              />
+            </div>
+          </div>
         <div class="cover_box mb-3">
           <span><strong>Titolo:</strong></span>
           <div class="control">
@@ -90,13 +105,7 @@ export default {
       errore_titolo: false,
       errore_descrizione: false,
       errore_permessi: false,
-
-      // form: {
-      //   titolo: this.uploadObject.titolo,
-      //   descrizione: this.uploadObject,
-
-      // },
-
+      area_post:null,
       //options della select delle tipologie di rapporto
       options: [
         {

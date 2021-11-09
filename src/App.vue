@@ -146,6 +146,11 @@ cite {
 }
 
 // SOVRASCRITTURA COLORI ABY SU PRIMARY
+.btn-primary:hover{
+  background-color: #1a6eb9 !important;
+  border-color: #1a6eb9 !important;
+}
+
 .dropdown-item.active,
 .dropdown-item:active {
   text-decoration: none;
@@ -197,7 +202,7 @@ a.active{
 // Paginazione
 .page-item.active .page-link {
   color: #fff;
-  background-color: #1f4b6b;
+  background-color: #1f4b6bba;
   border-color: #1f4b6b;
 }
 .page-link {

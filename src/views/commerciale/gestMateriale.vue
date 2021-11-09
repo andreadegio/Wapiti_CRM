@@ -192,10 +192,10 @@ export default {
     },
     onModificaClick(post_da_modificare) {
       // console.log("modifica del post " + post_da_modificare.categoria);
-      console.log("modifica del post " + JSON.stringify(post_da_modificare));
+      // console.log("modifica del post " + JSON.stringify(post_da_modificare));
       this.$router.push({
         name: "ModificaContenuti",
-        params: { post: post_da_modificare.id_post, editPost: post_da_modificare},
+        params: { post: post_da_modificare.id_post, editPost: post_da_modificare, settore: this.$attrs.settore, lista_aree : this.$attrs.lista_aree },
       });
     },
     cambiaPaginazioneTabella(per_page_items) {

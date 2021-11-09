@@ -16,11 +16,14 @@
         v-show="addFile"
         @back="step_back"
         :colore="coloreSettore"
+        :lista_aree="lista_aree"
         class="animate__animated animate__fadeIn"
       />
       <archivio
         v-show="showArchivio"
         :colore="coloreSettore"
+        :settore="$attrs.settore"
+        :lista_aree="lista_aree"
         @back="step_back"
         class="animate__animated animate__fadeIn"
       />
@@ -97,11 +100,20 @@ export default {
     this.get_color_settore(this.$attrs.settore);
     this.get_area();
     this.set_background();
+    this.get_reference();
   },
   updated() {
     this.get_color_settore(this.$attrs.settore);
   },
   methods: {
+    get_reference() {
+      if (this.$attrs.reference == "elenco") {
+        this.addCom = false;
+        this.addFile = false;
+        this.showArchivio = true;
+        this.home = false;
+      }
+    },
     set_background() {
       if (this.$attrs.settore == "Assicurazioni") {
         this.urlImgSettore =

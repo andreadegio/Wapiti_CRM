@@ -25,7 +25,7 @@
               alt="- IMPOSSIBILE CARICARE -"
             >
             </CCardImg>
-            <CCardBody class="py-0 px-1" style="min-height: 10rem">
+            <CCardBody class="py-0 px-1" style="min-height: 9rem">
               <div class="text-right">
                 <cite> {{ item.data_ins | formatDate }}</cite>
               </div>

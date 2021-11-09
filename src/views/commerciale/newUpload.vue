@@ -21,6 +21,7 @@
       :uploadObject="uploadObject"
       :keep-alive="true"
       :coloreTasti="$attrs.colore"
+      :lista_aree ="$attrs.lista_aree"
     ></horizontal-stepper>
     <!-- <div class="text-center">
       <cite>- Ti trovi nel settore - {{ $route.params.settore }} - </cite>
@@ -53,6 +54,7 @@ export default {
         percorso: "",
         permessi: [],
         file: [],
+        area_post:null
       },
       uploadSteps: [
         {
@@ -85,7 +87,7 @@ export default {
       uploadHeaders: "",
     };
   },
-  computed: {},
+
   methods: {
     back() {
       this.$emit("back");

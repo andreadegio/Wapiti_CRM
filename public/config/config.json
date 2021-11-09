@@ -20,6 +20,8 @@
     "area":"Commerciale/getArea",
     "pre_upload_post":"Commerciale/preUploadPost",
     "upload_post":"Commerciale/uploadPostAllegati",
+    "update_post":"Commerciale/updatePost",
+    "delete_post":"Commerciale/deletePost",
     "color_settore":"Utility/color_settore"
   },
   "servizi_broker": "https://servizi.documentale.cloud/aibajsonea/",
