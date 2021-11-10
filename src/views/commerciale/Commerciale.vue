@@ -1,7 +1,7 @@
 <template>
   <div id="aree" class="pt-4 px-5">
     <CJumbotron class="px-0 py-2 latest" v-show="post.length > 0">
-      <CCardGroup class="latest p-3">
+      <CCardGroup class="latest p-3 col-10">
         <CCard
           class="mx-2 px-0 card_materiale card_post col-md-3"
           v-for="(item, index) in post.slice(0, 5)"
