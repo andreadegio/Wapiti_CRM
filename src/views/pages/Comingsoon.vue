@@ -1,9 +1,11 @@
 <template>
-  <CContainer id="cover" class="d-flex align-items-center min-vh-100" style="background: rgb(255, 255, 255) url('img/comingsoon.jpg') no-repeat scroll 0% 0%;">
   <CContainer
     id="cover"
     class="d-flex align-items-center min-vh-100"
-    style="background: rgb(255, 255, 255) url('img/comingsoon.jpg') no-repeat scroll 0% 0%;"
+    style="
+      background: rgb(255, 255, 255) url('img/comingsoon.jpg') no-repeat scroll
+        0% 0%;
+    "
   >
     <CRow class="w-100 justify-content-center">
       <CCol md="6">
@@ -12,15 +14,11 @@
             <!-- <img src="img/abyway_logo.png"> -->
             <h1 class="display-3 mr-4 pb-5">Area non ancora disponibile</h1>
 
-          <p class="text-muted"></p>
-          <CButton
-                to="dashboard"
-                color="primary"
-                size="lg"
-                variant="outline"                
-              >
-                <i class="fas fa-angle-left"></i> Indietro
-              </CButton>
+            <p class="text-muted"></p>
+            <CButton to="dashboard" color="primary" size="lg" variant="outline">
+              <i class="fas fa-angle-left"></i> Indietro
+            </CButton>
+          </div>
         </div>
       </CCol>
     </CRow>
