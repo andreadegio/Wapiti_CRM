@@ -225,35 +225,18 @@
                               border-right: 0 !important;
                             "
                           >
-                            <!-- <CButton
-                              color="primary"
-                              variant="outline"
-                              square
-                              size="sm"
-                            >
-                              Visualizza
-                            </CButton> -->
+                            
                           </td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
-                  <!-- <li
-                    v-for="items in folder.childs"
-                    :key="items.nome"
-                    class="p-2 folder h5"
-                  >
-                    <span
-                      @click="call_subfolder_list(items, folder)"
-                      class="icon_folder"
-                      >{{ items.nome }}</span
-                    >
-                  </li> -->
+                  
                 </div>
               </span>
             </div>
             <div class="pt-5" v-if="settore == 'SETTORI 1 E 2'">
-              <!-- <div class="pt-5 h2"> -->
+             
               <span>
                 <div
                   v-for="folder in folder_list"
@@ -311,30 +294,13 @@
                               border-right: 0 !important;
                             "
                           >
-                            <!-- <CButton
-                              color="primary"
-                              variant="outline"
-                              square
-                              size="sm"
-                            >
-                              Visualizza
-                            </CButton> -->
+                           
                           </td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
-                  <!-- <li
-                    v-for="items in folder.childs"
-                    :key="items.nome"
-                    class="p-2 folder h5"
-                  >
-                    <span
-                      @click="call_subfolder_list(items, folder)"
-                      class="icon_folder"
-                      >{{ items.nome }}</span
-                    >
-                  </li> -->
+                 
                 </div>
               </span>
             </div>

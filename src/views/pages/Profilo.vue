@@ -12,13 +12,14 @@
                 <p>Intermediario: {{user.Intermediario}} </p>
                 <p>Abilitazione Auto:  {{user.Abilitato_Auto}} </p>
                 <p>Abilitazione Rami: {{user.Abilitato_Rami}} </p>
+                <p>Abilitazione Energy: {{user.Abilitato_Energy}} </p>
                 <CButton
                 to="dashboard"
                 color="info"
                 size="lg"
                 variant="outline"                
               >
-                <i class="fas fa-angle-left"></i> Indietro
+                 Indietro
               </CButton>
 
               

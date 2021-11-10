@@ -1,7 +1,11 @@
 {
-  "name": "abyway",
-  "version": "1.7.2",
-  "description": "Portale Abyway",
+  "name": "@coreui/coreui-free-vue-admin-template",
+  "version": "3.1.2",
+  "description": "Abyway portal",
+  "author": {
+    "name": "ABYWAY.IT",
+    "url": "https://www.abyway.it"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -13,6 +17,7 @@
     "release": "npm-run-all clearCache lint build test:unit test:e2e"
   },
   "dependencies": {
+    "@algoz098/vue-player": "^0.4.3",
     "@babel/plugin-transform-runtime": "^7.13.10",
     "@braid/vue-formulate": "^2.5.0",
     "@coreui/coreui": "^3.4.0",
@@ -24,18 +29,26 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/vue-fontawesome": "^2.0.2",
+    "@riophae/vue-treeselect": "^0.4.0",
+    "animate.css": "^4.1.1",
     "aos": "^2.3.4",
     "babel-plugin-transform-regenerator": "^6.26.0",
     "babel-polyfill": "^6.26.0",
+    "bulma": "^0.9.3",
     "form-data": "^4.0.0",
     "save": "^2.4.0",
     "vue": "~2.6.12",
     "vue-analytics": "^5.22.1",
+    "vue-doc-preview": "^0.3.2",
+    "vue-file-agent": "^1.7.3",
     "vue-formulate": "^0.12.1",
     "vue-masonry-wall": "^0.3.1",
     "vue-pdf": "^4.2.0",
     "vue-router": "^3.4.9",
+    "vue-simple-alert": "^1.1.1",
+    "vue-stepper": "^1.4.2",
     "vue2-editor": "^2.10.2",
+    "vuelidate": "^0.7.6",
     "vuetify": "^2.2.11",
     "vuex": "~3.6.0"
   },
@@ -56,7 +69,7 @@
     "deepmerge": "^4.2.2",
     "eslint": "^7.17.0",
     "eslint-plugin-vue": "^6.2.2",
-    "node-sass": "~4.14.1",
+    "node-sass": "^6.0.1",
     "npm-run-all": "~4.1.5",
     "sass": "^1.32.5",
     "sass-loader": "^10.1.1",
@@ -71,19 +84,13 @@
   ],
   "contributors": [
     {
-      "name": "CoreUI Team",
-      "url": "https://github.com/orgs/coreui/people"
+      "name": "Navert Team"
     }
   ],
-  "copyright": "Copyright 2020 creativeLabs Łukasz Holeczek",
+  "copyright": "Copyright 2020 Navert",
   "engines": {
     "node": ">= 12.x",
     "npm": ">= 6.x"
   },
-  "homepage": "http://coreui.io",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:coreui/coreui-free-vue-admin-template.git"
-  }
+  "homepage": "https://www.abyway.it"  
 }

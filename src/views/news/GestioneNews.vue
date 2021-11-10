@@ -34,6 +34,8 @@
           sorter
           pagination
           striped
+          clickableRows
+          @row-clicked="myRowClickHandler"
         >
           <!-- testa  -->
           <template #thead-top>
@@ -70,7 +72,7 @@
               <CCardBody>
                 <CMedia
                   :aside-image-props="{                    
-                    src: $custom_json.img_news_url + item.immagine,
+                    src: $custom_json.base_url + $custom_json.img_news_url + item.immagine,
                   }"
                 >
                   <h4>
@@ -155,10 +157,18 @@ export default {
     this.load_news();
   },
   methods: {
+     myRowClickHandler(record, index, column, e) {
+      // console.log(column);
+      if (e.target.tagName == "BUTTON") {
+        this.onModificaClick;
+      } else {
+        this.onToggleDetailsClicked(index);
+      }
+    },
     async load_news() {
       var chiamata_news = [];
       await axios
-        .get(this.$custom_json.api_url + this.$custom_json.ep_api.listanews)
+        .get(this.$custom_json.base_url + this.$custom_json.api_url + this.$custom_json.ep_api.listanews)
         .then((response) => {
           chiamata_news = response.data;
         });

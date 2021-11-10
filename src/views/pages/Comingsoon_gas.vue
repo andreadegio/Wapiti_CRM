@@ -12,9 +12,9 @@
             <h1 class="display-3 mr-4">Utente non abilitato</h1>
             <br />
             <h3>
-              Per ulteriori informazioni e chiarimenti è possibile contattare<br>
+              Per ulteriori informazioni e chiarimenti è possibile contattare<br />
               la direzione di ABY ENERGY attraverso l’indirizzo di posta
-              elettronica dedicato:<br>direzione@abyenergy.it
+              elettronica dedicato:<br />direzione@abyenergy.it
             </h3>
 
             <p class="text-muted pt-3"></p>

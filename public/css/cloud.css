@@ -1,0 +1,141 @@
+.cloud {
+    font-size: 2rem;
+    cursor: pointer;
+    list-style-type: none;
+  }
+  .upper::before {
+    content: "\f3bf";
+    font-family: "Font Awesome 5 free";
+    color: rgb(103, 103, 104);
+    font-size: 2em;
+    font-weight: 900;
+    padding-right: 5px;
+  }
+  
+  .JPG::before {
+    content: "\f1c5";
+    font-family: "Font Awesome 5 free";
+    color: rgb(103, 103, 104);
+    font-size: 2rem;
+    font-weight: 900;
+    padding-right: 5px;
+  }
+  .JPEG::before {
+    content: "\f1c5";
+    font-family: "Font Awesome 5 free";
+    color: rgb(103, 103, 104);
+    font-size: 2rem;
+    font-weight: 900;
+    padding-right: 5px;
+  }
+  .PNG::before {
+    content: "\f1c5";
+    font-family: "Font Awesome 5 free";
+    color: rgb(103, 103, 104);
+    font-size: 2rem;
+    font-weight: 900;
+    padding-right: 5px;
+  }
+  .PDF::before {
+    content: "\f1c1";
+    font-family: "Font Awesome 5 free";
+    color: rgb(103, 103, 104);
+    font-size: 2rem;
+    font-weight: 900;
+    padding-right: 5px;
+  }
+  .PPTX::before {
+    content: "\f1c4";
+    font-family: "Font Awesome 5 free";
+    color: rgb(103, 103, 104);
+    font-size: 2rem;
+    font-weight: 900;
+    padding-right: 5px;
+  }
+  .MP4::before {
+    content: "\f1c8";
+    font-family: "Font Awesome 5 free";
+    color: rgb(103, 103, 104);
+    font-size: 2rem;
+    font-weight: 900;
+    padding-right: 5px;
+  }
+  .DOCX::before {
+    content: "\f1c2";
+    font-family: "Font Awesome 5 free";
+    color: rgb(103, 103, 104);
+    font-size: 2rem;
+    font-weight: 900;
+    padding-right: 5px;
+  }
+  .XLSX::before {
+    content: "\f1c3";
+    font-family: "Font Awesome 5 free";
+    color: rgb(103, 103, 104);
+    font-size: 2rem;
+    font-weight: 900;
+    padding-right: 5px;
+  }
+  .TXT::before {
+    content: "\f15c";
+    font-family: "Font Awesome 5 free";
+    color: rgb(103, 103, 104);
+    font-size: 2rem;
+    font-weight: 900;
+    padding-right: 5px;
+  }
+  .directory::before {
+    content: "\f07b";
+    font-family: "Font Awesome 5 free";
+    color: rgb(252, 198, 3);
+    font-size: 2rem;
+    font-weight: 900;
+    padding-right: 5px;
+  }
+  .directory:hover::before {
+    content: "\f07c";
+    font-family: "Font Awesome 5 free";
+    color: rgb(252, 198, 3);
+    font-size: 2rem;
+    font-weight: 900;
+    padding-right: 5px;
+  }
+  .directory.highlight::before {
+    content: "\f07c";
+    font-family: "Font Awesome 5 free";
+    color: rgb(252, 198, 3);
+    font-size: 2rem;
+    font-weight: 900;
+    padding-right: 5px;
+  }
+  .desc_elemento{
+    font-size: 1.3rem;
+    word-wrap: anywhere;
+  }
+  .listaFile {
+    display: flex;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+  .stepper-box .bottom .stepper-button.next {
+      background-color: #2eb85c !important;
+
+      border-radius: 3px !important;
+  }
+
+  .stepper-button.previous:hover {
+    background-color: #1e2f56;
+    color: white !important;
+    border-radius: 0.35rem !important;
+  }
+  .stepper-button.previous {
+    border: 1px solid #1e2f56;
+    
+    border-radius: 0.35rem !important;
+  }
+  .content{
+    margin-bottom: 0px !important;
+    }
+
+    
+  

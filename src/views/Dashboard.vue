@@ -58,30 +58,26 @@
               </CCard>
             </CCardLink>
           </div>
-          <!-- <div class="col-sm"> -->
-          <!-- <CCardLink href="#" target="_self">
+          <div v-if="urlRami" class="col-sm">
+            <CCardLink :href="urlRami" target="_blank">
               <CCard
                 class="text-center elevation-6 portali-btn"
                 body-wrapper
-                
-              
-              >
-                <h1
-                  style="
-                    color: white;
-                    font-weight: 800;
-                    text-shadow: 1px 1px midnightblue;
-                    font-size: 2vw;
-                    margin-bottom: 0 !important;
-                    margin-top: 10%;
-                  "
-                >
-                  RAMI ASSICURATIVI
-                </h1>
+                style="
+                  height: 200px;
+                  background-image: url('img/buttons/rami.png');
+                  background-position: center;
+                  z-index: 0;
+                  background-size: cover;
+                "
+                ><CCardTitle>
+                  <h1 class="pulsante_portali">RAMI</h1>
+                </CCardTitle>
               </CCard>
-            </CCardLink> -->
-          <!-- </div> -->
-          <div class="col-sm" v-if="isEnergy != true">
+            </CCardLink>
+          </div>
+
+          <div class="col-sm" v-if="!isEnergy">
             <CCardLink to="Comingsoon_gas" target="_self">
               <CCard
                 class="text-center elevation-6 portali-btn"
@@ -159,6 +155,7 @@ export default {
       news_operative: null,
       triggerNews: 0,
       news_mondo: null,
+      urlRami: localStorage.getItem("urlRami"),
       isEnergy: "",
     };
   },
@@ -185,7 +182,6 @@ export default {
       // prima verifico di non averli già nello storage, altrimenti effettuo la chiamata
       if (localStorage.getItem("chisono_data") == null) {
         try {
-          // console.log("chiamata");
           var config = {
             method: "post",
             url: this.$custom_json.servizi_broker + "chisono",
@@ -211,6 +207,28 @@ export default {
             "unitaoperativaID",
             risposta_chisono.data.idUnitaOperativa
           );
+          // controllo se sono abilitato all'utilizzo del portale rami
+          if (risposta_chisono.data.Abilitato_Rami) {
+            // se sono abilitato chiamo il servizio per recuperare l'url da inserire nel pulsante
+            try {
+              var param = {
+                id_persona_operativa: risposta_chisono.data.idUtente,
+              };
+              await axios
+                .post(
+                  this.$custom_json.base_url +
+                    this.$custom_json.api_url +
+                    this.$custom_json.ep_api.getUrlRami,
+                  param
+                )
+                .then((response) => {
+                  localStorage.setItem("urlRami", response.data);
+                  this.urlRami = response.data;
+                });
+            } catch (error) {
+              console.log("impossibile recuperare jwt rami " + error);
+            }
+          }
           this.isEnergy = JSON.parse(
             localStorage.getItem("chisono_data")
           ).Abilitato_Energy;
@@ -222,7 +240,6 @@ export default {
       this.isEnergy = JSON.parse(
         localStorage.getItem("chisono_data")
       ).Abilitato_Energy;
-
       // this.triggerNews += 1;
       this.latest_news(); // ultime news operative
       this.load_news(); // ultime news mondo
@@ -334,7 +351,9 @@ export default {
       try {
         await axios
           .get(
-            this.$custom_json.api_url + this.$custom_json.ep_api.listanews_home
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.listanews_home
           )
           .then((response) => {
             chiamata_news = response.data;
@@ -353,7 +372,8 @@ export default {
           try {
             await axios
               .get(
-                this.$custom_json.api_url +
+                this.$custom_json.base_url +
+                  this.$custom_json.api_url +
                   this.$custom_json.ep_api.listanews_home
               )
               .then((response) => {
@@ -382,7 +402,11 @@ export default {
       //provo la chiamata all'end-point se l'esito è OK assegno il valore e scrivo nello storage
       try {
         await axios
-          .get(this.$custom_json.api_url + "listanewshome")
+          .get(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              "listanewshome"
+          )
           .then((response) => {
             chiamata_news = response.data;
           });
@@ -400,7 +424,8 @@ export default {
           try {
             await axios
               .get(
-                this.$custom_json.api_url +
+                this.$custom_json.base_url +
+                  this.$custom_json.api_url +
                   this.$custom_json.ep_api.listanews_home
               )
               .then((response) => {

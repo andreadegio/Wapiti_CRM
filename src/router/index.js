@@ -21,6 +21,13 @@ const Documentale = () => import("@/views/documentale/Documentale");
 const AdminFormazione = () => import("@/views/formazione/AdminFormazione");
 const Formazione = () => import("@/views/formazione/Formazione");
 
+// Views - Commerciale
+const AdminCommerciale = () => import(/* webpackChunkName: "Commerciale" */"@/views/commerciale/AdminCommerciale");
+const Commerciale = () => import(/* webpackChunkName: "Commerciale" */"@/views/commerciale/Commerciale");
+const Sezione = () => import(/* webpackChunkName: "Commerciale" */"@/views/commerciale/Sezione");
+const Comunicazione = () => import(/* webpackChunkName: "Commerciale" */"@/views/commerciale/Comunicazione");
+const ModificaContenuti = () => import(/* webpackChunkName: "Commerciale" */"@/views/commerciale/ModificaContenuti");
+
 // Views - Statistiche
 const Statistiche = () => import("@/views/statistiche/Statistiche");
 
@@ -95,6 +102,35 @@ function configRoutes() {
           path: "AdminFormazione",
           name: "AdminFormazione",
           component: AdminFormazione,
+        },
+        {
+          path: "Commerciale",
+          name: "Commerciale",
+          component: Commerciale,
+        },
+        {
+          path: "Commerciale/:contenuto",
+          name: "Sezione",
+          props: true,
+          component: Sezione,
+        },
+        {
+          path: "Commerciale/Comunicazione/:notizia",
+          name: "Comunicazione",
+          props: true,
+          component: Comunicazione,
+        },
+        {
+          path: "AdminCommerciale/Modifica/",
+          name: "ModificaContenuti",
+          props: true,
+          component: ModificaContenuti,
+        },
+        {
+          path: "AdminCommerciale/:settore",
+          name: "AdminCommerciale_settore",
+          props: true,
+          component: AdminCommerciale,
         },
         {
           path: "Comingsoon",
