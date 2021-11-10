@@ -22,11 +22,11 @@ const AdminFormazione = () => import("@/views/formazione/AdminFormazione");
 const Formazione = () => import("@/views/formazione/Formazione");
 
 // Views - Commerciale
-const AdminCommerciale = () => import("@/views/commerciale/AdminCommerciale");
-const Commerciale = () => import("@/views/commerciale/Commerciale");
-const Sezione = () => import("@/views/commerciale/Sezione");
-const Comunicazione = () => import("@/views/commerciale/Comunicazione");
-const ModificaContenuti = ()=> import("@/views/commerciale/ModificaContenuti");
+const AdminCommerciale = () => import(/* webpackChunkName: "Commerciale" */"@/views/commerciale/AdminCommerciale");
+const Commerciale = () => import(/* webpackChunkName: "Commerciale" */"@/views/commerciale/Commerciale");
+const Sezione = () => import(/* webpackChunkName: "Commerciale" */"@/views/commerciale/Sezione");
+const Comunicazione = () => import(/* webpackChunkName: "Commerciale" */"@/views/commerciale/Comunicazione");
+const ModificaContenuti = () => import(/* webpackChunkName: "Commerciale" */"@/views/commerciale/ModificaContenuti");
 
 // Views - Statistiche
 const Statistiche = () => import("@/views/statistiche/Statistiche");
@@ -120,12 +120,6 @@ function configRoutes() {
           props: true,
           component: Comunicazione,
         },
-        // {
-        //   path: "Commerciale/Modifica/:post",
-        //   name: "ModificaContenuti",
-        //   props: true,
-        //   component: ModificaContenuti,
-        // },
         {
           path: "AdminCommerciale/Modifica/",
           name: "ModificaContenuti",

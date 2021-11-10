@@ -2,8 +2,11 @@
   <div id="Archivio">
     <div class="row">
       <div class="col-md-1"></div>
-      <div class="col-md-10 ">
-        <div class="breadcrumbs card_post" :style="{ '--bgColor': $attrs.colore }">
+      <div class="col-md-10">
+        <div
+          class="breadcrumbs card_post"
+          :style="{ '--bgColor': $attrs.colore }"
+        >
           <CLink @click="back()" class="breadcrumbs_link"
             >Gestione {{ $route.params.settore }}</CLink
           >
@@ -41,15 +44,17 @@
                 >
                   {{ Boolean(item._toggled) ? "Nascondi" : "Mostra" }}
                 </CButton>
-                <CButton
-                  :id="'ModificaPost' + item.id"
-                  size="sm"
-                  color="warning"
-                  class="ml-2"
-                  @click="onModificaClick(item)"
-                >
-                  Modifica
-                </CButton>
+                <router-link :to="{name: 'ModificaContenuti', params: { post: item.id, editPost: item, settore: $attrs.settore, lista_aree : $attrs.lista_aree }}" >
+                  <CButton
+                    :id="'ModificaPost' + item.id"
+                    size="sm"
+                    color="warning"
+                    class="ml-2"
+                  >
+                    Modifica
+                  </CButton>
+                </router-link>
+                
               </td>
             </template>
 
@@ -190,14 +195,15 @@ export default {
       this.togglePost(id_post_da_togglare);
       this.$forceUpdate();
     },
-    onModificaClick(post_da_modificare) {
-      // console.log("modifica del post " + post_da_modificare.categoria);
-      // console.log("modifica del post " + JSON.stringify(post_da_modificare));
-      this.$router.push({
-        name: "ModificaContenuti",
-        params: { post: post_da_modificare.id_post, editPost: post_da_modificare, settore: this.$attrs.settore, lista_aree : this.$attrs.lista_aree },
-      });
-    },
+    // onModificaClick(post_da_modificare) {
+    //   // console.log("modifica del post " + post_da_modificare.categoria);
+    //   // console.log("modifica del post " + JSON.stringify(post_da_modificare));
+    //   this.$router.push("ModificaContenuti");
+    //   // this.$router.push({
+    //   //   name: "ModificaContenuti",
+    //   //   params: { post: post_da_modificare.id_post, editPost: post_da_modificare, settore: this.$attrs.settore, lista_aree : this.$attrs.lista_aree },
+    //   // });
+    // },
     cambiaPaginazioneTabella(per_page_items) {
       // crea oggetto da inviare alla CDataTable per cambiare la paginazione
       let pagination_object = {
@@ -209,7 +215,7 @@ export default {
       this.$refs.tabella_post.paginationChange(pagination_object);
     },
     forzaUpdateTabella() {
-      // per forzare l'update della CDataTable simuliamo un cambio di paginazione
+      // per forzare l'update della CDataTable simulo un cambio di paginazione
       // salva l'attuale valore di paginazione
       // metti paginazione a 1
       // rimetti attuale valore di paginazione

@@ -1,8 +1,11 @@
 <template>
   <div style="background-color: white">
     <div class="container">
-      <div class="area" >
-        <CLink class="area" :style="{ '--bgColor': lista_post[id].color_settore }" :to="'../../Commerciale/'+lista_post[id].settore"
+      <div class="area">
+        <CLink
+          class="area"
+          :style="{ '--bgColor': lista_post[id].color_settore }"
+          :to="'../../Commerciale/' + lista_post[id].settore"
           >{{ lista_post[id].settore }}
         </CLink>
       </div>

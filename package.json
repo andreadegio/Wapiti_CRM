@@ -1,12 +1,10 @@
 {
   "name": "@coreui/coreui-free-vue-admin-template",
   "version": "3.1.2",
-  "description": "Open Source Bootstrap Admin Template",
+  "description": "Abyway portal",
   "author": {
-    "name": "CoreUI",
-    "url": "https://coreui.io",
-    "github": "https://github.com/coreui",
-    "twitter": "https://twitter.com/core_ui"
+    "name": "ABYWAY.IT",
+    "url": "https://www.abyway.it"
   },
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -86,19 +84,13 @@
   ],
   "contributors": [
     {
-      "name": "CoreUI Team",
-      "url": "https://github.com/orgs/coreui/people"
+      "name": "Navert Team"
     }
   ],
-  "copyright": "Copyright 2020 creativeLabs Łukasz Holeczek",
+  "copyright": "Copyright 2020 Navert",
   "engines": {
     "node": ">= 12.x",
     "npm": ">= 6.x"
   },
-  "homepage": "http://coreui.io",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:coreui/coreui-free-vue-admin-template.git"
-  }
+  "homepage": "https://www.abyway.it"  
 }
