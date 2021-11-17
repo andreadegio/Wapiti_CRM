@@ -5,8 +5,8 @@
     <CHeaderNav class="d-md-down-none mr-auto">
       <CHeaderNavLink to="/dashboard" exact>
       <CHeaderNavItem class="px-3">
-       <img v-if="this.$route.path != '/dashboard'" src="img/logo_abyway.png" width="200px" v-c-tooltip="{content:'Clicca qui per tornare alla HOME', placement:'right'}">
-       <img v-else src="img/logo_abyway.png" width="200px" >
+       <img v-if="this.$route.path != '/dashboard'" src="/img/logo_abyway.png" width="200px" v-c-tooltip="{content:'Clicca qui per tornare alla HOME', placement:'right'}">
+       <img v-else src="/img/logo_abyway.png" width="200px" >
       </CHeaderNavItem>
       </CHeaderNavLink>
       

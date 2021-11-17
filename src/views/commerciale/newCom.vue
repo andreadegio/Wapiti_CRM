@@ -232,29 +232,24 @@
               ></VueFileAgent>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="row text-center">
-        <div class="col-6 text-right">
-          <CButton
-            class="m-3"
-            color="primary"
-            variant="outline"
-            @click="back()"
-          >
-            Annulla
-          </CButton>
-        </div>
-        <div class="col-6 text-left">
-          <CButton
-            class="m-3"
-            style="color: white"
-            name="salva"
-            color="success"
-            @click="salva()"
-          >
-            Salva</CButton
-          >
+          <div class="container">
+            <CButton
+              color="primary"
+              class=""
+              style="color: white"
+              name="salva"
+              @click="salva()"
+            ><i class="far fa-save"></i> Salva</CButton
+            >
+            <CButton
+              
+              class="ml-2"
+              color="primary"
+              variant="outline"
+              @click="back()"
+            ><i class="fas fa-times"></i> Annulla
+            </CButton>
+          </div>
         </div>
       </div>
     </div>
@@ -575,7 +570,11 @@ export default {
   display: block;
   width: 15%;
   height: 15px;
-  background: linear-gradient(to right,var(--bgColor) 60%,rgba(255,255,255,0) 100%);
+  background: linear-gradient(
+    to right,
+    var(--bgColor) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
   /* border-top: 15px solid var(--bgColor); */
 }
 .thumbImg {

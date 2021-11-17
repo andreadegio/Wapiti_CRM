@@ -278,12 +278,19 @@ export default {
     };
   },
   created() {
+    this.checknavigazione();
     this.set_background();
   },
   mounted() {
     this.getPermessiPost(this.editPost.id_post);
   },
   methods: {
+    checknavigazione() {
+      if (!this.editPost) {
+        // console.log("nessun valore");
+        this.back();
+      }
+    },
     back() {
       this.$router.push({
         name: "AdminCommerciale_settore",

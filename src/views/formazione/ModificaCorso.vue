@@ -176,9 +176,16 @@ export default {
     };
   },
   mounted() {
+    this.checknavigazione();
     this.getPermessiCorso(this.editPost.id_corso);
   },
   methods: {
+    checknavigazione(){
+      if (!this.editPost){
+        // console.log("nessun valore");
+        this.back();
+      }
+    },
     back() {
       this.$router.push({
         name: "AdminFormazione",

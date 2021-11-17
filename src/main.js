@@ -79,8 +79,9 @@ Vue.filter("formatDate", function(value) {
 Vue.mixin({
   methods: {},
 });
-fetch("./config/config.json")
-  .then((response) => response.json())
+
+fetch("/config/config.json")
+  .then((response) =>response.json())
   .then((custom_json) => {
     Vue.prototype.$custom_json = custom_json;
     // console.log(custom_json.ep_api.secondo);
@@ -103,4 +104,5 @@ fetch("./config/config.json")
         App,
       },
     });
-  });
+  })
+  .catch(error=>console.log("--- " + error));

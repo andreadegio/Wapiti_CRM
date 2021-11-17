@@ -220,20 +220,23 @@
             </div>
           </div>
           <div class="container">
-        <CButton
-          style="color: white"
-          color="primary"
-          class="ml-2"
-          @click="salva()"
-          ><i class="far fa-save"></i> Salva</CButton
-        >
-        <CButton color="primary" class="ml-2" variant="outline" @click="back()"
-          ><i class="fas fa-times"></i> Annulla</CButton
-        >
-      </div>
+            <CButton
+              style="color: white"
+              color="primary"
+              class="ml-2"
+              @click="salva()"
+              ><i class="far fa-save"></i> Salva</CButton
+            >
+            <CButton
+              color="primary"
+              class="ml-2"
+              variant="outline"
+              @click="back()"
+              ><i class="fas fa-times"></i> Annulla</CButton
+            >
+          </div>
         </div>
       </div>
-      
     </div>
   </div>
 </template>
