@@ -18,8 +18,10 @@ const GestioneNewsBroker = () => import("@/views/news/GestioneNewsBroker");
 const Documentale = () => import("@/views/documentale/Documentale");
 
 // Views - Formazione
-const AdminFormazione = () => import("@/views/formazione/AdminFormazione");
-const Formazione = () => import("@/views/formazione/Formazione");
+const AdminFormazione = () => import(/* webpackChunkName: "Formazione" */"@/views/formazione/AdminFormazione");
+const Formazione = () => import(/* webpackChunkName: "Formazione" */"@/views/formazione/Formazione");
+const Corso = () => import(/* webpackChunkName: "Formazione" */"@/views/formazione/Corso");
+const ModificaCorso = () => import(/* webpackChunkName: "Formazione" */"@/views/formazione/ModificaCorso");
 
 // Views - Commerciale
 const AdminCommerciale = () => import(/* webpackChunkName: "Commerciale" */"@/views/commerciale/AdminCommerciale");
@@ -99,9 +101,22 @@ function configRoutes() {
           component: Formazione,
         },
         {
+          path: "Formazione/Corso/:corso",
+          name: "Corso",
+          props: true,
+          component: Corso,
+        },
+        {
           path: "AdminFormazione",
           name: "AdminFormazione",
+          props: true,
           component: AdminFormazione,
+        },
+        {
+          path: "AdminFormazione/Modifica/",
+          name: "ModificaCorso",
+          props: true,
+          component: ModificaCorso,
         },
         {
           path: "Commerciale",
