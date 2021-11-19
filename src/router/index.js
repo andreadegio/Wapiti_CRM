@@ -18,10 +18,10 @@ const GestioneNewsBroker = () => import("@/views/news/GestioneNewsBroker");
 const Documentale = () => import("@/views/documentale/Documentale");
 
 // Views - Formazione
-const AdminFormazione = () => import(/* webpackChunkName: "Commerciale" */"@/views/formazione/AdminFormazione");
-const Formazione = () => import(/* webpackChunkName: "Commerciale" */"@/views/formazione/Formazione");
-const Corso = () => import(/* webpackChunkName: "Commerciale" */"@/views/formazione/Corso");
-const ModificaCorso = () => import(/* webpackChunkName: "Commerciale" */"@/views/formazione/ModificaCorso");
+const AdminFormazione = () => import(/* webpackChunkName: "Formazione" */"@/views/formazione/AdminFormazione");
+const Formazione = () => import(/* webpackChunkName: "Formazione" */"@/views/formazione/Formazione");
+const Corso = () => import(/* webpackChunkName: "Formazione" */"@/views/formazione/Corso");
+const ModificaCorso = () => import(/* webpackChunkName: "Formazione" */"@/views/formazione/ModificaCorso");
 
 // Views - Commerciale
 const AdminCommerciale = () => import(/* webpackChunkName: "Commerciale" */"@/views/commerciale/AdminCommerciale");
