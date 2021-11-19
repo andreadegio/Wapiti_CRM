@@ -34,7 +34,7 @@
         </CCardTitle>
       </CCard>
     </CCardLink>
-    <CCardLink to="Comingsoon" target="_self">
+    <CCardLink to="Formazione" target="_self">
       <CCard
         class="text-center elevation-6 pulsanti-azioni"
         body-wrapper

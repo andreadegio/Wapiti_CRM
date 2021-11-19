@@ -1,9 +1,5 @@
 <template>
-  <CContainer
-    id="cover_archivio"
-    :style="{ '--urlImg': urlImgSettore }"
-    class="align-items-center min-vh-100"
-  >
+  <CContainer class="cover_admin align-items-center min-vh-100">
     <div
       class="container mt-3"
       style="background-color: white; border-radius: 5px"
@@ -15,129 +11,15 @@
         :nome_file="nome_file"
         @aggiorna_modale="aggiorna_modale"
       />
-      <div v-if="editPost.categoria == 'Materiale'">
-        <h1>MODIFICA - {{ editPost.titolo }}</h1>
-        <span>
-          <cite>
-            - Si può modificare il titolo, i permessi e la descrizione del
-            contenuto. Per eliminare/modificare file, si deve procedere con
-            l'eliminazione del post e crearne uno nuovo -</cite
-          >
-        </span>
-        <div class="cover_box mb-3">
-          <span><strong>Titolo:</strong></span>
-          <CInput
-            type="text"
-            v-model="editPost.titolo"
-            placeholder="Inserisci un titolo"
-            maxlength="100"
-          />
-        </div>
-
-        <div class="row cover_box mb-3">
-          <span class="mb-2"
-            ><strong>Modifica chi può accedere a questi contenuti</strong></span
-          >
-
-          <div class="control">
-            <treeselect
-              v-model="permessi"
-              :multiple="true"
-              :options="options"
-              :max-height="300"
-              placeholder="Seleziona per tipologia di rapporto"
-            />
-          </div>
-        </div>
-
-        <div class="cover_box mb-3">
-          <label class="label"><strong>Contenuto:</strong></label>
-          <div class="control">
-            <CTextarea
-              placeholder="Descrivi il contenuto di ciò che andrai a caricare"
-              v-model="editPost.contenuto"
-            />
-          </div>
-        </div>
-
-        <div class="row cover_box">
-          <div class="mb-2"><strong>Materiale allegato</strong></div>
-          <div class="listaFile text-center">
-            <div
-              class="file"
-              v-for="allegato in editPost.files"
-              :key="allegato.nome_file"
-            >
-              <div
-                class="cloud"
-                @click="
-                  (showDoc = true),
-                    (file =
-                      $custom_json.base_url +
-                      allegato.percorso_file +
-                      '/' +
-                      allegato.nome_file),
-                    (ext = allegato.ext_file.toUpperCase()),
-                    (nome_file = allegato.nome_file)
-                "
-              >
-                <div :class="allegato.ext_file.toUpperCase()">
-                  <div class="desc_elemento mx-3">
-                    {{ allegato.nome_file }}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <CButton
-            style="color: white"
-            color="primary"
-            class="ml-2"
-            @click="updatePost"
-            ><i class="far fa-save"></i> Salva</CButton
-          >
-          <CButton
-            color="primary"
-            class="ml-2"
-            variant="outline"
-            @click="back()"
-            ><i class="fas fa-times"></i> Annulla</CButton
-          ><CButton
-            color="danger"
-            class="ml-2"
-            variant="ghost"
-            @click="askDeletePost"
-          >
-            <i class="far fa-trash-alt"></i> Elimina</CButton
-          >
-        </div>
-
-        <br />
-      </div>
-      <div v-else>
+      <div>
         <div class="p-3 rounded">
           <h1>MODIFICA - {{ editPost.titolo }}</h1>
           <span>
             <cite>
               - Per eliminare/modificare file, si deve procedere con
-              l'eliminazione del post e crearne uno nuovo -</cite
+              l'eliminazione del corso e crearne uno nuovo -</cite
             >
           </span>
-          <div class="row cover_box mb-3">
-            <span class="mb-2"><strong>Area di competenza:</strong></span>
-            <div class="control">
-              <treeselect
-                :multiple="false"
-                :always-open="false"
-                :options="$attrs.lista_aree"
-                :max-height="300"
-                placeholder="Seleziona l'area"
-                v-model="editPost.id_area"
-              />
-            </div>
-          </div>
 
           <div class="cover_box mb-3">
             <span><strong>Titolo:</strong></span>
@@ -175,7 +57,24 @@
               />
             </div>
           </div>
+          <div class="cover_box mb-3">
+            <span><strong>Durata (minuti):</strong></span>
+            <CInput
+              type="text"
+              v-model="editPost.durata"
+              placeholder="Durata indicativa del corso"
+              maxlength="4"
+            />
+          </div>
 
+          <div class="cover_box mb-3">
+            <span><strong>Obiettivi:</strong></span>
+            <CInput
+              type="text"
+              v-model="editPost.obiettivi"
+              placeholder="Indica gli obiettivi del corso"
+            />
+          </div>
           <div class="cover_box mb-3">
             <span><strong>Contenuto:</strong></span>
             <vue-editor v-model="editPost.contenuto" class="pb-3"></vue-editor>
@@ -219,20 +118,20 @@
               style="color: white"
               color="primary"
               class="ml-2"
-              @click="updatePostComunicazione"
+              @click="updateCorso"
               ><i class="far fa-save"></i> Salva</CButton
             >
             <CButton
               color="primary"
               class="ml-2"
               variant="outline"
-              @click="back()"
+              @click="back"
               ><i class="fas fa-times"></i> Annulla</CButton
             ><CButton
               color="danger"
               class="ml-2"
               variant="ghost"
-              @click="askDeletePostComunicazione"
+              @click="askDeleteCorso"
             >
               <i class="far fa-trash-alt"></i> Elimina</CButton
             >
@@ -256,10 +155,9 @@ export default {
     Treeselect,
     Visualizzatore: Visualizzatore,
   },
-  props: ["post", "editPost", "settore"],
+  props: ["post", "editPost"],
   data() {
     return {
-      urlImgSettore: "",
       showDoc: false,
       nome_file: "",
       file: "",
@@ -277,40 +175,27 @@ export default {
       contenuto_post: "",
     };
   },
-  created() {
-    this.checknavigazione();
-    this.set_background();
-  },
   mounted() {
-    this.getPermessiPost(this.editPost.id_post);
+    this.checknavigazione();
+    this.getPermessiCorso(this.editPost.id_corso);
   },
   methods: {
-    checknavigazione() {
-      if (!this.editPost) {
+    checknavigazione(){
+      if (!this.editPost){
         // console.log("nessun valore");
         this.back();
       }
     },
     back() {
       this.$router.push({
-        name: "AdminCommerciale_settore",
+        name: "AdminFormazione",
         params: { reference: "elenco" },
       });
-    },
-    set_background() {
-      if (this.settore == "Assicurazioni") {
-        this.urlImgSettore =
-          'url("http://localhost:8080/img/filigranaAuto.png")';
-      }
-      if (this.settore == "Energy") {
-        this.urlImgSettore =
-          'url("http://localhost:8080/img/filigranaGas.png")';
-      }
     },
     aggiorna_modale(value) {
       this.showDoc = value;
     },
-    async getPermessiPost(id_post) {
+    async getPermessiCorso(id_post) {
       let params = {
         idPost: id_post,
       };
@@ -320,7 +205,7 @@ export default {
           .post(
             this.$custom_json.base_url +
               this.$custom_json.api_url +
-              this.$custom_json.ep_api.permessi_post,
+              this.$custom_json.ep_api.permessi_corso,
             { params }
           )
           .then((response) => {
@@ -335,7 +220,7 @@ export default {
       }
     },
 
-    async updatePost() {
+    async updateCorso() {
       let params = {
         permessi: this.permessi,
         edit_post: this.editPost,
@@ -347,7 +232,7 @@ export default {
           .post(
             this.$custom_json.base_url +
               this.$custom_json.api_url +
-              this.$custom_json.ep_api.update_post,
+              this.$custom_json.ep_api.update_corso,
             { params }
           )
           .then((response) => {
@@ -371,61 +256,17 @@ export default {
       }
     },
 
-    async updatePostComunicazione() {
-      let params = {
-        permessi: this.permessi,
-        edit_post: this.editPost,
-        utente: JSON.parse(localStorage.getItem("chisono_data")).Nominativo,
-        idUtente: JSON.parse(localStorage.getItem("chisono_data")).idUtente,
-      };
-      try {
-        await axios
-          .post(
-            this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.update_post,
-            { params }
-          )
-          .then((response) => {
-            // console.log(JSON.stringify(response.data));
-            if (response.data.status == "OK") {
-              this.$alert(
-                "Modifica effettuata correttamente",
-                "Update completo",
-                "success"
-              ).then(
-                // eslint-disable-next-line no-unused-vars
-                (result) => {
-                  this.back();
-                }
-              );
-              return;
-            }
-          });
-      } catch {
-        console.log("errore");
-      }
+    askDeleteCorso() {
+      this.$confirm(
+        "Vuoi davvero eliminare " + this.editPost.titolo + "?"
+      ).then(() => {
+        this.deleteCorso();
+        // console.log("Cancellato");
+        return;
+      });
     },
 
-    askDeletePost() {
-      this.$confirm(
-        "Vuoi davvero eliminare " + this.editPost.titolo + "?"
-      ).then(() => {
-        this.deletePost();
-        // console.log("Cancellato");
-        return;
-      });
-    },
-    askDeletePostComunicazione() {
-      this.$confirm(
-        "Vuoi davvero eliminare " + this.editPost.titolo + "?"
-      ).then(() => {
-        this.deletePost();
-        // console.log("Cancellato");
-        return;
-      });
-    },
-    async deletePost() {
+    async deleteCorso() {
       //Premuto OK -> procedo con la cancellazione
       let params = {
         edit_post: this.editPost,
@@ -437,7 +278,7 @@ export default {
           .post(
             this.$custom_json.base_url +
               this.$custom_json.api_url +
-              this.$custom_json.ep_api.delete_post,
+              this.$custom_json.ep_api.delete_corso,
             { params }
           )
           .then((response) => {
@@ -471,12 +312,13 @@ export default {
 </script>
 
 <style scoped>
-#cover_archivio {
+@import "/css/cloud.css";
+.cover_admin {
   background-size: cover !important;
   background-position: right !important;
   max-width: none !important;
 
-  background-image: var(--urlImg);
+  background-image: url(/img/formazione/filigranaFormazione.jpg);
 }
 </style>
 

@@ -78,50 +78,19 @@
     <div
       style="background-color: white; border-radius: 0.3rem"
       class="container mt-2 card_post"
-      :style="{ '--bgColor': $attrs.colore }"
     >
       <div class="breadcrumbs">
-        <CLink @click="back()" class="breadcrumbs_link"
-          >Gestione {{ $route.params.settore }}</CLink
-        >
-        > Nuova Comunicazione
+        <CLink @click="back()" class="breadcrumbs_link">Gestione Corsi</CLink>
+        > Nuovo Corso
       </div>
       <div class="row justify-content-center">
-        <h2 class="pl-2 text-center">Inserimento di una nuova comunicazione</h2>
+        <h2 class="pl-2 text-center">Inserimento di un nuovo corso</h2>
         <div class="p-3 rounded col-10">
-          <!-- <div class="row cover_box mb-3">
-            <span class="mb-2"><strong>Seleziona la categoria:</strong></span>
-            <div class="control">
-              <treeselect
-                :multiple="false"
-                :always-open="false"
-                :options="lista_categorie"
-                :max-height="300"
-                placeholder="Seleziona la categoria"
-                v-model="categoria_post"
-              />
-            </div>
-          </div> -->
-          <div class="row cover_box mb-3">
-            <span class="mb-2"
-              ><strong>Seleziona l'area di competenza:</strong></span
-            >
-            <div class="control">
-              <treeselect
-                :multiple="false"
-                :always-open="false"
-                :options="$attrs.lista_aree"
-                :max-height="300"
-                placeholder="Seleziona l'area"
-                v-model="area_post"
-              />
-            </div>
-          </div>
           <div class="cover_box mb-3">
             <span><strong>Titolo:</strong></span>
             <CInput
               type="text"
-              v-model="titolo_post"
+              v-model="titolo_corso"
               placeholder="Assegna un titolo a questo caricamento Es. Set Informativo ABC"
               maxlength="100"
             />
@@ -130,7 +99,7 @@
             <span><strong>Sottotitolo:</strong></span>
             <CInput
               type="text"
-              v-model="subtitle_post"
+              v-model="subtitle_corso"
               placeholder="Assegna un sottotitolo"
               maxlength="200"
             />
@@ -187,7 +156,6 @@
                 <span class="mb-2"
                   ><strong>Chi può accedere a questi contenuti?</strong></span
                 >
-
                 <div class="control">
                   <treeselect
                     v-model="permessi"
@@ -195,20 +163,39 @@
                     :always-open="false"
                     :options="options"
                     :max-height="300"
-                    placeholder="Seleziona per tipologia di rapporto"
+                    placeholder="Seleziona la tipologia di rapporto"
                   />
                 </div>
               </div>
             </div>
           </div>
           <div class="cover_box mb-3">
-            <span><strong>Contenuto:</strong></span>
-            <vue-editor v-model="contenuto_post" class="pb-3"></vue-editor>
+            <span><strong>Durata (minuti):</strong></span>
+            <CInput
+              type="text"
+              v-model="durata_corso"
+              placeholder="Durata indicativa del corso"
+              maxlength="4"
+            />
+          </div>
+
+          <div class="cover_box mb-3">
+            <span><strong>Obiettivi:</strong></span>
+            <CInput
+              type="text"
+              v-model="obiettivi_corso"
+              placeholder="Indica gli obiettivi del corso"
+            />
+          </div>
+
+          <div class="cover_box mb-3">
+            <span><strong>Descrizione:</strong></span>
+            <vue-editor v-model="descrizione_corso" class="pb-3"></vue-editor>
           </div>
 
           <div class="row cover_box">
             <span class="mb-2"><strong>Aggiungi allegati:</strong></span>
-            <div class="control">
+            <div>
               <VueFileAgent
                 class="mx-5"
                 ref="vueFileAgent"
@@ -234,21 +221,19 @@
           </div>
           <div class="container">
             <CButton
-              color="primary"
-              class=""
               style="color: white"
-              name="salva"
+              color="primary"
+              class="ml-2"
               @click="salva()"
-            ><i class="far fa-save"></i> Salva</CButton
+              ><i class="far fa-save"></i> Salva</CButton
             >
             <CButton
-              
-              class="ml-2"
               color="primary"
+              class="ml-2"
               variant="outline"
               @click="back()"
-            ><i class="fas fa-times"></i> Annulla
-            </CButton>
+              ><i class="fas fa-times"></i> Annulla</CButton
+            >
           </div>
         </div>
       </div>
@@ -257,26 +242,25 @@
 </template>
 
 <script>
+import Treeselect from "@riophae/vue-treeselect";
 import { VueEditor } from "vue2-editor";
 import axios from "axios";
-import Treeselect from "@riophae/vue-treeselect";
 
 export default {
-  name: "nuovaComunicazione",
+  name: "NuovoCorso",
   components: {
     VueEditor,
     Treeselect,
   },
-  props: "lista_aree",
 
   data() {
     return {
-      contenuto_post: "",
-      titolo_post: "",
-      subtitle_post: "",
-      // categoria_post: null,
-
-      area_post: null,
+      descrizione_corso: "",
+      titolo_corso: "",
+      subtitle_corso: "",
+      // categoria_corso: null,
+      durata_corso: null,
+      obiettivi_corso: "",
       thumb: "",
       thumb2: "", //utilizzato per l'anteprima della ricerca
       idUnsplash: null, // utilizzato per poi recuperare il download link
@@ -286,7 +270,6 @@ export default {
       showModaleUpload: false,
       loader: false,
       permessi: null,
-      // lista_categorie: JSON.parse(localStorage.getItem("categorie")),
 
       options: [
         {
@@ -302,12 +285,6 @@ export default {
       uploadHeaders: {},
     };
   },
-
-  mounted() {
-    // this.lista_area = JSON.parse(localStorage.getItem("area"));
-    // console.log("NewCom - Aree " + this.lista_aree);
-    // this.get_categorie();
-  },
   methods: {
     back() {
       this.$emit("back");
@@ -322,13 +299,13 @@ export default {
     onBeforeDelete: function (fileRecord) {
       var i = this.fileRecordsForUpload.indexOf(fileRecord);
       if (i !== -1) {
-        // queued file, not yet uploaded. Just remove from the arrays
+        // coda di file, non ancora uploaded. Viene rimosso solo dall'array
         this.fileRecordsForUpload.splice(i, 1);
         var k = this.fileRecords.indexOf(fileRecord);
         if (k !== -1) this.fileRecords.splice(k, 1);
       } else {
         if (confirm("Sicuro di voler rimuovere il file?")) {
-          this.$refs.vueFileAgent.deleteFileRecord(fileRecord); // will trigger 'delete' event
+          this.$refs.vueFileAgent.deleteFileRecord(fileRecord); //trigger 'delete' event
         }
       }
     },
@@ -340,33 +317,12 @@ export default {
         this.deleteUploadedFile(fileRecord);
       }
     },
-    async get_categorie() {
-      // Chiamata per recuperare le categorie
-      try {
-        await axios
-          .post(
-            this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.categorie
-          )
-          .then((response) => {
-            // la risposta con l'elenco delle categorie  la salvo nello storage
-            localStorage.setItem("categorie", JSON.stringify(response.data));
-            // console.log(JSON.stringify(response.data));
-          });
-      } catch (error) {
-        console.log("impossibile recuperare le categorie");
-      }
-    },
-
     previewFiles(event) {
-      // console.log(event.target.files);
       this.thumb = null;
       this.thumb2 = null;
       this.idUnsplash = null;
       this.thumb = URL.createObjectURL(event.target.files[0]);
     },
-
     resetCover() {
       this.$refs.file.value = null;
       this.$refs.query.value = "";
@@ -374,7 +330,6 @@ export default {
       this.thumb2 = null;
       this.idUnsplash = null;
     },
-
     async searchImg(query) {
       if (!query) {
         this.$alert(
@@ -412,7 +367,6 @@ export default {
         console.log("Impossibile recuperare le immagini " + error);
       }
     },
-
     selectImg(id, urlImg) {
       // console.log(id,urlImg);
       this.$refs.file.value = null;
@@ -428,11 +382,11 @@ export default {
     salva: async function () {
       /*controllo inserimento campi*/
       if (
-        this.titolo_post == "" ||
-        this.subtitle_post == "" ||
-        this.contenuto_post == "" ||
-        // this.categoria_post == null ||
-        this.area_post == null ||
+        this.titolo_corso == "" ||
+        this.subtitle_corso == "" ||
+        this.descrizione_corso == "" ||
+        this.durata_corso == null ||
+        this.obiettivi_corso == null ||
         this.permessi == null
       ) {
         this.$alert(
@@ -444,7 +398,7 @@ export default {
       }
       if (this.thumb == "" && this.thumb2 == "") {
         this.$alert(
-          "Verifica di aver scelto o caricato una copertina per la comunicazione",
+          "Verifica di aver scelto o caricato una copertina per il corso",
           "Copertina mancante",
           "warning"
         );
@@ -455,35 +409,34 @@ export default {
       var formData = new FormData();
       formData.append("file", file);
       /*
-     Effettuo l'upload dei record del post, rispondo con l'id utilizzato per l'inserimento del post da utilizzare per l'upload dei file
+     Effettuo l'upload dei record del corso, rispondo con l'id utilizzato per l'inserimento del corso da utilizzare per l'upload dei file
      */
-      let preUploadPostUrl =
+      let preUploadcorsoUrl =
         this.$custom_json.base_url +
         this.$custom_json.api_url +
-        this.$custom_json.ep_api.pre_upload_post;
+        this.$custom_json.ep_api.pre_upload_corso;
 
       let uploadUrl =
         this.$custom_json.base_url +
         this.$custom_json.api_url +
-        this.$custom_json.ep_api.upload_post;
+        this.$custom_json.ep_api.upload_corso;
 
       let params = JSON.stringify({
-        settore: this.$route.params.settore,
-        titolo: this.titolo_post,
-        subtitle: this.subtitle_post,
-        contenuto: this.contenuto_post,
+        durata: this.durata_corso,
+        obiettivi: this.obiettivi_corso,
+        titolo: this.titolo_corso,
+        subtitle: this.subtitle_corso,
+        descrizione: this.descrizione_corso,
         permessi: this.permessi,
         utente: JSON.parse(localStorage.getItem("chisono_data")).Nominativo,
         idUtente: JSON.parse(localStorage.getItem("chisono_data")).idUtente,
-        // categoria: this.categoria_post,
-        area: this.area_post,
         copertinaUnsplash: this.idUnsplash,
         numeroAllegati: this.fileRecordsForUpload.length,
       });
 
       formData.append("params", params);
       await axios
-        .post(preUploadPostUrl, formData, {
+        .post(preUploadcorsoUrl, formData, {
           header: {
             "Content-Type": "multipart/form-data",
           },
@@ -491,13 +444,12 @@ export default {
         .then((response2) => {
           // console.log(response2.data.status);
           if (response2.data.status == "OK") {
-            // se ok allora carico gli allegati (se esistono) passandogli l'id del post
+            // se ok allora carico gli allegati (se esistono) passandogli l'id del corso
             if (this.fileRecordsForUpload.length > 0) {
               let params_allegati = {
-                settore: this.$route.params.settore,
-                percorso: response2.data.post_id + "_Com",
+                percorso: response2.data.corso_id + "_Corso",
                 permessi: this.permessi,
-                post_id: response2.data.post_id,
+                corso_id: response2.data.corso_id,
                 utente: JSON.parse(localStorage.getItem("chisono_data"))
                   .Nominativo,
                 idUtente: JSON.parse(localStorage.getItem("chisono_data"))
@@ -513,7 +465,7 @@ export default {
                 .then((response) => {
                   console.log(response.data);
                   this.$alert(
-                    "Comunicazione pubblicata correttamente",
+                    "Corso pubblicato correttamente",
                     "Completato",
                     "success"
                   ).then(
@@ -528,7 +480,7 @@ export default {
             } else {
               /* Non ci sono allegati -> ritorno */
               this.$alert(
-                "Comunicazione pubblicata correttamente",
+                "Corso pubblicato correttamente",
                 "Completato",
                 "success"
               ).then(
@@ -565,18 +517,9 @@ export default {
 </script>
 
 <style>
-.card_post::before {
-  content: "";
-  display: block;
-  width: 15%;
-  height: 15px;
-  background: linear-gradient(
-    to right,
-    var(--bgColor) 60%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  /* border-top: 15px solid var(--bgColor); */
-}
+/* Forzo caricamento css del modulo treeselect */
+@import "~@riophae/vue-treeselect/dist/vue-treeselect.css";
+@import "~vue-file-agent/dist/vue-file-agent.css";
 .thumbImg {
   max-width: 100%;
   max-height: 100%;
@@ -599,7 +542,6 @@ export default {
   border-radius: 0.5rem 0.5rem 0 0 !important;
 }
 .breadcrumbs_link {
-  color: var(--bgColor) !important;
   text-decoration: underline;
   font-size: 14px;
   line-height: 19px;
@@ -612,7 +554,6 @@ export default {
   font-weight: 600;
 }
 .breadcrumbs {
-  color: var(--bgColor);
   font-size: 14px;
   line-height: 19px;
   text-transform: uppercase;
@@ -622,5 +563,9 @@ export default {
   padding-bottom: 1.5rem;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 600;
+}
+.modal-body {
+  overflow-y: scroll;
+  max-height: 50vh;
 }
 </style>

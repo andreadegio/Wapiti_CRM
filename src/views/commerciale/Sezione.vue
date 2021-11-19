@@ -202,7 +202,9 @@ export default {
   top: 0;
   left: 0;
   width: 50%;
-  border-top: 6px solid var(--bgColor);
+  height: 8px;
+  background: linear-gradient(to right,var(--bgColor) 60%,rgba(255,255,255,0) 100%);
+  /* border-top: 6px solid var(--bgColor); */
 }
 .titolo_color {
   color: var(--bgColor) !important;

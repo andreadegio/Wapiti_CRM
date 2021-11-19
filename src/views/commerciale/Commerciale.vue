@@ -74,7 +74,7 @@
             to="AdminCommerciale/Assicurazioni"
             class=""
             style="color: white !important"
-            ><CIcon name="cil-settings" /><strong> Gestione</strong>
+            ><CIcon name="cil-settings" /><strong> Gestione contenuti</strong>
           </CLink>
         </div>
       </CCol>
@@ -98,7 +98,7 @@
           <CLink
             to="AdminCommerciale/Energy"
             style="color: white !important"
-            ><CIcon name="cil-settings" /><strong> Gestione</strong>
+            ><CIcon name="cil-settings" /><strong> Gestione contenuti</strong>
           </CLink>
         </div>
       </CCol>
@@ -183,7 +183,9 @@ export default {
   top: 0;
   width: 50%;
   left: 0;
-  border-top: 6px solid var(--bgColor);
+  height: 8px;
+  background: linear-gradient(to right,var(--bgColor) 60%,rgba(255,255,255,0) 100%);
+  /* border-top: 6px solid var(--bgColor); */
 }
 .titolo_color {
   color: var(--bgColor);
