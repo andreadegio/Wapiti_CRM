@@ -31,7 +31,6 @@ Vue.use(VueAnalytics, {
   id: "UA-197949487-1",
   router,
 });
-
 Vue.use(VueFileAgent);
 
 Vue.use(VueSimpleAlert);
