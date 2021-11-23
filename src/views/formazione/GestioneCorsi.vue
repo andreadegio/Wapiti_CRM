@@ -15,7 +15,9 @@
         </CRow>
         <CCardBody color="white" class="mt-2">
           <CDataTable
+            :noItemsView="{ noResults: 'no filtering results available custom', noItems: 'Nessun corso presente' }"
             ref="tabella_post"
+            
             :items="post"
             :fields="fields"
             :table-filter="{
@@ -162,7 +164,7 @@ export default {
       let params = {
         UO_tipo: JSON.parse(localStorage.getItem("chisono_data"))
           .UnitaOperativa_Tipo_ID,
-        is_sede: JSON.parse(localStorage.getItem("chisono_data")).Is_Sede
+        is_sede: JSON.parse(localStorage.getItem("chisono_data")).Is_Sede,
       };
       var lista_corsi = [];
       try {
@@ -200,7 +202,7 @@ export default {
       this.togglePost(id_post_da_togglare);
       this.$forceUpdate();
     },
-    
+
     cambiaPaginazioneTabella(per_page_items) {
       // crea oggetto da inviare alla CDataTable per cambiare la paginazione
       let pagination_object = {

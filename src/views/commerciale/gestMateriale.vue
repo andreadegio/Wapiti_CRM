@@ -17,6 +17,7 @@
         </CRow>
         <CCardBody color="white" class="mt-2">
           <CDataTable
+          :noItemsView="{ noResults: 'no filtering results available custom', noItems: 'Nessuna comunicazione o materiale presente' }"
             ref="tabella_post"
             :items="post"
             :fields="fields"
