@@ -25,6 +25,12 @@
               alt="- IMPOSSIBILE CARICARE -"
             >
             </CCardImg>
+            <CBadge
+              v-if="lista_nuovi != null && lista_nuovi.includes(item.id_post)"
+              color="danger"
+              class="badgeNuovo"
+              >Nuovo
+            </CBadge>
             <CCardBody class="py-0 px-1" style="min-height: 9rem">
               <div class="text-right">
                 <cite> {{ item.data_ins | formatDate }}</cite>
@@ -81,7 +87,7 @@
     </CJumbotron>
     <CJumbotron class="Gas" v-if="isEnergy">
       <CCol md="4" class="py-5 text-right">
-              <h1
+        <h1
           class="titolo-display text-center"
           style="font-weight: initial !important"
         >
@@ -95,9 +101,7 @@
           >Scopri di più...</CButton
         >
         <div class="mt-3" v-if="admin">
-          <CLink
-            to="AdminCommerciale/Energy"
-            style="color: white !important"
+          <CLink to="AdminCommerciale/Energy" style="color: white !important"
             ><CIcon name="cil-settings" /><strong> Gestione contenuti</strong>
           </CLink>
         </div>
@@ -124,6 +128,7 @@
 import axios from "axios";
 
 export default {
+  name: "Commerciale",
   data() {
     return {
       admin: JSON.parse(localStorage.getItem("chisono_data")).Is_Sede,
@@ -132,12 +137,37 @@ export default {
       isAuto: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Auto,
       post: [],
       bgColor: "#1e2f56",
+      lista_nuovi: [],
     };
   },
   mounted() {
     this.get_lista_post();
+    this.getToSee();
   },
   methods: {
+    async getToSee() {
+      // Chiamata per recuperare l'array dei corsi da leggere
+      let params = {
+        categoria: "Post",
+        utente: localStorage.getItem("userID"),
+        tipo_uo: JSON.parse(localStorage.getItem("chisono_data"))
+          .UnitaOperativa_Tipo_ID,
+      };
+      try {
+        await axios
+          .post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.get_toSee,
+            { params }
+          )
+          .then((response) => {
+            this.lista_nuovi = response.data;
+          });
+      } catch (error) {
+        console.log("errore: " + error);
+      }
+    },
     async get_lista_post() {
       // Chiamata per recuperare la lista dei post
       let params = {
@@ -184,7 +214,11 @@ export default {
   width: 50%;
   left: 0;
   height: 8px;
-  background: linear-gradient(to right,var(--bgColor) 60%,rgba(255,255,255,0) 100%);
+  background: linear-gradient(
+    to right,
+    var(--bgColor) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
   /* border-top: 6px solid var(--bgColor); */
 }
 .titolo_color {
@@ -245,6 +279,16 @@ export default {
 .btnGas:hover {
   color: rgb(255, 255, 255) !important;
   background-color: #eba133;
+}
+.badgeNuovo {
+  position: absolute;
+  z-index: 99;
+  right: 42%;
+  top: 58%;
+  padding: 0.4em 0.4em !important;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0 6px 10px 0 rgba(0, 0, 0, 0.55), 0 1px 18px 0 rgba(223, 78, 78, 0.83) !important;
+  font-size: 90% !important;
 }
 </style>
 

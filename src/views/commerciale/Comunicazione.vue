@@ -137,7 +137,7 @@
 
 <script>
 import Visualizzatore from "../../components/visualizzaDocumenti.vue";
-
+import axios from "axios";
 export default {
   name: "Comunicazione",
   // ricevo dalla pagina Commerciale.vue il titolo della notizia utilizzato per l'url, l'id e la lista completa dei post
@@ -153,6 +153,7 @@ export default {
       file: "",
       ext: "",
       nome_file: "",
+      lista_nuovi: [],
     };
   },
   mounted() {
@@ -161,8 +162,50 @@ export default {
       this.$router.push("..");
     }
     this.last = this.lista_post[this.lista_post.length - 1].id;
+    this.set_seen();
   },
   methods: {
+    async set_seen() {
+      // Chiamata per recuperare l'array dei post che risultano ancora da leggere
+      let params = {
+        categoria: "Post",
+        utente: localStorage.getItem("userID"),
+        tipo_uo: JSON.parse(localStorage.getItem("chisono_data"))
+          .UnitaOperativa_Tipo_ID,
+      };
+      try {
+        await axios
+          .post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.get_toSee,
+            { params }
+          )
+          .then((response) => {
+            this.lista_nuovi = response.data;
+          });
+      } catch (error) {
+        console.log("errore: " + error);
+      }
+      if (this.lista_nuovi.includes(this.lista_post[this.id].id_post)) {
+        // console.log("registro la lettura");
+        let registro = {
+          categoria: "Post",
+          utente: localStorage.getItem("userID"),
+          elemento: this.lista_post[this.id].id_post,
+        };
+        try {
+          await axios.post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.set_letta,
+            { registro }
+          );
+        } catch (error) {
+          console.log("errore: " + error);
+        }
+      }
+    },
     aggiorna_modale(value) {
       this.showDoc = value;
     },
