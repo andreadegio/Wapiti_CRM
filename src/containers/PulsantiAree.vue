@@ -87,6 +87,7 @@ export default {
   },
   created() {
     this.get_notifiche_formazione();
+    this.get_notifiche_commerciale();
   },
   methods: {
     async get_notifiche_formazione() {
@@ -106,6 +107,28 @@ export default {
           )
           .then((response) => {
             this.notificheFormazione = response.data;
+          });
+      } catch (error) {
+        console.log("errore: " + error);
+      }
+    },
+    async get_notifiche_commerciale() {
+      let params = {
+        categoria: "Post",
+        utente: localStorage.getItem("userID"),
+        tipo_uo: JSON.parse(localStorage.getItem("chisono_data"))
+          .UnitaOperativa_Tipo_ID,
+      };
+      try {
+        await axios
+          .post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.get_notifiche,
+            { params }
+          )
+          .then((response) => {
+            this.notificheCommerciale = response.data;
           });
       } catch (error) {
         console.log("errore: " + error);

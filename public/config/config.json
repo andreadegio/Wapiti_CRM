@@ -31,7 +31,8 @@
     "delete_corso": "Formazione/deleteCorso",
     "get_notifiche":"Utility/get_notifiche",
     "set_letta":"Utility/set_letta",
-    "get_toSee":"Utility/get_toSee"
+    "get_toSee":"Utility/get_toSee",
+    "get_avvisiToast":"Utility/get_avvisiToast"
   },
   "servizi_broker": "https://servizi.documentale.cloud/aibajsonea/",
   "broker_veicoli": "http://broker.abybroker.it/ea2019/AreaOperazioni.aspx",

@@ -1,5 +1,12 @@
 <template >
   <div v-if="show_async == 2">
+    <CToaster v-for="(avviso, index) in avvisiToast" :key="index" :autohide="5000" position="top-center">
+      <template>
+        <CToast color="info" :show="true" :header="avviso.Titolo">
+          <p v-html="avviso.Messaggio"></p>
+        </CToast>
+      </template>
+    </CToaster>
     <CRow>
       <CCol md="1"> </CCol>
       <CCol md="10">
@@ -157,6 +164,7 @@ export default {
       news_mondo: null,
       urlRami: localStorage.getItem("urlRami"),
       isEnergy: "",
+      avvisiToast: null
     };
   },
 
@@ -174,9 +182,28 @@ export default {
     }
     this.chisono();
   },
-  mounted() {},
+  mounted() {
+    this.get_avvisiToast();
+  },
 
   methods: {
+    async get_avvisiToast() {
+      // Chiamata per recuperare l'array dei messaggi Toast
+      
+      try {
+        await axios
+          .post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.get_avvisiToast
+          )
+          .then((response) => {
+           this.avvisiToast = response.data;
+          });
+      } catch (error) {
+        console.log("errore: " + error);
+      }
+    },
     async chisono() {
       //  chiamo il chisono per recuperare i dati dell'utente loggato
       // prima verifico di non averli già nello storage, altrimenti effettuo la chiamata
