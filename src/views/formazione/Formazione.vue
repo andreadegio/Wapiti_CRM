@@ -14,7 +14,7 @@
           </CLink>
         </div>
       </div>
-      <div class="col-10 ">
+      <div class="col-10">
         <div class="row justify-content-center">
           <CCardGroup class="latest col-10">
             <div
@@ -39,6 +39,14 @@
                     alt="- IMPOSSIBILE CARICARE -"
                   >
                   </CCardImg>
+                  <CBadge
+                    v-if="
+                      lista_nuovi != null && lista_nuovi.includes(item.id_corso)
+                    "
+                    color="danger"
+                    class="badgeNuovo"
+                    >Nuovo
+                  </CBadge>
                   <CCardBody
                     class="py-1 px-2 card_post"
                     :style="{ '--bgColor': item.color_settore }"
@@ -82,6 +90,7 @@
 import axios from "axios";
 
 export default {
+  name: "AreaFormazione",
   data() {
     return {
       admin: JSON.parse(localStorage.getItem("chisono_data")).Is_Sede,
@@ -90,12 +99,37 @@ export default {
       isAuto: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Auto,
       corsi: [],
       bgColor: "#1e2f56",
+      lista_nuovi: [],
     };
   },
   mounted() {
     this.get_lista_corsi();
+    this.getToSee();
   },
   methods: {
+    async getToSee() {
+      // Chiamata per recuperare l'array dei corsi da leggere
+      let params = {
+        categoria: "Corso",
+        utente: localStorage.getItem("userID"),
+        tipo_uo: JSON.parse(localStorage.getItem("chisono_data"))
+          .UnitaOperativa_Tipo_ID,
+      };
+      try {
+        await axios
+          .post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.get_toSee,
+            { params }
+          )
+          .then((response) => {
+            this.lista_nuovi = response.data;
+          });
+      } catch (error) {
+        console.log("errore: " + error);
+      }
+    },
     async get_lista_corsi() {
       // Chiamata per recuperare la lista dei corsi
       let params = {
@@ -177,6 +211,14 @@ export default {
 .formazione_style {
   display: grid;
   overflow: hidden;
+}
+.badgeNuovo {
+  position: absolute;
+  z-index: 99;
+  right: 90%;
+  padding: 0.4em 0.4em !important;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0 6px 10px 0 rgba(0, 0, 0, 0.55), 0 1px 18px 0 rgba(223, 78, 78, 0.83) !important;
 }
 </style>
 

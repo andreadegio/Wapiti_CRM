@@ -7,15 +7,20 @@
         class="box_contenuti"
         :style="{ '--bgColor': lista_corsi[id].color_settore }"
       >
-        <div
+        <!-- <div
           class="text-uppercase settore_color py-3"
           :style="{ '--bgColor': lista_corsi[id].color_settore }"
         >
           <strong
-            ><u>{{ lista_corsi[id].settore }}</u></strong
+            ><u>{{ lista_corsi[id].categoria }}</u></strong
           >
-        </div>
-
+        </div> -->
+        <CBadge
+          v-if="lista_nuovi.includes(lista_corsi[id].id_corso)"
+          color="danger"
+          class="badgeNuovo"
+          >Nuovo
+        </CBadge>
         <div class="titolo pb-3">{{ lista_corsi[id].titolo }}</div>
         <div class="sottotitolo pb-3">
           {{ lista_corsi[id].sottotitolo }}
@@ -54,16 +59,15 @@
           ></div>
         </div>
 
-        <div class="col-md-4 colonna_dx" v-show="
-              lista_corsi[id].allegati && lista_corsi[id].files.length > 0
-            ">
-          <div
-            class="allegati"            
-          >
+        <div
+          class="col-md-4 colonna_dx"
+          v-show="lista_corsi[id].allegati && lista_corsi[id].files.length > 0"
+        >
+          <div class="allegati">
             <span class="titolo_allegati ml-3">
               <i class="fas fa-paperclip"></i> Materiale del corso:</span
             >
-            
+
             <div class="listaFile text-center">
               <div
                 class="file"
@@ -165,6 +169,7 @@
 
 <script>
 import Visualizzatore from "../../components/visualizzaDocumenti.vue";
+import axios from "axios";
 
 export default {
   name: "Corso",
@@ -181,6 +186,7 @@ export default {
       file: "",
       ext: "",
       nome_file: "",
+      lista_nuovi: [],
     };
   },
   mounted() {
@@ -189,8 +195,53 @@ export default {
       this.$router.push("..");
     }
     this.last = this.lista_corsi[this.lista_corsi.length - 1].id;
+    this.set_seen();
   },
   methods: {
+    async set_seen() {
+      // Chiamata per recuperare l'array dei corsi che risultano ancora da leggere
+      let params = {
+        categoria: "Corso",
+        utente: localStorage.getItem("userID"),
+        tipo_uo: JSON.parse(localStorage.getItem("chisono_data"))
+          .UnitaOperativa_Tipo_ID,
+      };
+      try {
+        await axios
+          .post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.get_toSee,
+            { params }
+          )
+          .then((response) => {
+            this.lista_nuovi = response.data;
+          });
+      } catch (error) {
+        console.log("errore: " + error);
+      }
+      if (this.lista_nuovi.includes(this.lista_corsi[this.id].id_corso)) {
+        // console.log("registro la lettura");
+        let registro = {
+          categoria: "Corso",
+          utente: localStorage.getItem("userID"),
+          elemento: this.lista_corsi[this.id].id_corso
+        };
+        try {
+        await axios
+          .post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.set_letta,
+            { registro }
+          )
+          
+      } catch (error) {
+        console.log("errore: " + error);
+      }
+
+      }
+    },
     aggiorna_modale(value) {
       this.showDoc = value;
     },
@@ -337,7 +388,13 @@ export default {
   font-weight: 700;
   padding-left: 8px;
 }
-
+.badgeNuovo{
+  position: absolute;
+  z-index: 99;
+  right: 90%;
+  padding: 0.4em 0.4em !important;
+  top:10%;
+}
 /* SEZIONE ALLEGATI  */
 @import "/css/cloud.css";
 </style>

@@ -12,6 +12,12 @@
       </CCard>
     </CCardLink>
     <CCardLink to="Commerciale" target="_self">
+      <CBadge
+        v-show="notificheCommerciale > 0"
+        color="danger"
+        class="badgeNotifiche"
+        >{{ notificheCommerciale }}</CBadge
+      >
       <CCard
         class="text-center elevation-6 pulsanti-azioni"
         body-wrapper
@@ -35,6 +41,12 @@
       </CCard>
     </CCardLink>
     <CCardLink to="Formazione" target="_self">
+      <CBadge
+        v-show="notificheFormazione > 0"
+        color="danger"
+        class="badgeNotifiche"
+        >{{ notificheFormazione }}</CBadge
+      >
       <CCard
         class="text-center elevation-6 pulsanti-azioni"
         body-wrapper
@@ -63,21 +75,58 @@
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+
+export default {
+  name: "PulsantiSx",
+  data() {
+    return {
+      notificheCommerciale: 0,
+      notificheFormazione: 0,
+    };
+  },
+  created() {
+    this.get_notifiche_formazione();
+  },
+  methods: {
+    async get_notifiche_formazione() {
+      let params = {
+        categoria: "Corso",
+        utente: localStorage.getItem("userID"),
+        tipo_uo: JSON.parse(localStorage.getItem("chisono_data"))
+          .UnitaOperativa_Tipo_ID,
+      };
+      try {
+        await axios
+          .post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.get_notifiche,
+            { params }
+          )
+          .then((response) => {
+            this.notificheFormazione = response.data;
+          });
+      } catch (error) {
+        console.log("errore: " + error);
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
-#elenco_pulsanti{
+#elenco_pulsanti {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   width: 100%;
   padding-left: 0px !important;
   padding-right: 0px !important;
-
 }
-.card-link{
+.card-link {
   margin-left: 0px !important;
+  text-align: right;
 }
 .elevation-6 {
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
@@ -114,5 +163,16 @@ export default {};
 }
 .pulsanti-azioni h4 {
   margin-bottom: 0px !important;
+}
+.badgeNotifiche {
+  position: absolute;
+  z-index: 99999;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0 6px 10px 0 rgba(0, 0, 0, 0.55), 0 1px 18px 0 rgba(223, 78, 78, 0.83) !important;
+  font-size: 85% !important;
+  /* padding: 0.4em 0.4em; */
+  border-radius: 1rem;
+  margin-left: -0.5rem;
+  /* background-color: #ef7a12 !important; */
 }
 </style>
