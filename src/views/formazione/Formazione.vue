@@ -215,7 +215,8 @@ export default {
 .badgeNuovo {
   position: absolute;
   z-index: 99;
-  right: 90%;
+  right: 45%;
+  top:50%;
   padding: 0.4em 0.4em !important;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
     0 6px 10px 0 rgba(0, 0, 0, 0.55), 0 1px 18px 0 rgba(223, 78, 78, 0.83) !important;
