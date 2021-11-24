@@ -174,7 +174,7 @@ hr {
 }
 hr:after {
   content: "La nuova piattaforma operativa";
-  font-size: 3.5em;
+  font-size: 2rem;
   position: relative;
   /* left: -0.5em; */
   /* font-family: "Indie Flower", cursive; */
