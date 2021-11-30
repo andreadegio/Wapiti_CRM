@@ -1,6 +1,11 @@
 <template >
   <div v-if="show_async == 2">
-    <CToaster v-for="(avviso, index) in avvisiToast" :key="index" :autohide="5000" position="top-center">
+    <CToaster
+      v-for="(avviso, index) in avvisiToast"
+      :key="index"
+      :autohide="5000"
+      position="top-center"
+    >
       <template>
         <CToast color="info" :show="true" :header="avviso.Titolo">
           <p v-html="avviso.Messaggio"></p>
@@ -60,6 +65,7 @@
                   background-size: cover;
                 "
                 ><CCardTitle>
+                  <span class="portali">Piattaforma</span>
                   <h1 class="pulsante_portali">ASSICURAZIONI</h1>
                 </CCardTitle>
               </CCard>
@@ -78,7 +84,8 @@
                   background-size: cover;
                 "
                 ><CCardTitle>
-                  <h1 class="pulsante_portali">RAMI</h1>
+                  <span class="portali">Piattaforma</span>
+                  <h1 class="pulsante_portali">RC PROFESSIONALI</h1>
                 </CCardTitle>
               </CCard>
             </CCardLink>
@@ -96,8 +103,10 @@
                   z-index: 0;
                   background-size: cover;
                 "
-              >
-                <h1 class="pulsante_portali">GAS E LUCE</h1>
+                ><CCardTitle>
+                  <span class="portali">Piattaforma</span>
+                  <h1 class="pulsante_portali">GAS & LUCE</h1>
+                </CCardTitle>
               </CCard>
             </CCardLink>
           </div>
@@ -113,8 +122,10 @@
                   z-index: 0;
                   background-size: cover;
                 "
-              >
-                <h1 class="pulsante_portali">GAS E LUCE</h1>
+                ><CCardTitle>
+                  <span class="portali">Piattaforma</span>
+                  <h1 class="pulsante_portali">GAS & LUCE</h1>
+                </CCardTitle>
               </CCard>
             </CCardLink>
           </div>
@@ -164,7 +175,7 @@ export default {
       news_mondo: null,
       urlRami: localStorage.getItem("urlRami"),
       isEnergy: "",
-      avvisiToast: null
+      avvisiToast: null,
     };
   },
 
@@ -189,7 +200,7 @@ export default {
   methods: {
     async get_avvisiToast() {
       // Chiamata per recuperare l'array dei messaggi Toast
-      
+
       try {
         await axios
           .post(
@@ -198,7 +209,7 @@ export default {
               this.$custom_json.ep_api.get_avvisiToast
           )
           .then((response) => {
-           this.avvisiToast = response.data;
+            this.avvisiToast = response.data;
           });
       } catch (error) {
         console.log("errore: " + error);
@@ -527,6 +538,12 @@ hr:after {
   text-shadow: 1px 1px midnightblue;
   font-size: 2.5rem;
   margin-bottom: 0 !important;
-  margin-top: 10%;
+  margin-top: 5%;
+}
+.portali {
+  color: white;
+  text-shadow: 1px 1px midnightblue;
+  font-size: 1.5rem;
+  margin-bottom: 0 !important;
 }
 </style>

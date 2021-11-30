@@ -15,16 +15,18 @@
         </CRow>
         <CCardBody color="white" class="mt-2">
           <CDataTable
-            :noItemsView="{ noResults: 'no filtering results available custom', noItems: 'Nessun corso presente' }"
+            :noItemsView="{
+              noResults: 'no filtering results available custom',
+              noItems: 'Nessun corso presente',
+            }"
             ref="tabella_post"
-            
             :items="post"
             :fields="fields"
             :table-filter="{
               placeholder: 'Ricerca...',
               label: 'Ricerca nei corsi:',
             }"
-            :items-per-page-select="{ label: 'Corsi per pagina' }"
+            :items-per-page-select="{ label: 'Risultati per pagina' }"
             :items-per-page="post_per_pagina"
             hover
             sorter
@@ -34,7 +36,7 @@
             @row-clicked="myRowClickHandler"
           >
             <template #show_details="{ item }">
-              <td class="py-2">
+              <td class="py-2" style="text-align: center !important">
                 <CButton
                   color="primary"
                   variant="outline"
@@ -76,19 +78,27 @@
                     }"
                   >
                     <div class="row">
-                      <div class="col-sm-4">
+                      <div class="col-sm-8">
                         <div>
                           <span class="text-muted"><h4>Contenuto:</h4></span>
                           <p v-html="item.contenuto"></p>
                         </div>
                       </div>
-                      <div v-show="item.allegati == 1" class="col-sm-8">
-                        <h4>Allegati:</h4>
+                      <div class="col-sm-4">
+                        <h4>Permessi:</h4>
+                        <treeselect
+                          v-model="item.permessi"
+                          :multiple="true"
+                          :always-open="false"
+                          :disabled="true"
+                          :options="options"
+                          :max-height="300"
+                          placeholder="Permessi"
+                          :disableFuzzyMatching="true"
+                        />
                         <hr />
-                        <div v-for="allegato in item.files" :key="allegato.id">
-                          <span>{{ allegato.nome_file }}</span>
-                        </div>
-                        <div></div>
+                        <h4>Obiettivi del corso:</h4>
+                        {{ item.obiettivi }}
                       </div>
                     </div>
                   </CMedia>
@@ -105,9 +115,10 @@
 
 <script>
 import axios from "axios";
+import Treeselect from "@riophae/vue-treeselect";
 
 const fields = [
-  { key: "titolo", _style: "min-width:200px; font-weight: bold;" },
+  { key: "titolo", _style: "max-width:20rem; font-weight: bold;" },
   { key: "sottotitolo", label: "Sottotitolo" },
   { key: "data_ins", label: "Data Inserimento" },
 
@@ -121,6 +132,9 @@ const fields = [
 
 export default {
   name: "GestionePost",
+  components: {
+    Treeselect,
+  },
   data() {
     return {
       post: [],
@@ -131,6 +145,15 @@ export default {
       post_da_modificare: {},
       post_per_pagina: 10,
       add_edit: "",
+      options: [
+        {
+          id: "999",
+          label: "TUTTI",
+          isDefaultExpanded: true,
+          children: JSON.parse(localStorage.getItem("tipologie")),
+        },
+      ],
+      permessi: [],
     };
   },
   computed: {
