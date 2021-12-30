@@ -182,7 +182,9 @@ export default {
             { params }
           )
           .then((response) => {
-            this.lista_nuovi = response.data;
+            if (response.data) {
+              this.lista_nuovi = response.data;
+            }
           });
       } catch (error) {
         console.log("errore: " + error);

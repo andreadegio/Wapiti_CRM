@@ -215,7 +215,10 @@ export default {
             { params }
           )
           .then((response) => {
-            this.lista_nuovi = response.data;
+            if (response.data) {
+              console.log("risposta valida");
+              this.lista_nuovi = response.data;
+            }
           });
       } catch (error) {
         console.log("errore: " + error);
@@ -225,21 +228,18 @@ export default {
         let registro = {
           categoria: "Corso",
           utente: localStorage.getItem("userID"),
-          elemento: this.lista_corsi[this.id].id_corso
+          elemento: this.lista_corsi[this.id].id_corso,
         };
         try {
-        await axios
-          .post(
+          await axios.post(
             this.$custom_json.base_url +
               this.$custom_json.api_url +
               this.$custom_json.ep_api.set_letta,
             { registro }
-          )
-          
-      } catch (error) {
-        console.log("errore: " + error);
-      }
-
+          );
+        } catch (error) {
+          console.log("errore: " + error);
+        }
       }
     },
     aggiorna_modale(value) {
@@ -388,12 +388,12 @@ export default {
   font-weight: 700;
   padding-left: 8px;
 }
-.badgeNuovo{
+.badgeNuovo {
   position: absolute;
   z-index: 99;
   right: 90%;
   padding: 0.4em 0.4em !important;
-  top:10%;
+  top: 10%;
 }
 /* SEZIONE ALLEGATI  */
 @import "/css/cloud.css";
