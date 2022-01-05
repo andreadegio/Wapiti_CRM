@@ -17,7 +17,7 @@ var fullToolbar = [
 ]
 
 ## Modifiche per rilascio in produzione/staging
-nel mail.js modificare il baseURL per axiosFileUploader
+nel main.js modificare il baseURL per axiosFileUploader
 
 ## Errore chunkLoading
 modifcare le regole di routing nel file index.js raggruppando i componenti con un nome per il chunk di webpack

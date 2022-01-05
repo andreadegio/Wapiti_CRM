@@ -71,7 +71,7 @@
               </CCard>
             </CCardLink>
           </div>
-          <div v-if="urlRami" class="col-sm">
+          <!-- <div v-if="urlRami" class="col-sm">
             <CCardLink :href="urlRami" target="_blank">
               <CCard
                 class="text-center elevation-6 portali-btn"
@@ -89,8 +89,7 @@
                 </CCardTitle>
               </CCard>
             </CCardLink>
-          </div>
-
+          </div> -->
           <div class="col-sm" v-if="!isEnergy">
             <CCardLink to="Comingsoon_gas" target="_self">
               <CCard

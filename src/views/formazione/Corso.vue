@@ -307,9 +307,10 @@ export default {
   vertical-align: middle;
   max-height: 350px;
   width: 100%;
-  object-fit: cover;
+  object-fit: none;
   object-position: 50% 50%;
   border: 0;
+  opacity: 60%;
 }
 .titolo_allegati {
   font-size: 1.8rem;
