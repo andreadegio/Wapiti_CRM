@@ -123,6 +123,7 @@ export default {
   data() {
     return {
       jsonUtente: [],
+      data_login:'',
       messaggio_errore: false,
       login_url: this.$custom_json.login_url,
     };
@@ -138,9 +139,14 @@ export default {
   },
 
   methods: {
+    printDate: function () {
+            return new Date();
+          },
     getUserValue(submitEvent) {
+      this.data_login = this.printDate();
       localStorage.setItem("user", submitEvent.target.elements.user.value);
       localStorage.setItem("pwd", submitEvent.target.elements.password.value);
+      localStorage.setItem("lastLogin", this.data_login)
       return true;
     },
   },

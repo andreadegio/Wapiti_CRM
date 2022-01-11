@@ -209,6 +209,7 @@ export default {
       this.$route.query.auth !== "1"
     ) {
       this.$router.push("login");
+      return;
     }
     this.chisono();
   },
@@ -234,7 +235,38 @@ export default {
         console.log("errore: " + error);
       }
     },
+
     async chisono() {
+      const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+      //data salvata
+      const datasalvata = new Date(localStorage.getItem("lastLogin"));
+      const dataoggi = new Date();
+      //data di oggi
+      const data1 = Date.UTC(
+        dataoggi.getFullYear(),
+        dataoggi.getMonth(),
+        dataoggi.getDate()
+      );
+      const data2 = Date.UTC(
+        datasalvata.getFullYear(),
+        datasalvata.getMonth(),
+        datasalvata.getDate()
+      );
+      const differenza = Math.floor((data1 - data2) / _MS_PER_DAY);
+
+      console.log(
+        "data di oggi = " +
+          data1 +
+          " data storage= " +
+          data2 +
+          " differenza= " +
+          differenza
+      );
+      if (differenza != 0) {
+        console.log("devo rifare il login - sessione scaduta");
+        this.$router.push("login");
+        return;
+      }
       //  chiamo il chisono per recuperare i dati dell'utente loggato
       // prima verifico di non averli già nello storage, altrimenti effettuo la chiamata
       if (localStorage.getItem("chisono_data") == null) {
@@ -299,8 +331,10 @@ export default {
       this.isEnergy = JSON.parse(
         localStorage.getItem("chisono_data")
       ).Abilitato_Energy;
-      //se sono già autenticato, controllo il localstorage
-      this.isRami = JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Rami;
+      //se sono già autenticato e non ho effettuato il login da più di un giorno, controllo il localstorage
+      this.isRami = JSON.parse(
+        localStorage.getItem("chisono_data")
+      ).Abilitato_Rami;
       // this.triggerNews += 1;
       this.latest_news(); // ultime news operative
       this.load_news(); // ultime news mondo

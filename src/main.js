@@ -20,7 +20,7 @@ import VueAnalytics from "vue-analytics";
 import VueSimpleAlert from "vue-simple-alert";
 import VueFileAgent from "vue-file-agent";
 import moment from "moment";
-// import VueFileAgentStyles from 'vue-file-agent/dist/vue-file-agent.css';
+
 
 library.add(faUserSecret);
 Vue.component("font-awesome-icon", FontAwesomeIcon);

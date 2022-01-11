@@ -10,12 +10,12 @@
           </template>
           <CCardGroup class="latest">
             <div
-              class="col-lg-3 col-sm-6 px-0"
+              class="col-lg-3 col-sm-6 px-0 pb-0"
               v-for="(item, index) in post"
               :key="index"
             >
               <CCard
-                class="mx-1 pt-2 card_materiale card_post"
+                class="mx-1 pt-2 card_materiale card_post pb-0 mb-0"
                 :style="{ '--bgColor': item.color_settore }"
               >
                 <CLink
@@ -81,12 +81,12 @@
           </template>
           <CCardGroup class="latest">
             <div
-              class="col-lg-3 col-sm-6 px-0"
+              class="col-lg-3 col-sm-6 px-0 pb-0"
               v-for="(item, index) in post"
               :key="index"
             >
               <CCard
-                class="mx-1 pt-2 card_materiale card_post"
+                class="mx-1 pt-2 card_materiale card_post pb-0 mb-0"
                 :style="{ '--bgColor': item.color_settore }"
               >
                 <CLink
