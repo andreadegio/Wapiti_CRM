@@ -224,19 +224,15 @@
                               border-left: 0 !important;
                               border-right: 0 !important;
                             "
-                          >
-                            
-                          </td>
+                          ></td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
-                  
                 </div>
               </span>
             </div>
             <div class="pt-5" v-if="settore == 'SETTORI 1 E 2'">
-             
               <span>
                 <div
                   v-for="folder in folder_list"
@@ -293,14 +289,11 @@
                               border-left: 0 !important;
                               border-right: 0 !important;
                             "
-                          >
-                           
-                          </td>
+                          ></td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
-                 
                 </div>
               </span>
             </div>
@@ -322,6 +315,7 @@
           >
             <CDataTable
               id="int_table"
+              ref="tabella_doc"
               :items="files"
               :fields="fields_INTERMEDIARIO"
               hover
@@ -353,6 +347,7 @@
               id="rc_table"
               :items="files"
               :fields="fields_RCA"
+              ref="tabella_doc"
               sorter
               hover
               pagination
@@ -409,6 +404,7 @@
             <CDataTable
               id="altre_table"
               :items="files"
+              ref="tabella_doc"
               :fields="fields_SERVIZI"
               sorter
               hover
@@ -449,6 +445,7 @@
           <div class="pt-5" v-if="settore === 'ALTRE GARANZIE'">
             <CDataTable
               id="altre_table"
+              ref="tabella_doc"
               :items="files"
               :fields="fields_ALTRE"
               sorter
@@ -687,13 +684,19 @@ export default {
     // console.log(this.array_link);
   },
   methods: {
-    // async popolaFile(SLUG, URL) {
-    //   await this.recupera_documentale(SLUG, URL);
+    reset_pagination() {
+      // Forzo sempre la visualizzazione della prima pagina del datagrid per poter ripartire
+      // dalla prima ogni volta che cambio folder
+      if (this.$refs.tabella_doc) {
+        // console.log(this.$refs.tabella_doc.page);
+        this.$refs.tabella_doc.page = 1;
+      }
+    },
 
-    // },
     call_folder_list(folder) {
       // Funzione chiamata dalle cartelle di primo livello (documenti intermediario, precontrattuale, ecc)
-
+      //resetto la paginazione
+      this.reset_pagination();
       this.vuoto = false; // Inizializzo il messaggio "non ci sono file"
 
       // Inizializzo le sottocartelle
@@ -720,6 +723,9 @@ export default {
 
     call_subfolder_list(subfolder, folder) {
       // Funzione chiamata dalle cartelle di secondo livello (RCA, Altre garanzie, ecc)
+
+      //resetto la paginazione
+      this.reset_pagination();
       this.vuoto = false; // Inizializzo il messaggio "non ci sono file"
       this.color = "white";
       // Inizializzo le sottocartelle
@@ -733,6 +739,7 @@ export default {
 
       this.subfolder = subfolder.slug; // Per identificare il data-table
       // console.log(subfolder.slug);
+      // console.log(this.$data.page);
       switch (subfolder.slug) {
         case "INTERMEDIARIO":
           this.files = [];
@@ -770,6 +777,8 @@ export default {
 
     async call_garanzie_list(filtro = "", target = "") {
       // FUNZIONE PER GENERARE LE SOTTO CARTELLE DI TERZO LIVELLO DI ALTRE GARANZIE E SERVIZI
+      //resetto la paginazione
+      this.reset_pagination();
       this.select = true;
       this.file_name = "";
       this.filtro_gar = filtro; //utilizzato per filtrare i risultati nel datatable
@@ -866,6 +875,7 @@ export default {
     },
 
     filter_garanzie(tipo) {
+      this.reset_pagination();
       this.select = true;
       this.breadcrumbs.length == 3
         ? (this.breadcrumbs[2][0] = tipo)
@@ -878,6 +888,7 @@ export default {
     },
 
     filter_servizi(tipo) {
+      this.reset_pagination();
       // console.log(tipo);
       this.select = true;
       // console.log("settore: "+ this.settore);

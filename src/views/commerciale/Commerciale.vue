@@ -1,9 +1,10 @@
 <template>
   <div id="aree" class="pt-4 px-5">
     <CJumbotron class="px-0 py-2 latest" v-show="post.length > 0">
+      <h1 class="text-right pl-1 display-4">Ultimi inserimenti</h1>
       <CCardGroup class="latest p-3 col-12">
         <CCard
-          class="mx-2 px-0 card_materiale card_post col-md-3"
+          class="mx-2 px-0 card_materiale card_post col-md-2"
           v-for="(item, index) in post.slice(0, 5)"
           :key="index"
           :style="{ '--bgColor': item.color_settore }"
@@ -21,8 +22,9 @@
             >
             <CCardImg
               :src="$custom_json.base_url + item.copertina"
-              style="height: 15rem; object-fit: cover"
+              style="height: 7rem; object-fit: cover"
               alt="- IMPOSSIBILE CARICARE -"
+              class="py-0"
             >
             </CCardImg>
             <CBadge
@@ -31,36 +33,20 @@
               class="badgeNuovo"
               >Nuovo
             </CBadge>
-            <CCardBody class="py-0 px-1" style="min-height: 9rem">
-              <div class="text-right">
+            <CCardBody class="px-1 py-0">
+              <!-- <div class="text-right">
                 <cite> {{ item.data_ins | formatDate }}</cite>
-              </div>
-              <h2 class="text-center">{{ item.titolo }}</h2>
-
-              <!-- <div
-                v-html="$options.filters.truncate(item.contenuto, 50, ' [...]')"
-              ></div> -->
+              </div> -->
+              <h2 class="text-center py-0">{{ item.titolo }}</h2>
             </CCardBody>
-            <CCardFooter class="text-center pb-0"
-              ><span style="font-weight: 400">Leggi di più...</span>
+            <CCardFooter class="text-center py-0"
+              ><span style="font-weight: 400">Leggi di più ...</span>
             </CCardFooter>
           </CLink>
         </CCard>
       </CCardGroup>
     </CJumbotron>
     <CJumbotron style="" class="blue_logo" v-if="isAuto">
-      <CCol
-        md="8"
-        style="
-          background-image: url('img/buttons/auto.png');
-          background-position: center;
-          background-size: cover;
-          border-top-left-radius: 5px;
-          border-bottom-left-radius: 5px;
-          border-top-right-radius: 0px;
-          border-bottom-right-radius: 0px;
-        "
-      ></CCol>
       <CCol md="4" class="py-5 justify-content-center">
         <h1
           class="titolo-display text-center"
@@ -73,7 +59,7 @@
           class="btnAssicurazioni mt-3"
           size="lg"
           to="Commerciale/Assicurazioni"
-          >Scopri di più...</CButton
+          >Apri la sezione</CButton
         >
         <div class="mt-3" v-if="admin">
           <CLink
@@ -84,28 +70,20 @@
           </CLink>
         </div>
       </CCol>
+      <CCol
+        md="8"
+        style="
+          background-image: url('img/buttons/auto.png');
+          background-position: center;
+          background-size: cover;
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+          border-top-right-radius: 0px;
+          border-bottom-right-radius: 0px;
+        "
+      ></CCol>
     </CJumbotron>
     <CJumbotron class="Gas" v-if="isEnergy">
-      <CCol md="4" class="py-5 text-right">
-        <h1
-          class="titolo-display text-center"
-          style="font-weight: initial !important"
-        >
-          Gas & Luce
-        </h1>
-        <!-- <p class="lead">
-          Materiale e comunicazioni commerciali per il mondo Energy
-        </p> -->
-
-        <CButton class="mt-3 btnGas" size="lg" to="Commerciale/Energy"
-          >Scopri di più...</CButton
-        >
-        <div class="mt-3" v-if="admin">
-          <CLink to="AdminCommerciale/Energy" style="color: white !important"
-            ><CIcon name="cil-settings" /><strong> Gestione contenuti</strong>
-          </CLink>
-        </div>
-      </CCol>
       <CCol
         md="8"
         style="
@@ -119,6 +97,26 @@
         "
         class="py-0"
       >
+      </CCol>
+      <CCol md="4" class="py-5 text-right">
+        <h1
+          class="titolo-display text-center"
+          style="font-weight: initial !important"
+        >
+          Gas e Luce
+        </h1>
+        <!-- <p class="lead">
+          Materiale e comunicazioni commerciali per il mondo Energy
+        </p> -->
+
+        <CButton class="mt-3 btnGas" size="lg" to="Commerciale/Energy"
+          >Apri la sezione</CButton
+        >
+        <div class="mt-3" v-if="admin">
+          <CLink to="AdminCommerciale/Energy" style="color: white !important"
+            ><CIcon name="cil-settings" /><strong> Gestione contenuti</strong>
+          </CLink>
+        </div>
       </CCol>
     </CJumbotron>
   </div>

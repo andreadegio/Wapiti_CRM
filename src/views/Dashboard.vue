@@ -90,6 +90,25 @@
               </CCard>
             </CCardLink>
           </div> -->
+          <div v-if="isRami" class="col-sm">
+            <CCardLink to="Comingsoon_rami" target="_self">
+              <CCard
+                class="text-center elevation-6 portali-btn"
+                body-wrapper
+                style="
+                  height: 200px;
+                  background-image: url('img/buttons/rami.png');
+                  background-position: center;
+                  z-index: 0;
+                  background-size: cover;
+                "
+                ><CCardTitle>
+                  <span class="portali">Piattaforma</span>
+                  <h1 class="pulsante_portali">PROFESSIONISTI</h1>
+                </CCardTitle>
+              </CCard>
+            </CCardLink>
+          </div>
           <div class="col-sm" v-if="!isEnergy">
             <CCardLink to="Comingsoon_gas" target="_self">
               <CCard
@@ -104,7 +123,7 @@
                 "
                 ><CCardTitle>
                   <span class="portali">Piattaforma</span>
-                  <h1 class="pulsante_portali">GAS & LUCE</h1>
+                  <h1 class="pulsante_portali">GAS E LUCE</h1>
                 </CCardTitle>
               </CCard>
             </CCardLink>
@@ -123,7 +142,7 @@
                 "
                 ><CCardTitle>
                   <span class="portali">Piattaforma</span>
-                  <h1 class="pulsante_portali">GAS & LUCE</h1>
+                  <h1 class="pulsante_portali">GAS E LUCE</h1>
                 </CCardTitle>
               </CCard>
             </CCardLink>
@@ -174,6 +193,7 @@ export default {
       news_mondo: null,
       urlRami: localStorage.getItem("urlRami"),
       isEnergy: "",
+      isRami: false,
       avvisiToast: null,
     };
   },
@@ -246,6 +266,8 @@ export default {
           );
           // controllo se sono abilitato all'utilizzo del portale rami
           if (risposta_chisono.data.Abilitato_Rami) {
+            //Imposto il parametro isRami a true in modo da visualizzare il pulsante
+            this.isRami = true;
             // se sono abilitato chiamo il servizio per recuperare l'url da inserire nel pulsante
             try {
               var param = {
@@ -277,6 +299,8 @@ export default {
       this.isEnergy = JSON.parse(
         localStorage.getItem("chisono_data")
       ).Abilitato_Energy;
+      //se sono già autenticato, controllo il localstorage
+      this.isRami = JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Rami;
       // this.triggerNews += 1;
       this.latest_news(); // ultime news operative
       this.load_news(); // ultime news mondo

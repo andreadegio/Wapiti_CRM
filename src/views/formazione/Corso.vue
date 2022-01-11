@@ -1,6 +1,6 @@
 <template>
   <div style="background-color: white">
-    <div class="copertina">
+    <div class="copertina" >
       <CImg :src="$custom_json.base_url + lista_corsi[id].copertina" />
 
       <section
@@ -254,6 +254,9 @@ export default {
   /* margin-left: 50%; */
   margin-right: auto;
 }
+.modal-body{
+  max-height: none !important;
+}
 .box_contenuti::before {
   content: "";
   display: block;
@@ -310,7 +313,7 @@ export default {
   object-fit: none;
   object-position: 50% 50%;
   border: 0;
-  opacity: 60%;
+  opacity: 0.6 !important;
 }
 .titolo_allegati {
   font-size: 1.8rem;

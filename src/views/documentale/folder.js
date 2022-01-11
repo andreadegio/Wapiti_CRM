@@ -9,7 +9,7 @@ const documenti_list = [
     subFolder: true,
     childs: [
       {
-        nome: "MECCANISMI DI DISTRIBUZIONE",
+        nome: "MECCANISMI DI DISTRIBUZIONE (POG)",
         slug: "INTERMEDIARIO",
         tipo: "folder",
         ico: "edit",

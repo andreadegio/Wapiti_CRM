@@ -37,14 +37,14 @@ export default {
   margin-top: 56px;
 }
 // profondità modale
-.modal-backdrop{
+.modal-backdrop {
   z-index: auto !important;
 }
 
 // STILE PER EMULARE LA CLASSE BOOTSTRAP DISPLAY CHE MA RENDERLA RESPONSIVE
 // UTILIZZATO PER I TITOLI
 
-.titolo-display{
+.titolo-display {
   font-size: 4.5rem;
   letter-spacing: 0.1rem;
   font-weight: initial !important;
@@ -146,7 +146,7 @@ cite {
 }
 
 // SOVRASCRITTURA COLORI ABY SU PRIMARY
-.btn-primary:hover{
+.btn-primary:hover {
   background-color: #1a6eb9 !important;
   border-color: #1a6eb9 !important;
 }
@@ -160,11 +160,12 @@ cite {
 a {
   color: #1e2f56 !important;
   font-size: 1rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 400;
 }
-a.active{
-  background: #ef7a12 !important;
+a.active {
+  background: #ef7a12ad !important;
+  color: #fff !important;
 }
 .btn-outline-primary:hover {
   color: #fff;
@@ -239,17 +240,15 @@ a.active{
   text-transform: uppercase;
 }
 
-
 // .c-wrapper{
 //   flex-grow: initial !important;
 // }
-.c-body{
+.c-body {
   flex-grow: initial !important;
 }
 
-
 /* LOADER*/
-.attendere{
+.attendere {
   width: 10rem !important;
 }
 .lds-grid {
@@ -320,7 +319,7 @@ a.active{
     opacity: 0.5;
   }
 }
-.content{
-margin-bottom: 0px !important;
+.content {
+  margin-bottom: 0px !important;
 }
 </style>

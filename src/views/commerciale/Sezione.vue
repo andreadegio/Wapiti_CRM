@@ -45,7 +45,7 @@
                     class="badgeNuovo"
                     >Nuovo
                   </CBadge>
-                  <CCardBody class="py-0 px-1" style="min-height: 10rem">
+                  <CCardBody class="py-0 px-1" style="min-height: 5rem">
                     <div class="text-right">
                       <cite> {{ item.data_ins | formatDate }}</cite>
                     </div>
@@ -66,7 +66,7 @@
         <CTab>
           <template slot="title">
             <i class="fas fa-paperclip fa-2x"></i>
-            <span class="tabs-nav"> Materiale</span>
+            <span class="tabs-nav"> Materiale disponibile</span>
           </template>
           <PersonalCloud :area="contenuto" />
         </CTab>
@@ -137,7 +137,7 @@
         <CTab>
           <template slot="title">
             <i class="fas fa-paperclip fa-2x"></i>
-            <span class="tabs-nav"> Materiale</span>
+            <span class="tabs-nav"> Materiale disponibile</span>
           </template>
           <PersonalCloud :area="contenuto" />
         </CTab>
@@ -160,7 +160,7 @@ export default {
     };
   },
   mounted() {
-    console.log("contenuto" + this.contenuto);
+    // console.log("contenuto" + this.contenuto);
     this.get_lista_post();
     this.getToSee();
   },

@@ -15,7 +15,7 @@
         {{ lista_post[id].categoria }} - {{ lista_post[id].sottotitolo }}
       </div>
     </div>
-    <div class="copertina">
+    <div class="copertina" >
       <CImg :src="$custom_json.base_url + lista_post[id].copertina" />
     </div>
     <div class="container">
@@ -252,7 +252,7 @@ export default {
   object-fit: none;
   object-position: 50% 50%;
   border: 0;
-  opacity: 60%;
+  opacity: 0.6 !important;
 }
 .contenuto {
   font-size: 1.5rem;
@@ -284,6 +284,9 @@ export default {
   font-size: 2em;
   font-weight: 700;
   padding-left: 8px;
+}
+.modal-body{
+  max-height: none !important;
 }
 
 /* SEZIONE ALLEGATI  */
