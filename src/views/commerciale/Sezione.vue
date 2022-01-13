@@ -40,7 +40,9 @@
                   >
                   </CCardImg>
                   <CBadge
-                    v-if="lista_nuovi != null && lista_nuovi.includes(item.id_post)"
+                    v-if="
+                      lista_nuovi != null && lista_nuovi.includes(item.id_post)
+                    "
                     color="danger"
                     class="badgeNuovo"
                     >Nuovo
@@ -49,7 +51,9 @@
                     <div class="text-right">
                       <cite> {{ item.data_ins | formatDate }}</cite>
                     </div>
-                    <h2 class="text-center">{{ item.titolo }}</h2>
+                    <h2 class="text-center">
+                      {{ item.titolo | truncate(20, "[...]") }}
+                    </h2>
 
                     <!-- <div
                 v-html="$options.filters.truncate(item.contenuto, 50, ' [...]')"
@@ -62,6 +66,11 @@
               </CCard>
             </div>
           </CCardGroup>
+          <div class="text-center">
+            <span v-show="post.length == 0" class="display-4">
+              Nessun contenuto disponibile
+            </span>
+          </div>
         </CTab>
         <CTab>
           <template slot="title">
@@ -111,7 +120,9 @@
                   >
                   </CCardImg>
                   <CBadge
-                    v-if="lista_nuovi != null && lista_nuovi.includes(item.id_post)"
+                    v-if="
+                      lista_nuovi != null && lista_nuovi.includes(item.id_post)
+                    "
                     color="danger"
                     class="badgeNuovo"
                     >Nuovo
@@ -133,6 +144,11 @@
               </CCard>
             </div>
           </CCardGroup>
+          <div class="text-center">
+            <span v-show="post.length == 0" class="display-4">
+              Nessun contenuto disponibile
+            </span>
+          </div>
         </CTab>
         <CTab>
           <template slot="title">
@@ -156,7 +172,7 @@ export default {
     return {
       tree_RC: {},
       post: [],
-      lista_nuovi:[]
+      lista_nuovi: [],
     };
   },
   mounted() {

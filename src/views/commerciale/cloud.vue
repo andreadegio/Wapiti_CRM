@@ -94,7 +94,6 @@
             (showDoc = true),
               (file =
                 $custom_json.base_url +
-                
                 elemento.filePath +
                 '/' +
                 elemento.descrizione),
@@ -123,9 +122,7 @@
         </div>
       </div>
       <!-- FINE EXPLORER FILE -->
-      <div class="cloud m-3 col-lg-2 col-md-3 col-xs-6">
-        <span v-show="tree_RC == null"> Nessun elemento presente </span>
-      </div>
+
       <Visualizzatore
         :showDoc="showDoc"
         :file="file"
@@ -133,6 +130,9 @@
         :nome_file="nome_file"
         @aggiorna_modale="aggiorna_modale"
       />
+    </div>
+    <div class="cloud text-center">
+      <span v-show="tree_RC.length == 0" class="display-4"> Nessun file disponibile </span>
     </div>
 
     <br />
@@ -261,6 +261,8 @@ export default {
             localStorage.getItem("chisono_data")
           ).UnitaOperativa_Tipo_ID);
 
+      //
+
       try {
         if (subfolder != "" && subfolder != this.area + "/") {
           // subfolder == this.area+"/" ? console.log("uguale") : console.log("diverso");
@@ -269,6 +271,7 @@ export default {
             subfolder: subfolder,
             UO_tipo: UO_tipo,
             settore: this.area,
+            is_sede: JSON.parse(localStorage.getItem("chisono_data")).Is_Sede,
           };
           // console.log("subfolder " + JSON.stringify(subfolder));
           this.subTipo = "directory";
@@ -281,6 +284,7 @@ export default {
             subfolder: subfolder,
             UO_tipo: UO_tipo,
             settore: this.area,
+            is_sede: JSON.parse(localStorage.getItem("chisono_data")).Is_Sede,
           };
           this.sub = "";
           this.subTipo = "";

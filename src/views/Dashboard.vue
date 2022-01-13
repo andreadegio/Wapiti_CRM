@@ -254,14 +254,14 @@ export default {
       );
       const differenza = Math.floor((data1 - data2) / _MS_PER_DAY);
 
-      console.log(
-        "data di oggi = " +
-          data1 +
-          " data storage= " +
-          data2 +
-          " differenza= " +
-          differenza
-      );
+      // console.log(
+      //   "data di oggi = " +
+      //     data1 +
+      //     " data storage= " +
+      //     data2 +
+      //     " differenza= " +
+      //     differenza
+      // );
       if (differenza != 0) {
         console.log("devo rifare il login - sessione scaduta");
         this.$router.push("login");
