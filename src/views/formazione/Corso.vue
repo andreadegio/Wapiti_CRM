@@ -36,9 +36,10 @@
         </div>
       </section>
     </div>
-    <div class="container pt-5">
+    <div class="px-2 pt-5">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-1"></div>
+        <div class="col-md-7">
           <div class="contenuto pb-4">
             <span class="descrizione_header"
               >Cosa imparerai con questo corso</span
@@ -60,7 +61,7 @@
         </div>
 
         <div
-          class="col-md-4 colonna_dx"
+          class="col-md-3 colonna_dx"
           v-show="lista_corsi[id].allegati && lista_corsi[id].files.length > 0"
         >
           <div class="allegati">
@@ -104,6 +105,7 @@
             @aggiorna_modale="aggiorna_modale"
           />
         </div>
+        <div class="col-md-1"></div>
       </div>
     </div>
 
@@ -282,6 +284,7 @@ export default {
   position: absolute;
   left: 10%;
   padding: 3rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.08);
 }
 .data {
   color: #ef7a12;
@@ -353,10 +356,10 @@ export default {
   color: black;
 }
 .colonna_dx {
-  -webkit-box-shadow: 5px 5px 20px -1px #000000;
-  -moz-box-shadow: 5px 5px 20px -1px #000000;
-  -o-box-shadow: 5px 5px 20px -1px #000000;
-  box-shadow: 5px 5px 20px -1px #000000;
+  -webkit-box-shadow: 5px 5px 20px -1px #00000070;
+  -moz-box-shadow: 5px 5px 20px -1px #00000070;
+  -o-box-shadow: 5px 5px 20px -1px #00000070;
+  box-shadow: 5px 5px 20px -1px #00000070;
 }
 .dettagli {
   font-size: 0.8rem !important;

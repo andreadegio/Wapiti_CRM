@@ -1,6 +1,6 @@
 <template>
   <div style="background-color: white">
-    <div class="container">
+    <!-- <div class="container">
       <div class="area">
         <CLink
           class="area"
@@ -14,9 +14,24 @@
       <div class="sottotitolo">
         {{ lista_post[id].categoria }} - {{ lista_post[id].sottotitolo }}
       </div>
-    </div>
-    <div class="copertina" >
+    </div> -->
+    <div class="copertina">
       <CImg :src="$custom_json.base_url + lista_post[id].copertina" />
+      <section class="box-titolo">
+        <div class="area">
+          <CLink
+            class="area"
+            :style="{ '--bgColor': lista_post[id].color_settore }"
+            :to="'../../Commerciale/' + lista_post[id].settore"
+            >{{ lista_post[id].settore }}
+          </CLink>
+        </div>
+        <div class="data">{{ lista_post[id].data_ins | formatDate }}</div>
+        <div class="titolo">{{ lista_post[id].titolo }}</div>
+        <div class="sottotitolo">
+          {{ lista_post[id].categoria }} - {{ lista_post[id].sottotitolo }}
+        </div>
+      </section>
     </div>
     <div class="container">
       <div class="contenuto">
@@ -249,7 +264,7 @@ export default {
   vertical-align: middle;
   max-height: 240px;
   width: 100%;
-  object-fit: none;
+  object-fit: cover;
   object-position: 50% 50%;
   border: 0;
   opacity: 0.6 !important;
@@ -285,10 +300,26 @@ export default {
   font-weight: 700;
   padding-left: 8px;
 }
-.modal-body{
+.modal-body {
   max-height: none !important;
 }
-
+.box-titolo {
+  background-color: rgba(255, 255, 255, 0.871);
+  top: 10%;
+  position: absolute;
+  left: 10%;
+  padding: 3rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.08);
+}
+.copertina img {
+  vertical-align: middle;
+  max-height: 350px;
+  width: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  border: 0;
+  opacity: 0.6 !important;
+}
 /* SEZIONE ALLEGATI  */
 @import "/css/cloud.css";
 </style>

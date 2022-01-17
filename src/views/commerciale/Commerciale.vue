@@ -141,8 +141,35 @@ export default {
   mounted() {
     this.get_lista_post();
     this.getToSee();
+    this.get_tipologie();
   },
   methods: {
+    async get_tipologie() {
+      // Chiamata per recuperare le tipologie di rapporto
+      try {
+        await axios
+          .post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.tipologie_rapporto
+          )
+          .then((response) => {
+            //       this.tipologie =  [
+            //   {
+            //     id: "ALL",
+            //     label: "TUTTI",
+            //     isDefaultExpanded: true,
+            //     children: ,
+            //   },
+            // ],
+            // la risposta con l'elenco delle tipologie di rapporto la salvo nello storage
+            localStorage.setItem("tipologie", JSON.stringify(response.data));
+            // console.log(JSON.stringify(response.data));
+          });
+      } catch (error) {
+        console.log("impossibile accedere al cloud");
+      }
+    },
     async getToSee() {
       // Chiamata per recuperare l'array dei corsi da leggere
       let params = {
