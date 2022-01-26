@@ -23,7 +23,7 @@
             class="area"
             :style="{ '--bgColor': lista_post[id].color_settore }"
             :to="'../../Commerciale/' + lista_post[id].settore"
-            >{{ lista_post[id].settore }}
+            >{{ lista_post[id].label_settore }}
           </CLink>
         </div>
         <div class="data">{{ lista_post[id].data_ins | formatDate }}</div>

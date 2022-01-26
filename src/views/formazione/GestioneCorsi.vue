@@ -121,7 +121,12 @@ const fields = [
   { key: "titolo", _style: "max-width:20rem; font-weight: bold;" },
   { key: "sottotitolo", label: "Sottotitolo" },
   { key: "data_ins", label: "Data Inserimento" },
-
+  {
+    key: "visite",
+    label: "Visualizzazioni",
+    filter: false,
+    _classes: "text-center",
+  },
   {
     key: "show_details",
     label: "Opzioni",

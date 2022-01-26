@@ -1,13 +1,8 @@
 <template id="st">
-  <!-- <div id="stat_broker" class=".row_stats"> 
-    http://broker.abybroker.it/test/AreaOperazioni_Veicoli.aspx
-    http://broker.abybroker.it/test/_app_offline.htm
-   
-    -->
-    
   <iframe
     id="stats_frame"
-    :src="'http://broker.abybroker.it/ea2019/Stats_FlashReports_NoBarre.aspx?bg=ebedef&userID='+userID" 
+    :src="$custom_json.broker_statistiche + userID"
+    
     class="frame-stats"
     width="100%"
     frameborder="0"
@@ -17,6 +12,7 @@
   <!-- </div> -->
 </template>
 <script>
+
 export default {
   name: "Statistiche",
   data: function () {
@@ -26,28 +22,28 @@ export default {
     };
   },
   methods: {
+    // eslint-disable-next-line no-unused-vars
     getWindowHeight(event) {
-      var head = document.getElementById("header").offsetHeight - 5 ;
+      var head = document.getElementById("header").offsetHeight - 5;
       var foot = document.getElementById("footer").offsetHeight;
       var space = window.innerHeight;
       var spazio = space - (head + foot);
       document
         .getElementById("stats_frame")
         .setAttribute("style", "height:" + spazio + "px !important;");
-        this.windowHeight= spazio;
-        
+      this.windowHeight = spazio;
     },
   },
   mounted() {
     this.$nextTick(function () {
       window.addEventListener("resize", this.getWindowHeight);
       this.getWindowHeight();
-      document.documentElement.style.overflow = 'hidden';
+      document.documentElement.style.overflow = "hidden";
     });
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.getWindowHeight);
-    document.documentElement.style.overflow = 'auto';
+    document.documentElement.style.overflow = "auto";
   },
 };
 </script>
@@ -60,5 +56,4 @@ export default {
   height: auto !important; /* cross-browser */
   height: 100%; /* cross-browser */
 }
-
 </style>

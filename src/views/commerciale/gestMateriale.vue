@@ -125,6 +125,13 @@ const fields = [
   { key: "sottotitolo", label: "Sottotitolo" },
   { key: "categoria", label: "Categoria" },
   { key: "data_ins", label: "Data Inserimento" },
+  {
+    key: "visite",
+    label: "Visualizzazioni",
+    filter: false,
+    _classes: "text-center",
+    extra_label: "<u> prova </u>"
+  },
 
   {
     key: "show_details",

@@ -37,6 +37,7 @@ const Statistiche = () => import("@/views/statistiche/Statistiche");
 const Comingsoon_gas = () => import("@/views/pages/Comingsoon_gas");
 // Views - Page -Rami
 const Comingsoon_rami = () => import("@/views/pages/Comingsoon_rami");
+const Comingsoon_rami2 = () => import("@/views/pages/Comingsoon_rami2");
 
 // Views - Pages
 const Comingsoon = () => import("@/views/pages/Comingsoon");
@@ -163,6 +164,11 @@ function configRoutes() {
           path: "Comingsoon_rami",
           name: "Comingsoon_rami",
           component: Comingsoon_rami,
+        },
+        {
+          path: "Comingsoon_rami2",
+          name: "Comingsoon_rami2",
+          component: Comingsoon_rami2,
         },
         {
           path: "Profilo",

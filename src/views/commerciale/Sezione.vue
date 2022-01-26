@@ -30,7 +30,7 @@
                 >
                   <CCardHeader class="text-uppercase pt-0 titolo_color"
                     ><strong class="titolo_color">
-                      <u>{{ item.settore }}</u>
+                      <u>{{ item.label_settore }}</u>
                     </strong></CCardHeader
                   >
                   <CCardImg
@@ -110,7 +110,7 @@
                 >
                   <CCardHeader class="text-uppercase pt-0 titolo_color"
                     ><strong class="titolo_color">
-                      <u>{{ item.settore }}</u>
+                      <u>{{ item.label_settore }}</u>
                     </strong></CCardHeader
                   >
                   <CCardImg

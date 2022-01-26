@@ -71,7 +71,7 @@
               </CCard>
             </CCardLink>
           </div>
-          <!-- <div v-if="urlRami" class="col-sm">
+          <!-- <div v-if="isRami && entra_rami" class="col-sm">
             <CCardLink :href="urlRami" target="_blank">
               <CCard
                 class="text-center elevation-6 portali-btn"
@@ -90,8 +90,27 @@
               </CCard>
             </CCardLink>
           </div> -->
-          <div v-if="isRami" class="col-sm">
+          <div v-if="isRami && entra_rami" class="col-sm">
             <CCardLink to="Comingsoon_rami" target="_self">
+              <CCard
+                class="text-center elevation-6 portali-btn"
+                body-wrapper
+                style="
+                  height: 200px;
+                  background-image: url('img/buttons/rami.png');
+                  background-position: center;
+                  z-index: 0;
+                  background-size: cover;
+                "
+                ><CCardTitle>
+                  <span class="portali">Piattaforma</span>
+                  <h1 class="pulsante_portali">PROFESSIONISTI</h1>
+                </CCardTitle>
+              </CCard>
+            </CCardLink>
+          </div>
+          <div v-else class="col-sm">
+            <CCardLink to="Comingsoon_rami2" target="_self">
               <CCard
                 class="text-center elevation-6 portali-btn"
                 body-wrapper
@@ -187,6 +206,7 @@ export default {
       userID: "",
       anagraficaID: "",
       unitaoperativaID: "",
+      unitaOperativaTipoID: "",
       show_async: 0,
       news_operative: null,
       triggerNews: 0,
@@ -195,6 +215,7 @@ export default {
       isEnergy: "",
       isRami: false,
       avvisiToast: null,
+      entra_rami: false,
     };
   },
 
@@ -323,6 +344,9 @@ export default {
           this.isEnergy = JSON.parse(
             localStorage.getItem("chisono_data")
           ).Abilitato_Energy;
+          this.unitaOperativaTipoID = JSON.parse(
+            localStorage.getItem("chisono_data")
+          ).UnitaOperativa_Tipo_ID;
         } catch (error) {
           console.log("errore");
           this.$router.push("login");
@@ -331,6 +355,9 @@ export default {
       this.isEnergy = JSON.parse(
         localStorage.getItem("chisono_data")
       ).Abilitato_Energy;
+      this.unitaOperativaTipoID = JSON.parse(
+        localStorage.getItem("chisono_data")
+      ).UnitaOperativa_Tipo_ID;
       //se sono già autenticato e non ho effettuato il login da più di un giorno, controllo il localstorage
       this.isRami = JSON.parse(
         localStorage.getItem("chisono_data")
@@ -338,6 +365,14 @@ export default {
       // this.triggerNews += 1;
       this.latest_news(); // ultime news operative
       this.load_news(); // ultime news mondo
+      // Controllo che tipo di unità operativa sono per visualizzare un messaggio diverso e per abilitare l'accesso alla piattaforma rami
+      if (
+        this.unitaOperativaTipoID == 7 ||
+        this.unitaOperativaTipoID == 8 ||
+        this.unitaOperativaTipoID == 10
+      ) {
+        this.entra_rami = true;
+      }
     },
 
     // CARICO LE ULTIME 3 NEWS OPERATIVE PER LA HOME

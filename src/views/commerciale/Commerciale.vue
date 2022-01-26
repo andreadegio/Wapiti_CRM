@@ -2,7 +2,7 @@
   <div id="aree" class="pt-4 px-5">
     <CJumbotron class="px-0 py-2 latest" v-show="post.length > 0">
       <h1 class="text-right pl-1 display-4">Ultimi inserimenti</h1>
-      <CCardGroup class="latest p-3 col-12">
+      <CCardGroup class="latest top5 p-3 col-12">
         <CCard
           class="mx-2 px-0 card_materiale card_post col-md-2"
           v-for="(item, index) in post.slice(0, 5)"
@@ -17,7 +17,7 @@
           >
             <CCardHeader class="text-uppercase pt-0 titolo_color"
               ><strong>
-                <u>{{ item.settore }}</u>
+                <u>{{ item.label_settore }}</u>
               </strong></CCardHeader
             >
             <CCardImg
@@ -314,6 +314,9 @@ export default {
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
     0 6px 10px 0 rgba(0, 0, 0, 0.55), 0 1px 18px 0 rgba(223, 78, 78, 0.83) !important;
   font-size: 90% !important;
+}
+.top5 {
+  max-width: 95% !important;
 }
 </style>
 

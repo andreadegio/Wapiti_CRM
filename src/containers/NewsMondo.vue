@@ -1,5 +1,5 @@
 <template>
-  <div v-if="news != null && news !=''">
+  <div v-if="news != null && news != ''">
     <CModal
       color="dark"
       centered
@@ -19,7 +19,11 @@
       <template>
         <div style="text-align: center">
           <CImg
-            :src="$custom_json.base_url + $custom_json.img_news_url + news[newsNum].immagine"
+            :src="
+              $custom_json.base_url +
+              $custom_json.img_news_url +
+              news[newsNum].immagine
+            "
             style="max-width: 760px; max-height: 500px"
           />
         </div>
@@ -32,9 +36,15 @@
         >
       </template>
     </CModal>
-    <CCard id="world-list" md="8" class="h-100" style="z-index: 10" :show.sync="news">
+    <CCard
+      id="world-list"
+      md="8"
+      class="h-100"
+      style="z-index: 10"
+      :show.sync="news"
+    >
       <CCardHeader class="d-flex justify-content-between">
-        <strong class="h4">NEWS DAL MONDO</strong>
+        <strong class="h4 titolo_gradient">NEWS DAL MONDO</strong>
         <div class="card-header-actions">
           <CLink to="./Elenco_news" class="card-header-action btn-setting">
             <strong
@@ -52,7 +62,11 @@
             <CMedia aside-right aside-vertical-position="center">
               <template #aside>
                 <CImg
-                  :src="$custom_json.base_url + $custom_json.img_news_url + item.immagine"
+                  :src="
+                    $custom_json.base_url +
+                    $custom_json.img_news_url +
+                    item.immagine
+                  "
                   width="100px"
                   height="100px"
                 />
@@ -96,12 +110,7 @@
     </CCard>
   </div>
   <div v-else>
-    <CCard
-      id="world-list"
-      md="8"
-      class="h-100"
-      style="z-index: 10;"
-    >
+    <CCard id="world-list" md="8" class="h-100" style="z-index: 10">
       <CCardHeader class="d-flex justify-content-between">
         <strong class="h4">NEWS DAL MONDO</strong>
         <div class="card-header-actions">
@@ -120,7 +129,11 @@
             news prova a ricaricare
           </p>
           <CButton
-          @click = load_news() color="primary" size="lg" variant="outline">
+            @click="load_news()"
+            color="primary"
+            size="lg"
+            variant="outline"
+          >
             <i class="fas fa-redo-alt"></i> Ricarica
           </CButton>
         </div>
@@ -136,16 +149,14 @@
   </div>
 </template>
 <script>
-
-
 export default {
   name: "NewsMondo",
   props: ["newsParent"],
   watch: {
-    newsParent: function(newVal){
+    newsParent: function (newVal) {
       // console.log(JSON.stringify(newVal));
       this.news = newVal;
-    }
+    },
   },
 
   data() {
@@ -158,11 +169,11 @@ export default {
     };
   },
   mounted() {
- this.news= this.newsParent;
+    this.news = this.newsParent;
   },
   methods: {
-    load_news(){
-      this.$emit("reload_mondo");   
+    load_news() {
+      this.$emit("reload_mondo");
     },
     showModal(indice) {
       this.newsModal = true;
@@ -197,8 +208,15 @@ img {
   color: #3c4b64;
   font-weight: 600;
 }
-.errore_caricamento p{
+.errore_caricamento p {
   font-size: 1.5rem;
   font-weight: 300;
+}
+.titolo_gradient {
+  background: -webkit-linear-gradient(#ef7a12, #1e2f56);
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
 }
 </style>

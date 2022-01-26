@@ -67,14 +67,14 @@
                     :style="{ '--bgColor': item.color_settore }"
                     style="min-height: 10rem"
                   >
-                    <div class="text-uppercase settore_color pt-3">
+                    <!-- <div class="text-uppercase settore_color pt-3">
                       <strong>
                         <u>{{ item.settore }}</u>
                       </strong>
-                    </div>
+                    </div> -->
 
                     <div class="titolo text-left pt-3">
-                      {{ item.titolo }}
+                      {{ item.titolo | truncate(20, "[...]")  }}
                     </div>
                     <div class="row dettagli pt-4 pb-5 text-center">
                       <div class="col-6">
@@ -205,10 +205,10 @@ export default {
 }
 .titolo {
   font-size: 1.8rem !important;
-  max-width: 80%;
+  max-width: 95%;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  /* text-overflow: ellipsis; */
   letter-spacing: 0.05rem;
 }
 

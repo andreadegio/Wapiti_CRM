@@ -21,7 +21,6 @@ import VueSimpleAlert from "vue-simple-alert";
 import VueFileAgent from "vue-file-agent";
 import moment from "moment";
 
-
 library.add(faUserSecret);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.performance = true;
@@ -78,7 +77,7 @@ Vue.mixin({
 });
 
 fetch("/config/config.json")
-  .then((response) =>response.json())
+  .then((response) => response.json())
   .then((custom_json) => {
     Vue.prototype.$custom_json = custom_json;
     // console.log(custom_json.ep_api.secondo);
@@ -102,4 +101,4 @@ fetch("/config/config.json")
       },
     });
   })
-  .catch(error=>console.log("--- " + error));
+  .catch((error) => console.log("--- " + error));

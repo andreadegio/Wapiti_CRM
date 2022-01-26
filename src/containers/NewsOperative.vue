@@ -40,7 +40,7 @@
 
     <CCard class="h-100" style="z-index: 10" :show.sync="news_operative">
       <CCardHeader class="d-flex justify-content-between">
-        <strong class="h4">NEWS OPERATIVE </strong>
+        <strong class="h4 titolo_gradient">NEWS OPERATIVE </strong>
         <div class="card-header-actions">
           <CLink to="./NewsOperative" class="card-header-action btn-setting">
             <strong>
@@ -167,7 +167,7 @@ export default {
     };
   },
   mounted() {
-this.news_operative=this.operativeParent;
+    this.news_operative = this.operativeParent;
   },
   methods: {
     load_news_operative() {
@@ -207,5 +207,12 @@ this.news_operative=this.operativeParent;
 .errore_caricamento p {
   font-size: 1.5rem;
   font-weight: 300;
+}
+.titolo_gradient {
+  background: -webkit-linear-gradient(#ef7a12, #1e2f56);
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
 }
 </style>
