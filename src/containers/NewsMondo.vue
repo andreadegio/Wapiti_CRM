@@ -100,7 +100,7 @@
           </CListGroupItem>
         </CListGroup>
       </CCardBody>
-      <CCardFooter>
+      <CCardFooter class="pt-0">
         <div class="card-header-actions" v-if="admin">
           <CLink to="Gestione_news_Mondo" class="card-header-action btn-setting"
             ><CIcon name="cil-settings" /><strong> Gestione</strong>

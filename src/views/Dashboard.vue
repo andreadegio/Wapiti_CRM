@@ -16,11 +16,11 @@
       <CCol md="1"> </CCol>
       <CCol md="10">
         <div style="text-align: center; padding-bottom: 15px">
-          <h1 class="display-3" style="color: #1e2f56; font-weight: 900">
+          <h1 class="display-4" style="color: #1e2f56; font-weight: 900">
             Benvenuto in
-            <img class="login-img" src="img/logo_abyway.png" height="50px" />
+            <img class="login-img" src="img/logo_abyway.png" style="vertical-align: baseline" height="40px" />
           </h1>
-          <div id="scritta"><hr class="mt-4" /></div>
+          <div id="scritta"><hr class="mt-3" /></div>
         </div>
       </CCol>
       <CCol md="1"> </CCol>
@@ -31,11 +31,14 @@
         <PulsantiAree />
       </CCol>
       <CCol md="4">
-        <NewsOperative
+        <!-- <NewsOperative
           class="h-100"
           :operativeParent="news_operative"
           @reload_operative="reload_operative()"
           :key="triggerNews"
+        /> -->
+        <AreaManager
+          class="h-100"
         />
       </CCol>
       <CCol md="4">
@@ -189,7 +192,8 @@
 <script>
 import axios from "axios";
 import NewsMondo from "./../containers/NewsMondo";
-import NewsOperative from "./../containers/NewsOperative";
+
+import AreaManager from "./../containers/ContattiAreaManager";
 import PulsantiAree from "./../containers/PulsantiAree";
 import store from "./../store";
 
@@ -197,7 +201,7 @@ export default {
   name: "Dashboard",
   components: {
     NewsMondo,
-    NewsOperative,
+    AreaManager,
     PulsantiAree,
   },
   data() {
@@ -363,7 +367,7 @@ export default {
         localStorage.getItem("chisono_data")
       ).Abilitato_Rami;
       // this.triggerNews += 1;
-      this.latest_news(); // ultime news operative
+      // this.latest_news(); // ultime news operative
       this.load_news(); // ultime news mondo
       // Controllo che tipo di unità operativa sono per visualizzare un messaggio diverso e per abilitare l'accesso alla piattaforma rami
       if (
@@ -373,6 +377,8 @@ export default {
       ) {
         this.entra_rami = true;
       }
+      this.show_async++;
+      this.triggerNews += 1;
     },
 
     // CARICO LE ULTIME 3 NEWS OPERATIVE PER LA HOME
