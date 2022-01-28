@@ -72,7 +72,7 @@
             </CCardLink>
           </div>
           <!-- <div v-if="isRami && entra_rami" class="col-sm">
-            <CCardLink :href="urlRami" target="_blank">
+            <CCardLink :href="urlRami" target="_self">
               <CCard
                 class="text-center elevation-6 portali-btn"
                 body-wrapper
