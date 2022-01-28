@@ -71,6 +71,12 @@ Vue.filter("formatDate", function(value) {
   }
 });
 //#endregion
+//# Filtro per prima lettera maiuscola di un testo
+Vue.filter("capitalize", function(value) {
+  if (!value) return "";
+  value = value.toString();
+  return value.charAt(0).toUpperCase() + value.toLowerCase().slice(1);
+});
 
 Vue.mixin({
   methods: {},

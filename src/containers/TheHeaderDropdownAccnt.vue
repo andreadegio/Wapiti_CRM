@@ -25,6 +25,19 @@
                     <p class="text-muted"></p>
                     <p>Unità Operativa: {{ user.UnitaOperativa }}</p>
                     <p>Intermediario: {{ user.Intermediario }}</p>
+                    <p style="text-transform: capitalize" v-show="user.DirettoreCommerciale">
+                      Direttore Commerciale:
+                      {{ user.DirettoreCommerciale | capitalize }} (<em
+                        style="text-transform: lowercase"
+                        >{{ user.DirettoreCommerciale_Email }}</em
+                      >)
+                    </p>
+                    <p style="text-transform: capitalize" v-show="user.AreaManager">
+                      Area Manager: {{ user.AreaManager | capitalize }} (<em
+                        style="text-transform: lowercase"
+                        >{{ user.AreaManager_Email }}</em
+                      >)
+                    </p>
                     <p>
                       Abilitazione Auto: {{ user.Abilitato_Auto ? "SI" : "NO" }}
                     </p>
@@ -32,7 +45,8 @@
                       Abilitazione Rami: {{ user.Abilitato_Rami ? "SI" : "NO" }}
                     </p>
                     <p>
-                      Abilitazione Gas & Luce: {{ user.Abilitato_Energy ? "SI" : "NO" }}
+                      Abilitazione Gas & Luce:
+                      {{ user.Abilitato_Energy ? "SI" : "NO" }}
                     </p>
                   </CCardBody>
                 </CCard>
@@ -116,8 +130,8 @@
         <CBadge color="info" class="mfs-auto">{{
           itemsCount
         }}</CBadge> </CDropdownItem> -->
-        
-        <!-- 
+
+      <!-- 
     <CDropdownItem>
       <CIcon name="cil-envelope-open" /> Messages
       <CBadge color="success" class="mfs-auto">{{ itemsCount }}</CBadge>
