@@ -1,7 +1,7 @@
 {
-  "name": "@coreui/coreui-free-vue-admin-template",
-  "version": "3.1.2",
-  "description": "Abyway portal",
+  "name": "abyway",
+  "version": "22.2.1",
+  "description": "Abyway",
   "author": {
     "name": "ABYWAY.IT",
     "url": "https://www.abyway.it"

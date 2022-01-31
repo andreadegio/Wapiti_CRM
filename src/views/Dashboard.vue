@@ -74,27 +74,8 @@
               </CCard>
             </CCardLink>
           </div>
-          <!-- <div v-if="isRami && entra_rami" class="col-sm">
-            <CCardLink :href="urlRami" target="_self">
-              <CCard
-                class="text-center elevation-6 portali-btn"
-                body-wrapper
-                style="
-                  height: 200px;
-                  background-image: url('img/buttons/rami.png');
-                  background-position: center;
-                  z-index: 0;
-                  background-size: cover;
-                "
-                ><CCardTitle>
-                  <span class="portali">Piattaforma</span>
-                  <h1 class="pulsante_portali">RC PROFESSIONALI</h1>
-                </CCardTitle>
-              </CCard>
-            </CCardLink>
-          </div> -->
           <div v-if="isRami && entra_rami" class="col-sm">
-            <CCardLink to="Comingsoon_rami" target="_self">
+            <CCardLink :href="urlRami" target="_self">
               <CCard
                 class="text-center elevation-6 portali-btn"
                 body-wrapper
@@ -112,6 +93,25 @@
               </CCard>
             </CCardLink>
           </div>
+          <!-- <div v-if="isRami && entra_rami" class="col-sm">
+            <CCardLink to="Comingsoon_rami" target="_self">
+              <CCard
+                class="text-center elevation-6 portali-btn"
+                body-wrapper
+                style="
+                  height: 200px;
+                  background-image: url('img/buttons/rami.png');
+                  background-position: center;
+                  z-index: 0;
+                  background-size: cover;
+                "
+                ><CCardTitle>
+                  <span class="portali">Piattaforma</span>
+                  <h1 class="pulsante_portali">PROFESSIONISTI</h1>
+                </CCardTitle>
+              </CCard>
+            </CCardLink>
+          </div> -->
           <div v-else class="col-sm">
             <CCardLink to="Comingsoon_rami2" target="_self">
               <CCard

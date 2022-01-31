@@ -1,7 +1,7 @@
 <template>
   <CCard class="h-100" style="z-index: 10">
     <CCardHeader class="d-flex justify-content-between">
-      <strong class="h4 titolo_gradient">RECAPITI</strong>
+      <strong class="h4 titolo_gradient">{{ chisono.DirettoreCommerciale_Note ? chisono.DirettoreCommerciale_Note : "RECAPITI" }}</strong>
       <div class="card-header-actions"></div>
     </CCardHeader>
     <CCardBody id="manager" class="news_card py-0">
@@ -12,7 +12,7 @@
             style="text-transform: uppercase"
           >
             <h4 class="mb-1">
-              <strong> Direttore Commerciale </strong>
+              <strong>Direttore Commerciale</strong>
             </h4>
           </div>
           <p
@@ -49,7 +49,7 @@
             style="text-transform: uppercase"
           >
             <h4 class="mb-1">
-              <strong> Area Manager </strong>
+              <strong>{{ chisono.AreaManager_Note ? chisono.AreaManager_Note : "Area Manager" }}</strong>
             </h4>
           </div>
           <p class="my-3 text-justify nome" v-show="chisono.AreaManager">
