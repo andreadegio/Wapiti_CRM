@@ -240,6 +240,7 @@ export default {
   },
   mounted() {
     this.get_avvisiToast();
+    this.$forceUpdate();
   },
 
   methods: {
