@@ -15,17 +15,24 @@
         <span aria-hidden="true">&times;</span>
       </CButton>
     </template>
-    <template class="justify-content-center" style="display: flex">
+    <template class="justify-content-center" style="display: flex;">
       <div v-if="ext == 'MP4'" style="margin: auto; display: grid">
         <video controls width="100%">
           <source :src="encodeURI(file)" type="video/mp4" />
 
           Spiacente il tuo Browser non supporta la riproduzione video.
         </video>
-        <div class="text-center">
-          <a :href="encodeURI(file)" :download="nome_file" target="_blank"
-            >Download</a
-          >
+        <div class="download-text pt-3 text-center">
+          <CButton
+          id="btn_download_parent"
+              color="primary"
+              class="ml-2"
+              variant="outline"
+              ><a id="btn_download" :href="encodeURI(file)" :download="nome_file" target="_blank"
+            ><i class="fas fa-cloud-download-alt"></i> Download</a
+          ></CButton
+            >
+          
         </div>
       </div>
       <div
@@ -92,6 +99,16 @@ export default {
 };
 </script>
 <style scoped>
+#btn_download:hover {
+color: white !important;
+text-decoration: none;
+}
+
+#btn_download_parent:hover a{
+color: white !important;
+text-decoration: none;
+}
+
 #VueDocPreviewRoot {
   height: 40rem !important;
 }

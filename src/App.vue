@@ -130,6 +130,12 @@ cite {
   background-color: #1e2f56 !important;
 }
 
+// Dimensione delle modali
+.modal-body{
+  overflow-y: auto !important;
+  max-height: 80vh !important;
+}
+
 // SOVRASCRITTURA COLORI ABY SU TOOLTIP
 .arrow {
   border-right-color: #1e2f56 !important;

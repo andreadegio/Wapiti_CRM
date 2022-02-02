@@ -88,11 +88,6 @@
                       class="col-sm-10 mt-0 mb-0 px-0"
                       value="Accedi"
                     >
-                      <!-- <input
-                      class="entra_btn col-sm-10 mt-0 mb-0"
-                      type="submit"
-                      value="Accedi"
-                    /> -->
                     </CInput>
                   </CRow>
                 </form>
