@@ -24,7 +24,7 @@
                 border: 0;
               "
             >
-              <CCardBody style="color: #1f2f55; border-color: #3c74d0">
+              <CCardBody style="color: #1F4B6B; border-color: #3c74d0">
                 <div
                   v-show="messaggio_errore"
                   style="color: darkred; font-weight: bold"
@@ -195,7 +195,7 @@ hr:after {
   border-radius: 3px;
   font-weight: bold;
   width: 30%;
-  background: #1f2f55;
+  background: #1F4B6B;
   border: none;
   margin: 1.5em 0 1.5em;
   outline: none;
