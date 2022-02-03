@@ -248,7 +248,7 @@ export default {
 
   methods: {
     loginEnergy() {
-      console.log("invio il form di login");
+      // console.log("invio il form di login");
       // Creo un form
       var EnergyForm = document.createElement("form");
       EnergyForm.name="formLogin";
