@@ -1,43 +1,54 @@
 <template>
-  <div class="c-app flex-row align-items-center sfondo">
-    <img class="login_sx" src="img/login/login_sx.png" />
-    <img class="login_dx" src="img/login/login_dx.png" />
-    <CContainer class="pt-0 mt-0">
-      <CRow id="div_img" class="justify-content-center m-0">
-        <img class="login-img pb-2" src="img/logo_abyway.png" />
+  <div class="c-app flex-row align-items-center sfondo_gradiente">
+    <CContainer>
+      <CRow class="justify-content-center">
+        <span class="display-3" style="color: white; font-weight: bold">
+          Benvenuto in</span
+        >
+        <img class="login-img ml-2" src="img/logo_abyway.png" />
       </CRow>
 
+      <br />
+      <div id="scritta"><hr /></div>
       <CRow class="justify-content-center">
-        <CCol md="4" sm="1"> </CCol>
-        <CCol md="4" sm="10">
-          <CRow
-            class="pt-3 pb-2 mt-3 text-center m-0"
-            align-horizontal="center"
-          >
-            <span class="payoff">
-              Una serie di strumenti indispensabili, sviluppati per
-              semplificarti il lavoro e fornire<br />un servizio professionale
-              al Cliente.
-              <br />
-              <i style="color: #ef7918">Tutto questo è Abyway!</i></span
+        <CCol md="1"> </CCol>
+        <CCol md="5">
+          <CCardGroup class="pt-5" style="padding-top: 15% !important">
+            <CCard
+              id="gruppo_card"
+              class="p-4"
+              style="
+                background-color: rgba(249, 249, 249, 0.42);
+                color: white;
+                box-shadow: 5px 5px 7px 0px rgba(0, 0, 0, 0.4);
+                border: 0;
+              "
             >
-          </CRow>
-          <CRow align-horizontal="center" class="m-0">
-            <div>
-              <CRow align-horizontal="center" class="pt-2 text-center m-0">
-                <span class="h1 login-txt"><strong>Login</strong></span>
-              </CRow>
-              <CRow align-horizontal="center" class="m-0">
+              <CCardBody style="color: #1F4B6B; border-color: #3c74d0">
+                <div
+                  v-show="messaggio_errore"
+                  style="color: darkred; font-weight: bold"
+                >
+                  <CAlert color="danger" closeButton>
+                    Credenziali errate
+                  </CAlert>
+                </div>
+                <CRow align-horizontal="center" class="pb-3 text-center">
+                  <span class="h1"><strong> Benvenuto</strong></span>
+                </CRow>
+                <CRow class="pb-3 text-center" align-horizontal="center">
+                  <span
+                    >Inserisci username e password per accedere ai servizi
+                    online di AbyWay.it</span
+                  >
+                </CRow>
                 <form
                   id="formLogin"
                   @submit="getUserValue"
                   :action="login_url"
                   method="post"
                 >
-                  <CRow
-                    align-horizontal="center"
-                    class="m-0 pt-3 pb-3 text-center"
-                  >
+                  <CRow align-horizontal="center" class="pt-3 pb-3 text-center">
                     <CInput
                       id="user"
                       class="col-sm-10 pl-0 pr-0 mb-0"
@@ -70,14 +81,6 @@
                       type="hidden"
                       value="securetoken"
                     />
-                    <div
-                      v-show="messaggio_errore"
-                      style="color: darkred; font-weight: bold"
-                    >
-                      <CAlert color="danger" closeButton>
-                        Credenziali errate
-                      </CAlert>
-                    </div>
                     <CInput
                       id="accedi_btn"
                       type="submit"
@@ -85,14 +88,22 @@
                       class="col-sm-10 mt-0 mb-0 px-0"
                       value="Accedi"
                     >
+                      <!-- <input
+                      class="entra_btn col-sm-10 mt-0 mb-0"
+                      type="submit"
+                      value="Accedi"
+                    /> -->
                     </CInput>
                   </CRow>
                 </form>
-              </CRow>
-            </div>
-          </CRow>
+              </CCardBody>
+            </CCard>
+          </CCardGroup>
         </CCol>
-        <CCol md="4" sm="1" style="text-align: right"> </CCol>
+
+        <CCol md="6" style="text-align: right">
+          <img class="pt-5 mt-5 ml-5" src="img/slide_1_el1.png" />
+        </CCol>
       </CRow>
     </CContainer>
     <CFooter style="color: white; background: none; border: none">
@@ -112,7 +123,7 @@ export default {
   data() {
     return {
       jsonUtente: [],
-      data_login: "",
+      data_login:'',
       messaggio_errore: false,
       login_url: this.$custom_json.login_url,
     };
@@ -129,13 +140,13 @@ export default {
 
   methods: {
     printDate: function () {
-      return new Date();
-    },
+            return new Date();
+          },
     getUserValue(submitEvent) {
       this.data_login = this.printDate();
       localStorage.setItem("user", submitEvent.target.elements.user.value);
       localStorage.setItem("pwd", submitEvent.target.elements.password.value);
-      localStorage.setItem("lastLogin", this.data_login);
+      localStorage.setItem("lastLogin", this.data_login)
       return true;
     },
   },
@@ -147,10 +158,9 @@ export default {
   font-family: FreeStyle;
   src: url("/img/fonts/FREESCPT.TTF");
 }
-.sfondo {
-  /* background: url("/img/slide_1_bg.jpg") bottom right,
-    linear-gradient(to right bottom, #1cc7d0, #013ca6, #013ca6, #1cc7d0) !important; */
-  background-color: white;
+.sfondo_gradiente {
+  background: url("/img/slide_1_bg.jpg") bottom right,
+    linear-gradient(to right bottom, #1cc7d0, #013ca6, #013ca6, #1cc7d0) !important;
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
@@ -158,42 +168,34 @@ export default {
 }
 .login-img {
   vertical-align: baseline !important;
-  z-index: 10;
-  margin-bottom: 3rem;
 }
-.login-txt {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+hr {
+  border-width: 0;
+  color: rgb(255, 255, 255);
+  height: 1px;
+  line-height: 0;
+  margin: 0.5em 0;
+  text-align: center;
+  padding-top: 10px;
 }
+hr:after {
+  content: "La nuova piattaforma operativa";
+  font-size: 2rem;
+  position: relative;
+  /* left: -0.5em; */
+  /* font-family: "Indie Flower", cursive; */
+  font-family: "FreeStyle", cursive;
 
-.login_sx {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  max-height: 60%;
-  z-index: 0;
-}
-
-.login_dx {
-  position: absolute;
-  top: 0;
-  right: 0;
-  max-height: 30%;
-  z-index: 0;
-}
-.payoff {
-  color: #1f4b6b !important;
-  font-size: 1rem;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: 500;
-  margin-bottom: 2.5rem;
-  line-height: 1.7rem;
+  padding-top: 5px;
+  /* padding-left: 1em; */
+  /* padding-right: 1em; */
 }
 
 .entra_btn {
   border-radius: 3px;
-  font-weight: 400;
+  font-weight: bold;
   width: 30%;
-  background: #1f4b6b;
+  background: #1F4B6B;
   border: none;
   margin: 1.5em 0 1.5em;
   outline: none;
@@ -201,6 +203,7 @@ export default {
   font-size: 1.25em;
   padding: 14px 0;
   color: #fff;
+  text-transform: uppercase;
   transition: 0.5s ease-in;
   -webkit-transition: 0.5s ease-in;
   -moz-transition: 0.5s ease-in;
@@ -216,7 +219,8 @@ export default {
 #formLogin {
   margin-top: 10px;
   border-radius: 5px;
-  /* border: solid 1px #d8dbe07d; */
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: solid 1px #d8dbe07d;
 }
-
 </style>

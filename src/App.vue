@@ -30,7 +30,7 @@ export default {
   color: #0b4a9b !important;
 }
 .c-header-nav-link:hover {
-  color: #EF7918 !important;
+  color: #ef7918 !important;
 }
 
 .c-body {
@@ -108,7 +108,7 @@ div.card-accent-success:before {
 }
 
 cite {
-  color: #EF7918;
+  color: #ef7918;
   font-size: 0.8rem;
 }
 
@@ -127,21 +127,21 @@ cite {
 }
 
 .modal-header {
-  background-color: #1F4B6B !important;
+  background-color: #1f4b6b !important;
 }
 
 // Dimensione delle modali
-.modal-body{
+.modal-body {
   overflow-y: auto !important;
   max-height: 80vh !important;
 }
 
 // SOVRASCRITTURA COLORI ABY SU TOOLTIP
 .arrow {
-  border-right-color: #1F4B6B !important;
+  border-right-color: #1f4b6b !important;
 }
 .tooltip-old-inner {
-  background-color: #1F4B6B !important;
+  background-color: #1f4b6b !important;
 }
 
 #icona_indietro {
@@ -164,13 +164,13 @@ cite {
   background-color: #1f4b6b !important;
 }
 a {
-  color: #1F4B6B !important;
+  color: #1f4b6b !important;
   font-size: 1rem;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 400;
 }
 a.active {
-  background: #EF7918ad !important;
+  background: #ef7918ad !important;
   color: #fff !important;
 }
 .btn-outline-primary:hover {
@@ -223,19 +223,30 @@ a.active {
 :root {
   --primary: #1f4b6b !important;
 }
+#formLogin .input-group { 
+  border-radius: 0.3rem;
+  -webkit-box-shadow: 2px 3px 8px 1px #aeaeae;
+  -moz-box-shadow: 2px 3px 8px 1px #aeaeae;
+  -o-box-shadow: 2px 3px 8px 1px #aeaeae;
+  box-shadow: 2px 3px 8px 1px #aeaeae;
+}
 
 #accedi_btn {
-  background-color: #1f2f55;
+  background-color: #1f4b6b;
   border: 0;
   color: white;
   padding-top: 8px;
   padding-bottom: 8px;
-  font-weight: 900;
+  font-weight: 500;
   font-size: 1.4em;
-  text-transform: uppercase;
+  border-radius: 0.3rem;
+  -webkit-box-shadow: 2px 3px 8px 1px #aeaeae;
+  -moz-box-shadow: 2px 3px 8px 1px #aeaeae;
+  -o-box-shadow: 2px 3px 8px 1px #aeaeae;
+  box-shadow: 2px 3px 8px 1px #aeaeae;
 }
 #accedi_btn:hover {
-  background: #1255a6;
+  background: #EF7918;
 }
 .container {
   max-width: 1320px !important;
@@ -316,15 +327,24 @@ a.active {
   left: 56px;
   animation-delay: -1.6s;
 }
-@keyframes lds-grid {
-  0%,
-  100% {
-    opacity: 1;
+@media only screen and (max-width: 768px) {
+  .login_sx{
+    opacity: 30% !important;
   }
-  50% {
-    opacity: 0.5;
+  .login_dx{
+    opacity: 30% !important;
   }
 }
+
+// @keyframes lds-grid {
+//   0%,
+//   100% {
+//     opacity: 1;
+//   }
+//   50% {
+//     opacity: 0.5;
+//   }
+// }
 .content {
   margin-bottom: 0px !important;
 }
