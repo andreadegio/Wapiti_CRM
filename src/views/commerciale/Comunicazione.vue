@@ -242,7 +242,7 @@ export default {
   font-weight: 600;
 }
 .data {
-  color: #ef7a12;
+  color: #EF7918;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 14px;
   line-height: 19px;

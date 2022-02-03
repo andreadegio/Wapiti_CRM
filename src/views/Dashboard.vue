@@ -16,9 +16,14 @@
       <CCol md="1"> </CCol>
       <CCol md="10">
         <div style="text-align: center; padding-bottom: 15px">
-          <h1 class="display-4" style="color: #1e2f56; font-weight: 900">
+          <h1 class="display-4" style="color: #1F4B6B; font-weight: 900">
             Benvenuto in
-            <img class="login-img" src="img/logo_abyway.png" style="vertical-align: baseline" height="40px" />
+            <img
+              class="login-img"
+              src="img/logo_abyway.png"
+              style="vertical-align: baseline"
+              height="40px"
+            />
           </h1>
           <div id="scritta"><hr class="mt-3" /></div>
         </div>
@@ -37,9 +42,7 @@
           @reload_operative="reload_operative()"
           :key="triggerNews"
         /> -->
-        <AreaManager
-          class="h-100"
-        />
+        <AreaManager class="h-100" />
       </CCol>
       <CCol md="4">
         <NewsMondo
@@ -151,7 +154,7 @@
             </CCardLink>
           </div>
           <div class="col-sm" v-else>
-            <CCardLink :href="$custom_json.urlEnergy" target="_blank">
+            <CCardLink @click="loginEnergy()">
               <CCard
                 class="text-center elevation-6 portali-btn"
                 body-wrapper
@@ -244,6 +247,46 @@ export default {
   },
 
   methods: {
+    loginEnergy() {
+      console.log("invio il form di login");
+      // Creo un form
+      var EnergyForm = document.createElement("form");
+      EnergyForm.name="formLogin";
+      EnergyForm.target = "_blank";
+      EnergyForm.method = "POST";
+      EnergyForm.action = this.$custom_json.login_url_energy;
+
+      // Creo l'input per l'user
+      var EnergyFormUser = document.createElement("input");
+      EnergyFormUser.type = "hidden";
+      EnergyFormUser.name = "user";
+      EnergyFormUser.value = localStorage.getItem("user");
+      
+
+      // Creo l'input per la passwd
+      var EnergyFormPwd = document.createElement("input");
+      EnergyFormPwd.type = "hidden";
+      EnergyFormPwd.name = "password";
+      EnergyFormPwd.value = localStorage.getItem("pwd");
+
+      // Creo l'input per il token
+      var EnergyFormToken = document.createElement("input");
+      EnergyFormToken.type = "hidden";
+      EnergyFormToken.name = "72aeb0fc-7bd8-11e5-b78d-00505693441e";
+      EnergyFormToken.value = "securetoken";
+
+      // Aggiungo i campi al form
+      EnergyForm.appendChild(EnergyFormUser);
+      EnergyForm.appendChild(EnergyFormPwd);
+      EnergyForm.appendChild(EnergyFormToken);
+
+      // Aggiungo il form al dom
+      document.body.appendChild(EnergyForm);
+
+      // Invio la richiesta
+      EnergyForm.submit();
+    },
+
     async get_avvisiToast() {
       // Chiamata per recuperare l'array dei messaggi Toast
 

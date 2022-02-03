@@ -134,7 +134,7 @@ export default {
         .Abilitato_Energy,
       isAuto: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Auto,
       post: [],
-      bgColor: "#1e2f56",
+      bgColor: "#1F4B6B",
       lista_nuovi: [],
     };
   },
@@ -254,7 +254,7 @@ export default {
   text-decoration: none;
 }
 .btnAssicurazioni {
-  color: #1e2f56 !important;
+  color: #1F4B6B !important;
   background-color: #ffffff;
   margin: 0 auto;
   display: block;
@@ -267,7 +267,7 @@ export default {
 .jumbotron {
   margin-bottom: 1rem !important;
   display: flex;
-  background: linear-gradient(0deg, #1e2f56, #798ebd) !important;
+  background: linear-gradient(0deg, #1F4B6B, #798ebd) !important;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
     0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12) !important;
   color: white;

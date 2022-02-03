@@ -209,7 +209,7 @@ export default {
   font-weight: 300;
 }
 .titolo_gradient {
-  background: -webkit-linear-gradient(#ef7a12, #1e2f56);
+  background: -webkit-linear-gradient(#EF7918, #1F4B6B);
   background-clip: border-box;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

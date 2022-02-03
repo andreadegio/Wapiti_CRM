@@ -30,7 +30,7 @@ export default {
   color: #0b4a9b !important;
 }
 .c-header-nav-link:hover {
-  color: #ef7a12 !important;
+  color: #EF7918 !important;
 }
 
 .c-body {
@@ -108,7 +108,7 @@ div.card-accent-success:before {
 }
 
 cite {
-  color: #ef7a12;
+  color: #EF7918;
   font-size: 0.8rem;
 }
 
@@ -127,7 +127,7 @@ cite {
 }
 
 .modal-header {
-  background-color: #1e2f56 !important;
+  background-color: #1F4B6B !important;
 }
 
 // Dimensione delle modali
@@ -138,10 +138,10 @@ cite {
 
 // SOVRASCRITTURA COLORI ABY SU TOOLTIP
 .arrow {
-  border-right-color: #1e2f56 !important;
+  border-right-color: #1F4B6B !important;
 }
 .tooltip-old-inner {
-  background-color: #1e2f56 !important;
+  background-color: #1F4B6B !important;
 }
 
 #icona_indietro {
@@ -164,13 +164,13 @@ cite {
   background-color: #1f4b6b !important;
 }
 a {
-  color: #1e2f56 !important;
+  color: #1F4B6B !important;
   font-size: 1rem;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 400;
 }
 a.active {
-  background: #ef7a12ad !important;
+  background: #EF7918ad !important;
   color: #fff !important;
 }
 .btn-outline-primary:hover {
