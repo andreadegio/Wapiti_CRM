@@ -4,7 +4,7 @@
       <div v-if="corsi.length == 0" class="col-12 text-center">
         <h1 class="display-3 mr-4 pb-5">Non sono presenti corsi</h1>
          <div class="my-3" v-if="admin">
-          <CLink to="AdminFormazione" style="color: #ef7a12 !important"
+          <CLink to="AdminFormazione" style="color: #EF7918 !important"
             ><CIcon name="cil-settings" /><strong> Gestione contenuti</strong>
           </CLink>
         </div>
@@ -24,7 +24,7 @@
         <!-- <p>Filtra per categoria:</p>
         <p>Filtra per settore:</p> -->
         <div class="mt-3" v-if="admin">
-          <CLink to="AdminFormazione" style="color: #ef7a12 !important"
+          <CLink to="AdminFormazione" style="color: #EF7918 !important"
             ><CIcon name="cil-settings" /><strong> Gestione contenuti</strong>
           </CLink>
         </div>
@@ -113,7 +113,7 @@ export default {
         .Abilitato_Energy,
       isAuto: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Auto,
       corsi: [],
-      bgColor: "#1e2f56",
+      bgColor: "#1F4B6B",
       lista_nuovi: [],
     };
   },
@@ -216,7 +216,7 @@ export default {
   font-size: 0.8rem !important;
   text-transform: uppercase;
   letter-spacing: 0.025em;
-  color: #ef7a12 !important;
+  color: #EF7918 !important;
 }
 .card-img,
 .card-img-bottom {

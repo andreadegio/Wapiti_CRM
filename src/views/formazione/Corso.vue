@@ -287,7 +287,7 @@ export default {
   box-shadow: 0 2px 4px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.08);
 }
 .data {
-  color: #ef7a12;
+  color: #EF7918;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
   font-size: 0.8rem !important;
@@ -365,7 +365,7 @@ export default {
   font-size: 0.8rem !important;
   text-transform: uppercase;
   letter-spacing: 0.025em;
-  color: #ef7a12 !important;
+  color: #EF7918 !important;
   font-weight: 600;
 }
 .navigazione {

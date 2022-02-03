@@ -41,7 +41,7 @@
       <hr />
     </div>
     <!-- BREADCRUMBS -->
-    <cite v-show="percorso != ''" style="color: #1e2f56"
+    <cite v-show="percorso != ''" style="color: #1F4B6B"
       >{{ area }} > {{ breadcrumbs.join(" > ") }}</cite
     >
 

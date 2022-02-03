@@ -124,12 +124,12 @@
   }
 
   .stepper-button.previous:hover {
-    background-color: #1e2f56;
+    background-color: #1F4B6B;
     color: white !important;
     border-radius: 0.35rem !important;
   }
   .stepper-button.previous {
-    border: 1px solid #1e2f56;
+    border: 1px solid #1F4B6B;
     
     border-radius: 0.35rem !important;
   }
