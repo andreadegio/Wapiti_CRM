@@ -1,26 +1,20 @@
 <template>
-  <div class="c-app flex-row align-items-center sfondo">
+  <div class="flex-row align-items-center sfondo">
     <img class="login_sx" src="img/login/login_sx.png" />
     <img class="login_dx" src="img/login/login_dx.png" />
-    <CContainer class="pt-0 mt-0">
-      <CRow id="div_img" class="justify-content-center m-0">
-        <img class="login-img pb-2" src="img/logo_abyway.png" />
-      </CRow>
-
+    
+    <CContainer class="pt-5">
+      
       <CRow class="justify-content-center">
         <CCol md="4" sm="1"> </CCol>
         <CCol md="4" sm="10">
-          <CRow
-            class="pt-3 pb-2 mt-3 text-center m-0"
-            align-horizontal="center"
-          >
-            <span class="payoff">
+          <CRow class="pt-3 pb-3 text-center m-0" align-horizontal="center">
+            <img class="login-img" src="img/logo_abyway.png" />
+            <span class="testo_login">
               Una serie di strumenti indispensabili, sviluppati per
               semplificarti il lavoro e fornire<br />un servizio professionale
-              al Cliente.
-              <br />
-              <i style="color: #ef7918">Tutto questo è Abyway!</i></span
-            >
+              al Cliente. <br /> </span
+            ><span class="payoff"><i>Tutto questo è Abyway!</i></span>
           </CRow>
           <CRow align-horizontal="center" class="m-0">
             <div>
@@ -97,7 +91,9 @@
     </CContainer>
     <CFooter style="color: white; background: none; border: none">
       <div class="mfs-auto">
-        <span class="mr-1"><em>Powered by Navert S.r.l.</em></span>
+        <span class="mr-1" style="color: #768192"
+          ><em>Powered by Navert S.r.l.</em></span
+        >
       </div>
     </CFooter>
   </div>
@@ -144,8 +140,8 @@ export default {
 <style scoped>
 /* @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"); */
 @font-face {
-  font-family: FreeStyle;
-  src: url("/img/fonts/FREESCPT.TTF");
+  font-family: Shadows;
+  src: url("/img/fonts/Shadows.ttf");
 }
 .sfondo {
   /* background: url("/img/slide_1_bg.jpg") bottom right,
@@ -155,12 +151,18 @@ export default {
   background-position: center;
   background-size: cover;
   font-family: "Montserrat", sans-serif;
+  height: 100vh;
 }
+
+
 .login-img {
-  vertical-align: baseline !important;
+  /* position: absolute; */
   z-index: 10;
-  margin-bottom: 3rem;
+ 
+  padding-bottom: 2.5rem;
+  /* margin: auto; */
 }
+
 .login-txt {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -180,13 +182,20 @@ export default {
   max-height: 30%;
   z-index: 0;
 }
-.payoff {
+.testo_login {
   color: #1f4b6b !important;
   font-size: 1rem;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 500;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1rem;
   line-height: 1.7rem;
+}
+
+.payoff {
+  color: #ef7918;
+  font-family: "Shadows";
+  font-size: 2rem;
+  line-height: 3rem;
 }
 
 .entra_btn {

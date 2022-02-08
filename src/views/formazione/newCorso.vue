@@ -42,10 +42,22 @@
         </div>
         <div
           v-if="loader == true"
-          style="position: fixed; top: 50%; left: 50%"
-          class="my-5"
+          style="position: relative; width: 100%; top: 50%; left: 50%"
         >
-          <div class="lds-grid">
+          <img
+            src="img/loader.gif"
+            style="
+              position: fixed;
+              top: 50%;
+              left: 50%;
+              -webkit-transform: translate(-50%, -50%);
+              -moz-transform: translate(-50%, -50%);
+              -ms-transform: translate(-50%, -50%);
+              -o-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);
+            "
+          />
+          <!-- <div class="lds-grid">
             <div></div>
             <div></div>
             <div></div>
@@ -55,7 +67,7 @@
             <div></div>
             <div></div>
             <div></div>
-          </div>
+          </div> -->
         </div>
         <div
           class="m-3 col-lg-3 col-sm-6"

@@ -16,7 +16,7 @@
       <CCol md="1"> </CCol>
       <CCol md="10">
         <div style="text-align: center; padding-bottom: 15px">
-          <h1 class="display-4" style="color: #1F4B6B; font-weight: 900">
+          <h1 class="display-4" style="color: #1f4b6b; font-weight: 900">
             Benvenuto in
             <img
               class="login-img"
@@ -177,8 +177,21 @@
       <CCol md="1"> </CCol>
     </CRow>
   </div>
-  <div v-else style="position: fixed; top: 50%; left: 50%" class="my-5">
-    <div class="lds-grid">
+  <div v-else style="position: relative; width: 100%; top: 50%; left: 50%">
+    <img
+      src="img/loader.gif"
+      style="
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      "
+    />
+    <!-- <div class="lds-grid">
       <div></div>
       <div></div>
       <div></div>
@@ -188,7 +201,7 @@
       <div></div>
       <div></div>
       <div></div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -251,8 +264,8 @@ export default {
       // console.log("invio il form di login");
       // Creo un form
       var EnergyForm = document.createElement("form");
-      EnergyForm.name="formLogin";
-      EnergyForm.target = "_blank";
+      EnergyForm.name = "formLogin";
+      EnergyForm.target = "_self";
       EnergyForm.method = "POST";
       EnergyForm.action = this.$custom_json.login_url_energy;
 
@@ -261,7 +274,6 @@ export default {
       EnergyFormUser.type = "hidden";
       EnergyFormUser.name = "user";
       EnergyFormUser.value = localStorage.getItem("user");
-      
 
       // Creo l'input per la passwd
       var EnergyFormPwd = document.createElement("input");
@@ -628,8 +640,10 @@ export default {
 </script>
 <style scoped>
 @font-face {
-  font-family: FreeStyle;
-  src: url("/img/fonts/FREESCPT.TTF");
+  /* font-family: FreeStyle;
+  src: url("/img/fonts/FREESCPT.TTF"); */
+  font-family: Shadows;
+  src: url("/img/fonts/Shadows.ttf");
 }
 .elevation-6 {
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
@@ -659,11 +673,12 @@ hr {
 }
 hr:after {
   content: "La nuova piattaforma operativa";
-  font-size: 2rem;
+  font-size: 1.5rem;
   position: relative;
   left: -0.5em;
-  /* font-family: "Indie Flower", cursive; */
-  font-family: "FreeStyle", cursive;
+  /* font-family: "Indie Flower", cursive; 
+  font-family: "FreeStyle", cursive; */
+  font-family: "Shadows";
 
   background-color: #ebedef;
   padding-left: 1em;

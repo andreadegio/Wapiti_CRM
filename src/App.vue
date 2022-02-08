@@ -306,6 +306,7 @@ a.active {
   top: 32px;
   left: 32px;
   animation-delay: -0.8s;
+  background: #EF7918 ;
 }
 .lds-grid div:nth-child(6) {
   top: 32px;
@@ -336,15 +337,15 @@ a.active {
   }
 }
 
-// @keyframes lds-grid {
-//   0%,
-//   100% {
-//     opacity: 1;
-//   }
-//   50% {
-//     opacity: 0.5;
-//   }
-// }
+@keyframes lds-grid {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
 .content {
   margin-bottom: 0px !important;
 }

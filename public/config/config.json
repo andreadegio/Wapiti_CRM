@@ -46,6 +46,7 @@
     "LatestNewsOperative": "LatestNewsOperative"
   },
   "login_url": "http://broker.abybroker.it/accesso/login.aspx?r=abyway",
-  "login_url_energy": "http://abyenergy.it/accessoTest/login.aspx?r=staging",
+  "login_url_energy":  "https://abyenergy.it/Test/accesso.aspx?r=staging",
+  "logout_url_energy": "http://abyenergy.it/Test/logout.aspx",
   "logout_url": "http://broker.abybroker.it/ea2019/logout.aspx"
 }

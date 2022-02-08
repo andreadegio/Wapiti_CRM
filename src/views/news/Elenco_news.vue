@@ -1,6 +1,25 @@
 <template>
-  <div v-if="loader" style="position: fixed; top: 50%; left: 50%" class="my-5">
-    <div class="lds-grid">
+  <div
+    v-if="loader"
+    style="position: relative; width: 100%; top: 50%; left: 50%;"
+  >
+    <img
+      src="img/loader.gif"
+      style="
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: auto !important;
+        height: auto !important;
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        object-fit: none;
+      "
+    />
+    <!-- <div class="lds-grid">
       <div></div>
       <div></div>
       <div></div>
@@ -10,7 +29,7 @@
       <div></div>
       <div></div>
       <div></div>
-    </div>
+    </div> -->
   </div>
   <div v-else>
     <div v-if="news != null" id="elenco_mondo" style="display: grid !important">

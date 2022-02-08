@@ -42,10 +42,22 @@
         </div>
         <div
           v-if="loader == true"
-          style="position: fixed; top: 50%; left: 50%"
-          class="my-5"
+          style="position: relative; width: 100%; top: 50%; left: 50%"
         >
-          <div class="lds-grid">
+          <img
+            src= "/img/loader.gif"
+            style="
+              position: fixed;
+              top: 50%;
+              left: 50%;
+              -webkit-transform: translate(-50%, -50%);
+              -moz-transform: translate(-50%, -50%);
+              -ms-transform: translate(-50%, -50%);
+              -o-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);
+            "
+          />
+          <!-- <div class="lds-grid">
             <div></div>
             <div></div>
             <div></div>
@@ -55,7 +67,7 @@
             <div></div>
             <div></div>
             <div></div>
-          </div>
+          </div> -->
         </div>
         <div
           class="m-3 col-lg-3 col-sm-6"
@@ -239,15 +251,14 @@
               style="color: white"
               name="salva"
               @click="salva()"
-            ><i class="far fa-save"></i> Salva</CButton
+              ><i class="far fa-save"></i> Salva</CButton
             >
             <CButton
-              
               class="ml-2"
               color="primary"
               variant="outline"
               @click="back()"
-            ><i class="fas fa-times"></i> Annulla
+              ><i class="fas fa-times"></i> Annulla
             </CButton>
           </div>
         </div>
