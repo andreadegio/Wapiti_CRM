@@ -204,8 +204,7 @@ export default {
       store.commit("user_logout");
       setTimeout(() => {
         window.open(this.$custom_json.logout_url_energy, "_self");
-        window.open(this.$custom_json.logout_url, "_self");
-        
+        window.open(this.$custom_json.logout_url, "_self");        
       }, 2000);
     },
   },
