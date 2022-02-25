@@ -32,7 +32,8 @@
     "get_notifiche": "Utility/get_notifiche",
     "set_letta": "Utility/set_letta",
     "get_toSee": "Utility/get_toSee",
-    "get_avvisiToast": "Utility/get_avvisiToast"
+    "get_avvisiToast": "Utility/get_avvisiToast",
+    "set_accesso":"Utility/set_accesso"
   },
   "servizi_broker": "https://servizi.documentale.cloud/aibajsonea/",
   "broker_veicoli": "http://broker.abybroker.it/ea2019/AreaOperazioni.aspx",

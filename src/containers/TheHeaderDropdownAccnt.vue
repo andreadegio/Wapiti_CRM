@@ -25,14 +25,20 @@
                     <p class="text-muted"></p>
                     <p>Unità Operativa: {{ user.UnitaOperativa }}</p>
                     <p>Intermediario: {{ user.Intermediario }}</p>
-                    <p style="text-transform: capitalize" v-show="user.DirettoreCommerciale">
+                    <p
+                      style="text-transform: capitalize"
+                      v-show="user.DirettoreCommerciale"
+                    >
                       Direttore Commerciale:
                       {{ user.DirettoreCommerciale | capitalize }} (<em
                         style="text-transform: lowercase"
                         >{{ user.DirettoreCommerciale_Email }}</em
                       >)
                     </p>
-                    <p style="text-transform: capitalize" v-show="user.AreaManager">
+                    <p
+                      style="text-transform: capitalize"
+                      v-show="user.AreaManager"
+                    >
                       Area Manager: {{ user.AreaManager | capitalize }} (<em
                         style="text-transform: lowercase"
                         >{{ user.AreaManager_Email }}</em
@@ -125,6 +131,9 @@
       <CDropdownItem @click="Get_user()">
         <CIcon name="cil-user" /> Profilo
       </CDropdownItem>
+      <CDropdownItem>
+        <i class="far fa-chart-bar"> </i> <span class="pl-1">Accessi</span>
+      </CDropdownItem>
       <!-- <CDropdownItem>
         <CIcon name="cil-bell" /> Updates
         <CBadge color="info" class="mfs-auto">{{
@@ -152,9 +161,7 @@
       <strong>Settings</strong>
     </CDropdownHeader>
     
-    <CDropdownItem>
-      <CIcon name="cil-settings" /> Settings
-    </CDropdownItem>
+    
     <CDropdownItem>
       <CIcon name="cil-dollar" /> Payments
       <CBadge color="secondary" class="mfs-auto">{{ itemsCount }}</CBadge>
@@ -204,7 +211,7 @@ export default {
       store.commit("user_logout");
       setTimeout(() => {
         window.open(this.$custom_json.logout_url_energy, "_self");
-        window.open(this.$custom_json.logout_url, "_self");        
+        window.open(this.$custom_json.logout_url, "_self");
       }, 2000);
     },
   },

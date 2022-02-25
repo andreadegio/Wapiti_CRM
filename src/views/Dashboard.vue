@@ -59,7 +59,11 @@
       <CCol sm="10" md="10">
         <div class="row">
           <div class="col-sm">
-            <CCardLink :href="$custom_json.broker_veicoli" target="_self">
+            <CCardLink
+              
+              target="_self"
+              @click="conta_accesso('broker')"
+            >
               <CCard
                 class="text-center elevation-6 portali-btn"
                 body-wrapper
@@ -78,7 +82,7 @@
             </CCardLink>
           </div>
           <div v-if="isRami && entra_rami" class="col-sm">
-            <CCardLink :href="urlRami" target="_self">
+            <CCardLink @click="conta_accesso('rami')" target="_self">
               <CCard
                 class="text-center elevation-6 portali-btn"
                 body-wrapper
@@ -154,7 +158,7 @@
             </CCardLink>
           </div>
           <div class="col-sm" v-else>
-            <CCardLink @click="loginEnergy()">
+            <CCardLink @click="conta_accesso('energy')">
               <CCard
                 class="text-center elevation-6 portali-btn"
                 body-wrapper
@@ -260,6 +264,40 @@ export default {
   },
 
   methods: {
+    async conta_accesso(settore) {
+      let params = {
+        utente: this.userID,
+        piattaforma: settore,
+      };
+      try {
+        await axios
+          .post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.set_accesso,
+            { params }
+          )
+          .then((response) => {
+            switch (settore) {
+              case "broker":
+                window.location.href = this.$custom_json.broker_veicoli;
+                break;
+              case "energy":
+                this.loginEnergy();
+                break;
+              case "rami":
+                window.location.href = this.urlRami;
+                break;
+              default:
+                break;
+            }
+            console.log(response.data);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+      // alert("uno in più per " + settore + " è entrato " + this.userID);
+    },
     loginEnergy() {
       // console.log("invio il form di login");
       // Creo un form
@@ -369,6 +407,7 @@ export default {
             JSON.stringify(risposta_chisono.data)
           );
           localStorage.setItem("userID", risposta_chisono.data.idUtente);
+          this.userID = risposta_chisono.data.idUtente;
           localStorage.setItem(
             "anagraficaID",
             risposta_chisono.data.idAnagrafica
@@ -401,6 +440,7 @@ export default {
               console.log("impossibile recuperare jwt rami " + error);
             }
           }
+          localStorage.setItem("userID", risposta_chisono.data.idUtente);
           this.isEnergy = JSON.parse(
             localStorage.getItem("chisono_data")
           ).Abilitato_Energy;
@@ -412,6 +452,7 @@ export default {
           this.$router.push("login");
         }
       }
+      this.userID = localStorage.getItem("userID");
       this.isEnergy = JSON.parse(
         localStorage.getItem("chisono_data")
       ).Abilitato_Energy;
