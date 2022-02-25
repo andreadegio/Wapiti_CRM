@@ -14,7 +14,7 @@
               Una serie di strumenti indispensabili, sviluppati per
               semplificarti il lavoro e fornire<br />un servizio professionale
               al Cliente. <br /> </span
-            ><span class="payoff"><i>Tutto questo è Abyway!</i></span>
+            ><span class="payoff"><i>Tutto questo è AbyWay!</i></span>
           </CRow>
           <CRow align-horizontal="center" class="m-0">
             <div>
