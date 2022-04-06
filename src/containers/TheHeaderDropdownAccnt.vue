@@ -132,7 +132,10 @@
         <CIcon name="cil-user" /> Profilo
       </CDropdownItem>
       <CDropdownItem>
+        <CHeaderNavLink
+        to="Accessi_stat">
         <i class="far fa-chart-bar"> </i> <span class="pl-1">Accessi</span>
+        </CHeaderNavLink>
       </CDropdownItem>
       <!-- <CDropdownItem>
         <CIcon name="cil-bell" /> Updates

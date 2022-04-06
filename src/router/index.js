@@ -32,6 +32,7 @@ const ModificaContenuti = () => import(/* webpackChunkName: "Commerciale" */"@/v
 
 // Views - Statistiche
 const Statistiche = () => import("@/views/statistiche/Statistiche");
+const Accessi_stat = () => import("@/views/statistiche/Accessi_stat");
 
 // Views - Page - Gas
 const Comingsoon_gas = () => import("@/views/pages/Comingsoon_gas");
@@ -174,6 +175,11 @@ function configRoutes() {
           path: "Profilo",
           name: "Profilo",
           component: Profilo,
+        },
+        {
+          path: "Accessi_stat",
+          name: "Accessi_stat",
+          component: Accessi_stat,
         },
       ],
       meta: { requiresAuth: true },

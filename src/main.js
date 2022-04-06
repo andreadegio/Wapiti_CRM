@@ -6,7 +6,8 @@ import CoreuiVue from "@coreui/vue";
 import { iconsSet as icons, iconsSet } from "./assets/icons/icons.js";
 import store from "./store";
 import "aos/dist/aos.css";
-import vuetify from "./plugins/vuetify";
+import Vuetify from "@/plugins/vuetify";
+// import 'vuetify/dist/vuetify.min.css'
 import VueFormulate from "@braid/vue-formulate";
 import "../node_modules/@braid/vue-formulate/themes/snow/snow.scss";
 import axios from "../node_modules/axios";
@@ -20,11 +21,17 @@ import VueAnalytics from "vue-analytics";
 import VueSimpleAlert from "vue-simple-alert";
 import VueFileAgent from "vue-file-agent";
 import moment from "moment";
+import VCalendar from 'v-calendar';
 
 library.add(faUserSecret);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.performance = true;
-Vue.use(CoreuiVue, vuetify);
+Vue.use(CoreuiVue);
+Vue.use(Vuetify);
+Vue.use(VCalendar, {
+  componentPrefix: 'vc',  // Use <vc-calendar /> instead of <v-calendar />
+});
+
 
 Vue.use(VueAnalytics, {
   id: "UA-197949487-1",
@@ -94,7 +101,7 @@ fetch("/config/config.json")
       router,
       store,
       icons,
-      vuetify,
+      Vuetify,
       axios,
       VueAnalytics,
 
