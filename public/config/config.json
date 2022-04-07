@@ -33,7 +33,8 @@
     "set_letta": "Utility/set_letta",
     "get_toSee": "Utility/get_toSee",
     "get_avvisiToast": "Utility/get_avvisiToast",
-    "set_accesso":"Utility/set_accesso"
+    "set_accesso":"Utility/set_accesso",
+    "get_accessi_totali":"Utility/get_accessi_totali"
   },
   "servizi_broker": "https://servizi.documentale.cloud/aibajsonea/",
   "broker_veicoli": "http://broker.abybroker.it/ea2019/AreaOperazioni.aspx",
@@ -47,7 +48,7 @@
     "LatestNewsOperative": "LatestNewsOperative"
   },
   "login_url": "http://broker.abybroker.it/accesso/login.aspx?r=abyway",
-  "login_url_energy":  "https://abyenergy.it/Test/accesso.aspx?r=staging",
+  "login_url_energy":  "https://abyenergy.it/Test/accesso.aspx?r=p",
   "logout_url_energy": "http://abyenergy.it/Test/logout.aspx",
   "logout_url": "http://broker.abybroker.it/ea2019/logout.aspx"
 }
