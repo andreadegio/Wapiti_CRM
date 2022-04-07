@@ -25,14 +25,20 @@
                     <p class="text-muted"></p>
                     <p>Unità Operativa: {{ user.UnitaOperativa }}</p>
                     <p>Intermediario: {{ user.Intermediario }}</p>
-                    <p style="text-transform: capitalize" v-show="user.DirettoreCommerciale">
+                    <p
+                      style="text-transform: capitalize"
+                      v-show="user.DirettoreCommerciale"
+                    >
                       Direttore Commerciale:
                       {{ user.DirettoreCommerciale | capitalize }} (<em
                         style="text-transform: lowercase"
                         >{{ user.DirettoreCommerciale_Email }}</em
                       >)
                     </p>
-                    <p style="text-transform: capitalize" v-show="user.AreaManager">
+                    <p
+                      style="text-transform: capitalize"
+                      v-show="user.AreaManager"
+                    >
                       Area Manager: {{ user.AreaManager | capitalize }} (<em
                         style="text-transform: lowercase"
                         >{{ user.AreaManager_Email }}</em
@@ -110,6 +116,7 @@
       <template #toggler>
         <CHeaderNavLink>
           <div
+           @click="aggiornaSede()"
             id="user_option"
             class="c-avatar"
             v-c-tooltip="{ content: 'OPZIONI', placement: 'bottom-end' }"
@@ -125,48 +132,9 @@
       <CDropdownItem @click="Get_user()">
         <CIcon name="cil-user" /> Profilo
       </CDropdownItem>
-      <!-- <CDropdownItem>
-        <CIcon name="cil-bell" /> Updates
-        <CBadge color="info" class="mfs-auto">{{
-          itemsCount
-        }}</CBadge> </CDropdownItem> -->
-
-      <!-- 
-    <CDropdownItem>
-      <CIcon name="cil-envelope-open" /> Messages
-      <CBadge color="success" class="mfs-auto">{{ itemsCount }}</CBadge>
-    </CDropdownItem>
-    <CDropdownItem>
-      <CIcon name="cil-task" /> Tasks
-      <CBadge color="danger" class="mfs-auto">{{ itemsCount }}</CBadge>
-    </CDropdownItem>
-    <CDropdownItem>
-      <CIcon name="cil-comment-square" /> Comments
-      <CBadge color="warning" class="mfs-auto">{{ itemsCount }}</CBadge>
-    </CDropdownItem> -->
-      <!-- <CDropdownHeader
-      tag="div"
-      class="text-center"
-      color="light"
-    >
-      <strong>Settings</strong>
-    </CDropdownHeader>
-    
-    <CDropdownItem>
-      <CIcon name="cil-settings" /> Settings
-    </CDropdownItem>
-    <CDropdownItem>
-      <CIcon name="cil-dollar" /> Payments
-      <CBadge color="secondary" class="mfs-auto">{{ itemsCount }}</CBadge>
-    </CDropdownItem>
-    <CDropdownItem>
-      <CIcon name="cil-file" /> Projects
-      <CBadge color="primary" class="mfs-auto">{{ itemsCount }}</CBadge>
-    </CDropdownItem>
-    <CDropdownDivider/>
-    <CDropdownItem>
-      <CIcon name="cil-shield-alt" /> Lock Account
-    </CDropdownItem> -->
+      <CDropdownItem to="Accessi_stat" v-if="admin" >
+        <i class="far fa-chart-bar"> </i> <span class="pl-1">Accessi</span>
+      </CDropdownItem>
       <CDropdownItem @click="Logout()">
         <!-- <CHeaderNavLink to="login"> -->
         <CIcon :content="$options.logout_ico" /> Logout
@@ -184,6 +152,7 @@ export default {
   logout_ico: cilAccountLogout,
   data() {
     return {
+      admin: false,
       user: [],
       logout_modale: false,
       show_profile: false,
@@ -193,18 +162,22 @@ export default {
   },
 
   methods: {
+    aggiornaSede(){
+      this.admin = JSON.parse(localStorage.getItem("chisono_data")).Is_Sede;
+      console.log("agg_sede");
+    },
     Get_user() {
       this.user = JSON.parse(localStorage.getItem("chisono_data"));
       this.show_profile = true;
     },
 
     Logout() {
-      // // funzione di logout. Viene chiamata la pagina del broker e di energy e dopo 5 secondi viene effettuato il redirect alla login
+      // // funzione di logout. Viene chiamata la pagina del broker e di energy e dopo 2 secondi viene effettuato il redirect alla login
       this.logout_modale = true;
       store.commit("user_logout");
       setTimeout(() => {
         window.open(this.$custom_json.logout_url_energy, "_self");
-        window.open(this.$custom_json.logout_url, "_self");        
+        window.open(this.$custom_json.logout_url, "_self");
       }, 2000);
     },
   },
@@ -221,5 +194,11 @@ export default {
 }
 .c-icon {
   margin-right: 0.3rem;
+}
+.dropdown-item.active,
+.dropdown-item:active {
+  text-decoration: none;
+  color: #fff !important;
+  background-color: #1f4b6b !important;
 }
 </style>
