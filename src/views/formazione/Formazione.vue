@@ -17,7 +17,7 @@
       <div class="col-12 text-center">Tutti i corsi a te riservati</div>
     </div>
     <div class="row" v-if="corsi.length > 0">
-      <div class="col-2 pl-5 text-center">
+      <div class="col-sm-2 pl-5 text-center">
         <p style="font-weight: 600; font-variant: small-caps">
           Totale corsi presenti: {{ corsi.length }}
         </p>
@@ -29,7 +29,7 @@
           </CLink>
         </div>
       </div>
-      <div class="col-10">
+      <div class="col-sm-10">
         <div class="row justify-content-center">
           <CCardGroup class="latest col-10">
             <div

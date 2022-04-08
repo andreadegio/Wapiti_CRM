@@ -242,7 +242,7 @@ export default {
   font-weight: 600;
 }
 .data {
-  color: #EF7918;
+  color: #ef7918;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 14px;
   line-height: 19px;
@@ -309,7 +309,7 @@ export default {
   position: absolute;
   left: 10%;
   padding: 3rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.08);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 .copertina img {
   vertical-align: middle;
@@ -322,4 +322,13 @@ export default {
 }
 /* SEZIONE ALLEGATI  */
 @import "/css/cloud.css";
+
+@media screen and (max-width: 600px) {
+  .titolo {
+    font-size: 2rem !important;
+  }
+  .box-titolo {
+    position: inherit;
+  }
+}
 </style>

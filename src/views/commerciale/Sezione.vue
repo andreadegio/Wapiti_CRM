@@ -282,4 +282,14 @@ export default {
     0 6px 10px 0 rgba(0, 0, 0, 0.55), 0 1px 18px 0 rgba(223, 78, 78, 0.83) !important;
   font-size: 90% !important;
 }
+@media screen and (max-width: 600px) {
+  li {
+    border: 1px solid #1f4b6b;
+  }
+
+  .tabs-nav{
+    font-size: 1rem !important;
+  }
+
+}
 </style>

@@ -254,7 +254,7 @@ export default {
   text-decoration: none;
 }
 .btnAssicurazioni {
-  color: #1F4B6B !important;
+  color: #1f4b6b !important;
   background-color: #ffffff;
   margin: 0 auto;
   display: block;
@@ -267,7 +267,7 @@ export default {
 .jumbotron {
   margin-bottom: 1rem !important;
   display: flex;
-  background: linear-gradient(0deg, #1F4B6B, #798ebd) !important;
+  background: linear-gradient(0deg, #1f4b6b, #798ebd) !important;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
     0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12) !important;
   color: white;
@@ -317,6 +317,16 @@ export default {
 }
 .top5 {
   max-width: 95% !important;
+}
+
+@media screen and (max-width: 600px) {
+  .jumbotron {
+    display: block !important;
+  }
+
+  .titolo-display {
+    font-size: 2rem !important;
+  }
 }
 </style>
 

@@ -23,7 +23,7 @@
       </CHeaderNavLink>
     </CHeaderNav>
     <a
-      href="dashboard"
+      href="../dashboard"
       class="c-header-brand mx-auto d-lg-none router-link-active"
     >
       <img

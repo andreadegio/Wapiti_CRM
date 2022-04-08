@@ -1,6 +1,6 @@
 <template>
   <div style="background-color: white">
-    <div class="copertina" >
+    <div class="copertina">
       <CImg :src="$custom_json.base_url + lista_corsi[id].copertina" />
 
       <section
@@ -256,7 +256,7 @@ export default {
   /* margin-left: 50%; */
   margin-right: auto;
 }
-.modal-body{
+.modal-body {
   max-height: none !important;
 }
 .box_contenuti::before {
@@ -284,10 +284,10 @@ export default {
   position: absolute;
   left: 10%;
   padding: 3rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.08);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 .data {
-  color: #EF7918;
+  color: #ef7918;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
   font-size: 0.8rem !important;
@@ -365,7 +365,7 @@ export default {
   font-size: 0.8rem !important;
   text-transform: uppercase;
   letter-spacing: 0.025em;
-  color: #EF7918 !important;
+  color: #ef7918 !important;
   font-weight: 600;
 }
 .navigazione {
@@ -404,4 +404,10 @@ export default {
 }
 /* SEZIONE ALLEGATI  */
 @import "/css/cloud.css";
+
+@media screen and (max-width: 600px) {
+  .titolo {
+    font-size: 2rem !important;
+  }
+}
 </style>
