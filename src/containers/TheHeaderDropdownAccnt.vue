@@ -116,7 +116,7 @@
       <template #toggler>
         <CHeaderNavLink>
           <div
-           @click="aggiornaSede()"
+            @click="aggiornaSede()"
             id="user_option"
             class="c-avatar"
             v-c-tooltip="{ content: 'OPZIONI', placement: 'bottom-end' }"
@@ -126,14 +126,17 @@
           </div>
         </CHeaderNavLink>
       </template>
+      <CDropdownHeader tag="div" class="text-center" color="light" v-if="admin">
+        <strong>Admin</strong>
+      </CDropdownHeader>
+      <CDropdownItem to="Accessi_stat" v-if="admin">
+        <i class="far fa-chart-bar"> </i> <span class="pl-1">Accessi</span>
+      </CDropdownItem>
       <CDropdownHeader tag="div" class="text-center" color="light">
         <strong>Account</strong>
       </CDropdownHeader>
       <CDropdownItem @click="Get_user()">
         <CIcon name="cil-user" /> Profilo
-      </CDropdownItem>
-      <CDropdownItem to="Accessi_stat" v-if="admin" >
-        <i class="far fa-chart-bar"> </i> <span class="pl-1">Accessi</span>
       </CDropdownItem>
       <CDropdownItem @click="Logout()">
         <!-- <CHeaderNavLink to="login"> -->
@@ -162,7 +165,7 @@ export default {
   },
 
   methods: {
-    aggiornaSede(){
+    aggiornaSede() {
       this.admin = JSON.parse(localStorage.getItem("chisono_data")).Is_Sede;
       console.log("agg_sede");
     },
