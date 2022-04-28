@@ -148,6 +148,7 @@ export default {
             // la risposta con l'elenco delle aree  la salvo nello storage
             localStorage.setItem("area", JSON.stringify(response.data));
             this.lista_aree = response.data;
+            this.$store.commit("lista_aree", this.lista_aree);
             // console.log(JSON.stringify(response.data));
           });
       } catch (error) {

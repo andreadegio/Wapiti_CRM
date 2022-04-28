@@ -3,20 +3,20 @@
     <div>
       <div class="field">
         <div class="row cover_box mb-3">
-            <span class="mb-2"
-              ><strong>Seleziona l'area di competenza:</strong></span
-            >
-            <div class="control">
-              <treeselect
-                :multiple="false"
-                :always-open="false"
-                :options="$attrs.lista_aree"
-                :max-height="300"
-                placeholder="Seleziona l'area"
-                v-model="uploadObject.area_post"
-              />
-            </div>
+          <span class="mb-2"
+            ><strong>Seleziona l'area di competenza:</strong></span
+          >
+          <div class="control">
+            <treeselect
+              :multiple="false"
+              :always-open="false"
+              :options="$store.state.aree"
+              :max-height="300"
+              placeholder="Seleziona l'area"
+              v-model="uploadObject.area_post"
+            />
           </div>
+        </div>
         <div class="cover_box mb-3">
           <span><strong>Titolo:</strong></span>
           <div class="control">
@@ -97,7 +97,12 @@ import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
 export default {
   name: "StepOne",
-  props: ["clickedNext", "currentStep", "uploadObject","coloreTasti","pippo"],
+  props: {
+    clickedNext: Boolean,
+    currentStep: Object,
+    uploadObject: Object,
+    coloreTasti: String,
+  },
   // mixins: [validationMixin],
   components: { Treeselect },
   data() {
@@ -105,7 +110,7 @@ export default {
       errore_titolo: false,
       errore_descrizione: false,
       errore_permessi: false,
-      area_post:null,
+      area_post: null,
       //options della select delle tipologie di rapporto
       options: [
         {

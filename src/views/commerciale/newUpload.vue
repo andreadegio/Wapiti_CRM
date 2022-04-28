@@ -21,7 +21,6 @@
       :uploadObject="uploadObject"
       :keep-alive="true"
       :coloreTasti="$attrs.colore"
-      :lista_aree ="$attrs.lista_aree"
     ></horizontal-stepper>
     <!-- <div class="text-center">
       <cite>- Ti trovi nel settore - {{ $route.params.settore }} - </cite>
@@ -64,7 +63,6 @@ export default {
           subtitle: "Descrizione e permessi per i file",
           component: StepOne,
           completed: false,
-          coloreTasti: this.$attrs.colore,
         },
         {
           icon: "folder",

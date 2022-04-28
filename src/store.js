@@ -6,6 +6,7 @@ const state = {
   sidebarShow: "responsive",
   sidebarMinimize: false,
   utente: null,
+  aree:[],
 };
 
 const mutations = {
@@ -29,6 +30,9 @@ const mutations = {
     localStorage.setItem("utente", state.utente);
     localStorage.clear();
   },
+  lista_aree(state, payload){
+      state.aree= payload
+  }
 };
 
 export default new Vuex.Store({

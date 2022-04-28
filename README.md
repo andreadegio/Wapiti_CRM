@@ -24,3 +24,6 @@ modifcare le regole di routing nel file index.js raggruppando i componenti con u
 
 ## Config.json
 Nel config.json di produzione modificare il parametro di login sulla piattaforma energy da r=staging a r=p
+
+## Modifiche vue-file-agent
+Per una gestione personalizzata del caricamento dei file (materiale, comunicazioni, formazione) ho modificato il file del modulo vue-file-agent (\vue-file-agent\dist\vue-file-agent.umd.js) gestendo l'invio dei parametri passati con un json
