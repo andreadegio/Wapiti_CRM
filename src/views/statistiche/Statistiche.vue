@@ -56,4 +56,7 @@ export default {
   height: auto !important; /* cross-browser */
   height: 100%; /* cross-browser */
 }
+#stats_frame{
+  margin-top: -55px !important;
+}
 </style>

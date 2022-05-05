@@ -59,11 +59,7 @@
       <CCol sm="10" md="10">
         <div class="row">
           <div class="col-sm">
-            <CCardLink
-              
-              target="_self"
-              @click="conta_accesso('broker')"
-            >
+            <CCardLink target="_self" @click="conta_accesso('broker')">
               <CCard
                 class="text-center elevation-6 portali-btn"
                 body-wrapper
@@ -260,6 +256,7 @@ export default {
   },
   mounted() {
     this.get_avvisiToast();
+    // this.meteo();
     this.$forceUpdate();
   },
 
@@ -355,6 +352,7 @@ export default {
       }
     },
 
+   
     async chisono() {
       const _MS_PER_DAY = 1000 * 60 * 60 * 24;
       //data salvata
@@ -373,14 +371,6 @@ export default {
       );
       const differenza = Math.floor((data1 - data2) / _MS_PER_DAY);
 
-      // console.log(
-      //   "data di oggi = " +
-      //     data1 +
-      //     " data storage= " +
-      //     data2 +
-      //     " differenza= " +
-      //     differenza
-      // );
       if (differenza != 0) {
         console.log("devo rifare il login - sessione scaduta");
         this.$router.push("login");
