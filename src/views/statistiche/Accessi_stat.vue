@@ -186,9 +186,9 @@ export default {
         start: "",
         end: "",
       },
-      contBroker: "400",
-      contRami: "20",
-      contEnergy: "100",
+      contBroker: "",
+      contRami: "",
+      contEnergy: "",
     };
   },
   mounted(){

@@ -25,7 +25,7 @@
     <CHeaderNav v-if="city != ''" class="d-md-down-none mr-auto">
       <CHeaderNavItem class="px-3">
         <h4><em>{{city}}  {{temp}}°C  </em> 
-        <img :src = ico_meteo v-c-tooltip="{ content: desc_meteo, placement: 'bottom-end' }"/></h4>
+        <img style="margin-left: 5px; max-width: 42px;" :src = ico_meteo v-c-tooltip="{ content: desc_meteo, placement: 'bottom-end' }"/></h4>
         
       </CHeaderNavItem>
     </CHeaderNav>

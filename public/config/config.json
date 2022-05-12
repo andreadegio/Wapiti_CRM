@@ -39,8 +39,10 @@
     "get_accessi_totali":"Utility/get_accessi_totali"
   },
   "servizi_broker": "https://servizi.documentale.cloud/aibajsonea/",
+  "servizi_energy": "https://abyenergy.it/servizitest/",
   "broker_veicoli": "http://broker.abybroker.it/ea2019/AreaOperazioni.aspx",
   "broker_statistiche": "http://broker.abybroker.it/ea2019/Stats_FlashReports_NoBarre.aspx?bg=ebedef&userID=",
+  "energy_statistiche":"https://abyenergy.it/test/Stats_FlashReports_NoBarre.aspx?bg=ebedef&userID=",
   "ep_broker": {
     "documentale_broker": "CondizioniContrattuali/",
     "documentale_RCA": "Download_Documentale_RCA/",

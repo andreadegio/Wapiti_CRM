@@ -1,7 +1,7 @@
 <template id="st">
   <iframe
     id="stats_frame"
-    :src="urlIframe"
+    :src="$custom_json.broker_statistiche + userID"
     
     class="frame-stats"
     width="100%"
@@ -19,21 +19,9 @@ export default {
     return {
       windowHeight: 0,
       userID: localStorage.getItem("userID"),
-      userEnergyID: localStorage.getItem("idUtenteEnergy"),
-      urlIframe:"",
     };
   },
   methods: {
-    setIframe(){
-      if (this.$attrs.portale == "broker"){
-        this.urlIframe= this.$custom_json.broker_statistiche + this.userID;
-      }
-      if (this.$attrs.portale == "energy"){
-        this.urlIframe= this.$custom_json.energy_statistiche + this.userEnergyID;
-      }
-      
-    },
-
     // eslint-disable-next-line no-unused-vars
     getWindowHeight(event) {
       var head = document.getElementById("header").offsetHeight - 5;
@@ -47,7 +35,6 @@ export default {
     },
   },
   mounted() {
-    this.setIframe();
     this.$nextTick(function () {
       window.addEventListener("resize", this.getWindowHeight);
       this.getWindowHeight();
@@ -69,5 +56,7 @@ export default {
   height: auto !important; /* cross-browser */
   height: 100%; /* cross-browser */
 }
-
+#stats_frame{
+  /* margin-top: -55px !important; */
+}
 </style>

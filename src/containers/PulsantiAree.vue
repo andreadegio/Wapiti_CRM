@@ -1,6 +1,17 @@
 <template >
   <div id="elenco_pulsanti">
-    <CCardLink to="Statistiche" target="_self">
+    <CCardLink v-if="isEnergy" to="StatistichePortali" target="_self">
+      <CCard
+        class="text-center elevation-6 pulsanti-azioni"
+        body-wrapper
+        style="background-image: url('img/buttons/statistiche.png')"
+      >
+        <CCardTitle>
+          <h1>STATISTICHE</h1>
+        </CCardTitle>
+      </CCard>
+    </CCardLink>
+    <CCardLink v-else to="Statistiche/broker" target="_self">
       <CCard
         class="text-center elevation-6 pulsanti-azioni"
         body-wrapper
@@ -83,6 +94,7 @@ export default {
     return {
       notificheCommerciale: 0,
       notificheFormazione: 0,
+      isEnergy : JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Energy,
     };
   },
   created() {

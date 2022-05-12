@@ -31,8 +31,9 @@ const Comunicazione = () => import(/* webpackChunkName: "Commerciale" */"@/views
 const ModificaContenuti = () => import(/* webpackChunkName: "Commerciale" */"@/views/commerciale/ModificaContenuti");
 
 // Views - Statistiche
-const Statistiche = () => import("@/views/statistiche/Statistiche");
+const Statistiche = () => import(/* webpackChunkName: "Statistiche" */"@/views/statistiche/Statistiche");
 const Accessi_stat = () => import("@/views/statistiche/Accessi_stat");
+const StatistichePortali = () => import(/* webpackChunkName: "Statistiche" */"@/views/statistiche/StatistichePortali");
 
 // Views - Page - Gas
 const Comingsoon_gas = () => import("@/views/pages/Comingsoon_gas");
@@ -51,8 +52,9 @@ Vue.use(Router);
 
 const router = new Router({
   mode: "history",
-  linkActiveClass: "active",
-  scrollBehavior: () => ({ y: 0 }),
+  base: process.env.BASE_URL,
+  // linkActiveClass: "active",
+  // scrollBehavior: () => ({ y: 0 }),
   routes: configRoutes(),
 });
 
@@ -85,9 +87,9 @@ function configRoutes() {
           component: Documentale,
         },
         {
-          path: "Statistiche",
-          name: "Statistiche",
-          component: Statistiche,
+          path: "StatistichePortali",
+          name: "StatistichePortali",
+          component: StatistichePortali,
         },
         {
           path: "NewsOperative",
@@ -180,6 +182,12 @@ function configRoutes() {
           path: "Accessi_stat",
           name: "Accessi_stat",
           component: Accessi_stat,
+        },
+        {
+          path: "Statistiche/:portale",
+          name: "Statistiche",
+          props: true,
+          component: Statistiche,
         },
       ],
       meta: { requiresAuth: true },

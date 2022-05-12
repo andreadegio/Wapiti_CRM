@@ -34,7 +34,7 @@ export default {
 }
 
 .c-body {
-  margin-top: 56px;
+  // margin-top: 56px;
 }
 // profondità modale
 .modal-backdrop {
