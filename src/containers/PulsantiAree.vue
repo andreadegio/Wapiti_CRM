@@ -1,6 +1,10 @@
 <template >
   <div id="elenco_pulsanti">
-    <CCardLink v-if="isEnergy" to="StatistichePortali" target="_self">
+    <CCardLink
+      v-if="isEnergy && idUtenteEnergy != '-1'"
+      to="StatistichePortali"
+      target="_self"
+    >
       <CCard
         class="text-center elevation-6 pulsanti-azioni"
         body-wrapper
@@ -94,14 +98,48 @@ export default {
     return {
       notificheCommerciale: 0,
       notificheFormazione: 0,
-      isEnergy : JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Energy,
+      isEnergy: JSON.parse(localStorage.getItem("chisono_data"))
+        .Abilitato_Energy,
+      idUtenteEnergy: "",
     };
   },
   created() {
     this.get_notifiche_formazione();
     this.get_notifiche_commerciale();
+    this.chisono_energy();
   },
   methods: {
+    async chisono_energy() {
+      if (!localStorage.getItem("idUtenteEnergy")) {
+        console.log("chiamo il servizio energy");
+        try {
+          var config = {
+            method: "post",
+            url: this.$custom_json.servizi_energy + "chisono",
+            headers: {
+              utente: localStorage.getItem("user"),
+              password: localStorage.getItem("pwd"),
+            },
+          };
+          const risposta_chisono_energy = await axios(config);
+          localStorage.setItem(
+            "chisono_energy_data",
+            JSON.stringify(risposta_chisono_energy.data)
+          );
+          localStorage.setItem(
+            "idUtenteEnergy",
+            JSON.stringify(risposta_chisono_energy.data.idUtente)
+          );
+          this.idUtenteEnergy = localStorage.getItem("idUtenteEnergy");
+        } catch (error) {
+          console.log("errore");
+          this.idUtenteEnergy = "-1";
+          localStorage.setItem("idUtenteEnergy", "-1");
+        }
+      } else {
+        this.idUtenteEnergy = localStorage.getItem("idUtenteEnergy");
+      }
+    },
     async get_notifiche_formazione() {
       let params = {
         categoria: "Corso",
