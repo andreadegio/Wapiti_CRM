@@ -1,7 +1,7 @@
 <template>
   <div>
     <CRow class="pl-3 mt-2" style="justify-content: center">
-      <h1 class="mb-3 titolo_sezione">Documentale</h1>
+      <!-- <h1 class="mb-3 titolo_sezione">Documentale</h1> -->
     </CRow>
     <VisualizzaDocumento />
 
@@ -980,10 +980,10 @@ export default {
 }
 
 #RowExplorer {
-  margin: 0 10px 0 10px;
+  margin: 1rem 3rem 0 3rem;
   height: 80%;
-  position: absolute;
-  width: 99%;
+  /* position: absolute; */
+  /* width: 99%; */
   background-position: right !important;
   border-radius: 5px;
   background-size: contain !important;

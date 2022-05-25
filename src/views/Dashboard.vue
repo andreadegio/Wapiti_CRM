@@ -12,7 +12,7 @@
         </CToast>
       </template>
     </CToaster>
-    <CRow>
+    <!-- <CRow>
       <CCol md="1"> </CCol>
       <CCol md="10">
         <div style="text-align: center; padding-bottom: 15px">
@@ -29,13 +29,13 @@
         </div>
       </CCol>
       <CCol md="1"> </CCol>
-    </CRow>
-    <CRow>
+    </CRow> -->
+    <CRow class="pt-1">
       <CCol md="1"> </CCol>
-      <CCol id="pulsanti_aree" align-horizontal="center" md="2">
+      <!-- <CCol id="pulsanti_aree" align-horizontal="center" md="2">
         <PulsantiAree />
-      </CCol>
-      <CCol md="4">
+      </CCol> -->
+      <CCol md="5">
         <!-- <NewsOperative
           class="h-100"
           :operativeParent="news_operative"
@@ -44,7 +44,7 @@
         /> -->
         <AreaManager class="h-100" />
       </CCol>
-      <CCol md="4">
+      <CCol md="5">
         <NewsMondo
           class="h-100"
           :newsParent="news_mondo"
@@ -210,7 +210,7 @@ import axios from "axios";
 import NewsMondo from "./../containers/NewsMondo";
 
 import AreaManager from "./../containers/ContattiAreaManager";
-import PulsantiAree from "./../containers/PulsantiAree";
+
 import store from "./../store";
 
 export default {
@@ -218,7 +218,6 @@ export default {
   components: {
     NewsMondo,
     AreaManager,
-    PulsantiAree,
   },
   data() {
     return {
