@@ -36,12 +36,6 @@
         <PulsantiAree />
       </CCol>
       <CCol md="4">
-        <!-- <NewsOperative
-          class="h-100"
-          :operativeParent="news_operative"
-          @reload_operative="reload_operative()"
-          :key="triggerNews"
-        /> -->
         <AreaManager class="h-100" />
       </CCol>
       <CCol md="4">
@@ -77,7 +71,7 @@
               </CCard>
             </CCardLink>
           </div>
-          <div v-if="isRami && entra_rami" class="col-sm">
+          <div v-if="isRami" class="col-sm">
             <CCardLink @click="conta_accesso('rami')" target="_self">
               <CCard
                 class="text-center elevation-6 portali-btn"
@@ -96,25 +90,6 @@
               </CCard>
             </CCardLink>
           </div>
-          <!-- <div v-if="isRami && entra_rami" class="col-sm">
-            <CCardLink to="Comingsoon_rami" target="_self">
-              <CCard
-                class="text-center elevation-6 portali-btn"
-                body-wrapper
-                style="
-                  height: 200px;
-                  background-image: url('img/buttons/rami.png');
-                  background-position: center;
-                  z-index: 0;
-                  background-size: cover;
-                "
-                ><CCardTitle>
-                  <span class="portali">Piattaforma</span>
-                  <h1 class="pulsante_portali">PROFESSIONISTI</h1>
-                </CCardTitle>
-              </CCard>
-            </CCardLink>
-          </div> -->
           <div v-else class="col-sm">
             <CCardLink to="Comingsoon_rami2" target="_self">
               <CCard
