@@ -12,45 +12,20 @@
         </CToast>
       </template>
     </CToaster>
-    <!-- <CRow>
-      <CCol md="1"> </CCol>
-      <CCol md="10">
-        <div style="text-align: center; padding-bottom: 15px">
-          <h1 class="display-4" style="color: #1f4b6b; font-weight: 900">
-            Benvenuto in
-            <img
-              class="login-img"
-              src="img/logo_abyway.png"
-              style="vertical-align: baseline"
-              height="40px"
-            />
-          </h1>
-          <div id="scritta"><hr class="mt-3" /></div>
-        </div>
-      </CCol>
-      <CCol md="1"> </CCol>
-    </CRow> -->
+
     <CRow class="pt-1">
       <CCol md="1"> </CCol>
-      <!-- <CCol id="pulsanti_aree" align-horizontal="center" md="2">
-        <PulsantiAree />
-      </CCol> -->
-      <CCol md="5">
-        <!-- <NewsOperative
-          class="h-100"
-          :operativeParent="news_operative"
-          @reload_operative="reload_operative()"
-          :key="triggerNews"
-        /> -->
+      <CCol md="3">
         <AreaManager class="h-100" />
       </CCol>
-      <CCol md="5">
-        <NewsMondo
+      <CCol md="7">
+        <!-- <NewsMondo
           class="h-100"
           :newsParent="news_mondo"
           :key="triggerNews"
           @reload_mondo="reload_mondo()"
-        />
+        /> -->
+        <contattiAby />
       </CCol>
       <CCol md="1"> </CCol>
     </CRow>
@@ -77,7 +52,7 @@
               </CCard>
             </CCardLink>
           </div>
-          <div v-if="isRami && entra_rami" class="col-sm">
+          <div v-if="isRami" class="col-sm">
             <CCardLink @click="conta_accesso('rami')" target="_self">
               <CCard
                 class="text-center elevation-6 portali-btn"
@@ -96,25 +71,6 @@
               </CCard>
             </CCardLink>
           </div>
-          <!-- <div v-if="isRami && entra_rami" class="col-sm">
-            <CCardLink to="Comingsoon_rami" target="_self">
-              <CCard
-                class="text-center elevation-6 portali-btn"
-                body-wrapper
-                style="
-                  height: 200px;
-                  background-image: url('img/buttons/rami.png');
-                  background-position: center;
-                  z-index: 0;
-                  background-size: cover;
-                "
-                ><CCardTitle>
-                  <span class="portali">Piattaforma</span>
-                  <h1 class="pulsante_portali">PROFESSIONISTI</h1>
-                </CCardTitle>
-              </CCard>
-            </CCardLink>
-          </div> -->
           <div v-else class="col-sm">
             <CCardLink to="Comingsoon_rami2" target="_self">
               <CCard
@@ -191,33 +147,23 @@
         transform: translate(-50%, -50%);
       "
     />
-    <!-- <div class="lds-grid">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div> -->
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import NewsMondo from "./../containers/NewsMondo";
+// import NewsMondo from "./../containers/NewsMondo";
 
 import AreaManager from "./../containers/ContattiAreaManager";
+import ContattiAby from "./../containers/ContattiAby";
 
 import store from "./../store";
 
 export default {
   name: "Dashboard",
   components: {
-    NewsMondo,
     AreaManager,
+    ContattiAby,
   },
   data() {
     return {
@@ -351,7 +297,6 @@ export default {
       }
     },
 
-   
     async chisono() {
       const _MS_PER_DAY = 1000 * 60 * 60 * 24;
       //data salvata

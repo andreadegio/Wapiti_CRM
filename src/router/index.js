@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
+
 // import store from "../store";
 
 // Containers
@@ -235,7 +236,7 @@ router.beforeEach((to, from, next) => {
     }
 
     if (to.query.auth == "1" || localStorage.getItem("utente") == "ok") {
-      next();
+          next();
     } else {
       next({
         name: "Login",

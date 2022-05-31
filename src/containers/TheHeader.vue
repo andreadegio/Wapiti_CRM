@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color: white;">
+  <div style="background-color: white">
     <!-- <CHeader fixed with-subheader light class="d-flex justify-content-between fixed-nav"> -->
     <CHeader
       fixed
@@ -15,7 +15,7 @@
       <CHeaderNav v-if="city != ''" class="d-md-down-none mr-auto">
         <CHeaderNavItem class="px-3">
           <h4>
-            <em style="font-size: 1rem;">{{ city }} {{ temp }}°C </em>
+            <em style="font-size: 1rem">{{ city }} {{ temp }}°C </em>
             <img
               style="margin-left: 5px; max-width: 42px"
               :src="ico_meteo"
@@ -73,7 +73,7 @@
           variant="pills"
           justified
           fill
-          class=" c-header-light secondary-menu my-1"
+          class="c-header-light secondary-menu my-1"
         >
           <CNavItem active to="/dashboard" target="_self"
             ><i class="fas fa-home"></i> Dashboard</CNavItem
@@ -140,6 +140,7 @@ export default {
       isEnergy: JSON.parse(localStorage.getItem("chisono_data"))
         .Abilitato_Energy,
       idUtenteEnergy: "",
+      interval: null,
     };
   },
   mounted() {
@@ -147,6 +148,15 @@ export default {
     this.get_notifiche_formazione();
     this.get_notifiche_commerciale();
     this.chisono_energy();
+  },
+  created() {
+    this.interval = setInterval(() => {
+      this.get_notifiche_formazione();
+      this.get_notifiche_commerciale();
+    }, 3000);
+  },
+  destroyed() {
+    clearInterval(this.interval);
   },
   methods: {
     async chisono_energy() {
@@ -205,7 +215,7 @@ export default {
 
       try {
         axios.get(url).then((response) => {
-          console.log("Dati meteo: " + JSON.stringify(response.data.name));
+          // console.log("Dati meteo: " + JSON.stringify(response.data.name));
           this.city = response.data.name;
           this.temp = response.data.main.temp.toString().split(".")[0];
           this.desc_meteo = response.data.weather[0].description;
@@ -217,6 +227,7 @@ export default {
       }
     },
     async get_notifiche_formazione() {
+      // console.log("AGGIORNAMENTO NOTIFICHE FORMAZIONE");
       let params = {
         categoria: "Corso",
         utente: localStorage.getItem("userID"),
@@ -239,6 +250,7 @@ export default {
       }
     },
     async get_notifiche_commerciale() {
+      // console.log("AGGIORNAMENTO NOTIFICHE COMMERCIALE");
       let params = {
         categoria: "Post",
         utente: localStorage.getItem("userID"),
@@ -274,7 +286,7 @@ export default {
   font-weight: 300 !important;
 }
 
-a.active{
+a.active {
   background-color: #ef7a13 !important;
 }
 
