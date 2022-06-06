@@ -198,6 +198,9 @@ export default {
 #world-list li {
   border-top: 1px solid rgba(0, 0, 21, 0.125) !important;
 }
+#world-list li:last-of-type {
+  padding-bottom: 0px !important;
+}
 img {
   object-fit: cover;
   border-radius: 3px;
