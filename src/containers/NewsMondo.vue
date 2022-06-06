@@ -76,7 +76,7 @@
                 <strong>{{ item.titolo }}</strong>
               </h5>
               <p
-                class="text-justify"
+                class="text-justify testo_news"
                 v-html="
                   $options.filters.truncate(item.contenuto, 150, ' [...]')
                 "
@@ -218,5 +218,8 @@ img {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 700;
+}
+.testo_news{
+  
 }
 </style>

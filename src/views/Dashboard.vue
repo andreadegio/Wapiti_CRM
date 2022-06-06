@@ -28,17 +28,17 @@
           </div>
           <div class="col-sm p-0">
             <CCol class="h-100">
-              <contattiAby class="h-100" />
-            </CCol>
-          </div>
-          <div class="col-sm p-0">
-            <CCol class="h-100">
               <NewsMondo
                 class="h-100"
                 :newsParent="news_mondo"
                 :key="triggerNews"
                 @reload_mondo="reload_mondo()"
               />
+            </CCol>
+          </div>
+          <div class="col-sm p-0">
+            <CCol class="h-100">
+              <contattiAby class="h-100" />
             </CCol>
           </div>
         </div>

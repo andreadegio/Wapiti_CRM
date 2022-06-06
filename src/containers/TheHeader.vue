@@ -76,19 +76,20 @@
           class="c-header-light secondary-menu my-1"
           id="new_menu"
         >
-          <CNavItem active to="/dashboard" target="_self"
+          <CNavItem active class="grow" to="/dashboard" target="_self"
             ><i class="fas fa-home"></i> Dashboard</CNavItem
           >
           <CNavItem
+          class="grow"
             v-if="isEnergy && idUtenteEnergy != '-1'"
             to="/StatistichePortali"
             target="_self"
             ><i class="far fa-chart-bar"></i> Statistiche</CNavItem
           >
-          <CNavItem v-else to="Statistiche/broker" target="_self"
+          <CNavItem class="grow" v-else to="Statistiche/broker" target="_self"
             ><i class="far fa-chart-bar"></i> Statistiche</CNavItem
           >
-          <CNavItem to="/Commerciale" target="_self"
+          <CNavItem class="grow" to="/Commerciale" target="_self"
             ><i class="fas fa-user-tie"></i> Area Commerciale
             <CBadge
               v-show="notificheCommerciale > 0"
@@ -97,7 +98,7 @@
               >{{ notificheCommerciale }}</CBadge
             ></CNavItem
           >
-          <CNavItem to="/Formazione" target="_self"
+          <CNavItem class="grow" to="/Formazione" target="_self"
             ><i class="fas fa-user-graduate"></i> Formazione
             <CBadge
               v-show="notificheFormazione > 0"
@@ -106,10 +107,10 @@
               >{{ notificheFormazione }}</CBadge
             ></CNavItem
           >
-          <CNavItem to="/Comingsoon" target="_self"
+          <CNavItem class="grow" to="/Comingsoon" target="_self"
             ><i class="fas fa-calculator"></i> Amministrazione</CNavItem
           >
-          <CNavItem to="/Documentale" target="_self"
+          <CNavItem class="grow" to="/Documentale" target="_self"
             ><i class="fas fa-file-signature"></i> Documentale</CNavItem
           >
         </CNav>
@@ -277,9 +278,20 @@ export default {
 };
 </script>
 <style>
+.grow { transition: all .2s ease-in-out; }
+.grow:hover { transform: scale(1.2); }
 #new_menu li:hover {
-  background-color: #ecac75;
+  /* background-color: #ecac75; */
+  background-color: #ef7a13;
+
   border-radius: 10px;
+}
+#new_menu li a:hover {
+  /* background-color: #ecac75; */
+  /* background-color: #ef7a13;
+
+  border-radius: 10px; */
+  color: white !important;
 }
 .nav-item {
   margin-top: auto;
@@ -292,7 +304,7 @@ export default {
 
 .nav-pills .nav-link {
   font-size: 1.3rem !important;
-  font-weight: 300 !important;
+  font-weight: 500 !important;
 }
 
 a.active {

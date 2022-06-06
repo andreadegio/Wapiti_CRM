@@ -52,7 +52,7 @@
     </CModal>
     <CCard class="h-100">
       <CCardHeader class="d-flex justify-content-between">
-        <strong class="h4 titolo_gradient">RECAPITI</strong>
+        <strong class="h4 titolo_gradient">CONTATTACI</strong>
         <div class="card-header-actions"></div>
       </CCardHeader>
       <CCardBody id="manager" class="news_card py-0">
@@ -60,18 +60,23 @@
           <CListGroupItem
             v-for="(contatto, index) in elenco_contatti"
             :key="index"
-            class="flex-column align-items-start"
-            
+            class="flex-column align-items-start grow"
           >
             <div
-              class="d-flex w-100 justify-content-center py-3"
+              class="d-flex w-100  py-2"
               style="text-transform: uppercase"
               @click="show_contatto(index)"
             >
-            <div class="icona_contatto" v-html="contatto.icona"></div>
-              <h5>
+              <div
+                v-show="contatto.icona"
+                class="icona_contatto mr-3"
+                v-html="contatto.icona"
+              ></div>
+              <div class="recapito_name">
                 <strong>{{ contatto.descrizione }}</strong>
-              </h5>
+                <br/>
+                <div class="small_text">(Clicca per visualizzare le modalità di contatto)</div>
+              </div>
             </div>
           </CListGroupItem>
         </CListGroup>
@@ -96,6 +101,7 @@ export default {
           telegram: "333-123456789",
           orarioTelegram: "orario 11-18",
           form_contatto: null,
+          icona: '<i class="far fa-lightbulb"></i>',
         },
         {
           descrizione: "Polizze RC Auto",
@@ -105,6 +111,7 @@ export default {
           telegram: "333-123456789",
           orarioTelegram: "orario 11-18",
           form_contatto: null,
+          icona: '<i class="fas fa-car-alt"></i>',
         },
         {
           descrizione: "Polizze Flotte e Trasporti",
@@ -114,6 +121,7 @@ export default {
           telegram: "333-123456789",
           orarioTelegram: "orario 11-18",
           form_contatto: null,
+          icona: '<i class="fas fa-truck-moving"></i>',
         },
         {
           descrizione: "Polizze Individuali e Professionisti",
@@ -123,6 +131,7 @@ export default {
           telegram: "333-123456789",
           orarioTelegram: "orario 11-18",
           form_contatto: null,
+          icona: '<i class="fas fa-user-tie"></i>',
         },
         {
           descrizione: "Polizze aziende e Fidejussioni",
@@ -132,6 +141,7 @@ export default {
           telegram: "333-123456789",
           orarioTelegram: "orario 11-18",
           form_contatto: null,
+          icona: '<i class="fas fa-industry"></i>',
         },
         {
           descrizione: "Servizio Sinistri",
@@ -141,7 +151,7 @@ export default {
           telegram: "333-123456789",
           orarioTelegram: "orario 11-18",
           form_contatto: "mail_per_richiamare",
-          icona: '<i class="fas fa-car-crash"></i>'
+          icona: '<i class="fas fa-car-crash"></i>',
         },
         {
           descrizione: "Area Amministrativa",
@@ -151,6 +161,7 @@ export default {
           telegram: "333-123456789",
           orarioTelegram: "orario 11-18",
           form_contatto: "mail_per_richiamare",
+          icona: '<i class="fas fa-calculator"></i>',
         },
       ],
     };
@@ -175,13 +186,21 @@ export default {
 <style scoped>
 .contatto li:hover {
   cursor: pointer;
-  background-color: #ef791898;
+  background-color: #ef7a13;
+  color: white;
+}
+.contatto li:hover .small_text{
+  color: white;
 }
 .card-header {
   border-bottom: 0px !important;
 }
 .card-footer {
   border-top: 0px !important;
+}
+
+#manager{
+  font-size: 1rem;
 }
 
 #manager .list-group-item {
@@ -222,4 +241,36 @@ export default {
   -webkit-text-fill-color: transparent;
   font-weight: 700;
 }
+.icona_contatto {
+  position: relative;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 50em;
+  width: 50px;
+  height: 50px;
+  font-size: 14.4px;
+  background-color: #1d4b6b;
+  color: white;
+  font-size: 1.5rem;
+  /* margin-right: 10px; */
+}
+.recapito_name{
+  /* margin: auto; */
+}
+
+.small_text{
+  font-size: 0.7rem;
+  color: rgb(155, 155, 155);
+  
+}
+
+.grow { transition: all .2s ease-in-out; }
+.grow:hover { transform: scale(1.1); }
 </style>
