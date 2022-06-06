@@ -1,14 +1,18 @@
 <template >
   <div v-if="show_async == 2">
     <CToaster
+      id="messaggi_toast"
       v-for="(avviso, index) in avvisiToast"
       :key="index"
-      :autohide="5000"
       position="top-center"
+      :autohide="5000"
     >
       <template>
-        <CToast color="info" :show="true" :header="avviso.Titolo">
-          <p v-html="avviso.Messaggio"></p>
+        <CToast color="info" :show="true">
+          <template #header>
+            <div class="titolo_toast" v-html="avviso.Titolo"></div>
+          </template>
+          <p class="messaggio_toast" v-html="avviso.Messaggio"></p>
         </CToast>
       </template>
     </CToaster>
@@ -327,7 +331,6 @@ export default {
       }
     },
 
-   
     async chisono() {
       const _MS_PER_DAY = 1000 * 60 * 60 * 24;
       //data salvata
@@ -708,5 +711,21 @@ hr:after {
   text-shadow: 1px 1px midnightblue;
   font-size: 1.5rem;
   margin-bottom: 0 !important;
+}
+/* PERSONALIZZAZIONE MESSAGGI TOAST */
+.messaggio_toast {
+  padding: 0.75rem !important;
+  font-size: 1.2rem;
+}
+.titolo_toast {
+  text-align: center !important;
+  font-size: 2rem !important;
+}
+#messaggi_toast {
+  width: 80vh !important;
+}
+
+.mfs-2 .close{
+  margin-left: 20rem !important;
 }
 </style>
