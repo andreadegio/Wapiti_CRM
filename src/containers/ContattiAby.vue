@@ -1,112 +1,82 @@
 <template>
-  <CCard class="h-100 px-4 pb-5" style="z-index: 10">
-    <CCardHeader class="d-flex justify-content-between">
-      <strong class="h4 titolo_gradient">CONTATTI ABY</strong>
-    </CCardHeader>
-    <CTabs
-      variant="pills"
-      :active-tab="0"
-      vertical="true"
-      add-nav-wrapper-classes="col-sm-4"
-      add-tabs-wrapper-classes="col-sm-8"
+  <div>
+    <CModal
+      color="dark"
+      centered
+      :show.sync="modale_contatto"
+      style="z-index: 30"
+      size="lg"
     >
-      <CTab title="Servizi Gas e Luce">
-        <p
-            class="my-3 text-justify" 
-            v-show="chisono.DirettoreCommerciale_TelefonoFisso"
+      <template #header style="background-color: #1f4b6b !important">
+        <strong style="text-transform: uppercase"
+          >Recapiti per {{ dati_modale.descrizione }}</strong
+        >
+        <CButton class="close" @click="modale_contatto = false">
+          <span aria-hidden="true">&times;</span>
+        </CButton>
+      </template>
+      <template>
+        <div class="d-flex align-items-center">
+          <CContainer fluid>
+            <CRow class="justify-content-center">
+              <CCol md="10">
+                <CCard>
+                  <CCardBody>
+                    <h1>{{ dati_modale.descrizione }}</h1>
+                    <p class="text-muted"></p>
+                    <p>Telefono: {{ dati_modale.telefono }}</p>
+                    <p>Mail: {{ dati_modale.mail }}</p>
+                    <p>Telegram: {{ dati_modale.telegram }}</p>
+                    <p v-show="dati_modale.form_contatto != null">
+                      INSERISCI IL TUO NUMERO DI TELEFONO PER ESSERE
+                      RICONTATTATO form di contatto
+                    </p>
+                  </CCardBody>
+                </CCard>
+              </CCol>
+            </CRow>
+          </CContainer>
+        </div>
+      </template>
+
+      <template #footer>
+        <CButton
+          @click="modale_contatto = false"
+          color="dark"
+          size="sm"
+          variant="outline"
+        >
+          Chiudi
+        </CButton>
+      </template>
+    </CModal>
+    <CCard class="h-100">
+      <CCardHeader class="d-flex justify-content-between">
+        <strong class="h4 titolo_gradient">RECAPITI</strong>
+        <div class="card-header-actions"></div>
+      </CCardHeader>
+      <CCardBody id="manager" class="news_card py-0">
+        <CListGroup class="contatto">
+          <CListGroupItem
+            v-for="(contatto, index) in elenco_contatti"
+            :key="index"
+            class="flex-column align-items-start"
+            v-show="chisono.DirettoreCommerciale"
           >
-            <i class="fas fa-phone fa-fw"></i> Telefono:
-           <span style="text-transform:lowercase"> {{ chisono.DirettoreCommerciale_TelefonoFisso }}</span>
-          </p>
-          
-      </CTab>
-      <CTab title="Polizze RC Auto">
-        <p
-            class="my-3 text-justify" 
-            
-          >
-            <i class="fas fa-phone fa-fw"></i> Telefono:
-           <span style="text-transform:lowercase"> {{ chisono.DirettoreCommerciale_TelefonoFisso }}</span>
-          </p>
-           <p
-            class="my-3 text-justify"
-            
-          >
-            <i class="far fa-envelope fa-fw"></i> Mail:
-            <span class="mail">{{ chisono.DirettoreCommerciale_Email }}</span>
-          </p>
-      </CTab>
-      <CTab title="Polizze Flotte e Trasporti"> Text will not be shown. </CTab>
-      <CTab title="Polizze Individuali e Professionisti">
-        Text will not be shown.
-      </CTab>
-      <CTab title="Polizze Aziende e Fidejussioni">
-        Text will not be shown.
-      </CTab>
-      <CTab title="Servizio Sinistri"> Text will not be shown. </CTab>
-      <CTab title="Area Amministrativa"> Text will not be shown. </CTab>
-    </CTabs>
-    <!-- <table>
-      <thead>
-        <tr>
-          <th class="header_contatti riga_tabella">Settore</th>
-          <th>Telefono</th>
-          <th>Mail</th>
-          <th>Telegram</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="header_contatti riga_tabella">Servizi Gas e Luce</td>
-          <td>02-86882871 interno</td>
-          <td>energy@.....</td>
-          <td>telegram</td>
-        </tr>
-        <tr>
-          <td class="header_contatti riga_tabella">Polizze RC Auto</td>
-          <td>02-86882871 interno</td>
-          <td>mail@.....</td>
-          <td>telegram</td>
-        </tr>
-        <tr>
-          <td class="header_contatti riga_tabella">
-            Polizze Flotte e Trasporti
-          </td>
-          <td>02-86882871 interno</td>
-          <td>mail@.....</td>
-          <td>telegram</td>
-        </tr>
-        <tr>
-          <td class="header_contatti riga_tabella">
-            Polizze Individuali e Professionisti
-          </td>
-          <td>02-86882871 interno</td>
-          <td>mail@.....</td>
-          <td>telegram</td>
-        </tr>
-        <tr>
-          <td class="header_contatti riga_tabella">
-            Polizze Aziende e Fidejussioni
-          </td>
-          <td>02-86882871 interno</td>
-          <td>mail@.....</td>
-          <td>telegram</td>
-        </tr>
-        <tr>
-          <td class="header_contatti riga_tabella">Servizio Sinistri</td>
-          <td>02-86882871 interno</td>
-          <td>mail@.....</td>
-          <td>telegram</td>
-        </tr>
-        <tr>
-          <td class="header_contatti riga_tabella">Area Amministrativa</td>
-          <td>02-86882871 interno</td>
-          <td>mail@.....</td>
-          <td>telegram</td>
-        </tr>
-      </tbody>
-    </table> -->
-  </CCard>
+            <div
+              class="d-flex w-100 justify-content-center py-3"
+              style="text-transform: uppercase"
+              @click="show_contatto(index)"
+            >
+              <h5>
+                <strong>{{ contatto.descrizione }}</strong>
+              </h5>
+            </div>
+          </CListGroupItem>
+        </CListGroup>
+      </CCardBody>
+    </CCard>
+  </div>
 </template>
 <script>
 export default {
@@ -114,12 +84,105 @@ export default {
   data() {
     return {
       chisono: JSON.parse(localStorage.getItem("chisono_data")),
+      modale_contatto: false,
+      dati_modale: [],
+      elenco_contatti: [
+        {
+          descrizione: "Servizi Gas e Luce",
+          mail: "esempio@email.com",
+          telefono: "02-86882871 int XYZ",
+          orarioTelefono: "orario 9-12:30 / 14:30-18:30",
+          telegram: "333-123456789",
+          orarioTelegram: "orario 11-18",
+          form_contatto: null,
+        },
+        {
+          descrizione: "Polizze RC Auto",
+          mail: "esempio@email.com",
+          telefono: "02-86882871 int XYZ",
+          orarioTelefono: "orario 9-12:30 / 14:30-18:30",
+          telegram: "333-123456789",
+          orarioTelegram: "orario 11-18",
+          form_contatto: null,
+        },
+        {
+          descrizione: "Polizze Flotte e Trasporti",
+          mail: "esempio@email.com",
+          telefono: "02-86882871 int XYZ",
+          orarioTelefono: "orario 9-12:30 / 14:30-18:30",
+          telegram: "333-123456789",
+          orarioTelegram: "orario 11-18",
+          form_contatto: null,
+        },
+        {
+          descrizione: "Polizze Individuali e Professionisti",
+          mail: "esempio@email.com",
+          telefono: "02-86882871 int XYZ",
+          orarioTelefono: "orario 9-12:30 / 14:30-18:30",
+          telegram: "333-123456789",
+          orarioTelegram: "orario 11-18",
+          form_contatto: null,
+        },
+        {
+          descrizione: "Polizze aziende e Fidejussioni",
+          mail: "esempio@email.com",
+          telefono: "02-86882871 int XYZ",
+          orarioTelefono: "orario 9-12:30 / 14:30-18:30",
+          telegram: "333-123456789",
+          orarioTelegram: "orario 11-18",
+          form_contatto: null,
+        },
+        {
+          descrizione: "Servizio Sinistri",
+          mail: "esempio@email.com",
+          telefono: "Clicca per essere contattato",
+          orarioTelefono: "orario 11-18",
+          telegram: "333-123456789",
+          orarioTelegram: "orario 11-18",
+          form_contatto: "mail_per_richiamare",
+        },
+        {
+          descrizione: "Area Amministrativa",
+          mail: "esempio@email.com",
+          telefono: "Clicca per essere contattato",
+          orarioTelefono: "orario 11-18",
+          telegram: "333-123456789",
+          orarioTelegram: "orario 11-18",
+          form_contatto: "mail_per_richiamare",
+        },
+      ],
     };
+  },
+  methods: {
+    show_contatto(index) {
+      this.modale_contatto = true;
+      this.dati_modale = {
+        descrizione: this.elenco_contatti[index].descrizione,
+        mail: this.elenco_contatti[index].mail,
+        telefono: this.elenco_contatti[index].telefono,
+        orariTelefono: this.elenco_contatti[index].orariTelefono,
+        telegram: this.elenco_contatti[index].telegram,
+        orariTelegram: this.elenco_contatti[index].orariTelegram,
+        form_contatto: this.elenco_contatti[index].form_contatto,
+      };
+      console.log(index);
+    },
   },
 };
 </script>
 <style scoped>
-/* #manager .list-group-item {
+.contatto li:hover {
+  cursor: pointer;
+  background-color: #ef791898;
+}
+.card-header {
+  border-bottom: 0px !important;
+}
+.card-footer {
+  border-top: 0px !important;
+}
+
+#manager .list-group-item {
   border-left: 0px !important;
   border-right: 0px !important;
   border-bottom: 0px !important;
@@ -127,6 +190,9 @@ export default {
 }
 #manager li {
   border-top: 1px solid rgba(0, 0, 21, 0.125) !important;
+}
+#manager li:last-of-type {
+  border-bottom: 1px solid rgba(0, 0, 21, 0.125) !important;
 }
 
 #manager p {
@@ -145,7 +211,7 @@ export default {
 
 #manager .fa-fw {
   color: #1f4b6b;
-} */
+}
 
 .titolo_gradient {
   background: -webkit-linear-gradient(#ef7918, #1f4b6b);
@@ -153,16 +219,5 @@ export default {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 700;
-}
-.header_contatti {
-  background-color: #ddd;
-  left: 0;
-  position: sticky;
-  z-index: 9999;
-}
-.riga_tabella {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  padding-left: 1rem;
 }
 </style>

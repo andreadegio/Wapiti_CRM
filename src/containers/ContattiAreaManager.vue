@@ -1,5 +1,5 @@
 <template>
-  <CCard class="h-100" style="z-index: 10">
+  <CCard class="h-100" >
     <CCardHeader class="d-flex justify-content-between">
       <strong class="h4 titolo_gradient">{{ chisono.DirettoreCommerciale_Note ? chisono.DirettoreCommerciale_Note : "RECAPITI" }}</strong>
       <div class="card-header-actions"></div>
@@ -101,6 +101,9 @@ export default {
 }
 #manager li {
   border-top: 1px solid rgba(0, 0, 21, 0.125) !important;
+}
+#manager li:last-of-type {
+  border-bottom: 1px solid rgba(0, 0, 21, 0.125) !important;
 }
 
 #manager p {

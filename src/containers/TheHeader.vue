@@ -74,6 +74,7 @@
           justified
           fill
           class="c-header-light secondary-menu my-1"
+          id="new_menu"
         >
           <CNavItem active to="/dashboard" target="_self"
             ><i class="fas fa-home"></i> Dashboard</CNavItem
@@ -276,9 +277,17 @@ export default {
 };
 </script>
 <style>
+#new_menu li:hover {
+  background-color: #ecac75;
+  border-radius: 10px;
+}
 .nav-item {
   margin-top: auto;
   margin-bottom: auto;
+  /* border-right: 1px solid lightgray; */
+}
+.nav-item:first-of-type {
+  /* border-left: 1px solid lightgray; */
 }
 
 .nav-pills .nav-link {
@@ -298,6 +307,13 @@ a.active {
   font-size: 100% !important;
   border-radius: 1rem;
   margin-top: -0.5rem;
+}
+#header {
+  -webkit-box-shadow: -1px 7px 9px 1px #a3a3a3;
+  -moz-box-shadow: -1px 7px 9px 1px #a3a3a3;
+  -o-box-shadow: -1px 7px 9px 1px #a3a3a3;
+  box-shadow: -1px 7px 9px 1px #a3a3a3;
+  z-index: 1;
 }
 </style>
 

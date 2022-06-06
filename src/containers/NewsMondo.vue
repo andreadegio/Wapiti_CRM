@@ -4,7 +4,7 @@
       color="dark"
       centered
       :show.sync="newsModal"
-      style="z-index: 30"
+      
       size="lg"
     >
       <template #header>
@@ -40,7 +40,7 @@
       id="world-list"
       md="8"
       class="h-100"
-      style="z-index: 10"
+     
       :show.sync="news"
     >
       <CCardHeader class="d-flex justify-content-between">

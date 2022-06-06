@@ -13,20 +13,33 @@
       </template>
     </CToaster>
 
-    <CRow class="pt-1">
+    <CRow class="pt-3">
       <CCol md="1"> </CCol>
-      <CCol md="3">
-        <AreaManager class="h-100" />
+      <CCol sm="10" md="10">
+        <div class="row">
+          <div class="col-sm p-0">
+            <CCol class="h-100">
+              <AreaManager  />
+            </CCol>
+          </div>
+          <div class="col-sm p-0">
+            <CCol class="h-100"> 
+              <contattiAby class="h-100" />
+            </CCol>
+          </div>
+          <div class="col-sm p-0">
+            <CCol class="h-100">
+              <NewsMondo
+              class="h-100"
+                :newsParent="news_mondo"
+                :key="triggerNews"
+                @reload_mondo="reload_mondo()"
+              />
+            </Ccol>
+          </div>
+        </div>
       </CCol>
-      <CCol md="7">
-        <!-- <NewsMondo
-          class="h-100"
-          :newsParent="news_mondo"
-          :key="triggerNews"
-          @reload_mondo="reload_mondo()"
-        /> -->
-        <contattiAby />
-      </CCol>
+
       <CCol md="1"> </CCol>
     </CRow>
     <CRow align-horizontal="center">
@@ -152,7 +165,7 @@
 
 <script>
 import axios from "axios";
-// import NewsMondo from "./../containers/NewsMondo";
+import NewsMondo from "./../containers/NewsMondo";
 
 import AreaManager from "./../containers/ContattiAreaManager";
 import ContattiAby from "./../containers/ContattiAby";
@@ -164,6 +177,7 @@ export default {
   components: {
     AreaManager,
     ContattiAby,
+    NewsMondo,
   },
   data() {
     return {
