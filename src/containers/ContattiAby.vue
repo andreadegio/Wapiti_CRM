@@ -61,13 +61,14 @@
             v-for="(contatto, index) in elenco_contatti"
             :key="index"
             class="flex-column align-items-start"
-            v-show="chisono.DirettoreCommerciale"
+            
           >
             <div
               class="d-flex w-100 justify-content-center py-3"
               style="text-transform: uppercase"
               @click="show_contatto(index)"
             >
+            <div class="icona_contatto" v-html="contatto.icona"></div>
               <h5>
                 <strong>{{ contatto.descrizione }}</strong>
               </h5>
@@ -140,6 +141,7 @@ export default {
           telegram: "333-123456789",
           orarioTelegram: "orario 11-18",
           form_contatto: "mail_per_richiamare",
+          icona: '<i class="fas fa-car-crash"></i>'
         },
         {
           descrizione: "Area Amministrativa",
