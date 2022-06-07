@@ -1,7 +1,7 @@
 <template>
   <CCard class="h-100" >
     <CCardHeader class="d-flex justify-content-between">
-      <strong class="h4 titolo_gradient">{{ chisono.DirettoreCommerciale_Note ? chisono.DirettoreCommerciale_Note : "RECAPITI" }}</strong>
+      <strong class="h3 titolo_gradient">{{ chisono.DirettoreCommerciale_Note ? chisono.DirettoreCommerciale_Note : "RECAPITI" }}</strong>
       <div class="card-header-actions"></div>
     </CCardHeader>
     <CCardBody id="manager" class="news_card py-0">

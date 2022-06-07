@@ -44,7 +44,7 @@
       :show.sync="news"
     >
       <CCardHeader class="d-flex justify-content-between">
-        <strong class="h4 titolo_gradient">NEWS DAL MONDO</strong>
+        <strong class="h3 titolo_gradient">NEWS DAL MONDO</strong>
         <div class="card-header-actions">
           <CLink to="./Elenco_news" class="card-header-action btn-setting">
             <strong

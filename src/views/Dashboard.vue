@@ -28,17 +28,17 @@
           </div>
           <div class="col-sm p-0">
             <CCol class="h-100">
+              <contattiAby class="h-100" />
+            </CCol>
+          </div>
+          <div class="col-sm p-0">
+            <CCol class="h-100">
               <NewsMondo
                 class="h-100"
                 :newsParent="news_mondo"
                 :key="triggerNews"
                 @reload_mondo="reload_mondo()"
               />
-            </CCol>
-          </div>
-          <div class="col-sm p-0">
-            <CCol class="h-100">
-              <contattiAby class="h-100" />
             </CCol>
           </div>
         </div>
@@ -368,6 +368,7 @@ export default {
             "unitaoperativaID",
             risposta_chisono.data.idUnitaOperativa
           );
+
           // controllo se sono abilitato all'utilizzo del portale rami
           if (risposta_chisono.data.Abilitato_Rami) {
             //Imposto il parametro isRami a true in modo da visualizzare il pulsante
@@ -418,6 +419,7 @@ export default {
       // this.triggerNews += 1;
       // this.latest_news(); // ultime news operative
       this.load_news(); // ultime news mondo
+      this.recapitiAby(); // recupero i recapiti aby
       // Controllo che tipo di unità operativa sono per visualizzare un messaggio diverso e per abilitare l'accesso alla piattaforma rami
       if (
         this.unitaOperativaTipoID == 7 ||
@@ -428,6 +430,34 @@ export default {
       }
       this.show_async++;
       this.triggerNews += 1;
+    },
+
+    // RECUPERO I RECAPITI ABY
+    async recapitiAby() {
+      if (localStorage.getItem("RecapitiAby") == null) {
+        try {
+          var config = {
+            method: "post",
+            url:
+              this.$custom_json.servizi_broker +
+              this.$custom_json.ep_broker.RecapitiAby,
+            headers: {
+              userID: localStorage.getItem("userID"),
+              anagraficaid: localStorage.getItem("anagraficaID"),
+              unitaoperativaId: localStorage.getItem("unitaoperativaID"),
+              unitaOperativaTipologiaId: "3",
+            },
+          };
+          const risposta_recapitiAby = await axios(config);
+          console.log(JSON.stringify(risposta_recapitiAby));
+          localStorage.setItem(
+            "RecapitiAby",
+            JSON.stringify(risposta_recapitiAby.data)
+          );
+        } catch (error) {
+          console.log("errore" + error);
+        }
+      }
     },
 
     // CARICO LE ULTIME 3 NEWS OPERATIVE PER LA HOME

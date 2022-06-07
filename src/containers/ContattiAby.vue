@@ -8,7 +8,7 @@
       size="lg"
     >
       <template #header style="background-color: #1f4b6b !important">
-        <strong style="text-transform: uppercase"
+        <strong class="h4" style="text-transform: uppercase"
           >Recapiti per {{ dati_modale.descrizione }}</strong
         >
         <CButton class="close" @click="modale_contatto = false">
@@ -22,15 +22,92 @@
               <CCol md="10">
                 <CCard>
                   <CCardBody>
-                    <h1>{{ dati_modale.descrizione }}</h1>
+                    <div class="py-2 text-center titolo_recapito">
+                      {{ dati_modale.descrizione }}
+                    </div>
                     <p class="text-muted"></p>
-                    <p>Telefono: {{ dati_modale.telefono }}</p>
-                    <p>Mail: {{ dati_modale.mail }}</p>
-                    <p>Telegram: {{ dati_modale.telegram }}</p>
-                    <p v-show="dati_modale.form_contatto != null">
-                      INSERISCI IL TUO NUMERO DI TELEFONO PER ESSERE
-                      RICONTATTATO form di contatto
-                    </p>
+                    <div class="flex-column align-middle">
+                      <div class="icona_contatto mr-3 align-middle">
+                        <i class="fas fa-phone fa-fw"></i>
+                      </div>
+                      <div
+                        v-if="dati_modale.form_contatto"
+                        class="recapito_dettaglio d-inline-block align-middle"
+                      >
+                        <div class="form-row">
+                          <div class="form-group col-md-6 m-0 py-0">
+                            <input
+                              type="text"
+                              pattern="[0-9]+"
+                              class="form-control"
+                              v-model="inputTelefono"
+                              id="inputTelefono"
+                              placeholder="Telefono"
+                              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            />
+                          </div>
+                          <CButton
+                            @click="invia_contatto(inputTelefono)"
+                            style="color: white"
+                            color="primary"
+                            class="ml-2"
+                            ><i class="fas fa-share"></i> Invia
+                            Richiesta</CButton
+                          >
+                        </div>
+                        Inserisci il tuo numero e sarai ricontattato <br />
+                        <div
+                          class="text-muted small_text"
+                          v-show="dati_modale.orariTelefonoMattina"
+                        >
+                          (orario {{ dati_modale.orariTelefonoMattina }} /
+                          {{ dati_modale.orariTelefonoPomeriggio }})
+                        </div>
+                      </div>
+                      <div
+                        v-else
+                        class="recapito_dettaglio d-inline-block align-middle"
+                      >
+                        {{ dati_modale.telefono }}<br />
+                        <div
+                          class="text-muted small_text"
+                          v-show="dati_modale.orariTelefonoMattina"
+                        >
+                          (orario {{ dati_modale.orariTelefonoMattina }} /
+                          {{ dati_modale.orariTelefonoPomeriggio }})
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex-column align-middle py-4">
+                      <div class="icona_contatto mr-3 align-middle">
+                        <i class="far fa-envelope fa-fw"></i>
+                      </div>
+                      <div
+                        class="recapito_dettaglio d-inline-block align-middle"
+                      >
+                        {{ dati_modale.mail }}
+                        <br />
+                        <div class="text-muted small_text"></div>
+                      </div>
+                    </div>
+                    <div class="flex-column align-middle">
+                      <div class="icona_contatto mr-3 align-middle">
+                        <i class="fab fa-telegram-plane"></i>
+                      </div>
+                      <div
+                        class="recapito_dettaglio d-inline-block align-middle"
+                      >
+                        {{ dati_modale.telegram }}
+                        <br />
+                        <div
+                          class="text-muted small_text"
+                          v-show="dati_modale.orariTelegramMattina"
+                        >
+                          (orario {{ dati_modale.orariTelegramMattina }} /
+                          {{ dati_modale.orariTelegramPomeriggio }})
+                        </div>
+                      </div>
+                    </div>
                   </CCardBody>
                 </CCard>
               </CCol>
@@ -52,30 +129,32 @@
     </CModal>
     <CCard class="h-100">
       <CCardHeader class="d-flex justify-content-between">
-        <strong class="h4 titolo_gradient">CONTATTACI</strong>
+        <strong class="h3 titolo_gradient">RECAPITI</strong>
         <div class="card-header-actions"></div>
       </CCardHeader>
       <CCardBody id="manager" class="news_card py-0">
         <CListGroup class="contatto">
           <CListGroupItem
-            v-for="(contatto, index) in elenco_contatti"
+            v-for="(contatto, index) in recapiti"
             :key="index"
             class="flex-column align-items-start grow"
           >
             <div
-              class="d-flex w-100  py-2"
+              class="d-flex w-100 py-2"
               style="text-transform: uppercase"
               @click="show_contatto(index)"
             >
               <div
-                v-show="contatto.icona"
+                v-show="contatto.Area.FontAweSomeIcon"
                 class="icona_contatto mr-3"
-                v-html="contatto.icona"
+                v-html="contatto.Area.FontAweSomeIcon"
               ></div>
               <div class="recapito_name">
-                <strong>{{ contatto.descrizione }}</strong>
-                <br/>
-                <div class="small_text">(Clicca per visualizzare le modalità di contatto)</div>
+                <strong>{{ contatto.Area.DescrizioneArea }}</strong>
+                <br />
+                <div class="small_text">
+                  (Clicca per visualizzare le modalità di contatto)
+                </div>
               </div>
             </div>
           </CListGroupItem>
@@ -92,91 +171,289 @@ export default {
       chisono: JSON.parse(localStorage.getItem("chisono_data")),
       modale_contatto: false,
       dati_modale: [],
-      elenco_contatti: [
-        {
-          descrizione: "Servizi Gas e Luce",
-          mail: "esempio@email.com",
-          telefono: "02-86882871 int XYZ",
-          orarioTelefono: "orario 9-12:30 / 14:30-18:30",
-          telegram: "333-123456789",
-          orarioTelegram: "orario 11-18",
-          form_contatto: null,
-          icona: '<i class="far fa-lightbulb"></i>',
-        },
-        {
-          descrizione: "Polizze RC Auto",
-          mail: "esempio@email.com",
-          telefono: "02-86882871 int XYZ",
-          orarioTelefono: "orario 9-12:30 / 14:30-18:30",
-          telegram: "333-123456789",
-          orarioTelegram: "orario 11-18",
-          form_contatto: null,
-          icona: '<i class="fas fa-car-alt"></i>',
-        },
-        {
-          descrizione: "Polizze Flotte e Trasporti",
-          mail: "esempio@email.com",
-          telefono: "02-86882871 int XYZ",
-          orarioTelefono: "orario 9-12:30 / 14:30-18:30",
-          telegram: "333-123456789",
-          orarioTelegram: "orario 11-18",
-          form_contatto: null,
-          icona: '<i class="fas fa-truck-moving"></i>',
-        },
-        {
-          descrizione: "Polizze Individuali e Professionisti",
-          mail: "esempio@email.com",
-          telefono: "02-86882871 int XYZ",
-          orarioTelefono: "orario 9-12:30 / 14:30-18:30",
-          telegram: "333-123456789",
-          orarioTelegram: "orario 11-18",
-          form_contatto: null,
-          icona: '<i class="fas fa-user-tie"></i>',
-        },
-        {
-          descrizione: "Polizze aziende e Fidejussioni",
-          mail: "esempio@email.com",
-          telefono: "02-86882871 int XYZ",
-          orarioTelefono: "orario 9-12:30 / 14:30-18:30",
-          telegram: "333-123456789",
-          orarioTelegram: "orario 11-18",
-          form_contatto: null,
-          icona: '<i class="fas fa-industry"></i>',
-        },
-        {
-          descrizione: "Servizio Sinistri",
-          mail: "esempio@email.com",
-          telefono: "Clicca per essere contattato",
-          orarioTelefono: "orario 11-18",
-          telegram: "333-123456789",
-          orarioTelegram: "orario 11-18",
-          form_contatto: "mail_per_richiamare",
-          icona: '<i class="fas fa-car-crash"></i>',
-        },
-        {
-          descrizione: "Area Amministrativa",
-          mail: "esempio@email.com",
-          telefono: "Clicca per essere contattato",
-          orarioTelefono: "orario 11-18",
-          telegram: "333-123456789",
-          orarioTelegram: "orario 11-18",
-          form_contatto: "mail_per_richiamare",
-          icona: '<i class="fas fa-calculator"></i>',
-        },
-      ],
+      inputTelefono: "",
+    recapiti: JSON.parse(localStorage.getItem("RecapitiAby")),
+      // recapiti: [
+      //   {
+      //     IdTipologiaUO: 3,
+
+      //     TipologiaUO: "ABY PARTNER",
+
+      //     Area: {
+      //       IdArea: 7,
+
+      //       DescrizioneArea: "Area amministrativa",
+
+      //       FontAweSomeIcon: '<i class="fas fa-calculator"></i>',
+
+      //       Email: "xxxx",
+
+      //       Telefono: {
+      //         CliccaPerEssereRichiamato: true,
+
+      //         NrTelefono: "",
+
+      //         OrariMattina: "",
+
+      //         OrariPomeriggio: "",
+      //       },
+
+      //       Telegram: {
+      //         NrTelegram: "xxx",
+
+      //         OrariMattina: "9-12,30",
+
+      //         OrariPomeriggio: "14,30-18,30",
+      //       },
+      //     },
+      //   },
+
+      //   {
+      //     IdTipologiaUO: 3,
+
+      //     TipologiaUO: "ABY PARTNER",
+
+      //     Area: {
+      //       IdArea: 5,
+
+      //       DescrizioneArea: "Polizze aziende e fidejussioni",
+
+      //       FontAweSomeIcon: '<i class="fas fa-industry"></i>',
+
+      //       Email: "xxxx",
+
+      //       Telefono: {
+      //         CliccaPerEssereRichiamato: false,
+
+      //         NrTelefono: "02-86882871 tasto 1",
+
+      //         OrariMattina: "9-12,30",
+
+      //         OrariPomeriggio: "14,30-18,30",
+      //       },
+
+      //       Telegram: {
+      //         NrTelegram: "xxx",
+
+      //         OrariMattina: "9-12,30",
+
+      //         OrariPomeriggio: "14,30-18,30",
+      //       },
+      //     },
+      //   },
+
+      //   {
+      //     IdTipologiaUO: 3,
+
+      //     TipologiaUO: "ABY PARTNER",
+
+      //     Area: {
+      //       IdArea: 3,
+
+      //       DescrizioneArea: "Polizze flotte e trasporti",
+
+      //       FontAweSomeIcon: '<i class="fas fa-truck-moving"></i>',
+
+      //       Email: "xxxx",
+
+      //       Telefono: {
+      //         CliccaPerEssereRichiamato: false,
+
+      //         NrTelefono: "02-86882871 tasto 1",
+
+      //         OrariMattina: "9-12,30",
+
+      //         OrariPomeriggio: "14,30-18,30",
+      //       },
+
+      //       Telegram: {
+      //         NrTelegram: "xxx",
+
+      //         OrariMattina: "9-12,30",
+
+      //         OrariPomeriggio: "14,30-18,30",
+      //       },
+      //     },
+      //   },
+
+      //   {
+      //     IdTipologiaUO: 3,
+
+      //     TipologiaUO: "ABY PARTNER",
+
+      //     Area: {
+      //       IdArea: 4,
+
+      //       DescrizioneArea: "Polizze individuali e professionisti",
+
+      //       FontAweSomeIcon: '<i class="fas fa-user-tie"></i>',
+
+      //       Email: "xxxx",
+
+      //       Telefono: {
+      //         CliccaPerEssereRichiamato: false,
+
+      //         NrTelefono: "02-86882871 tasto 1",
+
+      //         OrariMattina: "9-12,30",
+
+      //         OrariPomeriggio: "14,30-18,30",
+      //       },
+
+      //       Telegram: {
+      //         NrTelegram: "xxx",
+
+      //         OrariMattina: "9-12,30",
+
+      //         OrariPomeriggio: "14,30-18,30",
+      //       },
+      //     },
+      //   },
+
+      //   {
+      //     IdTipologiaUO: 3,
+
+      //     TipologiaUO: "ABY PARTNER",
+
+      //     Area: {
+      //       IdArea: 2,
+
+      //       DescrizioneArea: "Polizze rc auto",
+
+      //       FontAweSomeIcon: '<i class="fas fa-car-alt"></i>',
+
+      //       Email: "xxxx",
+
+      //       Telefono: {
+      //         CliccaPerEssereRichiamato: false,
+
+      //         NrTelefono: "02-86882871 tasto 1",
+
+      //         OrariMattina: "9-12,30",
+
+      //         OrariPomeriggio: "14,30-18,30",
+      //       },
+
+      //       Telegram: {
+      //         NrTelegram: "xxx",
+
+      //         OrariMattina: "9-12,30",
+
+      //         OrariPomeriggio: "14,30-18,30",
+      //       },
+      //     },
+      //   },
+
+      //   {
+      //     IdTipologiaUO: 3,
+
+      //     TipologiaUO: "ABY PARTNER",
+
+      //     Area: {
+      //       IdArea: 1,
+
+      //       DescrizioneArea: "Servizi gas e luce",
+
+      //       FontAweSomeIcon: '<i class="far fa-lightbulb"></i>',
+
+      //       Email: "xxxx",
+
+      //       Telefono: {
+      //         CliccaPerEssereRichiamato: false,
+
+      //         NrTelefono: "02-86882871 tasto 1",
+
+      //         OrariMattina: "9-12,30",
+
+      //         OrariPomeriggio: "14,30-18,30",
+      //       },
+
+      //       Telegram: {
+      //         NrTelegram: "xxx",
+
+      //         OrariMattina: "9-12,30",
+
+      //         OrariPomeriggio: "14,30-18,30",
+      //       },
+      //     },
+      //   },
+
+      //   {
+      //     IdTipologiaUO: 3,
+
+      //     TipologiaUO: "ABY PARTNER",
+
+      //     Area: {
+      //       IdArea: 6,
+
+      //       DescrizioneArea: "Servizio sinistri",
+
+      //       FontAweSomeIcon: '<i class="fas fa-car-crash"></i>',
+
+      //       Email: "xxxx",
+
+      //       Telefono: {
+      //         CliccaPerEssereRichiamato: true,
+
+      //         NrTelefono: "",
+
+      //         OrariMattina: "",
+
+      //         OrariPomeriggio: "",
+      //       },
+
+      //       Telegram: {
+      //         NrTelegram: "xxx",
+
+      //         OrariMattina: "9-12,30",
+
+      //         OrariPomeriggio: "14,30-18,30",
+      //       },
+      //     },
+      //   },
+      // ],
     };
   },
   methods: {
+    invia_contatto(telefono) {
+      // console.log(telefono);
+      if (telefono) {
+        this.$alert(
+          "Richiesta inviata correttamente",
+          "Sarai ricontattato quanto prima",
+          "success"
+        ).then(
+          // eslint-disable-next-line no-unused-vars
+          (result) => {
+            this.modale_contatto = false;
+          }
+        );
+        return;
+      } else {
+        this.$alert(
+          "Verifica di aver inserito il numero corretto",
+          "Numero telefonico errato",
+          "warning"
+        );
+        return;
+      }
+    },
     show_contatto(index) {
       this.modale_contatto = true;
+      this.inputTelefono = "";
       this.dati_modale = {
-        descrizione: this.elenco_contatti[index].descrizione,
-        mail: this.elenco_contatti[index].mail,
-        telefono: this.elenco_contatti[index].telefono,
-        orariTelefono: this.elenco_contatti[index].orariTelefono,
-        telegram: this.elenco_contatti[index].telegram,
-        orariTelegram: this.elenco_contatti[index].orariTelegram,
-        form_contatto: this.elenco_contatti[index].form_contatto,
+        descrizione: this.recapiti[index].Area.DescrizioneArea,
+        mail: this.recapiti[index].Area.Email,
+        telefono: this.recapiti[index].Area.Telefono.NrTelefono,
+        orariTelefonoMattina: this.recapiti[index].Area.Telefono.OrariMattina,
+        orariTelefonoPomeriggio:
+          this.recapiti[index].Area.Telefono.OrariPomeriggio,
+        telegram: this.recapiti[index].Area.Telegram.NrTelegram,
+        orariTelegramMattina: this.recapiti[index].Area.Telegram.OrariMattina,
+        orariTelegramPomeriggio:
+          this.recapiti[index].Area.Telegram.OrariPomeriggio,
+        form_contatto:
+          this.recapiti[index].Area.Telefono.CliccaPerEssereRichiamato,
       };
       console.log(index);
     },
@@ -189,7 +466,7 @@ export default {
   background-color: #ef7a13;
   color: white;
 }
-.contatto li:hover .small_text{
+.contatto li:hover .small_text {
   color: white;
 }
 .card-header {
@@ -199,7 +476,7 @@ export default {
   border-top: 0px !important;
 }
 
-#manager{
+#manager {
   font-size: 1rem;
 }
 
@@ -209,6 +486,7 @@ export default {
   border-bottom: 0px !important;
   border-radius: 0px !important;
 }
+
 #manager li {
   border-top: 1px solid rgba(0, 0, 21, 0.125) !important;
 }
@@ -261,16 +539,23 @@ export default {
   font-size: 1.5rem;
   /* margin-right: 10px; */
 }
-.recapito_name{
-  /* margin: auto; */
+.recapito_dettaglio {
+  font-size: 1.5rem;
 }
 
-.small_text{
+.small_text {
   font-size: 0.7rem;
   color: rgb(155, 155, 155);
-  
 }
 
-.grow { transition: all .2s ease-in-out; }
-.grow:hover { transform: scale(1.1); }
+.grow {
+  transition: all 0.2s ease-in-out;
+}
+.grow:hover {
+  transform: scale(1.1);
+}
+.titolo_recapito {
+  font-size: 3rem;
+  text-shadow: 1px 1px 2px #838383;
+}
 </style>
