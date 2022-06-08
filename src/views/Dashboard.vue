@@ -1,5 +1,5 @@
 <template >
-  <div v-if="show_async == 2">
+  <div v-if="show_async == 3">
     <CToaster
       id="messaggi_toast"
       v-for="(avviso, index) in avvisiToast"
@@ -28,7 +28,7 @@
           </div>
           <div class="col-sm p-0">
             <CCol class="h-100">
-              <contattiAby class="h-100" />
+              <contattiAby :recapitiParent="recapiti" class="h-100" />
             </CCol>
           </div>
           <div class="col-sm p-0">
@@ -191,14 +191,13 @@ export default {
       unitaoperativaID: "",
       unitaOperativaTipoID: "",
       show_async: 0,
-      news_operative: null,
       triggerNews: 0,
       news_mondo: null,
       urlRami: localStorage.getItem("urlRami"),
       isEnergy: "",
       isRami: false,
       avvisiToast: null,
-      entra_rami: false,
+      recapiti: [],
     };
   },
 
@@ -299,7 +298,6 @@ export default {
 
     async get_avvisiToast() {
       // Chiamata per recuperare l'array dei messaggi Toast
-
       try {
         await axios
           .post(
@@ -416,18 +414,8 @@ export default {
       this.isRami = JSON.parse(
         localStorage.getItem("chisono_data")
       ).Abilitato_Rami;
-      // this.triggerNews += 1;
-      // this.latest_news(); // ultime news operative
       this.load_news(); // ultime news mondo
       this.recapitiAby(); // recupero i recapiti aby
-      // Controllo che tipo di unità operativa sono per visualizzare un messaggio diverso e per abilitare l'accesso alla piattaforma rami
-      if (
-        this.unitaOperativaTipoID == 7 ||
-        this.unitaOperativaTipoID == 8 ||
-        this.unitaOperativaTipoID == 10
-      ) {
-        this.entra_rami = true;
-      }
       this.show_async++;
       this.triggerNews += 1;
     },
@@ -445,119 +433,21 @@ export default {
               userID: localStorage.getItem("userID"),
               anagraficaid: localStorage.getItem("anagraficaID"),
               unitaoperativaId: localStorage.getItem("unitaoperativaID"),
-              unitaOperativaTipologiaId: "3",
+              unitaOperativaTipologiaId: JSON.parse(localStorage.getItem("chisono_data")).UnitaOperativa_Tipo_ID,
             },
           };
           const risposta_recapitiAby = await axios(config);
-          console.log(JSON.stringify(risposta_recapitiAby));
+          // console.log(JSON.stringify(risposta_recapitiAby));
           localStorage.setItem(
             "RecapitiAby",
             JSON.stringify(risposta_recapitiAby.data)
           );
+          this.recapiti = JSON.stringify(risposta_recapitiAby.data);
         } catch (error) {
           console.log("errore" + error);
         }
       }
-    },
-
-    // CARICO LE ULTIME 3 NEWS OPERATIVE PER LA HOME
-    async latest_news() {
-      try {
-        var config = {
-          method: "post",
-          url: this.$custom_json.servizi_broker + "LatestNewsOperative", //non recupero l'end-point dal config perchè genera cors error
-          headers: {
-            userID: localStorage.getItem("userID"),
-            anagraficaID: localStorage.getItem("anagraficaID"),
-            unitaoperativaID: localStorage.getItem("unitaoperativaID"),
-          },
-        };
-        const risposta_latestNews = await axios(config);
-        // this.triggerNews += 1;
-        this.news_operative = risposta_latestNews.data.map((item, id) => {
-          return { ...item, id };
-        });
-        localStorage.setItem(
-          "news_operative",
-          JSON.stringify(this.news_operative)
-        );
-      } catch (error) {
-        //se non ricevo una risposta valida allora guardo se nello storage c'è un salvataggio dei dati e recupero
-        // provvisoriamente quelli
-
-        if (localStorage.getItem("news_operative")) {
-          this.news_operative = JSON.parse(
-            localStorage.getItem("news_operative")
-          );
-        } else {
-          // in caso di chiamata fallita e contenuto non presente nello storage tento una seconda volta
-          try {
-            const risposta_latestNews = await axios(config);
-
-            this.news_operative = risposta_latestNews.data.map((item, id) => {
-              return { ...item, id };
-            });
-            localStorage.setItem(
-              "news_operative",
-              JSON.stringify(this.news_operative)
-            );
-          } catch (error) {
-            // se ricevo il secondo errore allora mosto la sezione vuota
-            this.news_operative = "";
-          }
-        }
-      }
       this.show_async++;
-      this.triggerNews += 1;
-    },
-
-    // Funzione che richiamo in caso di mancato caricamento delle news al primo accesso
-    async reload_operative() {
-      // alert("ricarico");
-      //provo la chiamata all'end-point se l'esito è OK assegno il valore e scrivo nello storage
-      try {
-        var config = {
-          method: "post",
-          url: this.$custom_json.servizi_broker + "LatestNewsOperative", //non recupero l'end-point dal config perchè genera cors error
-          headers: {
-            userID: localStorage.getItem("userID"),
-            anagraficaID: localStorage.getItem("anagraficaID"),
-            unitaoperativaID: localStorage.getItem("unitaoperativaID"),
-          },
-        };
-        const risposta_latestNews = await axios(config);
-
-        this.news_operative = risposta_latestNews.data.map((item, id) => {
-          return { ...item, id };
-        });
-        localStorage.setItem(
-          "news_operative",
-          JSON.stringify(this.news_operative)
-        );
-        // alert(this.news_operative);
-      } catch (error) {
-        //se non ricevo una risposta valida allora guardo se nello storage c'è un salvataggio dei dati e recupero
-        // provvisoriamente quelli
-        if (localStorage.getItem("news_operative") != null) {
-          this.news_mondo = JSON.parse(localStorage.getItem("news_operative"));
-        } else {
-          // in caso di chiamata fallita e contenuto non presente nello storage tento una seconda volta
-          try {
-            const risposta_latestNews = await axios(config);
-
-            this.news_operative = risposta_latestNews.data.map((item, id) => {
-              return { ...item, id };
-            });
-            localStorage.setItem(
-              "news_operative",
-              JSON.stringify(this.news_operative)
-            );
-          } catch (error) {
-            // se ricevo il secondo errore allora mosto la sezione vuota
-            this.news_operative = "";
-          }
-        }
-      }
     },
 
     // CARICO LE ULTIME 3 NEWS MONDO PER LA HOME

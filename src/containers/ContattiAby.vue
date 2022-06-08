@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="recapiti != []">
     <CModal
       color="dark"
       centered
@@ -156,6 +156,9 @@
                   (Clicca per visualizzare le modalità di contatto)
                 </div>
               </div>
+              <div class="right_arrow">
+                <i class="fas fa-chevron-right"></i>
+              </div>
             </div>
           </CListGroupItem>
         </CListGroup>
@@ -166,253 +169,31 @@
 <script>
 export default {
   name: "ContattiAby",
+  props: ["recapitiParent"],
+  watch: {
+    recapitiParent: function (newVal) {
+      // console.log(JSON.stringify(newVal));
+      console.log("parametro nel watch" + newVal);
+      this.recapiti = newVal;
+    },
+  },
   data() {
     return {
       chisono: JSON.parse(localStorage.getItem("chisono_data")),
       modale_contatto: false,
       dati_modale: [],
       inputTelefono: "",
-    recapiti: JSON.parse(localStorage.getItem("RecapitiAby")),
-      // recapiti: [
-      //   {
-      //     IdTipologiaUO: 3,
-
-      //     TipologiaUO: "ABY PARTNER",
-
-      //     Area: {
-      //       IdArea: 7,
-
-      //       DescrizioneArea: "Area amministrativa",
-
-      //       FontAweSomeIcon: '<i class="fas fa-calculator"></i>',
-
-      //       Email: "xxxx",
-
-      //       Telefono: {
-      //         CliccaPerEssereRichiamato: true,
-
-      //         NrTelefono: "",
-
-      //         OrariMattina: "",
-
-      //         OrariPomeriggio: "",
-      //       },
-
-      //       Telegram: {
-      //         NrTelegram: "xxx",
-
-      //         OrariMattina: "9-12,30",
-
-      //         OrariPomeriggio: "14,30-18,30",
-      //       },
-      //     },
-      //   },
-
-      //   {
-      //     IdTipologiaUO: 3,
-
-      //     TipologiaUO: "ABY PARTNER",
-
-      //     Area: {
-      //       IdArea: 5,
-
-      //       DescrizioneArea: "Polizze aziende e fidejussioni",
-
-      //       FontAweSomeIcon: '<i class="fas fa-industry"></i>',
-
-      //       Email: "xxxx",
-
-      //       Telefono: {
-      //         CliccaPerEssereRichiamato: false,
-
-      //         NrTelefono: "02-86882871 tasto 1",
-
-      //         OrariMattina: "9-12,30",
-
-      //         OrariPomeriggio: "14,30-18,30",
-      //       },
-
-      //       Telegram: {
-      //         NrTelegram: "xxx",
-
-      //         OrariMattina: "9-12,30",
-
-      //         OrariPomeriggio: "14,30-18,30",
-      //       },
-      //     },
-      //   },
-
-      //   {
-      //     IdTipologiaUO: 3,
-
-      //     TipologiaUO: "ABY PARTNER",
-
-      //     Area: {
-      //       IdArea: 3,
-
-      //       DescrizioneArea: "Polizze flotte e trasporti",
-
-      //       FontAweSomeIcon: '<i class="fas fa-truck-moving"></i>',
-
-      //       Email: "xxxx",
-
-      //       Telefono: {
-      //         CliccaPerEssereRichiamato: false,
-
-      //         NrTelefono: "02-86882871 tasto 1",
-
-      //         OrariMattina: "9-12,30",
-
-      //         OrariPomeriggio: "14,30-18,30",
-      //       },
-
-      //       Telegram: {
-      //         NrTelegram: "xxx",
-
-      //         OrariMattina: "9-12,30",
-
-      //         OrariPomeriggio: "14,30-18,30",
-      //       },
-      //     },
-      //   },
-
-      //   {
-      //     IdTipologiaUO: 3,
-
-      //     TipologiaUO: "ABY PARTNER",
-
-      //     Area: {
-      //       IdArea: 4,
-
-      //       DescrizioneArea: "Polizze individuali e professionisti",
-
-      //       FontAweSomeIcon: '<i class="fas fa-user-tie"></i>',
-
-      //       Email: "xxxx",
-
-      //       Telefono: {
-      //         CliccaPerEssereRichiamato: false,
-
-      //         NrTelefono: "02-86882871 tasto 1",
-
-      //         OrariMattina: "9-12,30",
-
-      //         OrariPomeriggio: "14,30-18,30",
-      //       },
-
-      //       Telegram: {
-      //         NrTelegram: "xxx",
-
-      //         OrariMattina: "9-12,30",
-
-      //         OrariPomeriggio: "14,30-18,30",
-      //       },
-      //     },
-      //   },
-
-      //   {
-      //     IdTipologiaUO: 3,
-
-      //     TipologiaUO: "ABY PARTNER",
-
-      //     Area: {
-      //       IdArea: 2,
-
-      //       DescrizioneArea: "Polizze rc auto",
-
-      //       FontAweSomeIcon: '<i class="fas fa-car-alt"></i>',
-
-      //       Email: "xxxx",
-
-      //       Telefono: {
-      //         CliccaPerEssereRichiamato: false,
-
-      //         NrTelefono: "02-86882871 tasto 1",
-
-      //         OrariMattina: "9-12,30",
-
-      //         OrariPomeriggio: "14,30-18,30",
-      //       },
-
-      //       Telegram: {
-      //         NrTelegram: "xxx",
-
-      //         OrariMattina: "9-12,30",
-
-      //         OrariPomeriggio: "14,30-18,30",
-      //       },
-      //     },
-      //   },
-
-      //   {
-      //     IdTipologiaUO: 3,
-
-      //     TipologiaUO: "ABY PARTNER",
-
-      //     Area: {
-      //       IdArea: 1,
-
-      //       DescrizioneArea: "Servizi gas e luce",
-
-      //       FontAweSomeIcon: '<i class="far fa-lightbulb"></i>',
-
-      //       Email: "xxxx",
-
-      //       Telefono: {
-      //         CliccaPerEssereRichiamato: false,
-
-      //         NrTelefono: "02-86882871 tasto 1",
-
-      //         OrariMattina: "9-12,30",
-
-      //         OrariPomeriggio: "14,30-18,30",
-      //       },
-
-      //       Telegram: {
-      //         NrTelegram: "xxx",
-
-      //         OrariMattina: "9-12,30",
-
-      //         OrariPomeriggio: "14,30-18,30",
-      //       },
-      //     },
-      //   },
-
-      //   {
-      //     IdTipologiaUO: 3,
-
-      //     TipologiaUO: "ABY PARTNER",
-
-      //     Area: {
-      //       IdArea: 6,
-
-      //       DescrizioneArea: "Servizio sinistri",
-
-      //       FontAweSomeIcon: '<i class="fas fa-car-crash"></i>',
-
-      //       Email: "xxxx",
-
-      //       Telefono: {
-      //         CliccaPerEssereRichiamato: true,
-
-      //         NrTelefono: "",
-
-      //         OrariMattina: "",
-
-      //         OrariPomeriggio: "",
-      //       },
-
-      //       Telegram: {
-      //         NrTelegram: "xxx",
-
-      //         OrariMattina: "9-12,30",
-
-      //         OrariPomeriggio: "14,30-18,30",
-      //       },
-      //     },
-      //   },
-      // ],
+      recapiti: [],
     };
+  },
+  mounted() {
+    if (localStorage.getItem("RecapitiAby")) {
+      // console.log("recupero dallo storage");
+      this.recapiti = JSON.parse(localStorage.getItem("RecapitiAby"));
+    } else {
+      // console.log("recupero dal parent");
+      this.recapiti = this.recapitiParent;
+    }
   },
   methods: {
     invia_contatto(telefono) {
@@ -537,7 +318,10 @@ export default {
   background-color: #1d4b6b;
   color: white;
   font-size: 1.5rem;
-  /* margin-right: 10px; */
+  -webkit-box-shadow: 0px 6px 10px 0px #8a8a8a;
+  -moz-box-shadow: 0px 6px 10px 0px #8a8a8a;
+  -o-box-shadow: 0px 6px 10px 0px #8a8a8a;
+  box-shadow: 0px 6px 10px 0px #8a8a8a;
 }
 .recapito_dettaglio {
   font-size: 1.5rem;
@@ -557,5 +341,11 @@ export default {
 .titolo_recapito {
   font-size: 3rem;
   text-shadow: 1px 1px 2px #838383;
+}
+.right_arrow {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 0;
+  margin-left: auto;
 }
 </style>

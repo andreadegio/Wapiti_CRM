@@ -24,45 +24,7 @@
           </h4>
         </CHeaderNavItem>
       </CHeaderNav>
-      <a
-        href="../dashboard"
-        class="c-header-brand mx-auto d-lg-none router-link-active"
-      >
-        <img
-          v-if="this.$route.path != '/dashboard'"
-          src="/img/logo_abyway.png"
-          style="scale: 60%"
-          v-c-tooltip="{
-            content: 'Clicca qui per tornare alla HOME',
-            placement: 'right',
-          }"
-        />
-        <img v-else src="/img/logo_abyway.png" style="scale: 60%" />
-      </a>
       <CHeaderNav class="mr-4">
-        <!-- <CHeaderNavItem
-          class="d-md-down-none mx-2"
-          v-c-tooltip="{
-            content: 'Clicca qui per tornare INDIETRO',
-            placement: 'bottom-end',
-          }"
-        >
-          <button @click="$router.go(-1)">
-            <CHeaderNavLink v-show="this.$route.path != '/dashboard'">
-              <CIcon
-                id="icona_indietro"
-                :content="$options.back_ico"
-                size="2xl"
-              />
-            </CHeaderNavLink>
-          </button>
-        </CHeaderNavItem> -->
-
-        <!-- <CHeaderNavItem class="d-md-down-none mx-2">
-        <CHeaderNavLink>
-          <CIcon name="cil-envelope-open" />
-        </CHeaderNavLink>
-      </CHeaderNavItem> -->
         <TheHeaderDropdownAccnt />
       </CHeaderNav>
     </CHeader>

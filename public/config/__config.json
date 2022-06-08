@@ -49,7 +49,8 @@
     "documentale_AltreGaranzie": "Download_Documentale_AltreGaranzie/",
     "documentale_ServiziNonAssicurativi": "Download_Documentale_ServiziNonAssicurativi/",
     "documentale_DocumentiIntermediario": "Download_Documentale_DocumentiIntermediario/",
-    "LatestNewsOperative": "LatestNewsOperative"
+    "LatestNewsOperative": "LatestNewsOperative",
+    "RecapitiAby":"RecapitiAby"
   },
   "login_url": "http://broker.abybroker.it/accesso/login.aspx?r=staging",
   "login_url_energy": "https://abyenergy.it/Test/accesso.aspx?r=staging",
