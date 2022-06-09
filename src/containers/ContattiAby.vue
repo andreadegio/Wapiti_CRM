@@ -16,87 +16,102 @@
         </CButton>
       </template>
       <template>
-        <div class="d-flex align-items-center">
+        <div class="justify-content-center align-items-center">
           <CContainer fluid>
             <CRow class="justify-content-center">
-              <CCol md="10">
-                <CCard>
+              <CCol md="11" class="p-0">
+                <CCard style="border: 0px">
                   <CCardBody>
                     <div class="py-2 text-center titolo_recapito">
                       {{ dati_modale.descrizione }}
                     </div>
                     <p class="text-muted"></p>
-                    <div class="flex-column align-middle">
+                    <div
+                      class="riga_contatto align-middle"
+                      style="
+                        display: block ruby !important;
+                        border-top: 1px solid rgb(249, 223, 195);
+                      "
+                    >
                       <div class="icona_contatto mr-3 align-middle">
                         <i class="fas fa-phone fa-fw"></i>
                       </div>
                       <div
-                        v-if="dati_modale.form_contatto"
                         class="recapito_dettaglio d-inline-block align-middle"
                       >
-                        <div class="form-row">
-                          <div class="form-group col-md-6 m-0 py-0">
-                            <input
-                              type="text"
-                              pattern="[0-9]+"
-                              class="form-control"
-                              v-model="inputTelefono"
-                              id="inputTelefono"
-                              placeholder="Telefono"
-                              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                            />
-                          </div>
-                          <CButton
-                            @click="invia_contatto(inputTelefono)"
-                            style="color: white"
-                            color="primary"
-                            class="ml-2"
-                            ><i class="fas fa-share"></i> Invia
-                            Richiesta</CButton
+                        <div v-show="dati_modale.telefono">
+                          Chiamaci al numero: <b>{{ dati_modale.telefono }}</b
+                          ><br />
+                          <div
+                            class="text-muted small_text"
+                            v-show="dati_modale.orariTelefonoMattina"
                           >
+                            (orario {{ dati_modale.orariTelefonoMattina }} /
+                            {{ dati_modale.orariTelefonoPomeriggio }})
+                          </div>
                         </div>
-                        Inserisci il tuo numero e sarai ricontattato <br />
-                        <div
-                          class="text-muted small_text"
-                          v-show="dati_modale.orariTelefonoMattina"
-                        >
-                          (orario {{ dati_modale.orariTelefonoMattina }} /
-                          {{ dati_modale.orariTelefonoPomeriggio }})
+                        <div v-show="invio">
+                          Attendere invio richiesta in corso...
                         </div>
-                      </div>
-                      <div
-                        v-else
-                        class="recapito_dettaglio d-inline-block align-middle"
-                      >
-                        {{ dati_modale.telefono }}<br />
-                        <div
-                          class="text-muted small_text"
-                          v-show="dati_modale.orariTelefonoMattina"
-                        >
-                          (orario {{ dati_modale.orariTelefonoMattina }} /
-                          {{ dati_modale.orariTelefonoPomeriggio }})
+                        <div v-if="dati_modale.form_contatto && !invio">
+                          <p class="mb-0" v-if="dati_modale.telefono">
+                            Oppure lascia il tuo numero e ti richiameremo noi
+                          </p>
+                          <p v-else>
+                            Lasciaci il tuo numero e ti richiameremo noi
+                          </p>
+
+                          <div class="form-row py-2">
+                            <div class="form-group col-md-6 m-0 py-0">
+                              <input
+                                type="text"
+                                pattern="[0-9]+"
+                                class="form-control"
+                                v-model="inputTelefono"
+                                id="inputTelefono"
+                                placeholder="Telefono"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                              />
+                            </div>
+                            <CButton
+                              @click="
+                                invia_contatto(
+                                  inputTelefono,
+                                  dati_modale.mailForm,
+                                  dati_modale.descrizione
+                                )
+                              "
+                              style="color: white"
+                              color="primary"
+                              class="ml-2"
+                              ><i class="fas fa-share"></i> Invia
+                              Richiesta</CButton
+                            >
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <div class="flex-column align-middle py-4">
+                    <div class="riga_contatto flex-column align-middle py-4">
                       <div class="icona_contatto mr-3 align-middle">
                         <i class="far fa-envelope fa-fw"></i>
                       </div>
                       <div
                         class="recapito_dettaglio d-inline-block align-middle"
                       >
+                        Mandaci una mail<br />
                         {{ dati_modale.mail }}
                         <br />
                         <div class="text-muted small_text"></div>
                       </div>
                     </div>
-                    <div class="flex-column align-middle">
+                    <div class="riga_contatto flex-column align-middle">
                       <div class="icona_contatto mr-3 align-middle">
                         <i class="fab fa-telegram-plane"></i>
                       </div>
                       <div
                         class="recapito_dettaglio d-inline-block align-middle"
                       >
+                        Scrivici su Telegram<br />
                         {{ dati_modale.telegram }}
                         <br />
                         <div
@@ -114,17 +129,37 @@
             </CRow>
           </CContainer>
         </div>
-      </template>
-
-      <template #footer>
+        <div
+          v-show="invio"
+          style="position: relative; width: 100%; top: 50%; left: 50%"
+        >
+          <img
+            src="img/loader.gif"
+            style="
+              position: fixed;
+              top: 50%;
+              left: 50%;
+              -webkit-transform: translate(-50%, -50%);
+              -moz-transform: translate(-50%, -50%);
+              -ms-transform: translate(-50%, -50%);
+              -o-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);
+            "
+          />
+        </div>
         <CButton
           @click="modale_contatto = false"
           color="dark"
           size="sm"
           variant="outline"
+          style="margin-left: auto; margin-right: auto; display: flex"
         >
           Chiudi
         </CButton>
+      </template>
+
+      <template #footer-wrapper>
+        <p></p>
       </template>
     </CModal>
     <CCard class="h-100">
@@ -167,6 +202,7 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   name: "ContattiAby",
   props: ["recapitiParent"],
@@ -184,6 +220,8 @@ export default {
       dati_modale: [],
       inputTelefono: "",
       recapiti: [],
+      user: [],
+      invio: false,
     };
   },
   mounted() {
@@ -196,19 +234,49 @@ export default {
     }
   },
   methods: {
-    invia_contatto(telefono) {
+    invia_contatto(telefono, mailReparto, settore) {
       // console.log(telefono);
       if (telefono) {
-        this.$alert(
-          "Richiesta inviata correttamente",
-          "Sarai ricontattato quanto prima",
-          "success"
-        ).then(
-          // eslint-disable-next-line no-unused-vars
-          (result) => {
-            this.modale_contatto = false;
-          }
-        );
+        this.invio = true;
+        // chiamo il servizio per inviare la mail
+        this.user = JSON.parse(localStorage.getItem("chisono_data"));
+        // console.log("Utente:" + this.user.Nominativo);
+        // console.log("Ufficio" + this.user.UnitaOperativa);
+        // console.log("Telefono" + telefono);
+        // console.log("MailReparto" + mailReparto);
+
+        let params = {
+          Utente: this.user.Nominativo,
+          Ufficio: this.user.UnitaOperativa,
+          Telefono: telefono,
+          MailReparto: mailReparto,
+          Settore: settore,
+        };
+        try {
+          axios
+            .post(
+              this.$custom_json.base_url +
+                this.$custom_json.api_url +
+                this.$custom_json.ep_api.richiesta_contatto,
+              { params }
+            )
+            .then((response) => {
+              console.log(response.data);
+              this.invio = false;
+              this.$alert(
+                "Richiesta inviata correttamente",
+                "Sarai ricontattato quanto prima",
+                "success"
+              ).then(
+                // eslint-disable-next-line no-unused-vars
+                (result) => {
+                  this.modale_contatto = false;
+                }
+              );
+            });
+        } catch (error) {
+          console.log(error);
+        }
         return;
       } else {
         this.$alert(
@@ -235,6 +303,9 @@ export default {
           this.recapiti[index].Area.Telegram.OrariPomeriggio,
         form_contatto:
           this.recapiti[index].Area.Telefono.CliccaPerEssereRichiamato,
+        mailForm:
+          this.recapiti[index].Area.Telefono
+            .DestinatarioDelCliccaPerEssereRichiamato,
       };
       console.log(index);
     },
@@ -325,6 +396,7 @@ export default {
 }
 .recapito_dettaglio {
   font-size: 1.5rem;
+  margin-left: 2rem;
 }
 
 .small_text {
@@ -347,5 +419,17 @@ export default {
   margin-bottom: auto;
   margin-right: 0;
   margin-left: auto;
+}
+.riga_contatto {
+  padding: 1rem;
+  border-bottom: 1px solid rgb(249, 223, 195);
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.modal-footer {
+  border: 0px !important;
+}
+.card-body {
+  padding: 0 !important;
 }
 </style>
