@@ -39,11 +39,12 @@
                       <div
                         class="recapito_dettaglio d-inline-block align-middle"
                       >
-                        <div v-show="dati_modale.telefono">
+                        <div v-show="dati_modale.telefono && !invio">
                           Chiamaci al numero: <b>{{ dati_modale.telefono }}</b
                           ><br />
                           <div
-                            class="text-muted small_text"
+                            class="text-muted text-center"
+                            style="font-size: 0.9rem"
                             v-show="dati_modale.orariTelefonoMattina"
                           >
                             (orario {{ dati_modale.orariTelefonoMattina }} /
@@ -52,6 +53,7 @@
                         </div>
                         <div v-show="invio">
                           Attendere invio richiesta in corso...
+                          <img src="img/message.gif" style="width: 5rem" />
                         </div>
                         <div v-if="dati_modale.form_contatto && !invio">
                           <p class="mb-0" v-if="dati_modale.telefono">
@@ -91,20 +93,28 @@
                         </div>
                       </div>
                     </div>
-                    <div class="riga_contatto flex-column align-middle py-4">
+                    <div
+                      class="riga_contatto align-middle py-4"
+                      style="display: block ruby !important"
+                    >
                       <div class="icona_contatto mr-3 align-middle">
                         <i class="far fa-envelope fa-fw"></i>
                       </div>
                       <div
                         class="recapito_dettaglio d-inline-block align-middle"
                       >
-                        Mandaci una mail<br />
-                        {{ dati_modale.mail }}
-                        <br />
+                        Mandaci una mail
+                        <p v-for="mail in dati_modale.mail" :key="mail" class="p-0 m-0">
+                        <a style="font-size:1.5rem;" :href="'mailto:'+ mail">  <b>{{ mail }}</b></a>
+                        </p>
+
                         <div class="text-muted small_text"></div>
                       </div>
                     </div>
-                    <div class="riga_contatto flex-column align-middle">
+                    <div
+                      v-show="dati_modale.telegram"
+                      class="riga_contatto flex-column align-middle"
+                    >
                       <div class="icona_contatto mr-3 align-middle">
                         <i class="fab fa-telegram-plane"></i>
                       </div>
@@ -112,10 +122,11 @@
                         class="recapito_dettaglio d-inline-block align-middle"
                       >
                         Scrivici su Telegram<br />
-                        {{ dati_modale.telegram }}
+                        <b>{{ dati_modale.telegram }}</b>
                         <br />
                         <div
-                          class="text-muted small_text"
+                          class="text-muted"
+                          style="font-size: 0.9rem"
                           v-show="dati_modale.orariTelegramMattina"
                         >
                           (orario {{ dati_modale.orariTelegramMattina }} /
@@ -128,24 +139,6 @@
               </CCol>
             </CRow>
           </CContainer>
-        </div>
-        <div
-          v-show="invio"
-          style="position: relative; width: 100%; top: 50%; left: 50%"
-        >
-          <img
-            src="img/loader.gif"
-            style="
-              position: fixed;
-              top: 50%;
-              left: 50%;
-              -webkit-transform: translate(-50%, -50%);
-              -moz-transform: translate(-50%, -50%);
-              -ms-transform: translate(-50%, -50%);
-              -o-transform: translate(-50%, -50%);
-              transform: translate(-50%, -50%);
-            "
-          />
         </div>
         <CButton
           @click="modale_contatto = false"
@@ -264,8 +257,8 @@ export default {
               console.log(response.data);
               this.invio = false;
               this.$alert(
-                "Richiesta inviata correttamente",
                 "Sarai ricontattato quanto prima",
+                "Richiesta inviata correttamente",
                 "success"
               ).then(
                 // eslint-disable-next-line no-unused-vars
@@ -290,9 +283,11 @@ export default {
     show_contatto(index) {
       this.modale_contatto = true;
       this.inputTelefono = "";
+      let Mail = this.recapiti[index].Area.Email.split(';');
+      console.log(Mail);
       this.dati_modale = {
         descrizione: this.recapiti[index].Area.DescrizioneArea,
-        mail: this.recapiti[index].Area.Email,
+        mail: Mail,
         telefono: this.recapiti[index].Area.Telefono.NrTelefono,
         orariTelefonoMattina: this.recapiti[index].Area.Telefono.OrariMattina,
         orariTelefonoPomeriggio:
