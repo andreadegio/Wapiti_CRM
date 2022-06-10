@@ -289,7 +289,7 @@ export default {
       this.modale_contatto = true;
       this.inputTelefono = "";
       let Mail = this.recapiti[index].Area.Email.split(";");
-      console.log(Mail);
+      // console.log(Mail);
       this.dati_modale = {
         descrizione: this.recapiti[index].Area.DescrizioneArea,
         mail: Mail,
@@ -307,7 +307,7 @@ export default {
           this.recapiti[index].Area.Telefono
             .DestinatarioDelCliccaPerEssereRichiamato,
       };
-      console.log(index);
+      // console.log(index);
     },
   },
 };

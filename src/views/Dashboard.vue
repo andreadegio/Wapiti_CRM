@@ -214,7 +214,7 @@ export default {
       this.$router.push("login");
       return;
     }
-    if (localStorage.getItem("force_login") !== "1") {
+    if (localStorage.getItem("versione") !== "1") {
       console.log("logout_forzato");
       this.$router.push("login");
       return;
