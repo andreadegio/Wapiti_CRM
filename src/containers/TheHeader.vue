@@ -12,7 +12,7 @@
           <img src="/img/logo_abyway.png" width="200px" />
         </CHeaderNavItem>
       </CHeaderNav>
-      <CHeaderNav v-if="city != ''" class="d-md-down-none mr-auto">
+      <!-- <CHeaderNav v-show="city" class="d-md-down-none mr-auto">
         <CHeaderNavItem class="px-3">
           <h4>
             <em style="font-size: 1rem">{{ city }} {{ temp }}°C </em>
@@ -23,7 +23,7 @@
             />
           </h4>
         </CHeaderNavItem>
-      </CHeaderNav>
+      </CHeaderNav> -->
       <CHeaderNav class="mr-4">
         <TheHeaderDropdownAccnt />
       </CHeaderNav>
@@ -42,7 +42,7 @@
             ><i class="fas fa-home"></i> Dashboard</CNavItem
           >
           <CNavItem
-          class="grow"
+            class="grow"
             v-if="isEnergy && idUtenteEnergy != '-1'"
             to="/StatistichePortali"
             target="_self"
@@ -95,10 +95,10 @@ export default {
   },
   data() {
     return {
-      city: "",
-      temp: "",
-      desc_meteo: "",
-      ico_meteo: "",
+      city: null,
+      temp: null,
+      desc_meteo: null,
+      ico_meteo: null,
       notificheCommerciale: 0,
       notificheFormazione: 0,
       isEnergy: JSON.parse(localStorage.getItem("chisono_data"))
@@ -240,8 +240,12 @@ export default {
 };
 </script>
 <style>
-.grow { transition: all .2s ease-in-out; }
-.grow:hover { transform: scale(1.2); }
+.grow {
+  transition: all 0.2s ease-in-out;
+}
+.grow:hover {
+  transform: scale(1.2);
+}
 #new_menu li:hover {
   /* background-color: #ecac75; */
   background-color: #ef7a13;
