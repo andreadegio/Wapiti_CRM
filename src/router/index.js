@@ -235,7 +235,7 @@ router.beforeEach((to, from, next) => {
       });
     }
 
-    if (to.query.auth == "1" || localStorage.getItem("utente") == "ok") {
+    if (to.query.auth == "1" || localStorage.getItem("utente") == "ok" && localStorage.getItem("force_login") == "1" ) {
           next();
     } else {
       next({

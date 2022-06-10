@@ -214,6 +214,11 @@ export default {
       this.$router.push("login");
       return;
     }
+    if (localStorage.getItem("force_login") !== "1") {
+      console.log("logout_forzato");
+      this.$router.push("login");
+      return;
+    }
     this.chisono();
   },
   mounted() {
@@ -433,7 +438,9 @@ export default {
               userID: localStorage.getItem("userID"),
               anagraficaid: localStorage.getItem("anagraficaID"),
               unitaoperativaId: localStorage.getItem("unitaoperativaID"),
-              unitaOperativaTipologiaId: JSON.parse(localStorage.getItem("chisono_data")).UnitaOperativa_Tipo_ID,
+              unitaOperativaTipologiaId: JSON.parse(
+                localStorage.getItem("chisono_data")
+              ).UnitaOperativa_Tipo_ID,
             },
           };
           const risposta_recapitiAby = await axios(config);

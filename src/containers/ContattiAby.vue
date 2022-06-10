@@ -40,16 +40,7 @@
                         class="recapito_dettaglio d-inline-block align-middle"
                       >
                         <div v-show="dati_modale.telefono && !invio">
-                          Chiamaci al numero: <b>{{ dati_modale.telefono }}</b
-                          ><br />
-                          <div
-                            class="text-muted text-center"
-                            style="font-size: 0.9rem"
-                            v-show="dati_modale.orariTelefonoMattina"
-                          >
-                            (orario {{ dati_modale.orariTelefonoMattina }} /
-                            {{ dati_modale.orariTelefonoPomeriggio }})
-                          </div>
+                          Chiamaci al numero: <p><b>{{ dati_modale.telefono }}</b></p>
                         </div>
                         <div v-show="invio">
                           Attendere invio richiesta in corso...
@@ -91,6 +82,14 @@
                             >
                           </div>
                         </div>
+                        <div
+                          class="text-muted "
+                          style="font-size: 0.9rem"
+                          v-show="dati_modale.orariTelefonoMattina"
+                        >
+                          (orario {{ dati_modale.orariTelefonoMattina }} /
+                          {{ dati_modale.orariTelefonoPomeriggio }})
+                        </div>
                       </div>
                     </div>
                     <div
@@ -104,8 +103,14 @@
                         class="recapito_dettaglio d-inline-block align-middle"
                       >
                         Mandaci una mail
-                        <p v-for="mail in dati_modale.mail" :key="mail" class="p-0 m-0">
-                        <a style="font-size:1.5rem;" :href="'mailto:'+ mail">  <b>{{ mail }}</b></a>
+                        <p
+                          v-for="mail in dati_modale.mail"
+                          :key="mail"
+                          class="p-0 m-0"
+                        >
+                          <a style="font-size: 1.5rem" :href="'mailto:' + mail">
+                            <b>{{ mail }}</b></a
+                          >
                         </p>
 
                         <div class="text-muted small_text"></div>
@@ -283,7 +288,7 @@ export default {
     show_contatto(index) {
       this.modale_contatto = true;
       this.inputTelefono = "";
-      let Mail = this.recapiti[index].Area.Email.split(';');
+      let Mail = this.recapiti[index].Area.Email.split(";");
       console.log(Mail);
       this.dati_modale = {
         descrizione: this.recapiti[index].Area.DescrizioneArea,
