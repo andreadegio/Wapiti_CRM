@@ -15,9 +15,9 @@
             <h1 class="display-3 mr-4 pb-5">Area non ancora disponibile</h1>
 
             <p class="text-muted"></p>
-            <CButton to="dashboard" color="primary" size="lg" variant="outline">
+            <!-- <CButton to="dashboard" color="primary" size="lg" variant="outline">
               <i class="fas fa-angle-left"></i> Indietro
-            </CButton>
+            </CButton> -->
           </div>
         </div>
       </CCol>

@@ -1,7 +1,7 @@
 <template>
-  <CCard class="h-100" style="z-index: 10">
+  <CCard class="h-100" >
     <CCardHeader class="d-flex justify-content-between">
-      <strong class="h4 titolo_gradient">{{ chisono.DirettoreCommerciale_Note ? chisono.DirettoreCommerciale_Note : "RECAPITI" }}</strong>
+      <strong class="h3 titolo_gradient">{{ chisono.DirettoreCommerciale_Note ? chisono.DirettoreCommerciale_Note : "CONTATTI" }}</strong>
       <div class="card-header-actions"></div>
     </CCardHeader>
     <CCardBody id="manager" class="news_card py-0">
@@ -101,6 +101,9 @@ export default {
 }
 #manager li {
   border-top: 1px solid rgba(0, 0, 21, 0.125) !important;
+}
+#manager li:last-of-type {
+  border-bottom: 1px solid rgba(0, 0, 21, 0.125) !important;
 }
 
 #manager p {

@@ -1,7 +1,7 @@
 <template>
   <div class="c-app">
     <CWrapper>
-      <TheHeader id="header" />
+      <TheHeader id="header"/>
       <div class="c-body">
         <main class="c-main">
           <CContainer fluid class="new_fluid" style="">

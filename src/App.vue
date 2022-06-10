@@ -38,7 +38,7 @@ export default {
 }
 // profondità modale
 .modal-backdrop {
-  z-index: auto !important;
+  z-index: 800 !important;
 }
 
 // STILE PER EMULARE LA CLASSE BOOTSTRAP DISPLAY CHE MA RENDERLA RESPONSIVE

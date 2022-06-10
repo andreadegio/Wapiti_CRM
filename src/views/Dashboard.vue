@@ -1,5 +1,5 @@
 <template >
-  <div v-if="show_async == 2">
+  <div v-if="show_async == 3">
     <CToaster
       id="messaggi_toast"
       v-for="(avviso, index) in avvisiToast"
@@ -16,39 +16,32 @@
         </CToast>
       </template>
     </CToaster>
-    <CRow>
+
+    <CRow class="pt-3">
       <CCol md="1"> </CCol>
-      <CCol md="10">
-        <div style="text-align: center; padding-bottom: 15px">
-          <h1 class="display-4" style="color: #1f4b6b; font-weight: 900">
-            Benvenuto in
-            <img
-              class="login-img"
-              src="img/logo_abyway.png"
-              style="vertical-align: baseline"
-              height="40px"
-            />
-          </h1>
-          <div id="scritta"><hr class="mt-3" /></div>
+      <CCol sm="10" md="10">
+        <div class="row">
+          <div class="col-sm p-0">
+            <CCol class="h-100">
+              <AreaManager />
+            </CCol>
+          </div>
+          <div class="col-sm p-0">
+            <CCol class="h-100">
+              <contattiAby :recapitiParent="recapiti" class="h-100" />
+            </CCol>
+          </div>
+          <div class="col-sm p-0">
+            <CCol class="h-100">
+              <NewsMondo
+                class="h-100"
+                :newsParent="news_mondo"
+                :key="triggerNews"
+                @reload_mondo="reload_mondo()"
+              />
+            </CCol>
+          </div>
         </div>
-      </CCol>
-      <CCol md="1"> </CCol>
-    </CRow>
-    <CRow>
-      <CCol md="1"> </CCol>
-      <CCol id="pulsanti_aree" align-horizontal="center" md="2">
-        <PulsantiAree />
-      </CCol>
-      <CCol md="4">
-        <AreaManager class="h-100" />
-      </CCol>
-      <CCol md="4">
-        <NewsMondo
-          class="h-100"
-          :newsParent="news_mondo"
-          :key="triggerNews"
-          @reload_mondo="reload_mondo()"
-        />
       </CCol>
       <CCol md="1"> </CCol>
     </CRow>
@@ -170,17 +163,6 @@
         transform: translate(-50%, -50%);
       "
     />
-    <!-- <div class="lds-grid">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div> -->
   </div>
 </template>
 
@@ -189,15 +171,16 @@ import axios from "axios";
 import NewsMondo from "./../containers/NewsMondo";
 
 import AreaManager from "./../containers/ContattiAreaManager";
-import PulsantiAree from "./../containers/PulsantiAree";
+import ContattiAby from "./../containers/ContattiAby";
+
 import store from "./../store";
 
 export default {
   name: "Dashboard",
   components: {
-    NewsMondo,
     AreaManager,
-    PulsantiAree,
+    ContattiAby,
+    NewsMondo,
   },
   data() {
     return {
@@ -207,14 +190,13 @@ export default {
       unitaoperativaID: "",
       unitaOperativaTipoID: "",
       show_async: 0,
-      news_operative: null,
       triggerNews: 0,
       news_mondo: null,
       urlRami: localStorage.getItem("urlRami"),
       isEnergy: "",
       isRami: false,
       avvisiToast: null,
-      entra_rami: false,
+      recapiti: [],
     };
   },
 
@@ -228,6 +210,11 @@ export default {
       localStorage.getItem("utente") !== "ok" &&
       this.$route.query.auth !== "1"
     ) {
+      this.$router.push("login");
+      return;
+    }
+    if (localStorage.getItem("versione") !== "1") {
+      console.log("logout_forzato");
       this.$router.push("login");
       return;
     }
@@ -315,7 +302,6 @@ export default {
 
     async get_avvisiToast() {
       // Chiamata per recuperare l'array dei messaggi Toast
-
       try {
         await axios
           .post(
@@ -384,6 +370,7 @@ export default {
             "unitaoperativaID",
             risposta_chisono.data.idUnitaOperativa
           );
+
           // controllo se sono abilitato all'utilizzo del portale rami
           if (risposta_chisono.data.Abilitato_Rami) {
             //Imposto il parametro isRami a true in modo da visualizzare il pulsante
@@ -431,119 +418,42 @@ export default {
       this.isRami = JSON.parse(
         localStorage.getItem("chisono_data")
       ).Abilitato_Rami;
-      // this.triggerNews += 1;
-      // this.latest_news(); // ultime news operative
       this.load_news(); // ultime news mondo
-      // Controllo che tipo di unità operativa sono per visualizzare un messaggio diverso e per abilitare l'accesso alla piattaforma rami
-      if (
-        this.unitaOperativaTipoID == 7 ||
-        this.unitaOperativaTipoID == 8 ||
-        this.unitaOperativaTipoID == 10
-      ) {
-        this.entra_rami = true;
-      }
+      this.recapitiAby(); // recupero i recapiti aby
       this.show_async++;
       this.triggerNews += 1;
     },
 
-    // CARICO LE ULTIME 3 NEWS OPERATIVE PER LA HOME
-    async latest_news() {
-      try {
-        var config = {
-          method: "post",
-          url: this.$custom_json.servizi_broker + "LatestNewsOperative", //non recupero l'end-point dal config perchè genera cors error
-          headers: {
-            userID: localStorage.getItem("userID"),
-            anagraficaID: localStorage.getItem("anagraficaID"),
-            unitaoperativaID: localStorage.getItem("unitaoperativaID"),
-          },
-        };
-        const risposta_latestNews = await axios(config);
-        // this.triggerNews += 1;
-        this.news_operative = risposta_latestNews.data.map((item, id) => {
-          return { ...item, id };
-        });
-        localStorage.setItem(
-          "news_operative",
-          JSON.stringify(this.news_operative)
-        );
-      } catch (error) {
-        //se non ricevo una risposta valida allora guardo se nello storage c'è un salvataggio dei dati e recupero
-        // provvisoriamente quelli
-
-        if (localStorage.getItem("news_operative")) {
-          this.news_operative = JSON.parse(
-            localStorage.getItem("news_operative")
+    // RECUPERO I RECAPITI ABY
+    async recapitiAby() {
+      if (localStorage.getItem("RecapitiAby") == null) {
+        try {
+          var config = {
+            method: "post",
+            url:
+              this.$custom_json.servizi_broker +
+              this.$custom_json.ep_broker.RecapitiAby,
+            headers: {
+              userID: localStorage.getItem("userID"),
+              anagraficaid: localStorage.getItem("anagraficaID"),
+              unitaoperativaId: localStorage.getItem("unitaoperativaID"),
+              unitaOperativaTipologiaId: JSON.parse(
+                localStorage.getItem("chisono_data")
+              ).UnitaOperativa_Tipo_ID,
+            },
+          };
+          const risposta_recapitiAby = await axios(config);
+          // console.log(JSON.stringify(risposta_recapitiAby));
+          localStorage.setItem(
+            "RecapitiAby",
+            JSON.stringify(risposta_recapitiAby.data)
           );
-        } else {
-          // in caso di chiamata fallita e contenuto non presente nello storage tento una seconda volta
-          try {
-            const risposta_latestNews = await axios(config);
-
-            this.news_operative = risposta_latestNews.data.map((item, id) => {
-              return { ...item, id };
-            });
-            localStorage.setItem(
-              "news_operative",
-              JSON.stringify(this.news_operative)
-            );
-          } catch (error) {
-            // se ricevo il secondo errore allora mosto la sezione vuota
-            this.news_operative = "";
-          }
+          this.recapiti = JSON.stringify(risposta_recapitiAby.data);
+        } catch (error) {
+          console.log("errore" + error);
         }
       }
       this.show_async++;
-      this.triggerNews += 1;
-    },
-
-    // Funzione che richiamo in caso di mancato caricamento delle news al primo accesso
-    async reload_operative() {
-      // alert("ricarico");
-      //provo la chiamata all'end-point se l'esito è OK assegno il valore e scrivo nello storage
-      try {
-        var config = {
-          method: "post",
-          url: this.$custom_json.servizi_broker + "LatestNewsOperative", //non recupero l'end-point dal config perchè genera cors error
-          headers: {
-            userID: localStorage.getItem("userID"),
-            anagraficaID: localStorage.getItem("anagraficaID"),
-            unitaoperativaID: localStorage.getItem("unitaoperativaID"),
-          },
-        };
-        const risposta_latestNews = await axios(config);
-
-        this.news_operative = risposta_latestNews.data.map((item, id) => {
-          return { ...item, id };
-        });
-        localStorage.setItem(
-          "news_operative",
-          JSON.stringify(this.news_operative)
-        );
-        // alert(this.news_operative);
-      } catch (error) {
-        //se non ricevo una risposta valida allora guardo se nello storage c'è un salvataggio dei dati e recupero
-        // provvisoriamente quelli
-        if (localStorage.getItem("news_operative") != null) {
-          this.news_mondo = JSON.parse(localStorage.getItem("news_operative"));
-        } else {
-          // in caso di chiamata fallita e contenuto non presente nello storage tento una seconda volta
-          try {
-            const risposta_latestNews = await axios(config);
-
-            this.news_operative = risposta_latestNews.data.map((item, id) => {
-              return { ...item, id };
-            });
-            localStorage.setItem(
-              "news_operative",
-              JSON.stringify(this.news_operative)
-            );
-          } catch (error) {
-            // se ricevo il secondo errore allora mosto la sezione vuota
-            this.news_operative = "";
-          }
-        }
-      }
     },
 
     // CARICO LE ULTIME 3 NEWS MONDO PER LA HOME
@@ -725,7 +635,7 @@ hr:after {
   width: 80vh !important;
 }
 
-.mfs-2 .close{
+.mfs-2 .close {
   margin-left: 20rem !important;
 }
 </style>

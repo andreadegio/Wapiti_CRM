@@ -4,7 +4,7 @@
       color="dark"
       centered
       :show.sync="newsModal"
-      style="z-index: 30"
+      
       size="lg"
     >
       <template #header>
@@ -40,11 +40,11 @@
       id="world-list"
       md="8"
       class="h-100"
-      style="z-index: 10"
+     
       :show.sync="news"
     >
       <CCardHeader class="d-flex justify-content-between">
-        <strong class="h4 titolo_gradient">NEWS DAL MONDO</strong>
+        <strong class="h3 titolo_gradient">NEWS DAL MONDO</strong>
         <div class="card-header-actions">
           <CLink to="./Elenco_news" class="card-header-action btn-setting">
             <strong
@@ -76,7 +76,7 @@
                 <strong>{{ item.titolo }}</strong>
               </h5>
               <p
-                class="text-justify"
+                class="text-justify testo_news"
                 v-html="
                   $options.filters.truncate(item.contenuto, 150, ' [...]')
                 "
@@ -198,6 +198,9 @@ export default {
 #world-list li {
   border-top: 1px solid rgba(0, 0, 21, 0.125) !important;
 }
+#world-list li:last-of-type {
+  padding-bottom: 0px !important;
+}
 img {
   object-fit: cover;
   border-radius: 3px;
@@ -218,5 +221,8 @@ img {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 700;
+}
+.testo_news{
+  
 }
 </style>

@@ -6,6 +6,7 @@ const state = {
   sidebarShow: "responsive",
   sidebarMinimize: false,
   utente: null,
+  versione:null,
   aree:[],
 };
 
@@ -23,7 +24,9 @@ const mutations = {
   },
   user_login() {
     state.utente = "ok";
+    state.versione=1;
     localStorage.setItem("utente", state.utente);
+    localStorage.setItem("versione", state.versione);
   },
   user_logout() {
     state.utente = "ko";
