@@ -1,5 +1,5 @@
 <template >
-  <div v-if="show_async == 3">
+  <div v-if="show_async !== 3">
     <CToaster
       id="messaggi_toast"
       v-for="(avviso, index) in avvisiToast"
@@ -36,7 +36,6 @@
               <NewsMondo
                 class="h-100"
                 :newsParent="news_mondo"
-                :key="triggerNews"
                 @reload_mondo="reload_mondo()"
               />
             </CCol>
@@ -173,8 +172,6 @@ import NewsMondo from "./../containers/NewsMondo";
 import AreaManager from "./../containers/ContattiAreaManager";
 import ContattiAby from "./../containers/ContattiAby";
 
-import store from "./../store";
-
 export default {
   name: "Dashboard",
   components: {
@@ -185,51 +182,31 @@ export default {
   data() {
     return {
       newsModal: false,
-      userID: "",
-      anagraficaID: "",
-      unitaoperativaID: "",
-      unitaOperativaTipoID: "",
+
+      // anagraficaID: "",
+      // unitaoperativaID: "",
+      // unitaOperativaTipoID: JSON.parse(localStorage.getItem("chisono_data"))
+      //   .UnitaOperativa_Tipo_ID,
       show_async: 0,
-      triggerNews: 0,
-      news_mondo: null,
+      // triggerNews: 0,
+      news_mondo: JSON.parse(localStorage.getItem("news_mondo")),
       urlRami: localStorage.getItem("urlRami"),
-      isEnergy: "",
-      isRami: false,
+      isEnergy: JSON.parse(localStorage.getItem("chisono_data"))
+        .Abilitato_Energy,
+      isRami: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Rami,
       avvisiToast: null,
-      recapiti: [],
+      recapiti: JSON.parse(localStorage.getItem("RecapitiAby")),
     };
   },
-
-  beforeCreate() {},
-  created() {
-    if (this.$route.query.auth == "1") {
-      store.commit("user_login");
-      this.$router.push("dashboard");
-    }
-    if (
-      localStorage.getItem("utente") !== "ok" &&
-      this.$route.query.auth !== "1"
-    ) {
-      this.$router.push("login");
-      return;
-    }
-    if (localStorage.getItem("versione") !== "1") {
-      console.log("logout_forzato");
-      this.$router.push("login");
-      return;
-    }
-    this.chisono();
-  },
-  mounted() {
+   mounted() {
     this.get_avvisiToast();
     // this.meteo();
-    this.$forceUpdate();
+    // this.$forceUpdate();
   },
-
   methods: {
     async conta_accesso(settore) {
       let params = {
-        utente: this.userID,
+        utente: localStorage.getItem("userID"),
         piattaforma: settore,
       };
       try {
@@ -299,7 +276,6 @@ export default {
       // Invio la richiesta
       EnergyForm.submit();
     },
-
     async get_avvisiToast() {
       // Chiamata per recuperare l'array dei messaggi Toast
       try {
@@ -315,195 +291,6 @@ export default {
       } catch (error) {
         console.log("errore: " + error);
       }
-    },
-
-    async chisono() {
-      const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-      //data salvata
-      const datasalvata = new Date(localStorage.getItem("lastLogin"));
-      const dataoggi = new Date();
-      //data di oggi
-      const data1 = Date.UTC(
-        dataoggi.getFullYear(),
-        dataoggi.getMonth(),
-        dataoggi.getDate()
-      );
-      const data2 = Date.UTC(
-        datasalvata.getFullYear(),
-        datasalvata.getMonth(),
-        datasalvata.getDate()
-      );
-      const differenza = Math.floor((data1 - data2) / _MS_PER_DAY);
-
-      if (differenza != 0) {
-        console.log("devo rifare il login - sessione scaduta");
-        this.$router.push("login");
-        return;
-      }
-      //  chiamo il chisono per recuperare i dati dell'utente loggato
-      // prima verifico di non averli già nello storage, altrimenti effettuo la chiamata
-      if (localStorage.getItem("chisono_data") == null) {
-        try {
-          var config = {
-            method: "post",
-            url: this.$custom_json.servizi_broker + "chisono",
-            headers: {
-              utente: localStorage.getItem("user"),
-              password: localStorage.getItem("pwd"),
-            },
-          };
-
-          const risposta_chisono = await axios(config);
-
-          // alert(JSON.stringify(risposta_chisono.data));
-          localStorage.setItem(
-            "chisono_data",
-            JSON.stringify(risposta_chisono.data)
-          );
-          localStorage.setItem("userID", risposta_chisono.data.idUtente);
-          this.userID = risposta_chisono.data.idUtente;
-          localStorage.setItem(
-            "anagraficaID",
-            risposta_chisono.data.idAnagrafica
-          );
-          localStorage.setItem(
-            "unitaoperativaID",
-            risposta_chisono.data.idUnitaOperativa
-          );
-
-          // controllo se sono abilitato all'utilizzo del portale rami
-          if (risposta_chisono.data.Abilitato_Rami) {
-            //Imposto il parametro isRami a true in modo da visualizzare il pulsante
-            this.isRami = true;
-            // se sono abilitato chiamo il servizio per recuperare l'url da inserire nel pulsante
-            try {
-              var param = {
-                id_persona_operativa: risposta_chisono.data.idUtente,
-              };
-              await axios
-                .post(
-                  this.$custom_json.base_url +
-                    this.$custom_json.api_url +
-                    this.$custom_json.ep_api.getUrlRami,
-                  param
-                )
-                .then((response) => {
-                  localStorage.setItem("urlRami", response.data);
-                  this.urlRami = response.data;
-                });
-            } catch (error) {
-              console.log("impossibile recuperare jwt rami " + error);
-            }
-          }
-          localStorage.setItem("userID", risposta_chisono.data.idUtente);
-          this.isEnergy = JSON.parse(
-            localStorage.getItem("chisono_data")
-          ).Abilitato_Energy;
-          this.unitaOperativaTipoID = JSON.parse(
-            localStorage.getItem("chisono_data")
-          ).UnitaOperativa_Tipo_ID;
-        } catch (error) {
-          console.log("errore");
-          this.$router.push("login");
-        }
-      }
-      this.userID = localStorage.getItem("userID");
-      this.isEnergy = JSON.parse(
-        localStorage.getItem("chisono_data")
-      ).Abilitato_Energy;
-      this.unitaOperativaTipoID = JSON.parse(
-        localStorage.getItem("chisono_data")
-      ).UnitaOperativa_Tipo_ID;
-      //se sono già autenticato e non ho effettuato il login da più di un giorno, controllo il localstorage
-      this.isRami = JSON.parse(
-        localStorage.getItem("chisono_data")
-      ).Abilitato_Rami;
-      this.load_news(); // ultime news mondo
-      this.recapitiAby(); // recupero i recapiti aby
-      this.show_async++;
-      this.triggerNews += 1;
-    },
-
-    // RECUPERO I RECAPITI ABY
-    async recapitiAby() {
-      if (localStorage.getItem("RecapitiAby") == null) {
-        try {
-          var config = {
-            method: "post",
-            url:
-              this.$custom_json.servizi_broker +
-              this.$custom_json.ep_broker.RecapitiAby,
-            headers: {
-              userID: localStorage.getItem("userID"),
-              anagraficaid: localStorage.getItem("anagraficaID"),
-              unitaoperativaId: localStorage.getItem("unitaoperativaID"),
-              unitaOperativaTipologiaId: JSON.parse(
-                localStorage.getItem("chisono_data")
-              ).UnitaOperativa_Tipo_ID,
-            },
-          };
-          const risposta_recapitiAby = await axios(config);
-          // console.log(JSON.stringify(risposta_recapitiAby));
-          localStorage.setItem(
-            "RecapitiAby",
-            JSON.stringify(risposta_recapitiAby.data)
-          );
-          this.recapiti = JSON.stringify(risposta_recapitiAby.data);
-        } catch (error) {
-          console.log("errore" + error);
-        }
-      }
-      this.show_async++;
-    },
-
-    // CARICO LE ULTIME 3 NEWS MONDO PER LA HOME
-    async load_news() {
-      var chiamata_news = [];
-      try {
-        await axios
-          .get(
-            this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.listanews_home
-          )
-          .then((response) => {
-            chiamata_news = response.data;
-          });
-        this.news_mondo = chiamata_news.map((item, id) => {
-          return { ...item, id };
-        });
-
-        localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
-      } catch (error) {
-        // alert(JSON.parse(localStorage.getItem("news_mondo")));
-        if (localStorage.getItem("news_mondo") != null) {
-          this.news_mondo = JSON.parse(localStorage.getItem("news_mondo"));
-        } else {
-          // in caso di chiamata fallita e contenuto non presente nello storage tento una seconda volta
-          try {
-            await axios
-              .get(
-                this.$custom_json.base_url +
-                  this.$custom_json.api_url +
-                  this.$custom_json.ep_api.listanews_home
-              )
-              .then((response) => {
-                chiamata_news = response.data;
-              });
-            this.news_mondo = chiamata_news.map((item, id) => {
-              return { ...item, id };
-            });
-
-            localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
-          } catch (error) {
-            // se ricevo il secondo errore allora mosto la sezione vuota
-            this.news_mondo = "";
-          }
-        }
-      }
-
-      this.show_async++;
-      this.triggerNews += 1;
     },
 
     // Funzione che richiamo in caso di mancato caricamento delle news al primo accesso

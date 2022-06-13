@@ -125,7 +125,7 @@ export default {
   methods: {
     async chisono_energy() {
       if (!localStorage.getItem("idUtenteEnergy")) {
-        console.log("chiamo il servizio energy");
+        // console.log("chiamo il servizio energy");
         try {
           var config = {
             method: "post",
