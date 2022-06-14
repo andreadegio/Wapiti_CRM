@@ -38,7 +38,11 @@
           class="c-header-light secondary-menu my-1"
           id="new_menu"
         >
-          <CNavItem active class="grow" to="../dashboard" target="_self"
+          <CNavItem
+            active
+            class="grow"
+            :to="{ path: '/dashboard' }"
+            target="_self"
             ><i class="fas fa-home"></i> Dashboard</CNavItem
           >
           <CNavItem
@@ -51,7 +55,7 @@
           <CNavItem class="grow" v-else to="Statistiche/broker" target="_self"
             ><i class="far fa-chart-bar"></i> Statistiche</CNavItem
           >
-          <CNavItem class="grow" to="../Commerciale" target="_self"
+          <CNavItem class="grow" :to="{ path: '/Commerciale' }" target="_self"
             ><i class="fas fa-user-tie"></i> Area Commerciale
             <CBadge
               v-show="notificheCommerciale > 0"
@@ -60,7 +64,7 @@
               >{{ notificheCommerciale }}</CBadge
             ></CNavItem
           >
-          <CNavItem class="grow" to="../Formazione" target="_self"
+          <CNavItem class="grow" :to="{ path: '/Formazione' }" target="_self"
             ><i class="fas fa-user-graduate"></i> Formazione
             <CBadge
               v-show="notificheFormazione > 0"
@@ -69,10 +73,10 @@
               >{{ notificheFormazione }}</CBadge
             ></CNavItem
           >
-          <CNavItem class="grow" to="../Comingsoon" target="_self"
+          <CNavItem class="grow" :to="{ path: '/Comingsoon' }" target="_self"
             ><i class="fas fa-calculator"></i> Amministrazione</CNavItem
           >
-          <CNavItem class="grow" to="../Documentale" target="_self"
+          <CNavItem class="grow" :to="{ path: '/Documentale' }" target="_self"
             ><i class="fas fa-file-signature"></i> Documentale</CNavItem
           >
         </CNav>
