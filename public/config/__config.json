@@ -37,7 +37,8 @@
     "get_avvisiToast": "Utility/get_avvisiToast",
     "set_accesso": "Utility/set_accesso",
     "get_accessi_totali": "Utility/get_accessi_totali",
-    "richiesta_contatto":"Utility/richiesta_contatto"
+    "richiesta_contatto":"Utility/richiesta_contatto",
+    "get_version":"Utility/get_version"
   },
   "servizi_broker": "https://servizi.documentale.cloud/aibajsonea/",
   "servizi_energy": "https://abyenergy.it/servizitest/",

@@ -235,7 +235,7 @@ router.beforeEach((to, from, next) => {
       });
     }
 
-    if (to.query.auth == "1" || localStorage.getItem("utente") == "ok" && localStorage.getItem("versione") == "1" ) {
+    if (to.query.auth == "1" || localStorage.getItem("utente") == "ok" ) {
           next();
     } else {
       next({

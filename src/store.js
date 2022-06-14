@@ -1,13 +1,15 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from "axios";
+
 Vue.use(Vuex);
 
 const state = {
   sidebarShow: "responsive",
   sidebarMinimize: false,
   utente: null,
-  versione:null,
-  aree:[],
+  aree: [],
+  url_versione:"",
 };
 
 const mutations = {
@@ -22,20 +24,22 @@ const mutations = {
   set(state, [variable, value]) {
     state[variable] = value;
   },
-  user_login() {
+  user_login(state, url) {
     state.utente = "ok";
-    state.versione=1;
+    axios.post(url).then((response) => {
+      // console.log("versione " + response.data);
+      localStorage.setItem("versione", response.data);
+    });
     localStorage.setItem("utente", state.utente);
-    localStorage.setItem("versione", state.versione);
   },
   user_logout() {
     state.utente = "ko";
     localStorage.setItem("utente", state.utente);
     localStorage.clear();
   },
-  lista_aree(state, payload){
-      state.aree= payload
-  }
+  lista_aree(state, payload) {
+    state.aree = payload;
+  },
 };
 
 export default new Vuex.Store({
