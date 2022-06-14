@@ -49,22 +49,19 @@ export default {
       loading: false,
       get_recapiti: false,
       get_news: false,
+      url_versione :"",
     };
   },
   created() {
+    this.url_versione =this.$custom_json.base_url +this.$custom_json.api_url +this.$custom_json.ep_api.get_version;
     if (this.$route.query.auth == "1") {
-      store.commit("user_login");
+      store.commit("user_login", this.url_versione);
       this.$router.push("dashboard");
     }
     if (
       localStorage.getItem("utente") !== "ok" &&
       this.$route.query.auth !== "1"
     ) {
-      this.$router.push("login");
-      return;
-    }
-    if (localStorage.getItem("versione") !== "1") {
-      // console.log("logout_forzato");
       this.$router.push("login");
       return;
     }
@@ -256,7 +253,7 @@ export default {
           }
         }
       }
-      this.get_news=true;
+      this.get_news = true;
     },
   },
 };

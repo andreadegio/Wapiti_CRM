@@ -38,7 +38,7 @@
           class="c-header-light secondary-menu my-1"
           id="new_menu"
         >
-          <CNavItem active class="grow" to="/dashboard" target="_self"
+          <CNavItem active class="grow" to="../dashboard" target="_self"
             ><i class="fas fa-home"></i> Dashboard</CNavItem
           >
           <CNavItem
@@ -51,7 +51,7 @@
           <CNavItem class="grow" v-else to="Statistiche/broker" target="_self"
             ><i class="far fa-chart-bar"></i> Statistiche</CNavItem
           >
-          <CNavItem class="grow" to="/Commerciale" target="_self"
+          <CNavItem class="grow" to="../Commerciale" target="_self"
             ><i class="fas fa-user-tie"></i> Area Commerciale
             <CBadge
               v-show="notificheCommerciale > 0"
@@ -60,7 +60,7 @@
               >{{ notificheCommerciale }}</CBadge
             ></CNavItem
           >
-          <CNavItem class="grow" to="/Formazione" target="_self"
+          <CNavItem class="grow" to="../Formazione" target="_self"
             ><i class="fas fa-user-graduate"></i> Formazione
             <CBadge
               v-show="notificheFormazione > 0"
@@ -69,10 +69,10 @@
               >{{ notificheFormazione }}</CBadge
             ></CNavItem
           >
-          <CNavItem class="grow" to="/Comingsoon" target="_self"
+          <CNavItem class="grow" to="../Comingsoon" target="_self"
             ><i class="fas fa-calculator"></i> Amministrazione</CNavItem
           >
-          <CNavItem class="grow" to="/Documentale" target="_self"
+          <CNavItem class="grow" to="../Documentale" target="_self"
             ><i class="fas fa-file-signature"></i> Documentale</CNavItem
           >
         </CNav>
@@ -105,6 +105,7 @@ export default {
         .Abilitato_Energy,
       idUtenteEnergy: "",
       interval: null,
+      check_ver: null,
     };
   },
   mounted() {
@@ -114,10 +115,37 @@ export default {
     this.chisono_energy();
   },
   created() {
+    let last_version = null;
     this.interval = setInterval(() => {
       this.get_notifiche_formazione();
       this.get_notifiche_commerciale();
     }, 3000);
+    // Controllo se dev'essere aggiornato e forzato il logout di tutti gli utenti ogni 10 minuti
+    this.check_ver = setInterval(() => {
+      let url =
+        this.$custom_json.base_url +
+        this.$custom_json.api_url +
+        this.$custom_json.ep_api.get_version;
+
+      axios.post(url).then((response) => {
+        // console.log("Versione recuperata " + response.data);
+        // localStorage.setItem("versione", response.data);
+        last_version = response.data;
+
+        if (localStorage.getItem("versione") !== last_version) {
+          // console.log(
+          //   "comparo " +
+          //     localStorage.getItem("versione") +
+          //     " con " +
+          //     last_version
+          // );
+          console.log("logout_forzato");
+          this.$router.push("login");
+
+          return;
+        }
+      });
+    }, 600000);
   },
   destroyed() {
     clearInterval(this.interval);
