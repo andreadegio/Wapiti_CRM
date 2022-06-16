@@ -19,22 +19,49 @@ const GestioneNewsBroker = () => import("@/views/news/GestioneNewsBroker");
 const Documentale = () => import("@/views/documentale/Documentale");
 
 // Views - Formazione
-const AdminFormazione = () => import(/* webpackChunkName: "Formazione" */"@/views/formazione/AdminFormazione");
-const Formazione = () => import(/* webpackChunkName: "Formazione" */"@/views/formazione/Formazione");
-const Corso = () => import(/* webpackChunkName: "Formazione" */"@/views/formazione/Corso");
-const ModificaCorso = () => import(/* webpackChunkName: "Formazione" */"@/views/formazione/ModificaCorso");
+const AdminFormazione = () =>
+  import(
+    /* webpackChunkName: "Formazione" */ "@/views/formazione/AdminFormazione"
+  );
+const Formazione = () =>
+  import(/* webpackChunkName: "Formazione" */ "@/views/formazione/Formazione");
+const Corso = () =>
+  import(/* webpackChunkName: "Formazione" */ "@/views/formazione/Corso");
+const ModificaCorso = () =>
+  import(
+    /* webpackChunkName: "Formazione" */ "@/views/formazione/ModificaCorso"
+  );
 
 // Views - Commerciale
-const AdminCommerciale = () => import(/* webpackChunkName: "Commerciale" */"@/views/commerciale/AdminCommerciale");
-const Commerciale = () => import(/* webpackChunkName: "Commerciale" */"@/views/commerciale/Commerciale");
-const Sezione = () => import(/* webpackChunkName: "Commerciale" */"@/views/commerciale/Sezione");
-const Comunicazione = () => import(/* webpackChunkName: "Commerciale" */"@/views/commerciale/Comunicazione");
-const ModificaContenuti = () => import(/* webpackChunkName: "Commerciale" */"@/views/commerciale/ModificaContenuti");
+const AdminCommerciale = () =>
+  import(
+    /* webpackChunkName: "Commerciale" */ "@/views/commerciale/AdminCommerciale"
+  );
+const Commerciale = () =>
+  import(
+    /* webpackChunkName: "Commerciale" */ "@/views/commerciale/Commerciale"
+  );
+const Sezione = () =>
+  import(/* webpackChunkName: "Commerciale" */ "@/views/commerciale/Sezione");
+const Comunicazione = () =>
+  import(
+    /* webpackChunkName: "Commerciale" */ "@/views/commerciale/Comunicazione"
+  );
+const ModificaContenuti = () =>
+  import(
+    /* webpackChunkName: "Commerciale" */ "@/views/commerciale/ModificaContenuti"
+  );
 
 // Views - Statistiche
-const Statistiche = () => import(/* webpackChunkName: "Statistiche" */"@/views/statistiche/Statistiche");
+const Statistiche = () =>
+  import(
+    /* webpackChunkName: "Statistiche" */ "@/views/statistiche/Statistiche"
+  );
 const Accessi_stat = () => import("@/views/statistiche/Accessi_stat");
-const StatistichePortali = () => import(/* webpackChunkName: "Statistiche" */"@/views/statistiche/StatistichePortali");
+const StatistichePortali = () =>
+  import(
+    /* webpackChunkName: "Statistiche" */ "@/views/statistiche/StatistichePortali"
+  );
 
 // Views - Page - Gas
 const Comingsoon_gas = () => import("@/views/pages/Comingsoon_gas");
@@ -62,130 +89,130 @@ const router = new Router({
 function configRoutes() {
   return [
     {
-      path: "/",
+      path: "",
       redirect: "/dashboard",
       name: "Home",
       component: TheContainer,
       children: [
         {
-          path: "dashboard",
+          path: "/dashboard",
           name: "Dashboard",
           component: Dashboard,
         },
         {
-          path: "Gestione_news_Mondo",
+          path: "/Gestione_news_Mondo",
           name: "GestioneNews",
           component: News,
         },
         {
-          path: "Elenco_news",
+          path: "/Elenco_news",
           name: "Elenco_news",
           component: Elenco_news,
         },
         {
-          path: "Documentale",
+          path: "/Documentale",
           name: "Documentale",
           component: Documentale,
         },
         {
-          path: "StatistichePortali",
+          path: "/StatistichePortali",
           name: "StatistichePortali",
           component: StatistichePortali,
         },
         {
-          path: "NewsOperative",
+          path: "/NewsOperative",
           name: "NewsOperativeBroker",
           component: NewsOperativeBroker,
         },
         {
-          path: "GestioneNewsBroker",
+          path: "/GestioneNewsBroker",
           name: "GestioneNewsBroker",
           component: GestioneNewsBroker,
         },
         {
-          path: "Formazione",
+          path: "/Formazione",
           name: "Formazione",
           component: Formazione,
         },
         {
-          path: "Formazione/Corso/:corso",
+          path: "/Formazione/Corso/:corso",
           name: "Corso",
           props: true,
           component: Corso,
         },
         {
-          path: "AdminFormazione",
+          path: "/AdminFormazione",
           name: "AdminFormazione",
           props: true,
           component: AdminFormazione,
         },
         {
-          path: "AdminFormazione/Modifica/",
+          path: "/AdminFormazione/Modifica/",
           name: "ModificaCorso",
           props: true,
           component: ModificaCorso,
         },
         {
-          path: "Commerciale",
+          path: "/Commerciale",
           name: "Commerciale",
           component: Commerciale,
         },
         {
-          path: "Commerciale/:contenuto",
+          path: "/Commerciale/:contenuto",
           name: "Sezione",
           props: true,
           component: Sezione,
         },
         {
-          path: "Commerciale/Comunicazione/:notizia",
+          path: "/Commerciale/Comunicazione/:notizia",
           name: "Comunicazione",
           props: true,
           component: Comunicazione,
         },
         {
-          path: "AdminCommerciale/Modifica/",
+          path: "/AdminCommerciale/Modifica/",
           name: "ModificaContenuti",
           props: true,
           component: ModificaContenuti,
         },
         {
-          path: "AdminCommerciale/:settore",
+          path: "/AdminCommerciale/:settore",
           name: "AdminCommerciale_settore",
           props: true,
           component: AdminCommerciale,
         },
         {
-          path: "Comingsoon",
+          path: "/Comingsoon",
           name: "Comingsoon",
           component: Comingsoon,
         },
         {
-          path: "Comingsoon_gas",
+          path: "/Comingsoon_gas",
           name: "Comingsoon_gas",
           component: Comingsoon_gas,
         },
         {
-          path: "Comingsoon_rami",
+          path: "/Comingsoon_rami",
           name: "Comingsoon_rami",
           component: Comingsoon_rami,
         },
         {
-          path: "Comingsoon_rami2",
+          path: "/Comingsoon_rami2",
           name: "Comingsoon_rami2",
           component: Comingsoon_rami2,
         },
         {
-          path: "Profilo",
+          path: "/Profilo",
           name: "Profilo",
           component: Profilo,
         },
         {
-          path: "Accessi_stat",
+          path: "/Accessi_stat",
           name: "Accessi_stat",
           component: Accessi_stat,
         },
         {
-          path: "Statistiche/:portale",
+          path: "/Statistiche/:portale",
           name: "Statistiche",
           props: true,
           component: Statistiche,
@@ -227,7 +254,6 @@ function configRoutes() {
   ];
 }
 router.beforeEach((to, from, next) => {
-  
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (localStorage.getItem("userID") == -1) {
       next({
@@ -235,8 +261,8 @@ router.beforeEach((to, from, next) => {
       });
     }
 
-    if (to.query.auth == "1" || localStorage.getItem("utente") == "ok" ) {
-          next();
+    if (to.query.auth == "1" || localStorage.getItem("utente") == "ok") {
+      next();
     } else {
       next({
         name: "Login",
@@ -245,6 +271,10 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
+});
+
+router.onError((error) => {
+    console.log("Errore di caricamento " + error.message); 
 });
 
 export default router;
