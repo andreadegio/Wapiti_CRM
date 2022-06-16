@@ -48,11 +48,15 @@
           <CNavItem
             class="grow"
             v-if="isEnergy && idUtenteEnergy != '-1'"
-            to="/StatistichePortali"
+            :to="{ path: '/StatistichePortali' }"
             target="_self"
             ><i class="far fa-chart-bar"></i> Statistiche</CNavItem
           >
-          <CNavItem class="grow" v-else to="Statistiche/broker" target="_self"
+          <CNavItem
+            class="grow"
+            v-else
+            :to="{ path: '/Statistiche', params: { portale: 'broker'}}"
+            target="_self"
             ><i class="far fa-chart-bar"></i> Statistiche</CNavItem
           >
           <CNavItem class="grow" :to="{ path: '/Commerciale' }" target="_self"
@@ -296,9 +300,7 @@ export default {
   margin-bottom: auto;
   /* border-right: 1px solid lightgray; */
 }
-.nav-item:first-of-type {
-  /* border-left: 1px solid lightgray; */
-}
+
 
 .nav-pills .nav-link {
   font-size: 1.3rem !important;

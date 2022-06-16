@@ -168,7 +168,6 @@
 <script>
 import axios from "axios";
 import NewsMondo from "./../containers/NewsMondo";
-
 import AreaManager from "./../containers/ContattiAreaManager";
 import ContattiAby from "./../containers/ContattiAby";
 
@@ -201,7 +200,7 @@ export default {
    mounted() {
     this.get_avvisiToast();
     // this.meteo();
-    // this.$forceUpdate();
+    this.$forceUpdate();
   },
   methods: {
     async conta_accesso(settore) {

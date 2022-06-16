@@ -28,19 +28,17 @@
                     <p class="text-muted"></p>
                     <div
                       class="riga_contatto align-middle"
-                      style="
-                        display: block ruby !important;
-                        border-top: 1px solid rgb(249, 223, 195);
-                      "
+                      style="border-top: 1px solid rgb(249, 223, 195)"
                     >
-                      <div class="icona_contatto mr-3 align-middle">
+                      <div class="icona_contatto_modale mr-3 align-middle">
                         <i class="fas fa-phone fa-fw"></i>
                       </div>
-                      <div
-                        class="recapito_dettaglio d-inline-block align-middle"
-                      >
+                      <div class="recapito_dettaglio align-middle">
                         <div v-show="dati_modale.telefono && !invio">
-                          Chiamaci al numero: <p><b>{{ dati_modale.telefono }}</b></p>
+                          Chiamaci al numero:
+                          <p>
+                            <b>{{ dati_modale.telefono }}</b>
+                          </p>
                         </div>
                         <div v-show="invio">
                           Attendere invio richiesta in corso...
@@ -83,7 +81,7 @@
                           </div>
                         </div>
                         <div
-                          class="text-muted "
+                          class="text-muted"
                           style="font-size: 0.9rem"
                           v-show="dati_modale.orariTelefonoMattina"
                         >
@@ -92,11 +90,8 @@
                         </div>
                       </div>
                     </div>
-                    <div
-                      class="riga_contatto align-middle py-4"
-                      style="display: block ruby !important"
-                    >
-                      <div class="icona_contatto mr-3 align-middle">
+                    <div class="riga_contatto align-middle py-4">
+                      <div class="icona_contatto_modale mr-3 align-middle">
                         <i class="far fa-envelope fa-fw"></i>
                       </div>
                       <div
@@ -120,7 +115,7 @@
                       v-show="dati_modale.telegram"
                       class="riga_contatto flex-column align-middle"
                     >
-                      <div class="icona_contatto mr-3 align-middle">
+                      <div class="icona_contatto_modale mr-3 align-middle">
                         <i class="fab fa-telegram-plane"></i>
                       </div>
                       <div
@@ -162,14 +157,15 @@
     </CModal>
     <CCard class="h-100">
       <CCardHeader class="d-flex justify-content-between">
-        <strong class="h3 titolo_gradient">RECAPITI</strong>
+        <strong class="h3 titolo_gradient">RECAPITI OPERATIVI</strong>
         <div class="card-header-actions"></div>
       </CCardHeader>
-      <CCardBody id="manager" class="news_card py-0">
+      <CCardBody  class="manager news_card py-0">
         <CListGroup class="contatto">
           <CListGroupItem
             v-for="(contatto, index) in recapiti"
             :key="index"
+            v-show="contatto.Area.RecapitoOperativo"
             class="flex-column align-items-start grow"
           >
             <div
@@ -328,39 +324,39 @@ export default {
   border-top: 0px !important;
 }
 
-#manager {
+.manager {
   font-size: 1rem;
 }
 
-#manager .list-group-item {
+.manager .list-group-item {
   border-left: 0px !important;
   border-right: 0px !important;
   border-bottom: 0px !important;
   border-radius: 0px !important;
 }
 
-#manager li {
+.manager li {
   border-top: 1px solid rgba(0, 0, 21, 0.125) !important;
 }
-#manager li:last-of-type {
+.manager li:last-of-type {
   border-bottom: 1px solid rgba(0, 0, 21, 0.125) !important;
 }
 
-#manager p {
+.manager p {
   font-size: 1.1rem;
   font-weight: 100;
 }
 
-#manager p.nome {
+.manager p.nome {
   font-weight: 500;
   text-transform: capitalize;
 }
 
-#manager span.mail {
+.manager span.mail {
   text-transform: lowercase;
 }
 
-#manager .fa-fw {
+.manager .fa-fw {
   color: #1f4b6b;
 }
 
@@ -372,6 +368,29 @@ export default {
   font-weight: 700;
 }
 .icona_contatto {
+  position: relative;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 50em;
+  min-width: 50px;
+  height: 50px;
+  font-size: 14.4px;
+  background-color: #1d4b6b;
+  color: white;
+  font-size: 1.5rem;
+  -webkit-box-shadow: 0px 6px 10px 0px #8a8a8a;
+  -moz-box-shadow: 0px 6px 10px 0px #8a8a8a;
+  -o-box-shadow: 0px 6px 10px 0px #8a8a8a;
+  box-shadow: 0px 6px 10px 0px #8a8a8a;
+}
+.icona_contatto_modale {
   position: relative;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -397,6 +416,7 @@ export default {
 .recapito_dettaglio {
   font-size: 1.5rem;
   margin-left: 2rem;
+  display: inline-block;
 }
 
 .small_text {
@@ -425,11 +445,23 @@ export default {
   border-bottom: 1px solid rgb(249, 223, 195);
   padding-top: 2rem;
   padding-bottom: 2rem;
+  display: block ruby;
 }
 .modal-footer {
   border: 0px !important;
 }
 .card-body {
   padding: 0 !important;
+}
+
+@media screen and (max-width: 600px) {
+  .riga_contatto {
+    display: grid !important;
+  }
+  .icona_contatto_modale {
+    margin-left: auto;
+    margin-right: auto !important;
+    margin-bottom: 1rem;
+  }
 }
 </style>
