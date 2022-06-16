@@ -34,6 +34,8 @@
                         <i class="fas fa-phone fa-fw"></i>
                       </div>
 
+
+
                       <!-- {{ modale_recapiti.Telefono.NrTelefono }} -->
                       <!-- <div class="recapito_dettaglio align-middle">
                         <div
