@@ -197,7 +197,7 @@ export default {
       recapiti: JSON.parse(localStorage.getItem("RecapitiAby")),
     };
   },
-   mounted() {
+  mounted() {
     this.get_avvisiToast();
     // this.meteo();
     this.$forceUpdate();
@@ -225,7 +225,11 @@ export default {
                 this.loginEnergy();
                 break;
               case "rami":
-                window.location.href = this.urlRami;
+                if (this.urlRami) {
+                  window.location.href = this.urlRami;
+                } else {
+                  window.location.href = localStorage.getItem("urlRami");
+                }
                 break;
               default:
                 break;

@@ -117,7 +117,7 @@ export default {
     };
   },
   mounted() {
-    this.meteo();
+    // this.meteo();
     this.get_notifiche_formazione();
     this.get_notifiche_commerciale();
     this.chisono_energy();

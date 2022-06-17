@@ -121,17 +121,16 @@
                       <div
                         class="recapito_dettaglio d-inline-block align-middle"
                       >
-                        Scrivici su Telegram<br />
-                        <b>{{ dati_modale.telegram }}</b>
-                        <br />
-                        <div
+                        Scrivici su Telegram
+                        <p class="mb-0"><b>{{ dati_modale.telegram }}</b></p>                        
+                        <p
                           class="text-muted"
                           style="font-size: 0.9rem"
                           v-show="dati_modale.orariTelegramMattina"
                         >
                           (orario {{ dati_modale.orariTelegramMattina }} /
                           {{ dati_modale.orariTelegramPomeriggio }})
-                        </div>
+                        </p>
                       </div>
                     </div>
                   </CCardBody>

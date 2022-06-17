@@ -22,40 +22,36 @@
               <CCol md="11" class="p-0">
                 <CCard style="border: 0px">
                   <CCardBody>
-                    <div class="py-2 text-center titolo_recapito">
-                      {{ modale_recapiti.Descrizione }}
+                    <div class="h4 py-2 text-center titolo_recapito nome">
+                      {{ modale_recapiti.Nome ? modale_recapiti.Nome : modale_recapiti.Descrizione }}
+                      <!-- <p
+                        class="h4 mb-1 mt-3 text-center manager nome"
+                        v-show="modale_recapiti.Nome"
+                      >
+                        <i>{{ modale_recapiti.Nome | capitalize }}</i>
+                      </p> -->
                     </div>
                     <p class="text-muted"></p>
                     <div
                       class="riga_contatto align-middle"
                       style="border-top: 1px solid rgb(249, 223, 195)"
+                      v-show="modale_recapiti.Telefono"
                     >
                       <div class="icona_contatto_modale mr-3 align-middle">
                         <i class="fas fa-phone fa-fw"></i>
                       </div>
-
-
-
-                      <!-- {{ modale_recapiti.Telefono.NrTelefono }} -->
-                      <!-- <div class="recapito_dettaglio align-middle">
-                        <div
-                          v-show="modale_recapiti.Telefono.NrTelefono && !invio"
-                        >
+                      <div class="recapito_dettaglio align-middle">
+                        <div v-show="modale_recapiti.Telefono && !invio">
                           Chiamaci al numero:
                           <p>
-                            <b>{{ modale_recapiti.Telefono.NrTelefono }}</b>
+                            <b>{{ modale_recapiti.Telefono }}</b>
                           </p>
                         </div>
                         <div v-show="invio">
                           Attendere invio richiesta in corso...
                           <img src="img/message.gif" style="width: 5rem" />
                         </div>
-                        <div
-                          v-if="
-                            modale_recapiti.Telefono
-                              .CliccaPerEssereRichiamato && !invio
-                          "
-                        >
+                        <div>
                           <p class="mb-0">
                             Oppure lascia il tuo numero e ti richiameremo noi
                           </p>
@@ -72,6 +68,13 @@
                               />
                             </div>
                             <CButton
+                              @click="
+                                richiamami(
+                                  inputTelefono,
+                                  modale_recapiti.Email,
+                                  modale_recapiti.Descrizione
+                                )
+                              "
                               style="color: white"
                               color="primary"
                               class="ml-2"
@@ -80,30 +83,57 @@
                             >
                           </div>
                         </div>
-                        <div class="text-muted" style="font-size: 0.9rem">
-                          (orario/ )
+                        <div
+                          class="text-muted"
+                          style="font-size: 0.9rem"
+                          v-show="
+                            modale_recapiti.TelefonoOraMattina &&
+                            modale_recapiti.TelefonoOraPomeriggio
+                          "
+                        >
+                          (orario {{ modale_recapiti.TelefonoOraMattina }} /
+                          {{ modale_recapiti.TelefonoOraPomeriggio }} )
                         </div>
-                      </div> -->
-                      
+                      </div>
                     </div>
-                    <div class="riga_contatto align-middle py-4">
+                    <div
+                      class="riga_contatto align-middle"
+                      style="border-top: 1px solid rgb(249, 223, 195)"
+                      v-show="modale_recapiti.Cell"
+                    >
+                      <div class="icona_contatto_modale mr-3 align-middle">
+                        <i class="fas fa-mobile-alt fa-fw"></i>
+                      </div>
+                      <div class="recapito_dettaglio align-middle">
+                        <div>
+                          Cellulare
+                          <p>
+                            <b>{{ modale_recapiti.Cell }}</b>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="riga_contatto align-middle py-4"
+                      v-show="modale_recapiti.Email"
+                    >
                       <div class="icona_contatto_modale mr-3 align-middle">
                         <i class="far fa-envelope fa-fw"></i>
                       </div>
                       <div
                         class="recapito_dettaglio d-inline-block align-middle"
                       >
-                        Mandaci una mail
-                        <p class="p-0 m-0">
-                          <a style="font-size: 1.5rem" :href="'mailto:'">
-                            <b></b
-                          ></a>
+                        {{ modale_recapiti.Nome ? "Mail" : "Mandaci una mail" }}
+                        <p class="p-0 m-0 mail">
+                          <a :href="'mailto:'">
+                            <p class="mail">{{ modale_recapiti.Email }}</p></a
+                          >
                         </p>
 
                         <div class="text-muted small_text"></div>
                       </div>
                     </div>
-                    <div class="riga_contatto flex-column align-middle">
+                    <!-- <div class="riga_contatto flex-column align-middle">
                       <div class="icona_contatto_modale mr-3 align-middle">
                         <i class="fab fa-telegram-plane"></i>
                       </div>
@@ -117,7 +147,7 @@
                           (orario / )
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                   </CCardBody>
                 </CCard>
               </CCol>
@@ -140,9 +170,13 @@
       </template>
     </CModal>
     <CCard class="mb-0 h-100">
-      <CCardHeader class="d-flex justify-content-between">
-        <strong class="h3 titolo_gradient">ASSICURAZIONI</strong>
+      <CCardHeader class="d-flex justify-content-between" style="border-bottom:1px solid lightgray !important;">
+        <strong class="h3 titolo_gradient">{{ chisono.Divisione_UnitaOperativa }}</strong>
         <div class="card-header-actions"></div>
+      </CCardHeader>
+      <CCardHeader class="d-flex justify-content-between py-4">
+        <div class="text-center w-100" style="color: #ef7a13;"><strong class="h3 ">ASSICURAZIONI</strong>
+        </div>
       </CCardHeader>
       <CCardBody class="manager news_card py-0">
         <CListGroup class="contatto">
@@ -154,7 +188,7 @@
             <div
               class="d-flex w-100 py-2"
               style="text-transform: uppercase"
-              @click="show_contatto(index, 'auto')"
+              @click="show_recapito(index, 'auto')"
             >
               <div
                 v-show="contatto.FontAweSomeIcon"
@@ -164,7 +198,7 @@
               <div class="recapito_name">
                 <strong
                   >{{ contatto.Descrizione }}
-                  {{ chisono.Divisione_UnitaOperativa }}</strong
+                  </strong
                 >
                 <br />
                 <div class="small_text">
@@ -178,9 +212,9 @@
           </CListGroupItem>
         </CListGroup>
 
-        <CCardHeader class="d-flex justify-content-between pt-5">
-          <strong class="h3 titolo_gradient">GAS E LUCE</strong>
-          <div class="card-header-actions"></div>
+        <CCardHeader class="d-flex justify-content-between py-4">
+          <div class="text-center w-100" style="color: #ef7a13;"><strong class="h3">GAS E LUCE</strong>
+          </div>
         </CCardHeader>
 
         <CListGroup class="contatto">
@@ -216,7 +250,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+// import axios from "axios";
 
 export default {
   name: "AreaManager",
@@ -228,6 +262,8 @@ export default {
       chisono: JSON.parse(localStorage.getItem("chisono_data")),
       modale: false,
       modale_recapiti: [],
+      invio: false,
+      inputTelefono: "",
     };
   },
   mounted() {
@@ -237,36 +273,41 @@ export default {
           Descrizione: item.Area.DescrizioneArea,
           Email: item.Area.Email,
           FontAweSomeIcon: item.Area.FontAweSomeIcon,
-          Telefono: item.Area.Telefono,
+          Telefono: item.Area.Telefono.NrTelefono,
+          TelefonoOraMattina: item.Area.Telefono.OrariMattina,
+          TelefonoOraPomeriggio: item.Area.Telefono.OrariPomeriggio,
+          Telegram: item.Area.Telegram.NrTelegram,
         });
     });
-
-    this.recapiti_assicurazioni.push(
-      {
+    if (this.chisono.DirettoreCommerciale) {
+      this.recapiti_assicurazioni.push({
         Descrizione: "Direttore Commerciale",
         Nome: this.chisono.DirettoreCommerciale,
         Email: this.chisono.DirettoreCommerciale_Email,
-        Cell: this.chisono.DirettoreCommerciale_cellulare,
+        Cell: this.chisono.DirettoreCommerciale_Cellulare,
         FontAweSomeIcon: '<i class="fas fa-user-tie"></i>',
         Telefono: "",
-      },
-      {
+      });
+    }
+    if (this.chisono.AreaManager) {
+      this.recapiti_assicurazioni.push({
         Descrizione: "Area Manager",
-        Nome: this.chisono.DirettoreCommerciale,
+        Nome: this.chisono.AreaManager,
         Email: this.chisono.AreaManager_Email,
-        Cell: this.chisono.AreaManager_cellulare,
+        Cell: this.chisono.AreaManager_Cellulare,
         FontAweSomeIcon: '<i class="fas fa-users"></i>',
         Telefono: "",
-      }
-    );
-
+      });
+    }
     this.recapiti_operativi.forEach((item) => {
       if (item.Area.Settore == "GAS&LUCE" && item.Area.RecapitoCommerciale)
         this.recapiti_energy.push({
           Descrizione: item.Area.DescrizioneArea,
           Email: item.Area.Email,
           FontAweSomeIcon: item.Area.FontAweSomeIcon,
-          Telefono: item.Area.Telefono,
+          Telefono: item.Area.Telefono.NrTelefono,
+          TelefonoOraMattina: item.Area.Telefono.OrariMattina,
+          TelefonoOraPomeriggio: item.Area.Telefono.OrariPomeriggio,
         });
     });
 
@@ -405,13 +446,16 @@ export default {
   font-weight: 100;
 }
 
-.manager p.nome {
+.nome {
+  font-size: 1.5rem;
   font-weight: 500;
   text-transform: capitalize;
 }
 
-.manager span.mail {
+.mail {
   text-transform: lowercase;
+  font-size: 1.3rem;
+  font-weight: bold;
 }
 
 .manager .fa-fw {
@@ -520,6 +564,9 @@ export default {
     margin-left: auto;
     margin-right: auto !important;
     margin-bottom: 1rem;
+  }
+  .mail {
+    font-size: 3vw !important;
   }
 }
 </style>
