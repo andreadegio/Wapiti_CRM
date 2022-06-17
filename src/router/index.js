@@ -212,7 +212,7 @@ function configRoutes() {
           component: Accessi_stat,
         },
         {
-          path: "/Statistiche/:portale",
+          path: "Statistiche/:portale",
           name: "Statistiche",
           props: true,
           component: Statistiche,
@@ -275,6 +275,15 @@ router.beforeEach((to, from, next) => {
 
 router.onError((error) => {
     console.log("Errore di caricamento " + error.message); 
+    const targetPath = router.history.pending.fullPath;
+    console.log("target path " + targetPath);
+    // router.replace(targetPath);
+    // window.location.reload();
+    // router.push("Dashboard");
+    history.replaceState("", "", targetPath);
+    router.replace(targetPath);
+    // router.push(targetPath);
+    console.log("history replace");
 });
 
 export default router;

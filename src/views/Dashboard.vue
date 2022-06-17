@@ -49,9 +49,12 @@
       <CCol sm="10" md="10">
         <div class="row">
           <div class="col-sm">
-            <CCardLink target="_self" @click="conta_accesso('broker')">
+            <CCardLink
+              target="_self"
+              @click="conta_accesso('broker')"
+            >
               <CCard
-                class="text-center elevation-6 portali-btn"
+                class="text-center elevation-6 portali-btn grow"
                 body-wrapper
                 style="
                   height: 200px;
@@ -60,7 +63,7 @@
                   z-index: 0;
                   background-size: cover;
                 "
-                ><CCardTitle>
+                ><CCardTitle class="grow">
                   <span class="portali">Piattaforma</span>
                   <h1 class="pulsante_portali">ASSICURAZIONI</h1>
                 </CCardTitle>
@@ -70,7 +73,7 @@
           <div v-if="isRami" class="col-sm">
             <CCardLink @click="conta_accesso('rami')" target="_self">
               <CCard
-                class="text-center elevation-6 portali-btn"
+                class="text-center elevation-6 portali-btn grow"
                 body-wrapper
                 style="
                   height: 200px;
@@ -79,7 +82,7 @@
                   z-index: 0;
                   background-size: cover;
                 "
-                ><CCardTitle>
+                ><CCardTitle class="grow">
                   <span class="portali">Piattaforma</span>
                   <h1 class="pulsante_portali">PROFESSIONISTI</h1>
                 </CCardTitle>
@@ -89,7 +92,7 @@
           <div v-else class="col-sm">
             <CCardLink to="Comingsoon_rami2" target="_self">
               <CCard
-                class="text-center elevation-6 portali-btn"
+                class="text-center elevation-6 portali-btn grow"
                 body-wrapper
                 style="
                   height: 200px;
@@ -98,7 +101,7 @@
                   z-index: 0;
                   background-size: cover;
                 "
-                ><CCardTitle>
+                ><CCardTitle class="grow">
                   <span class="portali">Piattaforma</span>
                   <h1 class="pulsante_portali">PROFESSIONISTI</h1>
                 </CCardTitle>
@@ -108,7 +111,7 @@
           <div class="col-sm" v-if="!isEnergy">
             <CCardLink to="Comingsoon_gas" target="_self">
               <CCard
-                class="text-center elevation-6 portali-btn"
+                class="text-center elevation-6 portali-btn grow"
                 body-wrapper
                 style="
                   height: 200px;
@@ -117,7 +120,7 @@
                   z-index: 0;
                   background-size: cover;
                 "
-                ><CCardTitle>
+                ><CCardTitle class="grow">
                   <span class="portali">Piattaforma</span>
                   <h1 class="pulsante_portali">GAS E LUCE</h1>
                 </CCardTitle>
@@ -127,7 +130,7 @@
           <div class="col-sm" v-else>
             <CCardLink @click="conta_accesso('energy')">
               <CCard
-                class="text-center elevation-6 portali-btn"
+                class="text-center elevation-6 portali-btn grow"
                 body-wrapper
                 style="
                   height: 200px;
@@ -136,7 +139,7 @@
                   z-index: 0;
                   background-size: cover;
                 "
-                ><CCardTitle>
+                ><CCardTitle class="grow">
                   <span class="portali">Piattaforma</span>
                   <h1 class="pulsante_portali">GAS E LUCE</h1>
                 </CCardTitle>
@@ -428,4 +431,11 @@ hr:after {
 .mfs-2 .close {
   margin-left: 20rem !important;
 }
+.grow {
+  transition: all 0.2s ease-in-out;
+}
+.grow:hover {
+  transform: scale(1.1);
+}
+
 </style>

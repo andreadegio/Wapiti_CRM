@@ -55,7 +55,7 @@
           <CNavItem
             class="grow"
             v-else
-            :to="{ path: '/Statistiche', params: { portale: 'broker'}}"
+            :to="{ path: '/Statistiche/broker'}"
             target="_self"
             ><i class="far fa-chart-bar"></i> Statistiche</CNavItem
           >
