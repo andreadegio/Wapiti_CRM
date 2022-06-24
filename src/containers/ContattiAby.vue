@@ -7,9 +7,9 @@
       style="z-index: 30"
       size="lg"
     >
-      <template #header style="background-color: #1f4b6b !important">
-        <strong class="h4" style="text-transform: uppercase"
-          >Recapiti per {{ dati_modale.descrizione }}</strong
+      <template #header style="background-color: #1f4b6b !important" >
+        <strong class="h4" style="text-transform: uppercase" v-if="dati_modale.descrizione"
+          >Recapiti per {{ dati_modale.descrizione[0] }}</strong
         >
         <CButton class="close" @click="modale_contatto = false">
           <span aria-hidden="true">&times;</span>
@@ -21,9 +21,9 @@
             <CRow class="justify-content-center">
               <CCol md="11" class="p-0">
                 <CCard style="border: 0px">
-                  <CCardBody>
-                    <div class="py-2 text-center titolo_recapito">
-                      {{ dati_modale.descrizione }}
+                  <CCardBody v-if="dati_modale.descrizione">
+                    <div class="py-2 text-center titolo_recapito" v-if="dati_modale.descrizione">
+                     {{ dati_modale.descrizione[0] }}<br/> <small v-if="dati_modale.descrizione.length > 1"> ({{dati_modale.descrizione[1]}} </small>
                     </div>
                     <p class="text-muted"></p>
                     <div
@@ -69,7 +69,7 @@
                                 invia_contatto(
                                   inputTelefono,
                                   dati_modale.mailForm,
-                                  dati_modale.descrizione
+                                  dati_modale.descrizione[0]
                                 )
                               "
                               style="color: white"
@@ -202,7 +202,7 @@ export default {
   watch: {
     recapitiParent: function (newVal) {
       // console.log(JSON.stringify(newVal));
-      console.log("parametro nel watch" + newVal);
+      // console.log("parametro nel watch" + newVal);
       this.recapiti = newVal;
     },
   },
@@ -286,7 +286,7 @@ export default {
       let Mail = this.recapiti[index].Area.Email.split(";");
       // console.log(Mail);
       this.dati_modale = {
-        descrizione: this.recapiti[index].Area.DescrizioneArea,
+        descrizione: this.recapiti[index].Area.DescrizioneArea.split("("),
         mail: Mail,
         telefono: this.recapiti[index].Area.Telefono.NrTelefono,
         orariTelefonoMattina: this.recapiti[index].Area.Telefono.OrariMattina,
@@ -302,6 +302,7 @@ export default {
           this.recapiti[index].Area.Telefono
             .DestinatarioDelCliccaPerEssereRichiamato,
       };
+      // console.log(this.dati_modale.descrizione.length);
       // console.log(index);
     },
   },
