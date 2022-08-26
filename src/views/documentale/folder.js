@@ -1,4 +1,23 @@
 //  Struttura del documentale
+const intermediari_list =[
+  {
+    nome: "INTERMEDIARI EMITTENTI",
+    slug: "INTERMEDIARI EMITTENTI",
+    tipo: "folder",
+    ico: "edit",
+    subFolder: false,
+    visible: "all"
+  },
+  {
+    nome: "INTERMEDIARI PROPONENTI",
+    slug: "INTERMEDIARI PROPONENTI",
+    tipo: "folder",
+    ico: "edit",
+    subFolder: false,
+    visible: "admin",
+  },
+];
+
 
 const documenti_list = [
   {
@@ -33,7 +52,7 @@ const documenti_list = [
 
 const folder_list = [
   {
-    nome: "SET INFORMATIVI SETTORI 1 E 2",
+    nome: "CATALOGO PRODOTTI AUTO",
     slug: "SETTORI 1 E 2",
     tipo: "folder",
     ico: "car",
@@ -68,7 +87,7 @@ const folder_list = [
   },
 
   {
-    nome: "SET INFORMATIVI SETTORI 3 E 4",
+    nome: "CATALOGO PRODOTTI NON AUTO",
     slug: "RAMI",
     tipo: "folder",
     childs: [],
@@ -84,4 +103,4 @@ const folder_list = [
   // },
 ];
 
-export { folder_list, documenti_list };
+export { folder_list, documenti_list, intermediari_list };

@@ -14,10 +14,40 @@
       <VisualizzaDocumento />
 
       <CRow id="RowExplorer" class="min-vh-100">
-        <!-- <CCol md="1"> </CCol> -->
-
         <!-- colonna file manager -->
         <CCol class="file_manager" md="4">
+          <!-- Intermediari Emittenti e Proponenti -->
+          <div
+            v-for="folder in intermediari_list"
+            :key="folder.slug"
+            class="folder parent pt-0 pl-2"
+          >
+            <span v-if="folder.visible == 'admin' && admin"
+              @click="
+                call_folder_list(folder);
+                dove_sono = folder.slug;
+                color = '';
+              "
+              style="white-space: nowrap"
+              class="icon_folder h4"
+              :class="{ highlight: dove_sono == folder.slug }"
+            >
+              {{ folder.nome }}</span
+            >
+            <span v-if="folder.visible == 'all'"
+              @click="
+                call_folder_list(folder);
+                dove_sono = folder.slug;
+                color = '';
+              "
+              style="white-space: nowrap"
+              class="icon_folder h4"
+              :class="{ highlight: dove_sono == folder.slug }"
+            >
+              {{ folder.nome }}</span
+            >
+         
+          </div>
           <!-- Documenti Broker -->
           <div
             v-for="folder in documenti_list"
@@ -132,11 +162,7 @@
         </CCol>
 
         <!-- colonna centrale elenco file browser -->
-        <CCol
-          md="8"
-          
-          :style="{ 'background-color': color }"
-        >
+        <CCol md="8" :style="{ 'background-color': color }">
           <div>
             <!-- <span class="h2"> Documenti</span><br /> -->
             <!-- breadcrumbs -->
@@ -321,7 +347,7 @@
                 id="int_table"
                 ref="tabella_doc"
                 :items="files"
-                :fields="fields_INTERMEDIARIO"
+                :fields="fields_DOCUMENTI"
                 hover
                 striped
                 :noItemsView="{ noItems: ' ' }"
@@ -512,12 +538,27 @@
 </template>
 <script>
 import axios from "axios";
-import { folder_list, documenti_list } from "./folder";
+import { folder_list, documenti_list, intermediari_list } from "./folder";
 
 import VisualizzaDocumento from "../../containers/VisualizzaDocumento";
 
 // NOMI DELLE COLONNE DELLA TABELLA PER INTERMEDIARIO
-const fields_INTERMEDIARIO = [
+const fields_DOCUMENTI = [
+  {
+    key: "Descrizione",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Descrizione",
+  },
+  {
+    key: "visualizza",
+    label: "Fascicolo  Informativo",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+];
+// NOMI COLONNE PER GLI INTERMEDIARI EMITTENTI E PROPONENTI
+const fields_INTERMEDIARI = [
   {
     key: "Descrizione",
     _style: "font-weight: bold; text-align:center;",
@@ -603,21 +644,21 @@ const fields_SERVIZI = [
   },
 ];
 // NOMI DELLE COLONNE PER LA TABELLA SETTORE12 (ELENCO SUBFOLDER)
-const fields_SETTORE12 = [
-  {
-    key: "Nome",
-    _style: "font-weight: bold; text-align: center;",
-    label: "Tipologia",
-  },
+// const fields_SETTORE12 = [
+//   {
+//     key: "Nome",
+//     _style: "font-weight: bold; text-align: center;",
+//     label: "Tipologia",
+//   },
 
-  {
-    key: "visualizza",
-    label: "Set Informativo",
-    sorter: false,
-    filter: false,
-    _style: "text-align: center;",
-  },
-];
+//   {
+//     key: "visualizza",
+//     label: "Set Informativo",
+//     sorter: false,
+//     filter: false,
+//     _style: "text-align: center;",
+//   },
+// ];
 
 export default {
   name: "Documentale",
@@ -627,10 +668,12 @@ export default {
   },
   data() {
     return {
+      admin: JSON.parse(localStorage.getItem("chisono_data")).Is_Sede,
       viewFile: false, // Usato per mostrare la modale con l'antprima del file
       file_name: "", // Usato per passare l'url alla preview
       folder_list, // Albero dei documenti (veicoli->rca->altre garanzie / rami / energia)
       documenti_list, // Documenti intermediario e precontrattuale
+      intermediari_list, // Intermediari Emittenti e Proponenti
       vuoto: false, // Usato per controllare il messaggio "Non ci sono documenti"
       settore: "", // utilizzato per assegnare il data table
       subfolder: "", // utilizzato per il breadcrumb delle cartelle di secondo livello
@@ -645,8 +688,9 @@ export default {
       fields_RCA,
       fields_ALTRE,
       fields_SERVIZI,
-      fields_INTERMEDIARIO,
-      fields_SETTORE12,
+      fields_DOCUMENTI,
+      fields_INTERMEDIARI,
+      // fields_SETTORE12,
 
       altre_gar: [],
       altri_servizi: [],
@@ -662,9 +706,7 @@ export default {
     };
   },
   mounted() {
-    // console.log('documentale ' + this.$custom_json);
-    // console.log("caricato");
-    // elenco file ottenuto dalle chiamate
+
     this.documenti_list.forEach((item) =>
       item.childs.forEach((link) =>
         this.array_link.push({
@@ -686,7 +728,7 @@ export default {
     this.array_link.forEach((item) =>
       this.recupera_documentale(item.SLUG, item.URL)
     );
-    // console.log(this.array_link);
+ 
   },
   methods: {
     reset_pagination() {
