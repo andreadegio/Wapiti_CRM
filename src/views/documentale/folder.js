@@ -19,10 +19,11 @@ const intermediari_list = [
     visible: "admin",
   },
   {
-    nome: "UNITA OPERATIVE",
+    nome: "UNITA OPERATIVE - Sez. E",
     slug: "UNITA OPERATIVE",
     tipo: "folder",
     ico: "store",
+    URL:"",
     subFolder: false,
     visible: "admin",
   },  

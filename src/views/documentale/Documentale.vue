@@ -7,15 +7,16 @@
         0% 0%;
     "
   >
-    <CModal title="Dettaglio Proponente" color="warning" :show.sync="warningModal">
+    <CModal
+      title="Dettaglio Proponente"
+      color="warning"
+      :show.sync="warningModal"
+    >
       <p class="text-center">IN COSTRUZIONE...</p>
       <template #footer>
-       <CButton
-       variant="outline"
-       color="info"
-       @click="warningModal=false">
-       Chiudi
-       </CButton>
+        <CButton variant="outline" color="info" @click="warningModal = false">
+          Chiudi
+        </CButton>
       </template>
     </CModal>
     <div>
@@ -31,7 +32,7 @@
           <div
             v-for="folder in intermediari_list"
             :key="folder.slug"
-            class="folder parent pt-0 pl-2"
+            class="folder parent pt-0 pl-2 py-1" style="border-bottom: 1px solid lightgray"
           >
             <span
               v-if="folder.visible == 'admin' && admin"
@@ -64,7 +65,7 @@
           <div
             v-for="folder in documenti_list"
             :key="folder.slug"
-            class="folder parent pt-0 pl-2"
+            class="folder parent pt-0 pl-2 py-1" style="border-bottom: 1px solid lightgray"
           >
             <span
               @click="
@@ -101,7 +102,7 @@
           <div
             v-for="folder in folder_list"
             :key="folder.slug"
-            class="folder parent pt-0 pl-2"
+            class="folder parent pt-0 pl-2 py-1" style="border-bottom: 1px solid lightgray"
           >
             <span
               @click="
@@ -376,10 +377,14 @@
               </CDataTable>
             </div>
             <!-- DATA TABLE PER EMITTENTI -->
-            <div class="pt-5" v-if="settore === 'INTERMEDIARI EMITTENTI'">
-              <p class="text-right">
-                Totale Intermediari Emittenti: <b>{{ files.length }}</b>
-              </p>
+            <div class="pt-3" v-if="settore === 'INTERMEDIARI EMITTENTI'">
+              <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4 text-center"></div>
+                <div class="col-sm-4 text-right">
+                  Totale Intermediari Emittenti: <b>{{ files.length }}</b>
+                </div>
+              </div>
               <CDataTable
                 id="emittenti_table"
                 :items="files"
@@ -387,6 +392,7 @@
                 ref="tabella_doc"
                 sorter
                 hover
+                :itemsPerPage="20"
                 pagination
                 :table-filter="{
                   placeholder: 'Ricerca...',
@@ -439,7 +445,7 @@
               </CDataTable>
             </div>
             <!-- DATA TABLE PER PROPONENTI -->
-            <div class="pt-5" v-if="settore === 'INTERMEDIARI PROPONENTI'">
+            <div class="pt-1" v-if="settore === 'INTERMEDIARI PROPONENTI'">
               <p class="text-right">
                 Totale Intermediari Proponenti: <b>{{ files.length }}</b>
               </p>
@@ -450,6 +456,7 @@
                 ref="tabella_doc"
                 sorter
                 hover
+                :itemsPerPage="20"
                 pagination
                 :table-filter="{
                   placeholder: 'Ricerca...',
@@ -477,7 +484,8 @@
                       size="sm"
                       @click="
                         preview(item.POG, 'INTERMEDIARIO');
-                        titoloModale('PROPONENTE', item.Descrizione, 'POG');"
+                        titoloModale('PROPONENTE', item.Descrizione, 'POG');
+                      "
                     >
                       Visualizza
                     </CButton>
@@ -1051,28 +1059,30 @@ export default {
     },
 
     async recupera_documentale(SLUG, URL) {
-      var elenco = [];
-      var config = {
-        method: "post",
-        url: this.$custom_json.servizi_broker + URL,
-        headers: {
-          userID: localStorage.getItem("userID"),
-          anagraficaID: localStorage.getItem("anagraficaID"),
-          unitaoperativaID: localStorage.getItem("unitaoperativaID"),
-        },
-      };
-      await axios(config)
-        .then(function (response) {
-          elenco = response.data;
-        })
-        .catch(function (error) {
-          elenco = [];
-          console.log(error);
-        });
-      for (var i in this.array_link) {
-        if (this.array_link[i].SLUG == SLUG) {
-          this.array_link[i].FILE = elenco;
-          break;
+      if (URL) {
+        var elenco = [];
+        var config = {
+          method: "post",
+          url: this.$custom_json.servizi_broker + URL,
+          headers: {
+            userID: localStorage.getItem("userID"),
+            anagraficaID: localStorage.getItem("anagraficaID"),
+            unitaoperativaID: localStorage.getItem("unitaoperativaID"),
+          },
+        };
+        await axios(config)
+          .then(function (response) {
+            elenco = response.data;
+          })
+          .catch(function (error) {
+            elenco = [];
+            console.log(error);
+          });
+        for (var i in this.array_link) {
+          if (this.array_link[i].SLUG == SLUG) {
+            this.array_link[i].FILE = elenco;
+            break;
+          }
         }
       }
       // console.log(elenco);

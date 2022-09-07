@@ -4,12 +4,12 @@
       class="container mt-3"
       style="background-color: white; border-radius: 5px"
     >
-      <div class="text-center">
-        <h1>Intermediario emittente {{ intermediario.RagioneSociale }}</h1>
-        <h4>Elenco prodotti attivi</h4>
-        <div class="cover_box mb-3"></div>
+      <div class="text-center pb-2">
+        <h1>{{ intermediario.RagioneSociale }}</h1>
+        <h4>({{ intermediario.Descrizione }})</h4>
       </div>
-      <div class="pt-1">
+      <div class="pt-4">
+        <div id="titolo_tabella" class="text-center"><h4>Elenco prodotti attivi</h4></div>
         <CDataTable
           id="prodotti_table"
           :items="prodotti"
