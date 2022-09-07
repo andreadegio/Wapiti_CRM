@@ -9,7 +9,9 @@
         <h4>({{ intermediario.Descrizione }})</h4>
       </div>
       <div class="pt-4">
-        <div id="titolo_tabella" class="text-center"><h4>Elenco prodotti attivi</h4></div>
+        <div id="titolo_tabella" class="text-center">
+          <h4>Elenco prodotti attivi</h4>
+        </div>
         <CDataTable
           id="prodotti_table"
           :items="prodotti"
@@ -17,13 +19,14 @@
           ref="tabella_prod"
           sorter
           hover
+          border
           pagination
           :table-filter="{
             placeholder: 'Ricerca...',
             label: 'Ricerca:',
           }"
           striped
-          itemsPerPage="20"
+          :itemsPerPage="20"
           :items-per-page-select="{ label: 'Risultati per pagina' }"
           :noItemsView="{ noItems: ' ' }"
         >
@@ -40,7 +43,7 @@
           color="primary"
           class="ml-2"
           variant="outline"
-          :to="{ path: '/Documentale' }"
+          :to="{ name: 'Documentale', params: { origine: 'Emittenti' } }"
         >
           <i class="fas fa-chevron-left"></i> Indietro</CButton
         >
@@ -58,7 +61,7 @@ import axios from "axios";
 const fields_PRODOTTI = [
   {
     key: "Compagnia",
-    _style: "font-weight: bold; text-align:left;",
+    _style: "font-weight: bold; text-align:center;",
     label: "Compagnia",
   },
   {
@@ -85,7 +88,7 @@ const fields_PRODOTTI = [
 export default {
   name: "DettagliIntermediario",
   components: {},
-  props: ["intermediario"],
+  props: ["intermediario", "elenco"],
   data() {
     return {
       prodotti: [],
@@ -95,11 +98,12 @@ export default {
 
   mounted() {
     this.recupera_prodotti(this.intermediario.IdAnagrafica);
+    localStorage.setItem("elenco_origine", JSON.stringify(this.elenco));
   },
   methods: {
     async recupera_prodotti(idIntermediario) {
       // Chiamata per recuperare i prodotti dell'intermediario
-      console.log("chiamo per l'id" + idIntermediario);
+      // console.log("chiamo per l'id" + idIntermediario);
       try {
         var config = {
           method: "post",
@@ -134,6 +138,10 @@ export default {
   max-width: none !important;
 
   background-image: var(--urlImg);
+}
+
+.btn-outline-primary:hover{
+  color:#fff !important;
 }
 </style>
 

@@ -29,43 +29,55 @@
         <!-- colonna file manager -->
         <CCol class="file_manager" md="3">
           <!-- Intermediari Emittenti e Proponenti -->
+
           <div
             v-for="folder in intermediari_list"
             :key="folder.slug"
-            class="folder parent pt-0 pl-2 py-1" style="border-bottom: 1px solid lightgray"
+            class="folder parent pt-0 pl-2"
           >
-            <span
+            <div
+              class="py-1"
+              style="border-bottom: 1px solid lightgray"
               v-if="folder.visible == 'admin' && admin"
-              @click="
-                call_folder_list(folder);
-                dove_sono = folder.slug;
-                color = 'white';
-              "
-              style="white-space: nowrap"
-              class="icon_folder h4"
-              :class="{ highlight: dove_sono == folder.slug }"
             >
-              {{ folder.nome }}</span
-            >
-            <span
+              <span
+                @click="
+                  call_folder_list(folder);
+                  dove_sono = folder.slug;
+                  color = 'white';
+                "
+                style="white-space: nowrap"
+                class="icon_folder h4"
+                :class="{ highlight: dove_sono == folder.slug }"
+              >
+                {{ folder.nome }}</span
+              >
+            </div>
+            <div
+              class="py-1"
+              style="border-bottom: 1px solid lightgray"
               v-if="folder.visible == 'all'"
-              @click="
-                call_folder_list(folder);
-                dove_sono = folder.slug;
-                color = 'white';
-              "
-              style="white-space: nowrap"
-              class="icon_folder h4"
-              :class="{ highlight: dove_sono == folder.slug }"
             >
-              {{ folder.nome }}</span
-            >
+              <span
+                @click="
+                  call_folder_list(folder);
+                  dove_sono = folder.slug;
+                  color = 'white';
+                "
+                style="white-space: nowrap"
+                class="icon_folder h4"
+                :class="{ highlight: dove_sono == folder.slug }"
+              >
+                {{ folder.nome }}</span
+              >
+            </div>
           </div>
           <!-- Documenti Broker -->
           <div
             v-for="folder in documenti_list"
             :key="folder.slug"
-            class="folder parent pt-0 pl-2 py-1" style="border-bottom: 1px solid lightgray"
+            class="folder parent pt-0 pl-2 py-1"
+            style="border-bottom: 1px solid lightgray"
           >
             <span
               @click="
@@ -102,7 +114,8 @@
           <div
             v-for="folder in folder_list"
             :key="folder.slug"
-            class="folder parent pt-0 pl-2 py-1" style="border-bottom: 1px solid lightgray"
+            class="folder parent pt-0 pl-2 py-1"
+            style="border-bottom: 1px solid lightgray"
           >
             <span
               @click="
@@ -354,6 +367,7 @@
                 :items="files"
                 :fields="fields_DOCUMENTI"
                 hover
+                border
                 striped
                 :noItemsView="{ noItems: ' ' }"
               >
@@ -392,6 +406,7 @@
                 ref="tabella_doc"
                 sorter
                 hover
+                border
                 :itemsPerPage="20"
                 pagination
                 :table-filter="{
@@ -402,11 +417,27 @@
                 :items-per-page-select="{ label: 'Risultati per pagina' }"
                 :noItemsView="{ noItems: ' ' }"
               >
-                <template #PartitaIva="{ item }">
+                <template #RUI="{ item }">
                   <td class="text-center">{{ item.PartitaIva }}</td>
                 </template>
                 <template #Quanti_prodotti_in_uso="{ item }">
-                  <td class="text-center">{{ item.Quanti_prodotti_in_uso }}</td>
+                  <td class="text-center">
+                    <router-link
+                      :to="{
+                        name: 'DettagliIntermediario',
+                        params: {
+                          intermediario: item,
+                          elenco: files,
+                        },
+                      }"
+                    >
+                      <CButton size="sm" color="primary" variant="outline"
+                      v-c-tooltip="'Clicca per visualizzare i Prodotti in uso'"> 
+                        {{ item.Quanti_prodotti_in_uso }} {{item.Quanti_prodotti_in_uso==1 ? "prodotto":"prodotti"}} in uso
+                      </CButton>
+                    </router-link>
+                    
+                    </td>
                 </template>
                 <template #POG="{ item }">
                   <td class="py-2 text-center">
@@ -433,6 +464,7 @@
                         name: 'DettagliIntermediario',
                         params: {
                           intermediario: item,
+                          elenco: files,
                         },
                       }"
                     >
@@ -456,6 +488,7 @@
                 ref="tabella_doc"
                 sorter
                 hover
+                border
                 :itemsPerPage="20"
                 pagination
                 :table-filter="{
@@ -466,7 +499,7 @@
                 :items-per-page-select="{ label: 'Risultati per pagina' }"
                 :noItemsView="{ noItems: ' ' }"
               >
-                <template #PartitaIva="{ item }">
+                <template #RUI="{ item }">
                   <td class="text-center">{{ item.PartitaIva }}</td>
                 </template>
                 <template #Quante_unita_operative_attive="{ item }">
@@ -523,6 +556,7 @@
                 ref="tabella_doc"
                 sorter
                 hover
+                border
                 pagination
                 :table-filter="{
                   placeholder: 'Ricerca...',
@@ -581,6 +615,7 @@
                 :fields="fields_SERVIZI"
                 sorter
                 hover
+                border
                 pagination
                 :column-filter-value="{ Tipo: filtro_gar }"
                 :table-filter="{
@@ -624,6 +659,7 @@
                 sorter
                 hover
                 pagination
+                border
                 :column-filter-value="{ Tipo: filtro_gar }"
                 :table-filter="{
                   placeholder: 'Ricerca...',
@@ -708,14 +744,14 @@ const fields_INTERMEDIARI_EMITTENTI = [
     label: "Ragione Sociale",
   },
   {
-    key: "PartitaIva",
+    key: "RUI",
     _style: "font-weight: bold; text-align:center;",
-    label: "Partita IVA",
+    label: "RUI",
   },
   {
     key: "Quanti_prodotti_in_uso",
     _style: "font-weight: bold; text-align:center;",
-    label: "Prodotti in uso",
+    label: "Elenco Prodotti",
   },
   {
     key: "POG",
@@ -739,9 +775,9 @@ const fields_INTERMEDIARI_PROPONENTI = [
     label: "Ragione Sociale",
   },
   {
-    key: "PartitaIva",
+    key: "RUI",
     _style: "font-weight: bold; text-align:center;",
-    label: "Partita IVA",
+    label: "RUI",
   },
   {
     key: "Quante_unita_operative_attive",
@@ -913,6 +949,41 @@ export default {
     this.array_link.forEach((item) =>
       this.recupera_documentale(item.SLUG, item.URL)
     );
+    if (this.$route.params.origine == "Emittenti") {
+      let origine = {
+        nome: "INTERMEDIARI EMITTENTI",
+        slug: "INTERMEDIARI EMITTENTI",
+        tipo: "folder",
+        ico: "edit",
+        URL: "Intermediari_Emittenti",
+        subFolder: false,
+        visible: "all",
+      };
+      this.settore = origine.slug;
+      this.dove_sono = origine.slug;
+      
+      this.breadcrumbs = []; // per popolare il Breadcrumbs
+      this.breadcrumbs.push([origine.nome, origine.ico]);
+      this.files =JSON.parse(localStorage.getItem("elenco_origine"));
+        this.color="white";
+
+      
+
+      // // this.call_folder_list(origine);
+      // // this.recupera_documentale(origine.slug, origine.URL);
+      // this.dove_sono = origine.slug;
+      // this.settore = origine.slug; // Per identificare il data-table
+      // for (var i in this.array_link) {
+      //   if (this.array_link[i].SLUG == this.dove_sono) {
+      //     console.log("arraylink " + this.array_link[0].FILE);
+      //     this.files = this.array_link[i].FILE;
+      //     break;
+      //   }
+      // }
+      // console.log("files " + this.files);
+
+      // this.color = "white";
+    }
   },
   methods: {
     reset_pagination() {
@@ -1102,6 +1173,7 @@ export default {
       }
 
       this.files = elenco;
+      // console.log("trovato");
       if (this.files.length <= 0) {
         this.vuoto = true; // Variabile usata per il messaggio "non ci sono documenti"
         this.color = "";
