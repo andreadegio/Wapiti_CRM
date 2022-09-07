@@ -1,23 +1,24 @@
 //  Struttura del documentale
-const intermediari_list =[
+const intermediari_list = [
   {
     nome: "INTERMEDIARI EMITTENTI",
     slug: "INTERMEDIARI EMITTENTI",
     tipo: "folder",
     ico: "edit",
+    URL: "Intermediari_Emittenti",
     subFolder: false,
-    visible: "all"
+    visible: "all",
   },
   {
     nome: "INTERMEDIARI PROPONENTI",
     slug: "INTERMEDIARI PROPONENTI",
     tipo: "folder",
     ico: "edit",
+    URL: "Intermediari_Proponenti",
     subFolder: false,
     visible: "admin",
   },
 ];
-
 
 const documenti_list = [
   {
@@ -46,7 +47,6 @@ const documenti_list = [
         subFolder: false,
       },
     ],
-    
   },
 ];
 

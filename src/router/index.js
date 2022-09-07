@@ -17,6 +17,10 @@ const GestioneNewsBroker = () => import("@/views/news/GestioneNewsBroker");
 
 // Views - Documentale
 const Documentale = () => import("@/views/documentale/Documentale");
+const DettagliIntermediario = () =>
+  import(
+    /* webpackChunkName: "Documentale" */ "@/views/documentale/DettagliIntermediario"
+  );
 
 // Views - Formazione
 const AdminFormazione = () =>
@@ -113,6 +117,12 @@ function configRoutes() {
           path: "/Documentale",
           name: "Documentale",
           component: Documentale,
+        },
+        {
+          path: "/Documentale/Intermediario/",
+          name: "DettagliIntermediario",
+          props: true,
+          component: DettagliIntermediario,
         },
         {
           path: "/StatistichePortali",

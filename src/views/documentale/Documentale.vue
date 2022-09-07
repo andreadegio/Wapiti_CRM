@@ -7,6 +7,17 @@
         0% 0%;
     "
   >
+    <CModal title="Dettaglio Proponente" color="warning" :show.sync="warningModal">
+      <p class="text-center">IN COSTRUZIONE...</p>
+      <template #footer>
+       <CButton
+       variant="outline"
+       color="info"
+       @click="warningModal=false">
+       Chiudi
+       </CButton>
+      </template>
+    </CModal>
     <div>
       <CRow class="pl-3 mt-2" style="justify-content: center">
         <!-- <h1 class="mb-3 titolo_sezione">Documentale</h1> -->
@@ -15,18 +26,19 @@
 
       <CRow id="RowExplorer" class="min-vh-100">
         <!-- colonna file manager -->
-        <CCol class="file_manager" md="4">
+        <CCol class="file_manager" md="3">
           <!-- Intermediari Emittenti e Proponenti -->
           <div
             v-for="folder in intermediari_list"
             :key="folder.slug"
             class="folder parent pt-0 pl-2"
           >
-            <span v-if="folder.visible == 'admin' && admin"
+            <span
+              v-if="folder.visible == 'admin' && admin"
               @click="
                 call_folder_list(folder);
                 dove_sono = folder.slug;
-                color = '';
+                color = 'white';
               "
               style="white-space: nowrap"
               class="icon_folder h4"
@@ -34,11 +46,12 @@
             >
               {{ folder.nome }}</span
             >
-            <span v-if="folder.visible == 'all'"
+            <span
+              v-if="folder.visible == 'all'"
               @click="
                 call_folder_list(folder);
                 dove_sono = folder.slug;
-                color = '';
+                color = 'white';
               "
               style="white-space: nowrap"
               class="icon_folder h4"
@@ -46,7 +59,6 @@
             >
               {{ folder.nome }}</span
             >
-         
           </div>
           <!-- Documenti Broker -->
           <div
@@ -162,9 +174,8 @@
         </CCol>
 
         <!-- colonna centrale elenco file browser -->
-        <CCol md="8" :style="{ 'background-color': color }">
+        <CCol md="9" :style="{ 'background-color': color }">
           <div>
-            <!-- <span class="h2"> Documenti</span><br /> -->
             <!-- breadcrumbs -->
             <div v-if="breadcrumbs.length > 0" id="breadcrumbs" class="pt-3">
               <span style="border: 1px solid; border-radius: 3px; padding: 2px">
@@ -189,15 +200,7 @@
                 style="border: 1px solid; border-radius: 3px; padding: 2px"
                 >{{ breadcrumbs[2][0] }}</span
               >
-              <!-- <span v-if="filtro_gar !== ''" style="padding: 2px"
-              ><i class="fas fa-chevron-right"></i>
-              <span
-                style="border: 1px solid; border-radius: 3px; padding: 2px"
-                >{{ filtro_gar }}</span
-              ></span
-            > -->
               <div class="pt-5" v-if="settore == 'DOCUMENTI'">
-                <!-- <div class="pt-5 h2"> -->
                 <span>
                   <div
                     v-for="folder in documenti_list"
@@ -262,6 +265,7 @@
                   </div>
                 </span>
               </div>
+              <!-- SETTORI 1 E 2 -->
               <div class="pt-5" v-if="settore == 'SETTORI 1 E 2'">
                 <span>
                   <div
@@ -335,7 +339,7 @@
             <div v-show="vuoto" class="pt-5 h4 text-center">
               - Al momento non ci sono documenti disponibili -
             </div>
-            <!-- DATA TABLE PER INTERMEDIARIO -->
+            <!-- DATA TABLE PER DOCUMENTI INTERMEDIARIO -->
             <div
               class="pt-5"
               v-if="
@@ -367,6 +371,137 @@
                     >
                       Visualizza
                     </CButton>
+                  </td>
+                </template>
+              </CDataTable>
+            </div>
+            <!-- DATA TABLE PER EMITTENTI -->
+            <div class="pt-5" v-if="settore === 'INTERMEDIARI EMITTENTI'">
+              <p class="text-right">
+                Totale Intermediari Emittenti: <b>{{ files.length }}</b>
+              </p>
+              <CDataTable
+                id="emittenti_table"
+                :items="files"
+                :fields="fields_INTERMEDIARI_EMITTENTI"
+                ref="tabella_doc"
+                sorter
+                hover
+                pagination
+                :table-filter="{
+                  placeholder: 'Ricerca...',
+                  label: 'Ricerca:',
+                }"
+                striped
+                :items-per-page-select="{ label: 'Risultati per pagina' }"
+                :noItemsView="{ noItems: ' ' }"
+              >
+                <template #PartitaIva="{ item }">
+                  <td class="text-center">{{ item.PartitaIva }}</td>
+                </template>
+                <template #Quanti_prodotti_in_uso="{ item }">
+                  <td class="text-center">{{ item.Quanti_prodotti_in_uso }}</td>
+                </template>
+                <template #POG="{ item }">
+                  <td class="py-2 text-center">
+                    <CButton
+                      v-if="item.POG !== ''"
+                      color="primary"
+                      variant="outline"
+                      square
+                      size="sm"
+                      @click="
+                        preview(item.POG, 'INTERMEDIARIO');
+                        titoloModale('EMITTENTE', item.Descrizione, 'POG');
+                      "
+                    >
+                      Visualizza
+                    </CButton>
+                  </td>
+                </template>
+
+                <template #Dettagli="{ item }">
+                  <td class="py-2 text-center">
+                    <router-link
+                      :to="{
+                        name: 'DettagliIntermediario',
+                        params: {
+                          intermediario: item,
+                        },
+                      }"
+                    >
+                      <CButton size="sm" color="primary" variant="outline">
+                        Mostra
+                      </CButton>
+                    </router-link>
+                  </td>
+                </template>
+              </CDataTable>
+            </div>
+            <!-- DATA TABLE PER PROPONENTI -->
+            <div class="pt-5" v-if="settore === 'INTERMEDIARI PROPONENTI'">
+              <p class="text-right">
+                Totale Intermediari Proponenti: <b>{{ files.length }}</b>
+              </p>
+              <CDataTable
+                id="proponenti_table"
+                :items="files"
+                :fields="fields_INTERMEDIARI_PROPONENTI"
+                ref="tabella_doc"
+                sorter
+                hover
+                pagination
+                :table-filter="{
+                  placeholder: 'Ricerca...',
+                  label: 'Ricerca:',
+                }"
+                striped
+                :items-per-page-select="{ label: 'Risultati per pagina' }"
+                :noItemsView="{ noItems: ' ' }"
+              >
+                <template #PartitaIva="{ item }">
+                  <td class="text-center">{{ item.PartitaIva }}</td>
+                </template>
+                <template #Quante_unita_operative_attive="{ item }">
+                  <td class="text-center">
+                    {{ item.Quante_unita_operative_attive }}
+                  </td>
+                </template>
+                <template #POG="{ item }">
+                  <td class="py-2 text-center">
+                    <CButton
+                      v-if="item.POG !== ''"
+                      color="primary"
+                      variant="outline"
+                      square
+                      size="sm"
+                      @click="
+                        preview(item.POG, 'INTERMEDIARIO');
+                        titoloModale('PROPONENTE', item.Descrizione, 'POG');"
+                    >
+                      Visualizza
+                    </CButton>
+                  </td>
+                </template>
+                <template #Dettagli>
+                  <td class="py-2 text-center">
+                    <!--  <router-link
+                      :to="{
+                        name: 'DettagliIntermediario',
+                        params: {
+                          intermediario: item,
+                        },
+                      }"
+                    > -->
+                    <CButton
+                      size="sm"
+                      color="primary"
+                      variant="outline"
+                      @click="warningModal = true"
+                    >
+                      Mostra
+                    </CButton>
+                    <!-- </router-link> -->
                   </td>
                 </template>
               </CDataTable>
@@ -542,7 +677,7 @@ import { folder_list, documenti_list, intermediari_list } from "./folder";
 
 import VisualizzaDocumento from "../../containers/VisualizzaDocumento";
 
-// NOMI DELLE COLONNE DELLA TABELLA PER INTERMEDIARIO
+// NOMI DELLE COLONNE DELLA TABELLA DOCUMENTI INTERMEDIARIO
 const fields_DOCUMENTI = [
   {
     key: "Descrizione",
@@ -558,15 +693,63 @@ const fields_DOCUMENTI = [
   },
 ];
 // NOMI COLONNE PER GLI INTERMEDIARI EMITTENTI E PROPONENTI
-const fields_INTERMEDIARI = [
+const fields_INTERMEDIARI_EMITTENTI = [
   {
-    key: "Descrizione",
+    key: "RagioneSociale",
     _style: "font-weight: bold; text-align:center;",
-    label: "Descrizione",
+    label: "Ragione Sociale",
   },
   {
-    key: "visualizza",
-    label: "Fascicolo  Informativo",
+    key: "PartitaIva",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Partita IVA",
+  },
+  {
+    key: "Quanti_prodotti_in_uso",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Prodotti in uso",
+  },
+  {
+    key: "POG",
+    label: "POG",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+  {
+    key: "Dettagli",
+    label: "Dettagli",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+];
+const fields_INTERMEDIARI_PROPONENTI = [
+  {
+    key: "RagioneSociale",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Ragione Sociale",
+  },
+  {
+    key: "PartitaIva",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Partita IVA",
+  },
+  {
+    key: "Quante_unita_operative_attive",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Unità Operative Attive",
+  },
+  {
+    key: "POG",
+    label: "POG",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+  {
+    key: "Dettagli",
+    label: "Dettagli",
     sorter: false,
     filter: false,
     _style: "text-align:center;",
@@ -643,22 +826,6 @@ const fields_SERVIZI = [
     _style: "text-align: center;",
   },
 ];
-// NOMI DELLE COLONNE PER LA TABELLA SETTORE12 (ELENCO SUBFOLDER)
-// const fields_SETTORE12 = [
-//   {
-//     key: "Nome",
-//     _style: "font-weight: bold; text-align: center;",
-//     label: "Tipologia",
-//   },
-
-//   {
-//     key: "visualizza",
-//     label: "Set Informativo",
-//     sorter: false,
-//     filter: false,
-//     _style: "text-align: center;",
-//   },
-// ];
 
 export default {
   name: "Documentale",
@@ -668,6 +835,7 @@ export default {
   },
   data() {
     return {
+      warningModal: false,
       admin: JSON.parse(localStorage.getItem("chisono_data")).Is_Sede,
       viewFile: false, // Usato per mostrare la modale con l'antprima del file
       file_name: "", // Usato per passare l'url alla preview
@@ -684,12 +852,12 @@ export default {
         return { ...item, id };
       }),
       dove_sono: undefined,
-
       fields_RCA,
       fields_ALTRE,
       fields_SERVIZI,
       fields_DOCUMENTI,
-      fields_INTERMEDIARI,
+      fields_INTERMEDIARI_EMITTENTI,
+      fields_INTERMEDIARI_PROPONENTI,
       // fields_SETTORE12,
 
       altre_gar: [],
@@ -701,12 +869,21 @@ export default {
       descrizione: null,
       tipoFile: null,
 
+      emittenti: [],
+      proponenti: [],
+
       color: "", // colore di sfondo documentale
       array_link: [], // array contenente l'elenco file per ciascuna cartella del documentale
     };
   },
   mounted() {
-
+    this.intermediari_list.forEach((item) =>
+      this.array_link.push({
+        ["SLUG"]: item.slug,
+        ["URL"]: item.URL,
+        ["FILE"]: [],
+      })
+    );
     this.documenti_list.forEach((item) =>
       item.childs.forEach((link) =>
         this.array_link.push({
@@ -728,7 +905,6 @@ export default {
     this.array_link.forEach((item) =>
       this.recupera_documentale(item.SLUG, item.URL)
     );
- 
   },
   methods: {
     reset_pagination() {
@@ -741,6 +917,7 @@ export default {
     },
 
     call_folder_list(folder) {
+      // console.log("colore "+ this.color);
       // Funzione chiamata dalle cartelle di primo livello (documenti intermediario, precontrattuale, ecc)
       //resetto la paginazione
       this.reset_pagination();
@@ -761,9 +938,8 @@ export default {
         this.load_documentale(folder.slug);
       } else {
         if (folder.subFolder == false) {
-          // console.log("vuoto");
           this.vuoto = true;
-          this.color = "";
+          // this.color = "";
         }
       }
     },
@@ -775,6 +951,7 @@ export default {
       this.reset_pagination();
       this.vuoto = false; // Inizializzo il messaggio "non ci sono file"
       this.color = "white";
+
       // Inizializzo le sottocartelle
       this.altre_gar = [];
       this.altri_servizi = [];
@@ -817,7 +994,7 @@ export default {
       } else {
         if (subfolder.subFolder == false) {
           this.vuoto = true;
-          this.color = "";
+          // this.color = "";
         }
       }
     },
