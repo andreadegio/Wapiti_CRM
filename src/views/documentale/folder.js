@@ -18,6 +18,14 @@ const intermediari_list = [
     subFolder: false,
     visible: "admin",
   },
+  {
+    nome: "UNITA OPERATIVE",
+    slug: "UNITA OPERATIVE",
+    tipo: "folder",
+    ico: "store",
+    subFolder: false,
+    visible: "admin",
+  },  
 ];
 
 const documenti_list = [
