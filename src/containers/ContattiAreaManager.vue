@@ -51,7 +51,7 @@
                           Attendere invio richiesta in corso...
                           <img src="img/message.gif" style="width: 5rem" />
                         </div>
-                        <div>
+                        <div v-if="!invio">
                           <p class="mb-0">
                             Oppure lascia il tuo numero e ti richiameremo noi
                           </p>
@@ -69,7 +69,7 @@
                             </div>
                             <CButton
                               @click="
-                                richiamami(
+                                invia_contatto(
                                   inputTelefono,
                                   modale_recapiti.Email,
                                   modale_recapiti.Descrizione
@@ -125,7 +125,7 @@
                       >
                         {{ modale_recapiti.Nome ? "Mail" : "Mandaci una mail" }}
                         <p class="p-0 m-0 mail">
-                          <a :href="'mailto:'">
+                          <a :href="'mailto:'+modale_recapiti.Email">
                             <p class="mail">{{ modale_recapiti.Email }}</p></a
                           >
                         </p>
@@ -250,7 +250,7 @@
   </div>
 </template>
 <script>
-// import axios from "axios";
+import axios from "axios";
 
 export default {
   name: "AreaManager",
@@ -331,59 +331,59 @@ export default {
     );
   },
   methods: {
-    // invia_contatto(telefono, mailReparto, settore) {
-    //   // console.log(telefono);
-    //   if (telefono) {
-    //     this.invio = true;
-    //     // chiamo il servizio per inviare la mail
-    //     this.user = JSON.parse(localStorage.getItem("chisono_data"));
-    //     // console.log("Utente:" + this.user.Nominativo);
-    //     // console.log("Ufficio" + this.user.UnitaOperativa);
-    //     // console.log("Telefono" + telefono);
-    //     // console.log("MailReparto" + mailReparto);
+    invia_contatto(telefono, mailReparto, settore) {
+      // console.log(telefono);
+      if (telefono) {
+        this.invio = true;
+        // chiamo il servizio per inviare la mail
+        this.user = JSON.parse(localStorage.getItem("chisono_data"));
+        // console.log("Utente:" + this.user.Nominativo);
+        // console.log("Ufficio" + this.user.UnitaOperativa);
+        // console.log("Telefono" + telefono);
+        // console.log("MailReparto" + mailReparto);
 
-    //     let params = {
-    //       Utente: this.user.Nominativo,
-    //       Ufficio: this.user.UnitaOperativa,
-    //       Telefono: telefono,
-    //       MailReparto: mailReparto,
-    //       Settore: settore,
-    //     };
-    //     try {
-    //       axios
-    //         .post(
-    //           this.$custom_json.base_url +
-    //             this.$custom_json.api_url +
-    //             this.$custom_json.ep_api.richiesta_contatto,
-    //           { params }
-    //         )
-    //         .then((response) => {
-    //           console.log(response.data);
-    //           this.invio = false;
-    //           this.$alert(
-    //             "Sarai ricontattato quanto prima",
-    //             "Richiesta inviata correttamente",
-    //             "success"
-    //           ).then(
-    //             // eslint-disable-next-line no-unused-vars
-    //             (result) => {
-    //               this.modale_contatto = false;
-    //             }
-    //           );
-    //         });
-    //     } catch (error) {
-    //       console.log(error);
-    //     }
-    //     return;
-    //   } else {
-    //     this.$alert(
-    //       "Verifica di aver inserito il numero corretto",
-    //       "Numero telefonico errato",
-    //       "warning"
-    //     );
-    //     return;
-    //   }
-    // },
+        let params = {
+          Utente: this.user.Nominativo,
+          Ufficio: this.user.UnitaOperativa,
+          Telefono: telefono,
+          MailReparto: mailReparto,
+          Settore: settore,
+        };
+        try {
+          axios
+            .post(
+              this.$custom_json.base_url +
+                this.$custom_json.api_url +
+                this.$custom_json.ep_api.richiesta_contatto,
+              { params }
+            )
+            .then((response) => {
+              console.log(response.data);
+              this.invio = false;
+              this.$alert(
+                "Sarai ricontattato quanto prima",
+                "Richiesta inviata correttamente",
+                "success"
+              ).then(
+                // eslint-disable-next-line no-unused-vars
+                (result) => {
+                  this.modale_contatto = false;
+                }
+              );
+            });
+        } catch (error) {
+          console.log(error);
+        }
+        return;
+      } else {
+        this.$alert(
+          "Verifica di aver inserito il numero corretto",
+          "Numero telefonico errato",
+          "warning"
+        );
+        return;
+      }
+    },
     show_recapito(index, settore) {
       let array_contatto = [];
       this.modale = true;
