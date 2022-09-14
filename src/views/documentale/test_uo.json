@@ -1,0 +1,92 @@
+[
+    {
+        "IdAnagrafica": 777118,
+        "RagioneSociale": "2C ASSICURAZIONI SNC DI BIZZARO CRISTINA E CONTATO CRISTINA",
+        "Descrizione": "C0261/368  ABY PARTNER - MONSELICE VIA DANTE",
+        "PartitaIva": "04986010280     ",
+        "RUI": "E000551373",
+        "DataRUI": "16/06/2016 00:00:00",
+        "TipologiaRapporto": "ABY PARTNER",
+        "IdIntermediario": 104024
+    },
+    {
+        "IdAnagrafica": 603254,
+        "RagioneSociale": "A. E G. SERVICE 22 SRL",
+        "Descrizione": "C0261/264  ABY PARTNER - (ACI) A. E G. SERVICE 22 SRL",
+        "PartitaIva": "07364951009     ",
+        "RUI": "E000283991",
+        "DataRUI": "01/12/2008 00:00:00",
+        "TipologiaRapporto": "ABY PARTNER",
+        "IdIntermediario": 104024
+    },
+    {
+        "IdAnagrafica": 1577663,
+        "RagioneSociale": "A.M. ASSICURAZIONI DI AMARILDA MUSTAFA",
+        "Descrizione": "C1000/155A  ABY POINT - DARFO BOARIO TERME",
+        "PartitaIva": "04610260160     ",
+        "RUI": "E000666160",
+        "DataRUI": "12/10/2020 00:00:00",
+        "TipologiaRapporto": "ABY POINT",
+        "IdIntermediario": 765888
+    },
+    {
+        "IdAnagrafica": 1457032,
+        "RagioneSociale": "A.PA.CO. SRL",
+        "Descrizione": "C0261/709  ABY PARTNER - GROTTERIA CONTRADA GROTTERIA MARE",
+        "PartitaIva": "02779610803     ",
+        "RUI": "E000693726",
+        "DataRUI": "15/10/2021 00:00:00",
+        "TipologiaRapporto": "ABY PARTNER",
+        "IdIntermediario": 104024
+    },
+    {
+        "IdAnagrafica": 836240,
+        "RagioneSociale": "ABY BROKER SRL",
+        "Descrizione": "C1000/101  ABY POINT - LAGO D'ISEO",
+        "PartitaIva": "00803170141     ",
+        "RUI": "B000137063",
+        "DataRUI": "06/08/2007 00:00:00",
+        "TipologiaRapporto": "ABY POINT",
+        "IdIntermediario": 765888
+    },
+    {
+        "IdAnagrafica": 29411,
+        "RagioneSociale": "ABY BROKER SRL",
+        "Descrizione": "C1000/123A  ABY POINT - PISTOIA",
+        "PartitaIva": "00803170141     ",
+        "RUI": "B000137063",
+        "DataRUI": "06/08/2007 00:00:00",
+        "TipologiaRapporto": "ABY POINT",
+        "IdIntermediario": 765888
+    },
+    {
+        "IdAnagrafica": 15484,
+        "RagioneSociale": "ABY BROKER SRL",
+        "Descrizione": "C1000/126  ABY POINT - SAN MINIATO",
+        "PartitaIva": "00803170141     ",
+        "RUI": "B000137063",
+        "DataRUI": "06/08/2007 00:00:00",
+        "TipologiaRapporto": "ABY POINT",
+        "IdIntermediario": 765888
+    },
+    {
+        "IdAnagrafica": 15497,
+        "RagioneSociale": "ABY BROKER SRL",
+        "Descrizione": "C1000/104  ABY POINT - AULLA",
+        "PartitaIva": "00803170141     ",
+        "RUI": "B000137063",
+        "DataRUI": "06/08/2007 00:00:00",
+        "TipologiaRapporto": "ABY POINT",
+        "IdIntermediario": 765888
+    },
+    {
+        "IdAnagrafica": 1031169,
+        "RagioneSociale": "ZETA BARI STORE SRL",
+        "Descrizione": "C0261/516  PARTNER - (HONDA) ZETA BARI STORE SRL",
+        "PartitaIva": "08507441213     ",
+        "RUI": "E000657288",
+        "DataRUI": "22/05/2020 00:00:00",
+        "TipologiaRapporto": "CONVENZIONE HONDA",
+        "IdIntermediario": 1044506
+    }
+]
