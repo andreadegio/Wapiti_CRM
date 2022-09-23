@@ -1,6 +1,6 @@
 {
-  "base_url": "http://abyway-staging.navert.cloud/",
-  "urlEnergy": "https://abyenergy.it/test/login.aspx",
+  "base_url": "https://www.abyway.it/",
+  "urlEnergy": "https://abyenergy.it/gestionale/login.aspx",
   "img_news_url": "upload/news/",
   "api_url": "API/",
   "cloud_url": "cloud/",
@@ -40,9 +40,9 @@
     "richiesta_contatto":"Utility/richiesta_contatto",
     "get_version":"Utility/get_version"
   },
-  "servizi_broker": "https://servizi.documentale.cloud/aibajsontest/",
+  "servizi_broker": "https://servizi.documentale.cloud/aibajsonea/",
   "servizi_energy": "https://abyenergy.it/servizitest/",
-  "broker_veicoli": "http://broker.abybroker.it/test/AreaOperazioni.aspx",
+  "broker_veicoli": "http://broker.abybroker.it/ea2019/AreaOperazioni.aspx",
   "broker_statistiche": "http://broker.abybroker.it/ea2019/Stats_FlashReports_NoBarre.aspx?bg=ebedef&userID=",
   "energy_statistiche": "https://abyenergy.it/test/Stats_FlashReports_NoBarre.aspx?bg=ebedef&userID=",
   "ep_broker": {
@@ -55,10 +55,14 @@
     "RecapitiAby":"RecapitiAby",
     "ProdottiIntermediario":"Prodotti_Get_By_Intermediario",
     "IntermediariEmittenti":"Intermediari_Emittenti",
-    "IntermediariProponenti":"Intermediari_Proponenti"
+    "IntermediariProponenti":"Intermediari_Proponenti",
+    "AgenzieIntermediario":"UnitaOperative_By_IdIntermediario",
+    "RilieviDiAby":"RilieviDiAby",
+    "RilieviIntermediari":"RilieviIntermediari",
+    "Audit":"Audit"
   },
-  "login_url": "http://broker.abybroker.it/accesso/login.aspx?r=staging",
-  "login_url_energy": "https://abyenergy.it/Test/accesso.aspx?r=staging",
-  "logout_url_energy": "https://abyenergy.it/Test/logout.aspx",
-  "logout_url": "http://broker.abybroker.it/test/logout.aspx"
+  "login_url": "http://broker.abybroker.it/accesso/login.aspx?r=abyway",
+  "login_url_energy": "https://abyenergy.it/Test/accesso.aspx?r=p",
+  "logout_url_energy": "http://abyenergy.it/Test/logout.aspx",
+  "logout_url": "http://broker.abybroker.it/ea2019/logout.aspx"
 }

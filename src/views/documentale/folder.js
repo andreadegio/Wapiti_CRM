@@ -23,7 +23,7 @@ const intermediari_list = [
     slug: "UNITA OPERATIVE",
     tipo: "folder",
     ico: "store",
-    URL:"",
+    URL:"UnitaOperative_Di_Aby_Broker",
     subFolder: false,
     visible: "admin",
   },  

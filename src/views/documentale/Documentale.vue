@@ -7,18 +7,6 @@
         0% 0%;
     "
   >
-    <CModal
-      title="Dettaglio Proponente"
-      color="warning"
-      :show.sync="warningModal"
-    >
-      <p class="text-center">IN COSTRUZIONE...</p>
-      <template #footer>
-        <CButton variant="outline" color="info" @click="warningModal = false">
-          Chiudi
-        </CButton>
-      </template>
-    </CModal>
     <div>
       <CRow class="pl-3 mt-2" style="justify-content: center">
         <!-- <h1 class="mb-3 titolo_sezione">Documentale</h1> -->
@@ -402,7 +390,11 @@
               <CDataTable
                 id="emittenti_table"
                 :items="files"
-                :fields="fields_INTERMEDIARI_EMITTENTI"
+                :fields="
+                  admin
+                    ? fields_INTERMEDIARI_EMITTENTI_ADMIN
+                    : fields_INTERMEDIARI_EMITTENTI
+                "
                 ref="tabella_doc"
                 sorter
                 hover
@@ -418,7 +410,7 @@
                 :noItemsView="{ noItems: ' ' }"
               >
                 <template #RUI="{ item }">
-                  <td class="text-center">{{ item.PartitaIva }}</td>
+                  <td class="text-center">{{ item.RUI }}</td>
                 </template>
                 <template #Quanti_prodotti_in_uso="{ item }">
                   <td class="text-center">
@@ -431,13 +423,24 @@
                         },
                       }"
                     >
-                      <CButton size="sm" color="primary" variant="outline"
-                      v-c-tooltip="'Clicca per visualizzare i Prodotti in uso'"> 
-                        {{ item.Quanti_prodotti_in_uso }} {{item.Quanti_prodotti_in_uso==1 ? "prodotto":"prodotti"}} in uso
+                      <CButton
+                        size="sm"
+                        color="primary"
+                        variant="outline"
+                        v-c-tooltip="
+                          'Clicca per visualizzare i Prodotti in uso'
+                        "
+                      >
+                        {{ item.Quanti_prodotti_in_uso }}
+                        {{
+                          item.Quanti_prodotti_in_uso == 1
+                            ? "prodotto"
+                            : "prodotti"
+                        }}
+                        in uso
                       </CButton>
                     </router-link>
-                    
-                    </td>
+                  </td>
                 </template>
                 <template #POG="{ item }">
                   <td class="py-2 text-center">
@@ -457,14 +460,54 @@
                   </td>
                 </template>
 
-                <template #Dettagli="{ item }">
+                <template #RilieviDiAby="{ item }">
                   <td class="py-2 text-center">
                     <router-link
                       :to="{
-                        name: 'DettagliIntermediario',
+                        name: 'Rilievi_Audit',
                         params: {
                           intermediario: item,
-                          elenco: files,
+                          oldData: files,
+                          origine: 'Emittenti',
+                          richiesta: 'Aby',
+                        },
+                      }"
+                    >
+                      <CButton size="sm" color="primary" variant="outline">
+                        Mostra
+                      </CButton>
+                    </router-link>
+                  </td>
+                </template>
+                <template #RilieviIntermediari="{ item }">
+                  <td class="py-2 text-center">
+                    <router-link
+                      :to="{
+                        name: 'Rilievi_Audit',
+                        params: {
+                          intermediario: item,
+                          oldData: files,
+                          origine: 'Emittenti',
+                          richiesta: 'Int',
+                        },
+                      }"
+                    >
+                      <CButton size="sm" color="primary" variant="outline">
+                        Mostra
+                      </CButton>
+                    </router-link>
+                  </td>
+                </template>
+                <template #Audit="{ item }">
+                  <td class="py-2 text-center">
+                    <router-link
+                      :to="{
+                        name: 'Rilievi_Audit',
+                        params: {
+                          intermediario: item,
+                          oldData: files,
+                          origine: 'Emittenti',
+                          richiesta: 'Aud',
                         },
                       }"
                     >
@@ -500,11 +543,35 @@
                 :noItemsView="{ noItems: ' ' }"
               >
                 <template #RUI="{ item }">
-                  <td class="text-center">{{ item.PartitaIva }}</td>
+                  <td class="text-center">{{ item.RUI }}</td>
                 </template>
                 <template #Quante_unita_operative_attive="{ item }">
                   <td class="text-center">
-                    {{ item.Quante_unita_operative_attive }}
+                    <router-link
+                      :to="{
+                        name: 'DettagliProponente',
+                        params: {
+                          intermediario: item,
+                          proponenti: files,
+                        },
+                      }"
+                    >
+                      <CButton
+                        size="sm"
+                        color="primary"
+                        variant="outline"
+                        v-c-tooltip="
+                          'Clicca per visualizzare le unità operative'
+                        "
+                      >
+                        {{ item.Quante_unita_operative_attive }}
+                        {{
+                          item.Quante_unita_operative_attive == 1
+                            ? "Unità operativa"
+                            : "Unità operative"
+                        }}
+                      </CButton>
+                    </router-link>
                   </td>
                 </template>
                 <template #POG="{ item }">
@@ -524,25 +591,146 @@
                     </CButton>
                   </td>
                 </template>
-                <template #Dettagli>
+                <template #RilieviDiAby="{ item }">
                   <td class="py-2 text-center">
-                    <!--  <router-link
+                    <router-link
                       :to="{
-                        name: 'DettagliIntermediario',
+                        name: 'Rilievi_Audit',
                         params: {
                           intermediario: item,
+                          oldData: files,
+                          origine: 'Proponenti',
+                          richiesta: 'Aby',
                         },
                       }"
-                    > -->
-                    <CButton
-                      size="sm"
-                      color="primary"
-                      variant="outline"
-                      @click="warningModal = true"
                     >
-                      Mostra
-                    </CButton>
-                    <!-- </router-link> -->
+                      <CButton size="sm" color="primary" variant="outline">
+                        Mostra
+                      </CButton>
+                    </router-link>
+                  </td>
+                </template>
+                <template #RilieviIntermediari="{ item }">
+                  <td class="py-2 text-center">
+                    <router-link
+                      :to="{
+                        name: 'Rilievi_Audit',
+                        params: {
+                          intermediario: item,
+                          oldData: files,
+                          origine: 'Proponenti',
+                          richiesta: 'Int',
+                        },
+                      }"
+                    >
+                      <CButton size="sm" color="primary" variant="outline">
+                        Mostra
+                      </CButton>
+                    </router-link>
+                  </td>
+                </template>
+                <template #Audit="{ item }">
+                  <td class="py-2 text-center">
+                    <router-link
+                      :to="{
+                        name: 'Rilievi_Audit',
+                        params: {
+                          intermediario: item,
+                          oldData: files,
+                          origine: 'Proponenti',
+                          richiesta: 'Aud',
+                        },
+                      }"
+                    >
+                      <CButton size="sm" color="primary" variant="outline">
+                        Mostra
+                      </CButton>
+                    </router-link>
+                  </td>
+                </template>
+              </CDataTable>
+            </div>
+            <!-- DATA TABLE PER UNITA' OPERATIVE -->
+            <div class="pt-1" v-if="settore === 'UNITA OPERATIVE'">
+              <p class="text-right">
+                Totale Unità Operative: <b>{{ files.length }}</b>
+              </p>
+              <CDataTable
+                id="UO_table"
+                :items="files"
+                :fields="fields_UO"
+                ref="tabella_doc"
+                sorter
+                hover
+                border
+                :itemsPerPage="20"
+                pagination
+                :table-filter="{
+                  placeholder: 'Ricerca...',
+                  label: 'Ricerca:',
+                }"
+                striped
+                :items-per-page-select="{ label: 'Risultati per pagina' }"
+                :noItemsView="{ noItems: ' ' }"
+              >
+                <template #RUI="{ item }">
+                  <td class="text-center">{{ item.RUI }}</td>
+                </template>
+                <template #RilieviDiAby="{ item }">
+                  <td class="py-2 text-center">
+                    <router-link
+                      :to="{
+                        name: 'Rilievi_Audit',
+                        params: {
+                          intermediario: item,
+                          oldData: files,
+                          origine: 'UO',
+                          richiesta: 'Aby',
+                        },
+                      }"
+                    >
+                      <CButton size="sm" color="primary" variant="outline">
+                        Mostra
+                      </CButton>
+                    </router-link>
+                  </td>
+                </template>
+                <template #RilieviIntermediari="{ item }">
+                  <td class="py-2 text-center">
+                    <router-link
+                      :to="{
+                        name: 'Rilievi_Audit',
+                        params: {
+                          intermediario: item,
+                          oldData: files,
+                          origine: 'UO',
+                          richiesta: 'Int',
+                        },
+                      }"
+                    >
+                      <CButton size="sm" color="primary" variant="outline">
+                        Mostra
+                      </CButton>
+                    </router-link>
+                  </td>
+                </template>
+                <template #Audit="{ item }">
+                  <td class="py-2 text-center">
+                    <router-link
+                      :to="{
+                        name: 'Rilievi_Audit',
+                        params: {
+                          intermediario: item,
+                          oldData: files,
+                          origine: 'UO',
+                          richiesta: 'Aud',
+                        },
+                      }"
+                    >
+                      <CButton size="sm" color="primary" variant="outline">
+                        Mostra
+                      </CButton>
+                    </router-link>
                   </td>
                 </template>
               </CDataTable>
@@ -737,6 +925,51 @@ const fields_DOCUMENTI = [
   },
 ];
 // NOMI COLONNE PER GLI INTERMEDIARI EMITTENTI E PROPONENTI
+const fields_INTERMEDIARI_EMITTENTI_ADMIN = [
+  {
+    key: "RagioneSociale",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Ragione Sociale",
+  },
+  {
+    key: "RUI",
+    _style: "font-weight: bold; text-align:center;",
+    label: "RUI",
+  },
+  {
+    key: "Quanti_prodotti_in_uso",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Elenco Prodotti",
+  },
+  {
+    key: "POG",
+    label: "POG",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+  {
+    key: "RilieviDiAby",
+    label: "Rilievi di Aby",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+  {
+    key: "RilieviIntermediari",
+    label: "Rilievi Intermediari",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+  {
+    key: "Audit",
+    label: "Audit",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+];
 const fields_INTERMEDIARI_EMITTENTI = [
   {
     key: "RagioneSociale",
@@ -761,8 +994,15 @@ const fields_INTERMEDIARI_EMITTENTI = [
     _style: "text-align:center;",
   },
   {
-    key: "Dettagli",
-    label: "Dettagli",
+    key: "RilieviIntermediari",
+    label: "Rilievi Intermediari",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+  {
+    key: "Audit",
+    label: "Audit",
     sorter: false,
     filter: false,
     _style: "text-align:center;",
@@ -792,8 +1032,56 @@ const fields_INTERMEDIARI_PROPONENTI = [
     _style: "text-align:center;",
   },
   {
-    key: "Dettagli",
-    label: "Dettagli",
+    key: "RilieviDiAby",
+    label: "Rilievi di Aby",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+  {
+    key: "RilieviIntermediari",
+    label: "Rilievi Intermediari",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+  {
+    key: "Audit",
+    label: "Audit",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+];
+// NOMI DELLE COLONNE PER DATA TABLE UNITA OPERATIVE
+const fields_UO = [
+  {
+    key: "RagioneSociale",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Ragione Sociale",
+  },
+  {
+    key: "RUI",
+    _style: "font-weight: bold; text-align:center;",
+    label: "RUI",
+  },
+  {
+    key: "RilieviDiAby",
+    label: "Rilievi di Aby",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+  {
+    key: "RilieviIntermediari",
+    label: "Rilievi Intermediario",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+  {
+    key: "Audit",
+    label: "Audit",
     sorter: false,
     filter: false,
     _style: "text-align:center;",
@@ -901,7 +1189,9 @@ export default {
       fields_SERVIZI,
       fields_DOCUMENTI,
       fields_INTERMEDIARI_EMITTENTI,
+      fields_INTERMEDIARI_EMITTENTI_ADMIN,
       fields_INTERMEDIARI_PROPONENTI,
+      fields_UO,
       // fields_SETTORE12,
 
       altre_gar: [],
@@ -918,6 +1208,9 @@ export default {
 
       color: "", // colore di sfondo documentale
       array_link: [], // array contenente l'elenco file per ciascuna cartella del documentale
+
+      // test UO
+      // files_UO,
     };
   },
   mounted() {
@@ -949,6 +1242,7 @@ export default {
     this.array_link.forEach((item) =>
       this.recupera_documentale(item.SLUG, item.URL)
     );
+    // Utilizzato per tornare a visualizzare gli emittenti/proponenti tornando indietro dalla pagina di dettaglio dell'intermediario
     if (this.$route.params.origine == "Emittenti") {
       let origine = {
         nome: "INTERMEDIARI EMITTENTI",
@@ -961,28 +1255,47 @@ export default {
       };
       this.settore = origine.slug;
       this.dove_sono = origine.slug;
-      
+
       this.breadcrumbs = []; // per popolare il Breadcrumbs
       this.breadcrumbs.push([origine.nome, origine.ico]);
-      this.files =JSON.parse(localStorage.getItem("elenco_origine"));
-        this.color="white";
+      this.files = JSON.parse(localStorage.getItem("elenco_origine"));
+      this.color = "white";
+    }
+    if (this.$route.params.origine == "Proponenti") {
+      let origine = {
+        nome: "INTERMEDIARI PROPONENTI",
+        slug: "INTERMEDIARI PROPONENTI",
+        tipo: "folder",
+        ico: "edit",
+        URL: "Intermediari_Proponenti",
+        subFolder: false,
+        visible: "admin",
+      };
+      this.settore = origine.slug;
+      this.dove_sono = origine.slug;
 
-      
+      this.breadcrumbs = []; // per popolare il Breadcrumbs
+      this.breadcrumbs.push([origine.nome, origine.ico]);
+      this.files = JSON.parse(localStorage.getItem("elenco_origine"));
+      this.color = "white";
+    }
+    if (this.$route.params.origine == "UO") {
+      let origine = {
+        nome: "UNITA OPERATIVE - Sez. E",
+        slug: "UNITA OPERATIVE",
+        tipo: "folder",
+        ico: "store",
+        URL: "UnitaOperative_Di_Aby_Broker",
+        subFolder: false,
+        visible: "admin",
+      };
+      this.settore = origine.slug;
+      this.dove_sono = origine.slug;
 
-      // // this.call_folder_list(origine);
-      // // this.recupera_documentale(origine.slug, origine.URL);
-      // this.dove_sono = origine.slug;
-      // this.settore = origine.slug; // Per identificare il data-table
-      // for (var i in this.array_link) {
-      //   if (this.array_link[i].SLUG == this.dove_sono) {
-      //     console.log("arraylink " + this.array_link[0].FILE);
-      //     this.files = this.array_link[i].FILE;
-      //     break;
-      //   }
-      // }
-      // console.log("files " + this.files);
-
-      // this.color = "white";
+      this.breadcrumbs = []; // per popolare il Breadcrumbs
+      this.breadcrumbs.push([origine.nome, origine.ico]);
+      this.files = JSON.parse(localStorage.getItem("elenco_origine"));
+      this.color = "white";
     }
   },
   methods: {

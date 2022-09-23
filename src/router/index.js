@@ -21,6 +21,14 @@ const DettagliIntermediario = () =>
   import(
     /* webpackChunkName: "Documentale" */ "@/views/documentale/DettagliIntermediario"
   );
+const DettagliProponente = () =>
+  import(
+    /* webpackChunkName: "Documentale" */ "@/views/documentale/DettagliProponente"
+  );
+const Rilievi_Audit = () =>
+  import(
+    /* webpackChunkName: "Documentale" */ "@/views/documentale/Rilievi_Audit"
+  );
 
 // Views - Formazione
 const AdminFormazione = () =>
@@ -123,6 +131,18 @@ function configRoutes() {
           name: "DettagliIntermediario",
           props: true,
           component: DettagliIntermediario,
+        },
+        {
+          path: "/Documentale/Proponente/",
+          name: "DettagliProponente",
+          props: true,
+          component: DettagliProponente,
+        },
+        {
+          path: "/Documentale/Dettaglio/",
+          name: "Rilievi_Audit",
+          props: true,
+          component: Rilievi_Audit,
         },
         {
           path: "/StatistichePortali",
