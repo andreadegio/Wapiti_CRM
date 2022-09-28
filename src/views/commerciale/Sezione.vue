@@ -245,6 +245,12 @@ export default {
 };
 </script>
 <style scoped>
+.tab-pane.active{
+  background-color: white !important;
+}
+a {
+  color: #1f4b6b !important;
+}
 .new_fluid {
   display: grid;
 }
