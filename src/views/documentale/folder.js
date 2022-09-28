@@ -1,8 +1,8 @@
 //  Struttura del documentale
 const intermediari_list = [
   {
-    nome: "ORGANIGRAMMA ABY",
-    slug: "ORGANIGRAMMA ABY",
+    nome: "ORGANIGRAMMA ABY BROKER",
+    slug: "ORGANIGRAMMA ABY BROKER",
     tipo: "folder",
     ico: "sitemap",
     URL: "Documentale_Organigramma",

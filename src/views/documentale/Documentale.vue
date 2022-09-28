@@ -61,43 +61,44 @@
             </div>
           </div>
           <!-- Documenti Broker -->
-          <div
-            v-for="folder in documenti_list"
-            :key="folder.slug"
-            class="folder parent pt-0 pl-2 py-1"
-            style="border-bottom: 1px solid lightgray"
-          >
-            <span
-              @click="
-                call_folder_list(folder);
-                dove_sono = folder.slug;
-                color = '';
-              "
-              style="white-space: nowrap"
-              class="icon_folder h4"
-              :class="{ highlight: dove_sono == folder.slug }"
+          <div v-if="!admin">
+            <div
+              v-for="folder in documenti_list"
+              :key="folder.slug"
+              class="folder parent pt-0 pl-2 py-1"
+              style="border-bottom: 1px solid lightgray"
             >
-              {{ folder.nome }}</span
-            >
-            <li
-              v-for="items in folder.childs"
-              :key="items.slug"
-              class="folder h5 pl-3"
-            >
-              └
               <span
                 @click="
-                  call_subfolder_list(items, folder);
-                  dove_sono = items.slug;
+                  call_folder_list(folder);
+                  dove_sono = folder.slug;
+                  color = '';
                 "
-                class="icon_folder"
-                :class="{ highlight: dove_sono == items.slug }"
                 style="white-space: nowrap"
-                >{{ items.nome }}</span
+                class="icon_folder h4"
+                :class="{ highlight: dove_sono == folder.slug }"
               >
-            </li>
+                {{ folder.nome }}</span
+              >
+              <li
+                v-for="items in folder.childs"
+                :key="items.slug"
+                class="folder h5 pl-3"
+              >
+                └
+                <span
+                  @click="
+                    call_subfolder_list(items, folder);
+                    dove_sono = items.slug;
+                  "
+                  class="icon_folder"
+                  :class="{ highlight: dove_sono == items.slug }"
+                  style="white-space: nowrap"
+                  >{{ items.nome }}</span
+                >
+              </li>
+            </div>
           </div>
-
           <!-- Settori -->
           <div
             v-for="folder in folder_list"
@@ -342,7 +343,7 @@
               - Al momento non ci sono documenti disponibili -
             </div>
             <!-- DATA TABLE PER ORGANIGRAMMA ABY -->
-            <div class="pt-5" v-if="settore === 'ORGANIGRAMMA ABY'">
+            <div class="pt-5" v-if="settore === 'ORGANIGRAMMA ABY BROKER'">
               <CDataTable
                 id="int_table"
                 ref="tabella_ORGANIGRAMMA ABY"
@@ -366,7 +367,7 @@
                     <a
                       :href="item.Nomefile"
                       @click.prevent="
-                        preview(item.Nomefile,'ORGANIGRAMMA');
+                        preview(item.Nomefile, 'ORGANIGRAMMA');
                         titoloModale(dove_sono, item.Descrizione);
                       "
                     >
@@ -377,7 +378,13 @@
               </CDataTable>
             </div>
             <!-- DATA TABLE PER CIRCOLARI -->
-            <div class="pt-5" v-if="(settore === 'CIRCOLARI INTERNE' && vuoto == false) || (settore==='CIRCOLARI OPERATIVE' && vuoto == false)">
+            <div
+              class="pt-5"
+              v-if="
+                (settore === 'CIRCOLARI INTERNE' && vuoto == false) ||
+                (settore === 'CIRCOLARI OPERATIVE' && vuoto == false)
+              "
+            >
               <CDataTable
                 id="int_table"
                 ref="tabella_CIRCOLARI"
@@ -1023,7 +1030,7 @@ const fields_CIRCOLARI = [
     _style: "text-align: center;",
   },
 ];
-const fields_ORGANIGRAMMA=[
+const fields_ORGANIGRAMMA = [
   {
     key: "Descrizione",
     _style: "font-weight: bold; text-align:center;",
@@ -1036,7 +1043,7 @@ const fields_ORGANIGRAMMA=[
     filter: false,
     _style: "text-align:center;",
   },
-]
+];
 // NOMI DELLE COLONNE DELLA TABELLA DOCUMENTI INTERMEDIARIO
 const fields_DOCUMENTI = [
   {
