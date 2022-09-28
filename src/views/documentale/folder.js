@@ -1,23 +1,60 @@
 //  Struttura del documentale
-const intermediari_list =[
+const intermediari_list = [
+  {
+    nome: "ORGANIGRAMMA ABY BROKER",
+    slug: "ORGANIGRAMMA ABY BROKER",
+    tipo: "folder",
+    ico: "sitemap",
+    URL: "Documentale_Organigramma",
+    subFolder: false,
+    visible: "all",
+  },
+  {
+    nome: "CIRCOLARI OPERATIVE",
+    slug: "CIRCOLARI OPERATIVE",
+    tipo: "folder",
+    ico: "edit",
+    URL: "CircolariOperative",
+    subFolder: false,
+    visible: "all",
+  },
+  {
+    nome: "CIRCOLARI INTERNE",
+    slug: "CIRCOLARI INTERNE",
+    tipo: "folder",
+    ico: "edit",
+    URL: "CircolariInterne",
+    subFolder: false,
+    visible: "admin",
+  },
   {
     nome: "INTERMEDIARI EMITTENTI",
     slug: "INTERMEDIARI EMITTENTI",
     tipo: "folder",
     ico: "edit",
+    URL: "Intermediari_Emittenti",
     subFolder: false,
-    visible: "all"
+    visible: "all",
   },
   {
     nome: "INTERMEDIARI PROPONENTI",
     slug: "INTERMEDIARI PROPONENTI",
     tipo: "folder",
     ico: "edit",
+    URL: "Intermediari_Proponenti",
     subFolder: false,
     visible: "admin",
   },
+  {
+    nome: "UNITA OPERATIVE - Sez. E",
+    slug: "UNITA OPERATIVE",
+    tipo: "folder",
+    ico: "store",
+    URL:"UnitaOperative_Di_Aby_Broker",
+    subFolder: false,
+    visible: "admin",
+  },  
 ];
-
 
 const documenti_list = [
   {
@@ -46,7 +83,6 @@ const documenti_list = [
         subFolder: false,
       },
     ],
-    
   },
 ];
 

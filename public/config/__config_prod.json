@@ -1,6 +1,6 @@
 {
-  "base_url": "https://abyway-staging.navert.cloud/",
-  "urlEnergy": "https://abyenergy.it/test/login.aspx",
+  "base_url": "https://www.abyway.it/",
+  "urlEnergy": "https://abyenergy.it/gestionale/login.aspx",
   "img_news_url": "upload/news/",
   "api_url": "API/",
   "cloud_url": "cloud/",
@@ -37,12 +37,12 @@
     "get_avvisiToast": "Utility/get_avvisiToast",
     "set_accesso": "Utility/set_accesso",
     "get_accessi_totali": "Utility/get_accessi_totali",
-    "richiesta_contatto": "Utility/richiesta_contatto",
-    "get_version": "Utility/get_version"
+    "richiesta_contatto":"Utility/richiesta_contatto",
+    "get_version":"Utility/get_version"
   },
-  "servizi_broker": "https://servizi.documentale.cloud/aibajsontesthttps/",
+  "servizi_broker": "https://servizi.documentale.cloud/aibajsonea/",
   "servizi_energy": "https://abyenergy.it/servizitest/",
-  "broker_veicoli": "http://broker.abybroker.it/testhttps/AreaOperazioni.aspx",
+  "broker_veicoli": "http://broker.abybroker.it/ea2019/AreaOperazioni.aspx",
   "broker_statistiche": "http://broker.abybroker.it/ea2019/Stats_FlashReports_NoBarre.aspx?bg=ebedef&userID=",
   "energy_statistiche": "https://abyenergy.it/test/Stats_FlashReports_NoBarre.aspx?bg=ebedef&userID=",
   "ep_broker": {
@@ -52,20 +52,17 @@
     "documentale_ServiziNonAssicurativi": "Download_Documentale_ServiziNonAssicurativi/",
     "documentale_DocumentiIntermediario": "Download_Documentale_DocumentiIntermediario/",
     "LatestNewsOperative": "LatestNewsOperative",
-    "RecapitiAby": "RecapitiAby",
-    "ProdottiIntermediario": "Prodotti_Get_By_Intermediario",
-    "IntermediariEmittenti": "Intermediari_Emittenti",
-    "IntermediariProponenti": "Intermediari_Proponenti",
-    "AgenzieIntermediario": "UnitaOperative_By_IdIntermediario",
-    "RilieviDiAby": "RilieviDiAby",
-    "RilieviIntermediari": "RilieviIntermediari",
-    "Audit": "Audit",
-    "CircolariInterne": "CircolariInterne",
-    "CircolariOperative": "CircolariOperative",
-    "Documentale_Organigramma": "Documentale_Organigramma"
+    "RecapitiAby":"RecapitiAby",
+    "ProdottiIntermediario":"Prodotti_Get_By_Intermediario",
+    "IntermediariEmittenti":"Intermediari_Emittenti",
+    "IntermediariProponenti":"Intermediari_Proponenti",
+    "AgenzieIntermediario":"UnitaOperative_By_IdIntermediario",
+    "RilieviDiAby":"RilieviDiAby",
+    "RilieviIntermediari":"RilieviIntermediari",
+    "Audit":"Audit"
   },
-  "login_url": "http://broker.abybroker.it/accesso/login.aspx?r=staging",
-  "login_url_energy": "https://abyenergy.it/Test/accesso.aspx?r=staging",
-  "logout_url_energy": "https://abyenergy.it/Test/logout.aspx",
-  "logout_url": "http://broker.abybroker.it/test/logout.aspx"
+  "login_url": "http://broker.abybroker.it/accesso/login.aspx?r=abyway",
+  "login_url_energy": "https://abyenergy.it/Test/accesso.aspx?r=p",
+  "logout_url_energy": "http://abyenergy.it/Test/logout.aspx",
+  "logout_url": "http://broker.abybroker.it/ea2019/logout.aspx"
 }

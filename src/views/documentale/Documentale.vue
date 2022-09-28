@@ -15,81 +15,96 @@
 
       <CRow id="RowExplorer" class="min-vh-100">
         <!-- colonna file manager -->
-        <CCol class="file_manager" md="4">
+        <CCol class="file_manager" md="3">
           <!-- Intermediari Emittenti e Proponenti -->
+
           <div
             v-for="folder in intermediari_list"
             :key="folder.slug"
             class="folder parent pt-0 pl-2"
           >
-            <span v-if="folder.visible == 'admin' && admin"
-              @click="
-                call_folder_list(folder);
-                dove_sono = folder.slug;
-                color = '';
-              "
-              style="white-space: nowrap"
-              class="icon_folder h4"
-              :class="{ highlight: dove_sono == folder.slug }"
+            <div
+              class="py-1"
+              style="border-bottom: 1px solid lightgray"
+              v-if="folder.visible == 'admin' && admin"
             >
-              {{ folder.nome }}</span
-            >
-            <span v-if="folder.visible == 'all'"
-              @click="
-                call_folder_list(folder);
-                dove_sono = folder.slug;
-                color = '';
-              "
-              style="white-space: nowrap"
-              class="icon_folder h4"
-              :class="{ highlight: dove_sono == folder.slug }"
-            >
-              {{ folder.nome }}</span
-            >
-         
-          </div>
-          <!-- Documenti Broker -->
-          <div
-            v-for="folder in documenti_list"
-            :key="folder.slug"
-            class="folder parent pt-0 pl-2"
-          >
-            <span
-              @click="
-                call_folder_list(folder);
-                dove_sono = folder.slug;
-                color = '';
-              "
-              style="white-space: nowrap"
-              class="icon_folder h4"
-              :class="{ highlight: dove_sono == folder.slug }"
-            >
-              {{ folder.nome }}</span
-            >
-            <li
-              v-for="items in folder.childs"
-              :key="items.slug"
-              class="folder h5 pl-3"
-            >
-              └
               <span
                 @click="
-                  call_subfolder_list(items, folder);
-                  dove_sono = items.slug;
+                  call_folder_list(folder);
+                  dove_sono = folder.slug;
+                  color = 'white';
                 "
-                class="icon_folder"
-                :class="{ highlight: dove_sono == items.slug }"
                 style="white-space: nowrap"
-                >{{ items.nome }}</span
+                class="icon_folder h4"
+                :class="{ highlight: dove_sono == folder.slug }"
               >
-            </li>
+                {{ folder.nome }}</span
+              >
+            </div>
+            <div
+              class="py-1"
+              style="border-bottom: 1px solid lightgray"
+              v-if="folder.visible == 'all'"
+            >
+              <span
+                @click="
+                  call_folder_list(folder);
+                  dove_sono = folder.slug;
+                  color = 'white';
+                "
+                style="white-space: nowrap"
+                class="icon_folder h4"
+                :class="{ highlight: dove_sono == folder.slug }"
+              >
+                {{ folder.nome }}</span
+              >
+            </div>
           </div>
-
+          <!-- Documenti Broker -->
+          <div v-if="!admin">
+            <div
+              v-for="folder in documenti_list"
+              :key="folder.slug"
+              class="folder parent pt-0 pl-2 py-1"
+              style="border-bottom: 1px solid lightgray"
+            >
+              <span
+                @click="
+                  call_folder_list(folder);
+                  dove_sono = folder.slug;
+                  color = '';
+                "
+                style="white-space: nowrap"
+                class="icon_folder h4"
+                :class="{ highlight: dove_sono == folder.slug }"
+              >
+                {{ folder.nome }}</span
+              >
+              <li
+                v-for="items in folder.childs"
+                :key="items.slug"
+                class="folder h5 pl-3"
+              >
+                └
+                <span
+                  @click="
+                    call_subfolder_list(items, folder);
+                    dove_sono = items.slug;
+                  "
+                  class="icon_folder"
+                  :class="{ highlight: dove_sono == items.slug }"
+                  style="white-space: nowrap"
+                  >{{ items.nome }}</span
+                >
+              </li>
+            </div>
+          </div>
           <!-- Settori -->
           <div
             v-for="folder in folder_list"
             :key="folder.slug"
-            class="folder parent pt-0 pl-2"
+            class="folder parent pt-0 pl-2 py-1"
+            style="border-bottom: 1px solid lightgray"
           >
             <span
               @click="
@@ -162,9 +177,8 @@
         </CCol>
 
         <!-- colonna centrale elenco file browser -->
-        <CCol md="8" :style="{ 'background-color': color }">
+        <CCol md="9" :style="{ 'background-color': color }">
           <div>
-            <!-- <span class="h2"> Documenti</span><br /> -->
             <!-- breadcrumbs -->
             <div v-if="breadcrumbs.length > 0" id="breadcrumbs" class="pt-3">
               <span style="border: 1px solid; border-radius: 3px; padding: 2px">
@@ -189,15 +203,7 @@
                 style="border: 1px solid; border-radius: 3px; padding: 2px"
                 >{{ breadcrumbs[2][0] }}</span
               >
-              <!-- <span v-if="filtro_gar !== ''" style="padding: 2px"
-              ><i class="fas fa-chevron-right"></i>
-              <span
-                style="border: 1px solid; border-radius: 3px; padding: 2px"
-                >{{ filtro_gar }}</span
-              ></span
-            > -->
               <div class="pt-5" v-if="settore == 'DOCUMENTI'">
-                <!-- <div class="pt-5 h2"> -->
                 <span>
                   <div
                     v-for="folder in documenti_list"
@@ -262,6 +268,7 @@
                   </div>
                 </span>
               </div>
+              <!-- SETTORI 1 E 2 -->
               <div class="pt-5" v-if="settore == 'SETTORI 1 E 2'">
                 <span>
                   <div
@@ -335,7 +342,82 @@
             <div v-show="vuoto" class="pt-5 h4 text-center">
               - Al momento non ci sono documenti disponibili -
             </div>
-            <!-- DATA TABLE PER INTERMEDIARIO -->
+            <!-- DATA TABLE PER ORGANIGRAMMA ABY -->
+            <div class="pt-5" v-if="settore === 'ORGANIGRAMMA ABY BROKER'">
+              <CDataTable
+                id="int_table"
+                ref="tabella_ORGANIGRAMMA ABY"
+                :items="files"
+                :fields="fields_ORGANIGRAMMA"
+                sorter
+                hover
+                border
+                :itemsPerPage="20"
+                pagination
+                :table-filter="{
+                  placeholder: 'Ricerca...',
+                  label: 'Ricerca:',
+                }"
+                striped
+                :items-per-page-select="{ label: 'Risultati per pagina' }"
+                :noItemsView="{ noItems: ' ' }"
+              >
+                <template #Download="{ item }">
+                  <td class="text-center">
+                    <a
+                      :href="item.Nomefile"
+                      @click.prevent="
+                        preview(item.Nomefile, 'ORGANIGRAMMA');
+                        titoloModale(dove_sono, item.Descrizione);
+                      "
+                    >
+                      <i class="fas fa-download fa-2x"></i
+                    ></a>
+                  </td>
+                </template>
+              </CDataTable>
+            </div>
+            <!-- DATA TABLE PER CIRCOLARI -->
+            <div
+              class="pt-5"
+              v-if="
+                (settore === 'CIRCOLARI INTERNE' && vuoto == false) ||
+                (settore === 'CIRCOLARI OPERATIVE' && vuoto == false)
+              "
+            >
+              <CDataTable
+                id="int_table"
+                ref="tabella_CIRCOLARI"
+                :items="files"
+                :fields="fields_CIRCOLARI"
+                sorter
+                hover
+                border
+                :itemsPerPage="20"
+                pagination
+                :table-filter="{
+                  placeholder: 'Ricerca...',
+                  label: 'Ricerca:',
+                }"
+                striped
+                :items-per-page-select="{ label: 'Risultati per pagina' }"
+                :noItemsView="{ noItems: ' ' }"
+              >
+                <template #Download="{ item }">
+                  <td class="text-center">
+                    <a
+                      :href="item.Filepath + '/' + item.Filename"
+                      @click.prevent="
+                        preview(item.Filepath + '/' + item.Filename)
+                      "
+                    >
+                      <i class="fas fa-download fa-2x"></i
+                    ></a>
+                  </td>
+                </template>
+              </CDataTable>
+            </div>
+            <!-- DATA TABLE PER DOCUMENTI INTERMEDIARIO -->
             <div
               class="pt-5"
               v-if="
@@ -349,6 +431,7 @@
                 :items="files"
                 :fields="fields_DOCUMENTI"
                 hover
+                border
                 striped
                 :noItemsView="{ noItems: ' ' }"
               >
@@ -371,6 +454,363 @@
                 </template>
               </CDataTable>
             </div>
+            <!-- DATA TABLE PER EMITTENTI -->
+            <div class="pt-3" v-if="settore === 'INTERMEDIARI EMITTENTI'">
+              <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4 text-center"></div>
+                <div class="col-sm-4 text-right">
+                  Totale Intermediari Emittenti: <b>{{ files.length }}</b>
+                </div>
+              </div>
+              <CDataTable
+                id="emittenti_table"
+                :items="files"
+                :fields="
+                  admin
+                    ? fields_INTERMEDIARI_EMITTENTI_ADMIN
+                    : fields_INTERMEDIARI_EMITTENTI
+                "
+                ref="tabella_doc"
+                sorter
+                hover
+                border
+                :itemsPerPage="20"
+                pagination
+                :table-filter="{
+                  placeholder: 'Ricerca...',
+                  label: 'Ricerca:',
+                }"
+                striped
+                :items-per-page-select="{ label: 'Risultati per pagina' }"
+                :noItemsView="{ noItems: ' ' }"
+              >
+                <template #RUI="{ item }">
+                  <td class="text-center">{{ item.RUI }}</td>
+                </template>
+                <template #Quanti_prodotti_in_uso="{ item }">
+                  <td class="text-center">
+                    <router-link
+                      :to="{
+                        name: 'DettagliIntermediario',
+                        params: {
+                          intermediario: item,
+                          elenco: files,
+                        },
+                      }"
+                    >
+                      <CButton
+                        size="sm"
+                        color="primary"
+                        variant="outline"
+                        v-c-tooltip="
+                          'Clicca per visualizzare i Prodotti in uso'
+                        "
+                      >
+                        {{ item.Quanti_prodotti_in_uso }}
+                        {{
+                          item.Quanti_prodotti_in_uso == 1
+                            ? "prodotto"
+                            : "prodotti"
+                        }}
+                        in uso
+                      </CButton>
+                    </router-link>
+                  </td>
+                </template>
+                <template #POG="{ item }">
+                  <td class="py-2 text-center">
+                    <CButton
+                      v-if="item.POG !== ''"
+                      color="primary"
+                      variant="outline"
+                      square
+                      size="sm"
+                      @click="
+                        preview(item.POG, 'INTERMEDIARIO');
+                        titoloModale('EMITTENTE', item.Descrizione, 'POG');
+                      "
+                    >
+                      Visualizza
+                    </CButton>
+                  </td>
+                </template>
+
+                <template #RilieviDiAby="{ item }">
+                  <td class="py-2 text-center">
+                    <router-link
+                      :to="{
+                        name: 'Rilievi_Audit',
+                        params: {
+                          intermediario: item,
+                          oldData: files,
+                          origine: 'Emittenti',
+                          richiesta: 'Aby',
+                        },
+                      }"
+                    >
+                      <CButton size="sm" color="primary" variant="outline">
+                        Mostra
+                      </CButton>
+                    </router-link>
+                  </td>
+                </template>
+                <template #RilieviIntermediari="{ item }">
+                  <td class="py-2 text-center">
+                    <router-link
+                      :to="{
+                        name: 'Rilievi_Audit',
+                        params: {
+                          intermediario: item,
+                          oldData: files,
+                          origine: 'Emittenti',
+                          richiesta: 'Int',
+                        },
+                      }"
+                    >
+                      <CButton size="sm" color="primary" variant="outline">
+                        Mostra
+                      </CButton>
+                    </router-link>
+                  </td>
+                </template>
+                <template #Audit="{ item }">
+                  <td class="py-2 text-center">
+                    <router-link
+                      :to="{
+                        name: 'Rilievi_Audit',
+                        params: {
+                          intermediario: item,
+                          oldData: files,
+                          origine: 'Emittenti',
+                          richiesta: 'Aud',
+                        },
+                      }"
+                    >
+                      <CButton size="sm" color="primary" variant="outline">
+                        Mostra
+                      </CButton>
+                    </router-link>
+                  </td>
+                </template>
+              </CDataTable>
+            </div>
+            <!-- DATA TABLE PER PROPONENTI -->
+            <div class="pt-1" v-if="settore === 'INTERMEDIARI PROPONENTI'">
+              <p class="text-right">
+                Totale Intermediari Proponenti: <b>{{ files.length }}</b>
+              </p>
+              <CDataTable
+                id="proponenti_table"
+                :items="files"
+                :fields="fields_INTERMEDIARI_PROPONENTI"
+                ref="tabella_doc"
+                sorter
+                hover
+                border
+                :itemsPerPage="20"
+                pagination
+                :table-filter="{
+                  placeholder: 'Ricerca...',
+                  label: 'Ricerca:',
+                }"
+                striped
+                :items-per-page-select="{ label: 'Risultati per pagina' }"
+                :noItemsView="{ noItems: ' ' }"
+              >
+                <template #RUI="{ item }">
+                  <td class="text-center">{{ item.RUI }}</td>
+                </template>
+                <template #Quante_unita_operative_attive="{ item }">
+                  <td class="text-center">
+                    <router-link
+                      :to="{
+                        name: 'DettagliProponente',
+                        params: {
+                          intermediario: item,
+                          proponenti: files,
+                        },
+                      }"
+                    >
+                      <CButton
+                        size="sm"
+                        color="primary"
+                        variant="outline"
+                        v-c-tooltip="
+                          'Clicca per visualizzare le unità operative'
+                        "
+                      >
+                        {{ item.Quante_unita_operative_attive }}
+                        {{
+                          item.Quante_unita_operative_attive == 1
+                            ? "Unità operativa"
+                            : "Unità operative"
+                        }}
+                      </CButton>
+                    </router-link>
+                  </td>
+                </template>
+                <template #POG="{ item }">
+                  <td class="py-2 text-center">
+                    <CButton
+                      v-if="item.POG !== ''"
+                      color="primary"
+                      variant="outline"
+                      square
+                      size="sm"
+                      @click="
+                        preview(item.POG, 'INTERMEDIARIO');
+                        titoloModale('PROPONENTE', item.Descrizione, 'POG');
+                      "
+                    >
+                      Visualizza
+                    </CButton>
+                  </td>
+                </template>
+                <template #RilieviDiAby="{ item }">
+                  <td class="py-2 text-center">
+                    <router-link
+                      :to="{
+                        name: 'Rilievi_Audit',
+                        params: {
+                          intermediario: item,
+                          oldData: files,
+                          origine: 'Proponenti',
+                          richiesta: 'Aby',
+                        },
+                      }"
+                    >
+                      <CButton size="sm" color="primary" variant="outline">
+                        Mostra
+                      </CButton>
+                    </router-link>
+                  </td>
+                </template>
+                <template #RilieviIntermediari="{ item }">
+                  <td class="py-2 text-center">
+                    <router-link
+                      :to="{
+                        name: 'Rilievi_Audit',
+                        params: {
+                          intermediario: item,
+                          oldData: files,
+                          origine: 'Proponenti',
+                          richiesta: 'Int',
+                        },
+                      }"
+                    >
+                      <CButton size="sm" color="primary" variant="outline">
+                        Mostra
+                      </CButton>
+                    </router-link>
+                  </td>
+                </template>
+                <template #Audit="{ item }">
+                  <td class="py-2 text-center">
+                    <router-link
+                      :to="{
+                        name: 'Rilievi_Audit',
+                        params: {
+                          intermediario: item,
+                          oldData: files,
+                          origine: 'Proponenti',
+                          richiesta: 'Aud',
+                        },
+                      }"
+                    >
+                      <CButton size="sm" color="primary" variant="outline">
+                        Mostra
+                      </CButton>
+                    </router-link>
+                  </td>
+                </template>
+              </CDataTable>
+            </div>
+            <!-- DATA TABLE PER UNITA' OPERATIVE -->
+            <div class="pt-1" v-if="settore === 'UNITA OPERATIVE'">
+              <p class="text-right">
+                Totale Unità Operative: <b>{{ files.length }}</b>
+              </p>
+              <CDataTable
+                id="UO_table"
+                :items="files"
+                :fields="fields_UO"
+                ref="tabella_doc"
+                sorter
+                hover
+                border
+                :itemsPerPage="20"
+                pagination
+                :table-filter="{
+                  placeholder: 'Ricerca...',
+                  label: 'Ricerca:',
+                }"
+                striped
+                :items-per-page-select="{ label: 'Risultati per pagina' }"
+                :noItemsView="{ noItems: ' ' }"
+              >
+                <template #RUI="{ item }">
+                  <td class="text-center">{{ item.RUI }}</td>
+                </template>
+                <template #RilieviDiAby="{ item }">
+                  <td class="py-2 text-center">
+                    <router-link
+                      :to="{
+                        name: 'Rilievi_Audit',
+                        params: {
+                          intermediario: item,
+                          oldData: files,
+                          origine: 'UO',
+                          richiesta: 'Aby',
+                        },
+                      }"
+                    >
+                      <CButton size="sm" color="primary" variant="outline">
+                        Mostra
+                      </CButton>
+                    </router-link>
+                  </td>
+                </template>
+                <template #RilieviIntermediari="{ item }">
+                  <td class="py-2 text-center">
+                    <router-link
+                      :to="{
+                        name: 'Rilievi_Audit',
+                        params: {
+                          intermediario: item,
+                          oldData: files,
+                          origine: 'UO',
+                          richiesta: 'Int',
+                        },
+                      }"
+                    >
+                      <CButton size="sm" color="primary" variant="outline">
+                        Mostra
+                      </CButton>
+                    </router-link>
+                  </td>
+                </template>
+                <template #Audit="{ item }">
+                  <td class="py-2 text-center">
+                    <router-link
+                      :to="{
+                        name: 'Rilievi_Audit',
+                        params: {
+                          intermediario: item,
+                          oldData: files,
+                          origine: 'UO',
+                          richiesta: 'Aud',
+                        },
+                      }"
+                    >
+                      <CButton size="sm" color="primary" variant="outline">
+                        Mostra
+                      </CButton>
+                    </router-link>
+                  </td>
+                </template>
+              </CDataTable>
+            </div>
             <!-- DATA TABLE PER RCA -->
             <div class="pt-5" v-if="settore === 'RC AUTO'">
               <CDataTable
@@ -380,6 +820,7 @@
                 ref="tabella_doc"
                 sorter
                 hover
+                border
                 pagination
                 :table-filter="{
                   placeholder: 'Ricerca...',
@@ -438,6 +879,7 @@
                 :fields="fields_SERVIZI"
                 sorter
                 hover
+                border
                 pagination
                 :column-filter-value="{ Tipo: filtro_gar }"
                 :table-filter="{
@@ -481,6 +923,7 @@
                 sorter
                 hover
                 pagination
+                border
                 :column-filter-value="{ Tipo: filtro_gar }"
                 :table-filter="{
                   placeholder: 'Ricerca...',
@@ -541,8 +984,67 @@ import axios from "axios";
 import { folder_list, documenti_list, intermediari_list } from "./folder";
 
 import VisualizzaDocumento from "../../containers/VisualizzaDocumento";
-
-// NOMI DELLE COLONNE DELLA TABELLA PER INTERMEDIARIO
+const fields_CIRCOLARI = [
+  {
+    key: "Numero_Formatted",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Numero",
+  },
+  {
+    key: "Titolo",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Titolo",
+  },
+  {
+    key: "Insert_Date",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Data creazione",
+  },
+  {
+    key: "Insert_User",
+    _style: "text-align:center;",
+    label: "Inserito da",
+  },
+  {
+    key: "Update_Date",
+    label: "Data aggiornamento",
+    _style: "text-align:center;",
+  },
+  {
+    key: "Update_User",
+    label: "Aggiornato da",
+    _style: "text-align:center;",
+  },
+  {
+    key: "Note",
+    label: "Note",
+    sorter: false,
+    filter: false,
+    _style: "text-align: center;",
+  },
+  {
+    key: "Download",
+    label: "Download",
+    sorter: false,
+    filter: false,
+    _style: "text-align: center;",
+  },
+];
+const fields_ORGANIGRAMMA = [
+  {
+    key: "Descrizione",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Descrizione",
+  },
+  {
+    key: "Download",
+    label: "Download",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+];
+// NOMI DELLE COLONNE DELLA TABELLA DOCUMENTI INTERMEDIARIO
 const fields_DOCUMENTI = [
   {
     key: "Descrizione",
@@ -558,15 +1060,168 @@ const fields_DOCUMENTI = [
   },
 ];
 // NOMI COLONNE PER GLI INTERMEDIARI EMITTENTI E PROPONENTI
-const fields_INTERMEDIARI = [
+const fields_INTERMEDIARI_EMITTENTI_ADMIN = [
+  {
+    key: "RagioneSociale",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Ragione Sociale",
+  },
+  {
+    key: "RUI",
+    _style: "font-weight: bold; text-align:center;",
+    label: "RUI",
+  },
+  {
+    key: "Quanti_prodotti_in_uso",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Elenco Prodotti",
+  },
+  {
+    key: "POG",
+    label: "POG",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+  {
+    key: "RilieviDiAby",
+    label: "Rilievi di Aby",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+  {
+    key: "RilieviIntermediari",
+    label: "Rilievi Intermediari",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+  {
+    key: "Audit",
+    label: "Audit",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+];
+const fields_INTERMEDIARI_EMITTENTI = [
+  {
+    key: "RagioneSociale",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Ragione Sociale",
+  },
+  {
+    key: "RUI",
+    _style: "font-weight: bold; text-align:center;",
+    label: "RUI",
+  },
+  {
+    key: "Quanti_prodotti_in_uso",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Elenco Prodotti",
+  },
+  {
+    key: "POG",
+    label: "POG",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+  {
+    key: "RilieviIntermediari",
+    label: "Rilievi Intermediari",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+  {
+    key: "Audit",
+    label: "Audit",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+];
+const fields_INTERMEDIARI_PROPONENTI = [
+  {
+    key: "RagioneSociale",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Ragione Sociale",
+  },
+  {
+    key: "RUI",
+    _style: "font-weight: bold; text-align:center;",
+    label: "RUI",
+  },
+  {
+    key: "Quante_unita_operative_attive",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Unità Operative Attive",
+  },
+  {
+    key: "POG",
+    label: "POG",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+  {
+    key: "RilieviDiAby",
+    label: "Rilievi di Aby",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+  {
+    key: "RilieviIntermediari",
+    label: "Rilievi Intermediari",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+  {
+    key: "Audit",
+    label: "Audit",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+];
+// NOMI DELLE COLONNE PER DATA TABLE UNITA OPERATIVE
+const fields_UO = [
   {
     key: "Descrizione",
     _style: "font-weight: bold; text-align:center;",
     label: "Descrizione",
   },
   {
-    key: "visualizza",
-    label: "Fascicolo  Informativo",
+    key: "RagioneSociale",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Ragione Sociale",
+  },
+  {
+    key: "RUI",
+    _style: "font-weight: bold; text-align:center;",
+    label: "RUI",
+  },
+  {
+    key: "RilieviDiAby",
+    label: "Rilievi di Aby",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+  {
+    key: "RilieviIntermediari",
+    label: "Rilievi Intermediario",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+  {
+    key: "Audit",
+    label: "Audit",
     sorter: false,
     filter: false,
     _style: "text-align:center;",
@@ -643,22 +1298,6 @@ const fields_SERVIZI = [
     _style: "text-align: center;",
   },
 ];
-// NOMI DELLE COLONNE PER LA TABELLA SETTORE12 (ELENCO SUBFOLDER)
-// const fields_SETTORE12 = [
-//   {
-//     key: "Nome",
-//     _style: "font-weight: bold; text-align: center;",
-//     label: "Tipologia",
-//   },
-
-//   {
-//     key: "visualizza",
-//     label: "Set Informativo",
-//     sorter: false,
-//     filter: false,
-//     _style: "text-align: center;",
-//   },
-// ];
 
 export default {
   name: "Documentale",
@@ -668,6 +1307,7 @@ export default {
   },
   data() {
     return {
+      warningModal: false,
       admin: JSON.parse(localStorage.getItem("chisono_data")).Is_Sede,
       viewFile: false, // Usato per mostrare la modale con l'antprima del file
       file_name: "", // Usato per passare l'url alla preview
@@ -684,12 +1324,16 @@ export default {
         return { ...item, id };
       }),
       dove_sono: undefined,
-
       fields_RCA,
       fields_ALTRE,
       fields_SERVIZI,
       fields_DOCUMENTI,
-      fields_INTERMEDIARI,
+      fields_INTERMEDIARI_EMITTENTI,
+      fields_INTERMEDIARI_EMITTENTI_ADMIN,
+      fields_INTERMEDIARI_PROPONENTI,
+      fields_UO,
+      fields_CIRCOLARI,
+      fields_ORGANIGRAMMA,
       // fields_SETTORE12,
 
       altre_gar: [],
@@ -701,12 +1345,24 @@ export default {
       descrizione: null,
       tipoFile: null,
 
+      emittenti: [],
+      proponenti: [],
+
       color: "", // colore di sfondo documentale
       array_link: [], // array contenente l'elenco file per ciascuna cartella del documentale
+
+      // test UO
+      // files_UO,
     };
   },
   mounted() {
-
+    this.intermediari_list.forEach((item) =>
+      this.array_link.push({
+        ["SLUG"]: item.slug,
+        ["URL"]: item.URL,
+        ["FILE"]: [],
+      })
+    );
     this.documenti_list.forEach((item) =>
       item.childs.forEach((link) =>
         this.array_link.push({
@@ -728,7 +1384,61 @@ export default {
     this.array_link.forEach((item) =>
       this.recupera_documentale(item.SLUG, item.URL)
     );
- 
+    // Utilizzato per tornare a visualizzare gli emittenti/proponenti tornando indietro dalla pagina di dettaglio dell'intermediario
+    if (this.$route.params.origine == "Emittenti") {
+      let origine = {
+        nome: "INTERMEDIARI EMITTENTI",
+        slug: "INTERMEDIARI EMITTENTI",
+        tipo: "folder",
+        ico: "edit",
+        URL: "Intermediari_Emittenti",
+        subFolder: false,
+        visible: "all",
+      };
+      this.settore = origine.slug;
+      this.dove_sono = origine.slug;
+
+      this.breadcrumbs = []; // per popolare il Breadcrumbs
+      this.breadcrumbs.push([origine.nome, origine.ico]);
+      this.files = JSON.parse(localStorage.getItem("elenco_origine"));
+      this.color = "white";
+    }
+    if (this.$route.params.origine == "Proponenti") {
+      let origine = {
+        nome: "INTERMEDIARI PROPONENTI",
+        slug: "INTERMEDIARI PROPONENTI",
+        tipo: "folder",
+        ico: "edit",
+        URL: "Intermediari_Proponenti",
+        subFolder: false,
+        visible: "admin",
+      };
+      this.settore = origine.slug;
+      this.dove_sono = origine.slug;
+
+      this.breadcrumbs = []; // per popolare il Breadcrumbs
+      this.breadcrumbs.push([origine.nome, origine.ico]);
+      this.files = JSON.parse(localStorage.getItem("elenco_origine"));
+      this.color = "white";
+    }
+    if (this.$route.params.origine == "UO") {
+      let origine = {
+        nome: "UNITA OPERATIVE - Sez. E",
+        slug: "UNITA OPERATIVE",
+        tipo: "folder",
+        ico: "store",
+        URL: "UnitaOperative_Di_Aby_Broker",
+        subFolder: false,
+        visible: "admin",
+      };
+      this.settore = origine.slug;
+      this.dove_sono = origine.slug;
+
+      this.breadcrumbs = []; // per popolare il Breadcrumbs
+      this.breadcrumbs.push([origine.nome, origine.ico]);
+      this.files = JSON.parse(localStorage.getItem("elenco_origine"));
+      this.color = "white";
+    }
   },
   methods: {
     reset_pagination() {
@@ -741,6 +1451,7 @@ export default {
     },
 
     call_folder_list(folder) {
+      // console.log("colore "+ this.color);
       // Funzione chiamata dalle cartelle di primo livello (documenti intermediario, precontrattuale, ecc)
       //resetto la paginazione
       this.reset_pagination();
@@ -761,9 +1472,8 @@ export default {
         this.load_documentale(folder.slug);
       } else {
         if (folder.subFolder == false) {
-          // console.log("vuoto");
           this.vuoto = true;
-          this.color = "";
+          // this.color = "";
         }
       }
     },
@@ -775,6 +1485,7 @@ export default {
       this.reset_pagination();
       this.vuoto = false; // Inizializzo il messaggio "non ci sono file"
       this.color = "white";
+
       // Inizializzo le sottocartelle
       this.altre_gar = [];
       this.altri_servizi = [];
@@ -817,7 +1528,7 @@ export default {
       } else {
         if (subfolder.subFolder == false) {
           this.vuoto = true;
-          this.color = "";
+          // this.color = "";
         }
       }
     },
@@ -874,28 +1585,30 @@ export default {
     },
 
     async recupera_documentale(SLUG, URL) {
-      var elenco = [];
-      var config = {
-        method: "post",
-        url: this.$custom_json.servizi_broker + URL,
-        headers: {
-          userID: localStorage.getItem("userID"),
-          anagraficaID: localStorage.getItem("anagraficaID"),
-          unitaoperativaID: localStorage.getItem("unitaoperativaID"),
-        },
-      };
-      await axios(config)
-        .then(function (response) {
-          elenco = response.data;
-        })
-        .catch(function (error) {
-          elenco = [];
-          console.log(error);
-        });
-      for (var i in this.array_link) {
-        if (this.array_link[i].SLUG == SLUG) {
-          this.array_link[i].FILE = elenco;
-          break;
+      if (URL) {
+        var elenco = [];
+        var config = {
+          method: "post",
+          url: this.$custom_json.servizi_broker + URL,
+          headers: {
+            userID: localStorage.getItem("userID"),
+            anagraficaID: localStorage.getItem("anagraficaID"),
+            unitaoperativaID: localStorage.getItem("unitaoperativaID"),
+          },
+        };
+        await axios(config)
+          .then(function (response) {
+            elenco = response.data;
+          })
+          .catch(function (error) {
+            elenco = [];
+            console.log(error);
+          });
+        for (var i in this.array_link) {
+          if (this.array_link[i].SLUG == SLUG) {
+            this.array_link[i].FILE = elenco;
+            break;
+          }
         }
       }
       // console.log(elenco);
@@ -915,6 +1628,7 @@ export default {
       }
 
       this.files = elenco;
+      // console.log("trovato");
       if (this.files.length <= 0) {
         this.vuoto = true; // Variabile usata per il messaggio "non ci sono documenti"
         this.color = "";
@@ -966,6 +1680,11 @@ export default {
     preview(url, dest) {
       var end_point = "";
       switch (dest) {
+        case "ORGANIGRAMMA":
+          end_point =
+            this.$custom_json.servizi_broker +
+            this.$custom_json.ep_broker.documentale_DocumentiIntermediario;
+          break;
         case "INTERMEDIARIO":
           end_point =
             this.$custom_json.servizi_broker +
@@ -991,6 +1710,7 @@ export default {
             this.$custom_json.servizi_broker +
             this.$custom_json.ep_broker.documentale_broker;
       }
+      // console.log("chiamo "+ end_point);
       this.viewFile = true;
       if (this.timer == 0) {
         this.select = false;

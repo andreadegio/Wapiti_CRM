@@ -39,13 +39,14 @@
           id="new_menu"
         >
           <CNavItem
-            active
+            :class="$route.path == '/dashboard' ? 'active' : ''"
             class="grow"
             :to="{ path: '/dashboard' }"
             target="_self"
             ><i class="fas fa-home"></i> Dashboard</CNavItem
           >
           <CNavItem
+          :class="$route.path == '/StatistichePortali' ? 'active' : ''"
             class="grow"
             v-if="isEnergy && idUtenteEnergy != '-1'"
             :to="{ path: '/StatistichePortali' }"
@@ -53,13 +54,16 @@
             ><i class="far fa-chart-bar"></i> Statistiche</CNavItem
           >
           <CNavItem
+          :class="$route.path == '/Statistiche/broker' ? 'active' : ''"
             class="grow"
             v-else
-            :to="{ path: '/Statistiche/broker'}"
+            :to="{ path: '/Statistiche/broker' }"
             target="_self"
             ><i class="far fa-chart-bar"></i> Statistiche</CNavItem
           >
-          <CNavItem class="grow" :to="{ path: '/Commerciale' }" target="_self"
+          <CNavItem 
+          :class="$route.path == '/Commerciale' ? 'active' : ''"
+          class="grow" :to="{ path: '/Commerciale' }" target="_self"
             ><i class="fas fa-user-tie"></i> Area Commerciale
             <CBadge
               v-show="notificheCommerciale > 0"
@@ -68,7 +72,9 @@
               >{{ notificheCommerciale }}</CBadge
             ></CNavItem
           >
-          <CNavItem class="grow" :to="{ path: '/Formazione' }" target="_self"
+          <CNavItem 
+          :class="$route.path == '/Formazione' ? 'active' : ''"
+          class="grow" :to="{ path: '/Formazione' }" target="_self"
             ><i class="fas fa-user-graduate"></i> Formazione
             <CBadge
               v-show="notificheFormazione > 0"
@@ -77,10 +83,14 @@
               >{{ notificheFormazione }}</CBadge
             ></CNavItem
           >
-          <CNavItem class="grow" :to="{ path: '/Comingsoon' }" target="_self"
+          <CNavItem 
+          :class="$route.path == '/Comingsoon' ? 'active' : ''"
+          class="grow" :to="{ path: '/Comingsoon' }" target="_self"
             ><i class="fas fa-calculator"></i> Amministrazione</CNavItem
           >
-          <CNavItem class="grow" :to="{ path: '/Documentale' }" target="_self"
+          <CNavItem
+          :class="$route.path == '/Documentale' ? $route.path== '/Documentale/Intermediario' ? 'active': 'active' : ''"
+           class="grow" :to="{ path: '/Documentale' }" target="_self"
             ><i class="fas fa-file-signature"></i> Documentale</CNavItem
           >
         </CNav>
@@ -301,13 +311,20 @@ export default {
   /* border-right: 1px solid lightgray; */
 }
 
-
 .nav-pills .nav-link {
   font-size: 1.3rem !important;
   font-weight: 500 !important;
 }
 
-a.active {
+.active {
+  background-color: #ef7a13 !important;
+  border-radius: 0.25rem;
+  
+}
+.active a{
+  color: white !important;
+}
+a.active{
   background-color: #ef7a13 !important;
 }
 

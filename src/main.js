@@ -95,7 +95,7 @@ fetch("/config/config.json")
     Vue.prototype.$custom_json = custom_json;
     // console.log(custom_json.ep_api.secondo);
     // console.log('main');
-
+    
     new Vue({
       el: "#app",
       router,
