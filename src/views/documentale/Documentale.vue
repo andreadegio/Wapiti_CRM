@@ -341,6 +341,75 @@
             <div v-show="vuoto" class="pt-5 h4 text-center">
               - Al momento non ci sono documenti disponibili -
             </div>
+            <!-- DATA TABLE PER ORGANIGRAMMA ABY -->
+            <div class="pt-5" v-if="settore === 'ORGANIGRAMMA ABY'">
+              <CDataTable
+                id="int_table"
+                ref="tabella_ORGANIGRAMMA ABY"
+                :items="files"
+                :fields="fields_ORGANIGRAMMA"
+                sorter
+                hover
+                border
+                :itemsPerPage="20"
+                pagination
+                :table-filter="{
+                  placeholder: 'Ricerca...',
+                  label: 'Ricerca:',
+                }"
+                striped
+                :items-per-page-select="{ label: 'Risultati per pagina' }"
+                :noItemsView="{ noItems: ' ' }"
+              >
+                <template #Download="{ item }">
+                  <td class="text-center">
+                    <a
+                      :href="item.Nomefile"
+                      @click.prevent="
+                        preview(item.Nomefile,'ORGANIGRAMMA');
+                        titoloModale(dove_sono, item.Descrizione);
+                      "
+                    >
+                      <i class="fas fa-download fa-2x"></i
+                    ></a>
+                  </td>
+                </template>
+              </CDataTable>
+            </div>
+            <!-- DATA TABLE PER CIRCOLARI -->
+            <div class="pt-5" v-if="(settore === 'CIRCOLARI INTERNE' && vuoto == false) || (settore==='CIRCOLARI OPERATIVE' && vuoto == false)">
+              <CDataTable
+                id="int_table"
+                ref="tabella_CIRCOLARI"
+                :items="files"
+                :fields="fields_CIRCOLARI"
+                sorter
+                hover
+                border
+                :itemsPerPage="20"
+                pagination
+                :table-filter="{
+                  placeholder: 'Ricerca...',
+                  label: 'Ricerca:',
+                }"
+                striped
+                :items-per-page-select="{ label: 'Risultati per pagina' }"
+                :noItemsView="{ noItems: ' ' }"
+              >
+                <template #Download="{ item }">
+                  <td class="text-center">
+                    <a
+                      :href="item.Filepath + '/' + item.Filename"
+                      @click.prevent="
+                        preview(item.Filepath + '/' + item.Filename)
+                      "
+                    >
+                      <i class="fas fa-download fa-2x"></i
+                    ></a>
+                  </td>
+                </template>
+              </CDataTable>
+            </div>
             <!-- DATA TABLE PER DOCUMENTI INTERMEDIARIO -->
             <div
               class="pt-5"
@@ -908,7 +977,66 @@ import axios from "axios";
 import { folder_list, documenti_list, intermediari_list } from "./folder";
 
 import VisualizzaDocumento from "../../containers/VisualizzaDocumento";
-
+const fields_CIRCOLARI = [
+  {
+    key: "Numero_Formatted",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Numero",
+  },
+  {
+    key: "Titolo",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Titolo",
+  },
+  {
+    key: "Insert_Date",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Data creazione",
+  },
+  {
+    key: "Insert_User",
+    _style: "text-align:center;",
+    label: "Inserito da",
+  },
+  {
+    key: "Update_Date",
+    label: "Data aggiornamento",
+    _style: "text-align:center;",
+  },
+  {
+    key: "Update_User",
+    label: "Aggiornato da",
+    _style: "text-align:center;",
+  },
+  {
+    key: "Note",
+    label: "Note",
+    sorter: false,
+    filter: false,
+    _style: "text-align: center;",
+  },
+  {
+    key: "Download",
+    label: "Download",
+    sorter: false,
+    filter: false,
+    _style: "text-align: center;",
+  },
+];
+const fields_ORGANIGRAMMA=[
+  {
+    key: "Descrizione",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Descrizione",
+  },
+  {
+    key: "Download",
+    label: "Download",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+]
 // NOMI DELLE COLONNE DELLA TABELLA DOCUMENTI INTERMEDIARIO
 const fields_DOCUMENTI = [
   {
@@ -1056,6 +1184,11 @@ const fields_INTERMEDIARI_PROPONENTI = [
 // NOMI DELLE COLONNE PER DATA TABLE UNITA OPERATIVE
 const fields_UO = [
   {
+    key: "Descrizione",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Descrizione",
+  },
+  {
     key: "RagioneSociale",
     _style: "font-weight: bold; text-align:center;",
     label: "Ragione Sociale",
@@ -1192,6 +1325,8 @@ export default {
       fields_INTERMEDIARI_EMITTENTI_ADMIN,
       fields_INTERMEDIARI_PROPONENTI,
       fields_UO,
+      fields_CIRCOLARI,
+      fields_ORGANIGRAMMA,
       // fields_SETTORE12,
 
       altre_gar: [],
@@ -1538,6 +1673,11 @@ export default {
     preview(url, dest) {
       var end_point = "";
       switch (dest) {
+        case "ORGANIGRAMMA":
+          end_point =
+            this.$custom_json.servizi_broker +
+            this.$custom_json.ep_broker.documentale_DocumentiIntermediario;
+          break;
         case "INTERMEDIARIO":
           end_point =
             this.$custom_json.servizi_broker +
@@ -1563,6 +1703,7 @@ export default {
             this.$custom_json.servizi_broker +
             this.$custom_json.ep_broker.documentale_broker;
       }
+      // console.log("chiamo "+ end_point);
       this.viewFile = true;
       if (this.timer == 0) {
         this.select = false;

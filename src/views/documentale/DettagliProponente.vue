@@ -34,91 +34,7 @@
             <td class="text-center">{{ item.RUI }}</td>
           </template>
         </CDataTable>
-        <!-- <CDataTable
-          id="UO_table"
-          :items="UO"
-          :fields="fields_UO"
-          ref="tabella_doc"
-          sorter
-          hover
-          border
-          :itemsPerPage="20"
-          pagination
-          :table-filter="{
-            placeholder: 'Ricerca...',
-            label: 'Ricerca:',
-          }"
-          striped
-          :items-per-page-select="{ label: 'Risultati per pagina' }"
-          :noItemsView="{ noItems: ' ' }"
-        >
-          <template #RUI="{ item }">
-            <td class="text-center">{{ item.RUI }}</td>
-          </template>
-          <template #RilieviDiAby="{ item }">
-            <td class="py-2 text-center">
-              <router-link
-                :to="{
-                  name: 'Rilievi_Audit',
-                  params: {
-                    intermediario: item,
-                    oldData: UO,
-                    origine: 'DettaglioProponente',
-                    richiesta: 'Aby',
-                    proponenti: proponenti,
-                    proponente: intermediario
-                  },
-                }"
-              >
-                <CButton size="sm" color="primary" variant="outline">
-                  Mostra
-                </CButton>
-              </router-link>
-            </td>
-          </template>
-          <template #RilieviIntermediari="{ item }">
-            <td class="py-2 text-center">
-              <router-link
-                :to="{
-                  name: 'Rilievi_Audit',
-                  params: {
-                    intermediario: item,
-                    oldData: UO,
-                    origine: 'DettaglioProponente',
-                    richiesta: 'Int',
-                    proponenti: proponenti,
-                    proponente: intermediario
-                  },
-                }"
-              >
-                <CButton size="sm" color="primary" variant="outline">
-                  Mostra
-                </CButton>
-              </router-link>
-            </td>
-          </template>
-          <template #Audit="{ item }">
-            <td class="py-2 text-center">
-              <router-link
-                :to="{
-                  name: 'Rilievi_Audit',
-                  params: {
-                    intermediario: item,
-                    oldData: UO,
-                    origine: 'DettaglioProponente',
-                    richiesta: 'Aud',
-                    proponenti: proponenti,
-                    proponente: intermediario
-                  },
-                }"
-              >
-                <CButton size="sm" color="primary" variant="outline">
-                  Mostra
-                </CButton>
-              </router-link>
-            </td>
-          </template>
-        </CDataTable> -->
+      
       </div>
       <div>
         <CButton
@@ -142,6 +58,11 @@ import axios from "axios";
 // NOMI DELLE COLONNE PER DATA TABLE UNITA OPERATIVE
 const fields_UO = [
   {
+    key: "Descrizione",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Descrizione",
+  },
+  {
     key: "RagioneSociale",
     _style: "font-weight: bold; text-align:center;",
     label: "Ragione Sociale",
@@ -152,39 +73,7 @@ const fields_UO = [
     label: "RUI",
   },
 ];
-// const fields_UO = [
-//   {
-//     key: "RagioneSociale",
-//     _style: "font-weight: bold; text-align:center;",
-//     label: "Ragione Sociale",
-//   },
-//   {
-//     key: "RUI",
-//     _style: "font-weight: bold; text-align:center;",
-//     label: "RUI",
-//   },
-//   {
-//     key: "RilieviDiAby",
-//     label: "Rilievi di Aby",
-//     sorter: false,
-//     filter: false,
-//     _style: "text-align:center;",
-//   },
-//   {
-//     key: "RilieviIntermediari",
-//     label: "Rilievi Intermediario",
-//     sorter: false,
-//     filter: false,
-//     _style: "text-align:center;",
-//   },
-//   {
-//     key: "Audit",
-//     label: "Audit",
-//     sorter: false,
-//     filter: false,
-//     _style: "text-align:center;",
-//   },
-// ];
+
 export default {
   name: "DettagliProponente",
   components: {},

@@ -1,6 +1,33 @@
 //  Struttura del documentale
 const intermediari_list = [
   {
+    nome: "ORGANIGRAMMA ABY",
+    slug: "ORGANIGRAMMA ABY",
+    tipo: "folder",
+    ico: "sitemap",
+    URL: "Documentale_Organigramma",
+    subFolder: false,
+    visible: "all",
+  },
+  {
+    nome: "CIRCOLARI OPERATIVE",
+    slug: "CIRCOLARI OPERATIVE",
+    tipo: "folder",
+    ico: "edit",
+    URL: "CircolariOperative",
+    subFolder: false,
+    visible: "all",
+  },
+  {
+    nome: "CIRCOLARI INTERNE",
+    slug: "CIRCOLARI INTERNE",
+    tipo: "folder",
+    ico: "edit",
+    URL: "CircolariInterne",
+    subFolder: false,
+    visible: "admin",
+  },
+  {
     nome: "INTERMEDIARI EMITTENTI",
     slug: "INTERMEDIARI EMITTENTI",
     tipo: "folder",

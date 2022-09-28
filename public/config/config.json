@@ -59,7 +59,10 @@
     "AgenzieIntermediario": "UnitaOperative_By_IdIntermediario",
     "RilieviDiAby": "RilieviDiAby",
     "RilieviIntermediari": "RilieviIntermediari",
-    "Audit": "Audit"
+    "Audit": "Audit",
+    "CircolariInterne": "CircolariInterne",
+    "CircolariOperative": "CircolariOperative",
+    "Documentale_Organigramma": "Documentale_Organigramma"
   },
   "login_url": "http://broker.abybroker.it/accesso/login.aspx?r=staging",
   "login_url_energy": "https://abyenergy.it/Test/accesso.aspx?r=staging",
