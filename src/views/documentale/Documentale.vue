@@ -406,9 +406,10 @@
                 <template #Download="{ item }">
                   <td class="text-center">
                     <a
-                      :href="item.Filepath + '/' + item.Filename"
+                      :href="item.Id"
                       @click.prevent="
-                        preview(item.Filepath + '/' + item.Filename)
+                        preview(item.Id,'CIRCOLARI')
+                         titoloModale(dove_sono, item.Titolo);
                       "
                     >
                       <i class="fas fa-download fa-2x"></i
@@ -1680,6 +1681,11 @@ export default {
     preview(url, dest) {
       var end_point = "";
       switch (dest) {
+        case "CIRCOLARI":
+          end_point =
+            this.$custom_json.servizi_broker +
+            this.$custom_json.ep_broker.Download_Circolari+'/';
+          break;
         case "ORGANIGRAMMA":
           end_point =
             this.$custom_json.servizi_broker +
