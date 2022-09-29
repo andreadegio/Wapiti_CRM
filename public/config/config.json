@@ -40,7 +40,7 @@
     "richiesta_contatto": "Utility/richiesta_contatto",
     "get_version": "Utility/get_version"
   },
-  "servizi_broker": "https://servizi.documentale.cloud/aibajsonea/",
+  "servizi_broker": "https://servizi.documentale.cloud/aibajsontesthttps/",
   "servizi_energy": "https://abyenergy.it/servizitest/",
   "broker_veicoli": "http://broker.abybroker.it/testhttps/AreaOperazioni.aspx",
   "broker_statistiche": "http://broker.abybroker.it/ea2019/Stats_FlashReports_NoBarre.aspx?bg=ebedef&userID=",
@@ -62,7 +62,8 @@
     "Audit": "Audit",
     "CircolariInterne": "CircolariInterne",
     "CircolariOperative": "CircolariOperative",
-    "Documentale_Organigramma": "Documentale_Organigramma"
+    "Documentale_Organigramma": "Documentale_Organigramma",
+    "Download_Circolari":"Download_Documentale_Circolari"
   },
   "login_url": "http://broker.abybroker.it/accesso/login.aspx?r=staging",
   "login_url_energy": "https://abyenergy.it/Test/accesso.aspx?r=staging",
