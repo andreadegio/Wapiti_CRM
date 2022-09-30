@@ -41,8 +41,18 @@
         >
           <template #Download="{ item }">
             <td class="text-center">
-              <a :href="item.Filepath + '/' + item.Filename" @click.prevent="preview(item.Filepath + '/' + item.Filename)">
-                <i class="fas fa-download fa-2x"></i></a>
+              <a
+                :href="item.Id"
+                @click.prevent="
+                  preview(item.Id, richiesta);
+                  titoloModale(
+                    richiesta == 'Aud' ? 'AUDIT' : 'RILIEVO',
+                    item.Numero_Formatted
+                  );
+                "
+              >
+                <i class="fas fa-download fa-2x"></i
+              ></a>
             </td>
           </template>
         </CDataTable>
@@ -202,11 +212,33 @@ export default {
       }
     },
     // CHIAMATA PER VISUALIZZARE I PDF
-    preview(url) {
+    preview(url, dest) {
+      var end_point = "";
+      switch (dest) {
+        case "Aud":
+          end_point =
+            this.$custom_json.servizi_broker +
+            this.$custom_json.ep_broker.Download_Documentale_Audit +
+            "/";
+          break;
+        case "Aby":
+          end_point =
+            this.$custom_json.servizi_broker +
+            this.$custom_json.ep_broker.Download_Documentale_Rilievi +
+            "/";
+          break;
+        case "Int":
+          end_point =
+            this.$custom_json.servizi_broker +
+            this.$custom_json.ep_broker.Download_Documentale_Rilievi +
+            "/";
+          break;
+      }
+
       this.viewFile = true;
       if (this.timer == 0) {
         this.select = false;
-        this.file_name = url;
+        this.file_name = end_point + url;
         this.timer = 1;
         setTimeout(() => {
           this.timer = 0;
@@ -215,9 +247,14 @@ export default {
         this.file_name = "";
         // console.log("riprovo");
         setTimeout(() => {
-          this.preview(url);
+          this.preview(url, dest);
         }, 1000);
       }
+    },
+    titoloModale(tipologia, descrizione, tipoFile) {
+      this.tipologia = tipologia;
+      this.descrizione = descrizione;
+      this.tipoFile = tipoFile;
     },
   },
 };

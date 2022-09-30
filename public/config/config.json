@@ -63,7 +63,9 @@
     "CircolariInterne": "CircolariInterne",
     "CircolariOperative": "CircolariOperative",
     "Documentale_Organigramma": "Documentale_Organigramma",
-    "Download_Circolari":"Download_Documentale_Circolari"
+    "Download_Circolari": "Download_Documentale_Circolari",
+    "Download_Documentale_Audit": "Download_Documentale_Audit",
+    "Download_Documentale_Rilievi": "Download_Documentale_Rilievi"
   },
   "login_url": "http://broker.abybroker.it/accesso/login.aspx?r=staging",
   "login_url_energy": "https://abyenergy.it/Test/accesso.aspx?r=staging",
