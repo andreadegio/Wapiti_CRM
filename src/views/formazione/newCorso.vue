@@ -57,17 +57,6 @@
               transform: translate(-50%, -50%);
             "
           />
-          <!-- <div class="lds-grid">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div> -->
         </div>
         <div
           class="m-3 col-lg-3 col-sm-6"
@@ -270,7 +259,7 @@ export default {
       descrizione_corso: "",
       titolo_corso: "",
       subtitle_corso: "",
-      // categoria_corso: null,
+      categoria_corso: null,
       durata_corso: null,
       obiettivi_corso: "",
       thumb: "",
@@ -329,12 +318,14 @@ export default {
         this.deleteUploadedFile(fileRecord);
       }
     },
+
     previewFiles(event) {
       this.thumb = null;
       this.thumb2 = null;
       this.idUnsplash = null;
       this.thumb = URL.createObjectURL(event.target.files[0]);
     },
+
     resetCover() {
       this.$refs.file.value = null;
       this.$refs.query.value = "";
@@ -342,6 +333,7 @@ export default {
       this.thumb2 = null;
       this.idUnsplash = null;
     },
+
     async searchImg(query) {
       if (!query) {
         this.$alert(

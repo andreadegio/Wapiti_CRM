@@ -31,6 +31,7 @@
     "upload_corso": "Formazione/uploadCorso",
     "update_corso": "Formazione/updateCorso",
     "delete_corso": "Formazione/deleteCorso",
+    "categorie_formazione": "Formazione/getCategorie",
     "get_notifiche": "Utility/get_notifiche",
     "set_letta": "Utility/set_letta",
     "get_toSee": "Utility/get_toSee",
