@@ -24,13 +24,14 @@
         <strong> <i class="fas fa-filter"></i> Filtra per categoria:</strong>
         <treeselect
           v-model="filtroCat"
-          class="col-sm-5"
+          class="col-sm-5 ml-2 filtro"
           :multiple="false"
           :options="categorie"
           :max-height="300"
-          placeholder="Seleziona la categoria"
+          placeholder="Seleziona una categoria"
           @input="filtra_risultati()"
         />
+  
       </div>
       <div class="text-right col-sm-6" v-if="admin">
         <CLink to="AdminFormazione" style="color: #ef7918 !important"
@@ -47,10 +48,7 @@
               v-for="(item, index) in corsi_filtrati"
               :key="index"
             >
-              <CCard
-                class="mx-1 card_materiale"
-                
-              >
+              <CCard class="mx-1 card_materiale">
                 <CLink
                   :to="{
                     name: 'Corso',
@@ -156,7 +154,7 @@ export default {
   },
   methods: {
     filtra_risultati() {
-      console.log("filtro " + this.filtroCat);
+      // console.log("filtro " + this.filtroCat);
       if (!this.filtroCat) {
         // console.log("niente filtro");
         this.corsi_filtrati = this.corsi.slice(0);
@@ -322,6 +320,10 @@ export default {
   color: lightgray;
   font-size: 0.7rem;
 }
-
+.filtro {
+  display: inline-table;
+  vertical-align: middle;
+  padding: 0px;
+}
 </style>
 

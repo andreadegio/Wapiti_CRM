@@ -168,6 +168,20 @@
                   />
                 </div>
               </div>
+              <div class="row cover_box">
+                <span class="mb-2"
+                  ><strong>Assegna una categoria:</strong></span
+                >
+                <div class="control">
+                  <treeselect
+                    v-model="filtroCat"
+                    :multiple="false"
+                    :options="categorie"
+                    :max-height="300"
+                    placeholder="Seleziona una categoria"
+                  />
+                </div>
+              </div>
             </div>
           </div>
           <div class="cover_box mb-3">
@@ -259,7 +273,6 @@ export default {
       descrizione_corso: "",
       titolo_corso: "",
       subtitle_corso: "",
-      categoria_corso: null,
       durata_corso: null,
       obiettivi_corso: "",
       thumb: "",
@@ -271,7 +284,8 @@ export default {
       showModaleUpload: false,
       loader: false,
       permessi: null,
-
+      filtroCat: null,
+      categorie: [],
       options: [
         {
           id: "999",
@@ -286,7 +300,35 @@ export default {
       uploadHeaders: {},
     };
   },
+  mounted() {
+    this.get_categorie();
+  },
   methods: {
+    async get_categorie() {
+      // Chiamata per recuperare la lista delle categorie
+      try {
+        await axios
+          .post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.categorie_formazione,
+
+            {
+              header: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          )
+          .then((response) => {
+            this.categorie = response.data;
+          });
+        // this.categorie = lista_corsi.map((item, id) => {
+        //   return { ...item, id };
+        // });
+      } catch (error) {
+        console.log("impossibile recuperare le categorie");
+      }
+    },
     back() {
       this.$emit("back");
     },
@@ -391,7 +433,8 @@ export default {
         this.descrizione_corso == "" ||
         this.durata_corso == null ||
         this.obiettivi_corso == null ||
-        this.permessi == null
+        this.permessi == null ||
+        this.filtroCat == null
       ) {
         this.$alert(
           "Verifica di aver compilato correttamente tutti i campi",
@@ -436,6 +479,7 @@ export default {
         idUtente: JSON.parse(localStorage.getItem("chisono_data")).idUtente,
         copertinaUnsplash: this.idUnsplash,
         numeroAllegati: this.fileRecordsForUpload.length,
+        categoria: this.filtroCat,
       });
 
       formData.append("params", params);

@@ -120,6 +120,7 @@ import Treeselect from "@riophae/vue-treeselect";
 const fields = [
   { key: "titolo", _style: "max-width:20rem; font-weight: bold;" },
   { key: "sottotitolo", label: "Sottotitolo" },
+  { key: "categoria", label: "Categoria" },
   { key: "data_ins", label: "Data Inserimento" },
   {
     key: "visite",
@@ -136,7 +137,7 @@ const fields = [
 ];
 
 export default {
-  name: "GestionePost",
+  name: "GestioneCorsi",
   components: {
     Treeselect,
   },
