@@ -56,7 +56,7 @@
       <CCardBody md="4" class="news_card py-0">
         <CListGroup>
           <CListGroupItem
-            v-for="(item, index) in news.slice(0, 3)"
+            v-for="(item, index) in news.slice(0, 4)"
             :key="index"
           >
             <CMedia aside-right aside-vertical-position="center">
