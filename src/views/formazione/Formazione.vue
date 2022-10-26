@@ -1,26 +1,22 @@
 <template>
-  <div class="pt-2 formazione_style">
+  <div class="pt-2" :class="corsi_filtrati.length && 'formazione_style'">
     <div>
       <div v-if="corsi_filtrati.length == 0" class="col-12 text-center">
         <h1 class="display-3 mr-4 pb-5">Non sono presenti corsi</h1>
-        <div class="my-3" v-if="admin">
-          <CLink to="AdminFormazione" style="color: #ef7918 !important"
-            ><CIcon name="cil-settings" /><strong> Gestione contenuti</strong>
-          </CLink>
-        </div>
-        <CButton to="dashboard" color="primary" size="lg" variant="outline">
-          <i class="fas fa-angle-left"></i> Indietro
-        </CButton>
       </div>
     </div>
     <div v-if="corsi_filtrati.length > 0" class="row display-4 pb-3">
       <div class="col-12 text-center">Tutti i corsi a te riservati</div>
     </div>
-    <p class="text-center" style="font-weight: 600; font-variant: small-caps">
+    <p
+      v-if="corsi_filtrati.length > 0"
+      class="text-center"
+      style="font-weight: 600; font-variant: small-caps"
+    >
       Totale corsi presenti: {{ corsi.length }}
     </p>
     <div id="filtro_ricerca" class="mt-2 mx-5 riquadro row">
-      <div class="text-left col-sm-6">
+      <div class="text-left col-sm-4">
         <strong> <i class="fas fa-filter"></i> Filtra per categoria:</strong>
         <treeselect
           v-model="filtroCat"
@@ -29,17 +25,34 @@
           :options="categorie"
           :max-height="300"
           placeholder="Seleziona una categoria"
-          @input="filtra_risultati()"
         />
-  
       </div>
-      <div class="text-right col-sm-6" v-if="admin">
+      <div class="text-left col-sm-4">
+        <strong>Ricerca: </strong>
+        <input
+          v-model="ricercaTxt"
+          id="ricercaTesto"
+          placeholder="Testo da cercare"
+          class="filtro mx-1 inputSearch"
+          style="
+            border-bottom: 1px solid gray !important;
+            border-left: 0 !important;
+            border-right: 0 !important;
+            border-top: 0 !important;
+            background-color: unset !important;
+            border-radius: 0 !important;
+            padding-left: 0 !important;
+            margin-bottom: 0 !important;
+          "
+        /><i class="fas fa-search fa-2x"></i>
+      </div>
+      <div class="text-right col-sm-4" v-if="admin">
         <CLink to="AdminFormazione" style="color: #ef7918 !important"
           ><CIcon name="cil-settings" /><strong> Gestione contenuti</strong>
         </CLink>
       </div>
     </div>
-    <div class="row" v-if="corsi_filtrati.length > 0">
+    <div v-if="corsi_filtrati.length > 0" class="row">
       <div class="col-sm-12">
         <div class="row justify-content-center">
           <CCardGroup class="latest col-10">
@@ -139,12 +152,35 @@ export default {
         .Abilitato_Energy,
       isAuto: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Auto,
       corsi: [],
-      corsi_filtrati: [],
+      // corsi_filtrati: [],
       bgColor: "#1F4B6B",
       lista_nuovi: [],
       filtroCat: null,
       categorie: [],
+      ricercaTxt: "",
     };
+  },
+  computed: {
+    corsi_filtrati() {
+      let tempCorsi = this.corsi;
+
+      // Ricerca testuale
+      if (this.ricercaTxt != "" && this.ricercaTxt) {
+        tempCorsi = tempCorsi.filter((item) => {
+          return item.titolo
+            .toUpperCase()
+            .includes(this.ricercaTxt.toUpperCase());
+        });
+      }
+      if (!this.filtroCat) {
+        // console.log("niente filtro");
+        tempCorsi = tempCorsi.slice(0);
+      } else {
+        // console.log("filtro");
+        tempCorsi = tempCorsi.filter((a) => a.id_categoria == this.filtroCat);
+      }
+      return tempCorsi;
+    },
   },
   mounted() {
     this.get_lista_corsi();
@@ -153,18 +189,6 @@ export default {
     this.filtra_risultati();
   },
   methods: {
-    filtra_risultati() {
-      // console.log("filtro " + this.filtroCat);
-      if (!this.filtroCat) {
-        // console.log("niente filtro");
-        this.corsi_filtrati = this.corsi.slice(0);
-      } else {
-        // console.log("filtro");
-        this.corsi_filtrati = this.corsi.filter(
-          (a) => a.id_categoria == this.filtroCat
-        );
-      }
-    },
     async getToSee() {
       // Chiamata per recuperare l'array dei corsi da leggere
       let params = {
@@ -324,6 +348,16 @@ export default {
   display: inline-table;
   vertical-align: middle;
   padding: 0px;
+}
+#ricercaTesto .form-control {
+  border-bottom: 1px solid gray !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-top: 0 !important;
+  background-color: unset !important;
+  border-radius: 0 !important;
+  padding-left: 0 !important;
+  margin-bottom: 0 !important;
 }
 </style>
 

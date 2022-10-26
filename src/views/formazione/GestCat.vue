@@ -9,6 +9,7 @@
       :closeOnBackdrop="true"
       @closeModalClick="chiudi()"
       @salvaCat="salva()"
+      :id_old="id_cat"
       :desc_old="edit_desc"
       :color_old="edit_color"
       :action="action"
@@ -47,6 +48,11 @@
         <div class="cover_box mb-3">
           <div style="background-color: white">
             <CDataTable
+            class="p-2"
+             :table-filter="{
+              placeholder: 'Ricerca...',
+              label: 'Ricerca nelle categorie:',
+            }"
               :no-items-view="{
                 noResults: 'Nessun filtro appliato',
                 noItems: 'Nessuna categoria trovata',
@@ -124,6 +130,7 @@ export default {
       filtroCat: null,
       categorie: [],
       modale_cat: false,
+      id_cat: "",
       edit_desc: "",
       edit_color: "",
       action: "",
@@ -134,6 +141,7 @@ export default {
   },
   methods: {
     editCat(item) {
+      this.id_cat = item.id;
       this.edit_desc = item.label;
       this.edit_color = item.color;
       this.action = "edit";
@@ -168,7 +176,29 @@ export default {
     chiudi() {
       this.modale_cat = false;
       this.action = "";
+      this.get_categorie();
       this.$forceUpdate();
+    },
+
+    cambiaPaginazioneTabella(per_page_items) {
+      // crea oggetto da inviare alla CDataTable per cambiare la paginazione
+      let pagination_object = {
+        target: {
+          value: per_page_items,
+        },
+      };
+      // chiama la funzione di cambio paginazione sulla CDataTable
+      this.$refs.tabella_cat.paginationChange(pagination_object);
+    },
+    forzaUpdateTabella() {
+      // per forzare l'update della CDataTable simulo un cambio di paginazione
+      // salva l'attuale valore di paginazione
+      // metti paginazione a 1
+      // rimetti attuale valore di paginazione
+      // in questo modo la tabella si ri-renderizza
+      let old_val = this.$refs.tabella_cat.perPageItems;
+      this.cambiaPaginazioneTabella(1);
+      this.cambiaPaginazioneTabella(old_val);
     },
   },
 };

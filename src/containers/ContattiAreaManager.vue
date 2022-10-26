@@ -221,6 +221,7 @@
           <CListGroupItem
             v-for="(contatto, index) in recapiti_energy"
             :key="index"
+            v-if="contatto.Descrizione != 'Direttore Commerciale'"
             class="flex-column align-items-start grow"
           >
             <div

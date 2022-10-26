@@ -35,6 +35,14 @@
             clickableRows
             @row-clicked="myRowClickHandler"
           >
+          <template #color_categoria="{ item }">
+                <td class="py-3" style="text-align: center !important">
+                  <div
+                    class="riquadro_colore py-0 m-0"
+                    :style="{ '--bgColor': item.color_categoria }"
+                  ></div>
+                </td>
+              </template>
             <template #show_details="{ item }">
               <td class="py-2" style="text-align: center !important">
                 <CButton
@@ -121,6 +129,7 @@ const fields = [
   { key: "titolo", _style: "max-width:20rem; font-weight: bold;" },
   { key: "sottotitolo", label: "Sottotitolo" },
   { key: "categoria", label: "Categoria" },
+  { key: "color_categoria", label: "Colore categoria"},
   { key: "data_ins", label: "Data Inserimento" },
   {
     key: "visite",

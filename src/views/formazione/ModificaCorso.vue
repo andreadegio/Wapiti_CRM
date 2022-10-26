@@ -57,6 +57,20 @@
               />
             </div>
           </div>
+          <div class="row cover_box">
+                <span class="mb-2"
+                  ><strong>Assegna una categoria:</strong></span
+                >
+                <div class="control">
+                  <treeselect
+                    v-model="editPost.id_categoria"
+                    :multiple="false"
+                    :options="categorie"
+                    :max-height="300"
+                    placeholder="Seleziona una categoria"
+                  />
+                </div>
+              </div>
           <div class="cover_box mb-3">
             <span><strong>Durata (minuti):</strong></span>
             <CInput
@@ -163,6 +177,7 @@ export default {
       file: "",
       ext: "",
       permessi: null,
+      categorie: [],
       options: [
         {
           id: "999",
@@ -178,8 +193,34 @@ export default {
   mounted() {
     this.checknavigazione();
     this.getPermessiCorso(this.editPost.id_corso);
+    this.get_categorie();
   },
   methods: {
+    async get_categorie() {
+      // Chiamata per recuperare la lista delle categorie
+      try {
+        await axios
+          .post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.categorie_formazione,
+
+            {
+              header: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          )
+          .then((response) => {
+            this.categorie = response.data;
+          });
+        // this.categorie = lista_corsi.map((item, id) => {
+        //   return { ...item, id };
+        // });
+      } catch (error) {
+        console.log("impossibile recuperare le categorie");
+      }
+    },
     checknavigazione(){
       if (!this.editPost){
         // console.log("nessun valore");

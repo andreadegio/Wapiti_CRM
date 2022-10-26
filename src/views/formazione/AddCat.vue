@@ -88,6 +88,11 @@ export default {
       required: true,
       default: "add",
     },
+    id_old: {
+      type: String,
+      required: true,
+      default: "",
+    },
     desc_old: {
       type: String,
       required: false,
@@ -105,6 +110,7 @@ export default {
   data() {
     return {
       showModaleUpload: false,
+      idcat:"",
       colors,
       descrizione: "",
     };
@@ -113,12 +119,86 @@ export default {
     if (this.action == "edit") {
       this.descrizione = this.desc_old;
       this.colors = this.color_old;
+      this.idcat = this.id_old;
+
     }
   },
   methods: {
-    salva() {
-      this.showModaleUpload = true;
-      this.$alert("Categoria inserita correttamente", "Completato", "success").then(this.chiudi());
+    salva: async function () {
+      if (this.descrizione == "" || this.colors.hex == "") {
+        this.$alert(
+          "Verifica di aver compilato correttamente tutti i campi",
+          "Dati incompleti",
+          "warning"
+        );
+        return;
+      }
+      if (this.action == "add") {
+        let url =
+          this.$custom_json.base_url +
+          this.$custom_json.api_url +
+          this.$custom_json.ep_api.add_cat_formazione;
+        let params = JSON.stringify({
+          descrizione: this.descrizione,
+          color: this.colors.hex,
+        });
+        await axios
+          .post(url, params, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+            if (response.data.status == "OK") {
+              this.showModaleUpload = true;
+              this.$alert(
+                "Categoria inserita correttamente",
+                "Completato",
+                "success"
+              ).then(this.chiudi());
+            } else {
+              this.$alert(
+                "Si è verificato un'errore:",
+                response.data.message,
+                "warning"
+              );
+              return;
+            }
+          });
+      }else{
+        let url =
+          this.$custom_json.base_url +
+          this.$custom_json.api_url +
+          this.$custom_json.ep_api.edit_cat_formazione;
+        let params = JSON.stringify({
+          id: this.idcat,
+          descrizione: this.descrizione,
+          color: this.colors.hex,
+        });
+        await axios
+          .post(url, params, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+            if (response.data.status == "OK") {
+              this.showModaleUpload = true;
+              this.$alert(
+                "Categoria inserita correttamente",
+                "Completato",
+                "success"
+              ).then(this.chiudi());
+            } else {
+              this.$alert(
+                "Si è verificato un'errore:",
+                response.data.message,
+                "warning"
+              );
+              return;
+            }
+          });
+      }
     },
     chiudi() {
       this.$emit("closeModalClick");
