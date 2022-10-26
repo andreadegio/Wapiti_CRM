@@ -12,7 +12,7 @@
           <img src="/img/logo_abyway.png" width="200px" />
         </CHeaderNavItem>
       </CHeaderNav>
-      <!-- <CHeaderNav v-show="city" class="d-md-down-none mr-auto">
+      <CHeaderNav v-show="city" class="d-md-down-none mr-auto">
         <CHeaderNavItem class="px-3">
           <h4>
             <em style="font-size: 1rem">{{ city }} {{ temp }}°C </em>
@@ -23,7 +23,7 @@
             />
           </h4>
         </CHeaderNavItem>
-      </CHeaderNav> -->
+      </CHeaderNav>
       <CHeaderNav class="mr-4">
         <TheHeaderDropdownAccnt />
       </CHeaderNav>
@@ -127,7 +127,7 @@ export default {
     };
   },
   mounted() {
-    // this.meteo();
+    this.meteo();
     this.get_notifiche_formazione();
     this.get_notifiche_commerciale();
     this.chisono_energy();
