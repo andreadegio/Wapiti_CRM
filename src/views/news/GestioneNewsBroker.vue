@@ -2,7 +2,7 @@
   
   <iframe
     id="news_frame"
-    :src="'http://broker.abybroker.it/ea2019/RicercaNotizie_NoBarre.aspx'"
+    :src="'https://broker.abybroker.it/ea2019/RicercaNotizie_NoBarre.aspx'"
     class="frame-stats"
     width="100%"
     frameborder="0"

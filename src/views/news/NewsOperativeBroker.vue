@@ -2,7 +2,7 @@
   <iframe
     id="news_frame"
     :src="
-      'http://broker.abybroker.it/ea2019/RicercaNotizieUO_NoBarre.aspx?userID=' +
+      'https://broker.abybroker.it/ea2019/RicercaNotizieUO_NoBarre.aspx?userID=' +
       userID +
       '&anagraficaID=' +
       anagraficaID +
