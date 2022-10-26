@@ -133,21 +133,7 @@
                         <div class="text-muted small_text"></div>
                       </div>
                     </div>
-                    <!-- <div class="riga_contatto flex-column align-middle">
-                      <div class="icona_contatto_modale mr-3 align-middle">
-                        <i class="fab fa-telegram-plane"></i>
-                      </div>
-                      <div
-                        class="recapito_dettaglio d-inline-block align-middle"
-                      >
-                        Scrivici su Telegram<br />
-                        <b></b>
-                        <br />
-                        <div class="text-muted" style="font-size: 0.9rem">
-                          (orario / )
-                        </div>
-                      </div>
-                    </div> -->
+                 
                   </CCardBody>
                 </CCard>
               </CCol>

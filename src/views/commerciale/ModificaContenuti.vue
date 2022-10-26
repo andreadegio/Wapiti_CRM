@@ -300,11 +300,11 @@ export default {
     set_background() {
       if (this.settore == "Assicurazioni") {
         this.urlImgSettore =
-          'url("http://localhost:8080/img/filigranaAuto.png")';
+          'url("/img/filigranaAuto.png")';
       }
       if (this.settore == "Energy") {
         this.urlImgSettore =
-          'url("http://localhost:8080/img/filigranaGas.png")';
+          'url("/img/filigranaGas.png")';
       }
     },
     aggiorna_modale(value) {
