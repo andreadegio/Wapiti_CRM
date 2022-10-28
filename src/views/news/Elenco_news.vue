@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="loader"
-    style="position: relative; width: 100%; top: 50%; left: 50%;"
+    style="position: relative; width: 100%; top: 50%; left: 50%"
   >
     <img
       src="img/loader.gif"
@@ -19,25 +19,82 @@
         object-fit: none;
       "
     />
-    <!-- <div class="lds-grid">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div> -->
   </div>
   <div v-else>
     <div v-if="news != null" id="elenco_mondo" style="display: grid !important">
       <h1 class="mb-3 mt-3 text-center titolo_sezione">
         Elenco News dal mondo
       </h1>
+      <CCardGroup class="latest col-12">
+        <div
+          class="col-lg-2 col-sm-6 px-0"
+          v-for="(item, index) in news"
+          :key="index"
+        >
+          <CCard class="mx-1 card_materiale">
+            <!-- <CLink
+              :to="{
+                name: 'Corso',
+                params: {
+                  corso: item.titolo,
+                  id: item.id,
+                  lista_corsi: corsi,
+                },
+              }"
+            > -->
+              <CCardImg
+                :src="$custom_json.base_url +
+                $custom_json.img_news_url +
+                item.immagine"
+                style="height: 15rem; object-fit: cover"
+                alt="- IMPOSSIBILE CARICARE -"
+              >
+              </CCardImg>
+              <!-- <CBadge
+                v-if="
+                  lista_nuovi != null && lista_nuovi.includes(item.id_corso)
+                "
+                color="danger"
+                class="badgeNuovo"
+                >Nuovo
+              </CBadge> -->
 
-      <vue-masonry-wall :items="news" :options="options">
+              <CCardBody
+                class="py-1 px-2 card_post"
+                
+                style="min-height: 10rem"
+              >
+                <div class="titolo text-left pt-3">
+                  {{ item.titolo | truncate(20, "[...]") }}
+                </div>
+                <div class="row dettagli pt-4 pb-5 text-center">
+                  <!-- <div class="col-6">
+                    <i class="far fa-calendar-alt"></i>
+                    {{ item.data_ins | formatDate }}
+                  </div>
+                  <div class="col-6">
+                    <i class="far fa-clock"></i> {{ item.durata }} minuti
+                  </div> -->
+                </div>
+                <div class="text-right"></div>
+              </CCardBody>
+              <CCardFooter class="text-right py-2">
+                <!-- <div
+                  class="views"
+                  v-c-tooltip="{
+                    content: 'Visualizzazioni ',
+                    placement: 'bottom-end',
+                  }"
+                >
+                  <i class="far fa-eye"></i> {{ item.visite }}
+                </div> -->
+                <strong>Vai al corso...</strong>
+              </CCardFooter>
+            <!-- </CLink> -->
+          </CCard>
+        </div>
+      </CCardGroup>
+      <!-- <vue-masonry-wall :items="news" :options="options">
         <template v-slot:default="{ item }">
           <div class="Item elevation-6">
             <img
@@ -54,7 +111,7 @@
               </h5>
               <p
                 class="text-ellipsis-2l text-justify"
-                v-html="item.contenuto"
+                v-html="$options.filters.truncate(item.contenuto, 200, ' [...]')"
               ></p>
               <p style="text-align: right">
                 <em
@@ -66,7 +123,7 @@
             </div>
           </div>
         </template>
-      </vue-masonry-wall>
+      </vue-masonry-wall> -->
     </div>
     <div v-else>
       <div class="errore_caricamento px-5 py-3 mt-5">
@@ -89,7 +146,7 @@
 </template>
 
 <script>
-import VueMasonryWall from "vue-masonry-wall";
+// import VueMasonryWall from "vue-masonry-wall";
 import axios from "axios";
 
 // eslint-disable-next-line no-unused-vars
@@ -106,7 +163,7 @@ function content() {
 }
 export default {
   name: "MasonryNews",
-  components: { VueMasonryWall },
+  // components: { VueMasonryWall },
   data() {
     return {
       options: {
