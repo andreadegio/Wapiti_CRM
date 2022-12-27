@@ -9,22 +9,33 @@
       class="text-center"
       style="font-weight: 600; font-variant: small-caps; margin-bottom: 0px !important; "
     >
-      Totale corsi presenti: {{ corsi.length }}
+      Totale corsi presenti: {{ corsi_filtrati.length }}
     </p>
     <div id="filtro_ricerca" class="mt-2 mx-5 riquadro row">
-      <div class="text-left col-sm-3">
+      <div class="text-left col-sm-3 separatore">
+        <strong> <i class="fas fa-filter"></i> Filtra per anno:</strong>
+        <treeselect
+          v-model="filtroAnno"
+          class=" ml-2 filtro"
+          :multiple="false"
+          :options="anni_select"
+          :max-height="300"
+          placeholder="Seleziona un anno"
+        />
+      </div>
+      <div class="text-left col-sm-3 separatore">
         <strong> <i class="fas fa-filter"></i> Filtra per categoria:</strong>
         <treeselect
           v-model="filtroCat"
-          class="col-sm-5 ml-2 filtro"
+          class=" ml-2 filtro"
           :multiple="false"
           :options="categorie"
           :max-height="300"
           placeholder="Seleziona una categoria"
         />
       </div>
-      <div class="text-left col-sm-3">
-        <strong>Ricerca: </strong>
+      <div class="text-left col-sm-3 separatore">
+        <strong><i class="fas fa-search"></i> Ricerca: </strong><br/>
         <input
           v-model="ricercaTxt"
           id="ricercaTesto"
@@ -39,20 +50,12 @@
             border-radius: 0 !important;
             padding-left: 3px !important;
             margin-bottom: 0 !important;
+            width: 100%;
+            line-height: 2rem;
           "
-        /><i class="fas fa-search"></i>
-      </div>
-      <div class="text-left col-sm-3">
-        <strong> <i class="fas fa-filter"></i> Filtra per anno:</strong>
-        <treeselect
-          v-model="filtroAnno"
-          class="col-sm-5 ml-2 filtro"
-          :multiple="false"
-          :options="anni_select"
-          :max-height="300"
-          placeholder="Seleziona un anno"
         />
       </div>
+      
       <div class="text-right col-sm-3" v-if="admin">
         <CLink to="AdminFormazione" style="color: #ef7918 !important"
           ><CIcon name="cil-settings" /><strong> Gestione contenuti</strong>
@@ -98,17 +101,22 @@
                     class="badgeNuovo"
                     >Nuovo
                   </CBadge>
+                  <CBadge
+                   v-if="item.priority == 1"                    
+                    class="badgePin"
+                    ><i class="fas fa-thumbtack fa-2x"></i><br/><p style="color: black !important;">Importante</p>
+                  </CBadge>
 
                   <CCardBody
                     class="py-1 px-2 card_post"
                     :style="{ '--bgColor': item.color_categoria }"
                     style="min-height: 10rem"
                   >
-                    <!-- <div class="text-uppercase settore_color pt-3">
+                    <div class="text-uppercase settore_color pt-3">
                       <strong>
-                        <u>{{ item.settore }}</u>
+                        <u>{{ item.categoria }}</u>
                       </strong>
-                    </div> -->
+                    </div>
 
                     <div class="titolo text-left pt-3">
                       {{ item.titolo | truncate(20, "[...]") }}
@@ -342,8 +350,13 @@ export default {
   text-decoration: none;
 }
 .settore_color {
-  color: var(--bgColor);
-  opacity: 0.5;
+  /* color: var(--bgColor); */
+  opacity: 0.6;
+  padding-top: 4px !important;
+  margin-left: -5px !important;
+}
+.separatore{
+  border-right: 1px dotted gray;
 }
 .titolo {
   font-size: 1.8rem !important;
@@ -377,6 +390,22 @@ export default {
   padding: 0.4em 0.4em !important;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
     0 6px 10px 0 rgba(0, 0, 0, 0.55), 0 1px 18px 0 rgba(223, 78, 78, 0.83) !important;
+}
+.badgePin {
+  transform: rotate(25deg);
+  color: red;
+  position: absolute;
+  z-index: 99;
+  right: 0%;
+  top: 0%;
+  padding: 0.4em 0.4em !important;
+  /* box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0 6px 10px 0 rgba(0, 0, 0, 0.55), 0 1px 18px 0 rgba(223, 78, 78, 0.83) !important;
+     */
+}
+.fa-thumbtack{
+  stroke: rgba(0, 0, 0, 0.73);
+  stroke-width: 20;
 }
 .riquadro {
   border: 1px solid lightgray;
