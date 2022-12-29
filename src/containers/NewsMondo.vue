@@ -222,7 +222,4 @@ img {
   -webkit-text-fill-color: transparent;
   font-weight: 700;
 }
-.testo_news{
-  
-}
 </style>
