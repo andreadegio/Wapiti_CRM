@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="loader"
-    style="position: relative; width: 100%; top: 50%; left: 50%;"
+    style="position: relative; width: 100%; top: 50%; left: 50%"
   >
     <img
       src="img/loader.gif"
@@ -19,54 +19,123 @@
         object-fit: none;
       "
     />
-    <!-- <div class="lds-grid">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div> -->
   </div>
   <div v-else>
     <div v-if="news != null" id="elenco_mondo" style="display: grid !important">
-      <h1 class="mb-3 mt-3 text-center titolo_sezione">
-        Elenco News dal mondo
-      </h1>
+      <CModal color="dark" centered :show.sync="newsModal" size="lg">
+        <template #header>
+          <strong style="text-transform: uppercase">{{
+            news_filtrate[newsNum].titolo
+          }}</strong>
+          <CButton
+            style="color: white"
+            class="close"
+            @click="newsModal = false"
+          >
+            <!-- <button type="button" class="close" aria-label="Close"> -->
+            <span aria-hidden="true">&times;</span>
+          </CButton>
+        </template>
+        <template>
+          <div style="text-align: center">
+            <CImg
+              :src="
+                $custom_json.base_url +
+                $custom_json.img_news_url +
+                news_filtrate[newsNum].immagine
+              "
+              style="max-width: 760px; max-height: 500px"
+            />
+          </div>
+          <div class="pt-3 text-justify testo_news" v-html="news_filtrate[newsNum].contenuto"> </div>
+        </template>
 
-      <vue-masonry-wall :items="news" :options="options">
-        <template v-slot:default="{ item }">
-          <div class="Item elevation-6">
-            <img
+        <template #footer>
+          <em
+            ><small>Notizia pubblicata il: {{ news_filtrate[newsNum].data }} </small></em
+          >
+        </template>
+      </CModal>
+      <h1 class="mb-4 mt-4 text-center titolo_sezione">Elenco News</h1>
+      <div id="filtro_ricerca" class="mt-2 mx-5 riquadro row">
+        <div class="text-left col-sm-3 separatore">
+          <strong> <i class="fas fa-filter"></i> Filtra per anno:</strong>
+          <treeselect
+            v-model="filtroAnno"
+            class="ml-2 filtro"
+            :multiple="false"
+            :options="anni_select"
+            :max-height="300"
+            placeholder="Seleziona un anno"
+          />
+        </div>
+
+        <div class="text-left col-sm-4 separatore">
+          <strong><i class="fas fa-search"></i> Ricerca: </strong><br />
+          <input
+            v-model="ricercaTxt"
+            id="ricercaTesto"
+            placeholder="Testo da cercare"
+            class="filtro mx-1 inputSearch"
+            style="
+              border-bottom: 1px solid gray !important;
+              border-left: 0 !important;
+              border-right: 0 !important;
+              border-top: 0 !important;
+              background-color: unset !important;
+              border-radius: 0 !important;
+              padding-left: 3px !important;
+              margin-bottom: 0 !important;
+              width: 100%;
+              line-height: 2rem;
+            "
+          />
+        </div>
+        <div class="text-center col-sm-4" v-if="admin">
+          <CLink
+            to="Gestione_news_Mondo"
+            class="card-header-action btn-setting"
+            style="position: absolute"
+            ><CIcon name="cil-settings" /><strong> Gestione News</strong>
+          </CLink>
+        </div>
+      </div>
+      <CCardGroup class="latest col-12">
+        <div
+          class="col-lg-2 col-sm-6 px-0"
+          v-for="(item, index) in news_filtrate"
+          :key="index"
+        >
+          <CCard
+            class="mx-1 card_materiale"
+            style="height: 100%"
+            @click="showModal(index)"
+          >
+            <CCardImg
               :src="
                 $custom_json.base_url +
                 $custom_json.img_news_url +
                 item.immagine
               "
-            />
-
-            <div class="Content" style="text-align: center">
-              <h5 class="text-ellipsis-1l pb-2">
-                <strong>{{ item.titolo }}</strong>
-              </h5>
-              <p
-                class="text-ellipsis-2l text-justify"
-                v-html="item.contenuto"
-              ></p>
-              <p style="text-align: right">
-                <em
-                  ><small class="text-muted" style=""
-                    >Notizia pubblicata il {{ item.data }}</small
-                  ></em
-                >
-              </p>
-            </div>
-          </div>
-        </template>
-      </vue-masonry-wall>
+              style="height: 15rem; object-fit: cover"
+              alt="- IMPOSSIBILE CARICARE -"
+            >
+            </CCardImg>
+            <CCardBody class="py-1 px-2 card_post">
+              <div class="text-center dettagli">
+                <i class="far fa-calendar-alt"></i>
+                {{ item.data | formatDate }}
+              </div>
+              <div class="titolo text-center pt-3">
+                {{ item.titolo }}
+              </div>
+            </CCardBody>
+            <CCardFooter class="text-center py-2">
+              <strong>Leggi...</strong>
+            </CCardFooter>
+          </CCard>
+        </div>
+      </CCardGroup>
     </div>
     <div v-else>
       <div class="errore_caricamento px-5 py-3 mt-5">
@@ -89,36 +158,47 @@
 </template>
 
 <script>
-import VueMasonryWall from "vue-masonry-wall";
 import axios from "axios";
-
-// eslint-disable-next-line no-unused-vars
-function content() {
-  const length = Math.random() * 300 + 30;
-  let result = "";
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  const charactersLength = characters.length;
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
+import Treeselect from "@riophae/vue-treeselect";
+import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 export default {
-  name: "MasonryNews",
-  components: { VueMasonryWall },
+  name: "ElencoNews",
+  components: {
+    Treeselect,
+  },
   data() {
     return {
-      options: {
-        width: 300,
-        padding: {
-          2: 8,
-          default: 12,
-        },
-      },
+      admin: JSON.parse(localStorage.getItem("chisono_data")).Is_Sede,
+      ricercaTxt: "",
+      filtroAnno: null,
+      anni_select: [],
+      newsNum: 0,
+      newsModal: false,
       news: null,
       loader: true,
     };
+  },
+  computed: {
+    news_filtrate() {
+      let tempNews = this.news;
+
+      // Ricerca testuale
+      if (this.ricercaTxt != "" && this.ricercaTxt) {
+        tempNews = tempNews.filter((item) => {
+          return item.titolo
+            .toUpperCase()
+            .includes(this.ricercaTxt.toUpperCase());
+        });
+      }
+
+      // Filtro per anno di pubblicazione
+      if (this.filtroAnno) {
+        tempNews = tempNews.filter((a) => {
+          return a.data.substr(0, 4).includes(this.filtroAnno);
+        });
+      }
+      return tempNews;
+    },
   },
   mounted() {
     this.load_news();
@@ -145,6 +225,24 @@ export default {
         this.news = null;
         this.loader = false;
       }
+      // Genero l'elenco degli anni disponibili per popolare la select del filtro per anno
+
+      const result = [
+        ...new Set(
+          this.news.map((event) => new Date(event.data).getFullYear())
+        ),
+      ];
+      result.forEach((element) => {
+        // console.log(element);
+        this.anni_select.push({ id: element, label: element });
+        // console.log(this.anni_select);
+      });
+      // console.log("filtrato= ", result);
+    },
+    showModal(indice) {
+      this.newsModal = true;
+      this.newsNum = indice;
+      // console.log(indice);
     },
   },
 };
@@ -185,5 +283,56 @@ img {
 .errore_caricamento p {
   font-size: 1.5rem;
   font-weight: 300;
+}
+.titolo {
+  font-size: 1.2rem !important;
+  max-width: 95%;
+  /* white-space: nowrap;
+  overflow: hidden; */
+  /* text-overflow: ellipsis; */
+  letter-spacing: 0.05rem;
+  font-weight: 600;
+}
+.dettagli {
+  font-size: 0.8rem !important;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  color: #ef7918 !important;
+}
+.riquadro {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  padding: 0.5rem;
+  background-color: aliceblue;
+  margin-bottom: 3px !important;
+}
+.views {
+  position: absolute;
+  top: auto;
+  left: 5px;
+  right: auto;
+  color: rgb(164, 160, 160);
+  font-size: 0.7rem;
+}
+.filtro {
+  display: inline-table;
+  vertical-align: middle;
+  padding: 0px;
+}
+#ricercaTesto .form-control {
+  border-bottom: 1px solid gray !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-top: 0 !important;
+  background-color: unset !important;
+  border-radius: 0 !important;
+  padding-left: 3px !important;
+  margin-bottom: 0 !important;
+}
+.separatore {
+  border-right: 1px dotted gray;
+}
+.testo_news{
+  font-size: 1rem !important;
 }
 </style>

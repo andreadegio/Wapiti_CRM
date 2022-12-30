@@ -7,7 +7,6 @@ import { iconsSet as icons, iconsSet } from "./assets/icons/icons.js";
 import store from "./store";
 import "aos/dist/aos.css";
 import Vuetify from "@/plugins/vuetify";
-// import 'vuetify/dist/vuetify.min.css'
 import VueFormulate from "@braid/vue-formulate";
 import "../node_modules/@braid/vue-formulate/themes/snow/snow.scss";
 import axios from "../node_modules/axios";

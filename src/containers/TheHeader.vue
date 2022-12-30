@@ -8,11 +8,15 @@
       class="c-header c-header-light c-header-fixed c-header-with-subheader"
     >
       <CHeaderNav class="d-md-down-none mr-auto">
-        <CHeaderNavItem class="px-3">
-          <img src="/img/logo_abyway.png" width="200px" />
+        <CHeaderNavItem
+          class="px-3"
+          target="_self"
+        >
+        <a href="/dashboard">
+          <img src="/img/Abyway Natale.png" width="200px" /></a>
         </CHeaderNavItem>
       </CHeaderNav>
-      <!-- <CHeaderNav v-show="city" class="d-md-down-none mr-auto">
+      <CHeaderNav v-show="city" class="d-md-down-none mr-auto">
         <CHeaderNavItem class="px-3">
           <h4>
             <em style="font-size: 1rem">{{ city }} {{ temp }}°C </em>
@@ -23,7 +27,7 @@
             />
           </h4>
         </CHeaderNavItem>
-      </CHeaderNav> -->
+      </CHeaderNav>
       <CHeaderNav class="mr-4">
         <TheHeaderDropdownAccnt />
       </CHeaderNav>
@@ -46,7 +50,7 @@
             ><i class="fas fa-home"></i> Dashboard</CNavItem
           >
           <CNavItem
-          :class="$route.path == '/StatistichePortali' ? 'active' : ''"
+            :class="$route.path == '/StatistichePortali' ? 'active' : ''"
             class="grow"
             v-if="isEnergy && idUtenteEnergy != '-1'"
             :to="{ path: '/StatistichePortali' }"
@@ -54,16 +58,18 @@
             ><i class="far fa-chart-bar"></i> Statistiche</CNavItem
           >
           <CNavItem
-          :class="$route.path == '/Statistiche/broker' ? 'active' : ''"
+            :class="$route.path == '/Statistiche/broker' ? 'active' : ''"
             class="grow"
             v-else
             :to="{ path: '/Statistiche/broker' }"
             target="_self"
             ><i class="far fa-chart-bar"></i> Statistiche</CNavItem
           >
-          <CNavItem 
-          :class="$route.path == '/Commerciale' ? 'active' : ''"
-          class="grow" :to="{ path: '/Commerciale' }" target="_self"
+          <CNavItem
+            :class="$route.path == '/Commerciale' ? 'active' : ''"
+            class="grow"
+            :to="{ path: '/Commerciale' }"
+            target="_self"
             ><i class="fas fa-user-tie"></i> Area Commerciale
             <CBadge
               v-show="notificheCommerciale > 0"
@@ -72,9 +78,11 @@
               >{{ notificheCommerciale }}</CBadge
             ></CNavItem
           >
-          <CNavItem 
-          :class="$route.path == '/Formazione' ? 'active' : ''"
-          class="grow" :to="{ path: '/Formazione' }" target="_self"
+          <CNavItem
+            :class="$route.path == '/Formazione' ? 'active' : ''"
+            class="grow"
+            :to="{ path: '/Formazione' }"
+            target="_self"
             ><i class="fas fa-user-graduate"></i> Formazione
             <CBadge
               v-show="notificheFormazione > 0"
@@ -83,14 +91,24 @@
               >{{ notificheFormazione }}</CBadge
             ></CNavItem
           >
-          <CNavItem 
-          :class="$route.path == '/Comingsoon' ? 'active' : ''"
-          class="grow" :to="{ path: '/Comingsoon' }" target="_self"
+          <CNavItem
+            :class="$route.path == '/Comingsoon' ? 'active' : ''"
+            class="grow"
+            :to="{ path: '/Comingsoon' }"
+            target="_self"
             ><i class="fas fa-calculator"></i> Amministrazione</CNavItem
           >
           <CNavItem
-          :class="$route.path == '/Documentale' ? $route.path== '/Documentale/Intermediario' ? 'active': 'active' : ''"
-           class="grow" :to="{ path: '/Documentale' }" target="_self"
+            :class="
+              $route.path == '/Documentale'
+                ? $route.path == '/Documentale/Intermediario'
+                  ? 'active'
+                  : 'active'
+                : ''
+            "
+            class="grow"
+            :to="{ path: '/Documentale' }"
+            target="_self"
             ><i class="fas fa-file-signature"></i> Documentale</CNavItem
           >
         </CNav>
@@ -127,7 +145,7 @@ export default {
     };
   },
   mounted() {
-    // this.meteo();
+    this.meteo();
     this.get_notifiche_formazione();
     this.get_notifiche_commerciale();
     this.chisono_energy();
@@ -319,12 +337,11 @@ export default {
 .active {
   background-color: #ef7a13 !important;
   border-radius: 0.25rem;
-  
 }
-.active a{
+.active a {
   color: white !important;
 }
-a.active{
+a.active {
   background-color: #ef7a13 !important;
 }
 
