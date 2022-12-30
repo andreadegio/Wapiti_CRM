@@ -86,6 +86,18 @@ const documenti_list = [
   },
 ];
 
+const rami_list = [
+  {
+    nome: "CATALOGO PRODOTTI NON AUTO",
+    slug: "RAMI",
+    tipo: "folder",
+    childs: [],
+    ico: "user-shield",
+    URL: "Documentale_AltriRamiElencoSettori",
+    subFolder: true,
+  }
+];
+
 const folder_list = [
   {
     nome: "CATALOGO PRODOTTI AUTO",
@@ -120,17 +132,7 @@ const folder_list = [
         subFolder: true,
       },
     ],
-  },
-
-  {
-    nome: "CATALOGO PRODOTTI NON AUTO",
-    slug: "RAMI",
-    tipo: "folder",
-    childs: [],
-    ico: "user-shield",
-    URL: undefined,
-    subFolder: false,
-  },
+  }
   // {
   //   nome: "GAS E LUCE",
   //   tipo: "folder",
@@ -139,4 +141,4 @@ const folder_list = [
   // },
 ];
 
-export { folder_list, documenti_list, intermediari_list };
+export { folder_list, documenti_list, intermediari_list, rami_list };

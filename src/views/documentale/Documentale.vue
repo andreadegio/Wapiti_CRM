@@ -174,6 +174,42 @@
               </div>
             </li>
           </div>
+          <!-- NON AUTO -->
+          <div
+            v-for="folder in rami_list"
+            :key="folder.slug"
+            class="folder parent pt-0 pl-2 py-1"
+            style="border-bottom: 1px solid lightgray"
+          >
+            <span
+              @click="
+                call_subfolder_rami(folder);
+                dove_sono = folder.slug;
+              "
+              style="white-space: nowrap"
+              class="icon_folder h4"
+              :class="{ highlight: dove_sono == folder.slug }"
+            >
+              {{ folder.nome }}</span
+            >
+            <li
+              v-for="tipo in non_auto"
+              :key="tipo.index"
+              class="folder h6 pl-3"
+            >
+              └
+              <span
+                class="icon_folder"
+                style="white-space: nowrap"
+                @click="
+                  filter_garanzie(tipo);
+                  dove_sono = tipo;
+                "
+                :class="{ highlight: dove_sono == tipo }"
+                >{{ tipo }}</span
+              >
+            </li>
+          </div>
         </CCol>
 
         <!-- colonna centrale elenco file browser -->
@@ -334,12 +370,73 @@
                   </div>
                 </span>
               </div>
+              <!-- SETTORE NON AUTO -->
+              <div class="pt-5" v-if="settore == 'RAMI'">
+                <span>
+                  <div class="pt-0">
+                    <div>
+                      <table
+                        class="table table-striped table-bordered table-hover"
+                        style="border: 0 !important"
+                      >
+                        <thead>
+                          <tr>
+                            <th
+                              style="
+                                border-left: 0 !important;
+                                border-right: 0 !important;
+                              "
+                              class="text-center"
+                            >
+                              Effettua una scelta
+                            </th>
+                            <th
+                              style="
+                                border-left: 0 !important;
+                                border-right: 0 !important;
+                              "
+                            ></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr
+                            v-for="tipo in non_auto"
+                            :key="tipo.index"
+                            @click="
+                              
+                              dove_sono = tipo;
+                            "
+                            style="cursor: pointer"
+                          >
+                            <td
+                              style="
+                                border-left: 0 !important;
+                                border-right: 0 !important;
+                              "
+                            >
+                              <span class="icon_folder pr-2"></span>{{ tipo }}
+                            </td>
+
+                            <td
+                              class="text-right"
+                              style="
+                                border-left: 0 !important;
+                                border-right: 0 !important;
+                              "
+                            ></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </span>
+              </div>
             </div>
             <div v-else class="pt-5 display-4">
               <font-awesome-icon icon="arrow-left"></font-awesome-icon> Effettua
               una selezione
             </div>
-            <div v-show="vuoto" class="pt-5 h4 text-center">
+            <div v-show="vuoto && settore != 'RAMI'" class="pt-5 h4 text-center">
               - Al momento non ci sono documenti disponibili -
             </div>
             <!-- DATA TABLE PER ORGANIGRAMMA ABY -->
@@ -408,8 +505,8 @@
                     <a
                       :href="item.Id"
                       @click.prevent="
-                        preview(item.Id,'CIRCOLARI')
-                         titoloModale(dove_sono, item.Titolo);
+                        preview(item.Id, 'CIRCOLARI');
+                        titoloModale(dove_sono, item.Titolo);
                       "
                     >
                       <i class="fas fa-download fa-2x"></i
@@ -974,6 +1071,66 @@
                 </template>
               </CDataTable>
             </div>
+            <!-- DATA TABLE PER NON AUTO -->
+            <div class="pt-5" v-if="settore === 'RAMI_DATA'">
+              <CDataTable
+                id="rami_table"
+                ref="tabella_doc"
+                :items="files"
+                :fields="fields_RAMI"
+                sorter
+                hover
+                pagination
+                border
+                :column-filter-value="{ Tipo: filtro_gar }"
+                :table-filter="{
+                  placeholder: 'Ricerca...',
+                  label: 'Ricerca:',
+                }"
+                striped
+                :items-per-page-select="{ label: 'Risultati per pagina' }"
+                :noItemsView="{ noItems: ' ' }"
+              >
+                <template #visualizza_POG="{ item }">
+                  <td class="py-2 text-center">
+                    <CButton
+                      v-if="item.Pog !== ''"
+                      color="primary"
+                      variant="outline"
+                      square
+                      size="sm"
+                      @click="
+                        preview(item.Pog, 'RAMI');
+                        titoloModale(item.Tipo, item.Descrizione, 'POG');
+                      "
+                    >
+                      Visualizza
+                    </CButton>
+                  </td>
+                </template>
+                <template #visualizza="{ item }">
+                  <td class="py-2 text-center">
+                    <CButton
+                      v-if="item.Nomefile !== ''"
+                      color="primary"
+                      variant="outline"
+                      square
+                      size="sm"
+                      @click="
+                        preview(item.Nomefile, 'RAMI');
+                        titoloModale(
+                          item.Tipo,
+                          item.Descrizione,
+                          'SET INFORMATIVO'
+                        );
+                      "
+                    >
+                      Visualizza
+                    </CButton>
+                  </td>
+                </template>
+              </CDataTable>
+            </div>
           </div>
         </CCol>
       </CRow>
@@ -982,7 +1139,12 @@
 </template>
 <script>
 import axios from "axios";
-import { folder_list, documenti_list, intermediari_list } from "./folder";
+import {
+  folder_list,
+  documenti_list,
+  intermediari_list,
+  rami_list,
+} from "./folder";
 
 import VisualizzaDocumento from "../../containers/VisualizzaDocumento";
 const fields_CIRCOLARI = [
@@ -1299,6 +1461,34 @@ const fields_SERVIZI = [
     _style: "text-align: center;",
   },
 ];
+// NOMI DELLE COLONNE DELLA TABELLA PER CATALOGO NON AUTO
+const fields_RAMI = [
+  {
+    key: "Tipo",
+    _style: "font-weight: bold; text-align: center;",
+    label: "Tipologia",
+  },
+  {
+    key: "Descrizione",
+    _style: "font-weight: bold; text-align: center;",
+    label: "Compagnia",
+  },
+
+  {
+    key: "visualizza_POG",
+    label: "POG",
+    sorter: false,
+    filter: false,
+    _style: "text-align: center;",
+  },
+  {
+    key: "visualizza",
+    label: "Set Informativo",
+    sorter: false,
+    filter: false,
+    _style: "text-align: center;",
+  },
+];
 
 export default {
   name: "Documentale",
@@ -1315,6 +1505,7 @@ export default {
       folder_list, // Albero dei documenti (veicoli->rca->altre garanzie / rami / energia)
       documenti_list, // Documenti intermediario e precontrattuale
       intermediari_list, // Intermediari Emittenti e Proponenti
+      rami_list, // Catalogo prodotti NON auto
       vuoto: false, // Usato per controllare il messaggio "Non ci sono documenti"
       settore: "", // utilizzato per assegnare il data table
       subfolder: "", // utilizzato per il breadcrumb delle cartelle di secondo livello
@@ -1335,10 +1526,12 @@ export default {
       fields_UO,
       fields_CIRCOLARI,
       fields_ORGANIGRAMMA,
+      fields_RAMI,
       // fields_SETTORE12,
 
       altre_gar: [],
       altri_servizi: [],
+      non_auto: [],
       filtro_gar: "",
 
       // titolo per la modale di anteprima
@@ -1459,6 +1652,7 @@ export default {
       this.vuoto = false; // Inizializzo il messaggio "non ci sono file"
 
       // Inizializzo le sottocartelle
+      this.non_auto = [];
       this.altre_gar = [];
       this.altri_servizi = [];
       this.filtro_gar = "";
@@ -1467,6 +1661,43 @@ export default {
       this.breadcrumbs.push([folder.nome, folder.ico]);
 
       this.settore = folder.slug; // Per identificare il data-table
+      this.files = []; // array dei risultati
+      if (folder.URL) {
+        // Chiamo la funzione per recuperare le informazioni dai servizi
+        this.load_documentale(folder.slug);
+      } else {
+        if (folder.subFolder == false) {
+          this.vuoto = true;
+          // this.color = "";
+        }
+      }
+    },
+
+    call_subfolder_rami(folder) {
+      // Funzione chiamata per l'alberatura del catalogo non auto
+
+      //resetto la paginazione
+      this.reset_pagination();
+      this.vuoto = false; // Inizializzo il messaggio "non ci sono file"
+      this.color = "white";
+
+      // Inizializzo le sottocartelle
+      this.altre_gar = [];
+      this.altri_servizi = [];
+      this.non_auto = [];
+      this.filtro_gar = "";
+
+      this.breadcrumbs = []; // per popolare il Breadcrumbs
+      this.breadcrumbs.push([folder.nome, folder.ico]);
+
+      // this.subfolder = folder.slug; // Per identificare il data-table
+      // console.log(subfolder.slug);
+      // console.log(this.$data.page);
+
+      this.files = [];
+      this.settore = "RAMI";
+      this.call_garanzie_list("", folder.URL); // chiamata per popolare il sotto elenco del catalogo non auto
+
       this.files = []; // array dei risultati
       if (folder.URL) {
         // Chiamo la funzione per recuperare le informazioni dai servizi
@@ -1490,6 +1721,7 @@ export default {
       // Inizializzo le sottocartelle
       this.altre_gar = [];
       this.altri_servizi = [];
+      this.non_auto = [];
       this.filtro_gar = "";
 
       this.breadcrumbs = []; // per popolare il Breadcrumbs
@@ -1515,11 +1747,16 @@ export default {
         case "ALTRE_GARANZIE":
           this.files = [];
           this.settore = "ALTRE GARANZIE";
-          this.call_garanzie_list("", "AltreGaranzie"); // chiamata per popolare il sotto elenco delle garanzie
+          this.call_garanzie_list("", subfolder.URL); // chiamata per popolare il sotto elenco delle garanzie
           break;
         case "ALTRI_SERVIZI":
           this.settore = "SERVIZI NON ASSICURATIVI";
-          this.call_garanzie_list("", "ServiziNonAssicurativi"); // chiamata per popolare il sotto elenco delle garanzie
+          this.call_garanzie_list("", subfolder.URL); // chiamata per popolare il sotto elenco delle garanzie
+          break;
+        case "RAMI":
+          this.files = [];
+          this.settore = "RAMI";
+          this.call_garanzie_list("", subfolder.URL); // chiamata per popolare il sotto elenco del catalogo non auto
           break;
       }
       this.files = []; // array dei risultati
@@ -1546,7 +1783,7 @@ export default {
       if (target !== "") {
         var config = {
           method: "post",
-          url: this.$custom_json.servizi_broker + "Documentale_" + target,
+          url: this.$custom_json.servizi_broker + target,
           headers: {
             userID: localStorage.getItem("userID"),
             anagraficaID: localStorage.getItem("anagraficaID"),
@@ -1574,14 +1811,15 @@ export default {
           });
       }
       switch (target) {
-        case "AltreGaranzie":
+        case "Documentale_AltreGaranzie":
           this.altre_gar = lista_gar;
           break;
-        case "ServiziNonAssicurativi":
+        case "Documentale_ServiziNonAssicurativi":
           this.altri_servizi = lista_gar;
           break;
-        default:
-          this.altre_gar = lista_gar;
+        case "Documentale_AltriRamiElencoSettori":
+          this.non_auto = lista_gar;
+          break;
       }
     },
 
@@ -1684,7 +1922,8 @@ export default {
         case "CIRCOLARI":
           end_point =
             this.$custom_json.servizi_broker +
-            this.$custom_json.ep_broker.Download_Circolari+'/';
+            this.$custom_json.ep_broker.Download_Circolari +
+            "/";
           break;
         case "ORGANIGRAMMA":
           end_point =
