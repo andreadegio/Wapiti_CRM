@@ -211,8 +211,8 @@
               <div
                 class="pl-4"
                 v-show="
-                  json_prodotti.length > 0 &&
-                  tipo.idTipo == json_prodotti[0].idTipo
+                  lista_sub_prod.length > 0 &&
+                  tipo.idTipo == lista_sub_prod[0].idTipo
                 "
               >
                 <li
@@ -1174,7 +1174,6 @@ import {
   intermediari_list,
   rami_list,
 } from "./folder";
-import jsonRami from "./test_doc_rami.json";
 
 import VisualizzaDocumento from "../../containers/VisualizzaDocumento";
 const fields_CIRCOLARI = [
@@ -1710,87 +1709,6 @@ export default {
       }
     },
 
-    call_folder_rami(folder) {
-      // Funzione chiamata per l'alberatura principale del catalogo non auto
-
-      //resetto la paginazione
-      this.reset_pagination();
-      this.vuoto = false; // Inizializzo il messaggio "non ci sono file"
-      this.color = "white";
-
-      // Inizializzo le sottocartelle
-      this.altre_gar = [];
-      this.altri_servizi = [];
-      this.non_auto = [];
-      this.filtro_gar = "";
-      this.filtro_rami = "";
-      this.breadcrumbs = []; // per popolare il Breadcrumbs
-      this.breadcrumbs.push([folder.nome, folder.ico]);
-
-      this.settore = "RAMI";
-      this.call_garanzie_list_rami("", folder.URL); // chiamata per popolare il sotto elenco del catalogo non auto
-
-      // this.files = []; // array dei risultati
-      if (folder.URL) {
-        // Chiamo la funzione per recuperare le informazioni dai servizi
-        this.load_documentale(folder.slug);
-      } else {
-        if (folder.subFolder == false) {
-          this.vuoto = true;
-        }
-      }
-    },
-
-    call_sub_rami(tipoId, tipoName) {
-      // Funzione attivata la click sulle cartelle di secondo livello nella colonna del file explorer oppure dall'elenco nella zona centrale
-      console.log(tipoId);
-      this.breadcrumbs.length == 2
-        ? (this.breadcrumbs[1][0] = tipoName)
-        : this.breadcrumbs.push([tipoName]);
-      // CHIAMATA PER POPOLARE IL TERZO LIVELLO DELLE CARTELLE NEI PRODOTTI NON AUTO
-      this.lista_sub_prod = [];
-      if (tipoId == 2) {
-        // TEST UTILIZZO UN FILE STATICO AL POSTO DELLA CHIAMATA
-        this.json_prodotti = jsonRami;
-
-        //resetto la paginazione
-        this.reset_pagination();
-        this.vuoto = false; // Inizializzo il messaggio "non ci sono file"
-        this.color = "white";
-
-        // console.log(this.json_prodotti[0].idTipo);
-        var lista_prod = [];
-        var lookup = {};
-        for (var item, i = 0; (item = this.json_prodotti[i++]); ) {
-          var name = item.Tipo;
-          var idTipo = item.Id;
-
-          if (!(name in lookup)) {
-            lookup[name] = 1;
-            lista_prod.push({ name, idTipo });
-          }
-        }
-        this.lista_sub_prod = lista_prod; // Elenco delle sotto cartelle
-
-        this.files = [];
-        this.settore = "RAMI_DATA";
-        this.recupero_catalogo_rami(tipoId); // chiamata per popolare il terzo livello
-      }
-    },
-
-    filter_rami(filtro) {
-      this.reset_pagination();
-      this.select = true;
-      this.breadcrumbs.length == 3
-        ? (this.breadcrumbs[2][0] = filtro)
-        : this.breadcrumbs.push([filtro]);
-      // svuotamento dell'array files necessario per reimpostare la paginazione
-      let temp_file = this.files;
-      this.files = [];
-      this.files = temp_file;
-      this.filtro_rami = filtro;
-    },
-
     call_subfolder_list(subfolder, folder) {
       // Funzione chiamata dalle cartelle di secondo livello (RCA, Altre garanzie, ecc)
 
@@ -1854,6 +1772,69 @@ export default {
       }
     },
 
+    call_folder_rami(folder) {
+      // Funzione chiamata per l'alberatura principale del catalogo non auto
+
+      //resetto la paginazione
+      this.reset_pagination();
+      this.vuoto = false; // Inizializzo il messaggio "non ci sono file"
+      this.color = "white";
+
+      // Inizializzo le sottocartelle
+      this.altre_gar = [];
+      this.altri_servizi = [];
+      this.non_auto = [];
+      this.filtro_gar = "";
+      this.filtro_rami = "";
+      this.breadcrumbs = []; // per popolare il Breadcrumbs
+      this.breadcrumbs.push([folder.nome, folder.ico]);
+
+      this.settore = "RAMI";
+      this.call_garanzie_list_rami("", folder.URL); // chiamata per popolare il sotto elenco del catalogo non auto
+
+      // this.files = []; // array dei risultati
+      if (folder.URL) {
+        // Chiamo la funzione per recuperare le informazioni dai servizi
+        this.load_documentale(folder.slug);
+      } else {
+        if (folder.subFolder == false) {
+          this.vuoto = true;
+        }
+      }
+    },
+
+    call_sub_rami(tipoId, tipoName) {
+      // Funzione attivata la click sulle cartelle di secondo livello nella colonna del file explorer oppure dall'elenco nella zona centrale
+      if (this.breadcrumbs.length > 2) {
+        this.breadcrumbs.pop();
+      }
+      this.breadcrumbs.length == 2
+        ? (this.breadcrumbs[1][0] = tipoName)
+        : this.breadcrumbs.push([tipoName]);
+      //resetto la paginazione
+      this.reset_pagination();
+      this.vuoto = false; // Inizializzo il messaggio "non ci sono file"
+      this.color = "white";
+      this.filtro_rami = "";
+
+      this.files = [];
+      this.settore = "RAMI_DATA";
+      this.recupero_catalogo_rami(tipoId); // chiamata per popolare il terzo livello
+    },
+
+    filter_rami(filtro) {
+      this.reset_pagination();
+      this.select = true;
+      this.breadcrumbs.length >= 3
+        ? (this.breadcrumbs[2][0] = filtro)
+        : this.breadcrumbs.push([filtro]);
+      // svuotamento dell'array files necessario per reimpostare la paginazione
+      let temp_file = this.files;
+      this.files = [];
+      this.files = temp_file;
+      this.filtro_rami = filtro;
+    },
+
     async call_garanzie_list_rami(filtro = "", target = "") {
       // FUNZIONE PER GENERARE LE SOTTO CARTELLE DI SECONDO LIVELLO DEI PRODOTTI NON AUTO
       //resetto la paginazione
@@ -1875,7 +1856,6 @@ export default {
         };
         await axios(config)
           .then(function (response) {
-            // console.log(JSON.stringify(response.data));
             elenco = response.data;
             var lookup = {};
             var items = elenco;
@@ -1897,6 +1877,57 @@ export default {
 
       this.non_auto = lista_gar;
     },
+
+    async recupero_catalogo_rami(tipoId) {
+      // Funzione per recuperare dal servizio l'elenco del catalogo passando l'id della sotto categoria (A,B,C,D,...)
+      this.vuoto = false; // Inizializzo in modo da non mostrare il messaggio "nessun documento" in fase di caricamento
+      this.color = "white";
+      var elenco = [];
+      // LISTA PER POPOLARE IL TERZO LIVELLO DELLE CARTELLE NEI PRODOTTI NON AUTO
+      this.lista_sub_prod = [];
+      var config = {
+        method: "post",
+        url:
+          this.$custom_json.servizi_broker +
+          this.$custom_json.ep_broker.Documentale_AltriRamiCatalogoProdotti,
+        headers: {
+          userID: localStorage.getItem("userID"),
+          anagraficaID: localStorage.getItem("anagraficaID"),
+          unitaoperativaID: localStorage.getItem("unitaoperativaID"),
+          idTipo: tipoId,
+        },
+      };
+      await axios(config)
+        .then(function (response) {
+          elenco = response.data;
+        })
+        .catch(function (error) {
+          elenco = [];
+          console.log(error);
+        });
+      this.files = elenco;
+      var lista_prod = [];
+      var lookup = {};
+      for (var item, i = 0; (item = elenco[i++]); ) {
+        var name = item.Tipo;
+        var idTipo = item.idTipo;
+
+        if (!(name in lookup)) {
+          lookup[name] = 1;
+          lista_prod.push({ name, idTipo });
+        }
+      }
+      this.lista_sub_prod = lista_prod; // Elenco delle sotto cartelle
+
+      // this.files = jsonRami;
+
+      // console.log("trovato");
+      if (this.files.length <= 0) {
+        this.vuoto = true; // Variabile usata per il messaggio "non ci sono documenti"
+        this.color = "";
+      }
+    },
+
     async call_garanzie_list(filtro = "", target = "") {
       // FUNZIONE PER GENERARE LE SOTTO CARTELLE DI TERZO LIVELLO DI ALTRE GARANZIE E SERVIZI
       //resetto la paginazione
@@ -1980,40 +2011,6 @@ export default {
       return elenco;
     },
 
-    async recupero_catalogo_rami(tipoId) {
-      // Funzione per recuperare dal servizio l'elenco del catalogo passando l'id della sotto categoria (A,B,C,D,...)
-      this.vuoto = false; // Inizializzo in modo da non mostrare il messaggio "nessun documento" in fase di caricamento
-      this.color = "white";
-      var elenco = [];
-
-      // var config = {
-      //   method: "post",
-      //   url: this.$custom_json.servizi_broker + this.$custom_json.ep_broker.Documentale_AltriRamiCatalogoProdotti,
-      //   headers: {
-      //     userID: localStorage.getItem("userID"),
-      //     anagraficaID: localStorage.getItem("anagraficaID"),
-      //     unitaoperativaID: localStorage.getItem("unitaoperativaID"),
-      //     idTipo: tipoId
-      //   },
-      // };
-      // await axios(config)
-      //   .then(function (response) {
-      //     elenco = response.data;
-      //   })
-      //   .catch(function (error) {
-      //     elenco = [];
-      //     console.log(error);
-      //   });
-      // this.files = elenco;
-
-      this.files = jsonRami;
-
-      // console.log("trovato");
-      if (this.files.length <= 0) {
-        this.vuoto = true; // Variabile usata per il messaggio "non ci sono documenti"
-        this.color = "";
-      }
-    },
     async load_documentale(target) {
       // console.log(target);
       this.vuoto = false; // Inizializzo in modo da non mostrare il messaggio "nessun documento" in fase di caricamento
