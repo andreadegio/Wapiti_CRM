@@ -43,10 +43,10 @@
     "richiesta_contatto": "Utility/richiesta_contatto",
     "get_version": "Utility/get_version"
   },
-  "servizi_broker": "https://servizi.documentale.cloud/aibajsontesthttps/",
+  "servizi_broker": "https://servizi.documentale.cloud/AibaJSON2023-test/",
   "servizi_energy": "https://abyenergy.it/servizitest/",
-  "broker_veicoli": "http://broker.abybroker.it/testhttps/AreaOperazioni.aspx",
-  "broker_statistiche": "http://broker.abybroker.it/ea2019/Stats_FlashReports_NoBarre.aspx?bg=ebedef&userID=",
+  "broker_veicoli": "https://broker.abybroker.it/BN2023-test/AreaOperazioni.aspx",
+  "broker_statistiche": "https://broker.abybroker.it/BN2023-test/Stats_FlashReports_NoBarre.aspx?bg=ebedef&userID=",
   "energy_statistiche": "https://abyenergy.it/test/Stats_FlashReports_NoBarre.aspx?bg=ebedef&userID=",
   "ep_broker": {
     "documentale_broker": "CondizioniContrattuali/",
@@ -68,10 +68,11 @@
     "Documentale_Organigramma": "Documentale_Organigramma",
     "Download_Circolari": "Download_Documentale_Circolari",
     "Download_Documentale_Audit": "Download_Documentale_Audit",
-    "Download_Documentale_Rilievi": "Download_Documentale_Rilievi"
+    "Download_Documentale_Rilievi": "Download_Documentale_Rilievi",
+    "Documentale_AltriRamiCatalogoProdotti": "Documentale_AltriRamiCatalogoProdotti"
   },
-  "login_url": "http://broker.abybroker.it/accesso/login.aspx?r=staging",
+  "login_url": "https://broker.abybroker.it/accesso/login.aspx?r=staging",
   "login_url_energy": "https://abyenergy.it/Test/accesso.aspx?r=staging",
   "logout_url_energy": "https://abyenergy.it/Test/logout.aspx",
-  "logout_url": "http://broker.abybroker.it/test/logout.aspx"
+  "logout_url": "https://broker.abybroker.it/BN2023-test/logout.aspx"
 }
