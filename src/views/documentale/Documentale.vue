@@ -183,7 +183,7 @@
           >
             <span
               @click="
-                call_subfolder_rami(folder);
+                call_folder_rami(folder);
                 dove_sono = folder.slug;
               "
               style="white-space: nowrap"
@@ -202,12 +202,37 @@
                 class="icon_folder"
                 style="white-space: nowrap"
                 @click="
-                  filter_garanzie(tipo);
-                  dove_sono = tipo;
+                  call_sub_rami(tipo.idTipo, tipo.name);
+                  dove_sono = tipo.name;
                 "
-                :class="{ highlight: dove_sono == tipo }"
-                >{{ tipo }}</span
+                :class="{ highlight: dove_sono == tipo.name }"
+                >{{ tipo.name }}</span
               >
+              <div
+                class="pl-4"
+                v-show="
+                  json_prodotti.length > 0 &&
+                  tipo.idTipo == json_prodotti[0].idTipo
+                "
+              >
+                <li
+                  v-for="subcat in lista_sub_prod"
+                  :key="subcat.index"
+                  class="folder h6 pl-3"
+                >
+                  └
+                  <span
+                    class="icon_folder"
+                    style="white-space: nowrap"
+                    @click="
+                      filter_rami(subcat.name);
+                      dove_sono = subcat.name;
+                    "
+                    :class="{ highlight: dove_sono == subcat.name }"
+                    >{{ subcat.name }}</span
+                  >
+                </li>
+              </div>
             </li>
           </div>
         </CCol>
@@ -403,8 +428,8 @@
                             v-for="tipo in non_auto"
                             :key="tipo.index"
                             @click="
-                              
-                              dove_sono = tipo;
+                              call_sub_rami(tipo.idTipo, tipo.name);
+                              dove_sono = tipo.name;
                             "
                             style="cursor: pointer"
                           >
@@ -414,7 +439,8 @@
                                 border-right: 0 !important;
                               "
                             >
-                              <span class="icon_folder pr-2"></span>{{ tipo }}
+                              <span class="icon_folder pr-2"></span
+                              >{{ tipo.name }}
                             </td>
 
                             <td
@@ -436,7 +462,10 @@
               <font-awesome-icon icon="arrow-left"></font-awesome-icon> Effettua
               una selezione
             </div>
-            <div v-show="vuoto && settore != 'RAMI'" class="pt-5 h4 text-center">
+            <div
+              v-show="vuoto && settore != 'RAMI'"
+              class="pt-5 h4 text-center"
+            >
               - Al momento non ci sono documenti disponibili -
             </div>
             <!-- DATA TABLE PER ORGANIGRAMMA ABY -->
@@ -1082,7 +1111,7 @@
                 hover
                 pagination
                 border
-                :column-filter-value="{ Tipo: filtro_gar }"
+                :column-filter-value="{ Tipo: filtro_rami }"
                 :table-filter="{
                   placeholder: 'Ricerca...',
                   label: 'Ricerca:',
@@ -1145,6 +1174,7 @@ import {
   intermediari_list,
   rami_list,
 } from "./folder";
+import jsonRami from "./test_doc_rami.json";
 
 import VisualizzaDocumento from "../../containers/VisualizzaDocumento";
 const fields_CIRCOLARI = [
@@ -1498,6 +1528,10 @@ export default {
   },
   data() {
     return {
+      json_prodotti: [],
+      array_prodotti_rami: [],
+      lista_sub_prod: [],
+
       warningModal: false,
       admin: JSON.parse(localStorage.getItem("chisono_data")).Is_Sede,
       viewFile: false, // Usato per mostrare la modale con l'antprima del file
@@ -1533,6 +1567,7 @@ export default {
       altri_servizi: [],
       non_auto: [],
       filtro_gar: "",
+      filtro_rami: "",
 
       // titolo per la modale di anteprima
       tipologia: null,
@@ -1652,10 +1687,12 @@ export default {
       this.vuoto = false; // Inizializzo il messaggio "non ci sono file"
 
       // Inizializzo le sottocartelle
-      this.non_auto = [];
       this.altre_gar = [];
       this.altri_servizi = [];
+      this.non_auto = [];
       this.filtro_gar = "";
+      this.filtro_rami = "";
+      this.lista_sub_prod = [];
 
       this.breadcrumbs = []; // per popolare il Breadcrumbs
       this.breadcrumbs.push([folder.nome, folder.ico]);
@@ -1673,8 +1710,8 @@ export default {
       }
     },
 
-    call_subfolder_rami(folder) {
-      // Funzione chiamata per l'alberatura del catalogo non auto
+    call_folder_rami(folder) {
+      // Funzione chiamata per l'alberatura principale del catalogo non auto
 
       //resetto la paginazione
       this.reset_pagination();
@@ -1686,28 +1723,72 @@ export default {
       this.altri_servizi = [];
       this.non_auto = [];
       this.filtro_gar = "";
-
+      this.filtro_rami = "";
       this.breadcrumbs = []; // per popolare il Breadcrumbs
       this.breadcrumbs.push([folder.nome, folder.ico]);
 
-      // this.subfolder = folder.slug; // Per identificare il data-table
-      // console.log(subfolder.slug);
-      // console.log(this.$data.page);
-
-      this.files = [];
       this.settore = "RAMI";
-      this.call_garanzie_list("", folder.URL); // chiamata per popolare il sotto elenco del catalogo non auto
+      this.call_garanzie_list_rami("", folder.URL); // chiamata per popolare il sotto elenco del catalogo non auto
 
-      this.files = []; // array dei risultati
+      // this.files = []; // array dei risultati
       if (folder.URL) {
         // Chiamo la funzione per recuperare le informazioni dai servizi
         this.load_documentale(folder.slug);
       } else {
         if (folder.subFolder == false) {
           this.vuoto = true;
-          // this.color = "";
         }
       }
+    },
+
+    call_sub_rami(tipoId, tipoName) {
+      // Funzione attivata la click sulle cartelle di secondo livello nella colonna del file explorer oppure dall'elenco nella zona centrale
+      console.log(tipoId);
+      this.breadcrumbs.length == 2
+        ? (this.breadcrumbs[1][0] = tipoName)
+        : this.breadcrumbs.push([tipoName]);
+      // CHIAMATA PER POPOLARE IL TERZO LIVELLO DELLE CARTELLE NEI PRODOTTI NON AUTO
+      this.lista_sub_prod = [];
+      if (tipoId == 2) {
+        // TEST UTILIZZO UN FILE STATICO AL POSTO DELLA CHIAMATA
+        this.json_prodotti = jsonRami;
+
+        //resetto la paginazione
+        this.reset_pagination();
+        this.vuoto = false; // Inizializzo il messaggio "non ci sono file"
+        this.color = "white";
+
+        // console.log(this.json_prodotti[0].idTipo);
+        var lista_prod = [];
+        var lookup = {};
+        for (var item, i = 0; (item = this.json_prodotti[i++]); ) {
+          var name = item.Tipo;
+          var idTipo = item.Id;
+
+          if (!(name in lookup)) {
+            lookup[name] = 1;
+            lista_prod.push({ name, idTipo });
+          }
+        }
+        this.lista_sub_prod = lista_prod; // Elenco delle sotto cartelle
+
+        this.files = [];
+        this.settore = "RAMI_DATA";
+        this.recupero_catalogo_rami(tipoId); // chiamata per popolare il terzo livello
+      }
+    },
+
+    filter_rami(filtro) {
+      this.reset_pagination();
+      this.select = true;
+      this.breadcrumbs.length == 3
+        ? (this.breadcrumbs[2][0] = filtro)
+        : this.breadcrumbs.push([filtro]);
+      // svuotamento dell'array files necessario per reimpostare la paginazione
+      let temp_file = this.files;
+      this.files = [];
+      this.files = temp_file;
+      this.filtro_rami = filtro;
     },
 
     call_subfolder_list(subfolder, folder) {
@@ -1723,6 +1804,8 @@ export default {
       this.altri_servizi = [];
       this.non_auto = [];
       this.filtro_gar = "";
+      this.filtro_rami = "";
+      this.lista_sub_prod = [];
 
       this.breadcrumbs = []; // per popolare il Breadcrumbs
       this.breadcrumbs.push([folder.nome, folder.ico]);
@@ -1753,11 +1836,11 @@ export default {
           this.settore = "SERVIZI NON ASSICURATIVI";
           this.call_garanzie_list("", subfolder.URL); // chiamata per popolare il sotto elenco delle garanzie
           break;
-        case "RAMI":
-          this.files = [];
-          this.settore = "RAMI";
-          this.call_garanzie_list("", subfolder.URL); // chiamata per popolare il sotto elenco del catalogo non auto
-          break;
+        // case "RAMI":
+        //   this.files = [];
+        //   this.settore = "RAMI";
+        //   this.call_garanzie_list("", subfolder.URL); // chiamata per popolare il sotto elenco del catalogo non auto
+        //   break;
       }
       this.files = []; // array dei risultati
       if (subfolder.URL) {
@@ -1771,6 +1854,49 @@ export default {
       }
     },
 
+    async call_garanzie_list_rami(filtro = "", target = "") {
+      // FUNZIONE PER GENERARE LE SOTTO CARTELLE DI SECONDO LIVELLO DEI PRODOTTI NON AUTO
+      //resetto la paginazione
+      this.reset_pagination();
+      this.select = true;
+      this.file_name = "";
+      this.filtro_rami = filtro; //utilizzato per filtrare i risultati nel datatable
+      var elenco = [];
+      var lista_gar = [];
+      if (target !== "") {
+        var config = {
+          method: "post",
+          url: this.$custom_json.servizi_broker + target,
+          headers: {
+            userID: localStorage.getItem("userID"),
+            anagraficaID: localStorage.getItem("anagraficaID"),
+            unitaoperativaID: localStorage.getItem("unitaoperativaID"),
+          },
+        };
+        await axios(config)
+          .then(function (response) {
+            // console.log(JSON.stringify(response.data));
+            elenco = response.data;
+            var lookup = {};
+            var items = elenco;
+            for (var item, i = 0; (item = items[i++]); ) {
+              var name = item.Tipo;
+              var idTipo = item.Id;
+
+              if (!(name in lookup)) {
+                lookup[name] = 1;
+                lista_gar.push({ name, idTipo });
+              }
+            }
+          })
+          .catch(function (error) {
+            elenco = [];
+            console.log(error);
+          });
+      }
+
+      this.non_auto = lista_gar;
+    },
     async call_garanzie_list(filtro = "", target = "") {
       // FUNZIONE PER GENERARE LE SOTTO CARTELLE DI TERZO LIVELLO DI ALTRE GARANZIE E SERVIZI
       //resetto la paginazione
@@ -1852,6 +1978,41 @@ export default {
       }
       // console.log(elenco);
       return elenco;
+    },
+
+    async recupero_catalogo_rami(tipoId) {
+      // Funzione per recuperare dal servizio l'elenco del catalogo passando l'id della sotto categoria (A,B,C,D,...)
+      this.vuoto = false; // Inizializzo in modo da non mostrare il messaggio "nessun documento" in fase di caricamento
+      this.color = "white";
+      var elenco = [];
+
+      // var config = {
+      //   method: "post",
+      //   url: this.$custom_json.servizi_broker + this.$custom_json.ep_broker.Documentale_AltriRamiCatalogoProdotti,
+      //   headers: {
+      //     userID: localStorage.getItem("userID"),
+      //     anagraficaID: localStorage.getItem("anagraficaID"),
+      //     unitaoperativaID: localStorage.getItem("unitaoperativaID"),
+      //     idTipo: tipoId
+      //   },
+      // };
+      // await axios(config)
+      //   .then(function (response) {
+      //     elenco = response.data;
+      //   })
+      //   .catch(function (error) {
+      //     elenco = [];
+      //     console.log(error);
+      //   });
+      // this.files = elenco;
+
+      this.files = jsonRami;
+
+      // console.log("trovato");
+      if (this.files.length <= 0) {
+        this.vuoto = true; // Variabile usata per il messaggio "non ci sono documenti"
+        this.color = "";
+      }
     },
     async load_documentale(target) {
       // console.log(target);

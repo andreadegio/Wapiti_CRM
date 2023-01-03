@@ -1,0 +1,490 @@
+[
+       {
+      "idCompagnia": 1577,
+      "Tipo": "B01 - Infortuni e Malattia",
+      "Pog": "",
+      "Descrizione": "ALLIANZ / C1204",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 167,
+      "Tipo": "B01 - Infortuni e Malattia",
+      "Pog": "",
+      "Descrizione": "ASSIMOCO / C119",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 249,
+      "Tipo": "B01 - Infortuni e Malattia",
+      "Pog": "",
+      "Descrizione": "EUROP ASSISTANCE / C000",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1038,
+      "Tipo": "B01 - Infortuni e Malattia",
+      "Pog": "",
+      "Descrizione": "GROUPAMA ASSICURAZIONI / C321",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1501,
+      "Tipo": "B01 - Infortuni e Malattia",
+      "Pog": "",
+      "Descrizione": "HDI ASSICURAZIONI / C0569",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1583,
+      "Tipo": "B01 - Infortuni e Malattia",
+      "Pog": "",
+      "Descrizione": "HDI ASSICURAZIONI / C1206",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1260,
+      "Tipo": "B01 - Infortuni e Malattia",
+      "Pog": "",
+      "Descrizione": "HDI ASSICURAZIONI / C893",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1140,
+      "Tipo": "B01 - Infortuni e Malattia",
+      "Pog": "",
+      "Descrizione": "LLOYD'S / C706",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1360,
+      "Tipo": "B01 - Infortuni e Malattia",
+      "Pog": "",
+      "Descrizione": "TUA ASSICURAZIONI / C569",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1541,
+      "Tipo": "B01 - Infortuni e Malattia",
+      "Pog": "",
+      "Descrizione": "UNIPOLSAI / C707",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1577,
+      "Tipo": "B02 - Malattia",
+      "Pog": "",
+      "Descrizione": "ALLIANZ / C1204",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1084,
+      "Tipo": "B02 - Malattia",
+      "Pog": "",
+      "Descrizione": "NOBIS ASSICURAZIONI (EX DARAG) / C377",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 253,
+      "Tipo": "B02 - Malattia",
+      "Pog": "",
+      "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI / C028",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 674,
+      "Tipo": "B02 - Malattia",
+      "Pog": "",
+      "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI / C250",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 167,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "ASSIMOCO / C119",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 951,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "ASSIMOCO / C119",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1187,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "AXA ASSICURAZIONI / C321",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1236,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "CATTOLICA ASSICURAZIONI / C893",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 801,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "DARAG / C000",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1460,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "GENERALI ITALIA / C1023",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1349,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "GROUPAMA ASSICURAZIONI / C1023",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1012,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "GROUPAMA ASSICURAZIONI / C167",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 377,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "GROUPAMA ASSICURAZIONI / C167",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 603,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "GROUPAMA ASSICURAZIONI / C167",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1148,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "GROUPAMA ASSICURAZIONI / C292",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1038,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "GROUPAMA ASSICURAZIONI / C321",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 315,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "HDI ASSICURAZIONI / C028",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1501,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "HDI ASSICURAZIONI / C0569",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1411,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "HDI ASSICURAZIONI / C1091",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 995,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "HDI ASSICURAZIONI / C254",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 903,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "NOBIS ASSICURAZIONI (EX DARAG) / C010",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1084,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "NOBIS ASSICURAZIONI (EX DARAG) / C377",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1154,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "NOBIS ASSICURAZIONI (EX DARAG) / C719",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 385,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "REALE MUTUA / C022",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 958,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "TUA ASSICURAZIONI / C196",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1026,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "TUA ASSICURAZIONI / C258",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1360,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "TUA ASSICURAZIONI / C569",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1019,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "UNIPOLSAI / C025",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 913,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "ZURICH / C018",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1025,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "ZURICH / C258",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1164,
+      "Tipo": "B03 - Multirischio Abitazione",
+      "Pog": "",
+      "Descrizione": "ZURICH / C708",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 951,
+      "Tipo": "B04 - RC Famiglia",
+      "Pog": "",
+      "Descrizione": "ASSIMOCO / C119",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 167,
+      "Tipo": "B04 - RC Famiglia",
+      "Pog": "",
+      "Descrizione": "ASSIMOCO / C119",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 996,
+      "Tipo": "B04 - RC Famiglia",
+      "Pog": "",
+      "Descrizione": "ASSIMOCO / C254",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1184,
+      "Tipo": "B04 - RC Famiglia",
+      "Pog": "",
+      "Descrizione": "AXA ASSICURAZIONI / C167",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1236,
+      "Tipo": "B04 - RC Famiglia",
+      "Pog": "",
+      "Descrizione": "CATTOLICA ASSICURAZIONI / C893",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 801,
+      "Tipo": "B04 - RC Famiglia",
+      "Pog": "",
+      "Descrizione": "DARAG / C000",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1291,
+      "Tipo": "B04 - RC Famiglia",
+      "Pog": "",
+      "Descrizione": "DARAG RC 100% / C010",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1290,
+      "Tipo": "B04 - RC Famiglia",
+      "Pog": "",
+      "Descrizione": "DARAG RC 100% / C377",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1012,
+      "Tipo": "B04 - RC Famiglia",
+      "Pog": "",
+      "Descrizione": "GROUPAMA ASSICURAZIONI / C167",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 377,
+      "Tipo": "B04 - RC Famiglia",
+      "Pog": "",
+      "Descrizione": "GROUPAMA ASSICURAZIONI / C167",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 903,
+      "Tipo": "B04 - RC Famiglia",
+      "Pog": "",
+      "Descrizione": "NOBIS ASSICURAZIONI (EX DARAG) / C010",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1084,
+      "Tipo": "B04 - RC Famiglia",
+      "Pog": "",
+      "Descrizione": "NOBIS ASSICURAZIONI (EX DARAG) / C377",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1119,
+      "Tipo": "B04 - RC Famiglia",
+      "Pog": "",
+      "Descrizione": "NOBIS ASSICURAZIONI (EX DARAG) / C664",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1154,
+      "Tipo": "B04 - RC Famiglia",
+      "Pog": "",
+      "Descrizione": "NOBIS ASSICURAZIONI (EX DARAG) / C719",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1360,
+      "Tipo": "B04 - RC Famiglia",
+      "Pog": "",
+      "Descrizione": "TUA ASSICURAZIONI / C569",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 933,
+      "Tipo": "B04 - RC Famiglia",
+      "Pog": "",
+      "Descrizione": "UNIPOLSAI / C0002",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 950,
+      "Tipo": "B04 - RC Famiglia",
+      "Pog": "",
+      "Descrizione": "UNIPOLSAI / C025",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1204,
+      "Tipo": "B05 - Rischi Catastrofali",
+      "Pog": "",
+      "Descrizione": "GENIALLOYD / C1098",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1501,
+      "Tipo": "B05 - Rischi Catastrofali",
+      "Pog": "",
+      "Descrizione": "HDI ASSICURAZIONI / C0569",
+      "Nomefile": "",
+      "idTipo": 2
+    },
+    {
+      "idCompagnia": 1145,
+      "Tipo": "B08 - TCM (Temporanea Caso Morte)",
+      "Pog": "",
+      "Descrizione": "EUROVITA / C000",
+      "Nomefile": "",
+      "idTipo": 2
+    }
+  ]
