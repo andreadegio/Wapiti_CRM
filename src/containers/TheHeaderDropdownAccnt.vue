@@ -20,40 +20,114 @@
             <CRow class="justify-content-center">
               <CCol md="10">
                 <CCard>
-                  <CCardBody>
+                  <CCardBody align="center">
                     <h1>{{ user.Nominativo }}</h1>
-                    <p class="text-muted"></p>
-                    <p>Unità Operativa: {{ user.UnitaOperativa }}</p>
-                    <p>Intermediario: {{ user.Intermediario }}</p>
-                    <p
-                      style="text-transform: capitalize"
-                      v-show="user.DirettoreCommerciale"
+                    <div>
+                      <p class="text-muted"></p>
+                      <p><b>Unità Operativa:</b> {{ user.UnitaOperativa }}</p>
+                      <p><b>Intermediario:</b> {{ user.Intermediario }}</p>
+                      <p
+                        style="text-transform: capitalize"
+                        v-show="user.DirettoreCommerciale"
+                      >
+                        <b>Direttore Commerciale:</b>
+                        {{ user.DirettoreCommerciale | capitalize }} (<em
+                          style="text-transform: lowercase"
+                          >{{ user.DirettoreCommerciale_Email }}</em
+                        >)
+                      </p>
+                      <p
+                        style="text-transform: capitalize"
+                        v-show="user.AreaManager"
+                      >
+                        <b>Area Manager:</b>
+                        {{ user.AreaManager | capitalize }} (<em
+                          style="text-transform: lowercase"
+                          >{{ user.AreaManager_Email }}</em
+                        >)
+                      </p>
+                    </div>
+                    <div
+                      class="pt-3 pb-2 text-center text-uppercase"
+                      style="font-weight: bold"
                     >
-                      Direttore Commerciale:
-                      {{ user.DirettoreCommerciale | capitalize }} (<em
-                        style="text-transform: lowercase"
-                        >{{ user.DirettoreCommerciale_Email }}</em
-                      >)
-                    </p>
-                    <p
-                      style="text-transform: capitalize"
-                      v-show="user.AreaManager"
-                    >
-                      Area Manager: {{ user.AreaManager | capitalize }} (<em
-                        style="text-transform: lowercase"
-                        >{{ user.AreaManager_Email }}</em
-                      >)
-                    </p>
-                    <p>
-                      Abilitazione Auto: {{ user.Abilitato_Auto ? "SI" : "NO" }}
-                    </p>
-                    <p>
-                      Abilitazione Rami: {{ user.Abilitato_Rami ? "SI" : "NO" }}
-                    </p>
-                    <p>
-                      Abilitazione Gas & Luce:
-                      {{ user.Abilitato_Energy ? "SI" : "NO" }}
-                    </p>
+                      Piattaforme operative abilitate:
+                    </div>
+
+                    <CRow class="pt-4" style="justify-content: center">
+                      <CCol sm="3" class="text-center mx-2 border">
+                        <CRow align-horizontal="center" class="bg-broker"
+                          ><span class="py-3 intestazione_accessi">
+                            <i class="fas fa-car-alt fa-3x"></i>
+                            <br />
+                            Piattaforma<br />Assicurazioni</span
+                          ></CRow
+                        >
+                        <CRow align-horizontal="center"
+                          ><div
+                            v-show="user.Abilitato_Auto"
+                            class="py-3"
+                            style="color: green"
+                          >
+                            <i class="fas fa-check fa-3x"></i>
+                          </div>
+                          <div
+                            v-show="!user.Abilitato_Auto"
+                            class="py-3"
+                            style="color: red"
+                          >
+                            <i class="fas fa-times fa-3x"></i></div
+                        ></CRow>
+                      </CCol>
+                      <CCol sm="3" class="text-center mx-2 border">
+                        <CRow align-horizontal="center" class="bg-rami"
+                          ><span class="py-3 intestazione_accessi">
+                            <i class="fas fa-user-tie fa-3x"></i>
+                            <br />
+                            Piattaforma<br />Professionisti</span
+                          ></CRow
+                        >
+                        <CRow align-horizontal="center"
+                          ><div
+                            v-show="user.Abilitato_Rami"
+                            class="py-3"
+                            style="color: green"
+                          >
+                            <i class="fas fa-check fa-3x"></i>
+                          </div>
+                          <div
+                            v-show="!user.Abilitato_Rami"
+                            class="py-3"
+                            style="color: red"
+                          >
+                            <i class="fas fa-times fa-3x"></i></div
+                        ></CRow>
+                      </CCol>
+                      <CCol sm="3" class="text-center mx-2 border">
+                        <CRow align-horizontal="center" class="bg-energy"
+                          ><span class="py-3 intestazione_accessi">
+                            <i class="far fa-lightbulb fa-3x"></i>
+                            <br />
+                            Piattaforma<br />Gas & Luce</span
+                          ></CRow
+                        >
+                        <CRow align-horizontal="center"
+                          ><div
+                            v-show="user.Abilitato_Energy"
+                            class="py-3"
+                            style="color: green"
+                          >
+                            <i class="fas fa-check fa-3x"></i>
+                          </div>
+                          <div
+                            v-show="!user.Abilitato_Energy"
+                            class="py-3"
+                            style="color: red"
+                          >
+                            <i class="fas fa-times fa-3x"></i></div
+                        ></CRow>
+                      </CCol>
+                    </CRow>
                   </CCardBody>
                 </CCard>
               </CCol>
@@ -129,7 +203,7 @@
       <CDropdownHeader tag="div" class="text-center" color="light" v-if="admin">
         <strong>Admin</strong>
       </CDropdownHeader>
-      <CDropdownItem to="Accessi_stat" v-if="admin">
+      <CDropdownItem to="/Accessi_stat" v-if="admin">
         <i class="far fa-chart-bar"> </i> <span class="pl-1">Accessi</span>
       </CDropdownItem>
       <CDropdownHeader tag="div" class="text-center" color="light">
@@ -188,6 +262,20 @@ export default {
 </script>
 
 <style scoped>
+.bg-broker {
+  background-color: #1f4b6b !important;
+}
+.intestazione_accessi {
+  color: white !important;
+  font-weight: 600 !important;
+}
+.bg-rami {
+  background-color: #607d8b !important;
+}
+.bg-energy {
+  background-color: green !important;
+}
+
 #user_option {
   background-color: #0b4a9b;
   color: white;
