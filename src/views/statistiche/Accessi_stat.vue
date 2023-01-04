@@ -1,10 +1,8 @@
 <template>
-  <CContainer class="text-center" style="background-color: white;">
-    <p class="display-3 mb-5">
-        Accessi alle piattaforme
-      </p>
-    <CRow style="border-top: 1px solid lightgray;">
-      <CCol col="12" sm="2" >
+  <CContainer class="text-center" style="background-color: white">
+    <p class="display-3 mb-5">Accessi alle piattaforme</p>
+    <CRow style="border-top: 1px solid lightgray">
+      <CCol col="12" sm="2">
         <h1>Totali</h1>
         <cite>dal 7/4/2022</cite>
       </CCol>
@@ -19,7 +17,7 @@
           <span class="py-3">
             <i class="fas fa-car-alt fa-3x"></i>
             <br />
-            Broker
+            Piattaforma<br />Assicurazioni
           </span>
         </CWidgetBrand>
       </CCol>
@@ -34,7 +32,7 @@
           <span class="py-3">
             <i class="fas fa-user-tie fa-3x"></i>
             <br />
-            Professionisti
+            Piattaforma<br />Professionisti
           </span>
         </CWidgetBrand>
       </CCol>
@@ -49,14 +47,19 @@
           <span class="py-3">
             <i class="far fa-lightbulb fa-3x"></i>
             <br />
-            Gas & Luce
+            Piattaforma<br />Gas & Luce
           </span>
         </CWidgetBrand>
       </CCol>
     </CRow>
-    <CRow style="border-top: 1px solid lightgray; border-bottom: 1px solid lightgray">
+    <CRow
+      style="
+        border-top: 1px solid lightgray;
+        border-bottom: 1px solid lightgray;
+      "
+    >
       <CCol col="12" sm="2">
-       <h1>Mese corrente</h1>
+        <h1>Mese corrente</h1>
       </CCol>
       <CCol col="12" sm="3">
         <CWidgetBrand
@@ -69,7 +72,7 @@
           <span class="py-3">
             <i class="fas fa-car-alt fa-3x"></i>
             <br />
-            Broker
+            Piattaforma<br />Assicurazioni
           </span>
         </CWidgetBrand>
       </CCol>
@@ -84,7 +87,7 @@
           <span class="py-3">
             <i class="fas fa-user-tie fa-3x"></i>
             <br />
-            Professionisti
+            Piattaforma<br />Professionisti
           </span>
         </CWidgetBrand>
       </CCol>
@@ -99,14 +102,14 @@
           <span class="py-3">
             <i class="far fa-lightbulb fa-3x"></i>
             <br />
-            Gas & Luce
+            Piattaforma<br />Gas & Luce
           </span>
         </CWidgetBrand>
       </CCol>
     </CRow>
     <CRow>
       <CCol col="12" sm="2">
-        <h1>Oggi</h1> 
+        <h1>Oggi</h1>
       </CCol>
       <CCol col="12" sm="3">
         <CWidgetBrand
@@ -119,7 +122,7 @@
           <span class="py-3">
             <i class="fas fa-car-alt fa-3x"></i>
             <br />
-            Broker
+            Piattaforma<br />Assicurazioni
           </span>
         </CWidgetBrand>
       </CCol>
@@ -134,7 +137,7 @@
           <span class="py-3">
             <i class="fas fa-user-tie fa-3x"></i>
             <br />
-            Professionisti
+            Piattaforma<br />Professionisti
           </span>
         </CWidgetBrand>
       </CCol>
@@ -149,7 +152,7 @@
           <span class="py-3">
             <i class="far fa-lightbulb fa-3x"></i>
             <br />
-            Gas & Luce
+            Piattaforma<br />Gas & Luce
           </span>
         </CWidgetBrand>
       </CCol>
@@ -174,7 +177,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      accessi_totali:[],
+      accessi_totali: [],
       attrs: [
         {
           key: "today",
@@ -191,11 +194,11 @@ export default {
       contEnergy: "",
     };
   },
-  mounted(){
+  mounted() {
     this.get_accessi_totali();
   },
-  methods:{
-     async get_accessi_totali() {
+  methods: {
+    async get_accessi_totali() {
       // Chiamata per recuperare il totale degli accessi alle piattaforme
       try {
         await axios
@@ -205,14 +208,14 @@ export default {
               this.$custom_json.ep_api.get_accessi_totali
           )
           .then((response) => {
-            this.accessi_totali= response.data;
-           console.log(this.accessi_totali.Broker_totale);
+            this.accessi_totali = response.data;
+            console.log(this.accessi_totali.Broker_totale);
           });
       } catch (error) {
         console.log("errore: " + error);
       }
     },
-  }
+  },
 };
 </script>
 <style>

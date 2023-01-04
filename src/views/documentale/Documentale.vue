@@ -553,6 +553,7 @@
               "
             >
               <CDataTable
+                :itemsPerPage="20"
                 id="int_table"
                 ref="tabella_doc"
                 :items="files"
@@ -945,6 +946,7 @@
                 :items="files"
                 :fields="fields_RCA"
                 ref="tabella_doc"
+                :itemsPerPage="20"
                 sorter
                 hover
                 border
@@ -1004,6 +1006,7 @@
                 :items="files"
                 ref="tabella_doc"
                 :fields="fields_SERVIZI"
+                :itemsPerPage="20"
                 sorter
                 hover
                 border
@@ -1047,6 +1050,7 @@
                 ref="tabella_doc"
                 :items="files"
                 :fields="fields_ALTRE"
+                :itemsPerPage="20"
                 sorter
                 hover
                 pagination
@@ -1103,7 +1107,7 @@
             <!-- DATA TABLE PER NON AUTO -->
             <div class="pt-5" v-if="settore === 'RAMI_DATA' && !vuoto">
               <CDataTable
-               items-per-page="20"
+                :itemsPerPage="20"
                 id="rami_table"
                 ref="tabella_doc"
                 :items="files"
@@ -1522,7 +1526,7 @@ const fields_RAMI = [
   {
     key: "Descrizione",
     _style: "font-weight: bold; text-align: center;",
-    label: "Compagnia",
+    label: "Descrizione",
   },
 
   {
