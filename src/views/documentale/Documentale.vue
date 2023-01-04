@@ -1101,8 +1101,9 @@
               </CDataTable>
             </div>
             <!-- DATA TABLE PER NON AUTO -->
-            <div class="pt-5" v-if="settore === 'RAMI_DATA'">
+            <div class="pt-5" v-if="settore === 'RAMI_DATA' && !vuoto">
               <CDataTable
+               items-per-page="20"
                 id="rami_table"
                 ref="tabella_doc"
                 :items="files"
@@ -1138,6 +1139,27 @@
                   </td>
                 </template>
                 <template #visualizza="{ item }">
+                  <td class="py-2 text-center">
+                    <CButton
+                      v-if="item.Nomefile !== ''"
+                      color="primary"
+                      variant="outline"
+                      square
+                      size="sm"
+                      @click="
+                        preview(item.Nomefile, 'RAMI');
+                        titoloModale(
+                          item.Tipo,
+                          item.Descrizione,
+                          'SET INFORMATIVO'
+                        );
+                      "
+                    >
+                      Visualizza
+                    </CButton>
+                  </td>
+                </template>
+                <template #SchedaTecnica="{ item }">
                   <td class="py-2 text-center">
                     <CButton
                       v-if="item.Nomefile !== ''"
@@ -1517,6 +1539,13 @@ const fields_RAMI = [
     filter: false,
     _style: "text-align: center;",
   },
+  {
+    key: "SchedaTecnica",
+    label: "Scheda Tecnica",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
 ];
 
 export default {
@@ -1782,6 +1811,7 @@ export default {
 
       // Inizializzo le sottocartelle
       this.altre_gar = [];
+      this.lista_sub_prod = [];
       this.altri_servizi = [];
       this.non_auto = [];
       this.filtro_gar = "";
