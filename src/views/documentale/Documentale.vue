@@ -1166,7 +1166,7 @@
                 <template #SchedaTecnica="{ item }">
                   <td class="py-2 text-center">
                     <CButton
-                      v-if="item.Nomefile !== ''"
+                      v-if="item.Nomefile == 'prova'"
                       color="primary"
                       variant="outline"
                       square
@@ -1450,7 +1450,7 @@ const fields_RCA = [
   {
     key: "Descrizione",
     _style: "font-weight: bold; text-align:center;",
-    label: "Compagnia",
+    label: "Denominazione Prodotto",
   },
 
   {
@@ -1478,7 +1478,7 @@ const fields_ALTRE = [
   {
     key: "Descrizione",
     _style: "font-weight: bold; text-align: center;",
-    label: "Compagnia",
+    label: "Denominazione Prodotto",
   },
 
   {
@@ -1506,7 +1506,7 @@ const fields_SERVIZI = [
   {
     key: "Descrizione",
     _style: "font-weight: bold; text-align: center;",
-    label: "Descrizione",
+    label: "Denominazione Prodotto",
   },
   {
     key: "visualizza",
@@ -1526,7 +1526,7 @@ const fields_RAMI = [
   {
     key: "Descrizione",
     _style: "font-weight: bold; text-align: center;",
-    label: "Descrizione",
+    label: "Denominazione Prodotto",
   },
 
   {

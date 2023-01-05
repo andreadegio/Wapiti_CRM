@@ -13,7 +13,7 @@
           target="_self"
         >
         <a href="/dashboard">
-          <img src="/img/Abyway Natale.png" width="200px" /></a>
+          <img src="/img/logo_abyway.png" width="200px" /></a>
         </CHeaderNavItem>
       </CHeaderNav>
       <CHeaderNav v-show="city" class="d-md-down-none mr-auto">
