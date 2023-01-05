@@ -941,6 +941,7 @@
             </div>
             <!-- DATA TABLE PER RCA -->
             <div class="pt-5" v-if="settore === 'RC AUTO'">
+              <button @click="download_excel()">Scarica</button>
               <CDataTable
                 id="rc_table"
                 :items="files"
@@ -1193,6 +1194,8 @@
   </CContainer>
 </template>
 <script>
+import  { jsontoexcel }  from "vue-table-to-excel";
+
 import axios from "axios";
 import {
   folder_list,
@@ -1560,6 +1563,15 @@ export default {
   },
   data() {
     return {
+      json_excel: {
+        data: [
+          { name: "Tom", phone: "+321321", email: "pippo" },
+          { name: "Jerry", phone: "+321321", email: "pippo" },
+          { name: "Pippo", phone: "+321321", email: "pippo" },
+        ],
+        head: ["name", "phone", "email"],
+        fileName: "prova_download.csv",
+      },
       json_prodotti: [],
       array_prodotti_rami: [],
       lista_sub_prod: [],
@@ -1702,6 +1714,12 @@ export default {
     }
   },
   methods: {
+    download_excel() {
+      const { data, head, fileName } = this.json_excel;
+      console.log(data);
+      jsontoexcel.getXlsx(data, head, fileName);
+    },
+
     reset_pagination() {
       // Forzo sempre la visualizzazione della prima pagina del datagrid per poter ripartire
       // dalla prima ogni volta che cambio folder
