@@ -1,0 +1,2830 @@
+[
+    {
+        "idCompagnia": 223,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ADMIRAL EUROPE",
+        "Nomefile": "223_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1281,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ADMIRAL EUROPE",
+        "Nomefile": "1281_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1404,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ADMIRAL EUROPE",
+        "Nomefile": "1404_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1445,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ADMIRAL EUROPE",
+        "Nomefile": "1445_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1446,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ADMIRAL EUROPE",
+        "Nomefile": "1446_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 371,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ADRIATIC ASSICURAZIONI",
+        "Nomefile": "371_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 822,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ADRIATIC ASSICURAZIONI",
+        "Nomefile": "822_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1359,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ADRIATIC ASSICURAZIONI",
+        "Nomefile": "1359_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1376,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ADRIATIC ASSICURAZIONI",
+        "Nomefile": "1376_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1384,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ADRIATIC ASSICURAZIONI",
+        "Nomefile": "1384_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1385,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ADRIATIC ASSICURAZIONI",
+        "Nomefile": "1385_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1387,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ADRIATIC ASSICURAZIONI",
+        "Nomefile": "1387_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1476,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ADRIATIC ASSICURAZIONI",
+        "Nomefile": "1476_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1480,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ADRIATIC ASSICURAZIONI",
+        "Nomefile": "1480_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1504,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ADRIATIC ASSICURAZIONI",
+        "Nomefile": "1504_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1510,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ADRIATIC ASSICURAZIONI",
+        "Nomefile": "1510_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1546,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ADRIATIC ASSICURAZIONI",
+        "Nomefile": "1546_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1547,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ADRIATIC ASSICURAZIONI",
+        "Nomefile": "1547_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1569,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ADRIATIC ASSICURAZIONI",
+        "Nomefile": "1569_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 997,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "997_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1002,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1002_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1003,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1003_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1100,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1100_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1107,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1107_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1110,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1110_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1155,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1155_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1180,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1180_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1183,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1183_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1186,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1186_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1200,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1200_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1209,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1209_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1246,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1246_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1249,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1249_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1269,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1269_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1279,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1279_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1328,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1328_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1331,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1331_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1333,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1333_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1339,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1339_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1366,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1366_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1397,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1397_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1398,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1398_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1458,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1458_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1471,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1471_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1529,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1529_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1530,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1530_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1592,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ",
+        "Nomefile": "1592_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 305,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ DIRECT",
+        "Nomefile": "305_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 852,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ DIRECT",
+        "Nomefile": "852_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1010,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ALLIANZ DIRECT",
+        "Nomefile": "1010_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 935,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AMISSIMA ASSICURAZIONI",
+        "Nomefile": "935_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1036,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AMISSIMA ASSICURAZIONI",
+        "Nomefile": "1036_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1082,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AMISSIMA ASSICURAZIONI",
+        "Nomefile": "1082_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1157,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AMISSIMA ASSICURAZIONI",
+        "Nomefile": "1157_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1232,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AMISSIMA ASSICURAZIONI",
+        "Nomefile": "1232_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1234,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AMISSIMA ASSICURAZIONI",
+        "Nomefile": "1234_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1250,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AMISSIMA ASSICURAZIONI",
+        "Nomefile": "1250_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1336,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AMISSIMA ASSICURAZIONI",
+        "Nomefile": "1336_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1345,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AMISSIMA ASSICURAZIONI",
+        "Nomefile": "1345_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1363,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AMISSIMA ASSICURAZIONI",
+        "Nomefile": "1363_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1417,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AMISSIMA ASSICURAZIONI",
+        "Nomefile": "1417_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1420,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AMISSIMA ASSICURAZIONI",
+        "Nomefile": "1420_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1421,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AMISSIMA ASSICURAZIONI",
+        "Nomefile": "1421_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1464,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AMISSIMA ASSICURAZIONI",
+        "Nomefile": "1464_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1071,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ASSICURATRICE MILANESE",
+        "Nomefile": "1071_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1196,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ASSICURATRICE MILANESE",
+        "Nomefile": "1196_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1214,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ASSICURATRICE MILANESE",
+        "Nomefile": "1214_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1274,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ASSICURATRICE MILANESE",
+        "Nomefile": "1274_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1325,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ASSICURATRICE MILANESE",
+        "Nomefile": "1325_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1380,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ASSICURATRICE MILANESE",
+        "Nomefile": "1380_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1506,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ASSIMOCO",
+        "Nomefile": "1506_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 904,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AVIVA ITALIA",
+        "Nomefile": "904_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 934,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AVIVA ITALIA",
+        "Nomefile": "934_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 941,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AVIVA ITALIA",
+        "Nomefile": "941_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 982,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AVIVA ITALIA",
+        "Nomefile": "982_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 989,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AVIVA ITALIA",
+        "Nomefile": "989_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1125,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AVIVA ITALIA",
+        "Nomefile": "1125_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1179,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AVIVA ITALIA",
+        "Nomefile": "1179_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1305,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AVIVA ITALIA",
+        "Nomefile": "1305_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1494,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AVIVA ITALIA",
+        "Nomefile": "1494_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1496,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AVIVA ITALIA",
+        "Nomefile": "1496_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1497,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AVIVA ITALIA",
+        "Nomefile": "1497_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1567,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AVIVA ITALIA",
+        "Nomefile": "1567_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 944,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "944_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 965,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "965_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 970,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "970_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 972,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "972_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 974,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "974_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 976,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "976_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 977,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "977_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1033,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "1033_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1054,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "1054_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1068,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "1068_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1074,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "1074_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1103,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "1103_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1109,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "1109_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1118,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "1118_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1184,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "1184_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1187,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "1187_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1217,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "1217_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1244,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "1244_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1283,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "1283_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1371,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "1371_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1381,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "1381_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1386,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "1386_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1433,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "1433_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1434,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "1434_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1542,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "AXA ASSICURAZIONI",
+        "Nomefile": "1542_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1121,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "BENE ASSICURAZIONI",
+        "Nomefile": "1121_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1169,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "BENE ASSICURAZIONI",
+        "Nomefile": "1169_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1213,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "BENE ASSICURAZIONI",
+        "Nomefile": "1213_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1301,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "BENE ASSICURAZIONI",
+        "Nomefile": "1301_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1303,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "BENE ASSICURAZIONI",
+        "Nomefile": "1303_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1304,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "BENE ASSICURAZIONI",
+        "Nomefile": "1304_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1313,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "BENE ASSICURAZIONI",
+        "Nomefile": "1313_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1341,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "BENE ASSICURAZIONI",
+        "Nomefile": "1341_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1361,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "BENE ASSICURAZIONI",
+        "Nomefile": "1361_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1365,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "BENE ASSICURAZIONI",
+        "Nomefile": "1365_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 832,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "CARGEAS ASSICURAZIONI",
+        "Nomefile": "832_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1348,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "CARGEAS ASSICURAZIONI",
+        "Nomefile": "1348_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 646,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "CATTOLICA ASSICURAZIONI",
+        "Nomefile": "646_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 654,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "CATTOLICA ASSICURAZIONI",
+        "Nomefile": "654_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1006,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "CATTOLICA ASSICURAZIONI",
+        "Nomefile": "1006_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1040,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "CATTOLICA ASSICURAZIONI",
+        "Nomefile": "1040_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1049,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "CATTOLICA ASSICURAZIONI",
+        "Nomefile": "1049_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1075,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "CATTOLICA ASSICURAZIONI",
+        "Nomefile": "1075_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1236,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "CATTOLICA ASSICURAZIONI",
+        "Nomefile": "1236_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1318,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "CATTOLICA ASSICURAZIONI",
+        "Nomefile": "1318_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1374,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "CATTOLICA ASSICURAZIONI",
+        "Nomefile": "1374_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1390,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "CATTOLICA ASSICURAZIONI",
+        "Nomefile": "1390_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1395,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "CATTOLICA ASSICURAZIONI",
+        "Nomefile": "1395_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1403,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "CATTOLICA ASSICURAZIONI",
+        "Nomefile": "1403_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1264,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "DALLBOGG",
+        "Nomefile": "1264_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1409,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "DALLBOGG",
+        "Nomefile": "1409_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1418,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "DALLBOGG",
+        "Nomefile": "1418_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1430,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "DALLBOGG",
+        "Nomefile": "1430_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1431,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "DALLBOGG",
+        "Nomefile": "1431_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1432,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "DALLBOGG",
+        "Nomefile": "1432_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1436,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "DALLBOGG",
+        "Nomefile": "1436_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1438,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "DALLBOGG",
+        "Nomefile": "1438_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1454,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "DALLBOGG",
+        "Nomefile": "1454_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1491,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "DALLBOGG",
+        "Nomefile": "1491_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1492,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "DALLBOGG",
+        "Nomefile": "1492_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1502,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "DALLBOGG",
+        "Nomefile": "1502_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1512,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "DALLBOGG",
+        "Nomefile": "1512_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1513,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "DALLBOGG",
+        "Nomefile": "1513_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1515,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "DALLBOGG",
+        "Nomefile": "1515_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1524,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "DALLBOGG",
+        "Nomefile": "1524_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1525,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "DALLBOGG",
+        "Nomefile": "1525_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1526,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "DALLBOGG",
+        "Nomefile": "1526_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1084,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "DARAG",
+        "Nomefile": "1084_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1022,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "DIRECT ASSICURAZIONI",
+        "Nomefile": "1022_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1023,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "DIRECT ASSICURAZIONI",
+        "Nomefile": "1023_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1477,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "EUROHERC OSIGURANJE DD",
+        "Nomefile": "1477_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1489,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "EUROHERC OSIGURANJE DD",
+        "Nomefile": "1489_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1505,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "EUROHERC OSIGURANJE DD",
+        "Nomefile": "1505_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1511,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "EUROHERC OSIGURANJE DD",
+        "Nomefile": "1511_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1575,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "EUROHERC OSIGURANJE DD",
+        "Nomefile": "1575_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 736,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENERALI ITALIA",
+        "Nomefile": "736_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1009,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENERALI ITALIA",
+        "Nomefile": "1009_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1048,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENERALI ITALIA",
+        "Nomefile": "1048_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1080,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENERALI ITALIA",
+        "Nomefile": "1080_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1177,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENERALI ITALIA",
+        "Nomefile": "1177_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1257,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENERALI ITALIA",
+        "Nomefile": "1257_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1282,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENERALI ITALIA",
+        "Nomefile": "1282_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1322,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENERALI ITALIA",
+        "Nomefile": "1322_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1343,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENERALI ITALIA",
+        "Nomefile": "1343_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1392,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENERALI ITALIA",
+        "Nomefile": "1392_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1460,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENERALI ITALIA",
+        "Nomefile": "1460_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1473,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENERALI ITALIA",
+        "Nomefile": "1473_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1514,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENERALI ITALIA",
+        "Nomefile": "1514_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1574,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENERALI ITALIA",
+        "Nomefile": "1574_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1591,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENERALI ITALIA",
+        "Nomefile": "1591_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1132,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENERTEL",
+        "Nomefile": "1132_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1205,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENERTEL",
+        "Nomefile": "1205_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1449,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENERTEL",
+        "Nomefile": "1449_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1450,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENERTEL",
+        "Nomefile": "1450_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 874,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENIAL+",
+        "Nomefile": "874_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1277,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENIAL+",
+        "Nomefile": "1277_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 992,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GENIALCLICK",
+        "Nomefile": "992_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 993,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GREAT LAKES INSURANCE",
+        "Nomefile": "993_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1203,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GREAT LAKES INSURANCE",
+        "Nomefile": "1203_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1285,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GREAT LAKES INSURANCE",
+        "Nomefile": "1285_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1447,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GREAT LAKES INSURANCE",
+        "Nomefile": "1447_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1521,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GREAT LAKES INSURANCE",
+        "Nomefile": "1521_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 983,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GROUPAMA ASSICURAZIONI",
+        "Nomefile": "983_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1012,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GROUPAMA ASSICURAZIONI",
+        "Nomefile": "1012_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1038,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GROUPAMA ASSICURAZIONI",
+        "Nomefile": "1038_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1148,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GROUPAMA ASSICURAZIONI",
+        "Nomefile": "1148_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1176,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GROUPAMA ASSICURAZIONI",
+        "Nomefile": "1176_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1311,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GROUPAMA ASSICURAZIONI",
+        "Nomefile": "1311_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1332,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GROUPAMA ASSICURAZIONI",
+        "Nomefile": "1332_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1338,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GROUPAMA ASSICURAZIONI",
+        "Nomefile": "1338_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1349,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GROUPAMA ASSICURAZIONI",
+        "Nomefile": "1349_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1368,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GROUPAMA ASSICURAZIONI",
+        "Nomefile": "1368_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1388,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "GROUPAMA ASSICURAZIONI",
+        "Nomefile": "1388_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1037,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HDI ASSICURAZIONI",
+        "Nomefile": "1037_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1070,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HDI ASSICURAZIONI",
+        "Nomefile": "1070_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1098,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HDI ASSICURAZIONI",
+        "Nomefile": "1098_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1102,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HDI ASSICURAZIONI",
+        "Nomefile": "1102_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1106,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HDI ASSICURAZIONI",
+        "Nomefile": "1106_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1224,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HDI ASSICURAZIONI",
+        "Nomefile": "1224_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1228,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HDI ASSICURAZIONI",
+        "Nomefile": "1228_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1239,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HDI ASSICURAZIONI",
+        "Nomefile": "1239_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1245,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HDI ASSICURAZIONI",
+        "Nomefile": "1245_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1259,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HDI ASSICURAZIONI",
+        "Nomefile": "1259_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1260,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HDI ASSICURAZIONI",
+        "Nomefile": "1260_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1278,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HDI ASSICURAZIONI",
+        "Nomefile": "1278_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1296,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HDI ASSICURAZIONI",
+        "Nomefile": "1296_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1394,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HDI ASSICURAZIONI",
+        "Nomefile": "1394_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1411,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HDI ASSICURAZIONI",
+        "Nomefile": "1411_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1501,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HDI ASSICURAZIONI",
+        "Nomefile": "1501_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1503,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HDI ASSICURAZIONI",
+        "Nomefile": "1503_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1557,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HDI ASSICURAZIONI",
+        "Nomefile": "1557_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1570,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HDI ASSICURAZIONI",
+        "Nomefile": "1570_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 754,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HELVETIA ASSICURAZIONI",
+        "Nomefile": "754_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 918,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HELVETIA ASSICURAZIONI",
+        "Nomefile": "918_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1156,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HELVETIA ASSICURAZIONI",
+        "Nomefile": "1156_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1166,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HELVETIA ASSICURAZIONI",
+        "Nomefile": "1166_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1216,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HELVETIA ASSICURAZIONI",
+        "Nomefile": "1216_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1294,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HELVETIA ASSICURAZIONI",
+        "Nomefile": "1294_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1340,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HELVETIA ASSICURAZIONI",
+        "Nomefile": "1340_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1347,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HELVETIA ASSICURAZIONI",
+        "Nomefile": "1347_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1413,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HELVETIA ASSICURAZIONI",
+        "Nomefile": "1413_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1419,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HELVETIA ASSICURAZIONI",
+        "Nomefile": "1419_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1435,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HELVETIA ASSICURAZIONI",
+        "Nomefile": "1435_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1495,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HELVETIA ASSICURAZIONI",
+        "Nomefile": "1495_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1518,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "HELVETIA ASSICURAZIONI",
+        "Nomefile": "1518_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1479,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "IPTIQ EMEA",
+        "Nomefile": "1479_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1522,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "IPTIQ EMEA",
+        "Nomefile": "1522_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1528,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "IPTIQ EMEA",
+        "Nomefile": "1528_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1482,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "IPTIQ EMEA (Regime di LPS)",
+        "Nomefile": "1482_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1523,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "IPTIQ EMEA (Regime di LPS)",
+        "Nomefile": "1523_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1527,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "IPTIQ EMEA (Regime di LPS)",
+        "Nomefile": "1527_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 678,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ITALIANA ASSICURAZIONI",
+        "Nomefile": "678_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1034,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ITALIANA ASSICURAZIONI",
+        "Nomefile": "1034_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1089,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ITALIANA ASSICURAZIONI",
+        "Nomefile": "1089_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1096,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ITALIANA ASSICURAZIONI",
+        "Nomefile": "1096_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1123,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ITALIANA ASSICURAZIONI",
+        "Nomefile": "1123_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1149,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ITALIANA ASSICURAZIONI",
+        "Nomefile": "1149_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1185,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ITALIANA ASSICURAZIONI",
+        "Nomefile": "1185_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1212,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ITALIANA ASSICURAZIONI",
+        "Nomefile": "1212_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1327,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ITALIANA ASSICURAZIONI",
+        "Nomefile": "1327_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1362,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ITALIANA ASSICURAZIONI",
+        "Nomefile": "1362_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1372,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ITALIANA ASSICURAZIONI",
+        "Nomefile": "1372_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1391,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ITALIANA ASSICURAZIONI",
+        "Nomefile": "1391_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1470,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ITALIANA ASSICURAZIONI",
+        "Nomefile": "1470_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1481,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ITALIANA ASSICURAZIONI",
+        "Nomefile": "1481_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1493,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ITALIANA ASSICURAZIONI",
+        "Nomefile": "1493_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1562,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ITALIANA ASSICURAZIONI",
+        "Nomefile": "1562_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 922,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ITAS MUTUA",
+        "Nomefile": "922_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1027,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ITAS MUTUA",
+        "Nomefile": "1027_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1046,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ITAS MUTUA",
+        "Nomefile": "1046_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1092,
+        "Tipo": "RCA",
+        "Pog": "1092_SchedaProdotto_RCA.pdf",
+        "Descrizione": "ITAS MUTUA",
+        "Nomefile": "1092_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1116,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ITAS MUTUA",
+        "Nomefile": "1116_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1178,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ITAS MUTUA",
+        "Nomefile": "1178_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1462,
+        "Tipo": "RCA",
+        "Pog": "1462_SchedaProdotto_RCA.pdf",
+        "Descrizione": "ITAS MUTUA",
+        "Nomefile": "1462_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 335,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "LINEAR",
+        "Nomefile": "335_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1129,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "LINEAR",
+        "Nomefile": "1129_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1443,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "LINEAR",
+        "Nomefile": "1443_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1444,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "LINEAR",
+        "Nomefile": "1444_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1532,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "LINEAR",
+        "Nomefile": "1532_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1306,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "LINEAR NEXT",
+        "Nomefile": "1306_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 674,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "674_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 899,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "899_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 903,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "903_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 943,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "943_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 990,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "990_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1104,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "1104_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1119,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "1119_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1146,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "1146_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1154,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "1154_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1174,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "1174_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1193,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "1193_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1207,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "1207_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1215,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "1215_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1251,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "1251_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1254,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "1254_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1298,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "1298_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1314,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "1314_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1315,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "1315_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1320,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "1320_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1356,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "1356_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1407,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "1407_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1414,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "1414_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1427,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "1427_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1437,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "1437_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1472,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "1472_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1478,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "NOBIS FILO DIRETTO ASSICURAZIONI",
+        "Nomefile": "1478_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1018,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "QUIXA",
+        "Nomefile": "1018_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1223,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "QUIXA",
+        "Nomefile": "1223_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1441,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "QUIXA",
+        "Nomefile": "1441_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1442,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "QUIXA",
+        "Nomefile": "1442_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1533,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "QUIXA",
+        "Nomefile": "1533_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 385,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "REALE MUTUA",
+        "Nomefile": "385_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1073,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "REALE MUTUA",
+        "Nomefile": "1073_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1095,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "REALE MUTUA",
+        "Nomefile": "1095_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1181,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "REALE MUTUA",
+        "Nomefile": "1181_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1334,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "REALE MUTUA",
+        "Nomefile": "1334_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1337,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "REALE MUTUA",
+        "Nomefile": "1337_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1382,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "REALE MUTUA",
+        "Nomefile": "1382_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1172,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "SARA ASSICURAZIONI",
+        "Nomefile": "1172_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1190,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "SARA ASSICURAZIONI",
+        "Nomefile": "1190_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1247,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "SARA ASSICURAZIONI",
+        "Nomefile": "1247_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1302,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "SARA ASSICURAZIONI",
+        "Nomefile": "1302_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1323,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "SARA ASSICURAZIONI",
+        "Nomefile": "1323_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1354,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "SARA ASSICURAZIONI",
+        "Nomefile": "1354_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1355,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "SARA ASSICURAZIONI",
+        "Nomefile": "1355_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1358,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "SARA ASSICURAZIONI",
+        "Nomefile": "1358_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1402,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "SARA ASSICURAZIONI",
+        "Nomefile": "1402_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1406,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "SARA ASSICURAZIONI",
+        "Nomefile": "1406_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1408,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "SARA ASSICURAZIONI",
+        "Nomefile": "1408_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1565,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "SARA ASSICURAZIONI",
+        "Nomefile": "1565_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1057,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "SOGESSUR",
+        "Nomefile": "1057_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1058,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "SOGESSUR",
+        "Nomefile": "1058_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1062,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "SOGESSUR",
+        "Nomefile": "1062_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1134,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "SOGESSUR",
+        "Nomefile": "1134_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1423,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "SOGESSUR",
+        "Nomefile": "1423_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1424,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "SOGESSUR",
+        "Nomefile": "1424_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1425,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "SOGESSUR",
+        "Nomefile": "1425_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1426,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "SOGESSUR",
+        "Nomefile": "1426_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 755,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "TUA ASSICURAZIONI",
+        "Nomefile": "755_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 958,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "TUA ASSICURAZIONI",
+        "Nomefile": "958_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1026,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "TUA ASSICURAZIONI",
+        "Nomefile": "1026_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1035,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "TUA ASSICURAZIONI",
+        "Nomefile": "1035_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1043,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "TUA ASSICURAZIONI",
+        "Nomefile": "1043_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1045,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "TUA ASSICURAZIONI",
+        "Nomefile": "1045_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1088,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "TUA ASSICURAZIONI",
+        "Nomefile": "1088_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1195,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "TUA ASSICURAZIONI",
+        "Nomefile": "1195_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1225,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "TUA ASSICURAZIONI",
+        "Nomefile": "1225_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1227,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "TUA ASSICURAZIONI",
+        "Nomefile": "1227_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1360,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "TUA ASSICURAZIONI",
+        "Nomefile": "1360_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1367,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "TUA ASSICURAZIONI",
+        "Nomefile": "1367_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1370,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "TUA ASSICURAZIONI",
+        "Nomefile": "1370_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1393,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "TUA ASSICURAZIONI",
+        "Nomefile": "1393_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1469,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "TUA ASSICURAZIONI",
+        "Nomefile": "1469_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 747,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "747_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 933,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "933_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 962,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "962_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 963,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "963_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 967,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "967_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1019,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1019_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1024,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1024_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1028,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1028_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1105,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1105_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1160,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1160_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1175,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1175_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1237,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1237_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1241,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1241_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1243,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1243_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1295,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1295_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1299,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1299_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1309,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1309_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1330,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1330_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1351,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1351_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1357,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1357_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1369,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1369_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1375,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1375_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1389,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1389_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1399,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1399_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1416,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1416_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1422,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1422_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1455,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1455_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1498,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1498_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1543,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1543_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1551,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1551_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1552,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1552_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1553,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1553_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1554,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1554_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1555,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1555_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1558,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1558_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1559,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1559_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1560,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1560_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1561,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1561_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1563,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1563_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1564,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1564_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1572,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1572_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1586,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1586_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1589,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "UNIPOLSAI",
+        "Nomefile": "1589_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1201,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "VERTI ASSICURAZIONI",
+        "Nomefile": "1201_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1042,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "VITTORIA ASSICURAZIONI",
+        "Nomefile": "1042_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1152,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "VITTORIA ASSICURAZIONI",
+        "Nomefile": "1152_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1253,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "VITTORIA ASSICURAZIONI",
+        "Nomefile": "1253_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1316,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "VITTORIA ASSICURAZIONI",
+        "Nomefile": "1316_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1321,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "VITTORIA ASSICURAZIONI",
+        "Nomefile": "1321_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1324,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "VITTORIA ASSICURAZIONI",
+        "Nomefile": "1324_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1346,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "VITTORIA ASSICURAZIONI",
+        "Nomefile": "1346_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1401,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "VITTORIA ASSICURAZIONI",
+        "Nomefile": "1401_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1499,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "VITTORIA ASSICURAZIONI",
+        "Nomefile": "1499_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1289,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "WAKAM",
+        "Nomefile": "1289_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 913,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ZURICH",
+        "Nomefile": "913_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 923,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ZURICH",
+        "Nomefile": "923_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1025,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ZURICH",
+        "Nomefile": "1025_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1039,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ZURICH",
+        "Nomefile": "1039_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1061,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ZURICH",
+        "Nomefile": "1061_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1133,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ZURICH",
+        "Nomefile": "1133_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1182,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ZURICH",
+        "Nomefile": "1182_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1202,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ZURICH",
+        "Nomefile": "1202_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1284,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ZURICH",
+        "Nomefile": "1284_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1342,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ZURICH",
+        "Nomefile": "1342_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1353,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ZURICH",
+        "Nomefile": "1353_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1428,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ZURICH",
+        "Nomefile": "1428_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1452,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ZURICH",
+        "Nomefile": "1452_CondizioniPolizza_RCA.pdf"
+    },
+    {
+        "idCompagnia": 1508,
+        "Tipo": "RCA",
+        "Pog": "",
+        "Descrizione": "ZURICH",
+        "Nomefile": "1508_CondizioniPolizza_RCA.pdf"
+    }
+]
