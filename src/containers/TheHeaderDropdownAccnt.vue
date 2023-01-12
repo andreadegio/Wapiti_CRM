@@ -206,6 +206,9 @@
       <CDropdownItem to="/Accessi_stat" v-if="admin">
         <i class="far fa-chart-bar"> </i> <span class="pl-1">Accessi</span>
       </CDropdownItem>
+      <CDropdownItem to="/GeneratoreFirme" v-if="admin">
+        <i class="fas fa-file-signature"></i> <span class="pl-1">Genera Firme</span>
+      </CDropdownItem>
       <CDropdownHeader tag="div" class="text-center" color="light">
         <strong>Account</strong>
       </CDropdownHeader>
