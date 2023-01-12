@@ -37,8 +37,8 @@
                     </li>
                     <li>
                       Per cambiare il <b>Numero di telefono</b> spunta la
-                      casella "Cambia numero fisso" altrimenti di default
-                      assegna il numero +39 02 86882871
+                      casella "Cambia numero fisso" altrimenti
+                      <em>di default assegna il numero +39 02 86882871</em>
                     </li>
                     <li>
                       Per mostrare l'<b>Interno</b> del centralino, spunta la
@@ -54,15 +54,20 @@
                     </li>
                     <li>
                       Per cambiare l'<b>Indirizzo</b> spunta la casella "Cambia
-                      Indirizzo" e compila il campo, altrimenti di default
-                      assegna "Via Monte Napoleone 8, 20121 Milano (MI)"
+                      Indirizzo" e compila il campo, altrimenti
+                      <em
+                        >di default assegna "Via Monte Napoleone 8, 20121 Milano
+                        (MI)"</em
+                      >
                     </li>
                   </ol>
                   <div>
                     Al termine puoi vedere l'<b>Anteprima</b> di come si
                     presenterà la tua firma, se tutto ok premi sul pulsante
-                    <b>COPIA LA FIRMA</b> e poi apri il tuo software di posta ed
-                    incolla nell'apposito spazio
+                    <b>COPIA PER OUTLOOK</b> se utilizzi Outlook come programma
+                    di posta, altrimenti <b>COPIA IN HTML</b> se utilizzi altri
+                    programmi di posta che supportano la firma in HTML.<br/>
+                    A questo punto puoi incollare la firma all'interno del tuo programma di posta.
                   </div>
                 </div>
               </CCol>
@@ -88,10 +93,8 @@
     </CButton>
     <Configuratore
       class="configuratore"
-      
       :recapiti="recapiti"
       @switchAzienda="switchAzienda"
-      
       @changeRecapiti="changeRecapiti"
     />
     <div style="text-align: center">
@@ -100,9 +103,10 @@
         class="mx-2"
         color="#1f4b6b"
         style="color: white"
-        @click="copytohtml(company)"
+        @click="copy4outlook(company)"
+        :disabled="recapiti.nome == ''"
       >
-        Copia in HTML
+        Copia per Outlook
       </v-btn>
       &nbsp;
       <v-btn
@@ -110,9 +114,10 @@
         class="mx-2"
         color="#1f4b6b"
         style="color: white"
-        @click="copy4outlook(company)"
+        @click="copytohtml(company)"
+        :disabled="recapiti.nome == ''"
       >
-        Copia per Outlook
+        Copia in HTML
       </v-btn>
     </div>
     <br />
@@ -121,13 +126,11 @@
     <SignatureAby
       class="preview"
       v-show="company == 'ABY'"
-      
       :recapiti="recapiti"
     />
     <SignatureNavert
       class="preview"
       v-show="company == 'NAV'"
-
       :recapiti="recapiti"
     />
   </div>
@@ -161,8 +164,8 @@ export default {
         interno: "",
         sel_cell: false,
         cellulare: "",
-        sel_mail: true,
-        mail: "mail",
+        sel_mail: false,
+        mail: "",
         sel_indirizzo: false,
         indirizzo: "",
       },
@@ -182,8 +185,8 @@ export default {
         interno: "",
         sel_cell: false,
         cellulare: "",
-        sel_mail: true,
-        mail: "mail",
+        sel_mail: false,
+        mail: "",
         sel_indirizzo: false,
         indirizzo: "",
       };
