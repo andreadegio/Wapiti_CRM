@@ -53,12 +53,16 @@
                       Mail" ed inserisci la mail
                     </li>
                     <li>
-                      Per cambiare l'<b>Indirizzo</b> spunta la casella "Cambia
-                      Indirizzo" e compila il campo, altrimenti
+                      Per cambiare l'Indirizzo della <b>Sede Legale</b> spunta la casella "Cambia
+                      Sede Legale" e compila il campo, altrimenti
                       <em
                         >di default assegna "Via Monte Napoleone 8, 20121 Milano
                         (MI)"</em
                       >
+                    </li>
+                    <li>
+                      Per mostrare l'Indirizzo della <b>Sede Operativa</b> spunta la casella "Mostra
+                      Sede Operativa" e compila il campo inserendo l'indirizzo.
                     </li>
                   </ol>
                   <div>
@@ -66,8 +70,9 @@
                     presenterà la tua firma, se tutto ok premi sul pulsante
                     <b>COPIA PER OUTLOOK</b> se utilizzi Outlook come programma
                     di posta, altrimenti <b>COPIA IN HTML</b> se utilizzi altri
-                    programmi di posta che supportano la firma in HTML.<br/>
-                    A questo punto puoi incollare la firma all'interno del tuo programma di posta.
+                    programmi di posta che supportano la firma in HTML.<br />
+                    A questo punto puoi incollare la firma all'interno del tuo
+                    programma di posta.
                   </div>
                 </div>
               </CCol>
@@ -168,6 +173,8 @@ export default {
         mail: "",
         sel_indirizzo: false,
         indirizzo: "",
+        sel_operativa: false,
+        operativa: "",
       },
     };
   },
@@ -189,20 +196,10 @@ export default {
         mail: "",
         sel_indirizzo: false,
         indirizzo: "",
+        sel_operativa: false,
+        operativa: "",
       };
     },
-    // changeNome(utente) {
-    //   this.nome = utente;
-    // },
-    // changeRuolo(newRuolo) {
-    //   this.ruolo = newRuolo;
-    // },
-    // changeRuolo2(newRuolo2) {
-    //   this.ruolo2 = newRuolo2;
-    // },
-    // changeMostraRuolo(newMostraRuolo) {
-    //   this.mostra_ruolo = newMostraRuolo;
-    // },
     changeRecapiti(newRecapiti) {
       this.recapiti = newRecapiti;
     },

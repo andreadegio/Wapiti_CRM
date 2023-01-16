@@ -107,14 +107,28 @@
       <v-col cols="12" sm="6" md="3" class="p-1">
         <v-checkbox
           v-model="recapiti.sel_indirizzo"
-          label="Cambia Indirizzo"
+          label="Cambia Sede Legale"
           @change="$emit('changeRecapiti', recapiti)"
         />
         <v-text-field
           v-if="recapiti.sel_indirizzo"
-          label="Nuovo Indirizzo"
-          placeholder="+39 02 86882871"
+          label="Indirizzo Sede Legale"
+          placeholder="Via Monte Napoleone 8, 20121 Milano (MI)"
           v-model="recapiti.indirizzo"
+          @change="$emit('changeRecapiti', recapiti)"
+        ></v-text-field>
+      </v-col>
+      <v-col cols="12" sm="6" md="3" class="p-1">
+        <v-checkbox
+          v-model="recapiti.sel_operativa"
+          label="Mostra Sede Operativa"
+          @change="$emit('changeRecapiti', recapiti)"
+        />
+        <v-text-field
+          v-if="recapiti.sel_operativa"
+          label="Indirizzo Sede Operativa"
+           placeholder="Via Monte Napoleone 8, 20121 Milano (MI)"
+          v-model="recapiti.operativa"
           @change="$emit('changeRecapiti', recapiti)"
         ></v-text-field>
       </v-col>
