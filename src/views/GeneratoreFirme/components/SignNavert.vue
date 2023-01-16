@@ -47,7 +47,7 @@
             >
               <tbody>
                 <tr>
-                  <td rowspan="5">
+                  <td rowspan="6">
                     <img
                       src="https://www.aby.it/team/navert/sign/img/lineaVerticale.png"
                       width="3"
@@ -105,21 +105,52 @@
                     />
                   </td>
                   <td v-if="recapiti.sel_indirizzo">
+                    Sede Legale:
                     <a
                       :href="'https://maps.google.com/?q=' + recapiti.indirizzo"
-                      style="text-decoration: none; color: #575756; font-family: Montserrat;"
+                      style="
+                        text-decoration: none;
+                        color: #575756;
+                        font-family: Montserrat;
+                      "
                     >
                       {{ recapiti.indirizzo }}</a
                     >
                   </td>
                   <td v-else>
+                    Sede Legale:
                     <a
                       href="https://maps.google.com/?q=Via Monte Napoleone 8, 20121 Milano (MI)"
-                      style="text-decoration: none; color: #575756; font-family: Montserrat;"
+                      style="
+                        text-decoration: none;
+                        color: #575756;
+                        font-family: Montserrat;
+                      "
                       target="_blank"
                     >
                       Via Monte Napoleone 8, 20121 Milano (MI)
                     </a>
+                  </td>
+                </tr>
+                <tr v-if="recapiti.sel_operativa">
+                  <td style="text-align: center; font-family: Montserrat">
+                    <img
+                      src="https://www.aby.it/team/navert/sign/img/Geo.png"
+                      alt=""
+                    />
+                  </td>
+                  <td>
+                    Sede Operativa:
+                    <a
+                      :href="'https://maps.google.com/?q=' + recapiti.operativa"
+                      style="
+                        text-decoration: none;
+                        color: #575756;
+                        font-family: Montserrat;
+                      "
+                    >
+                      {{ recapiti.operativa }}</a
+                    >
                   </td>
                 </tr>
                 <tr>

@@ -21,10 +21,12 @@
               font-size: 28px;
             "
           >
-            <span>{{ recapiti.nome != "" ? recapiti.nome : "Nome Cognome" }}</span>
+            <span>{{
+              recapiti.nome != "" ? recapiti.nome : "Nome Cognome"
+            }}</span>
             <div
               style="
-              font-family: Montserrat;
+                font-family: Montserrat;
                 font-weight: 500;
                 text-transform: capitalize;
                 font-size: 18px;
@@ -33,7 +35,9 @@
               v-if="recapiti.mostra_ruolo"
             >
               <i
-                >{{ recapiti.ruolo != "" ? recapiti.ruolo : "Ruolo Aziendale" }}&nbsp;<br />{{
+                >{{
+                  recapiti.ruolo != "" ? recapiti.ruolo : "Ruolo Aziendale"
+                }}&nbsp;<br />{{
                   recapiti.ruolo2 != "" ? recapiti.ruolo2 : ""
                 }}</i
               >
@@ -43,11 +47,16 @@
           <td rowspan="4">
             <table
               width="100%"
-              style="color: #575756; line-height: 2rem; font-weight: 500;font-family: Montserrat;"
+              style="
+                color: #575756;
+                line-height: 2rem;
+                font-weight: 500;
+                font-family: Montserrat;
+              "
             >
               <tbody>
                 <tr>
-                  <td rowspan="5">
+                  <td rowspan="6">
                     <img
                       src="https://www.aby.it/team/aby/sign/img/lineaVerticale.png"
                       width="3"
@@ -55,13 +64,13 @@
                       alt=""
                     />
                   </td>
-                  <td style="text-align: center; font-family: Montserrat;">
+                  <td style="text-align: center; font-family: Montserrat">
                     <img
                       src="https://www.aby.it/team/aby/sign/img/Telefono.png"
                       alt=""
                     />
                   </td>
-                  <td valign="middle" style="font-family: Montserrat;">
+                  <td valign="middle" style="font-family: Montserrat">
                     {{
                       recapiti.sel_telefono
                         ? recapiti.telefono
@@ -74,7 +83,7 @@
                   </td>
                 </tr>
                 <tr v-if="recapiti.sel_cell">
-                  <td style="text-align: center; font-family: Montserrat;">
+                  <td style="text-align: center; font-family: Montserrat">
                     <img
                       src="https://www.aby.it/team/aby/sign/img/Mobile.png"
                       alt="Cell"
@@ -83,13 +92,19 @@
                   <td>{{ recapiti.cellulare }}</td>
                 </tr>
                 <tr v-if="recapiti.sel_mail">
-                  <td style="text-align: center; font-family: Montserrat;">
+                  <td style="text-align: center; font-family: Montserrat">
                     <img
                       src="https://www.aby.it/team/aby/sign/img/Mail.png"
                       alt=""
                     />
                   </td>
-                  <td style="text-decoration: none; color: #575756; font-family: Montserrat;">
+                  <td
+                    style="
+                      text-decoration: none;
+                      color: #575756;
+                      font-family: Montserrat;
+                    "
+                  >
                     <a
                       :href="'mailto:' + recapiti.mail"
                       style="text-decoration: none; color: #575756"
@@ -98,38 +113,69 @@
                   </td>
                 </tr>
                 <tr>
-                  <td style="text-align: center; font-family: Montserrat;">
+                  <td style="text-align: center; font-family: Montserrat">
                     <img
                       src="https://www.aby.it/team/aby/sign/img/Geo.png"
                       alt=""
                     />
                   </td>
                   <td v-if="recapiti.sel_indirizzo">
+                    Sede Legale:
                     <a
                       :href="'https://maps.google.com/?q=' + recapiti.indirizzo"
-                      style="text-decoration: none; color: #575756; font-family: Montserrat;"
+                      style="
+                        text-decoration: none;
+                        color: #575756;
+                        font-family: Montserrat;
+                      "
                     >
                       {{ recapiti.indirizzo }}</a
                     >
                   </td>
                   <td v-else>
+                    Sede Legale:
                     <a
                       href="https://maps.google.com/?q=Via Monte Napoleone 8, 20121 Milano (MI)"
-                      style="text-decoration: none; color: #575756; font-family: Montserrat;"
+                      style="
+                        text-decoration: none;
+                        color: #575756;
+                        font-family: Montserrat;
+                      "
                       target="_blank"
                     >
                       Via Monte Napoleone 8, 20121 Milano (MI)
                     </a>
                   </td>
                 </tr>
+                <tr v-if="recapiti.sel_operativa">
+                  <td style="text-align: center; font-family: Montserrat">
+                    <img
+                      src="https://www.aby.it/team/aby/sign/img/Geo.png"
+                      alt=""
+                    />
+                  </td>
+                  <td>
+                    Sede Operativa:
+                    <a
+                      :href="'https://maps.google.com/?q=' + recapiti.operativa"
+                      style="
+                        text-decoration: none;
+                        color: #575756;
+                        font-family: Montserrat;
+                      "
+                    >
+                      {{ recapiti.operativa }}</a
+                    >
+                  </td>
+                </tr>
                 <tr>
-                  <td style="text-align: center; font-family: Montserrat;">
+                  <td style="text-align: center; font-family: Montserrat">
                     <img
                       src="https://www.aby.it/team/aby/sign/img/Web.png"
                       alt=""
                     />
                   </td>
-                  <td style="font-weight: 500; font-family: Montserrat;">
+                  <td style="font-weight: 500; font-family: Montserrat">
                     <a
                       href="https://www.aby.it"
                       target="_blank"
