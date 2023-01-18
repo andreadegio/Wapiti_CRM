@@ -1,12 +1,12 @@
 <template>
-  <div id="firma_NAV" style="font-family: Montserrat">
+  <div id="firma_ABY" style="font-family: Montserrat">
     <table width="100%" style="color: #575756">
       <tbody>
         <tr>
           <td rowspan="4" width="160">
             <img
-              src="https://www.aby.it/team/navert/sign/img/Logo_Navert.png"
-              alt="Navert"
+              src="https://www.aby.it/team/aby/sign/img/Logo_Aby.png"
+              alt="Aby"
               width="150"
             />
           </td>
@@ -58,7 +58,7 @@
                 <tr>
                   <td rowspan="6">
                     <img
-                      src="https://www.aby.it/team/navert/sign/img/lineaVerticale.png"
+                      src="https://www.aby.it/team/aby/sign/img/lineaVerticale.png"
                       width="3"
                       height="79"
                       alt=""
@@ -66,7 +66,7 @@
                   </td>
                   <td style="text-align: center; font-family: Montserrat">
                     <img
-                      src="https://www.aby.it/team/navert/sign/img/Telefono.png"
+                      src="https://www.aby.it/team/aby/sign/img/Telefono.png"
                       alt=""
                     />
                   </td>
@@ -85,7 +85,7 @@
                 <tr v-if="recapiti.sel_cell">
                   <td style="text-align: center; font-family: Montserrat">
                     <img
-                      src="https://www.aby.it/team/navert/sign/img/Mobile.png"
+                      src="https://www.aby.it/team/aby/sign/img/Mobile.png"
                       alt="Cell"
                     />
                   </td>
@@ -100,7 +100,7 @@
                     "
                   >
                     <img
-                      src="https://www.aby.it/team/navert/sign/img/Mail.png"
+                      src="https://www.aby.it/team/aby/sign/img/Mail.png"
                       alt=""
                     />
                   </td>
@@ -125,15 +125,9 @@
                   </td>
                 </tr>
                 <tr>
-                  <td
-                    style="
-                      text-align: center;
-                      font-family: Montserrat;
-                      font-size: 10px !important;
-                    "
-                  >
+                  <td style="text-align: center; font-family: Montserrat">
                     <img
-                      src="https://www.aby.it/team/navert/sign/img/Geo.png"
+                      src="https://www.aby.it/team/aby/sign/img/Geo.png"
                       alt=""
                     />
                   </td>
@@ -154,7 +148,7 @@
                   <td v-else>
                     Sede Legale:
                     <a
-                      href="https://maps.google.com/?q=Via Monte Napoleone 8, 20121 Milano (MI)"
+                      href="https://maps.google.com/?q=Via Gandhi 8, 54011 Aulla (MS)"
                       style="
                         text-decoration: none;
                         color: #575756;
@@ -163,14 +157,14 @@
                       "
                       target="_blank"
                     >
-                      20121 Milano via Monte Napoleone 8
+                      54011 Aulla (MS) via Gandhi 8
                     </a>
                   </td>
                 </tr>
                 <tr v-if="recapiti.sel_operativa">
                   <td style="text-align: center; font-family: Montserrat">
                     <img
-                      src="https://www.aby.it/team/navert/sign/img/Geo.png"
+                      src="https://www.aby.it/team/aby/sign/img/Geo.png"
                       alt=""
                     />
                   </td>
@@ -192,7 +186,7 @@
                 <tr>
                   <td style="text-align: center; font-family: Montserrat">
                     <img
-                      src="https://www.aby.it/team/navert/sign/img/Web.png"
+                      src="https://www.aby.it/team/aby/sign/img/Web.png"
                       alt=""
                     />
                   </td>
@@ -224,23 +218,23 @@
       <tr>
         <td
           align="center"
-          background="https://www.aby.it/team/navert/sign/img/lineaOrizzontale.png"
+          background="https://www.aby.it/team/aby/sign/img/lineaOrizzontale.png"
           style="background-repeat: no-repeat; background-position: center"
         >
           <a href="https://www.facebook.com/GruppoAby"
             ><img
               style="padding: 5px"
-              src="https://www.aby.it/team/navert/sign/img/facebook.png"
+              src="https://www.aby.it/team/aby/sign/img/facebook.png"
               alt="" /></a
           >&nbsp;<a href="https://www.instagram.com/abybrokersrl/"
             ><img
               style="padding: 5px"
-              src="https://www.aby.it/team/navert/sign/img/Instagram.png"
+              src="https://www.aby.it/team/aby/sign/img/Instagram.png"
               alt="" /></a
           >&nbsp;<a href="https://www.linkedin.com/company/aby-broker/"
             ><img
               style="padding: 5px"
-              src="https://www.aby.it/team/navert/sign/img/Linkedin.png"
+              src="https://www.aby.it/team/aby/sign/img/Linkedin.png"
               alt="" /></a
           >&nbsp;
         </td>
@@ -250,8 +244,7 @@
       align="center"
       style="font-weight: 500; font-family: Montserrat; font-size: 10px"
     >
-      Navèrt Srl - Partita IVA e Codice Fiscale: 10141840966 - Numero REA:
-      MI-2509423
+      Aby Energy Srl. - Partita IVA e Codice Fiscale: 01421080456 - Numero REA: MS-139699 
     </div>
     <div
       style="
@@ -291,7 +284,7 @@
 
 <script>
 export default {
-  name: "SignNav",
+  name: "SignAbyEnergy",
   props: ["recapiti"],
 };
 </script>

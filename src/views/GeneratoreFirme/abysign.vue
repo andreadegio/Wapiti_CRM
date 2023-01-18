@@ -127,10 +127,21 @@
     </div>
     <br />
 
-    <span v-if="company != ''"><b>ANTEPRIMA DELLA FIRMA CREATA</b></span>
+    <div v-if="company != ''" style="text-align: center;"><b>ANTEPRIMA DELLA FIRMA CREATA</b></div>
+    <div style="max-width: 80%;margin-left: auto;margin-right: auto;">
     <SignatureAby
       class="preview"
       v-show="company == 'ABY'"
+      :recapiti="recapiti"
+    />
+    <SignatureAbyEnergy
+      class="preview"
+      v-show="company == 'ENERGY'"
+      :recapiti="recapiti"
+    />
+    <SignatureAbyServizi
+      class="preview"
+      v-show="company == 'SERVIZI'"
       :recapiti="recapiti"
     />
     <SignatureNavert
@@ -138,10 +149,13 @@
       v-show="company == 'NAV'"
       :recapiti="recapiti"
     />
+    </div>
   </div>
 </template>
 
 <script>
+import SignatureAbyEnergy from "./components/SignAbyEnergy.vue";
+import SignatureAbyServizi from "./components/SignAbyServizi.vue";
 import SignatureAby from "./components/SignAby.vue";
 import SignatureNavert from "./components/SignNavert.vue";
 import Configuratore from "./components/Configuratore.vue";
@@ -149,6 +163,8 @@ import Configuratore from "./components/Configuratore.vue";
 export default {
   name: "AbySign",
   components: {
+    SignatureAbyEnergy,
+    SignatureAbyServizi,
     SignatureAby,
     SignatureNavert,
     Configuratore,

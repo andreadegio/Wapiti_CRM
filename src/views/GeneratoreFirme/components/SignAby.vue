@@ -3,10 +3,11 @@
     <table width="100%" style="color: #575756">
       <tbody>
         <tr>
-          <td rowspan="4" width="281">
+          <td rowspan="4" width="160">
             <img
               src="https://www.aby.it/team/aby/sign/img/Logo_Aby.png"
               alt="Aby"
+              width="150"
             />
           </td>
           <td width="1%"></td>
@@ -17,8 +18,7 @@
               font-family: Montserrat;
               font-weight: 600;
               color: #1f4b6b;
-              text-transform: capitalize;
-              font-size: 28px;
+              font-size: 16px;
             "
           >
             <span>{{
@@ -28,8 +28,7 @@
               style="
                 font-family: Montserrat;
                 font-weight: 500;
-                text-transform: capitalize;
-                font-size: 18px;
+                font-size: 10px;
                 color: #575756;
               "
               v-if="recapiti.mostra_ruolo"
@@ -49,9 +48,10 @@
               width="100%"
               style="
                 color: #575756;
-                line-height: 2rem;
+                line-height: 1.5rem;
                 font-weight: 500;
                 font-family: Montserrat;
+                font-size: 10px;
               "
             >
               <tbody>
@@ -92,7 +92,13 @@
                   <td>{{ recapiti.cellulare }}</td>
                 </tr>
                 <tr v-if="recapiti.sel_mail">
-                  <td style="text-align: center; font-family: Montserrat">
+                  <td
+                    style="
+                      text-align: center;
+                      font-family: Montserrat;
+                      font-size: 10px !important;
+                    "
+                  >
                     <img
                       src="https://www.aby.it/team/aby/sign/img/Mail.png"
                       alt=""
@@ -103,11 +109,17 @@
                       text-decoration: none;
                       color: #575756;
                       font-family: Montserrat;
+                      font-size: 10px !important;
                     "
                   >
                     <a
                       :href="'mailto:' + recapiti.mail"
-                      style="text-decoration: none; color: #575756"
+                      style="
+                        text-decoration: none;
+                        color: #575756;
+                        font-family: Montserrat;
+                        font-size: 10px !important;
+                      "
                       >{{ recapiti.mail }}</a
                     >
                   </td>
@@ -127,6 +139,7 @@
                         text-decoration: none;
                         color: #575756;
                         font-family: Montserrat;
+                        font-size: 10px !important;
                       "
                     >
                       {{ recapiti.indirizzo }}</a
@@ -140,10 +153,11 @@
                         text-decoration: none;
                         color: #575756;
                         font-family: Montserrat;
+                        font-size: 10px !important;
                       "
                       target="_blank"
                     >
-                      Via Monte Napoleone 8, 20121 Milano (MI)
+                      20121 Milano via Monte Napoleone 8
                     </a>
                   </td>
                 </tr>
@@ -162,6 +176,7 @@
                         text-decoration: none;
                         color: #575756;
                         font-family: Montserrat;
+                        font-size: 10px !important;
                       "
                     >
                       {{ recapiti.operativa }}</a
@@ -179,7 +194,12 @@
                     <a
                       href="https://www.aby.it"
                       target="_blank"
-                      style="text-decoration: none; color: #575756"
+                      style="
+                        text-decoration: none;
+                        color: #575756;
+                        font-family: Montserrat;
+                        font-size: 10px !important;
+                      "
                       >www.aby.it</a
                     >
                   </td>
@@ -220,15 +240,18 @@
         </td>
       </tr>
     </table>
-    <div align="center" style="font-weight: 500; font-family: Montserrat">
-      ABY BROKER S.r.l. - Partita IVA e Codice Fiscale: 00803170141 - Numero
-      REA: MI-2057530 - Iscrizione RUI: B00137063
+    <div
+      align="center"
+      style="font-weight: 500; font-family: Montserrat; font-size: 10px"
+    >
+      Aby Broker Srl. - Partita IVA e Codice Fiscale: 00803170141 - Numero REA:
+      MI-2057530 - Iscrizione RUI: B00137063
     </div>
     <div
       style="
         width: 100%;
         margin-top: 20px;
-        padding-top: 10px;
+        padding-top: 9px;
         border-top: 2px solid lightgray;
       "
     >
@@ -237,9 +260,10 @@
           font-family: Helvetica, sans-serif;
           color: #333333;
           line-height: 15px;
-          font-size: 12px;
+          font-size: 9px;
         "
-        ><em>Avviso di riservatezza</em><br />
+        >
+        <br/><br/><em>Avviso di riservatezza</em><br />
         Ai sensi del D.Lgs. 196/2003 si precisa che le&nbsp;informazioni
         contenute&nbsp;in questo messaggio sono&nbsp;riservate ed a uso
         esclusivo del destinatario. Qualora&nbsp;il&nbsp;messaggio in parola Le

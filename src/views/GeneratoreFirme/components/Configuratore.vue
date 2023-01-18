@@ -6,8 +6,10 @@
       row
       @change="$emit('switchAzienda', azienda)"
     >
-      <v-radio label="ABY" color="red" value="ABY"></v-radio>
-      <v-radio label="NAVERT" color="red darken-3" value="NAV"></v-radio>
+      <v-radio label="Aby Broker" color="red" value="ABY"></v-radio>
+      <v-radio label="Aby Servizi" color="red" value="SERVIZI"></v-radio>
+      <v-radio label="Aby Energy" color="red" value="ENERGY"></v-radio>
+      <v-radio label="Navèrt" color="red darken-3" value="NAV"></v-radio>
     </v-radio-group>
     <div class="py-2" v-show="azienda != ''">
       <b>COMPILA CON I DATI DELL'UTENTE PER GENERARE LA FIRMA</b>
@@ -151,22 +153,6 @@ export default {
   data() {
     return {
       azienda: "",
-      // nome: "",
-      // ruolo: "",
-      // ruolo2: "",
-      // mostra_ruolo: false,
-      // recapiti: {
-      //   sel_telefono: false,
-      //   telefono: "",
-      //   sel_interno: false,
-      //   interno: "",
-      //   sel_cell: false,
-      //   cellulare: "",
-      //   sel_mail: true,
-      //   mail: "Mail",
-      //   sel_indirizzo: false,
-      //   indirizzo: "",
-      // },
     };
   },
 };
