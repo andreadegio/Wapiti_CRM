@@ -118,8 +118,7 @@
                       </strong>
                     </div>
 
-                    <div class="titolo text-left pt-3">
-                      {{ item.titolo | truncate(20, "[...]") }}
+                    <div class="titolo text-left pt-3" >{{ item.titolo }}
                     </div>
                     <div class="row dettagli pt-4 pb-5 text-center">
                       <div class="col-6">
@@ -363,7 +362,7 @@ export default {
   max-width: 95%;
   white-space: nowrap;
   overflow: hidden;
-  /* text-overflow: ellipsis; */
+  text-overflow: ellipsis;
   letter-spacing: 0.05rem;
 }
 
