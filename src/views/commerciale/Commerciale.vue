@@ -76,10 +76,7 @@
           background-image: url('img/buttons/auto.png');
           background-position: center;
           background-size: cover;
-          border-top-left-radius: 5px;
-          border-bottom-left-radius: 5px;
-          border-top-right-radius: 0px;
-          border-bottom-right-radius: 0px;
+          border-radius: 0.5rem 1rem 1rem 0.5rem;
         "
       ></CCol>
     </CJumbotron>
@@ -90,10 +87,7 @@
           background-image: url('img/buttons/energy.jpg');
           background-position: center;
           background-size: cover;
-          border-top-left-radius: 0px;
-          border-bottom-left-radius: 0px;
-          border-top-right-radius: 5px;
-          border-bottom-right-radius: 5px;
+          border-radius: 1rem 0.5rem 0.5rem 1rem;
         "
         class="py-0"
       >
@@ -134,7 +128,6 @@ export default {
         .Abilitato_Energy,
       isAuto: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Auto,
       post: [],
-      bgColor: "#1F4B6B",
       lista_nuovi: [],
     };
   },
@@ -244,7 +237,7 @@ export default {
     var(--bgColor) 60%,
     rgba(255, 255, 255, 0) 100%
   );
-  /* border-top: 6px solid var(--bgColor); */
+  border-radius: 1rem 0 0 0;
 }
 .titolo_color {
   color: var(--bgColor);
@@ -266,8 +259,9 @@ export default {
 }
 .jumbotron {
   margin-bottom: 1rem !important;
+  border-radius: 1rem;
   display: flex;
-  background: linear-gradient(0deg, #1f4b6b, #798ebd) !important;
+  background: linear-gradient(0deg, #1f4b6b, #798ebd);
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
     0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12) !important;
   color: white;
@@ -276,7 +270,7 @@ export default {
 .jumbotron.latest {
   margin-bottom: 1rem !important;
   display: flex;
-  background: linear-gradient(0deg, #7b7b7b, #cecece) !important;
+  background: linear-gradient(0deg, #7b7b7b, #cecece);
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
     0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12) !important;
   color: white;
@@ -286,10 +280,10 @@ export default {
   display: flex;
   color: white;
   padding: 3px;
-
+  border-radius: 1rem;
   background: rgba(0, 0, 0, 0)
     linear-gradient(0deg, rgb(14, 119, 49), rgb(81, 213, 126)) repeat scroll 0%
-    0% !important;
+    0% ;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
     0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12) !important;
 }

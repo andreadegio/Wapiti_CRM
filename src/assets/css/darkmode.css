@@ -1,0 +1,115 @@
+/* CLASSI PER MODALITA' DARK
+.dark-mode classe del toggle*/
+
+.dark-mode #header {
+  background-color: #313030;
+  box-shadow: -1px 7px 9px 1px #1a1a1a !important;
+  position: fixed;
+  width: 100%;
+  max-height: 7rem;
+}
+.dark-mode header {
+  background-color: black;
+  border-bottom: 0px;
+  color: antiquewhite;
+}
+
+.dark-mode li.nav-item.active {
+  background-color: #bf7e44 !important;
+}
+.dark-mode li a.nav-link {
+  color: #c6c6c6 !important;
+}
+
+.dark-mode #new_home {
+  background-color: #16171d !important;
+}
+
+.dark-mode .c-body {
+  padding-top: 7rem;
+}
+
+.dark-mode .c-footer {
+  color: #575a5e;
+  background: #16171d;
+  border-top: 1px solid #333335;
+}
+
+.dark-mode .card {
+  border-radius: 1rem;
+  background-color: #2b2a2a;
+  border-color: #2b2a2a;
+}
+.dark-mode .card-header {
+  background-color: #313030;
+  border-color: #4a4a4a;
+}
+
+.dark-mode .titolo_gradient {
+  background: -webkit-linear-gradient(chocolate, bisque);
+  background-clip: border-box;
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+.dark-mode .contatti-titolo {
+  color: rgb(204, 154, 110);
+}
+.dark-mode .icona_contatto {
+  box-shadow: 0px 6px 10px 0px #1a1a1a;
+}
+.dark-mode header.main_title {
+  border-bottom: 1px solid #4a4a4a !important;
+  background-color: unset;
+}
+
+.dark-mode .contatto li {
+  color: #7285a4;
+}
+
+.dark-mode .small_text {
+  color: rgb(240, 240, 240);
+}
+
+.dark-mode .contatto li:hover {
+  color: white !important;
+}
+
+.dark-mode .media-body {
+  color: #7285a4;
+}
+
+.dark-mode .testo_news {
+  color: antiquewhite;
+}
+.dark-mode .card-footer {
+  background-color: #313030;
+}
+
+.dark-mode .card-header a {
+  color: #c6c6c6 !important;
+}
+.dark-mode .card-footer a {
+  color: #c6c6c6 !important;
+}
+
+.dark-mode .btn-outline-primary {
+  border-color: #70a5ca;
+  color: #7285a4 !important;
+}
+
+.dark-mode .testo_login {
+  color: antiquewhite !;
+}
+
+.dark-mode #world-list li:not(:first-child) {
+  border-top: 1px solid rgb(96, 96, 96) !important;
+}
+
+.btn-outline-primary:hover {
+  color: antiquewhite !important;
+  background-color: #1d4b6b;
+  border-color: #1d4b6b;
+}
