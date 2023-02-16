@@ -25,3 +25,6 @@ modifcare le regole di routing nel file index.js raggruppando i componenti con u
 ## Modifiche vue-file-agent
 Per una gestione personalizzata del caricamento dei file (materiale, comunicazioni, formazione) ho modificato il file del modulo vue-file-agent (\vue-file-agent\dist\vue-file-agent.umd.js) gestendo l'invio dei parametri passati con un json
 
+
+## Ripulire file css
+css-purge -i global.css -o global_purged.css

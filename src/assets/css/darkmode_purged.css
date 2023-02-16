@@ -1,0 +1,161 @@
+.dark-mode #header {
+  background-color: #313030;
+  box-shadow: -1px 7px 9px 1px #1a1a1a !important;
+  position: fixed;
+  width: 100%;
+  max-height: 7rem;
+}
+.dark-mode header {
+  background-color: #000;
+  border-bottom: 0;
+  color: #faebd7;
+}
+.dark-mode li.nav-item.active {
+  background-color: #bf7e44 !important;
+}
+.dark-mode li a.nav-link {
+  color: #c6c6c6 !important;
+}
+.dark-mode #new_home {
+  background-color: #16171d !important;
+}
+.dark-mode .c-body {
+  padding-top: 7rem;
+}
+.dark-mode .c-footer {
+  color: #575a5e;
+  background: #16171d;
+  border-top: 1px solid #333335;
+}
+.dark-mode .card {
+  border-radius: 1rem;
+  background-color: #2b2a2a;
+  border-color: #2b2a2a;
+}
+.dark-mode .card-header {
+  background-color: #313030;
+  border-color: #4a4a4a;
+}
+.dark-mode .titolo_gradient {
+  background: -webkit-linear-gradient(#d2691e, bisque);
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+.dark-mode .contatti-titolo {
+  color: #cc9a6e;
+}
+.dark-mode .icona_contatto {
+  box-shadow: 0px 6px 10px 0px #1a1a1a;
+}
+.dark-mode header.main_title {
+  border-bottom: 1px solid #4a4a4a;
+  background-color: unset;
+}
+.dark-mode .contatto li {
+  color: #7285a4;
+}
+.dark-mode .small_text {
+  color: #f0f0f0;
+}
+.dark-mode .contatto li:hover {
+  color: #fff !important;
+}
+.dark-mode .media-body {
+  color: #7285a4;
+}
+.dark-mode .testo_news {
+  color: #faebd7;
+}
+.dark-mode .card-footer {
+  background-color: #313030;
+  border-color: unset;
+  border-radius: 0 0 1rem 1rem;
+}
+.dark-mode .card-header a {
+  color: #c6c6c6 !important;
+}
+.dark-mode .card-footer a {
+  color: #c6c6c6 !important;
+}
+.dark-mode .btn-outline-primary {
+  border-color: #70a5ca;
+  color: #7285a4 !important;
+}
+.dark-mode .testo_login {
+  color: #faebd7!;
+}
+.dark-mode #world-list li:not(:first-child) {
+  border-top: #606060;
+}
+.btn-outline-primary:hover {
+  color: #faebd7 !important;
+  background-color: #1d4b6b;
+  border-color: #1d4b6b;
+}
+.dark-mode .card_post {
+  background-color: #3e3d3d;
+  border-color: #3e3d3d;
+}
+.dark-mode .card_post .card-footer {
+  background-color: unset;
+  color: #9d9175;
+  border-top: 0px;
+}
+.dark-mode .card_post .card-header {
+  background-color: unset;
+}
+
+.dark-mode .card_post .card-body {
+  color: antiquewhite;
+}
+
+.dark-mode .jumbotron.latest {
+  background: #313030 !important;
+  border-radius: 1rem;
+}
+
+.dark-mode .titolo_color {
+  color: rgb(182, 180, 180) !important;
+}
+
+.dark-mode .formazione-titolo {
+  color: antiquewhite;
+}
+.dark-mode .formazione-contatore {
+  color: #a6a3a3;
+}
+
+.dark-mode .riquadro {
+  border: 0 !important;
+  background-color: #313030 !important;
+  color: #b5b5b5;
+}
+.dark-mode .filtro {
+  color: #090909;
+}
+.dark-mode #ricercaTesto {
+  background-color: unset;
+  border: 1 px solid lightgray !important;
+  border-style: solid !important;
+  border-color: #727270 !important;
+  border-width: 2px !important;
+  color: whitesmoke;
+}
+.dark-mode .vue-treeselect__control {
+  background: unset;
+  border: 2px solid #727270;
+}
+.dark-mode .vue-treeselect__menu {
+  background-color: rgb(64, 64, 64);
+  color: rgb(192, 189, 189);
+}
+.dark-mode .vue-treeselect__label:hover {
+  background-color: rgb(100, 100, 100);
+  color: rgb(237, 237, 237);
+}
+.dark-mode .vue-treeselect__label:focus {
+  background-color: rgb(100, 100, 100);
+  color: rgb(237, 237, 237);
+}

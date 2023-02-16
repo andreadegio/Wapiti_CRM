@@ -2,14 +2,14 @@
   <div class="pt-2" :class="corsi_filtrati.length && 'formazione_style'">
     
     <div v-if="corsi_filtrati.length > 0" class="row display-4 pb-3">
-      <div class="col-12 text-center">Tutti i corsi a te riservati</div>
+      <div class="col-12 text-center formazione-titolo">Area Formazione</div>
     </div>
     <p
       v-if="corsi_filtrati.length > 0"
-      class="text-center"
+      class="text-center formazione-contatore"
       style="font-weight: 600; font-variant: small-caps; margin-bottom: 0px !important; "
     >
-      Totale corsi presenti: {{ corsi_filtrati.length }}
+      Corsi presenti: {{ corsi_filtrati.length }}
     </p>
     <div id="filtro_ricerca" class="mt-2 mx-5 riquadro row">
       <div class="text-left col-sm-3 separatore">
@@ -42,14 +42,14 @@
           placeholder="Testo da cercare"
           class="filtro mx-1 inputSearch"
           style="
-            border-bottom: 1px solid gray !important;
-            border-left: 0 !important;
-            border-right: 0 !important;
-            border-top: 0 !important;
-            background-color: unset !important;
-            border-radius: 0 !important;
-            padding-left: 3px !important;
-            margin-bottom: 0 !important;
+            border-bottom: 1px solid gray ;
+            border-left: 0 ;
+            border-right: 0 ;
+            border-top: 0 ;
+            background-color: unset ;
+            border-radius: 0.3rem ;
+            padding-left: 3px ;
+            margin-bottom: 0 ;
             width: 100%;
             line-height: 2rem;
           "
