@@ -71,6 +71,7 @@ const Statistiche = () =>
   );
 const Accessi_stat = () => import("@/views/statistiche/Accessi_stat");
 const GeneratoreFirme = () => import("@/views/GeneratoreFirme/abysign");
+const Calendario = () => import("@/views/Calendario/calendario");
 const StatistichePortali = () =>
   import(
     /* webpackChunkName: "Statistiche" */ "@/views/statistiche/StatistichePortali"
@@ -248,6 +249,11 @@ function configRoutes() {
           component: GeneratoreFirme,
         },
         {
+          path: "/Calendario",
+          name: "calendario",
+          component: Calendario,
+        },
+        {
           path: "Statistiche/:portale",
           name: "Statistiche",
           props: true,
@@ -310,16 +316,16 @@ router.beforeEach((to, from, next) => {
 });
 
 router.onError((error) => {
-    console.log("Errore di caricamento " + error.message); 
-    const targetPath = router.history.pending.fullPath;
-    console.log("target path " + targetPath);
-    // router.replace(targetPath);
-    // window.location.reload();
-    // router.push("Dashboard");
-    history.replaceState("", "", targetPath);
-    router.replace(targetPath);
-    // router.push(targetPath);
-    console.log("history replace");
+  console.log("Errore di caricamento " + error.message);
+  const targetPath = router.history.pending.fullPath;
+  console.log("target path " + targetPath);
+  // router.replace(targetPath);
+  // window.location.reload();
+  // router.push("Dashboard");
+  history.replaceState("", "", targetPath);
+  router.replace(targetPath);
+  // router.push(targetPath);
+  console.log("history replace");
 });
 
 export default router;

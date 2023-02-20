@@ -201,13 +201,21 @@
         </CHeaderNavLink>
       </template>
       <CDropdownHeader tag="div" class="text-center" color="light" v-if="admin">
-        <strong>Admin</strong>
+        <strong>Utility</strong>
       </CDropdownHeader>
+      <CDropdownItem to="/Calendario" v-if="admin">
+        <i class="far fa-calendar-alt"></i>
+        <span class="pl-1">Appuntamenti</span>
+      </CDropdownItem>
+      <CDropdownItem to="/GeneratoreFirme" v-if="admin">
+        <i class="fas fa-file-signature"></i>
+        <span class="pl-1">Genera Firma</span>
+      </CDropdownItem>
       <CDropdownItem to="/Accessi_stat" v-if="admin">
         <i class="far fa-chart-bar"> </i> <span class="pl-1">Accessi</span>
       </CDropdownItem>
-      <CDropdownItem to="/GeneratoreFirme" v-if="admin">
-        <i class="fas fa-file-signature"></i> <span class="pl-1">Genera Firme</span>
+      <CDropdownItem href="https://www.abyway.it/Monitor/GestioneMonitor.html" target="_blank" v-if="admin">
+        <i class="fas fa-tv"></i> <span class="pl-1">Gestione TV</span>
       </CDropdownItem>
       <CDropdownHeader tag="div" class="text-center" color="light">
         <strong>Account</strong>
