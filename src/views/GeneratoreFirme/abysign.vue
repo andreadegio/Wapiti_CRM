@@ -134,6 +134,11 @@
       v-show="company == 'ABY'"
       :recapiti="recapiti"
     />
+    <SignatureAbyPoint
+      class="preview"
+      v-show="company == 'POINT'"
+      :recapiti="recapiti"
+    />
     <SignatureAbyEnergy
       class="preview"
       v-show="company == 'ENERGY'"
@@ -157,6 +162,7 @@
 import SignatureAbyEnergy from "./components/SignAbyEnergy.vue";
 import SignatureAbyServizi from "./components/SignAbyServizi.vue";
 import SignatureAby from "./components/SignAby.vue";
+import SignatureAbyPoint from "./components/SignAbyPoint.vue";
 import SignatureNavert from "./components/SignNavert.vue";
 import Configuratore from "./components/Configuratore.vue";
 
@@ -166,6 +172,7 @@ export default {
     SignatureAbyEnergy,
     SignatureAbyServizi,
     SignatureAby,
+    SignatureAbyPoint,
     SignatureNavert,
     Configuratore,
   },
