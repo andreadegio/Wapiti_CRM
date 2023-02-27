@@ -18,7 +18,7 @@
               font-family: Montserrat;
               font-weight: 600;
               color: #1f4b6b;
-              font-size: 16px;
+              font-size: 18px;
             "
           >
             <span>{{
@@ -28,7 +28,7 @@
               style="
                 font-family: Montserrat;
                 font-weight: 500;
-                font-size: 10px;
+                font-size: 12px;
                 color: #575756;
               "
               v-if="recapiti.mostra_ruolo"
@@ -51,7 +51,7 @@
                 line-height: 1.5rem;
                 font-weight: 500;
                 font-family: Montserrat;
-                font-size: 10px;
+                font-size: 12px;
               "
             >
               <tbody>
@@ -96,7 +96,7 @@
                     style="
                       text-align: center;
                       font-family: Montserrat;
-                      font-size: 10px !important;
+                      font-size: 12px !important;
                     "
                   >
                     <img
@@ -109,7 +109,7 @@
                       text-decoration: none;
                       color: #575756;
                       font-family: Montserrat;
-                      font-size: 10px !important;
+                      font-size: 12px !important;
                     "
                   >
                     <a
@@ -118,7 +118,7 @@
                         text-decoration: none;
                         color: #575756;
                         font-family: Montserrat;
-                        font-size: 10px !important;
+                        font-size: 12px !important;
                       "
                       >{{ recapiti.mail }}</a
                     >
@@ -139,7 +139,7 @@
                         text-decoration: none;
                         color: #575756;
                         font-family: Montserrat;
-                        font-size: 10px !important;
+                        font-size: 12px !important;
                       "
                     >
                       {{ recapiti.indirizzo }}</a
@@ -153,7 +153,7 @@
                         text-decoration: none;
                         color: #575756;
                         font-family: Montserrat;
-                        font-size: 10px !important;
+                        font-size: 12px !important;
                       "
                       target="_blank"
                     >
@@ -176,7 +176,7 @@
                         text-decoration: none;
                         color: #575756;
                         font-family: Montserrat;
-                        font-size: 10px !important;
+                        font-size: 12px !important;
                       "
                     >
                       {{ recapiti.operativa }}</a
@@ -198,7 +198,7 @@
                         text-decoration: none;
                         color: #575756;
                         font-family: Montserrat;
-                        font-size: 10px !important;
+                        font-size: 12px !important;
                       "
                       >www.aby.it</a
                     >
