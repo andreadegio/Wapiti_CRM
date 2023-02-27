@@ -6,7 +6,8 @@
       row
       @change="$emit('switchAzienda', azienda)"
     >
-      <v-radio label="Aby Broker" color="red" value="ABY"></v-radio>
+      <v-radio label="Aby Broker" color="red" value="ABY"></v-radio> 
+      <v-radio label="Aby Point" color="red" value="POINT"></v-radio> 
       <v-radio label="Aby Servizi" color="red" value="SERVIZI"></v-radio>
       <v-radio label="Aby Energy" color="red" value="ENERGY"></v-radio>
       <v-radio label="Navèrt" color="red darken-3" value="NAV"></v-radio>
@@ -106,7 +107,7 @@
           @change="$emit('changeRecapiti', recapiti)"
         ></v-text-field>
       </v-col>
-      <v-col cols="12" sm="6" md="3" class="p-1">
+      <v-col cols="12" sm="6" md="3" class="p-1" v-if="azienda != 'POINT'">
         <v-checkbox
           v-model="recapiti.sel_indirizzo"
           label="Cambia Sede Legale"
