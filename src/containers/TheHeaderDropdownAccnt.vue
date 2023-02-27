@@ -207,10 +207,6 @@
         <i class="far fa-calendar-alt"></i>
         <span class="pl-1">Appuntamenti</span>
       </CDropdownItem>
-      <CDropdownItem to="/GeneratoreFirme" v-if="admin">
-        <i class="fas fa-file-signature"></i>
-        <span class="pl-1">Genera Firma</span>
-      </CDropdownItem>
       <CDropdownItem to="/Accessi_stat" v-if="admin">
         <i class="far fa-chart-bar"> </i> <span class="pl-1">Accessi</span>
       </CDropdownItem>
@@ -222,6 +218,10 @@
       </CDropdownHeader>
       <CDropdownItem @click="Get_user()">
         <CIcon name="cil-user" /> Profilo
+      </CDropdownItem>
+      <CDropdownItem to="/GeneratoreFirme" v-if="admin">
+        <i class="fas fa-file-signature"></i>
+        <span class="pl-1">Genera Firma</span>
       </CDropdownItem>
       <CDropdownItem @click="Logout()">
         <!-- <CHeaderNavLink to="login"> -->
