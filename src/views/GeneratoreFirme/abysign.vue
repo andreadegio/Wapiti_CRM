@@ -198,6 +198,8 @@ export default {
         indirizzo: "",
         sel_operativa: false,
         operativa: "",
+        sel_datiSoc: false,
+        datiSoc: "",
       },
     };
   },

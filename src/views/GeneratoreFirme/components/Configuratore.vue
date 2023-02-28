@@ -135,6 +135,20 @@
           @change="$emit('changeRecapiti', recapiti)"
         ></v-text-field>
       </v-col>
+      <v-col cols="12" sm="6" md="3" class="p-1" v-if="azienda == 'POINT'">
+        <v-checkbox
+          v-model="recapiti.sel_datiSoc"
+          label="Cambia dati societari"
+          @change="$emit('changeRecapiti', recapiti)"
+        />
+        <v-text-field
+          v-if="recapiti.sel_datiSoc"
+          label="Dati Societari"
+           placeholder="Aby Broker Srl. - Partita IVA e Codice Fiscale: 00803170141 - Numero REA: MI-2057530 - Iscrizione RUI: B00137063"
+          v-model="recapiti.datiSoc"
+          @change="$emit('changeRecapiti', recapiti)"
+        ></v-text-field>
+      </v-col>
     </v-row>
   </div>
 </template>
