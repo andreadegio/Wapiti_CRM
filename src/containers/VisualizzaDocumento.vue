@@ -47,11 +47,11 @@
                   v-if="$parent.timer != 0 && $parent.select == false"
                   style="background-color: #fff"
                 >
-                  <img src="img/search-folder.gif" style="width: 50px" /><br />
+                  <img src="/img/search-folder.gif" style="width: 50px" /><br />
                   <span class="h4">... Recupero documento in corso ...</span>
                 </div>
                 <div v-show="$parent.select">
-                 <img src="img/search-folder.gif" style="width: 50px" /><br />
+                 <img src="/img/search-folder.gif" style="width: 50px" /><br />
                   <span class="h4">... Recupero documento in corso ...</span>
                 </div>
               </div>
