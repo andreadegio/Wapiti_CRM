@@ -635,6 +635,11 @@
                 :items-per-page-select="{ label: 'Risultati per pagina' }"
                 :noItemsView="{ noItems: ' ' }"
               >
+                <template #Descrizione="{ item }">
+                  <td class="text-center">
+                    {{ item.Descrizione.split(" ")[0] }}
+                  </td>
+                </template>
                 <template #RUI="{ item }">
                   <td class="text-center">{{ item.RUI }}</td>
                 </template>
@@ -768,6 +773,11 @@
                 :items-per-page-select="{ label: 'Risultati per pagina' }"
                 :noItemsView="{ noItems: ' ' }"
               >
+                <template #Descrizione="{ item }">
+                  <td class="text-center">
+                    {{ item.Descrizione.split(" ")[0] }}
+                  </td>
+                </template>
                 <template #RUI="{ item }">
                   <td class="text-center">{{ item.RUI }}</td>
                 </template>
@@ -1321,6 +1331,11 @@ const fields_INTERMEDIARI_EMITTENTI_ADMIN = [
     label: "Ragione Sociale",
   },
   {
+    key: "Descrizione",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Codice Interno",
+  },
+  {
     key: "RUI",
     _style: "font-weight: bold; text-align:center;",
     label: "RUI",
@@ -1366,6 +1381,11 @@ const fields_INTERMEDIARI_EMITTENTI = [
     label: "Ragione Sociale",
   },
   {
+    key: "Descrizione",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Codice Interno",
+  },
+  {
     key: "RUI",
     _style: "font-weight: bold; text-align:center;",
     label: "RUI",
@@ -1402,6 +1422,11 @@ const fields_INTERMEDIARI_PROPONENTI = [
     key: "RagioneSociale",
     _style: "font-weight: bold; text-align:center;",
     label: "Ragione Sociale",
+  },
+  {
+    key: "Descrizione",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Codice Interno",
   },
   {
     key: "RUI",
@@ -1752,21 +1777,24 @@ export default {
       let setinfo = "";
       let elenco;
       for (var i in this.array_link) {
-        if (this.array_link[i].SLUG == "RC_AUTO" || this.array_link[i].SLUG == "ALTRE_GARANZIE" || this.array_link[i].SLUG == "ALTRI_SERVIZI" ) {
-         elenco = this.array_link[i].FILE;
+        if (
+          this.array_link[i].SLUG == "RC_AUTO" ||
+          this.array_link[i].SLUG == "ALTRE_GARANZIE" ||
+          this.array_link[i].SLUG == "ALTRI_SERVIZI"
+        ) {
+          elenco = this.array_link[i].FILE;
 
-         elenco.forEach(function (item) {
-        item.Pog != "" ? (pog = "SI") : (pog = "NO");
-        item.Nomefile != "" ? (setinfo = "SI") : (setinfo = "NO");
-        datiExcel.push({
-          ["idCompagnia"]: item.idCompagnia,
-          ["Tipo"]: item.Tipo,
-          ["Prodotto"]: item.Descrizione,
-          ["Pog"]: pog,
-          ["SetInformativo"]: setinfo,
-        });
-      });
-          
+          elenco.forEach(function (item) {
+            item.Pog != "" ? (pog = "SI") : (pog = "NO");
+            item.Nomefile != "" ? (setinfo = "SI") : (setinfo = "NO");
+            datiExcel.push({
+              ["idCompagnia"]: item.idCompagnia,
+              ["Tipo"]: item.Tipo,
+              ["Prodotto"]: item.Descrizione,
+              ["Pog"]: pog,
+              ["SetInformativo"]: setinfo,
+            });
+          });
         }
       }
 
