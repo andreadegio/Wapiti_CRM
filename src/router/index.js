@@ -70,6 +70,7 @@ const Statistiche = () =>
     /* webpackChunkName: "Statistiche" */ "@/views/statistiche/Statistiche"
   );
 const Accessi_stat = () => import("@/views/statistiche/Accessi_stat");
+const GeneratoreFirme = () => import("@/views/GeneratoreFirme/abysign");
 const StatistichePortali = () =>
   import(
     /* webpackChunkName: "Statistiche" */ "@/views/statistiche/StatistichePortali"
@@ -240,6 +241,11 @@ function configRoutes() {
           path: "/Accessi_stat",
           name: "Accessi_stat",
           component: Accessi_stat,
+        },
+        {
+          path: "/GeneratoreFirme",
+          name: "abysign",
+          component: GeneratoreFirme,
         },
         {
           path: "Statistiche/:portale",

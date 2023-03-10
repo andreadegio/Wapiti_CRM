@@ -43,7 +43,7 @@
      
       :show.sync="news"
     >
-      <CCardHeader class="d-flex justify-content-between">
+      <CCardHeader class="main_title d-flex justify-content-between">
         <strong class="h3 titolo_gradient">NEWS DAL MONDO</strong>
         <div class="card-header-actions">
           <CLink to="./Elenco_news" class="card-header-action btn-setting">
@@ -72,9 +72,9 @@
                 />
               </template>
 
-              <h5 class="mt-0 text-justify" style="text-transform: uppercase">
+              <div class="mt-0 text-justify" style="text-transform: uppercase">
                 <strong>{{ item.titolo }}</strong>
-              </h5>
+              </div>
               <p
                 class="text-justify testo_news"
                 v-html="
@@ -182,44 +182,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-.card-header {
-  border-bottom: 0px !important;
-}
-.card-footer {
-  border-top: 0px !important;
-}
-#world-list .list-group-item {
-  border-left: 0px !important;
-  border-right: 0px !important;
-  border-bottom: 0px !important;
-  border-radius: 0px !important;
-}
-#world-list li {
-  border-top: 1px solid rgba(0, 0, 21, 0.125) !important;
-}
-#world-list li:last-of-type {
-  padding-bottom: 0px !important;
-}
-img {
-  object-fit: cover;
-  border-radius: 3px;
-}
-.errore_caricamento {
-  text-align: center;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #3c4b64;
-  font-weight: 600;
-}
-.errore_caricamento p {
-  font-size: 1.5rem;
-  font-weight: 300;
-}
-.titolo_gradient {
-  background: -webkit-linear-gradient(#EF7918, #1F4B6B);
-  background-clip: border-box;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 700;
-}
-</style>

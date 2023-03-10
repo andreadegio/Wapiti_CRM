@@ -391,12 +391,23 @@
                           </tr>
                         </tbody>
                       </table>
+                      <div class="text-left">
+                        <CButton
+                          color="primary"
+                          style="color: white; padding: 8px"
+                          square
+                          size="sm"
+                          @click="download_excel_auto()"
+                          ><i class="fas fa-file-excel fa-2x"></i> &nbsp;
+                          Esporta Catalogo</CButton
+                        >
+                      </div>
                     </div>
                   </div>
                 </span>
               </div>
               <!-- SETTORE NON AUTO -->
-              <div class="pt-5" v-if="settore == 'RAMI'">
+              <div class="pt-2" v-if="settore == 'RAMI'">
                 <span>
                   <div class="pt-0">
                     <div>
@@ -454,6 +465,17 @@
                         </tbody>
                       </table>
                     </div>
+                    <div class="text-left">
+                      <CButton
+                        color="primary"
+                        style="color: white; padding: 8px"
+                        square
+                        size="sm"
+                        @click="download_excel_rami()"
+                        ><i class="fas fa-file-excel fa-2x"></i> &nbsp; Esporta
+                        Catalogo</CButton
+                      >
+                    </div>
                   </div>
                 </span>
               </div>
@@ -469,7 +491,7 @@
               - Al momento non ci sono documenti disponibili -
             </div>
             <!-- DATA TABLE PER ORGANIGRAMMA ABY -->
-            <div class="pt-5" v-if="settore === 'ORGANIGRAMMA ABY BROKER'">
+            <div class="pt-2" v-if="settore === 'ORGANIGRAMMA ABY BROKER'">
               <CDataTable
                 id="int_table"
                 ref="tabella_ORGANIGRAMMA ABY"
@@ -505,7 +527,7 @@
             </div>
             <!-- DATA TABLE PER CIRCOLARI -->
             <div
-              class="pt-5"
+              class="pt-2"
               v-if="
                 (settore === 'CIRCOLARI INTERNE' && vuoto == false) ||
                 (settore === 'CIRCOLARI OPERATIVE' && vuoto == false)
@@ -546,13 +568,14 @@
             </div>
             <!-- DATA TABLE PER DOCUMENTI INTERMEDIARIO -->
             <div
-              class="pt-5"
+              class="pt-2"
               v-if="
                 settore === 'INTERMEDIARIO' ||
                 (settore === 'PRECONTRATTUALE' && vuoto == false)
               "
             >
               <CDataTable
+                :itemsPerPage="20"
                 id="int_table"
                 ref="tabella_doc"
                 :items="files"
@@ -582,7 +605,7 @@
               </CDataTable>
             </div>
             <!-- DATA TABLE PER EMITTENTI -->
-            <div class="pt-3" v-if="settore === 'INTERMEDIARI EMITTENTI'">
+            <div class="pt-2" v-if="settore === 'INTERMEDIARI EMITTENTI'">
               <div class="row">
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4 text-center"></div>
@@ -723,7 +746,7 @@
               </CDataTable>
             </div>
             <!-- DATA TABLE PER PROPONENTI -->
-            <div class="pt-1" v-if="settore === 'INTERMEDIARI PROPONENTI'">
+            <div class="pt-2" v-if="settore === 'INTERMEDIARI PROPONENTI'">
               <p class="text-right">
                 Totale Intermediari Proponenti: <b>{{ files.length }}</b>
               </p>
@@ -854,7 +877,7 @@
               </CDataTable>
             </div>
             <!-- DATA TABLE PER UNITA' OPERATIVE -->
-            <div class="pt-1" v-if="settore === 'UNITA OPERATIVE'">
+            <div class="pt-2" v-if="settore === 'UNITA OPERATIVE'">
               <p class="text-right">
                 Totale Unità Operative: <b>{{ files.length }}</b>
               </p>
@@ -939,12 +962,25 @@
               </CDataTable>
             </div>
             <!-- DATA TABLE PER RCA -->
-            <div class="pt-5" v-if="settore === 'RC AUTO'">
+            <div class="pt-2" v-if="settore === 'RC AUTO'">
+              <!-- <div class="text-center">
+                <CButton
+                  color="primary"
+                  style="color: white; padding: 8px"
+                  square
+                  size="sm"
+                  @click="download_excel()"
+                  ><i class="fas fa-file-excel fa-2x"></i> &nbsp; Esporta
+                  Risultati</CButton
+                >
+              </div> -->
+
               <CDataTable
                 id="rc_table"
                 :items="files"
                 :fields="fields_RCA"
                 ref="tabella_doc"
+                :itemsPerPage="20"
                 sorter
                 hover
                 border
@@ -998,12 +1034,13 @@
               </CDataTable>
             </div>
             <!-- DATA TABLE PER SERVIZI NON ASSICURATIVI -->
-            <div class="pt-5" v-if="settore === 'SERVIZI NON ASSICURATIVI'">
+            <div class="pt-2" v-if="settore === 'SERVIZI NON ASSICURATIVI'">
               <CDataTable
                 id="altre_table"
                 :items="files"
                 ref="tabella_doc"
                 :fields="fields_SERVIZI"
+                :itemsPerPage="20"
                 sorter
                 hover
                 border
@@ -1041,12 +1078,13 @@
               </CDataTable>
             </div>
             <!-- DATA TABLE PER ALTRE GARANZIE -->
-            <div class="pt-5" v-if="settore === 'ALTRE GARANZIE'">
+            <div class="pt-2" v-if="settore === 'ALTRE GARANZIE'">
               <CDataTable
                 id="altre_table"
                 ref="tabella_doc"
                 :items="files"
                 :fields="fields_ALTRE"
+                :itemsPerPage="20"
                 sorter
                 hover
                 pagination
@@ -1101,8 +1139,9 @@
               </CDataTable>
             </div>
             <!-- DATA TABLE PER NON AUTO -->
-            <div class="pt-5" v-if="settore === 'RAMI_DATA'">
+            <div class="pt-2" v-if="settore === 'RAMI_DATA' && !vuoto">
               <CDataTable
+                :itemsPerPage="20"
                 id="rami_table"
                 ref="tabella_doc"
                 :items="files"
@@ -1158,6 +1197,27 @@
                     </CButton>
                   </td>
                 </template>
+                <template #SchedaTecnica="{ item }">
+                  <td class="py-2 text-center">
+                    <CButton
+                      v-if="item.Nomefile == 'prova'"
+                      color="primary"
+                      variant="outline"
+                      square
+                      size="sm"
+                      @click="
+                        preview(item.Nomefile, 'RAMI');
+                        titoloModale(
+                          item.Tipo,
+                          item.Descrizione,
+                          'SET INFORMATIVO'
+                        );
+                      "
+                    >
+                      Visualizza
+                    </CButton>
+                  </td>
+                </template>
               </CDataTable>
             </div>
           </div>
@@ -1167,6 +1227,8 @@
   </CContainer>
 </template>
 <script>
+import { jsontoexcel } from "vue-table-to-excel";
+
 import axios from "axios";
 import {
   folder_list,
@@ -1424,7 +1486,7 @@ const fields_RCA = [
   {
     key: "Descrizione",
     _style: "font-weight: bold; text-align:center;",
-    label: "Compagnia",
+    label: "Denominazione Prodotto",
   },
 
   {
@@ -1452,7 +1514,7 @@ const fields_ALTRE = [
   {
     key: "Descrizione",
     _style: "font-weight: bold; text-align: center;",
-    label: "Compagnia",
+    label: "Denominazione Prodotto",
   },
 
   {
@@ -1480,7 +1542,7 @@ const fields_SERVIZI = [
   {
     key: "Descrizione",
     _style: "font-weight: bold; text-align: center;",
-    label: "Descrizione",
+    label: "Denominazione Prodotto",
   },
   {
     key: "visualizza",
@@ -1500,7 +1562,7 @@ const fields_RAMI = [
   {
     key: "Descrizione",
     _style: "font-weight: bold; text-align: center;",
-    label: "Compagnia",
+    label: "Denominazione Prodotto",
   },
 
   {
@@ -1516,6 +1578,13 @@ const fields_RAMI = [
     sorter: false,
     filter: false,
     _style: "text-align: center;",
+  },
+  {
+    key: "SchedaTecnica",
+    label: "Scheda Tecnica",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
   },
 ];
 
@@ -1669,6 +1738,116 @@ export default {
     }
   },
   methods: {
+    download_excel_auto() {
+      let head = [
+        "ID Compagnia",
+        "Tipo Prodotto",
+        "Denominazione Prodotto",
+        "POG",
+        "Set Informativo",
+      ];
+      let fileName = "Catalogo Prodotti Auto.csv";
+      let datiExcel = [];
+      let pog = "";
+      let setinfo = "";
+      let elenco;
+      for (var i in this.array_link) {
+        if (this.array_link[i].SLUG == "RC_AUTO" || this.array_link[i].SLUG == "ALTRE_GARANZIE" || this.array_link[i].SLUG == "ALTRI_SERVIZI" ) {
+         elenco = this.array_link[i].FILE;
+
+         elenco.forEach(function (item) {
+        item.Pog != "" ? (pog = "SI") : (pog = "NO");
+        item.Nomefile != "" ? (setinfo = "SI") : (setinfo = "NO");
+        datiExcel.push({
+          ["idCompagnia"]: item.idCompagnia,
+          ["Tipo"]: item.Tipo,
+          ["Prodotto"]: item.Descrizione,
+          ["Pog"]: pog,
+          ["SetInformativo"]: setinfo,
+        });
+      });
+          
+        }
+      }
+
+      jsontoexcel.getXlsx(datiExcel, head, fileName);
+    },
+    download_excel() {
+      let head = [
+        "ID Compagnia",
+        "Denominazione Prodotto",
+        "POG",
+        "Set Informativo",
+      ];
+      let fileName = "Catalogo RC Auto.csv";
+      let datiExcel = [];
+      let pog = "";
+      let setinfo = "";
+      this.files.forEach(function (item) {
+        item.Pog != "" ? (pog = "SI") : (pog = "NO");
+        item.Nomefile != "" ? (setinfo = "SI") : (setinfo = "NO");
+        datiExcel.push({
+          ["idCompagnia"]: item.idCompagnia,
+          ["Prodotto"]: item.Descrizione,
+          ["Pog"]: pog,
+          ["SetInformativo"]: setinfo,
+        });
+      });
+
+      jsontoexcel.getXlsx(datiExcel, head, fileName);
+    },
+
+    async download_excel_rami() {
+      let head = [
+        "ID Compagnia",
+        "Tipo",
+        "Denominazione Prodotto",
+        "POG",
+        "Set Informativo",
+      ];
+      let fileName = "Catalogo Prodotti Altri Rami.csv";
+      let datiExcel = [];
+      let pog = "";
+      let setinfo = "";
+      // recupero il catalogo completo chiamando il servizio con idTipo non valorizzato
+      var elenco = [];
+      var config = {
+        method: "post",
+        url:
+          this.$custom_json.servizi_broker +
+          this.$custom_json.ep_broker.Documentale_AltriRamiCatalogoProdotti,
+        headers: {
+          userID: localStorage.getItem("userID"),
+          anagraficaID: localStorage.getItem("anagraficaID"),
+          unitaoperativaID: localStorage.getItem("unitaoperativaID"),
+          idTipo: "",
+        },
+      };
+      await axios(config)
+        .then(function (response) {
+          elenco = response.data;
+        })
+        .catch(function (error) {
+          elenco = [];
+          console.log(error);
+        });
+      // console.log(elenco);
+      elenco.forEach(function (item) {
+        item.Pog != "" ? (pog = "SI") : (pog = "NO");
+        item.Nomefile != "" ? (setinfo = "SI") : (setinfo = "NO");
+        datiExcel.push({
+          ["idCompagnia"]: item.idCompagnia,
+          ["Tipo"]: item.Tipo,
+          ["Prodotto"]: item.Descrizione,
+          ["Pog"]: pog,
+          ["SetInformativo"]: setinfo,
+        });
+      });
+      // console.log(datiExcel);
+
+      jsontoexcel.getXlsx(datiExcel, head, fileName);
+    },
+
     reset_pagination() {
       // Forzo sempre la visualizzazione della prima pagina del datagrid per poter ripartire
       // dalla prima ogni volta che cambio folder
@@ -1782,6 +1961,7 @@ export default {
 
       // Inizializzo le sottocartelle
       this.altre_gar = [];
+      this.lista_sub_prod = [];
       this.altri_servizi = [];
       this.non_auto = [];
       this.filtro_gar = "";

@@ -206,6 +206,9 @@
       <CDropdownItem to="/Accessi_stat" v-if="admin">
         <i class="far fa-chart-bar"> </i> <span class="pl-1">Accessi</span>
       </CDropdownItem>
+      <CDropdownItem to="/GeneratoreFirme" v-if="admin">
+        <i class="fas fa-file-signature"></i> <span class="pl-1">Genera Firme</span>
+      </CDropdownItem>
       <CDropdownHeader tag="div" class="text-center" color="light">
         <strong>Account</strong>
       </CDropdownHeader>
@@ -260,36 +263,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.bg-broker {
-  background-color: #1f4b6b !important;
-}
-.intestazione_accessi {
-  color: white !important;
-  font-weight: 600 !important;
-}
-.bg-rami {
-  background-color: #607d8b !important;
-}
-.bg-energy {
-  background-color: green !important;
-}
-
-#user_option {
-  background-color: #0b4a9b;
-  color: white;
-}
-#user_option:hover {
-  background-color: rgb(239, 122, 18);
-}
-.c-icon {
-  margin-right: 0.3rem;
-}
-.dropdown-item.active,
-.dropdown-item:active {
-  text-decoration: none;
-  color: #fff !important;
-  background-color: #1f4b6b !important;
-}
-</style>

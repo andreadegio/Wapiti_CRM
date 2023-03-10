@@ -1,10 +1,7 @@
 <template>
-  <div style="background-color: white">
+  <div class="theheader">
     <!-- <CHeader fixed with-subheader light class="d-flex justify-content-between fixed-nav"> -->
     <CHeader
-      fixed
-      with-subheader
-      light
       class="c-header c-header-light c-header-fixed c-header-with-subheader"
     >
       <CHeaderNav class="d-md-down-none mr-auto">
@@ -13,7 +10,7 @@
           target="_self"
         >
         <a href="/dashboard">
-          <img src="/img/Abyway Natale.png" width="200px" /></a>
+          <img src="/img/logo_abyway.png" width="200px" /></a>
         </CHeaderNavItem>
       </CHeaderNav>
       <CHeaderNav v-show="city" class="d-md-down-none mr-auto">
@@ -32,7 +29,7 @@
         <TheHeaderDropdownAccnt />
       </CHeaderNav>
     </CHeader>
-    <CRow>
+    <CRow id="nav-menu">
       <CCol md="1"></CCol>
       <CCol md="10">
         <CNav
@@ -303,63 +300,5 @@ export default {
   },
 };
 </script>
-<style>
-.grow {
-  transition: all 0.2s ease-in-out;
-}
-.grow:hover {
-  transform: scale(1.2);
-}
-#new_menu li:hover {
-  /* background-color: #ecac75; */
-  background-color: #ef7a13;
 
-  border-radius: 10px;
-}
-#new_menu li a:hover {
-  /* background-color: #ecac75; */
-  /* background-color: #ef7a13;
-
-  border-radius: 10px; */
-  color: white !important;
-}
-.nav-item {
-  margin-top: auto;
-  margin-bottom: auto;
-  /* border-right: 1px solid lightgray; */
-}
-
-.nav-pills .nav-link {
-  font-size: 1.3rem !important;
-  font-weight: 500 !important;
-}
-
-.active {
-  background-color: #ef7a13 !important;
-  border-radius: 0.25rem;
-}
-.active a {
-  color: white !important;
-}
-a.active {
-  background-color: #ef7a13 !important;
-}
-
-.badgeNotifiche {
-  position: absolute;
-  z-index: 99999;
-  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
-    0 6px 10px 0 rgba(0, 0, 0, 0.55), 0 1px 18px 0 rgba(223, 78, 78, 0.83) !important;
-  font-size: 100% !important;
-  border-radius: 1rem;
-  margin-top: -0.5rem;
-}
-#header {
-  -webkit-box-shadow: -1px 7px 9px 1px #a3a3a3;
-  -moz-box-shadow: -1px 7px 9px 1px #a3a3a3;
-  -o-box-shadow: -1px 7px 9px 1px #a3a3a3;
-  box-shadow: -1px 7px 9px 1px #a3a3a3;
-  z-index: 1;
-}
-</style>
 

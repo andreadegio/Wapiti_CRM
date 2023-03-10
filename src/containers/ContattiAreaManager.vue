@@ -156,12 +156,12 @@
       </template>
     </CModal>
     <CCard class="mb-0 h-100">
-      <CCardHeader class="d-flex justify-content-between" style="border-bottom:1px solid lightgray !important;">
+      <CCardHeader class="main_title d-flex justify-content-between" >
         <strong class="h3 titolo_gradient">{{ chisono.Divisione_UnitaOperativa }}</strong>
         <div class="card-header-actions"></div>
       </CCardHeader>
       <CCardHeader class="d-flex justify-content-between py-4">
-        <div class="text-center w-100" style="color: #ef7a13;"><strong class="h3 ">ASSICURAZIONI</strong>
+        <div class="text-center w-100 contatti-titolo" ><strong class="h3 ">ASSICURAZIONI</strong>
         </div>
       </CCardHeader>
       <CCardBody class="manager news_card py-0">
@@ -199,7 +199,7 @@
         </CListGroup>
 
         <CCardHeader class="d-flex justify-content-between py-4">
-          <div class="text-center w-100" style="color: #ef7a13;"><strong class="h3">GAS E LUCE</strong>
+          <div class="text-center w-100 contatti-titolo"><strong class="h3">GAS E LUCE</strong>
           </div>
         </CCardHeader>
 
@@ -394,166 +394,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-.contatto li:hover {
-  cursor: pointer;
-  background-color: #ef7a13;
-  color: white;
-}
-.contatto li:hover .small_text {
-  color: white;
-}
-.card-header {
-  border-bottom: 0px !important;
-}
-.card-footer {
-  border-top: 0px !important;
-}
-
-.manager {
-  font-size: 1rem;
-}
-
-.manager .list-group-item {
-  border-left: 0px !important;
-  border-right: 0px !important;
-  border-bottom: 0px !important;
-  border-radius: 0px !important;
-}
-
-.manager li {
-  border-top: 1px solid rgba(0, 0, 21, 0.125) !important;
-}
-.manager li:last-of-type {
-  border-bottom: 1px solid rgba(0, 0, 21, 0.125) !important;
-}
-
-.manager p {
-  font-size: 1.1rem;
-  font-weight: 100;
-}
-
-.nome {
-  font-size: 1.5rem;
-  font-weight: 500;
-  text-transform: capitalize;
-}
-
-.mail {
-  text-transform: lowercase;
-  font-size: 1.3rem;
-  font-weight: bold;
-}
-
-.manager .fa-fw {
-  color: #1f4b6b;
-}
-
-.titolo_gradient {
-  background: -webkit-linear-gradient(#ef7918, #1f4b6b);
-  background-clip: border-box;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 700;
-}
-.icona_contatto {
-  position: relative;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  border-radius: 50em;
-  min-width: 50px;
-  height: 50px;
-  font-size: 14.4px;
-  background-color: #1d4b6b;
-  color: white;
-  font-size: 1.5rem;
-  -webkit-box-shadow: 0px 6px 10px 0px #8a8a8a;
-  -moz-box-shadow: 0px 6px 10px 0px #8a8a8a;
-  -o-box-shadow: 0px 6px 10px 0px #8a8a8a;
-  box-shadow: 0px 6px 10px 0px #8a8a8a;
-}
-.icona_contatto_modale {
-  position: relative;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  border-radius: 50em;
-  width: 50px;
-  height: 50px;
-  font-size: 14.4px;
-  background-color: #1d4b6b;
-  color: white;
-  font-size: 1.5rem;
-  -webkit-box-shadow: 0px 6px 10px 0px #8a8a8a;
-  -moz-box-shadow: 0px 6px 10px 0px #8a8a8a;
-  -o-box-shadow: 0px 6px 10px 0px #8a8a8a;
-  box-shadow: 0px 6px 10px 0px #8a8a8a;
-}
-.recapito_dettaglio {
-  font-size: 1.5rem;
-  margin-left: 2rem;
-  display: inline-block;
-}
-
-.small_text {
-  font-size: 0.7rem;
-  color: rgb(155, 155, 155);
-}
-
-.grow {
-  transition: all 0.2s ease-in-out;
-}
-.grow:hover {
-  transform: scale(1.1);
-}
-.titolo_recapito {
-  font-size: 3rem;
-  text-shadow: 1px 1px 2px #838383;
-}
-.right_arrow {
-  margin-top: auto;
-  margin-bottom: auto;
-  margin-right: 0;
-  margin-left: auto;
-}
-.riga_contatto {
-  padding: 1rem;
-  border-bottom: 1px solid rgb(249, 223, 195);
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  display: block ruby;
-}
-.modal-footer {
-  border: 0px !important;
-}
-.card-body {
-  padding: 0 !important;
-}
-
-@media screen and (max-width: 600px) {
-  .riga_contatto {
-    display: grid !important;
-  }
-  .icona_contatto_modale {
-    margin-left: auto;
-    margin-right: auto !important;
-    margin-bottom: 1rem;
-  }
-  .mail {
-    font-size: 3vw !important;
-  }
-}
-</style>

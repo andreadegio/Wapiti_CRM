@@ -6,7 +6,9 @@ import CoreuiVue from "@coreui/vue";
 import { iconsSet as icons, iconsSet } from "./assets/icons/icons.js";
 import store from "./store";
 import "aos/dist/aos.css";
-import Vuetify from "@/plugins/vuetify";
+import vuetify from "@/plugins/vuetify";
+import 'vuetify/dist/vuetify.min.css';
+import 'vuetify/dist/vuetify.min.js';
 import VueFormulate from "@braid/vue-formulate";
 import "../node_modules/@braid/vue-formulate/themes/snow/snow.scss";
 import axios from "../node_modules/axios";
@@ -26,7 +28,7 @@ library.add(faUserSecret);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.performance = true;
 Vue.use(CoreuiVue);
-Vue.use(Vuetify);
+Vue.use(vuetify);
 Vue.use(VCalendar, {
   componentPrefix: 'vc',  // Use <vc-calendar /> instead of <v-calendar />
 });
@@ -40,13 +42,13 @@ Vue.use(VueFileAgent);
 
 Vue.use(VueSimpleAlert);
 
-const axiosFileUploader = axios.create({
-  baseURL: "https://www.abyway.it/API",
-});
-
 // const axiosFileUploader = axios.create({
-//   baseURL: "https://abyway-staging.navert.cloud/API",
+//   baseURL: "https://www.abyway.it/API",
 // });
+
+const axiosFileUploader = axios.create({
+  baseURL: "https://abyway-staging.navert.cloud/API",
+});
 
 Vue.use(VueFormulate, {
   uploader: axiosFileUploader,
@@ -58,7 +60,7 @@ Vue.use(iconsSet);
 Vue.prototype.$log = console.log.bind(console);
 
 //#region FILTRO PER RIDURRE LA LUNGHEZZA DEI TESTI ED AGGIUNGERE " [...]"
-var filter = function(text, length, clamp) {
+var filter = function (text, length, clamp) {
   clamp = clamp || " [...]";
   var node = document.createElement("div");
   node.innerHTML = text;
@@ -70,7 +72,7 @@ Vue.filter("truncate", filter);
 //#endregion
 
 //#region FILTRO PER LA FORMATTAZIONE DELLA DATA PARTENDO DA QUELLA SU DB
-Vue.filter("formatDate", function(value) {
+Vue.filter("formatDate", function (value) {
   if (value) {
     moment.locale("it");
     return moment(String(value)).format("DD MMMM yyyy");
@@ -78,7 +80,7 @@ Vue.filter("formatDate", function(value) {
 });
 //#endregion
 //# Filtro per prima lettera maiuscola di un testo
-Vue.filter("capitalize", function(value) {
+Vue.filter("capitalize", function (value) {
   if (!value) return "";
   value = value.toString();
   return value.charAt(0).toUpperCase() + value.toLowerCase().slice(1);
@@ -94,17 +96,17 @@ fetch("/config/config.json")
     Vue.prototype.$custom_json = custom_json;
     // console.log(custom_json.ep_api.secondo);
     // console.log('main');
-    
+
     new Vue({
       el: "#app",
       router,
       store,
       icons,
-      Vuetify,
+      vuetify,
       axios,
       VueAnalytics,
 
-      beforeDestroy() {},
+      beforeDestroy() { },
 
       template: "<App/>",
 
