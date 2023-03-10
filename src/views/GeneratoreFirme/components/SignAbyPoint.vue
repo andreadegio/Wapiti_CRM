@@ -241,11 +241,14 @@
       </tr>
     </table>
     <div
-      align="center"
+      class="text-center"
       style="font-weight: 500; font-family: Montserrat; font-size: 10px"
     >
-      Aby Broker Srl. - Partita IVA e Codice Fiscale: 00803170141 - Numero REA:
-      MI-2057530 - Iscrizione RUI: B00137063
+      {{
+        recapiti.sel_datiSoc
+          ? recapiti.datiSoc
+          : "Aby Broker Srl. - Partita IVA e Codice Fiscale: 00803170141 - Numero REA: MI-2057530 - Iscrizione RUI: B00137063"
+      }}
     </div>
     <div
       style="
@@ -262,8 +265,8 @@
           line-height: 15px;
           font-size: 9px;
         "
-        >
-        <br/><br/><em>Avviso di riservatezza</em><br />
+      >
+        <br /><br /><em>Avviso di riservatezza</em><br />
         Ai sensi del D.Lgs. 196/2003 si precisa che le&nbsp;informazioni
         contenute&nbsp;in questo messaggio sono&nbsp;riservate ed a uso
         esclusivo del destinatario. Qualora&nbsp;il&nbsp;messaggio in parola Le

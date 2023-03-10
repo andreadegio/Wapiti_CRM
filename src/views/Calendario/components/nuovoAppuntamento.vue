@@ -1,227 +1,256 @@
 <template>
   <div>
-    <v-col class="d-flex" cols="12" sm="6">
-      <v-select :items="settori" label="Settore" item-value="text" outlined>
-      </v-select>
-    </v-col>
-    <v-col class="d-flex" cols="12" sm="6">
-      <v-text-field
-        v-model="oggetto"
-        label="Oggetto della riunione"
-        placeholder="Inserisci l'oggetto della riunione"
-        outlined
-      ></v-text-field>
-    </v-col>
     <v-row>
-      <v-col class="d-flex" cols="6" sm="3"
-        ><v-menu
-          v-model="menuData"
-          :close-on-content-click="false"
-          :nudge-right="40"
-          transition="scale-transition"
-          offset-y
-          min-width="auto"
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-text-field
-              v-model="formattedDataInizio"
-              label="Data di inizio"
-              prepend-icon="mdi-calendar"
-              outlined
-              v-bind="attrs"
-              v-on="on"
-              :value="formattedDataInizio"
-            ></v-text-field>
-          </template>
-          <v-date-picker
-            v-model="dataInizio"
-            no-title
-            locale="it-it"
-            format="dd/MM/yyyy"
-            @input="menuData = false"
-          ></v-date-picker> </v-menu
-      ></v-col>
-      <v-col class="d-flex" cols="6" sm="3">
-        <v-menu
-          ref="menu"
-          v-model="menuOra"
-          :close-on-content-click="false"
-          :nudge-right="40"
-          :return-value.sync="time"
-          transition="scale-transition"
-          offset-y
-          max-width="290px"
-          min-width="290px"
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-text-field
-              v-model="oraInizio"
-              label="Orario di inizio"
-              prepend-icon="mdi-clock-time-four-outline"
-              outlined
-              v-bind="attrs"
-              v-on="on"
-            ></v-text-field>
-          </template>
-          <v-time-picker
-            v-if="menuOra"
-            v-model="oraInizio"
-            min="8:00"
-            max="19:00"
-            :allowed-minutes="slotMinuti"
-            format="24hr"
-            full-width
-            @click:minute="$refs.menu.save(time)"
-          ></v-time-picker>
-        </v-menu>
-      </v-col>
-    </v-row>
-    <!-- data e ora fine -->
-    <v-row>
-      <v-col class="d-flex" cols="6" sm="3"
-        ><v-menu
-          v-model="menuData2"
-          :close-on-content-click="false"
-          :nudge-right="40"
-          transition="scale-transition"
-          offset-y
-          min-width="auto"
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-text-field
-              v-model="formattedDataFine"
-              label="Data di fine"
-              prepend-icon="mdi-calendar"
-              outlined
-              v-bind="attrs"
-              v-on="on"
-              :value="formattedDataFine"
-            ></v-text-field>
-          </template>
-          <v-date-picker
-            v-model="dataFine"
-            no-title
-            locale="it-it"
-            format="dd/MM/yyyy"
-            @input="menuData2 = false"
-          ></v-date-picker> </v-menu
-      ></v-col>
-      <v-col class="d-flex" cols="6" sm="3">
-        <v-menu
-          ref="menu"
-          v-model="menuOra2"
-          :close-on-content-click="false"
-          :nudge-right="40"
-          :return-value.sync="time2"
-          transition="scale-transition"
-          offset-y
-          max-width="290px"
-          min-width="290px"
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-text-field
-              v-model="oraFine"
-              label="Orario fine"
-              prepend-icon="mdi-clock-time-four-outline"
-              outlined
-              v-bind="attrs"
-              v-on="on"
-            ></v-text-field>
-          </template>
-          <v-time-picker
-            v-if="menuOra2"
-            v-model="oraFine"
-            min="8:00"
-            max="19:00"
-            :allowed-minutes="slotMinuti"
-            format="24hr"
-            full-width
-            @click:minute="$refs.menu.save(time2)"
-          ></v-time-picker>
-        </v-menu>
-      </v-col>
-    </v-row>
+      <v-col class="mt-2" cols="12" sm="6">
+        <div>
+          <v-select :items="settori" label="Settore" item-value="text" outlined>
+          </v-select>
+        </div>
+        <div>
+          <v-text-field
+            v-model="oggetto"
+            label="Titolo Evento"
+            placeholder="Assegna un titolo all'evento"
+            outlined
+          ></v-text-field>
+        </div>
 
-    <div>
-      <v-icon class="mr-2"> mdi-account-group </v-icon>
-      <strong>Partecipanti</strong> ({{
-        partecipanti.length > 0 ? partecipanti.length + 1 : "1"
-      }})
-    </div>
-    <div>
-      <v-list-item>
-        <v-list-item-avatar
-          ><v-btn class="mx-2" x-small disabled elevation="2" fab color="red">
-            <v-icon dark> mdi-minus </v-icon>
-          </v-btn></v-list-item-avatar
-        >
-        <v-list-item-content>
-          <v-list-item-title class="text-capitalize">
-            <strong> {{ user.Nominativo }}</strong>
-            <!-- <span class="partecipazione"
+        <v-row>
+          <v-col cols="12" sm="6">
+            <v-menu
+              v-model="menuData"
+              :close-on-content-click="false"
+              :nudge-right="40"
+              transition="scale-transition"
+              offset-y
+              min-width="auto"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="formattedDataInizio"
+                  label="Data di inizio"
+                  prepend-inner-icon="mdi-calendar"
+                  outlined
+                  v-bind="attrs"
+                  v-on="on"
+                  :value="formattedDataInizio"
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                v-model="dataInizio"
+                no-title
+                locale="it-it"
+                format="dd/MM/yyyy"
+                @input="menuData = false"
+              ></v-date-picker>
+            </v-menu>
+          </v-col>
+          <v-col cols="12" sm="6">
+            <v-menu
+              ref="menu"
+              v-model="menuOra"
+              :close-on-content-click="false"
+              :nudge-right="40"
+              :return-value.sync="time"
+              transition="scale-transition"
+              offset-y
+              max-width="290px"
+              min-width="290px"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="oraInizio"
+                  label="Orario di inizio"
+                  prepend-inner-icon="mdi-clock-time-four-outline"
+                  outlined
+                  v-bind="attrs"
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-time-picker
+                v-if="menuOra"
+                v-model="oraInizio"
+                min="8:00"
+                max="19:00"
+                :allowed-minutes="slotMinuti"
+                format="24hr"
+                full-width
+                @click:minute="$refs.menu.save(time)"
+              ></v-time-picker>
+            </v-menu>
+          </v-col>
+        </v-row>
+
+        <!-- data e ora fine -->
+        <v-row>
+          <v-col cols="12" sm="6"
+            ><v-menu
+              v-model="menuData2"
+              :close-on-content-click="false"
+              :nudge-right="40"
+              transition="scale-transition"
+              offset-y
+              min-width="auto"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="formattedDataFine"
+                  label="Data di fine"
+                  prepend-inner-icon="mdi-calendar"
+                  outlined
+                  v-bind="attrs"
+                  v-on="on"
+                  :value="formattedDataFine"
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                v-model="dataFine"
+                no-title
+                locale="it-it"
+                format="dd/MM/yyyy"
+                @input="menuData2 = false"
+              ></v-date-picker> </v-menu
+          ></v-col>
+          <v-col cols="12" sm="6">
+            <v-menu
+              ref="menu"
+              v-model="menuOra2"
+              :close-on-content-click="false"
+              :nudge-right="40"
+              :return-value.sync="time2"
+              transition="scale-transition"
+              offset-y
+              max-width="290px"
+              min-width="290px"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="oraFine"
+                  label="Orario fine"
+                  prepend-inner-icon="mdi-clock-time-four-outline"
+                  outlined
+                  v-bind="attrs"
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-time-picker
+                v-if="menuOra2"
+                v-model="oraFine"
+                min="8:00"
+                max="19:00"
+                :allowed-minutes="slotMinuti"
+                format="24hr"
+                full-width
+                @click:minute="$refs.menu.save(time2)"
+              ></v-time-picker>
+            </v-menu>
+          </v-col>
+        </v-row>
+        <div class="my-4">
+          <div class="h4">
+            <v-icon class="mr-2"> mdi-bell-ring </v-icon
+            ><span><strong> Notifiche</strong></span>
+          </div>
+          <div>
+            <div class="my-2 pt-2">
+              Scegli come notificare il promemoria e quanto
+              tempo prima inviarlo.
+            </div>
+            <v-checkbox id="checkMail" v-model="mailCheck"
+              ><template v-slot:label>
+                <div class="mb-0">
+                  <v-icon class="mr-2"> mdi-email-fast </v-icon>Mail
+                </div></template
+              ></v-checkbox
+            >
+
+            <v-checkbox v-model="smsCheck"
+              ><template v-slot:label>
+                <div>
+                  <v-icon class="mr-2"> mdi-message-processing </v-icon>SMS
+                </div></template
+              ></v-checkbox
+            >
+          </div>
+        </div>
+        <div>
+          <v-textarea
+            outlined
+            v-model="descrizione"
+            name="input-7-4"
+            label="Descrizione"
+            placeholder="Descrizione dell'evento"
+          ></v-textarea>
+        </div>
+      </v-col>
+      <v-col class="pl-5 mt-2" cols="12" sm="6">
+        <div class="h4">
+          <v-icon class="mr-2"> mdi-account-group </v-icon>
+          <strong>Partecipanti</strong> ({{
+            partecipanti.length > 0 ? partecipanti.length + 1 : "1"
+          }})
+        </div>
+        <div>
+          <v-list-item>
+            <v-list-item-avatar
+              ><v-btn
+                class="mx-2"
+                x-small
+                disabled
+                elevation="2"
+                fab
+                color="red"
+              >
+                <v-icon dark> mdi-minus </v-icon>
+              </v-btn></v-list-item-avatar
+            >
+            <v-list-item-content>
+              <v-list-item-title class="text-capitalize">
+                <strong> {{ user.Nominativo }}</strong>
+                <!-- <span class="partecipazione"
               ><small><i> - Confermato -</i></small></span
             > -->
-          </v-list-item-title>
-          <v-list-item-subtitle> Organizzatore </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-      <div v-if="partecipanti.length + 1 > 1">
-        <v-list-item
-          three-line
-          v-for="partecipante in partecipanti"
-          :key="partecipante.id"
-        >
-          <v-list-item-avatar
-            ><v-btn
-              class="mx-2"
-              fab
-              dark
-              x-small
-              color="red"
-              @click="rimuoviPartecipante(partecipante.id)"
+              </v-list-item-title>
+              <v-list-item-subtitle> Organizzatore </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <div v-if="partecipanti.length + 1 > 1">
+            <v-list-item
+              three-line
+              v-for="partecipante in partecipanti"
+              :key="partecipante.id"
             >
-              <v-icon dark> mdi-minus </v-icon>
-            </v-btn></v-list-item-avatar
-          >
-          <v-list-item-content>
-            <v-list-item-title
-              ><strong> {{ partecipante.nome }}</strong>
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              {{ partecipante.UO }}
-            </v-list-item-subtitle>
-            <v-list-item-subtitle>
-              <small>{{ partecipante.email }}</small>
-            </v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </div>
-      <v-btn color="primary" dark class="ma-2" @click="mostraModale">
-        Aggiungi partecipante
-      </v-btn>
-    </div>
-
-    <div class="my-4">
-      <v-icon class="mr-2"> mdi-bell-ring </v-icon> <strong>Notifiche</strong>
-      <div>
-        <v-checkbox id="checkMail" v-model="mailCheck"
-          ><template  v-slot:label style="margin-bottom: 0 !important;">
-            <div class="mb-0">
-              <v-icon class="mr-2"> mdi-email-fast </v-icon>Mail
-            </div></template
-          ></v-checkbox
-        >
-
-        <v-checkbox v-model="smsCheck"
-          ><template v-slot:label style="margin-bottom: 0 !important;">
-            <div>
-              <v-icon class="mr-2"> mdi-message-processing </v-icon>SMS
-            </div></template
-          ></v-checkbox
-        >
-      </div>
-    </div>
-
+              <v-list-item-avatar
+                ><v-btn
+                  class="mx-2"
+                  fab
+                  dark
+                  x-small
+                  color="red"
+                  @click="rimuoviPartecipante(partecipante.id)"
+                >
+                  <v-icon dark> mdi-minus </v-icon>
+                </v-btn></v-list-item-avatar
+              >
+              <v-list-item-content>
+                <v-list-item-title
+                  ><strong> {{ partecipante.nome }}</strong>
+                </v-list-item-title>
+                <v-list-item-subtitle>
+                  {{ partecipante.UO }}
+                </v-list-item-subtitle>
+                <v-list-item-subtitle>
+                  <small>{{ partecipante.email }}</small>
+                </v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </div>
+          <v-btn color="primary" dark class="ma-2" @click="mostraModale">
+            Aggiungi partecipante
+          </v-btn>
+        </div>
+      </v-col>
+    </v-row>
     <v-dialog
       persistent
       scrollable
@@ -242,7 +271,6 @@
                 outlined
                 prepend-inner-icon="mdi-magnify"
                 clearable
-                
               ></v-text-field>
             </v-col>
             <v-col cols="12" sm="6" md="6">
@@ -303,15 +331,6 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-col class="d-flex" cols="12" sm="6">
-      <v-textarea
-        outlined
-        v-model="descrizione"
-        name="input-7-4"
-        label="Descrizione"
-        placeholder="Descrizione dell'evento"
-      ></v-textarea>
-    </v-col>
   </div>
 </template>
   
