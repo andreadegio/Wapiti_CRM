@@ -63,7 +63,7 @@
                   z-index: 0;
                   background-size: cover;
                 "
-                ><CCardTitle class="grow">
+                ><CCardTitle class="grow titolo_piattaforme">
                   <span class="portali">Piattaforma</span>
                   <h1 class="pulsante_portali">ASSICURAZIONI</h1>
                 </CCardTitle>
@@ -82,7 +82,7 @@
                   z-index: 0;
                   background-size: cover;
                 "
-                ><CCardTitle class="grow">
+                ><CCardTitle class="grow titolo_piattaforme">
                   <span class="portali">Piattaforma</span>
                   <h1 class="pulsante_portali">PROFESSIONISTI</h1>
                 </CCardTitle>
@@ -101,7 +101,7 @@
                   z-index: 0;
                   background-size: cover;
                 "
-                ><CCardTitle class="grow">
+                ><CCardTitle class="grow titolo_piattaforme">
                   <span class="portali">Piattaforma</span>
                   <h1 class="pulsante_portali">PROFESSIONISTI</h1>
                 </CCardTitle>
@@ -120,7 +120,7 @@
                   z-index: 0;
                   background-size: cover;
                 "
-                ><CCardTitle class="grow">
+                ><CCardTitle class="grow titolo_piattaforme">
                   <span class="portali">Piattaforma</span>
                   <h1 class="pulsante_portali">GAS E LUCE</h1>
                 </CCardTitle>
@@ -139,7 +139,7 @@
                   z-index: 0;
                   background-size: cover;
                 "
-                ><CCardTitle class="grow">
+                ><CCardTitle class="grow titolo_piattaforme">
                   <span class="portali">Piattaforma</span>
                   <h1 class="pulsante_portali">GAS E LUCE</h1>
                 </CCardTitle>

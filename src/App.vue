@@ -22,7 +22,9 @@ export default {
   font-family: Shadows;
   src: url("/img/fonts/Shadows.ttf");
 }
-
+.titolo_piattaforme {
+  padding-top: 2rem;
+}
 .bg-broker {
   background-color: #1f4b6b !important;
 }
@@ -56,17 +58,17 @@ export default {
 .card-header {
   border-bottom: 0;
 }
-.card-header.main_title{
+.card-header.main_title {
   border-radius: 1rem 1rem 0 0 !important;
 }
 .card-footer {
   border-top: 0;
   border-radius: 0 0 1rem 1rem;
 }
-.card-footer:last-child{
+.card-footer:last-child {
   border-radius: 0 0 1rem 1rem !important;
 }
-.card{
+.card {
   border-radius: 1rem !important;
 }
 #world-list .list-group-item {
@@ -639,5 +641,4 @@ a {
 .content {
   margin-bottom: 0px !important;
 }
-
 </style>
