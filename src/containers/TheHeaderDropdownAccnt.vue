@@ -24,7 +24,7 @@
                     <h1>{{ user.Nominativo }}</h1>
                     <div>
                       <p><b>E-mail:</b> {{ user.Email }}</p>
-                      <p>
+                      <p v-show="user.UnitaOperativa_Email != ''">
                         <b>E-mail unità operativa:</b>
                         {{ user.UnitaOperativa_Email }}
                       </p>
