@@ -235,10 +235,6 @@
       <CDropdownItem @click="Get_user()">
         <CIcon name="cil-user" /> Profilo
       </CDropdownItem>
-      <CDropdownItem to="/GeneratoreFirme" v-if="admin">
-        <i class="fas fa-file-signature"></i>
-        <span class="pl-1">Genera Firma</span>
-      </CDropdownItem>
       <CDropdownItem @click="Logout()">
         <!-- <CHeaderNavLink to="login"> -->
         <CIcon :content="$options.logout_ico" /> Logout
