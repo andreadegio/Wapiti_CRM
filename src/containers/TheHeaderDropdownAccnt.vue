@@ -7,7 +7,7 @@
       style="z-index: 30"
       size="lg"
     >
-      <template #header style="background-color: #1f4b6b !important">
+      <template #header>
         <strong style="text-transform: uppercase">Profilo Utente</strong>
         <CButton class="close" @click="show_profile = false">
           <!-- <button type="button" class="close" aria-label="Close"> -->
@@ -23,8 +23,15 @@
                   <CCardBody align="center">
                     <h1>{{ user.Nominativo }}</h1>
                     <div>
+                      <p><b>E-mail:</b> {{ user.Email }}</p>
+                      <p v-show="user.UnitaOperativa_Email != ''">
+                        <b>E-mail unità operativa:</b>
+                        {{ user.UnitaOperativa_Email }}
+                      </p>
+
                       <p class="text-muted"></p>
                       <p><b>Unità Operativa:</b> {{ user.UnitaOperativa }}</p>
+
                       <p><b>Intermediario:</b> {{ user.Intermediario }}</p>
                       <p
                         style="text-transform: capitalize"
@@ -54,7 +61,7 @@
                       Piattaforme operative abilitate:
                     </div>
 
-                    <CRow class="pt-4" style="justify-content: center">
+                    <CRow class="py-4" style="justify-content: center">
                       <CCol sm="3" class="text-center mx-2 border">
                         <CRow align-horizontal="center" class="bg-broker"
                           ><span class="py-3 intestazione_accessi">
@@ -157,7 +164,7 @@
       size="sm"
       :closeOnBackdrop="false"
     >
-      <template #header style="background-color: #1f4b6b !important">
+      <template #header>
         <strong style="text-transform: uppercase">Logout</strong>
       </template>
       <template>
@@ -210,12 +217,21 @@
       <CDropdownItem to="/Accessi_stat" v-if="admin">
         <i class="far fa-chart-bar"> </i> <span class="pl-1">Accessi</span>
       </CDropdownItem>
-      <CDropdownItem href="https://www.abyway.it/Monitor/GestioneMonitor.html" target="_blank" v-if="admin">
+      <CDropdownItem
+        href="https://www.abyway.it/Monitor/GestioneMonitor.html"
+        target="_blank"
+        v-if="admin"
+      >
         <i class="fas fa-tv"></i> <span class="pl-1">Gestione TV</span>
       </CDropdownItem>
+
       <CDropdownHeader tag="div" class="text-center" color="light">
         <strong>Account</strong>
       </CDropdownHeader>
+      <CDropdownItem to="/GeneratoreFirme" v-if="firma">
+        <i class="fas fa-file-signature"></i>
+        <span class="pl-1">Genera Firma</span>
+      </CDropdownItem>
       <CDropdownItem @click="Get_user()">
         <CIcon name="cil-user" /> Profilo
       </CDropdownItem>
@@ -241,6 +257,7 @@ export default {
   data() {
     return {
       admin: false,
+      firma: false,
       user: [],
       logout_modale: false,
       show_profile: false,
@@ -252,7 +269,10 @@ export default {
   methods: {
     aggiornaSede() {
       this.admin = JSON.parse(localStorage.getItem("chisono_data")).Is_Sede;
-      console.log("agg_sede");
+      this.firma = JSON.parse(
+        localStorage.getItem("chisono_data")
+      ).Is_Abilitato_Genera_Firma_Aziendale;
+      // console.log("agg_sede");
     },
     Get_user() {
       this.user = JSON.parse(localStorage.getItem("chisono_data"));

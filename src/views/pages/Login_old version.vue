@@ -169,7 +169,7 @@ export default {
 .login-img {
   vertical-align: baseline !important;
 }
-hr {
+/* hr {
   border-width: 0;
   color: rgb(255, 255, 255);
   height: 1px;
@@ -177,9 +177,9 @@ hr {
   margin: 0.5em 0;
   text-align: center;
   padding-top: 10px;
-}
+} */
 hr:after {
-  content: "La nuova piattaforma operativa";
+  /* content: "La nuova piattaforma operativa"; */
   font-size: 2rem;
   position: relative;
   /* left: -0.5em; */
