@@ -282,15 +282,15 @@ hr {
   margin: 0.5em 0;
   text-align: center;
 }
-hr:after {
-  content: "La nuova piattaforma operativa";
-  font-size: 1.5rem;
-  position: relative;
-  left: -0.5em;
-  background-color: #ebedef;
-  padding-left: 1em;
-  padding-right: 1em;
-}
+// hr:after {
+//   // content: "La nuova piattaforma operativa";
+//   font-size: 1.5rem;
+//   position: relative;
+//   left: -0.5em;
+//   background-color: #ebedef;
+//   padding-left: 1em;
+//   padding-right: 1em;
+// }
 #pulsanti_aree {
   display: grid;
   justify-content: center;

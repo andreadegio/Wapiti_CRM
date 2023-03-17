@@ -146,31 +146,49 @@
             </v-menu>
           </v-col>
         </v-row>
+        <!-- Notifiche -->
         <div class="my-4">
           <div class="h4">
             <v-icon class="mr-2"> mdi-bell-ring </v-icon
             ><span><strong> Notifiche</strong></span>
           </div>
+
           <div>
             <div class="my-2 pt-2">
-              Scegli come notificare il promemoria e quanto
-              tempo prima inviarlo.
+              Scegli come notificare il promemoria e quanto tempo prima
+              inviarlo.
             </div>
-            <v-checkbox id="checkMail" v-model="mailCheck"
-              ><template v-slot:label>
-                <div class="mb-0">
-                  <v-icon class="mr-2"> mdi-email-fast </v-icon>Mail
-                </div></template
-              ></v-checkbox
-            >
+            <v-row>
+              <v-col cols="12" sm="6" md="6">
+                <v-checkbox id="checkMail" v-model="mailCheck"
+                  ><template v-slot:label>
+                    <div class="mb-0">
+                      <v-icon class="mr-2"> mdi-email-fast </v-icon>Mail
+                    </div></template
+                  ></v-checkbox
+                >
 
-            <v-checkbox v-model="smsCheck"
-              ><template v-slot:label>
-                <div>
-                  <v-icon class="mr-2"> mdi-message-processing </v-icon>SMS
-                </div></template
-              ></v-checkbox
-            >
+                <v-checkbox v-model="smsCheck"
+                  ><template v-slot:label>
+                    <div>
+                      <v-icon class="mr-2"> mdi-message-processing </v-icon>SMS
+                    </div></template
+                  ></v-checkbox
+                >
+              </v-col>
+              <v-col cols="12" sm="3" md="3">
+                <v-text-field
+                  outlined
+                  type="number"
+                  style="width: 60px"
+                ></v-text-field>
+                <v-select
+                  :items="periodo"
+                  label="ore/giorni/settimane"
+                  outlined
+                ></v-select>
+              </v-col>
+            </v-row>
           </div>
         </div>
         <div>
@@ -265,15 +283,18 @@
             operativa" oppure ricerca per nome/cognome
           </div>
           <v-row class="mt-2">
-            <v-col cols="12" sm="6" md="6">
+            <v-col cols="12">
               <v-text-field
                 v-model="filtroPartecipanti"
                 outlined
                 prepend-inner-icon="mdi-magnify"
                 clearable
+                placeholder="Ricerca per nome"
               ></v-text-field>
             </v-col>
-            <v-col cols="12" sm="6" md="6">
+          </v-row>
+          <v-row class="mt-2">
+            <v-col cols="12">
               <v-select
                 clearable
                 v-model="UO"
