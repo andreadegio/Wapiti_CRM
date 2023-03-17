@@ -277,13 +277,13 @@ hr {
   background-color: #c6c6c6;
   border-width: 0;
   color: #999;
-  height: 1px;
-  line-height: 0;
-  margin: 0.5em 0;
+  height: 1px !important;
+  // line-height: 0;
+  // margin: 0.5em 0;
   text-align: center;
 }
 hr:after {
-  content: "La nuova piattaforma operativa";
+  // content: "La nuova piattaforma operativa";
   font-size: 1.5rem;
   position: relative;
   left: -0.5em;

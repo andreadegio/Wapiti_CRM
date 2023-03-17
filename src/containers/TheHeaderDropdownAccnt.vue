@@ -23,8 +23,15 @@
                   <CCardBody align="center">
                     <h1>{{ user.Nominativo }}</h1>
                     <div>
+                      <p><b>E-mail:</b> {{ user.Email }}</p>
+                      <p>
+                        <b>E-mail unità operativa:</b>
+                        {{ user.UnitaOperativa_Email }}
+                      </p>
+
                       <p class="text-muted"></p>
                       <p><b>Unità Operativa:</b> {{ user.UnitaOperativa }}</p>
+
                       <p><b>Intermediario:</b> {{ user.Intermediario }}</p>
                       <p
                         style="text-transform: capitalize"
@@ -157,7 +164,7 @@
       size="sm"
       :closeOnBackdrop="false"
     >
-      <template #header style="background-color: #1f4b6b !important">
+      <template #header>
         <strong style="text-transform: uppercase">Logout</strong>
       </template>
       <template>
@@ -201,7 +208,7 @@
         </CHeaderNavLink>
       </template>
       <CDropdownHeader tag="div" class="text-center" color="light" v-if="admin">
-        <strong>Admin</strong>
+        <strong>Utility</strong>
       </CDropdownHeader>
       <CDropdownItem to="/Accessi_stat" v-if="admin">
         <i class="far fa-chart-bar"> </i> <span class="pl-1">Accessi</span>
@@ -217,7 +224,7 @@
       <CDropdownHeader tag="div" class="text-center" color="light">
         <strong>Account</strong>
       </CDropdownHeader>
-      <CDropdownItem to="/GeneratoreFirme" v-if="admin">
+      <CDropdownItem to="/GeneratoreFirme" v-if="firma">
         <i class="fas fa-file-signature"></i>
         <span class="pl-1">Genera Firma</span>
       </CDropdownItem>
@@ -254,7 +261,9 @@ export default {
   methods: {
     aggiornaSede() {
       this.admin = JSON.parse(localStorage.getItem("chisono_data")).Is_Sede;
-      this.firma = JSON.parse(localStorage.getItem("chisono_data")).Is_Abilitato_Genera_Firma_Aziendale;
+      this.firma = JSON.parse(
+        localStorage.getItem("chisono_data")
+      ).Is_Abilitato_Genera_Firma_Aziendale;
       // console.log("agg_sede");
     },
     Get_user() {
