@@ -229,6 +229,7 @@ export default {
       this.recapiti = newRecapiti;
     },
     copytohtml(tipo) {
+      console.log(tipo);
       var t = document.getElementById("firma_" + tipo).innerHTML;
       navigator.clipboard.writeText(t);
       alert(
