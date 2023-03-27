@@ -31,6 +31,7 @@
               <span
                 @click="
                   call_folder_list(folder);
+                  subAuto = false;
                   dove_sono = folder.slug;
                   color = 'white';
                 "
@@ -49,6 +50,7 @@
               <span
                 @click="
                   call_folder_list(folder);
+                  subAuto = false;
                   dove_sono = folder.slug;
                   color = 'white';
                 "
@@ -71,6 +73,7 @@
               <span
                 @click="
                   call_folder_list(folder);
+                  subAuto = false;
                   dove_sono = folder.slug;
                   color = '';
                 "
@@ -110,6 +113,7 @@
               @click="
                 call_folder_list(folder);
                 dove_sono = folder.slug;
+                subAuto = true;
                 color = '';
               "
               style="white-space: nowrap"
@@ -119,6 +123,7 @@
               {{ folder.nome }}</span
             >
             <li
+              v-show="subAuto"
               v-for="items in folder.childs"
               :key="items.slug"
               class="folder h5 pl-3"
@@ -184,10 +189,11 @@
             <span
               @click="
                 call_folder_rami(folder);
+                subAuto = false;
                 dove_sono = folder.slug;
               "
               style="white-space: nowrap"
-              class="icon_folder h4"
+              class="icon_folder h5"
               :class="{ highlight: dove_sono == folder.slug }"
             >
               {{ folder.nome }}</span
@@ -1621,6 +1627,7 @@ export default {
   },
   data() {
     return {
+      subAuto: false,
       json_prodotti: [],
       array_prodotti_rami: [],
       lista_sub_prod: [],
