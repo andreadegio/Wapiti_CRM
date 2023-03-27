@@ -129,6 +129,21 @@
                       </v-toolbar>
                       <v-card-text>
                         <span v-html="selectedEvent.details"></span>
+                        <div>
+                          <v-list lines="two">
+                            <v-list-subheader>Partecipanti</v-list-subheader>
+
+                            <v-list-item
+                              v-for="item in selectedEvent.partecipanti"
+                              :key="item.id"
+                            >
+                              <v-list-item-content>
+                                {{ item.nome }}
+                                <br />{{ item.stato }}
+                              </v-list-item-content>
+                            </v-list-item>
+                          </v-list>
+                        </div>
                       </v-card-text>
                       <v-card-actions>
                         <v-btn
@@ -177,11 +192,29 @@ export default {
     events: [
       {
         name: "Riunione Gas e luce",
-        start: "2023-02-17 09:15",
-        end: "2023-02-17 10:30",
+        start: "2023-03-24 09:15",
+        end: "2023-03-24 10:30",
         color: "green darken-2",
         details: "Riunione con Aby Point Aulla per gas e luce",
         timed: true,
+        partecipanti: [
+          {
+            id: 1,
+            nome: "Mario Rossi",
+            email: "mario.rossi@example.com",
+            UO: "Aby Point Aulla",
+            disponibile: true,
+            stato: "Confermato",
+          },
+          {
+            id: 2,
+            nome: "Paolo Verdi",
+            email: "paolo.verdi@example.com",
+            UO: "Aby Point La Spezia",
+            disponibile: true,
+            stato: "In attesa",
+          },
+        ],
       },
       {
         name: "Presentazione AbyOne",
@@ -199,12 +232,6 @@ export default {
         color: "orange darken-3",
         timed: false,
       },
-      // {
-      //   name: "Festa",
-      //   start: "2023-02-19",
-      //   color: "red",
-      //   timed: false,
-      // },
     ],
   }),
   mounted() {
@@ -259,7 +286,6 @@ export default {
       } else {
         open();
       }
-
       nativeEvent.stopPropagation();
     },
     // updateRange({ start, end }) {

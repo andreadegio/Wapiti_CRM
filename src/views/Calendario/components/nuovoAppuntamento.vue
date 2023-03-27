@@ -3,12 +3,12 @@
     <v-row>
       <v-col class="mt-2" cols="12" sm="6">
         <div>
-          <v-select :items="settori" label="Settore" item-value="text" outlined>
+          <v-select :items="settori" v-model="settore" label="Settore" item-value="text" outlined>
           </v-select>
         </div>
         <div>
           <v-text-field
-            v-model="oggetto"
+            v-model="titolo"
             label="Titolo Evento"
             placeholder="Assegna un titolo all'evento"
             outlined
@@ -154,12 +154,11 @@
           </div>
 
           <div>
-            <div class="my-2 pt-2">
-              Scegli come notificare il promemoria e quanto tempo prima
-              inviarlo.
-            </div>
             <v-row>
               <v-col cols="12" sm="6" md="6">
+                <div class="my-2 pt-2">
+                  <b>Scegli come notificare il promemoria</b>
+                </div>
                 <v-checkbox id="checkMail" v-model="mailCheck"
                   ><template v-slot:label>
                     <div class="mb-0">
@@ -176,17 +175,25 @@
                   ></v-checkbox
                 >
               </v-col>
-              <v-col cols="12" sm="3" md="3">
-                <v-text-field
-                  outlined
-                  type="number"
-                  style="width: 60px"
-                ></v-text-field>
-                <v-select
-                  :items="periodo"
-                  label="ore/giorni/settimane"
-                  outlined
-                ></v-select>
+              <v-col cols="12" sm="6" md="6">
+                <div class="my-2 py-2">
+                  <b>Scegli quanto tempo prima inviare il promemoria.</b>
+                </div>
+                <v-row>
+                  <v-text-field
+                    outlined
+                    type="number"
+                    style="width: 60px"
+                    min="1"
+                    v-model="intervallo"
+                  ></v-text-field>
+                  <v-select
+                    :items="periodo"
+                    v-model="scelta_periodo"
+                    label="ore/giorni/settimane"
+                    outlined
+                  ></v-select>
+                </v-row>
               </v-col>
             </v-row>
           </div>
@@ -406,8 +413,9 @@ export default {
           text: "Gas & Luce",
         },
       ],
+      settore:"",
       user: JSON.parse(localStorage.getItem("chisono_data")),
-      oggetto: "",
+      titolo: "",
       dataInizio: "",
       oraInizio: "",
       dataFine: "",
@@ -491,7 +499,10 @@ export default {
       mailCheck: false,
       filtroPartecipanti: "",
       filtroUO: [],
+      intervallo:1,
+      scelta_periodo:"",
       UO: "",
+      periodo: [{ text: "ore" }, { text: "giorni" }, { text: "settimane" }],
     };
   },
   methods: {
