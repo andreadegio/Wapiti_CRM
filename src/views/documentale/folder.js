@@ -88,7 +88,7 @@ const documenti_list = [
 
 const rami_list = [
   {
-    nome: "CATALOGO PRODOTTI ALTRI RAMI",
+    nome: "CATALOGO PRODOTTI RAMI NON AUTO",
     slug: "RAMI",
     tipo: "folder",
     childs: [],
