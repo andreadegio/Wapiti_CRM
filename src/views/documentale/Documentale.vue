@@ -36,7 +36,7 @@
                   color = 'white';
                 "
                 style="white-space: nowrap"
-                class="icon_folder h4"
+                class="icon_folder h5"
                 :class="{ highlight: dove_sono == folder.slug }"
               >
                 {{ folder.nome }}</span
@@ -55,7 +55,7 @@
                   color = 'white';
                 "
                 style="white-space: nowrap"
-                class="icon_folder h4"
+                class="icon_folder h5"
                 :class="{ highlight: dove_sono == folder.slug }"
               >
                 {{ folder.nome }}</span
@@ -78,7 +78,7 @@
                   color = '';
                 "
                 style="white-space: nowrap"
-                class="icon_folder h4"
+                class="icon_folder h5"
                 :class="{ highlight: dove_sono == folder.slug }"
               >
                 {{ folder.nome }}</span
@@ -86,7 +86,7 @@
               <li
                 v-for="items in folder.childs"
                 :key="items.slug"
-                class="folder h5 pl-3"
+                class="folder h6 pl-3"
               >
                 └
                 <span
@@ -117,7 +117,7 @@
                 color = '';
               "
               style="white-space: nowrap"
-              class="icon_folder h4"
+              class="icon_folder h5"
               :class="{ highlight: dove_sono == folder.slug }"
             >
               {{ folder.nome }}</span
@@ -126,7 +126,7 @@
               v-show="subAuto"
               v-for="items in folder.childs"
               :key="items.slug"
-              class="folder h5 pl-3"
+              class="folder h6 pl-3"
             >
               └
               <span
