@@ -23,9 +23,11 @@ import VueSimpleAlert from "vue-simple-alert";
 import VueFileAgent from "vue-file-agent";
 import moment from "moment";
 import VCalendar from 'v-calendar';
+import draggable from 'vue-draggable';
 
 library.add(faUserSecret);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
+Vue.component('draggable', draggable);
 Vue.config.performance = true;
 Vue.use(CoreuiVue);
 Vue.use(vuetify);

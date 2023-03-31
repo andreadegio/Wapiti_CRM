@@ -41,6 +41,7 @@
     "vue-analytics": "^5.22.1",
     "vue-color": "^2.8.1",
     "vue-doc-preview": "^0.3.2",
+    "vue-draggable": "^2.0.6",
     "vue-file-agent": "~1.7.1",
     "vue-formulate": "^0.12.1",
     "vue-masonry-wall": "^0.3.1",
