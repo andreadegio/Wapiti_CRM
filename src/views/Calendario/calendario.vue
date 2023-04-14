@@ -16,11 +16,18 @@
             <v-toolbar-title>Nuovo Appuntamento</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items>
-              <v-btn dark text @click="addNew = false"> Salva </v-btn>
+              <v-btn
+                dark
+                text
+                @inserimentoCompletato="aggiornaCalendario"
+                @click="aggiungiAppuntamento"
+              >
+                Salva
+              </v-btn>
             </v-toolbar-items>
           </v-toolbar>
           <v-card-text>
-            <newMeeting />
+            <newMeeting ref="child" />
             <v-divider></v-divider>
           </v-card-text>
 
@@ -120,26 +127,40 @@
                           v-html="selectedEvent.name"
                         ></v-toolbar-title>
                         <v-spacer></v-spacer>
-                        <v-btn icon>
+                        <!-- <v-btn icon>
                           <v-icon>mdi-heart</v-icon>
                         </v-btn>
                         <v-btn icon>
                           <v-icon>mdi-dots-vertical</v-icon>
-                        </v-btn>
+                        </v-btn> -->
                       </v-toolbar>
                       <v-card-text>
                         <span v-html="selectedEvent.details"></span>
+                        <v-list lines="two">
+                          <b>Organizzatore</b>
+                          <v-list-item
+                            v-for="item in selectedEvent.partecipanti"
+                            :key="item.utente_id"
+                            v-show="item.ruolo == 'Organizzatore'"
+                          >
+                            <v-list-item-content>
+                              {{ item.nome }}<br />
+                              <small>({{ item.stato }})</small>
+                            </v-list-item-content>
+                          </v-list-item>
+                        </v-list>
                         <div>
                           <v-list lines="two">
-                            <v-list-subheader>Partecipanti</v-list-subheader>
-
+                            <b>Partecipanti</b>
                             <v-list-item
                               v-for="item in selectedEvent.partecipanti"
-                              :key="item.id"
+                              :key="item.utente_id"
+                              v-show="item.ruolo != 'Organizzatore'"
                             >
                               <v-list-item-content>
                                 {{ item.nome }}
-                                <br />{{ item.stato }}
+                                <br />
+                                <small>({{ item.stato }})</small>
                               </v-list-item-content>
                             </v-list-item>
                           </v-list>
@@ -168,6 +189,7 @@
 
 <script>
 import newMeeting from "./components/nuovoAppuntamento.vue";
+import axios from "axios";
 
 export default {
   name: "Calendar",
@@ -189,51 +211,11 @@ export default {
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
-    events: [
-      {
-        name: "Riunione Gas e luce",
-        start: "2023-03-24 09:15",
-        end: "2023-03-24 10:30",
-        color: "green darken-2",
-        details: "Riunione con Aby Point Aulla per gas e luce",
-        timed: true,
-        partecipanti: [
-          {
-            id: 1,
-            nome: "Mario Rossi",
-            email: "mario.rossi@example.com",
-            UO: "Aby Point Aulla",
-            disponibile: true,
-            stato: "Confermato",
-          },
-          {
-            id: 2,
-            nome: "Paolo Verdi",
-            email: "paolo.verdi@example.com",
-            UO: "Aby Point La Spezia",
-            disponibile: true,
-            stato: "In attesa",
-          },
-        ],
-      },
-      {
-        name: "Presentazione AbyOne",
-        start: "2023-02-11 15:45",
-        end: "2023-02-11 17:30",
-        details: "Riunione per la presentazione di AbyOne",
-        color: "blue darken-4",
-        timed: false,
-      },
-      {
-        name: "Riunione Aby Next",
-        start: "2023-02-22 15:45",
-        end: "2023-02-22 17:30",
-        details: "Riunione per la presentazione di Aby Next",
-        color: "orange darken-3",
-        timed: false,
-      },
-    ],
+    events: [],
   }),
+  created() {
+    this.aggiornaCalendario();
+  },
   mounted() {
     this.$refs.calendar.checkChange();
     const mesi = [
@@ -255,6 +237,17 @@ export default {
     this.meseCorrente = mesi[dataCorrenteMese];
   },
   methods: {
+    async aggiornaCalendario() {
+      await axios
+        .get("https://abyway-staging.navert.cloud/API/Agenda/getEvents")
+        .then((response) => {
+          this.events = response.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+        // console.log(JSON.stringify(this.events));
+    },
     viewDay({ date }) {
       this.focus = date;
       this.type = "day";
@@ -288,31 +281,12 @@ export default {
       }
       nativeEvent.stopPropagation();
     },
-    // updateRange({ start, end }) {
-    //   // const events = [];
-    //   // const min = new Date(`${start.date}T00:00:00`);
-    //   // const max = new Date(`${end.date}T23:59:59`);
-    //   // const days = (max.getTime() - min.getTime()) / 86400000;
-    //   // const eventCount = this.rnd(days, days + 20);
-    //   // for (let i = 0; i < eventCount; i++) {
-    //   //   const allDay = this.rnd(0, 3) === 0;
-    //   //   const firstTimestamp = this.rnd(min.getTime(), max.getTime());
-    //   //   const first = new Date(firstTimestamp - (firstTimestamp % 900000));
-    //   //   const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000;
-    //   //   const second = new Date(first.getTime() + secondTimestamp);
-    //   //   events.push({
-    //   //     name: this.names[this.rnd(0, this.names.length - 1)],
-    //   //     start: first,
-    //   //     end: second,
-    //   //     color: this.colors[this.rnd(0, this.colors.length - 1)],
-    //   //     timed: !allDay,
-    //   //   });
-    //   // }
-    //   // this.events = events;
-    // },
-    // rnd(a, b) {
-    //   return Math.floor((b - a + 1) * Math.random()) + a;
-    // },
+    async aggiungiAppuntamento() {
+      await this.$refs.child.aggiungiAppuntamento();
+      this.addNew = false;
+      this.aggiornaCalendario();
+      
+    },
   },
 };
 </script>

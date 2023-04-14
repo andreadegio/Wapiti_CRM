@@ -3,7 +3,13 @@
     <v-row>
       <v-col class="mt-2" cols="12" sm="6">
         <div>
-          <v-select :items="settori" v-model="settore" label="Settore" item-value="text" outlined>
+          <v-select
+            :items="settori"
+            v-model="settore"
+            label="Settore"
+            item-value="value"
+            outlined
+          >
           </v-select>
         </div>
         <div>
@@ -159,21 +165,20 @@
                 <div class="my-2 pt-2">
                   <b>Scegli come notificare il promemoria</b>
                 </div>
-                <v-checkbox id="checkMail" v-model="mailCheck"
-                  ><template v-slot:label>
+                <v-checkbox
+                  v-for="(notifica, index) in tipoNotifica"
+                  :key="index"
+                  :id="`check${notifica.id}`"
+                  v-model="notificheSelezionate"
+                  :value="notifica.id"
+                >
+                  <template v-slot:label>
                     <div class="mb-0">
-                      <v-icon class="mr-2"> mdi-email-fast </v-icon>Mail
-                    </div></template
-                  ></v-checkbox
-                >
-
-                <v-checkbox v-model="smsCheck"
-                  ><template v-slot:label>
-                    <div>
-                      <v-icon class="mr-2"> mdi-message-processing </v-icon>SMS
-                    </div></template
-                  ></v-checkbox
-                >
+                      <v-icon class="mr-2">{{ notifica.icona }}</v-icon
+                      >{{ notifica.tipo }}
+                    </div>
+                  </template>
+                </v-checkbox>
               </v-col>
               <v-col cols="12" sm="6" md="6">
                 <div class="my-2 py-2">
@@ -243,7 +248,7 @@
             <v-list-item
               three-line
               v-for="partecipante in partecipanti"
-              :key="partecipante.id"
+              :key="partecipante.utente_id"
             >
               <v-list-item-avatar
                 ><v-btn
@@ -252,7 +257,7 @@
                   dark
                   x-small
                   color="red"
-                  @click="rimuoviPartecipante(partecipante.id)"
+                  @click="rimuoviPartecipante(partecipante.utente_id)"
                 >
                   <v-icon dark> mdi-minus </v-icon>
                 </v-btn></v-list-item-avatar
@@ -338,7 +343,7 @@
                   dark
                   x-small
                   color="red"
-                  @click="rimuoviPartecipante(partecipante.id)"
+                  @click="rimuoviPartecipante(partecipante.utente_id)"
                 >
                   <v-icon dark> mdi-minus </v-icon>
                 </v-btn>
@@ -363,6 +368,7 @@
 </template>
   
   <script>
+import axios from "axios";
 export default {
   name: "nuovoAppuntamento",
   filters: {
@@ -406,14 +412,9 @@ export default {
   },
   data() {
     return {
-      settori: [
-        { text: "Veicoli" },
-        { text: "Altri Rami" },
-        {
-          text: "Gas & Luce",
-        },
-      ],
-      settore:"",
+      message: "",
+      settori: [],
+      settore: "",
       user: JSON.parse(localStorage.getItem("chisono_data")),
       titolo: "",
       dataInizio: "",
@@ -432,77 +433,83 @@ export default {
       mostraModalePartecipanti: false,
       listaUtenti: [
         {
-          id: 1,
+          utente_id: 1,
           nome: "Mario Rossi",
           email: "mario.rossi@example.com",
           UO: "Aby Point Aulla",
           disponibile: true,
         },
         {
-          id: 2,
+          utente_id: 2,
           nome: "Paolo Verdi",
           email: "paolo.verdi@example.com",
           UO: "Aby Point La Spezia",
           disponibile: true,
         },
         {
-          id: 3,
+          utente_id: 3,
           nome: "Marco Bianchi",
           email: "marco.bianchi@example.com",
           UO: "Aby Point La Spezia",
           disponibile: true,
         },
         {
-          id: 4,
+          utente_id: 4,
           nome: "Simona Neri",
           email: "simona.neri@example.com",
           UO: "Aby Point Genova",
           disponibile: true,
         },
         {
-          id: 5,
+          utente_id: 5,
           nome: "Giovanni Marrone",
           email: "giovanni.marrone@example.com",
           UO: "Aby Point La Spezia",
           disponibile: true,
         },
         {
-          id: 6,
+          utente_id: 6,
           nome: "Francesca Bianco",
           email: "francesca.bianco@example.com",
           UO: "Aby Point Sarzana",
           disponibile: true,
         },
         {
-          id: 7,
+          utente_id: 7,
           nome: "Antonio Neri",
           email: "antonio.neri@example.com",
           UO: "Aby Point Carrara",
           disponibile: true,
         },
         {
-          id: 8,
+          utente_id: 8,
           nome: "Pippo Baudo",
           email: "francesca.bianco@example.com",
           UO: "Aby Point Sarzana",
           disponibile: true,
         },
         {
-          id: 9,
+          utente_id: 9,
           nome: "Aieie Brasow",
           email: "antonio.neri@example.com",
           UO: "Aby Point Carrara",
           disponibile: true,
         },
       ],
+      tipoNotifica: [],
+      notificheSelezionate: [],
       smsCheck: false,
       mailCheck: false,
       filtroPartecipanti: "",
       filtroUO: [],
-      intervallo:1,
-      scelta_periodo:"",
+      intervallo: 1,
+      scelta_periodo: "",
       UO: "",
-      periodo: [{ text: "ore" }, { text: "giorni" }, { text: "settimane" }],
+      periodo: [
+        { text: "ore", value: 1 },
+        { text: "giorni", value: 2 },
+        { text: "settimane", value: 3 },
+      ],
     };
   },
   methods: {
@@ -517,35 +524,108 @@ export default {
         this.filtroUO.push({ id: element.UO, label: element.UO });
       });
     },
+    getTipiNotifiche() {
+      axios
+        .get("https://abyway-staging.navert.cloud/API/Agenda/getTipiNotifiche")
+        .then((response) => {
+          this.tipoNotifica = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getSettori() {
+      axios
+        .get("https://abyway-staging.navert.cloud/API/Agenda/getSettori")
+        .then((response) => {
+          this.settori = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     aggiungiPartecipante(partecipante) {
       // Imposta il parametro "disponibile" a "false" del partecipante appena aggiunto
-      const partecipanteAggiunto = { ...partecipante, disponibile: false };
+      const partecipanteAggiunto = {
+        ...partecipante,
+        disponibile: false,
+        ruolo: 2,
+        confirmation_id: 1,
+      };
 
       // Aggiunge il partecipante alla lista dei partecipanti
       this.partecipanti.push(partecipanteAggiunto);
 
       // Cerca il partecipante nella lista dei partecipanti disponibili e modifica il parametro "disponibile" a "false"
       const indice = this.listaUtenti.findIndex(
-        (p) => p.id === partecipante.id
+        (p) => p.utente_id === partecipante.utente_id
       );
       if (indice !== -1) {
         this.listaUtenti[indice].disponibile = false;
       }
       //   this.mostraModalePartecipanti = false;
     },
-    rimuoviPartecipante(id) {
+    rimuoviPartecipante(utente_id) {
       // Rimuove il partecipante con l'id specificato dalla lista dei partecipanti
-      this.partecipanti = this.partecipanti.filter((p) => p.id !== id);
+      this.partecipanti = this.partecipanti.filter(
+        (p) => p.utente_id !== utente_id
+      );
 
       // Cerca il partecipante nella lista dei partecipanti disponibili e modifica il parametro "disponibile" a "true"
-      const indice = this.listaUtenti.findIndex((p) => p.id === id);
+      const indice = this.listaUtenti.findIndex(
+        (p) => p.utente_id === utente_id
+      );
       if (indice !== -1) {
         this.listaUtenti[indice].disponibile = true;
       }
     },
+    async aggiungiAppuntamento() {
+      let organizzatore = {
+        utente_id: JSON.parse(localStorage.getItem("chisono_data")).idUtente,
+        nome: JSON.parse(localStorage.getItem("chisono_data")).Nominativo,
+        email: JSON.parse(localStorage.getItem("chisono_data")).Email,
+        UO: JSON.parse(localStorage.getItem("chisono_data")).UnitaOperativa,
+        UO_mail: JSON.parse(localStorage.getItem("chisono_data"))
+          .UnitaOperativa_Email,
+        ruolo: 1,
+        confirmation_id: 2,
+      };
+      this.partecipanti.push(organizzatore);
+
+      let eventData = {
+        name: this.titolo,
+        start: this.dataInizio + " " + this.oraInizio,
+        end: this.dataFine + " " + this.oraFine,
+        sector_id: this.settore,
+        details: this.descrizione,
+        timed: true,
+        insert_user_id: JSON.parse(localStorage.getItem("chisono_data"))
+          .idUtente,
+        insert_user_name: JSON.parse(localStorage.getItem("chisono_data"))
+          .Nominativo,
+        state_id: 1,
+        partecipanti: this.partecipanti,
+      };
+      await axios
+        .post(
+          "https://abyway-staging.navert.cloud/API/Agenda/addEvent",
+          eventData
+        )
+        .then((response) => {
+          // console.log(response.data);
+          this.message = response.data.message;
+          this.$alert(this.message, "OK", "success");
+          this.$emit("inserimentoCompletato");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
   mounted() {
     this.uoSelect();
+    this.getTipiNotifiche();
+    this.getSettori();
   },
 };
 </script>
