@@ -24,6 +24,7 @@ import VueFileAgent from "vue-file-agent";
 import moment from "moment";
 import VCalendar from 'v-calendar';
 
+
 library.add(faUserSecret);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.performance = true;

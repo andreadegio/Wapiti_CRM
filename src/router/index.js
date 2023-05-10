@@ -75,6 +75,7 @@ const StatistichePortali = () =>
   import(
     /* webpackChunkName: "Statistiche" */ "@/views/statistiche/StatistichePortali"
   );
+const Crm = () => import("@/views/crm/crm");
 
 // Views - Page - Gas
 const Comingsoon_gas = () => import("@/views/pages/Comingsoon_gas");
@@ -243,6 +244,11 @@ function configRoutes() {
           component: Accessi_stat,
         },
         {
+          path: "/Crm",
+          name: "Crm",
+          component: Crm,
+        },
+        {
           path: "/GeneratoreFirme",
           name: "abysign",
           component: GeneratoreFirme,
@@ -310,16 +316,16 @@ router.beforeEach((to, from, next) => {
 });
 
 router.onError((error) => {
-    console.log("Errore di caricamento " + error.message); 
-    const targetPath = router.history.pending.fullPath;
-    console.log("target path " + targetPath);
-    // router.replace(targetPath);
-    // window.location.reload();
-    // router.push("Dashboard");
-    history.replaceState("", "", targetPath);
-    router.replace(targetPath);
-    // router.push(targetPath);
-    console.log("history replace");
+  console.log("Errore di caricamento " + error.message);
+  const targetPath = router.history.pending.fullPath;
+  console.log("target path " + targetPath);
+  // router.replace(targetPath);
+  // window.location.reload();
+  // router.push("Dashboard");
+  history.replaceState("", "", targetPath);
+  router.replace(targetPath);
+  // router.push(targetPath);
+  console.log("history replace");
 });
 
 export default router;

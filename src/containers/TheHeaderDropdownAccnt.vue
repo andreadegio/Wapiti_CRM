@@ -210,6 +210,9 @@
       <CDropdownHeader tag="div" class="text-center" color="light" v-if="admin">
         <strong>Utility</strong>
       </CDropdownHeader>
+      <CDropdownItem to="/Crm" v-if="admin">
+        <i class="fas fa-address-book"></i> <span class="pl-1">CRM</span>
+      </CDropdownItem>
       <CDropdownItem to="/Accessi_stat" v-if="admin">
         <i class="far fa-chart-bar"> </i> <span class="pl-1">Accessi</span>
       </CDropdownItem>
