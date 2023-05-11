@@ -71,6 +71,8 @@ const Statistiche = () =>
   );
 const Accessi_stat = () => import("@/views/statistiche/Accessi_stat");
 const GeneratoreFirme = () => import("@/views/GeneratoreFirme/abysign");
+const Calendario = () => import("@/views/Calendario/calendario");
+const Kanban = () => import("@/views/KanbanContatti/KanbanBoard");
 const StatistichePortali = () =>
   import(
     /* webpackChunkName: "Statistiche" */ "@/views/statistiche/StatistichePortali"
@@ -252,6 +254,16 @@ function configRoutes() {
           path: "/GeneratoreFirme",
           name: "abysign",
           component: GeneratoreFirme,
+        },
+        {
+          path: "/Calendario",
+          name: "calendario",
+          component: Calendario,
+        },
+        {
+          path: "/Kanban",
+          name: "kanbanBoard",
+          component: Kanban,
         },
         {
           path: "Statistiche/:portale",

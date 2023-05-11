@@ -23,10 +23,12 @@ import VueSimpleAlert from "vue-simple-alert";
 import VueFileAgent from "vue-file-agent";
 import moment from "moment";
 import VCalendar from 'v-calendar';
+import draggable from 'vue-draggable';
 
 
 library.add(faUserSecret);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
+Vue.component('draggable', draggable);
 Vue.config.performance = true;
 Vue.use(CoreuiVue);
 Vue.use(vuetify);
@@ -43,13 +45,13 @@ Vue.use(VueFileAgent);
 
 Vue.use(VueSimpleAlert);
 
-const axiosFileUploader = axios.create({
-  baseURL: "https://www.abyway.it/API",
-});
-
 // const axiosFileUploader = axios.create({
-//   baseURL: "https://abyway-staging.navert.cloud/API",
+//   baseURL: "https://www.abyway.it/API",
 // });
+
+const axiosFileUploader = axios.create({
+  baseURL: "https://abyway-staging.navert.cloud/API",
+});
 
 Vue.use(VueFormulate, {
   uploader: axiosFileUploader,
