@@ -18,15 +18,15 @@
     >
       <template #actions="row">
         <div class="d-flex">
-          <CButton @click="addNote(row.item.id)" variant="outline-primary"
-            >Aggiungi nota</CButton
-          >
-          <CButton @click="workCandidate(row.item.id)" variant="outline-primary"
-            >Lavora candidatura</CButton
-          >
+          <note :itemId="row.item.id" :candidato="row.item.candidate"></note>
+          <Lavorazione
+            :itemId="row.item.id"
+            :candidato="row.item"
+          ></Lavorazione>
           <CButton
+            color="danger"
             @click="rejectCandidate(row.item.id)"
-            variant="outline-danger"
+            variant="ghost"
             >Rifiuta candidatura</CButton
           >
         </div>
@@ -35,8 +35,14 @@
   </div>
 </template>
 <script>
+import Note from "./Note.vue";
+import Lavorazione from "./Lavorazione.vue";
 export default {
   name: "Grid",
+  components: {
+    Note,
+    Lavorazione,
+  },
   props: {
     gridType: {
       type: String,
@@ -51,19 +57,23 @@ export default {
           id: 1,
           state: "Nuovo",
           candidate: "Mario Rossi",
-          type: "Candidatura spontanea",
+          type: "Sezione E",
           contact_origin: "LinkedIn",
-          contacts: "mario.rossi@email.com",
+          email: "mario.rossi@email.com",
           region: "Lombardia",
+          tel: "02123456",
+          cell: "333123456",
         },
         {
           id: 2,
           state: "Nuovo",
           candidate: "Giuseppe Bianchi",
-          type: "Ricerca attiva",
+          type: "Agente",
           contact_origin: "Sito web aziendale",
-          contacts: "giuseppe.bianchi@email.com",
+          email: "giuseppe.bianchi@email.com",
           region: "Toscana",
+          tel: "02123456",
+          cell: "333123456",
         },
       ],
       fields: [
@@ -89,14 +99,6 @@ export default {
     },
     updateItems() {
       // Logica per aggiornare il valore di "items" in base a "gridType"
-    },
-    addNote(id) {
-      console.log(id);
-      // Implementazione per l'aggiunta di una nota alla candidatura con l'id specificato
-    },
-    workCandidate(id) {
-      console.log(id);
-      // Implementazione per il lavoro sulla candidatura con l'id specificato
     },
     rejectCandidate(id) {
       console.log(id);

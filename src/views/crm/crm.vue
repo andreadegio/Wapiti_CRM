@@ -1,16 +1,18 @@
 <template>
-  <div class="container">
-    <SideBar @showgrid="showGrid" />
-    <div id="main" class="main">
-      <!-- Contenuto principale della pagina -->
-      <Stats v-if="gridType === 'default'" />
-      <Grid
-        v-if="gridType !== 'default' && gridType !== 'aggiungi_candidature'"
-        :gridType="gridType"
-      />
-      <AddContact v-if="gridType === 'aggiungi_candidature'" />
+  <v-app>
+    <div class="container">
+      <SideBar @showgrid="showGrid" />
+      <div id="main" class="main">
+        <!-- Contenuto principale della pagina -->
+        <Stats v-if="gridType === 'default'" />
+        <Grid
+          v-if="gridType !== 'default' && gridType !== 'aggiungi_candidature'"
+          :gridType="gridType"
+        />
+        <AddContact v-if="gridType === 'aggiungi_candidature'" />
+      </div>
     </div>
-  </div>
+  </v-app>
 </template>
 <script>
 import SideBar from "./components/SideBar.vue";
@@ -46,8 +48,7 @@ export default {
   flex-direction: row;
   width: 100%;
   height: 100%;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  max-width: 100% !important;
 }
 
 .main {
