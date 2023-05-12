@@ -51,37 +51,12 @@ export default {
   },
   data() {
     return {
-      items: [
-        // elenco di oggetti che rappresentano le righe della tabella
-        {
-          id: 1,
-          state: "Nuovo",
-          candidate: "Mario Rossi",
-          type: "Sezione E",
-          contact_origin: "LinkedIn",
-          email: "mario.rossi@email.com",
-          region: "Lombardia",
-          tel: "02123456",
-          cell: "333123456",
-        },
-        {
-          id: 2,
-          state: "Nuovo",
-          candidate: "Giuseppe Bianchi",
-          type: "Agente",
-          contact_origin: "Sito web aziendale",
-          email: "giuseppe.bianchi@email.com",
-          region: "Toscana",
-          tel: "02123456",
-          cell: "333123456",
-        },
-      ],
+      items: [],
       fields: [
         { key: "state", label: "Stato" },
         { key: "candidate", label: "Candidato" },
         { key: "type", label: "Tipologia" },
-        { key: "contact_origin", label: "Origine del contatto" },
-        { key: "contacts", label: "Recapiti" },
+        { key: "contact_origin", label: "Fonte" },
         { key: "region", label: "Regione" },
         { key: "actions", label: "Azioni" },
       ],
@@ -96,9 +71,180 @@ export default {
   methods: {
     updateFields() {
       // Logica per aggiornare il valore di "fields" in base a "gridType"
+      this.fields = [
+      { key: "state", label: "Stato" },
+        { key: "candidate", label: "Candidato" },
+        { key: "type", label: "Tipologia" },
+        { key: "contact_origin", label: "Fonte" },
+        { key: "region", label: "Regione" },
+        { key: "actions", label: "Azioni" },
+      ];
     },
     updateItems() {
       // Logica per aggiornare il valore di "items" in base a "gridType"
+      if (this.gridType === "follow_up") {
+        //inserire richiesta ws
+        this.items = [
+          {
+            id: 1,
+            state: "Account attivato",
+            candidate: "Mario Rossi",
+            type: "Sezione E",
+            contact_origin: "LinkedIn",
+            email: "mario.rossi@email.com",
+            region: "Lombardia",
+            tel: "02123456",
+            cell: "333123456",
+          },
+          {
+            id: 2,
+            state: "Follow-up",
+            candidate: "Giuseppe Bianchi",
+            type: "Agente",
+            contact_origin: "Sito web aziendale",
+            email: "giuseppe.bianchi@email.com",
+            region: "Toscana",
+            tel: "02123456",
+            cell: "333123456",
+            _classes: "bg-warning",
+          },
+        ];
+      }
+      if (this.gridType === "attivazione_account") {
+        //inserire richiesta ws
+        this.items = [
+          {
+            id: 1,
+            state: "Documentazione Registrata",
+            candidate: "Mario Rossi",
+            type: "Sezione E",
+            contact_origin: "LinkedIn",
+            email: "mario.rossi@email.com",
+            region: "Lombardia",
+            tel: "02123456",
+            cell: "333123456",
+          },
+          {
+            id: 2,
+            state: "Documentazione Registrata",
+            candidate: "Giuseppe Bianchi",
+            type: "Agente",
+            contact_origin: "Sito web aziendale",
+            email: "giuseppe.bianchi@email.com",
+            region: "Toscana",
+            tel: "02123456",
+            cell: "333123456",
+          },
+        ];
+      }
+      if (this.gridType === "registrazione_documentazione") {
+        //inserire richiesta ws
+        this.items = [
+          {
+            id: 1,
+            state: "Formazione",
+            candidate: "Mario Rossi",
+            type: "Sezione E",
+            contact_origin: "LinkedIn",
+            email: "mario.rossi@email.com",
+            region: "Lombardia",
+            tel: "02123456",
+            cell: "333123456",
+          },
+          {
+            id: 2,
+            state: "Formazione",
+            candidate: "Giuseppe Bianchi",
+            type: "Agente",
+            contact_origin: "Sito web aziendale",
+            email: "giuseppe.bianchi@email.com",
+            region: "Toscana",
+            tel: "02123456",
+            cell: "333123456",
+          },
+        ];
+      }
+      if (this.gridType === "formazione") {
+        //inserire richiesta ws
+        this.items = [
+          {
+            id: 1,
+            state: "Richiesta Documentazione",
+            candidate: "Mario Rossi",
+            type: "Sezione E",
+            contact_origin: "LinkedIn",
+            email: "mario.rossi@email.com",
+            region: "Lombardia",
+            tel: "02123456",
+            cell: "333123456",
+          },
+          {
+            id: 2,
+            state: "Richiesta Documentazione",
+            candidate: "Giuseppe Bianchi",
+            type: "Agente",
+            contact_origin: "Sito web aziendale",
+            email: "giuseppe.bianchi@email.com",
+            region: "Toscana",
+            tel: "02123456",
+            cell: "333123456",
+          },
+        ];
+      }
+      if (this.gridType === "richiesta_documentazione") {
+        //inserire richiesta ws
+        this.items = [
+          {
+            id: 1,
+            state: "Primo Contatto",
+            candidate: "Mario Rossi",
+            type: "Sezione E",
+            contact_origin: "LinkedIn",
+            email: "mario.rossi@email.com",
+            region: "Lombardia",
+            tel: "02123456",
+            cell: "333123456",
+          },
+          {
+            id: 2,
+            state: "Primo Contatto",
+            candidate: "Giuseppe Bianchi",
+            type: "Agente",
+            contact_origin: "Sito web aziendale",
+            email: "giuseppe.bianchi@email.com",
+            region: "Toscana",
+            tel: "02123456",
+            cell: "333123456",
+          },
+        ];
+      }
+      if (this.gridType === "primi_contatti") {
+        //inserire richiesta ws
+        this.items = [
+          {
+            id: 1,
+            state: "Nuovo",
+            candidate: "Mario Rossi",
+            type: "Sezione E",
+            contact_origin: "LinkedIn",
+            email: "mario.rossi@email.com",
+            region: "Lombardia",
+            tel: "02123456",
+            cell: "333123456",
+          },
+          {
+            id: 2,
+            state: "Nuovo",
+            candidate: "Giuseppe Bianchi",
+            type: "Agente",
+            contact_origin: "Sito web aziendale",
+            email: "giuseppe.bianchi@email.com",
+            region: "Toscana",
+            tel: "02123456",
+            cell: "333123456",
+          },
+        ];
+      }
     },
     rejectCandidate(id) {
       console.log(id);

@@ -4,56 +4,40 @@
     <div>
       <v-container>
         <v-form>
-          <v-radio-group v-model="tipoPersona" row>
+          <v-radio-group v-model="tipoPersona" row class="pb-2">
             <template v-slot:label>
               <div>Tipologia</div>
             </template>
-            <v-radio label="Persona Fisica" value="persona-fisica"></v-radio>
-            <v-radio
-              label="Persona Giuridica"
-              value="persona-giuridica"
-            ></v-radio>
+            <v-radio label="Persona Fisica" value="PF"></v-radio>
+            <v-radio label="Persona Giuridica" value="PG"></v-radio>
           </v-radio-group>
 
           <v-row>
-            <v-col
-              v-if="tipoPersona === 'persona-fisica'"
-              cols="12"
-              sm="6"
-              md="6"
-            >
+            <v-col v-if="tipoPersona === 'PF'" cols="12" sm="4" md="4">
               <v-text-field outlined v-model="nome" label="Nome"></v-text-field>
             </v-col>
-            <v-col
-              v-if="tipoPersona === 'persona-fisica'"
-              cols="12"
-              sm="6"
-              md="6"
-            >
+            <v-col v-if="tipoPersona === 'PF'" cols="12" sm="4" md="4">
               <v-text-field
                 outlined
                 v-model="cognome"
                 label="Cognome"
               ></v-text-field>
             </v-col>
-            <v-col
-              v-if="tipoPersona === 'persona-giuridica'"
-              cols="12"
-              sm="6"
-              md="6"
-            >
+            <v-col v-if="tipoPersona === 'PF'" cols="12" sm="4" md="4">
+              <v-text-field
+                outlined
+                v-model="cf"
+                label="Codice Fiscale"
+              ></v-text-field>
+            </v-col>
+            <v-col v-if="tipoPersona === 'PG'" cols="12" sm="6" md="6">
               <v-text-field
                 outlined
                 v-model="ragioneSociale"
                 label="Ragione Sociale"
               ></v-text-field>
             </v-col>
-            <v-col
-              v-if="tipoPersona === 'persona-giuridica'"
-              cols="12"
-              sm="6"
-              md="6"
-            >
+            <v-col v-if="tipoPersona === 'PG'" cols="12" sm="6" md="6">
               <v-text-field
                 outlined
                 v-model="partitaIva"
@@ -68,15 +52,29 @@
             label="Agenzia"
           ></v-text-field>
           <v-row>
-            <v-col cols="12" sm="6" md="6">
+            <v-col cols="12" sm="4" md="4">
+              <v-select
+                outlined
+                v-model="provenienza"
+                :items="[
+                  'Sito web',
+                  'Social',
+                  'SNA',
+                  'Contatto diretto',
+                  'Contatto di terzi',
+                ]"
+                label="Origine del contatto"
+              ></v-select>
+            </v-col>
+            <v-col cols="12" sm="4" md="4">
               <v-select
                 outlined
                 v-model="tipologia"
-                :items="['agente', 'broker', 'sezione E', 'altro']"
+                :items="['Agente', 'Broker', 'Sezione E', 'Non iscritto']"
                 label="Tipologia"
               ></v-select
             ></v-col>
-            <v-col cols="12" sm="6" md="6">
+            <v-col cols="12" sm="4" md="4">
               <v-select
                 outlined
                 v-model="priorita"
@@ -86,15 +84,19 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="12" sm="6" md="6">
+            <v-col cols="12" sm="2" md="2">
               <v-radio-group row v-model="iscrittoRui" class="iscrittoRui">
                 <template v-slot:label>
                   <div>Iscritto al RUI</div>
                 </template>
                 <v-radio label="Si" value="si"></v-radio>
-                <v-radio label="No" value="no"></v-radio> </v-radio-group
+                <v-radio
+                  label="No"
+                  value="no"
+                  checked
+                ></v-radio> </v-radio-group
             ></v-col>
-            <v-col cols="12" sm="6" md="6">
+            <v-col cols="12" sm="3" md="3">
               <v-text-field
                 outlined
                 v-if="iscrittoRui === 'si'"
@@ -105,21 +107,21 @@
           </v-row>
 
           <v-row>
-            <v-col cols="12" sm="4" md="4">
+            <v-col cols="12" sm="6" md="4">
               <v-text-field
                 outlined
                 v-model="cellulare"
                 label="Cellulare"
               ></v-text-field>
             </v-col>
-            <v-col cols="12" sm="4" md="4">
+            <v-col cols="12" sm="6" md="4">
               <v-text-field
                 outlined
                 v-model="telefono"
                 label="Telefono"
               ></v-text-field>
             </v-col>
-            <v-col cols="12" sm="4" md="4">
+            <v-col cols="12" sm="6" md="4">
               <v-text-field
                 outlined
                 v-model="email"
@@ -128,23 +130,33 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="12" sm="6" md="6">
+            <v-col cols="12" sm="4" md="4">
+              <v-text-field outlined v-model="via" label="Via"></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="4" md="4">
               <v-text-field
                 outlined
-                v-model="viaCivico"
-                label="Via e Civico"
+                v-model="civico"
+                label="N° Civico"
               ></v-text-field>
             </v-col>
-            <v-col cols="12" sm="6" md="6">
+            <v-col cols="12" sm="4" md="4">
               <v-text-field
                 outlined
-                v-model="citta"
-                label="Città"
-              ></v-text-field>
-            </v-col>
-          </v-row>
+                v-model="cap"
+                label="cap"
+              ></v-text-field> </v-col
+          ></v-row>
           <v-row>
-            <v-col cols="12" md="6" sm="6">
+            <v-col cols="12" sm="4" md="4">
+              <v-text-field
+                outlined
+                v-model="comune"
+                label="Comune"
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="12" md="4" sm="4">
               <v-text-field
                 outlined
                 v-model="provincia"
@@ -152,7 +164,7 @@
               ></v-text-field>
             </v-col>
 
-            <v-col cols="12" md="6" sm="6">
+            <v-col cols="12" md="4" sm="4">
               <v-text-field
                 outlined
                 v-model="regione"
@@ -184,11 +196,19 @@
             <v-col cols="12" sm="4" md="4">
               <div v-if="preferenzaIncontro === 'si'">
                 <v-text-field
-                  v-model="oraInizio"
+                  v-model="oraIncontro"
                   label="Orario appuntamento"
                   prepend-inner-icon="mdi-clock-time-four-outline"
                   outlined
                 ></v-text-field>
+              </div>
+              <div v-if="preferenzaIncontro === 'si'">
+                Luogo:
+                <v-radio-group v-model="luogoIncontro">
+                  <v-radio label="c/o Candidato" value="candidato"></v-radio>
+                  <v-radio label="c/o nostra Sede" value="sede"></v-radio>
+                  <v-radio label="Web meeting" value="web"></v-radio>
+                </v-radio-group>
               </div>
             </v-col>
           </v-row>
@@ -207,14 +227,28 @@ export default {
       tipoPersona: "",
       nome: "",
       cognome: "",
+      cf: "",
       ragioneSociale: "",
       partitaIva: "",
       agenzia: "",
+      provenienza: "",
       tipologia: "",
       priorita: "Normale",
-      iscrittoRui: "",
+      iscrittoRui: "no",
+      cellulare: "",
+      telefono: "",
+      email: "",
+      via: "",
+      civico: "",
+      comune: "",
+      provincia: "",
+      regione: "",
+      cap: "",
+      numeroIscrizione: "",
       preferenzaIncontro: "no",
       dataIncontro: null,
+      oraIncontro:null,
+      luogoIncontro: "",
     };
   },
   methods: {

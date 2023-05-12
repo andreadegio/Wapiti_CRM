@@ -23,7 +23,7 @@
       </v-toolbar>
       <v-list three-line subheader>
         <v-subheader class="display-1"
-          >Informazioni sul contatto {{ candidato.candidate }}</v-subheader
+          >Candidato {{ candidato.candidate }}</v-subheader
         >
         <v-list-item>
           <v-list-item-content>
@@ -40,12 +40,13 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+
       <v-divider></v-divider>
 
       <v-row align-content="center" align="center">
         <v-col>
           <v-checkbox
-            v-model="notifica"
+            v-model="conferma"
             :label="'Conferma di aver contattato il candidato'"
           ></v-checkbox>
         </v-col>
@@ -80,14 +81,14 @@ export default {
       required: true,
     },
     candidato: {
-      type: Array,
+      type: Object,
       required: true,
     },
   },
   data() {
     return {
       dialog: false,
-      notifica: true,
+      conferma: false,
       nota_primo_contatto: "",
       user: JSON.parse(localStorage.getItem("chisono_data")),
     };

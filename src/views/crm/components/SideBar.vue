@@ -150,6 +150,7 @@ export default {
   background-color: transparent;
   border: none;
   cursor: pointer;
+  padding: 0 0.5rem 0 1rem;
 }
 
 
