@@ -218,7 +218,7 @@ export default {
           },
         ];
       }
-      if (this.gridType === "primi_contatti") {
+      if (this.gridType === "primo_contatto") {
         //inserire richiesta ws
         this.items = [
           {

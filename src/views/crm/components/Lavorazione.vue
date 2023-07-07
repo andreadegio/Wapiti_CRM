@@ -21,25 +21,7 @@
           <v-btn dark text @click="dialog = false"> Salva </v-btn>
         </v-toolbar-items>
       </v-toolbar>
-      <v-list three-line subheader>
-        <v-subheader class="display-1"
-          >Candidato {{ candidato.candidate }}</v-subheader
-        >
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title>Provenienza</v-list-item-title>
-            <v-list-item-subtitle>{{
-              candidato.contact_origin
-            }}</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title>Tipologia</v-list-item-title>
-            <v-list-item-subtitle>{{ candidato.type }}</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+      <scheda :candidato="candidato"></scheda>
 
       <v-divider></v-divider>
 
@@ -70,10 +52,12 @@
 </template>
 <script>
 import { VueEditor } from "vue2-editor";
+import scheda from "./Scheda.vue";
 export default {
   name: "Lavorazione",
   components: {
     VueEditor,
+    scheda,
   },
   props: {
     itemId: {

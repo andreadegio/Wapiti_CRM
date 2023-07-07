@@ -3,7 +3,7 @@
     <div class="toggle_side">
       <button @click="toggleSidebar" class="btn_sidebar">
         <span v-show="sidebarHidden"><i class="fas fa-bars"></i></span>
-        <span v-show="!sidebarHidden"><i class="fas fa-times"></i></span>
+        <span v-show="!sidebarHidden"><i class="fas fa-angle-double-left"></i></span>
       </button>
     </div>
 
@@ -26,7 +26,7 @@
         </div>
       </CNavItem>
       <CNavItem>
-        <div class="side_btn" @click="buttonClicked('primi_contatti')">
+        <div class="side_btn" @click="buttonClicked('primo_contatto')">
           <div
             class="side_btn_ico"
             v-c-tooltip="{
@@ -37,7 +37,23 @@
             <i class="fas fa-people-arrows"></i>
           </div>
           <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
-            >Primi contatti</span
+            >Primo contatto</span
+          >
+        </div>
+      </CNavItem>
+      <CNavItem>
+        <div class="side_btn" @click="buttonClicked('solleciti')">
+          <div
+            class="side_btn_ico"
+            v-c-tooltip="{
+              content: 'Chiamate di cortesia',
+              placement: 'right',
+            }"
+          >
+          <i class="fas fa-phone-volume"></i>
+          </div>
+          <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
+            >Chiamate di cortesia</span
           >
         </div>
       </CNavItem>
@@ -46,14 +62,14 @@
           <div
             class="side_btn_ico"
             v-c-tooltip="{
-              content: 'Richiesta documentazione',
+              content: 'Mini webinar',
               placement: 'right',
             }"
           >
-            <i class="fas fa-file-upload"></i>
+          <i class="fas fa-desktop"></i>
           </div>
           <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
-            >Richiesta documentazione</span
+            >Mini webinar</span
           >
         </div>
       </CNavItem>
@@ -69,7 +85,7 @@
             <i class="fas fa-chalkboard-teacher"></i>
           </div>
           <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
-            >Sessioni di formazione</span
+            >Formazione</span
           >
         </div>
       </CNavItem>
@@ -82,10 +98,10 @@
               placement: 'right',
             }"
           >
-            <i class="fas fa-file-download"></i>
+          <i class="fas fa-file-signature"></i>
           </div>
           <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
-            >Registrazione documentazione</span
+            >Registrazione documenti</span
           >
         </div>
       </CNavItem>
@@ -101,7 +117,7 @@
             <i class="far fa-id-badge"></i>
           </div>
           <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
-            >Attivazione account operativi</span
+            >Attivazione account</span
           >
         </div>
       </CNavItem>
@@ -117,7 +133,7 @@
             <i class="fas fa-headset"></i>
           </div>
           <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
-            >Follow-up candidature</span
+            >Follow-up</span
           >
         </div>
       </CNavItem>
