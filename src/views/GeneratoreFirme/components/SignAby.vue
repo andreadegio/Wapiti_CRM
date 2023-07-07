@@ -245,7 +245,7 @@
       style="font-weight: 500; font-family: Montserrat; font-size: 10px"
     >
       Aby Broker Srl. - Partita IVA e Codice Fiscale: 00803170141 - Numero REA:
-      MI-2057530 - Iscrizione RUI: B00137063
+      MI-2057530 - Iscrizione RUI: B000137063
     </div>
     <div
       style="

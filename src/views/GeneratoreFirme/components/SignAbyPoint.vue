@@ -247,7 +247,7 @@
       {{
         recapiti.sel_datiSoc
           ? recapiti.datiSoc
-          : "Aby Broker Srl. - Partita IVA e Codice Fiscale: 00803170141 - Numero REA: MI-2057530 - Iscrizione RUI: B00137063"
+          : "Aby Broker Srl. - Partita IVA e Codice Fiscale: 00803170141 - Numero REA: MI-2057530 - Iscrizione RUI: B000137063"
       }}
     </div>
     <div
