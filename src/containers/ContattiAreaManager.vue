@@ -308,7 +308,7 @@ export default {
         Telefono: "",
       },
       {
-        Descrizione: "Area Manager",
+        Descrizione: "Direttore Network",
         Nome: this.chisono.Energy_AreaManager,
         Email: this.chisono.Energy_AreaManager_Email,
         Cell: this.chisono.Energy_AreaManager_Cellulare,

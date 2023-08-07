@@ -32,34 +32,25 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col v-if="tipoPersona === 'PG'" cols="12" sm="6" md="6">
+            <v-col v-if="tipoPersona === 'PG'" cols="12" sm="4" md="4">
               <v-text-field
                 outlined
                 v-model="ragioneSociale"
                 label="Ragione Sociale"
               ></v-text-field>
             </v-col>
-            <v-col v-if="tipoPersona === 'PG'" cols="12" sm="6" md="6">
+            <v-col v-if="tipoPersona === 'PG'" cols="12" sm="4" md="4">
               <v-text-field
                 outlined
                 v-model="partitaIva"
                 label="Partita IVA"
               ></v-text-field>
             </v-col>
-          </v-row>
-          <v-row>
-            <v-col v-if="tipoPersona === 'PG'" cols="12" sm="6" md="6">
+            <v-col v-if="tipoPersona === 'PG'" cols="12" sm="4" md="4">
               <v-text-field
                 outlined
                 v-model="nomeReferente"
-                label="Nome Referente"
-              ></v-text-field>
-            </v-col>
-            <v-col v-if="tipoPersona === 'PG'" cols="12" sm="6" md="6">
-              <v-text-field
-                outlined
-                v-model="cognomeReferente"
-                label="Cognome Referente"
+                label="Referente"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -80,7 +71,10 @@
                   :items="originiOptions"
                   label="Origine del contatto"
                 ></v-select>
-                <p @click="addOriginOption()">Aggiungi nuova origine</p>
+                <div class="nuova_origine" @click="addOriginOption()">
+                  <i class="fas fa-plus-circle fa-2x"> </i>
+                  <p style="margin-left: 0.5rem">Aggiungi nuova origine</p>
+                </div>
               </v-col>
               <v-col cols="12" sm="3" md="3">
                 <v-select
@@ -120,6 +114,14 @@
                   label="Numero Iscrizione"
                 ></v-text-field
               ></v-col>
+              <v-col cols="12" sm="3" md="3">
+                <v-text-field
+                  outlined
+                  v-if="iscrittoRui === 'si'"
+                  v-model="dataIscrizione"
+                  label="Data Iscrizione"
+                ></v-text-field>
+              </v-col>
             </v-row>
 
             <v-row>
@@ -262,8 +264,8 @@ export default {
       cf: "",
       ragioneSociale: "",
       partitaIva: "",
-      nomeReferente:"",
-      cognomeReferente:"",
+      nomeReferente: "",
+      cognomeReferente: "",
       agenzia: "",
       provenienza: "",
       tipologia: "",
@@ -279,6 +281,7 @@ export default {
       regione: "",
       cap: "",
       numeroIscrizione: "",
+      dataIscrizione: "",
       preferenzaIncontro: "no",
       dataIncontro: null,
       oraIncontro: null,
@@ -297,7 +300,7 @@ export default {
   methods: {
     async salvaContatto() {
       // Controllo campi obbligatori
-      
+
       // Controllo formale dei dati
       var param = {
         tipo_persona: this.tipoPersona,
@@ -323,6 +326,7 @@ export default {
         regione: this.regione,
         cap: this.cap,
         numeroIscrizione: this.numeroIscrizione,
+        dataIscrizione: this.dataIscrizione,
         preferenzaIncontro: this.preferenzaIncontro,
         dataIncontro: this.dataIncontro,
         oraIncontro: this.oraIncontro,
@@ -353,16 +357,43 @@ export default {
         console.log("Errore di comunicazione con il back-end");
       }
     },
-    addOriginOption() {
+    async addOriginOption() {
       // Aggiungo un origine nella select
       console.log("cliccato");
       this.$prompt("Inserisci una nuova origine per le candidature").then(
         (text) => {
-          if (text != "1") {
-            this.originiOptions.push(text);
-            this.$alert("Valore inserito", "OK", "success");
-          } else {
-            this.$alert(text, "Attenzione", "warning");
+          if (text) {
+            // this.originiOptions.push(text);
+            // Aggiungo il valore sul db
+            let param = {
+              valore: text,
+            };
+            try {
+              axios
+                .post(
+                  this.$custom_json.base_url +
+                    this.$custom_json.api_url +
+                    this.$custom_json.ep_api.addSource,
+                  param
+                )
+                .then((response) => {
+                  var message = response.data.message;
+                  switch (response.data.esito) {
+                    case "OK":
+                      this.$alert(
+                        "Nuova origine inserita correttamente",
+                        "OK",
+                        "success"
+                      );
+                      break;
+                    case "KO":
+                      this.$alert(message, "Attenzione", "warning");
+                      break;
+                  }
+                });
+            } catch (error) {
+              this.$alert(text, "Attenzione", "warning");
+            }
           }
         }
       );
@@ -378,5 +409,21 @@ export default {
 .disabled_input {
   pointer-events: none;
   opacity: 0.5;
+}
+.nuova_origine {
+  cursor: pointer;
+  color: #1976d2;
+  display: flex;
+  vertical-align: middle;
+  top: -1rem;
+  position: relative;
+  font-size: 1rem;
+  font-weight: 500;
+  /* border: 1px solid #1976d2; */
+  /* border-radius: 5px; */
+  padding: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-bottom: 0.1rem !important;
+  width: fit-content;
 }
 </style>
