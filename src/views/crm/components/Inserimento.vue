@@ -49,7 +49,7 @@
             <v-col v-if="tipoPersona === 'PG'" cols="12" sm="4" md="4">
               <v-text-field
                 outlined
-                v-model="nomeReferente"
+                v-model="referente"
                 label="Referente"
               ></v-text-field>
             </v-col>
@@ -69,6 +69,8 @@
                   outlined
                   v-model="provenienza"
                   :items="originiOptions"
+                  item-value="id_origin"
+                  item-text="desc"
                   label="Origine del contatto"
                 ></v-select>
                 <div class="nuova_origine" @click="addOriginOption()">
@@ -81,6 +83,8 @@
                   outlined
                   v-model="tipologia"
                   :items="tipologiaOptions"
+                  item-value="id_tipologia"
+                  item-text="desc"
                   label="Tipologia"
                 ></v-select
               ></v-col>
@@ -120,6 +124,7 @@
                   v-if="iscrittoRui === 'si'"
                   v-model="dataIscrizione"
                   label="Data Iscrizione"
+                  type="date"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -264,8 +269,7 @@ export default {
       cf: "",
       ragioneSociale: "",
       partitaIva: "",
-      nomeReferente: "",
-      cognomeReferente: "",
+      referente: "",
       agenzia: "",
       provenienza: "",
       tipologia: "",
@@ -287,17 +291,84 @@ export default {
       oraIncontro: null,
       luogoIncontro: "",
       note: "",
-      originiOptions: [
-        "Sito web",
-        "Social",
-        "SNA",
-        "Contatto diretto",
-        "Contatto di terzi",
-      ],
-      tipologiaOptions: ["Agente", "Broker", "Sezione E", "Non iscritto"],
+      originiOptions: [],
+      tipologiaOptions: [],
     };
   },
+  mounted() {
+    this.getProvenienze();
+    this.getTipologia();
+  },
   methods: {
+    async addOriginOption() {
+      // Aggiungo un origine nella select
+      this.$prompt("Inserisci una nuova origine").then((text) => {
+        if (text) {
+          // this.originiOptions.push(text);
+          // Aggiungo il valore sul db
+          let param = {
+            nuovaOrigine: text,
+          };
+          try {
+            axios
+              .post(
+                this.$custom_json.base_url +
+                  this.$custom_json.api_url +
+                  this.$custom_json.ep_api.addSource,
+                param
+              )
+              .then((response) => {
+                var message = response.data.message;
+                switch (response.data.esito) {
+                  case "OK":
+                    this.$alert(
+                      "Nuova origine inserita correttamente",
+                      "OK",
+                      "success"
+                    );
+                    this.getProvenienze();
+                    break;
+                  case "KO":
+                    this.$alert(message, "Attenzione", "warning");
+                    break;
+                }
+              });
+          } catch (error) {
+            this.$alert(text, "Attenzione", "warning");
+          }
+        }
+      });
+    },
+    async getProvenienze() {
+      try {
+        await axios
+          .get(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.getSource
+          )
+          .then((response) => {
+            this.originiOptions = response.data;
+          });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async getTipologia() {
+      try {
+        await axios
+          .get(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.getTipo
+          )
+          .then((response) => {
+            this.tipologiaOptions = response.data;
+          });
+      } catch (error) {
+        console.error(error);
+      }
+    },
     async salvaContatto() {
       // Controllo campi obbligatori
 
@@ -309,8 +380,7 @@ export default {
         codiceFiscale: this.cf,
         ragioneSociale: this.ragioneSociale,
         partitaIVA: this.partitaIva,
-        nomeReferente: this.nomeReferente,
-        cognomeReferente: this.cognomeReferente,
+        referente: this.referente,
         agenzia: this.agenzia,
         provenienza: this.provenienza,
         tipologia: this.tipologia,
@@ -356,47 +426,6 @@ export default {
       } catch (error) {
         console.log("Errore di comunicazione con il back-end");
       }
-    },
-    async addOriginOption() {
-      // Aggiungo un origine nella select
-      console.log("cliccato");
-      this.$prompt("Inserisci una nuova origine per le candidature").then(
-        (text) => {
-          if (text) {
-            // this.originiOptions.push(text);
-            // Aggiungo il valore sul db
-            let param = {
-              valore: text,
-            };
-            try {
-              axios
-                .post(
-                  this.$custom_json.base_url +
-                    this.$custom_json.api_url +
-                    this.$custom_json.ep_api.addSource,
-                  param
-                )
-                .then((response) => {
-                  var message = response.data.message;
-                  switch (response.data.esito) {
-                    case "OK":
-                      this.$alert(
-                        "Nuova origine inserita correttamente",
-                        "OK",
-                        "success"
-                      );
-                      break;
-                    case "KO":
-                      this.$alert(message, "Attenzione", "warning");
-                      break;
-                  }
-                });
-            } catch (error) {
-              this.$alert(text, "Attenzione", "warning");
-            }
-          }
-        }
-      );
     },
   },
 };

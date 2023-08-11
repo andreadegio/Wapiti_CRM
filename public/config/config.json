@@ -43,7 +43,9 @@
     "richiesta_contatto": "Utility/richiesta_contatto",
     "get_version": "Utility/get_version",
     "newContatto": "CRM/salvaContatto",
-    "addSource": "CRM/addSource"
+    "addSource": "CRM/addSource",
+    "getSource": "CRM/getSource",
+    "getTipo": "CRM/getTipo"
   },
   "servizi_broker": "https://servizi.documentale.cloud/AibaJSON2023-test/",
   "servizi_energy": "https://abyenergy.it/servizitest/",
