@@ -379,7 +379,7 @@ export default {
         cognome: this.cognome,
         codiceFiscale: this.cf,
         ragioneSociale: this.ragioneSociale,
-        partitaIVA: this.partitaIva,
+        partitaIva: this.partitaIva,
         referente: this.referente,
         agenzia: this.agenzia,
         provenienza: this.provenienza,
