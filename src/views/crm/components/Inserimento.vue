@@ -99,17 +99,14 @@
             </v-row>
             <v-row>
               <v-col cols="12" sm="2" md="2">
-                <v-radio-group row v-model="iscrittoRui" class="iscrittoRui">
+                <v-radio-group v-model="iscrittoRui" row class="iscrittoRui">
                   <template v-slot:label>
                     <div>Iscritto al RUI</div>
                   </template>
                   <v-radio label="Si" value="si"></v-radio>
-                  <v-radio
-                    label="No"
-                    value="no"
-                    checked
-                  ></v-radio> </v-radio-group
-              ></v-col>
+                  <v-radio label="No" value="no" checked></v-radio>
+                </v-radio-group>
+              </v-col>
               <v-col cols="12" sm="3" md="3">
                 <v-text-field
                   outlined
@@ -285,7 +282,7 @@ export default {
       regione: "",
       cap: "",
       numeroIscrizione: "",
-      dataIscrizione: "",
+      dataIscrizione: null,
       preferenzaIncontro: "no",
       dataIncontro: null,
       oraIncontro: null,
@@ -298,6 +295,32 @@ export default {
   mounted() {
     this.getProvenienze();
     this.getTipologia();
+  },
+  watch: {
+    tipoPersona() {
+      // Inizializzo i campi se passo da una tipologia all'altra
+      //   if (newTipo == 'PF'){
+
+      //   }
+      // else if (newTipo=='PG'){
+      //   // reset dei campi
+      // }
+      this.nome = "";
+      this.cognome = "";
+      this.cf = "";
+      this.ragioneSociale = "";
+      this.partitaIva = "";
+      this.referente = " ";
+    },
+    iscrittoRui() {
+      this.numeroIscrizione = "";
+      this.dataIscrizione = null;
+    },
+    preferenzaIncontro() {
+      this.dataIncontro = "";
+      this.oraIncontro = "";
+      this.luogoIncontro = "";
+    },
   },
   methods: {
     async addOriginOption() {
@@ -385,7 +408,7 @@ export default {
         provenienza: this.provenienza,
         tipologia: this.tipologia,
         priorita: this.priorita,
-        iscrittoRUI: this.iscrittoRui,
+        iscrittoRui: this.iscrittoRui,
         cellulare: this.cellulare,
         telefono: this.telefono,
         email: this.email,
