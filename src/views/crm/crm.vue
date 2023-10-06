@@ -9,7 +9,10 @@
           v-if="gridType !== 'default' && gridType !== 'aggiungi_candidature'"
           :gridType="gridType"
         />
-        <AddContact v-if="gridType === 'aggiungi_candidature'" />
+        <AddContact
+          v-if="gridType === 'aggiungi_candidature'"
+          @showgrid="showGrid"
+        />
       </div>
     </div>
   </v-app>
@@ -35,7 +38,7 @@ export default {
   },
   methods: {
     showGrid(pulsante) {
-      console.log(pulsante);
+      // console.log(pulsante);
       this.gridType = pulsante;
     },
   },

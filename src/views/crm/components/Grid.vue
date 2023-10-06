@@ -18,11 +18,11 @@
     >
       <template #actions="row">
         <div class="d-flex">
-          <note :itemId="row.item.id" :candidato="row.item.candidate"></note>
           <Lavorazione
             :itemId="row.item.id"
             :candidato="row.item"
           ></Lavorazione>
+          <note :itemId="row.item.id" :candidato="row.item.candidate"></note>
           <CButton
             color="danger"
             @click="rejectCandidate(row.item.id)"
@@ -72,7 +72,7 @@ export default {
     updateFields() {
       // Logica per aggiornare il valore di "fields" in base a "gridType"
       this.fields = [
-      { key: "state", label: "Stato" },
+        { key: "state", label: "Stato" },
         { key: "candidate", label: "Candidato" },
         { key: "type", label: "Tipologia" },
         { key: "contact_origin", label: "Fonte" },

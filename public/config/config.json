@@ -41,7 +41,9 @@
     "set_accesso": "Utility/set_accesso",
     "get_accessi_totali": "Utility/get_accessi_totali",
     "richiesta_contatto": "Utility/richiesta_contatto",
-    "get_version": "Utility/get_version",
+    "get_version": "Utility/get_version"
+  },
+  "crm": {
     "newContatto": "CRM/salvaContatto",
     "addSource": "CRM/addSource",
     "getSource": "CRM/getSource",
