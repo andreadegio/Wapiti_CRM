@@ -1,8 +1,8 @@
 <template>
   <v-dialog v-model="dialog" persistent max-width="600px">
     <template v-slot:activator="{ on, attrs }">
-      <v-btn color="primary" dark v-bind="attrs" v-on="on">
-        Aggiungi nota
+      <v-btn color="blue-grey" dark v-bind="attrs" v-on="on" class="ml-2">
+        <i class="far fa-edit"></i> Aggiungi nota
       </v-btn>
     </template>
     <v-card>

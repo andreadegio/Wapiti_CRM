@@ -31,7 +31,7 @@
               <v-text-field
                 outlined
                 v-model="cf"
-                label="Codice Fiscale *"
+                label="Codice Fiscale"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -184,7 +184,7 @@
                 <v-select
                   outlined
                   id="province"
-                  v-model="selectedProvince"
+                  v-model="provincia"
                   @change="updateRegion"
                   :items="province"
                   label="Provincia"
@@ -196,7 +196,7 @@
                   outlined
                   readonly
                   id="regione"
-                  v-model="selectedRegion"
+                  v-model="regione"
                   label="Regione"
                 ></v-text-field>
               </v-col>
@@ -252,8 +252,6 @@ export default {
       note: "",
       originiOptions: [],
       tipologiaOptions: [],
-      selectedProvince: "", // Inizializza con un valore vuoto
-      selectedRegion: "", //Inizializza con un valore vuoto
       province: [
         { text: "Agrigento (AG)", value: "Agrigento (AG)" },
         { text: "Alessandria (AL)", value: "Alessandria (AL)" },
@@ -509,7 +507,7 @@ export default {
         "Viterbo (VT)": "Lazio",
       };
 
-      this.selectedRegion = provinceToRegionMap[this.selectedProvince];
+      this.regione = provinceToRegionMap[this.provincia];
     },
     async addOriginOption() {
       // Aggiungo un origine nella select
@@ -586,8 +584,7 @@ export default {
         if (
           !this.nome ||
           !this.cognome ||
-          (!this.telefono && !this.cellulare) ||
-          !this.cf
+          (!this.telefono && !this.cellulare && !this.email)
         ) {
           this.$alert(
             "Compila i campi obbligatori per Persona Fisica.",
@@ -599,8 +596,8 @@ export default {
       } else if (this.tipoPersona === "PG") {
         if (
           !this.ragioneSociale ||
-          (!this.telefono && !this.cellulare) ||
-          !this.ragioneSociale
+          (!this.telefono && !this.cellulare && !this.email) ||
+          !this.partitaIva
         ) {
           this.$alert(
             "Compila i campi obbligatori per Persona Giuridica.",

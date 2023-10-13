@@ -6,13 +6,10 @@
         <!-- Contenuto principale della pagina -->
         <Stats v-if="gridType === 'default'" />
         <Grid
-          v-if="gridType !== 'default' && gridType !== 'aggiungi_candidature'"
+          v-if="gridType !== 'default' && gridType !== 'new'"
           :gridType="gridType"
         />
-        <AddContact
-          v-if="gridType === 'aggiungi_candidature'"
-          @showgrid="showGrid"
-        />
+        <AddContact v-if="gridType === 'new'" @showgrid="showGrid" />
       </div>
     </div>
   </v-app>

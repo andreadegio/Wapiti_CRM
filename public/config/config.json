@@ -47,7 +47,8 @@
     "newContatto": "CRM/salvaContatto",
     "addSource": "CRM/addSource",
     "getSource": "CRM/getSource",
-    "getTipo": "CRM/getTipo"
+    "getTipo": "CRM/getTipo",
+    "getListaByStep": "CRM/getListaByStep"
   },
   "servizi_broker": "https://servizi.documentale.cloud/AibaJSON2023-test/",
   "servizi_energy": "https://abyenergy.it/servizitest/",

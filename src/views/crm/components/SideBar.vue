@@ -3,14 +3,16 @@
     <div class="toggle_side">
       <button @click="toggleSidebar" class="btn_sidebar">
         <span v-show="sidebarHidden"><i class="fas fa-bars"></i></span>
-        <span v-show="!sidebarHidden"><i class="fas fa-angle-double-left"></i></span>
+        <span v-show="!sidebarHidden"
+          ><i class="fas fa-angle-double-left"></i
+        ></span>
       </button>
     </div>
 
     <!-- Contenuto della sidebar -->
     <CNav vertical class="sidebar">
       <CNavItem>
-        <div class="side_btn" @click="buttonClicked('aggiungi_candidature')">
+        <div class="side_btn" @click="buttonClicked('new')">
           <div
             class="side_btn_ico"
             v-c-tooltip="{
@@ -41,6 +43,23 @@
           >
         </div>
       </CNavItem>
+
+      <CNavItem>
+        <div class="side_btn" @click="buttonClicked('webinar')">
+          <div
+            class="side_btn_ico"
+            v-c-tooltip="{
+              content: 'Mini webinar',
+              placement: 'right',
+            }"
+          >
+            <i class="fas fa-desktop"></i>
+          </div>
+          <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
+            >Mini webinar</span
+          >
+        </div>
+      </CNavItem>
       <CNavItem>
         <div class="side_btn" @click="buttonClicked('solleciti')">
           <div
@@ -50,26 +69,30 @@
               placement: 'right',
             }"
           >
-          <i class="fas fa-phone-volume"></i>
+            <i class="fas fa-phone-volume"></i>
           </div>
           <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
             >Chiamate di cortesia</span
           >
         </div>
       </CNavItem>
+
       <CNavItem>
-        <div class="side_btn" @click="buttonClicked('richiesta_documentazione')">
+        <div
+          class="side_btn"
+          @click="buttonClicked('registrazione_documentazione')"
+        >
           <div
             class="side_btn_ico"
             v-c-tooltip="{
-              content: 'Mini webinar',
+              content: 'Registrazione documentazione',
               placement: 'right',
             }"
           >
-          <i class="fas fa-desktop"></i>
+            <i class="fas fa-file-signature"></i>
           </div>
           <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
-            >Mini webinar</span
+            >Registrazione documenti</span
           >
         </div>
       </CNavItem>
@@ -89,22 +112,7 @@
           >
         </div>
       </CNavItem>
-      <CNavItem>
-        <div class="side_btn" @click="buttonClicked('registrazione_documentazione')">
-          <div
-            class="side_btn_ico"
-            v-c-tooltip="{
-              content: 'Registrazione documentazione',
-              placement: 'right',
-            }"
-          >
-          <i class="fas fa-file-signature"></i>
-          </div>
-          <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
-            >Registrazione documenti</span
-          >
-        </div>
-      </CNavItem>
+
       <CNavItem>
         <div class="side_btn" @click="buttonClicked('attivazione_account')">
           <div
@@ -114,7 +122,7 @@
               placement: 'right',
             }"
           >
-            <i class="far fa-id-badge"></i>
+            <i class="fas fa-user-check"></i>
           </div>
           <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
             >Attivazione account</span
@@ -154,9 +162,9 @@ export default {
     toggleSidebar() {
       this.sidebarHidden = !this.sidebarHidden;
     },
-    buttonClicked(pulsante){
-      this.$emit('showgrid', pulsante)
-    }
+    buttonClicked(pulsante) {
+      this.$emit("showgrid", pulsante);
+    },
   },
 };
 </script>
@@ -168,7 +176,6 @@ export default {
   cursor: pointer;
   padding: 0 0.5rem 0 1rem;
 }
-
 
 .toggle_side {
   text-align: right;
