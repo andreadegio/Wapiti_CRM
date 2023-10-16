@@ -6,45 +6,33 @@
     transition="dialog-bottom-transition"
   >
     <template v-slot:activator="{ on, attrs }">
-      <v-btn color="primary" dark v-bind="attrs" v-on="on">
+      <v-btn color="#1f4b6b" dark v-bind="attrs" v-on="on">
         <i class="fas fa-user-edit"> </i> Lavora contatto
       </v-btn>
     </template>
 
     <v-card>
       <v-container>
-        <v-toolbar dark color="blue darken-1">
+        <v-toolbar dark color="#1f4b6b">
           <v-btn icon dark @click="dialog = false">
             <v-icon>mdi-close</v-icon>
           </v-btn>
-          Lavorazione {{ candidato.candidate }}
+          Lavorazione contatto {{ candidato.candidate }}
           <v-spacer></v-spacer>
           <v-toolbar-items>
-            <v-btn text dark @click="dialog = false"> Salva </v-btn>
+            <v-btn text dark @click="dialog = false"
+              ><i class="fas fa-save fa-2x"></i> &nbsp; Salva
+            </v-btn>
           </v-toolbar-items>
         </v-toolbar>
         <scheda :candidato="candidato"></scheda>
         <v-divider></v-divider>
-        <v-row align-content="center" align="center">
-          <v-col>
-            <v-checkbox
-              v-model="conferma"
-              :label="'Conferma di aver contattato il candidato'"
-            ></v-checkbox>
-          </v-col>
-          <v-col>
-            Contattato in data e ora
-            <strong>{{ new Date().toLocaleString("it-IT") }}</strong>
-          </v-col>
-          <v-col>
-            Operatore <strong>{{ user.Nominativo }}</strong>
-          </v-col>
-        </v-row>
+
         <v-row>
           <v-col cols="12" sm="4" md="4">
             <v-radio-group row v-model="preferenzaIncontro">
               <template v-slot:label>
-                <div>Richiesto incontro commerciale / Mini Demo</div>
+                <div>Richiesto Mini Demo</div>
               </template>
               <v-radio label="Si" value="si"></v-radio>
               <v-radio label="No" value="no" checked></v-radio>
@@ -79,6 +67,26 @@
             </div>
           </v-col>
         </v-row>
+
+        <v-divider></v-divider>
+
+        <v-row align-content="center" align="center">
+          <v-col>
+            <v-checkbox
+              style="font-weight: 600; color: #1f4b6b !important"
+              v-model="conferma"
+              :label="'Conferma di aver contattato il candidato'"
+            ></v-checkbox>
+          </v-col>
+          <v-col>
+            Contattato in data e ora
+            <strong>{{ new Date().toLocaleString("it-IT") }}</strong>
+          </v-col>
+          <v-col>
+            Operatore <strong>{{ user.Nominativo }}</strong>
+          </v-col>
+        </v-row>
+
         <v-divider></v-divider>
         <div class="container">
           <div class="pb-3 font-weight-bold h5">

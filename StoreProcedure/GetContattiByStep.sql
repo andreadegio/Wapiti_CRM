@@ -13,7 +13,15 @@ BEGIN
         a.regione,
         a.mail,
         a.telefono,
-        a.cell
+        a.cell,
+        a.cf,
+        a.piva,
+        a.agenzia,
+        a.rui as numRui,
+        a.via,
+        a.civico,
+        a.cap,
+        a.comune
     FROM
         crm_anagrafica a
     INNER JOIN

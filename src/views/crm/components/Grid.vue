@@ -14,7 +14,7 @@
       pagination
       striped
       :items-per-page-select="{ label: 'Risultati per pagina' }"
-      :noItemsView="{ noItems: ' ' }"
+      :noItemsView="{ noItems: 'Nessun contatto presente' }"
     >
       <template #tipologia="{ item }">
         <td style="text-align: center !important">
@@ -32,14 +32,14 @@
             :itemId="row.item.id"
             :candidato="row.item"
           ></Lavorazione>
-          <note :itemId="row.item.id" :candidato="row.item.candidate"></note>
+          <Note :itemId="row.item.id" :candidato="row.item.candidate"></Note>
           <CButton
             class="mx-2"
             color="danger"
             @click="rejectCandidate(row.item.id)"
             variant="ghost"
-            ><i class="fas fa-user-slash"></i> Rifiuta candidato</CButton
-          >
+            ><i class="fas fa-user-slash"></i> Rifiuta contatto
+          </CButton>
         </div>
       </template>
     </CDataTable>
@@ -68,8 +68,9 @@ export default {
         { key: "state", label: "Stato" },
         { key: "tipologia", label: "PF/PG" },
         { key: "candidate", label: "Candidato" },
-        { key: "type", label: "Tipologia" },
+        { key: "type", label: "RUI" },
         { key: "contact_origin", label: "Fonte" },
+        { key: "provincia", label: "Provincia" },
         { key: "region", label: "Regione" },
         { key: "actions", label: "Azioni" },
       ],
@@ -88,8 +89,9 @@ export default {
         { key: "state", label: "Stato" },
         { key: "tipologia", label: "PF/PG" },
         { key: "candidate", label: "Candidato" },
-        { key: "type", label: "Tipologia" },
+        { key: "type", label: "RUI" },
         { key: "contact_origin", label: "Fonte" },
+        { key: "provincia", label: "Provincia" },
         { key: "region", label: "Regione" },
         { key: "actions", label: "Azioni" },
       ];
@@ -169,11 +171,21 @@ export default {
               candidate: candidato,
               type: item.RUI,
               contact_origin: item.origine,
-              email: item.mail,
+              mail: item.mail,
               region: item.regione,
+              provincia: item.provincia,
               tel: item.telefono,
               cell: item.cell,
               tipologia: item.tipologia,
+              referente: item.referente,
+              cf: item.cf,
+              piva: item.piva,
+              agenzia: item.agenzia,
+              numRui: item.numRui,
+              via: item.via,
+              civico: item.civico,
+              cap: item.cap,
+              comune: item.comune,
             };
           });
         });
