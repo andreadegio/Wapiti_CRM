@@ -1,0 +1,2839 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.967269952776244,
+                    44.21548707049513
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "54011",
+                "WA": "",
+                "PROV": "MS",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Aulla",
+                "PRATICHE": "TRUE",
+                "storeid": 1,
+                "INDIRIZZO": "Via Gandhi, 8",
+                "MAIL": "aulla@abypoint.com",
+                "TELEFONO": "0187421624",
+                "CITTA": "Aulla"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.5494232,
+                    43.0690441
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "06083",
+                "WA": "",
+                "PROV": "PG",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Bastia Umbra",
+                "PRATICHE": "TRUE",
+                "storeid": 2,
+                "INDIRIZZO": "Via del Conservificio, 79",
+                "MAIL": "bastiaumbra@abypoint.com",
+                "TELEFONO": "0758241805",
+                "CITTA": "Bastia Umbra"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.5504878,
+                    43.9822115
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "55023",
+                "WA": "",
+                "PROV": "LU",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Borgo a Mozzano",
+                "PRATICHE": "TRUE",
+                "storeid": 3,
+                "INDIRIZZO": "Via Lodovica, 1",
+                "MAIL": "borgoamozzano@abypoint.com",
+                "TELEFONO": "05831718017",
+                "CITTA": "Borgo a Mozzano"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.1931718,
+                    45.8998183
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "25047",
+                "WA": "",
+                "PROV": "MB",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Boario Terme",
+                "PRATICHE": "TRUE",
+                "storeid": 4,
+                "INDIRIZZO": "Via Angelo Argilla, 2",
+                "MAIL": "boario@abypoint.com",
+                "TELEFONO": "0364793339",
+                "CITTA": "Darfo Boario Terme"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.3022026,
+                    45.95655199999999
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "25043",
+                "WA": "",
+                "PROV": "BS",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Breno",
+                "PRATICHE": "TRUE",
+                "storeid": 5,
+                "INDIRIZZO": "Via Mazzini, 21",
+                "MAIL": "breno@abypoint.com",
+                "TELEFONO": "0364080035",
+                "CITTA": "Breno"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.3030592,
+                    45.5677315
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "20861",
+                "WA": "",
+                "PROV": "MB",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Brugherio",
+                "PRATICHE": "TRUE",
+                "storeid": 6,
+                "INDIRIZZO": "Via Filippo Corridoni, 5",
+                "MAIL": "brugherio@abypoint.com",
+                "TELEFONO": "0395783892",
+                "CITTA": "Brugherio"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.1332507,
+                    43.8028939
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "50013",
+                "WA": "",
+                "PROV": "FI",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Campi Bisenzio",
+                "PRATICHE": "TRUE",
+                "storeid": 7,
+                "INDIRIZZO": "Via della Crescia, 105",
+                "MAIL": "campibisenzio@abypoint.com",
+                "TELEFONO": "0550461094",
+                "CITTA": "Campi Bisenzio"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.4082518,
+                    44.1097568
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "55032",
+                "WA": "",
+                "PROV": "LU",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Castelnuovo Garfagnana",
+                "PRATICHE": "TRUE",
+                "storeid": 8,
+                "INDIRIZZO": "Via Garibaldi, 24",
+                "MAIL": "castelnuovo@abypoint.com",
+                "TELEFONO": "05831748013",
+                "CITTA": "Castelnuovo Garfagnana"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.399224,
+                    43.6284117
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "60015",
+                "WA": "",
+                "PROV": "AN",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Falconara Marittima",
+                "PRATICHE": "TRUE",
+                "storeid": 9,
+                "INDIRIZZO": "Via Nino Bixio, 80",
+                "MAIL": "falconara@abypoint.com",
+                "TELEFONO": "0719728185",
+                "CITTA": "Falconara Marittima"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.06473,
+                    44.8654355
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "43036",
+                "WA": "",
+                "PROV": "PR",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Fidenza",
+                "PRATICHE": "TRUE",
+                "storeid": 10,
+                "INDIRIZZO": "Via Berenini, 111",
+                "MAIL": "fidenza@abypoint.com",
+                "TELEFONO": "0524758007",
+                "CITTA": "Fidenza"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.7027059,
+                    42.9581875
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "06034",
+                "WA": "",
+                "PROV": "PG",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Foligno",
+                "PRATICHE": "TRUE",
+                "storeid": 11,
+                "INDIRIZZO": "Via XX Settembre, 76",
+                "MAIL": "foligno@abypoint.com",
+                "TELEFONO": "0742718731",
+                "CITTA": "Foligno"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.5994277,
+                    41.2531778
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "04023",
+                "WA": "",
+                "PROV": "LT",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Formia",
+                "PRATICHE": "TRUE",
+                "storeid": 12,
+                "INDIRIZZO": "Via Vitruvio, 398",
+                "MAIL": "formia@abypoint.com",
+                "TELEFONO": "0771900321",
+                "CITTA": "Formia"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.851811999999999,
+                    44.1110207
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "19121",
+                "WA": "",
+                "PROV": "SP",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di La Spezia viale San Bartolomeo",
+                "PRATICHE": "TRUE",
+                "storeid": 13,
+                "INDIRIZZO": "Viale San Bartolomeo, 282",
+                "MAIL": "laspeziasb@abypoint.com",
+                "TELEFONO": "01871788069",
+                "CITTA": "La Spezia"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.102756,
+                    45.828731
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "24062",
+                "WA": "",
+                "PROV": "BG",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Costa Volpino",
+                "PRATICHE": "TRUE",
+                "storeid": 14,
+                "INDIRIZZO": "Via Nazionale, 192",
+                "MAIL": "lagodiseo@abypoint.com",
+                "TELEFONO": "0350510037",
+                "CITTA": "Costa Volpino"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.3155905,
+                    43.5552141
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "57121",
+                "WA": "",
+                "PROV": "LI",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Livorno",
+                "PRATICHE": "TRUE",
+                "storeid": 15,
+                "INDIRIZZO": "Via Garibaldi, 83",
+                "MAIL": "livorno@abypoint.com",
+                "TELEFONO": "0586883796",
+                "CITTA": "Livorno"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.5203615,
+                    43.841149
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "55100",
+                "WA": "",
+                "PROV": "LU",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Lucca via Ingrillini",
+                "PRATICHE": "TRUE",
+                "storeid": 16,
+                "INDIRIZZO": "Via Mario Ingrillini, 9",
+                "MAIL": "luccaingrillini@abypoint.com",
+                "TELEFONO": "0583493884",
+                "CITTA": "Lucca"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.4806477,
+                    43.8456021
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "55100",
+                "WA": "",
+                "PROV": "LU",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Lucca viale Puccini",
+                "PRATICHE": "TRUE",
+                "storeid": 17,
+                "INDIRIZZO": "Viale Giacomo Puccini, 902",
+                "MAIL": "lucca@abypoint.com",
+                "TELEFONO": "0583050439",
+                "CITTA": "Lucca"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.0438482,
+                    44.0385688
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "54033",
+                "WA": "",
+                "PROV": "MS",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Marina di Carrara",
+                "PRATICHE": "TRUE",
+                "storeid": 18,
+                "INDIRIZZO": "VIA Nazario Sauro, 64",
+                "MAIL": "marinadicarrara@abypoint.com",
+                "TELEFONO": "05851988000",
+                "CITTA": "Carrara"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.1140223,
+                    44.0209153
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "54100",
+                "WA": "",
+                "PROV": "MS",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Massa",
+                "PRATICHE": "TRUE",
+                "storeid": 19,
+                "INDIRIZZO": "Via Massa Avenza, 22",
+                "MAIL": "massa@abypoint.com",
+                "TELEFONO": "0585793501",
+                "CITTA": "Massa"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.7495201,
+                    43.8838262
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "51010",
+                "WA": "",
+                "PROV": "PT",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Massa e Cozzile",
+                "PRATICHE": "TRUE",
+                "storeid": 20,
+                "INDIRIZZO": "Via I Maggio, 307",
+                "MAIL": "massaecozzile@abypoint.com",
+                "TELEFONO": "0572048042",
+                "CITTA": "Massa e Cozzile"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.2843532,
+                    38.0783003
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "90046",
+                "WA": "",
+                "PROV": "PA",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Monreale",
+                "PRATICHE": "TRUE",
+                "storeid": 21,
+                "INDIRIZZO": "Via Venero, 141",
+                "MAIL": "monreale@abypoint.com",
+                "TELEFONO": "0918486318",
+                "CITTA": "Monreale"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.1471087,
+                    39.25266920000001
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "09042",
+                "WA": "",
+                "PROV": "CA",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Monserrato",
+                "PRATICHE": "TRUE",
+                "storeid": 22,
+                "INDIRIZZO": "Via Zuddas, 164",
+                "MAIL": "monserrato@abypoint.com",
+                "TELEFONO": "0709190824",
+                "CITTA": "Monserrato"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.8149663,
+                    43.8683381
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "51015",
+                "WA": "",
+                "PROV": "PT",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Monsummano Terme",
+                "PRATICHE": "TRUE",
+                "storeid": 23,
+                "INDIRIZZO": "Via Giacomo Matteotti, 96",
+                "MAIL": "monsummano@abypoint.com",
+                "TELEFONO": "0572048009",
+                "CITTA": "Monsummano Terme"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.7732345,
+                    43.8774215
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "51016",
+                "WA": "",
+                "PROV": "PT",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Montecatini Terme",
+                "PRATICHE": "TRUE",
+                "storeid": 24,
+                "INDIRIZZO": "Via del Salsero, 99",
+                "MAIL": "montecatini@abypoint.com",
+                "TELEFONO": "0572773952",
+                "CITTA": "Montecatini Terme"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.501356,
+                    43.4922634
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "60027",
+                "WA": "",
+                "PROV": "AN",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Osimo",
+                "PRATICHE": "TRUE",
+                "storeid": 25,
+                "INDIRIZZO": "Via Don Sturzo, 73",
+                "MAIL": "osimo@abypoint.com",
+                "TELEFONO": "0714606220",
+                "CITTA": "Osimo"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.6876061,
+                    43.88010269999999
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "51017",
+                "WA": "",
+                "PROV": "PT",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Pescia",
+                "PRATICHE": "TRUE",
+                "storeid": 26,
+                "INDIRIZZO": "Via degli Alberghi, 54",
+                "MAIL": "pescia@abypoint.com",
+                "TELEFONO": "0572453433",
+                "CITTA": "Pescia"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    16.31412,
+                    39.1990136
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "87050",
+                "WA": "",
+                "PROV": "CS",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Piano Lago",
+                "PRATICHE": "TRUE",
+                "storeid": 27,
+                "INDIRIZZO": "Strada Statale, 19/10",
+                "MAIL": "pianolago@abypoint.com",
+                "TELEFONO": "09841758097",
+                "CITTA": "Mangone"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.4061184,
+                    43.7092445
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "56125",
+                "WA": "",
+                "PROV": "PI",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Pisa",
+                "PRATICHE": "TRUE",
+                "storeid": 28,
+                "INDIRIZZO": "Via Carlo Cattaneo, 6",
+                "MAIL": "pisacattaneo@abypoint.com",
+                "TELEFONO": "0508061503",
+                "CITTA": "Pisa"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.900694,
+                    43.9328925
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "51100",
+                "WA": "",
+                "PROV": "PT",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Pistoia",
+                "PRATICHE": "TRUE",
+                "storeid": 29,
+                "INDIRIZZO": "Viale Adua, 26",
+                "MAIL": "pistoia@abypoint.com",
+                "TELEFONO": "0573358187",
+                "CITTA": "Pistoia"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.877140599999999,
+                    44.3735968
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "54027",
+                "WA": "",
+                "PROV": "MS",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Pontremoli",
+                "PRATICHE": "TRUE",
+                "storeid": 30,
+                "INDIRIZZO": "Via Sforza, 45",
+                "MAIL": "altalunigiana@abypoint.com",
+                "TELEFONO": "0187498032",
+                "CITTA": "Pontremoli"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.1255989,
+                    43.8680913
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "59100",
+                "WA": "",
+                "PROV": "PO",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Prato",
+                "PRATICHE": "TRUE",
+                "storeid": 31,
+                "INDIRIZZO": "Via Firenze, 74",
+                "MAIL": "prato@abypoint.com",
+                "TELEFONO": "0574070293",
+                "CITTA": "Prato"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.982561,
+                    43.851603
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "51039",
+                "WA": "",
+                "PROV": "PT",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Quarrata",
+                "PRATICHE": "TRUE",
+                "storeid": 32,
+                "INDIRIZZO": "Via Cimabue, 5/7",
+                "MAIL": "quarrata@abypoint.com",
+                "TELEFONO": "0573566077",
+                "CITTA": "Quarrata"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.1877316,
+                    39.24634280000001
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "09045",
+                "WA": "",
+                "PROV": "CA",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Quartu Sant'Elena",
+                "PRATICHE": "TRUE",
+                "storeid": 33,
+                "INDIRIZZO": "Via Sicilia, 86",
+                "MAIL": "quartu@abypoint.com",
+                "TELEFONO": "0707568238",
+                "CITTA": "Quartu Sant'Elena"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.5367427,
+                    43.5573647
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "52027",
+                "WA": "",
+                "PROV": "AR",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di San Giovanni Valdarno",
+                "PRATICHE": "TRUE",
+                "storeid": 34,
+                "INDIRIZZO": "Viale Spartaco Lavagnini, 103",
+                "MAIL": "valdarno@abypoint.com",
+                "TELEFONO": "055940267",
+                "CITTA": "San Giovanni Valdarno"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.8637116,
+                    43.6921461
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "56028",
+                "WA": "",
+                "PROV": "PI",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di San Miniato",
+                "PRATICHE": "TRUE",
+                "storeid": 35,
+                "INDIRIZZO": "Via Tosco Romagnola Est 855",
+                "MAIL": "sanminiato@abypoint.com",
+                "TELEFONO": "0571401393",
+                "CITTA": "San Miniato"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.9904409,
+                    44.095042
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "54035",
+                "WA": "",
+                "PROV": "MS",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Sarzana San Lazzaro",
+                "PRATICHE": "TRUE",
+                "storeid": 36,
+                "INDIRIZZO": "Via Aurelia, 23",
+                "MAIL": "sarzana@abypoint.com",
+                "TELEFONO": "0187620713",
+                "CITTA": "Fosdinovo"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.1232651,
+                    45.5786193
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "20030",
+                "WA": "",
+                "PROV": "MI",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Senago",
+                "PRATICHE": "TRUE",
+                "storeid": 37,
+                "INDIRIZZO": "Via San Bernardo, 2",
+                "MAIL": "senago@abypoint.com",
+                "TELEFONO": "0256568354",
+                "CITTA": "Senago"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.410898099999999,
+                    44.2722708
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "16039",
+                "WA": "",
+                "PROV": "GE",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Sestri Levante",
+                "PRATICHE": "TRUE",
+                "storeid": 38,
+                "INDIRIZZO": "Via Nazionale, 371",
+                "MAIL": "sestrilevante@abypoint.com",
+                "TELEFONO": "01851780004",
+                "CITTA": "Sestri Levante"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.1524063,
+                    45.4896928
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "03038",
+                "WA": "",
+                "PROV": "VE",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Spinea",
+                "PRATICHE": "TRUE",
+                "storeid": 39,
+                "INDIRIZZO": "Via Viareggio, 36",
+                "MAIL": "spinea@abypoint.com",
+                "TELEFONO": "0410970185",
+                "CITTA": "Spinea"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.6464068,
+                    45.0593719
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "10141",
+                "WA": "",
+                "PROV": "TO",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Torino corso Racconigi",
+                "PRATICHE": "TRUE",
+                "storeid": 40,
+                "INDIRIZZO": "Corso Racconigi, 169",
+                "MAIL": "racconigi@abypoint.com",
+                "TELEFONO": "0112077385",
+                "CITTA": "Torino"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.6919621,
+                    45.1076591
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "10148",
+                "WA": "",
+                "PROV": "TO",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Torino via Reiss Romoli",
+                "PRATICHE": "TRUE",
+                "storeid": 41,
+                "INDIRIZZO": "Via Guglielmo Reiss Romoli, 48",
+                "MAIL": "reissromoli@abypoint.com",
+                "TELEFONO": "0113740086",
+                "CITTA": "Torino"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.7676481,
+                    45.1375617
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "10036",
+                "WA": "",
+                "PROV": "TO",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Settimo Torinese",
+                "PRATICHE": "TRUE",
+                "storeid": 42,
+                "INDIRIZZO": "Via Cavour, 25",
+                "MAIL": "settimotorinese@abypoint.com",
+                "TELEFONO": "0110240220",
+                "CITTA": "Settimo Torinese"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.2278551,
+                    43.9010259
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "55041",
+                "WA": "",
+                "PROV": "LU",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point della Versilia",
+                "PRATICHE": "TRUE",
+                "storeid": 43,
+                "INDIRIZZO": "Via Trieste, 126",
+                "MAIL": "versilia@abypoint.com",
+                "TELEFONO": "0584617141",
+                "CITTA": "Camaiore"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.9489596,
+                    44.2932001
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "54028",
+                "WA": "",
+                "PROV": "MS",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Villafranca Lunigiana",
+                "PRATICHE": "TRUE",
+                "storeid": 44,
+                "INDIRIZZO": "Via Malaspina, 31",
+                "MAIL": "altalunigiana@abypoint.com",
+                "TELEFONO": "0187498032",
+                "CITTA": "Villafranca Lunigiana"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.2832151,
+                    44.5145402
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "BO",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Ditta Dal Monte Massimo",
+                "PRATICHE": "TRUE",
+                "storeid": 45,
+                "INDIRIZZO": "Via Emilia, 194",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Bologna"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.5091942,
+                    41.8768245
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "RM",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Concordia Assicurazioni Sas",
+                "PRATICHE": "TRUE",
+                "storeid": 46,
+                "INDIRIZZO": "Via Concordia, 40",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Roma"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.7586581,
+                    43.2589006
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "FM",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Scuola Guida Car di Onori A.&.C. Snc",
+                "PRATICHE": "TRUE",
+                "storeid": 47,
+                "INDIRIZZO": "Piazza Garibaldi, 56",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Porto Sant'Elpidio"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.9042199,
+                    44.6364042
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "MO",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Ditta Di Giammarco Giulio",
+                "PRATICHE": "TRUE",
+                "storeid": 48,
+                "INDIRIZZO": "Via Giardini, 456",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Modena"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.656689,
+                    45.0057175
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "TO",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Ditta Autoscuola Germana di Diomante Maria",
+                "PRATICHE": "TRUE",
+                "storeid": 49,
+                "INDIRIZZO": "Via Torino, 6",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Nichelino"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.9490789,
+                    42.45209690000001
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "PE",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Ditta Di Quinzio Luca",
+                "PRATICHE": "TRUE",
+                "storeid": 50,
+                "INDIRIZZO": "Contrada Santa Vittoria, 22",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Penne"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    14.2256963,
+                    42.4557501
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "PE",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Ditta Faccilongo Pasquale",
+                "PRATICHE": "TRUE",
+                "storeid": 51,
+                "INDIRIZZO": "Via Benedetto Croce, 269",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Pescara"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.6411302,
+                    44.7092732
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "RE",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Ditta Toscano Francesco",
+                "PRATICHE": "TRUE",
+                "storeid": 52,
+                "INDIRIZZO": "Via Cadoppi, 4",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Reggio Emilia"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.0038112,
+                    45.56862530000001
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "BS",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Ditta Infozeta di Zinna Fabrizio",
+                "PRATICHE": "TRUE",
+                "storeid": 53,
+                "INDIRIZZO": "Via San Rocco, 21",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Rovato"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.5200214,
+                    44.9271511
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "MN",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Ditta Profit Group di Cordioli Patrizia",
+                "PRATICHE": "TRUE",
+                "storeid": 54,
+                "INDIRIZZO": "Via Vicolo San Filippo, 2",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Viadana"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.114252,
+                    44.9985955
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "MN",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Ditta Semeghini Riccardo",
+                "PRATICHE": "TRUE",
+                "storeid": 55,
+                "INDIRIZZO": "Villa Poma piazza Mazzalli, 22",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Borgo Mantovano"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.3423403,
+                    46.4289498
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "BZ",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Assicura-Ti di Makkaoui Mohamed",
+                "PRATICHE": "TRUE",
+                "storeid": 56,
+                "INDIRIZZO": "Via Kennedy, 52",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Laives - Leifers"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.9353255,
+                    44.4029156
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "GE",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Margenova Consulting Srl",
+                "PRATICHE": "TRUE",
+                "storeid": 57,
+                "INDIRIZZO": "Viale Fieschi, 136",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Genova"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.6774361,
+                    45.05671479999999
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "PC",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Mulazzi Assicurazioni Sas",
+                "PRATICHE": "TRUE",
+                "storeid": 58,
+                "INDIRIZZO": "Via Anguissola, 6",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Piacenza"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.7242629,
+                    43.9652627
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "RN",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Scavolini Intermediazioni Assicurative Sas",
+                "PRATICHE": "TRUE",
+                "storeid": 59,
+                "INDIRIZZO": "Via Toscana, 3",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Cattolica"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    14.2185436,
+                    42.4621467
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "PE",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Sapa Servizi Srls",
+                "PRATICHE": "TRUE",
+                "storeid": 60,
+                "INDIRIZZO": "Via Alfonso Di Vestea, 37",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Pescara"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.8698141,
+                    42.9490811
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "AP",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Sapa Servizi Srls",
+                "PRATICHE": "TRUE",
+                "storeid": 61,
+                "INDIRIZZO": "Via Manara, 134",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "San Benedetto del Tronto"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.7208158,
+                    42.8634879
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "AP",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Ditta Capriotti Filippo",
+                "PRATICHE": "TRUE",
+                "storeid": 62,
+                "INDIRIZZO": "Via Salaria, 56",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Castel Di Lama"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.0775967,
+                    44.8893766
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "MO",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Furlani Srl",
+                "PRATICHE": "TRUE",
+                "storeid": 63,
+                "INDIRIZZO": "Via Maestri Del Lavoro, 16",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Mirandola"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.6535434,
+                    43.99442000000001
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "RN",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Assiamica di Morri Milena",
+                "PRATICHE": "TRUE",
+                "storeid": 64,
+                "INDIRIZZO": "Viale Lazio, 25",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Riccione"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.2328278,
+                    43.5107058
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "AN",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Euro Ass di Cola S. & C. Sas",
+                "PRATICHE": "TRUE",
+                "storeid": 65,
+                "INDIRIZZO": "Piazza Anna Ciabotti, 4",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Jesi"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.2105361,
+                    44.4138893
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "RA",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Rassicura di Nicola Grandi",
+                "PRATICHE": "TRUE",
+                "storeid": 66,
+                "INDIRIZZO": "Via Circonvallazione Piazza D'armi, 74",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Ravenna"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.2104901,
+                    44.0528213
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "SV",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Ditta Maccarini Giancarlo",
+                "PRATICHE": "TRUE",
+                "storeid": 67,
+                "INDIRIZZO": "Via del Roggetto, 57",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Albenga"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.798332,
+                    45.075836
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "RO",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Assistudio Servizi Assicurativi Sas di Sigolo Guido & C.",
+                "PRATICHE": "TRUE",
+                "storeid": 68,
+                "INDIRIZZO": "Via della Costituzione, 4",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Rovigo"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.7245893,
+                    44.5496995
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "CN",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Canavese Assicurazioni Sas",
+                "PRATICHE": "TRUE",
+                "storeid": 69,
+                "INDIRIZZO": "Via Cavour, 1",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Fossano"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.4869839,
+                    45.459594
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "BS",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "New Agency Insurance Srls",
+                "PRATICHE": "TRUE",
+                "storeid": 70,
+                "INDIRIZZO": "Via Cesare Battisti, 4",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Lonato"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.7868158,
+                    44.7638026
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "AL",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Assiservizi Assicurazioni Srls",
+                "PRATICHE": "",
+                "storeid": 71,
+                "INDIRIZZO": "Via Giuseppe Mazzini, 1",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Novi Ligure"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.6398954,
+                    44.6380609
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "AL",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Ditta Balduzzi Paola",
+                "PRATICHE": "",
+                "storeid": 72,
+                "INDIRIZZO": "Via Dania, 1",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Ovada"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.0259361,
+                    44.6927642
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "CN",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Alba Intermediazioni Assicurative Sas",
+                "PRATICHE": "",
+                "storeid": 73,
+                "INDIRIZZO": "Corso Piave, 55",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Alba"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.6140701,
+                    44.9091544
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "AL",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Centro Studi E Servizi Srl",
+                "PRATICHE": "",
+                "storeid": 74,
+                "INDIRIZZO": "Piazza Garibaldi, 21",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Alessandria"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.845369200000002,
+                    45.3232229
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "MI",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Ditta Favara Consulting Di Favara Michael",
+                "PRATICHE": "",
+                "storeid": 75,
+                "INDIRIZZO": "Corso Novara, 71",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Vigevano"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.295021799999999,
+                    45.3927209
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "MI",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Ditta Meazzo Daniele",
+                "PRATICHE": "",
+                "storeid": 76,
+                "INDIRIZZO": "Via Brigate Partigiane, 22",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "San Giuliano Milanese"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.1658566,
+                    45.6307779
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "MB",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Ditta Assipoint Di Hebelea Cristina",
+                "PRATICHE": "",
+                "storeid": 77,
+                "INDIRIZZO": "Via Garibaldi, 146",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Cesano Maderno"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.118205399999999,
+                    45.4198962
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "MI",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Agenzia Allrisk S.R.L.S.",
+                "PRATICHE": "",
+                "storeid": 78,
+                "INDIRIZZO": "Via Emilia, 3B",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Buccinasco"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.2066423,
+                    45.65731299999999
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "MB",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Ditta Vasile Assicurazioni Di Vasile Steluta",
+                "PRATICHE": "",
+                "storeid": 79,
+                "INDIRIZZO": "Cesare Correnti, 50",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Seregno"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.6244232,
+                    41.9991106
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "PE",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Fonte Nuova Assicurazioni Srls",
+                "PRATICHE": "",
+                "storeid": 80,
+                "INDIRIZZO": "Via Cesare Battisti, 4",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Fonte Nuova"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.4400663,
+                    43.7276403
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "SA",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Broker Servizi S.R.L.S.",
+                "PRATICHE": "",
+                "storeid": 81,
+                "INDIRIZZO": "Corso Roma, 131",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Lunano"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.8708401,
+                    45.9093889
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "TN",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Ditta Guella Alessandra",
+                "PRATICHE": "",
+                "storeid": 82,
+                "INDIRIZZO": "Via Cima Tofino, 2",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Arco Di Trento"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.3862527,
+                    45.6332533
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "TV",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Ditta Geromel Gianfranco",
+                "PRATICHE": "",
+                "storeid": 83,
+                "INDIRIZZO": "Via San Rocco, 127G",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Roncade"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.213214146663862,
+                    42.43787107481569
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "GR",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "G. & G. Assicurazioni Sas Di Bianciardi Gino & C.",
+                "PRATICHE": "",
+                "storeid": 84,
+                "INDIRIZZO": "Via Vincenzo Gioberti, 9",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Orbetello"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.0034619,
+                    44.4801489
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "MO",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Ditta Cupertino Michele Marco",
+                "PRATICHE": "",
+                "storeid": 85,
+                "INDIRIZZO": "Via Della Pace, 360",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Vignola"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.5873844,
+                    44.3971479
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "BO",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Assi-Ca Di Ciccone Annalisa",
+                "PRATICHE": "",
+                "storeid": 86,
+                "INDIRIZZO": "Via Don Minzoni, 3/5",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Castel San Pietro Terme"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.6219937,
+                    42.0072309
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "AQ",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Ditta Panacci Assunta",
+                "PRATICHE": "",
+                "storeid": 87,
+                "INDIRIZZO": "Via Dei Fanti, 17",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "San Benedetto Dei Marsi"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.4345994,
+                    43.3918141
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "LI",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "M&G Assicurazioni Di Mazza Fabiana",
+                "PRATICHE": "",
+                "storeid": 88,
+                "INDIRIZZO": "Via E. Berliguer, 2 Frazione Rosignano Solvay",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Rosignano Marittimo"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    14.2889058,
+                    42.3539485
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "CH",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Ditta Cicchitti Assicura",
+                "PRATICHE": "",
+                "storeid": 89,
+                "INDIRIZZO": "Via San Giacomo, 77",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Miglianico"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.4365437,
+                    43.7726204
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "FI",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Ditta Marrucci Matteo",
+                "PRATICHE": "",
+                "storeid": 90,
+                "INDIRIZZO": "Via Znojmo, 45/47",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Pontassieve"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.0549276,
+                    44.2151173
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "FC",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Mengozzi Fabrizio & Morigi Marco Snc",
+                "PRATICHE": "",
+                "storeid": 91,
+                "INDIRIZZO": "Piazza Falcone E Borsellino, 12",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Forl\u00ec"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.2906643,
+                    44.7835863
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "PR",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Agenzia Di Assicurazioni Di Ferrari Simona E Andrea Sas",
+                "PRATICHE": "",
+                "storeid": 92,
+                "INDIRIZZO": "Via La Spezia, 193/A",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Parma"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.1125014,
+                    45.5520705
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "BS",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "D.F.L. Snc Di Durini Massimiliano Ferrari Sergio Leviani Stefano",
+                "PRATICHE": "",
+                "storeid": 93,
+                "INDIRIZZO": "Via Padana Superiore, 121",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Castegnato"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.2969398,
+                    45.9865825
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "TV",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Arnosti Elvio S.A.S.",
+                "PRATICHE": "",
+                "storeid": 94,
+                "INDIRIZZO": "Galleria IV Novembre, 4",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Vittorio Veneto"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.0441607,
+                    41.4088122
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "LT",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Co.Ri.S. Di Alessandra Baldoni",
+                "PRATICHE": "",
+                "storeid": 95,
+                "INDIRIZZO": "Viale Italia, 3/B",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Pontinia"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.4837305,
+                    45.7118445
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": null,
+                "WA": "",
+                "PROV": "TV",
+                "ENERGY": "",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "",
+                "DESCRIZIONE": "Ditta Istudor Alina",
+                "PRATICHE": "",
+                "storeid": 96,
+                "INDIRIZZO": "Via Borgo Marcea, 19",
+                "MAIL": "",
+                "TELEFONO": null,
+                "CITTA": "Salgareda"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.4368283,
+                    43.0909828
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "06135",
+                "WA": "",
+                "PROV": "PG",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Ponte San Giovanni",
+                "PRATICHE": "TRUE",
+                "storeid": 97,
+                "INDIRIZZO": "Via Manzoni - fraz. Ponte San Giovanni, 130/132",
+                "MAIL": "pontesangiovanni@abypoint.com",
+                "TELEFONO": "0758241820",
+                "CITTA": "Ponte San Giovani"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.7537978,
+                    43.2143111
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "53048",
+                "WA": "",
+                "PROV": "SI",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPoint",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Aby Point di Sinalunga",
+                "PRATICHE": "TRUE",
+                "storeid": 98,
+                "INDIRIZZO": "Via Trento, 90",
+                "MAIL": "sinalunga@abypoint.com",
+                "TELEFONO": "05771697646",
+                "CITTA": "Sinalunga"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.47541898,
+                    45.2814481
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "13012",
+                "WA": "",
+                "PROV": "VC",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Ditta Tosini Cinzia",
+                "PRATICHE": "TRUE",
+                "storeid": 99,
+                "INDIRIZZO": "Via primo maggio, 4",
+                "MAIL": "",
+                "TELEFONO": "",
+                "CITTA": "Prarolo"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.6689783,
+                    45.0129465
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "46030",
+                "WA": "",
+                "PROV": "MN",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Ditta Lusetti Enrica",
+                "PRATICHE": "TRUE",
+                "storeid": 100,
+                "INDIRIZZO": "Via Magistrello, 33",
+                "MAIL": "",
+                "TELEFONO": "",
+                "CITTA": "Viadana"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.3991285,
+                    45.845624
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "23900",
+                "WA": "",
+                "PROV": "LC",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Kara Services di Karamoko Abdramane Ruggero",
+                "PRATICHE": "TRUE",
+                "storeid": 101,
+                "INDIRIZZO": "Corso Martiri della liberazione, 161B",
+                "MAIL": "",
+                "TELEFONO": "",
+                "CITTA": "Lecco"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.4042104,
+                    43.5269024
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "60020",
+                "WA": "",
+                "PROV": "AN",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Essebi Cconsulenza Snc di Sampaolesi M. & C",
+                "PRATICHE": "TRUE",
+                "storeid": 102,
+                "INDIRIZZO": "Via San Giovanni,34",
+                "MAIL": "",
+                "TELEFONO": "",
+                "CITTA": "Polverigi"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.3547830,
+                    44.8898599
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "43056",
+                "WA": "",
+                "PROV": "PR",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Ditta Rizzoli Andrea",
+                "PRATICHE": "TRUE",
+                "storeid": 103,
+                "INDIRIZZO": "Via Asolana, 42",
+                "MAIL": "",
+                "TELEFONO": "",
+                "CITTA": "Torrile"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.0850077,
+                    45.6286549
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "25040",
+                "WA": "",
+                "PROV": "BS",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Carrozzeria Bivio Srl",
+                "PRATICHE": "TRUE",
+                "storeid": 104,
+                "INDIRIZZO": "Via Fornaci, 1",
+                "MAIL": "",
+                "TELEFONO": "",
+                "CITTA": "Monticelli Brusati"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.7400170,
+                    45.2226797
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "35043",
+                "WA": "",
+                "PROV": "PD",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Ditta Tamiazzo Daniele",
+                "PRATICHE": "TRUE",
+                "storeid": 105,
+                "INDIRIZZO": "Via G. Guareschi, 12D",
+                "MAIL": "",
+                "TELEFONO": "",
+                "CITTA": "Monselice"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.9553139,
+                    43.0002450
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "53043",
+                "WA": "",
+                "PROV": "SI",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Ditta Puliatti Tiziano Vincenzo",
+                "PRATICHE": "TRUE",
+                "storeid": 106,
+                "INDIRIZZO": "Via Oslavia, 7",
+                "MAIL": "",
+                "TELEFONO": "",
+                "CITTA": "Chiusi"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.3552734,
+                    44.4376183
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "40065",
+                "WA": "",
+                "PROV": "BO",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Ghini Auto Srl",
+                "PRATICHE": "TRUE",
+                "storeid": 107,
+                "INDIRIZZO": "Via A. Costa, 124/3",
+                "MAIL": "",
+                "TELEFONO": "",
+                "CITTA": "Rastignano Pianoro"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.6208481,
+                    45.6194305
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "30027",
+                "WA": "",
+                "PROV": "VE",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Ditta Zamuner Dausto",
+                "PRATICHE": "TRUE",
+                "storeid": 108,
+                "INDIRIZZO": "Via Ponte di Ramo, 8",
+                "MAIL": "",
+                "TELEFONO": "",
+                "CITTA": "San Donà di Piave"
+            }
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.4102659,
+                    45.8377341
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "CELL": "",
+                "CAP": "23900",
+                "WA": "",
+                "PROV": "LC",
+                "ENERGY": "TRUE",
+                "TIPOLOGIA DI RAPPORTO": "AbyPartner",
+                "ASSICURAZIONI": "TRUE",
+                "DESCRIZIONE": "Ditta Galli Simone",
+                "PRATICHE": "TRUE",
+                "storeid": 109,
+                "INDIRIZZO": "Corso E. Filiberto, 16/A ",
+                "MAIL": "",
+                "TELEFONO": "",
+                "CITTA": "Lecco"
+            }
+        }
+    ]
+}
