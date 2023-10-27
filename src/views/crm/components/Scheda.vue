@@ -24,6 +24,7 @@
           </v-tooltip>
         </p>
       </v-subheader>
+
       <v-row
         class="mt-2"
         style="background-color: #b2dfdb; border-radius: 10px"
@@ -68,7 +69,7 @@
         <v-col>
           <v-list-item>
             <v-list-item-content>
-              <v-list-item-title>Tipo</v-list-item-title>
+              <v-list-item-title>Tipologia</v-list-item-title>
 
               <v-list-item-subtitle v-if="candidato.tipologia === 'PF'"
                 ><i class="far fa-user"></i>

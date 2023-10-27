@@ -11,35 +11,8 @@
       </v-card-title>
       <v-card-text>
         <v-container>
-          <VueEditor v-model="nota"></VueEditor>
+          <v-textarea rows="4" outlined v-model="nota"></v-textarea>
         </v-container>
-        <v-checkbox
-          v-model="riprogrammaCall"
-          label="Programma nuovo giorno per contattare il candidato"
-        >
-        </v-checkbox>
-        <v-row>
-          <v-col cols="12" sm="6" md="6">
-            <div v-if="riprogrammaCall">
-              <v-date-picker
-                v-model="dataIncontro"
-                no-title
-                locale="it-it"
-                format="dd/MM/yyyy"
-              ></v-date-picker>
-            </div>
-          </v-col>
-          <v-col cols="12" sm="6" md="6">
-            <div v-if="riprogrammaCall">
-              <v-text-field
-                v-model="oraIncontro"
-                label="Orario appuntamento"
-                prepend-inner-icon="mdi-clock-time-four-outline"
-                outlined
-              ></v-text-field>
-            </div>
-          </v-col>
-        </v-row>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -53,12 +26,9 @@
 </template>
 
 <script>
-import { VueEditor } from "vue2-editor";
 export default {
   name: "Note",
-  components: {
-    VueEditor,
-  },
+
   props: {
     itemId: {
       type: Number,

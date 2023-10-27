@@ -1,161 +1,303 @@
 <template>
-  <v-dialog
-    v-model="dialog"
-    fullscreen
-    hide-overlay
-    transition="dialog-bottom-transition"
-  >
-    <template v-slot:activator="{ on, attrs }">
-      <v-btn color="#1f4b6b" dark v-bind="attrs" v-on="on">
-        <i class="fas fa-user-edit"> </i> Lavora contatto
-      </v-btn>
-    </template>
-
-    <v-card>
-      <v-container>
-        <v-toolbar dark color="#1f4b6b">
-          <v-btn icon dark @click="dialog = false">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-          Lavorazione: {{ candidato.candidate }}
-          <v-spacer></v-spacer>
-          <v-toolbar-items>
-            <v-btn text dark @click="dialog = false"
-              ><i class="fas fa-save fa-2x"></i> &nbsp; Salva
-            </v-btn>
-          </v-toolbar-items>
-        </v-toolbar>
-        <scheda :candidato="candidato"></scheda>
-        <v-divider></v-divider>
-
-        <section>
-          <v-row>
-            <v-col cols="12" sm="4" md="4">
-              <v-checkbox
-                style="font-weight: 600; color: #1f4b6b !important"
-                v-model="richiama"
-                :label="'Riprogramma telefonata'"
-              ></v-checkbox>
-            </v-col>
-            <v-col cols="12" sm="4" md="4">
-              <div v-if="richiama">
-                Giorno fissato per la chiamata
-                <v-date-picker
-                  v-model="dataChiamata"
-                  no-title
-                  locale="it-it"
-                  format="dd/MM/yyyy"
-                ></v-date-picker>
-              </div>
-            </v-col>
-            <v-col cols="12" sm="4" md="4">
-              <div v-if="richiama">
-                <v-text-field
-                  v-model="oraChiamata"
-                  label="Orario nuova chiamata"
-                  prepend-inner-icon="mdi-clock-time-four-outline"
-                  outlined
-                ></v-text-field>
-              </div>
-              <div v-if="richiama">
+  <div>
+    <v-dialog v-model="dialog2" max-width="600px" persistent>
+      <v-card class="pa-3" v-if="!metodoContatto">
+        <h1 class="title mb-4" style="color: red">
+          Nessuna modalità di contatto selezionata
+        </h1>
+        <p class="mb-5">Per favore, seleziona una modalità di contatto</p>
+        <v-btn color="primary" @click="dialog2 = !dialog2">Chiudi</v-btn>
+      </v-card>
+      <v-card v-else-if="metodoContatto">
+        <v-card-title>
+          <span class="text-h5" style="color: #1f4b6b"
+            >Conferma di aver contattato tramite {{ metodoContatto }}</span
+          >
+          {{ candidato.candidate }}
+        </v-card-title>
+        <v-card-text>
+          <v-container>
+            <section>
+              <div
+                class="container pb-0"
+                v-if="!richiama && metodoContatto == 'telefono'"
+              >
+                <div class="pb-3 font-weight-bold h5" style="color: #1f4b6b">
+                  Descrivere brevemente il colloquio con il candidato
+                </div>
                 <v-textarea
-                  v-model="motivoRichiama"
-                  rows="3"
-                  label="Motivo"
-                  prepend-inner-icon="mdi mdi-note-edit-outline"
+                  rows="4"
                   outlined
+                  v-model="nota_primo_contatto"
                 ></v-textarea>
               </div>
-            </v-col>
-          </v-row>
-        </section>
 
-        <v-divider></v-divider>
-
-        <section :class="{ disabled_input: richiama }">
-          <v-row>
-            <v-col cols="12" sm="4" md="4">
-              <v-radio-group row v-model="preferenzaIncontro">
-                <template v-slot:label>
-                  <div>Richiesto Mini Demo</div>
-                </template>
-                <v-radio label="Si" value="si"></v-radio>
-                <v-radio label="No" value="no" checked></v-radio>
-              </v-radio-group>
-            </v-col>
-            <v-col cols="12" sm="4" md="4">
-              <div v-if="preferenzaIncontro === 'si'">
-                Giorno fissato per l'appuntamento
-                <v-date-picker
-                  v-model="dataIncontro"
-                  no-title
-                  locale="it-it"
-                  format="dd/MM/yyyy"
-                ></v-date-picker>
-              </div>
-            </v-col>
-            <v-col cols="12" sm="4" md="4">
-              <div v-if="preferenzaIncontro === 'si'">
+              <div v-if="metodoContatto == 'social'">
+                <div class="font-weight-bold h5" style="color: #1f4b6b">
+                  Quale social è stato utilizzato?
+                </div>
+                <v-radio-group v-model="socialMethod">
+                  <v-radio label="LinkedIn" value="linkedin"></v-radio>
+                  <v-radio label="Facebook" value="facebook"></v-radio>
+                </v-radio-group>
                 <v-text-field
-                  v-model="oraIncontro"
-                  label="Orario appuntamento"
-                  prepend-inner-icon="mdi-clock-time-four-outline"
+                  v-if="
+                    socialMethod === 'linkedin' || socialMethod === 'facebook'
+                  "
                   outlined
+                  label="Inserisci il link del profilo social"
+                  v-model="socialLink"
                 ></v-text-field>
               </div>
-              <div v-if="preferenzaIncontro === 'si'">
-                Luogo:
-                <v-radio-group v-model="luogoIncontro">
-                  <v-radio label="c/o nostra Sede" value="sede"></v-radio>
+
+              <v-divider class="mt-0"></v-divider>
+              <v-row align-content="center" align="center">
+                <v-checkbox
+                  v-if="preferenzaDemo"
+                  style="font-weight: 600"
+                  v-model="confermaDemo"
+                  :label="
+                    'Conferma di aver fissato una Demo in data ' +
+                    new Date(dataDemo).toLocaleString('it-IT')
+                  "
+                ></v-checkbox>
+                <v-checkbox
+                  v-if="metodoContatto == 'email'"
+                  style="font-weight: 600"
+                  v-model="confermaMail"
+                  label="Conferma di voler contattare tramite l'invio della mail"
+                ></v-checkbox>
+                <v-checkbox
+                  v-if="metodoContatto == 'social'"
+                  style="font-weight: 600"
+                  v-model="confermaSocial"
+                  label="Conferma di aver contattato tramite social"
+                ></v-checkbox>
+                <v-checkbox
+                  v-if="metodoContatto == 'telefono'"
+                  style="font-weight: 600"
+                  v-model="confermaTelefono"
+                  :label="
+                    !richiama
+                      ? 'Conferma di aver contattato il candidato'
+                      : 'Conferma di voler riprogrammare la chiamata'
+                  "
+                ></v-checkbox>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="6" md="6">
+                  <small>
+                    {{ !richiama ? "Contattato" : "Riprogrammato" }} in data e
+                    ora<br />
+                    <strong>{{ new Date().toLocaleString("it-IT") }}</strong>
+                  </small>
+                </v-col>
+                <v-col cols="12" sm="6" md="6">
+                  <small>
+                    Operatore<br />
+                    <strong>{{ user.Nominativo }}</strong>
+                  </small>
+                </v-col>
+              </v-row>
+            </section>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <CButton
+            class="mx-2"
+            color="danger"
+            @click="dialog2 = false"
+            variant="ghost"
+            ><i class="fas fa-times"></i>&nbsp; Annulla
+          </CButton>
+          <v-btn
+            color="#1f4b6b"
+            dark
+            @click="dialog2 = false"
+            :class="{ disabled_input: isSaveButtonDisabled }"
+            ><i class="far fa-save"></i> &nbsp; Salva
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-dialog
+      v-model="dialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn color="#1f4b6b" dark v-bind="attrs" v-on="on">
+          <i class="fas fa-user-edit"> </i> &nbsp;Lavora contatto
+        </v-btn>
+      </template>
+      <v-card>
+        <v-container>
+          <v-toolbar dark color="#1f4b6b">
+            <v-btn icon dark @click="dialog = false">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+            Lavorazione:&nbsp; {{ candidato.candidate }}
+            <v-spacer></v-spacer>
+            <v-alert dense elevation="4" outlined text type="warning">
+              Attenzione la scheda anagrafica è incompleta</v-alert
+            >
+            <v-spacer></v-spacer>
+            <v-toolbar-items>
+              <v-btn text dark @click="dialog2 = true"
+                ><i class="fas fa-save fa-2x"></i> &nbsp; Salva
+              </v-btn>
+            </v-toolbar-items>
+          </v-toolbar>
+          <scheda :candidato="candidato"></scheda>
+          <v-divider></v-divider>
+          <section id="modalita_contatto">
+            <h3 style="color: #1f4b6b">
+              <strong>Modalità di contatto:</strong>
+            </h3>
+            <small
+              >Seleziona il metodo utilizzato per contattare il candidato</small
+            >
+            <v-row>
+              <v-col cols="12" sm="6" md="6">
+                <v-radio-group v-model="metodoContatto" row>
                   <v-radio
-                    label="Web Meeting / Mini-Demo"
-                    value="web"
+                    label="Telefono"
+                    value="telefono"
+                    :disabled="!candidato.tel && !candidato.cell"
+                  ></v-radio>
+                  <v-radio
+                    label="Email"
+                    value="email"
+                    :disabled="richiama || !candidato.mail"
+                  ></v-radio>
+                  <v-radio
+                    label="Social"
+                    value="social"
+                    :disabled="richiama"
                   ></v-radio>
                 </v-radio-group>
-              </div>
-            </v-col>
-          </v-row>
-        </section>
-
-        <v-divider></v-divider>
-
-        <section :class="{ disabled_input: richiama }">
-          <v-row align-content="center" align="center">
-            <v-col>
-              <v-checkbox
-                style="font-weight: 600; color: #1f4b6b !important"
-                v-model="conferma"
-                :label="'Conferma di aver contattato il candidato'"
-              ></v-checkbox>
-            </v-col>
-            <v-col>
-              Contattato in data e ora
-              <strong>{{ new Date().toLocaleString("it-IT") }}</strong>
-            </v-col>
-            <v-col>
-              Operatore <strong>{{ user.Nominativo }}</strong>
-            </v-col>
-          </v-row>
-
+              </v-col>
+            </v-row>
+          </section>
           <v-divider></v-divider>
-          <div class="container">
-            <div class="pb-3 font-weight-bold h5">
-              Descrivere brevemente il colloquio con il candidato
-            </div>
-            <VueEditor v-model="nota_primo_contatto"></VueEditor>
-          </div>
-        </section>
-      </v-container>
-    </v-card>
-  </v-dialog>
+          <v-tooltip
+            top
+            :color="metodoContatto !== 'telefono' ? 'warning' : 'transparent'"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <section v-bind="attrs" v-on="on" id="opzioni_contatto">
+                <div
+                  :class="{
+                    disabled_input:
+                      !metodoContatto || metodoContatto != 'telefono',
+                  }"
+                >
+                  <h3 style="color: #1f4b6b">
+                    <strong>Opzioni:</strong>
+                  </h3>
+                  <small
+                    >Puoi programmare una demo per il contatto oppure
+                    riprogrammare la call
+                  </small>
+                  <v-row>
+                    <v-col
+                      cols="12"
+                      sm="4"
+                      md="4"
+                      :class="{ disabled_input: richiama }"
+                    >
+                      <v-checkbox
+                        style="font-weight: 600; color: #1f4b6b !important"
+                        v-model="preferenzaDemo"
+                        :label="'Fissa una Demo'"
+                      ></v-checkbox>
+                    </v-col>
+                    <v-col cols="12" sm="4" md="4">
+                      <v-checkbox
+                        style="font-weight: 600; color: #1f4b6b !important"
+                        v-model="richiama"
+                        :label="'Riprogramma telefonata'"
+                      ></v-checkbox>
+                    </v-col>
+                  </v-row>
+                </div>
+              </section>
+            </template>
+            <span v-if="metodoContatto !== 'telefono'"
+              >Disponibili solo per contatto telefonico</span
+            >
+          </v-tooltip>
+          <v-divider v-if="preferenzaDemo || richiama"></v-divider>
+          <section>
+            <v-row>
+              <v-col cols="12" sm="4" md="4" v-if="preferenzaDemo">
+                <div>
+                  <v-date-picker
+                    v-model="dataDemo"
+                    color="#1f4b6b"
+                    no-title
+                    locale="it-it"
+                    format="dd/MM/yyyy"
+                    :min="today"
+                  ></v-date-picker>
+                </div>
+              </v-col>
+              <v-col cols="12" sm="4" md="4" v-if="preferenzaDemo">
+                <div>
+                  <v-text-field
+                    v-model="oraDemo"
+                    label="Orario appuntamento"
+                    prepend-inner-icon="mdi-clock-time-four-outline"
+                    outlined
+                  ></v-text-field>
+                </div>
+              </v-col>
+              <v-col cols="12" sm="4" md="4" v-if="richiama">
+                <div>
+                  <v-date-picker
+                    v-model="dataChiamata"
+                    color="#1f4b6b"
+                    no-title
+                    locale="it-it"
+                    format="dd/MM/yyyy"
+                    :min="today"
+                  ></v-date-picker>
+                </div>
+              </v-col>
+              <v-col cols="12" sm="4" md="4" v-if="richiama">
+                <div>
+                  <v-select
+                    v-model="oraChiamata"
+                    label="Orario nuova chiamata"
+                    prepend-inner-icon="mdi-clock-time-four-outline"
+                    outlined
+                    :items="rangeOrari"
+                  ></v-select>
+                </div>
+                <div>
+                  <v-textarea
+                    v-model="motivoRichiama"
+                    rows="3"
+                    label="Motivo"
+                    outlined
+                  ></v-textarea>
+                </div>
+              </v-col>
+            </v-row>
+          </section>
+          <v-divider></v-divider>
+        </v-container>
+      </v-card>
+    </v-dialog>
+  </div>
 </template>
 <script>
-import { VueEditor } from "vue2-editor";
 import scheda from "./Scheda.vue";
 export default {
   name: "Lavorazione",
   components: {
-    VueEditor,
     scheda,
   },
   props: {
@@ -169,27 +311,87 @@ export default {
     },
   },
   watch: {
-    preferenzaIncontro() {
-      this.dataIncontro = "";
-      this.oraIncontro = "";
-      this.luogoIncontro = "";
+    metodoContatto() {
+      this.preferenzaDemo = false;
+      this.conferma = false;
+      this.conferma = false;
+      this.confermaDemo = false;
+    },
+    preferenzaDemo() {
+      this.dataDemo = "";
+      this.oraDemo = "";
+    },
+    richiama() {
+      this.preferenzaDemo = false;
+      this.conferma = false;
+      this.conferma = false;
+      this.confermaDemo = false;
     },
   },
   data() {
     return {
+      today: new Date().toISOString().substr(0, 10),
       dialog: false,
+      dialog2: false,
       richiama: false,
-      conferma: false,
+      confermaSocial: false,
+      confermaMail: false,
+      confermaDemo: false,
+      confermaTelefono: false,
       nota_primo_contatto: "",
-      preferenzaIncontro: "no",
-      dataIncontro: null,
-      oraIncontro: null,
-      luogoIncontro: "",
+      preferenzaDemo: false,
+      dataDemo: null,
+      oraDemo: null,
       dataChiamata: null,
       oraChiamata: null,
+      metodoContatto: null,
+      socialLink: null,
+      socialMethod: null,
+      rangeOrari: [
+        { text: "09:00", value: "09:00" },
+        { text: "10:00", value: "10:00" },
+        { text: "11:00", value: "11:00" },
+        { text: "12:00", value: "12:00" },
+        { text: "15:00", value: "15:00" },
+        { text: "16:00", value: "16:00" },
+        { text: "17:00", value: "17:00" },
+      ],
       motivoRichiama: "",
       user: JSON.parse(localStorage.getItem("chisono_data")),
     };
+  },
+  computed: {
+    isSaveButtonDisabled() {
+      if (this.metodoContatto === "social") {
+        if (this.socialMethod && this.confermaSocial && this.socialLink) {
+          return false;
+        }
+      }
+      if (this.metodoContatto === "email") {
+        return !this.confermaMail;
+      }
+      if (this.metodoContatto === "telefono") {
+        if (this.preferenzaDemo) {
+          if (
+            this.nota_primo_contatto &&
+            this.confermaTelefono &&
+            this.confermaDemo
+          ) {
+            return false;
+          }
+          return true;
+        }
+        if (this.nota_primo_contatto && this.confermaTelefono) {
+          return false;
+        }
+        if (this.richiama) {
+          return !this.confermaTelefono;
+        }
+        return true;
+      }
+
+      return true;
+    },
   },
 };
 </script>
