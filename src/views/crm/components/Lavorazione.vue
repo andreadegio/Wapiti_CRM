@@ -8,15 +8,127 @@
         <p class="mb-5">Per favore, seleziona una modalità di contatto</p>
         <v-btn color="primary" @click="dialog2 = !dialog2">Chiudi</v-btn>
       </v-card>
-      <v-card v-else-if="metodoContatto">
-        <v-card-title>
-          <span class="text-h5" style="color: #1f4b6b"
-            >Conferma di aver contattato tramite {{ metodoContatto }}</span
-          >
-          {{ candidato.candidate }}
-        </v-card-title>
+      <v-card
+        class="pa-3"
+        v-else-if="metodoContatto == 'telefono' && !combinazioni"
+      >
+        <h1 class="title mb-4" style="color: red">
+          Opzioni mancanti o incomplete
+        </h1>
+        <p class="mb-5">
+          Non è stata selezionata alcuna opzione sull'esito della telefonata
+          oppure le informazioni sono incomplete, verifica di aver inserito data
+          ed ora nel caso di prenotazione di una Demo o per riprogrammare la
+          chiamata
+        </p>
+        <v-btn color="primary" @click="dialog2 = !dialog2">Chiudi</v-btn>
+      </v-card>
+      <v-card
+        v-else-if="metodoContatto == 'telefono' && combinazioni"
+        class="text-center"
+      >
         <v-card-text>
           <v-container>
+            <div class="text-h5" style="color: #1f4b6b">
+              Conferma di aver contattato <br />
+              {{ candidato.candidate }} <br />tramite {{ metodoContatto }}
+            </div>
+            <section>
+              <div
+                class="container pb-0"
+                v-if="!richiama && metodoContatto == 'telefono'"
+              >
+                <div class="pb-3 font-weight-bold h5" style="color: #1f4b6b">
+                  Descrivere brevemente il colloquio con il candidato
+                </div>
+                <v-textarea
+                  rows="4"
+                  outlined
+                  v-model="nota_primo_contatto"
+                ></v-textarea>
+              </div>
+              <v-divider class="mt-0"></v-divider>
+              <v-row align-content="center" align="center">
+                <v-checkbox
+                  v-if="preferenzaDemo"
+                  style="font-weight: 600"
+                  v-model="confermaDemo"
+                >
+                  <template v-slot:label>
+                    Conferma di aver fissato una Demo in data
+                    {{ dataDemo | formatDate }} alle ore {{ oraDemo }}
+                  </template>
+                </v-checkbox>
+                <v-checkbox
+                  v-if="metodoContatto == 'telefono'"
+                  style="font-weight: 600; color: darkred !important"
+                  color="red darken-3"
+                  v-model="confermaTelefono"
+                >
+                  <template v-slot:label>
+                    <span v-if="rifiuta"
+                      >Confermando elimini il contato dall'elenco</span
+                    >
+                    <span
+                      v-else-if="richiama"
+                      style="color: darkred !important"
+                    >
+                      Confermando riprogrammi la chiamata in data
+                      {{ dataChiamata | formatDate }}</span
+                    >
+                    <span v-else-if="!rifiuta && !richiama"
+                      >Conferma di aver contattato il candidato</span
+                    >
+                  </template>
+                </v-checkbox>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="6" md="6">
+                  <small>
+                    {{ !richiama ? "Contattato" : "Riprogrammato" }} in data e
+                    ora<br />
+                    <strong>{{ new Date().toLocaleString("it-IT") }}</strong>
+                  </small>
+                </v-col>
+                <v-col cols="12" sm="6" md="6">
+                  <small>
+                    Operatore<br />
+                    <strong>{{ user.Nominativo }}</strong>
+                  </small>
+                </v-col>
+              </v-row>
+            </section>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <CButton
+            class="mx-2"
+            color="danger"
+            @click="
+              dialog2 = false;
+              resetModaleConferme();
+            "
+            variant="ghost"
+            ><i class="fas fa-times"></i>&nbsp; Annulla
+          </CButton>
+          <v-btn
+            color="#1f4b6b"
+            dark
+            @click="dialog2 = false"
+            :class="{ disabled_input: isSaveButtonDisabled }"
+            ><i class="far fa-save"></i> &nbsp;
+            {{ !rifiuta ? "Salva" : "Elimina" }}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+      <v-card v-else-if="metodoContatto != 'telefono'" class="text-center">
+        <v-card-text>
+          <v-container>
+            <div class="text-h5" style="color: #1f4b6b">
+              Conferma di aver contattato <br />
+              {{ candidato.candidate }} <br />tramite {{ metodoContatto }}
+            </div>
             <section>
               <div
                 class="container pb-0"
@@ -56,11 +168,12 @@
                   v-if="preferenzaDemo"
                   style="font-weight: 600"
                   v-model="confermaDemo"
-                  :label="
-                    'Conferma di aver fissato una Demo in data ' +
-                    new Date(dataDemo).toLocaleString('it-IT')
-                  "
-                ></v-checkbox>
+                >
+                  <template v-slot:label>
+                    Conferma di aver fissato una Demo in data
+                    {{ dataDemo | formatDate }} alle ore {{ oraDemo }}
+                  </template>
+                </v-checkbox>
                 <v-checkbox
                   v-if="metodoContatto == 'email'"
                   style="font-weight: 600"
@@ -72,16 +185,6 @@
                   style="font-weight: 600"
                   v-model="confermaSocial"
                   label="Conferma di aver contattato tramite social"
-                ></v-checkbox>
-                <v-checkbox
-                  v-if="metodoContatto == 'telefono'"
-                  style="font-weight: 600"
-                  v-model="confermaTelefono"
-                  :label="
-                    !richiama
-                      ? 'Conferma di aver contattato il candidato'
-                      : 'Conferma di voler riprogrammare la chiamata'
-                  "
                 ></v-checkbox>
               </v-row>
               <v-row>
@@ -107,7 +210,10 @@
           <CButton
             class="mx-2"
             color="danger"
-            @click="dialog2 = false"
+            @click="
+              dialog2 = false;
+              resetModaleConferme();
+            "
             variant="ghost"
             ><i class="fas fa-times"></i>&nbsp; Annulla
           </CButton>
@@ -140,7 +246,14 @@
             </v-btn>
             Lavorazione:&nbsp; {{ candidato.candidate }}
             <v-spacer></v-spacer>
-            <v-alert dense elevation="4" outlined text type="warning">
+            <v-alert
+              dense
+              elevation="4"
+              outlined
+              text
+              type="warning"
+              v-if="anaIncompleta"
+            >
               Attenzione la scheda anagrafica è incompleta</v-alert
             >
             <v-spacer></v-spacer>
@@ -198,7 +311,7 @@
                     <strong>Opzioni:</strong>
                   </h3>
                   <small
-                    >Puoi programmare una demo per il contatto oppure
+                    >Scegli se procedere, rifiutare, programmare una demo oppure
                     riprogrammare la call
                   </small>
                   <v-row>
@@ -206,15 +319,54 @@
                       cols="12"
                       sm="4"
                       md="4"
-                      :class="{ disabled_input: richiama }"
+                      :class="{
+                        disabled_input: richiama || rifiuta || preferenzaDemo,
+                      }"
+                    >
+                      <v-checkbox
+                        style="font-weight: 600; color: #1f4b6b !important"
+                        v-model="accetta"
+                        :checked="preferenzaDemo"
+                        :label="'Accetta / Interessato'"
+                      ></v-checkbox>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      sm="4"
+                      md="4"
+                      :class="{
+                        disabled_input: richiama || accetta || preferenzaDemo,
+                      }"
+                    >
+                      <v-checkbox
+                        style="font-weight: 600; color: #1f4b6b !important"
+                        v-model="rifiuta"
+                        color="red darken-3"
+                        :label="'Rifiuta / Non interessato'"
+                      ></v-checkbox>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col
+                      cols="12"
+                      sm="4"
+                      md="4"
+                      :class="{ disabled_input: richiama || rifiuta }"
                     >
                       <v-checkbox
                         style="font-weight: 600; color: #1f4b6b !important"
                         v-model="preferenzaDemo"
-                        :label="'Fissa una Demo'"
+                        :label="'Prenota una Demo'"
                       ></v-checkbox>
                     </v-col>
-                    <v-col cols="12" sm="4" md="4">
+                    <v-col
+                      cols="12"
+                      sm="4"
+                      md="4"
+                      :class="{
+                        disabled_input: rifiuta || accetta || preferenzaDemo,
+                      }"
+                    >
                       <v-checkbox
                         style="font-weight: 600; color: #1f4b6b !important"
                         v-model="richiama"
@@ -246,12 +398,13 @@
               </v-col>
               <v-col cols="12" sm="4" md="4" v-if="preferenzaDemo">
                 <div>
-                  <v-text-field
+                  <v-select
                     v-model="oraDemo"
                     label="Orario appuntamento"
                     prepend-inner-icon="mdi-clock-time-four-outline"
                     outlined
-                  ></v-text-field>
+                    :items="rangeOrari"
+                  ></v-select>
                 </div>
               </v-col>
               <v-col cols="12" sm="4" md="4" v-if="richiama">
@@ -313,17 +466,21 @@ export default {
   watch: {
     metodoContatto() {
       this.preferenzaDemo = false;
-      this.conferma = false;
-      this.conferma = false;
-      this.confermaDemo = false;
+      this.richiama = false;
+      this.accetta = false;
+      this.rifiuta = false;
     },
     preferenzaDemo() {
+      this.preferenzaDemo ? (this.accetta = true) : (this.accetta = false);
       this.dataDemo = "";
       this.oraDemo = "";
     },
     richiama() {
       this.preferenzaDemo = false;
-      this.conferma = false;
+      this.dataChiamata = null;
+      this.oraChiamata = null;
+      this.motivoRichiama = null;
+      this.accetta = false;
       this.conferma = false;
       this.confermaDemo = false;
     },
@@ -347,6 +504,8 @@ export default {
       metodoContatto: null,
       socialLink: null,
       socialMethod: null,
+      rifiuta: false,
+      accetta: false,
       rangeOrari: [
         { text: "09:00", value: "09:00" },
         { text: "10:00", value: "10:00" },
@@ -360,7 +519,35 @@ export default {
       user: JSON.parse(localStorage.getItem("chisono_data")),
     };
   },
+  methods: {
+    resetModaleConferme() {
+      // reset dei checkbox
+      this.confermaSocial = false;
+      this.confermaTelefono = false;
+      this.confermaMail = false;
+      this.confermaDemo = false;
+
+      // reset dei campi compilabili
+      this.nota_primo_contatto = null;
+      this.socialMethod = null;
+      this.socialLink = null;
+    },
+    async lavoraContatto() {},
+  },
   computed: {
+    anaIncompleta() {
+      // criteri per stabilire se l'anagrafica è incompleta
+      if (this.candidato.tel != null && this.candidato.cel != null) {
+        return false;
+      }
+      if (this.candidato.tipologia == "PF" && this.candidato.cf != "") {
+        return false;
+      }
+      if (this.candidato.tipologia == "PG" && this.candidato.piva != "") {
+        return false;
+      }
+      return true;
+    },
     isSaveButtonDisabled() {
       if (this.metodoContatto === "social") {
         if (this.socialMethod && this.confermaSocial && this.socialLink) {
@@ -391,6 +578,34 @@ export default {
       }
 
       return true;
+    },
+    combinazioni() {
+      if (this.metodoContatto == "telefono") {
+        if (this.accetta && !this.preferenzaDemo) {
+          return true;
+        }
+        if (
+          this.accetta &&
+          this.preferenzaDemo &&
+          this.dataDemo != "" &&
+          this.oraDemo != ""
+        ) {
+          return true;
+        }
+        if (this.rifiuta) {
+          return true;
+        }
+        if (
+          this.richiama &&
+          this.dataChiamata != null &&
+          this.oraChiamata != null &&
+          (this.motivoRichiama != "" || this.motivoRichiama != null)
+        ) {
+          return true;
+        }
+      }
+
+      return false;
     },
   },
 };

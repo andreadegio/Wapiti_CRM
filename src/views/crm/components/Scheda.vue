@@ -280,7 +280,7 @@ export default {
     },
     geocodeCenter() {
       const addressStr = `${this.candidato.via} ${this.candidato.civico}, ${this.candidato.cap} ${this.candidato.comune}`;
-      console.log(addressStr);
+      // console.log(addressStr);
       this.$gmapApiPromiseLazy().then(() => {
         const geocoder = new window.google.maps.Geocoder();
         geocoder.geocode({ address: addressStr }, (results, status) => {
