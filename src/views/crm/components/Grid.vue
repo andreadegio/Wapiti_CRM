@@ -24,23 +24,28 @@
           </div>
         </td>
       </template>
+      <template #data_ins="{ item }">
+        <td>{{ item.data_ins | formatDate }}</td>
+      </template>
 
       <template #actions="row">
-        <div class="d-flex">
-          <Lavorazione
-            class="ml-2"
-            :itemId="row.item.id"
-            :candidato="row.item"
-          ></Lavorazione>
-          <Note :itemId="row.item.id" :candidato="row.item.candidate"></Note>
-          <CButton
-            class="mx-2"
-            color="danger"
-            @click="rejectCandidate(row.item.id)"
-            variant="ghost"
-            ><i class="fas fa-user-slash"></i> Rifiuta contatto
-          </CButton>
-        </div>
+        <td>
+          <div class="d-flex">
+            <Lavorazione
+              class="ml-2"
+              :itemId="row.item.id"
+              :candidato="row.item"
+              :step="step"
+              @aggiorna_grid="aggiorna_grid"
+            ></Lavorazione>
+            <Note :itemId="row.item.id" :candidato="row.item.candidato"></Note>
+            <Elimina
+              :candidato="row.item"
+              :step="step"
+              @aggiorna_grid="aggiorna_grid"
+            ></Elimina>
+          </div>
+        </td>
       </template>
     </CDataTable>
   </div>
@@ -49,11 +54,13 @@
 import axios from "axios";
 import Note from "./Note.vue";
 import Lavorazione from "./Lavorazione.vue";
+import Elimina from "./Elimina.vue";
 export default {
   name: "Grid",
   components: {
     Note,
     Lavorazione,
+    Elimina,
   },
   props: {
     gridType: {
@@ -63,15 +70,17 @@ export default {
   },
   data() {
     return {
+      step: 0,
       items: [],
       fields: [
-        { key: "state", label: "Stato" },
+        { key: "stato", label: "Stato" },
         { key: "tipologia", label: "PF/PG" },
-        { key: "candidate", label: "Candidato" },
-        { key: "type", label: "RUI" },
-        { key: "contact_origin", label: "Fonte" },
+        { key: "candidato", label: "Candidato" },
+        { key: "RUI", label: "RUI" },
+        { key: "origine", label: "Fonte" },
         { key: "provincia", label: "Provincia" },
-        { key: "region", label: "Regione" },
+        { key: "regione", label: "Regione" },
+        { key: "data_ins", label: "Inserito il" },
         { key: "actions", label: "Azioni" },
       ],
     };
@@ -86,113 +95,71 @@ export default {
     updateFields() {
       // Logica per aggiornare il valore di "fields" in base a "gridType"
       this.fields = [
-        { key: "state", label: "Stato" },
+        { key: "stato", label: "Stato" },
         { key: "tipologia", label: "PF/PG" },
-        { key: "candidate", label: "Candidato" },
-        { key: "type", label: "RUI" },
-        { key: "contact_origin", label: "Fonte" },
+        { key: "candidato", label: "Candidato" },
+        { key: "RUI", label: "RUI" },
+        { key: "origine", label: "Fonte" },
         { key: "provincia", label: "Provincia" },
-        { key: "region", label: "Regione" },
+        { key: "regione", label: "Regione" },
+        { key: "data_ins", label: "Inserito il" },
         { key: "actions", label: "Azioni" },
       ];
     },
     updateItems() {
       // Logica per aggiornare il valore di "items" in base a "gridType"
-      var stato = "";
-      var step = 0;
+      // var stato = "";
+      this.step = 0;
 
       if (this.gridType === "primo_contatto") {
-        step = 1;
-        stato = "Nuovo";
+        this.step = [1, 2];
+        // stato = "Nuovo";
       }
       if (this.gridType === "webinar") {
-        step = 2;
-        stato = "Contattato";
+        this.step = 3;
+        // stato = "Mini Demo";
       }
       if (this.gridType === "solleciti") {
-        step = 3;
-        stato = "Sollecito documenti";
+        this.step = 4;
+        // stato = "Sollecito";
       }
       if (this.gridType === "registrazione_documentazione") {
-        step = 4;
-        stato = "Attesa documenti";
+        this.step = [5, 9];
+        // stato = "Registrazione";
       }
       if (this.gridType === "formazione") {
-        step = 5;
-        stato = "Documenti registrati";
+        this.step = 6;
+        // stato = "Formazione";
       }
       if (this.gridType === "attivazione_account") {
-        step = 6;
-        stato = "Formazione fatta";
+        this.step = 7;
+        // stato = "Da attivare";
       }
       if (this.gridType === "follow_up") {
-        step = 7;
-        stato = "Nuova attivazione";
-        //inserire richiesta ws
-        // this.items = [
-        //   {
-        //     id: 1,
-        //     state: "Account attivato",
-        //     candidate: "Mario Rossi",
-        //     type: "Sezione E",
-        //     contact_origin: "LinkedIn",
-        //     email: "mario.rossi@email.com",
-        //     region: "Lombardia",
-        //     tel: "02123456",
-        //     cell: "333123456",
-        //   },
-        //   {
-        //     id: 2,
-        //     state: "Follow-up",
-        //     candidate: "Giuseppe Bianchi",
-        //     type: "Agente",
-        //     contact_origin: "Sito web aziendale",
-        //     email: "giuseppe.bianchi@email.com",
-        //     region: "Toscana",
-        //     tel: "02123456",
-        //     cell: "333123456",
-        //     _classes: "bg-warning",
-        //   },
-        // ];
+        this.step = 8;
       }
 
-      if (step != 0) {
+      if (this.step != 0) {
         // Se è stato scelto un pulsante valido allora recupero le liste
-        this.getLista(step).then((candidati) => {
+        this.getLista(this.step).then((candidati) => {
           this.items = candidati.map((item) => {
             if (item.rag_soc) {
               var candidato = item.rag_soc;
             } else {
               candidato = item.nome + " " + item.cognome;
             }
+
             return {
-              id: item.id,
-              state: stato,
-              candidate: candidato,
-              type: item.RUI,
-              contact_origin: item.origine,
-              mail: item.mail,
-              region: item.regione,
-              provincia: item.provincia,
-              tel: item.telefono,
-              cell: item.cell,
-              tipologia: item.tipologia,
-              referente: item.referente,
-              cf: item.cf,
-              piva: item.piva,
-              agenzia: item.agenzia,
-              numRui: item.numRui,
-              via: item.via,
-              civico: item.civico,
-              cap: item.cap,
-              comune: item.comune,
+              ...item,
+              candidato: candidato,
             };
           });
         });
       }
     },
+
     async getLista(stato) {
-      console.log(stato);
+      //  console.log(stato);
       let param = { step: stato };
       try {
         const response = await axios.post(
@@ -207,10 +174,21 @@ export default {
         return []; // In caso di errore, ritorna un array vuoto ogestisci l'errore in un altro modo
       }
     },
+    aggiorna_grid(state) {
+      this.getLista(state).then((candidati) => {
+        this.items = candidati.map((item) => {
+          if (item.rag_soc) {
+            var candidato = item.rag_soc;
+          } else {
+            candidato = item.nome + " " + item.cognome;
+          }
 
-    rejectCandidate(id) {
-      console.log(id);
-      // Implementazione per il rifiuto della candidatura con l'id specificato
+          return {
+            ...item,
+            candidato: candidato,
+          };
+        });
+      });
     },
   },
   mounted() {

@@ -23,7 +23,7 @@
             <i class="fas fa-user-plus"></i>
           </div>
           <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
-            >Aggiungi candidature</span
+            >Aggiungi candidato</span
           >
         </div>
       </CNavItem>
@@ -32,7 +32,7 @@
           <div
             class="side_btn_ico"
             v-c-tooltip="{
-              content: 'Primi contatti',
+              content: 'Primo contatto',
               placement: 'right',
             }"
           >
@@ -85,7 +85,7 @@
           <div
             class="side_btn_ico"
             v-c-tooltip="{
-              content: 'Registrazione documentazione',
+              content: 'Registrazione documenti',
               placement: 'right',
             }"
           >
@@ -101,7 +101,7 @@
           <div
             class="side_btn_ico"
             v-c-tooltip="{
-              content: 'Sessioni di formazione',
+              content: 'Formazione',
               placement: 'right',
             }"
           >
@@ -134,7 +134,7 @@
           <div
             class="side_btn_ico"
             v-c-tooltip="{
-              content: 'Follow-up candidature',
+              content: 'Follow-up',
               placement: 'right',
             }"
           >

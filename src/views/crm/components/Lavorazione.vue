@@ -6,7 +6,7 @@
           Nessuna modalità di contatto selezionata
         </h1>
         <p class="mb-5">Per favore, seleziona una modalità di contatto</p>
-        <v-btn color="primary" @click="dialog2 = !dialog2">Chiudi</v-btn>
+        <v-btn color="primary" @click="dialog2 = !dialog2">Ok</v-btn>
       </v-card>
       <v-card
         class="pa-3"
@@ -31,14 +31,25 @@
           <v-container>
             <div class="text-h5" style="color: #1f4b6b">
               Conferma di aver contattato <br />
-              {{ candidato.candidate }} <br />tramite {{ metodoContatto }}
+              {{ candidato.candidato }} <br />tramite {{ metodoContatto }}
             </div>
             <section>
               <div
                 class="container pb-0"
                 v-if="!richiama && metodoContatto == 'telefono'"
               >
-                <div class="pb-3 font-weight-bold h5" style="color: #1f4b6b">
+                <div
+                  v-if="rifiuta"
+                  class="pb-3 font-weight-bold h5"
+                  style="color: darkred"
+                >
+                  Scrivi la motivazione per cui vuoi eliminare il candidato
+                </div>
+                <div
+                  v-else
+                  class="pb-3 font-weight-bold h5"
+                  style="color: #1f4b6b"
+                >
                   Descrivere brevemente il colloquio con il candidato
                 </div>
                 <v-textarea
@@ -66,7 +77,7 @@
                   v-model="confermaTelefono"
                 >
                   <template v-slot:label>
-                    <span v-if="rifiuta"
+                    <span v-if="rifiuta" style="color: darkred !important"
                       >Confermando elimini il contato dall'elenco</span
                     >
                     <span
@@ -115,7 +126,7 @@
           <v-btn
             color="#1f4b6b"
             dark
-            @click="dialog2 = false"
+            @click="(dialog2 = false), lavoraContatto()"
             :class="{ disabled_input: isSaveButtonDisabled }"
             ><i class="far fa-save"></i> &nbsp;
             {{ !rifiuta ? "Salva" : "Elimina" }}
@@ -127,7 +138,7 @@
           <v-container>
             <div class="text-h5" style="color: #1f4b6b">
               Conferma di aver contattato <br />
-              {{ candidato.candidate }} <br />tramite {{ metodoContatto }}
+              {{ candidato.candidato }} <br />tramite {{ metodoContatto }}
             </div>
             <section>
               <div
@@ -220,7 +231,7 @@
           <v-btn
             color="#1f4b6b"
             dark
-            @click="dialog2 = false"
+            @click="(dialog2 = false), lavoraContatto()"
             :class="{ disabled_input: isSaveButtonDisabled }"
             ><i class="far fa-save"></i> &nbsp; Salva
           </v-btn>
@@ -235,16 +246,24 @@
     >
       <template v-slot:activator="{ on, attrs }">
         <v-btn color="#1f4b6b" dark v-bind="attrs" v-on="on">
-          <i class="fas fa-user-edit"> </i> &nbsp;Lavora contatto
+          <i class="fas fa-user-edit"> </i> &nbsp;Gestisci
         </v-btn>
       </template>
       <v-card>
         <v-container>
           <v-toolbar dark color="#1f4b6b">
-            <v-btn icon dark @click="dialog = false">
+            <v-btn
+              icon
+              dark
+              @click="
+                dialog = false;
+                resetBeforeClose();
+              "
+            >
               <v-icon>mdi-close</v-icon>
             </v-btn>
-            Lavorazione:&nbsp; {{ candidato.candidate }}
+            Lavorazione:&nbsp; {{ candidato.candidato }} &nbsp; contatto
+            inserito in data: &nbsp;{{ candidato.data_ins | formatDate }}
             <v-spacer></v-spacer>
             <v-alert
               dense
@@ -291,6 +310,17 @@
                     :disabled="richiama"
                   ></v-radio>
                 </v-radio-group>
+              </v-col>
+              <v-col
+                v-if="metodoContatto === 'telefono'"
+                cols="12"
+                sm="4"
+                md="4"
+                :class="{
+                  disabled_input: richiama || rifiuta,
+                }"
+              >
+                <v-btn color="warning">Questionario assuntivo</v-btn>
               </v-col>
             </v-row>
           </section>
@@ -447,22 +477,14 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 import scheda from "./Scheda.vue";
 export default {
   name: "Lavorazione",
   components: {
     scheda,
   },
-  props: {
-    itemId: {
-      type: Number,
-      required: true,
-    },
-    candidato: {
-      type: Object,
-      required: true,
-    },
-  },
+  props: ["step", "itemId", "candidato"],
   watch: {
     metodoContatto() {
       this.preferenzaDemo = false;
@@ -520,6 +542,13 @@ export default {
     };
   },
   methods: {
+    resetBeforeClose() {
+      this.metodoContatto = null;
+      this.accetta = false;
+      this.rifiuta = false;
+      this.richiama = false;
+      this.preferenzaDemo = false;
+    },
     resetModaleConferme() {
       // reset dei checkbox
       this.confermaSocial = false;
@@ -532,7 +561,50 @@ export default {
       this.socialMethod = null;
       this.socialLink = null;
     },
-    async lavoraContatto() {},
+    async lavoraContatto() {
+      // Salvataggio ed avanzamento di stato
+      // preparo i parametri da passare al ws
+      let params = {
+        contatto: this.candidato,
+        notePrimoContatto: this.nota_primo_contatto || "",
+        canalePrimoContatto: this.metodoContatto,
+        preferenzaDemo: this.preferenzaDemo ? true : false,
+        dataDemo: this.dataDemo,
+        oraDemo: this.oraDemo,
+        dataChiamata: this.dataChiamata,
+        oraChiamata: this.oraChiamata,
+        richiamare: this.richiama,
+        motivoRecall: this.motivoRichiama,
+        profiloSocial: this.socialLink,
+        tipoSocial: this.socialMethod,
+        accetta: this.accetta,
+        rifiuta: this.rifiuta,
+        utente: this.user,
+      };
+      try {
+        await axios
+          .post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.crm.lavoraContatto,
+            params
+          )
+          .then((response) => {
+            var message = response.data.message;
+            switch (response.data.esito) {
+              case "OK":
+                this.$alert(message, "OK", "success");
+                this.$emit("aggiorna_grid", this.step);
+                break;
+              case "KO":
+                this.$alert(message, "Attenzione", "warning");
+                break;
+            }
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   computed: {
     anaIncompleta() {

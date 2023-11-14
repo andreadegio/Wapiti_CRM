@@ -2,7 +2,7 @@
   <div>
     <v-list three-line subheader>
       <v-subheader class="display-1"
-        >{{ candidato.candidate }}
+        >{{ candidato.candidato }}
         <!-- <v-btn color="warning" fab x-small dark class="ml-2">
           <v-icon>mdi-alarm</v-icon>
         </v-btn> -->
@@ -16,6 +16,7 @@
                 color="#1f4b6b"
                 v-bind="attrs"
                 v-on="on"
+                class="disabled_input"
               >
                 <i class="fas fa-pencil-alt"></i>
               </v-btn>
@@ -229,7 +230,7 @@
           :icon="getCustomMarkerIcon(feature.properties)"
           :title="feature.properties.DESCRIZIONE"
         />
-        <gmap-marker :position="mapCenter" :title="candidato.candidate" />
+        <gmap-marker :position="mapCenter" :title="candidato.candidato" />
       </gmap-map>
     </div>
   </div>
@@ -333,5 +334,9 @@ export default {
 .gmap-marker img {
   width: 30px !important;
   height: 30px !important;
+}
+.disabled_input {
+  pointer-events: none;
+  opacity: 0.5;
 }
 </style>
