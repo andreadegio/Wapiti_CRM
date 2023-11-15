@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-
+// import axios from "axios";
 // import store from "../store";
 
 // Containers
@@ -297,6 +297,20 @@ router.beforeEach((to, from, next) => {
       });
     }
 
+    //CONTROLLO SE PROVENGO DA AUA
+    if (to.query.aua == 1 && to.query.u!="" && to.query.p!="") {
+      let user = atob(to.query.u);
+      let passwd = atob(to.query.p);
+      let data_login = new Date();
+      // alert("utente" + user);
+      // alert("password" + passwd);
+      localStorage.setItem("user", user);
+      localStorage.setItem("pwd", passwd);
+      localStorage.setItem("lastLogin", data_login);
+      localStorage.setItem("AUA", true);
+      next();
+    }
+
     if (to.query.auth == "1" || localStorage.getItem("utente") == "ok") {
       next();
     } else {
@@ -312,14 +326,14 @@ router.beforeEach((to, from, next) => {
 router.onError((error) => {
     console.log("Errore di caricamento " + error.message); 
     const targetPath = router.history.pending.fullPath;
-    console.log("target path " + targetPath);
+    // console.log("target path " + targetPath);
     // router.replace(targetPath);
     // window.location.reload();
     // router.push("Dashboard");
     history.replaceState("", "", targetPath);
     router.replace(targetPath);
     // router.push(targetPath);
-    console.log("history replace");
+    // console.log("history replace");
 });
 
 export default router;

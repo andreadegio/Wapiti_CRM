@@ -1,4 +1,4 @@
-<template >
+<template>
   <div v-if="show_async !== 3">
     <CToaster
       id="messaggi_toast"
@@ -49,10 +49,7 @@
       <CCol sm="10" md="10">
         <div class="row">
           <div class="col-sm">
-            <CCardLink
-              target="_self"
-              @click="conta_accesso('broker')"
-            >
+            <CCardLink target="_self" @click="conta_accesso('broker')">
               <CCard
                 class="text-center elevation-6 portali-btn grow"
                 body-wrapper
@@ -184,13 +181,7 @@ export default {
   data() {
     return {
       newsModal: false,
-
-      // anagraficaID: "",
-      // unitaoperativaID: "",
-      // unitaOperativaTipoID: JSON.parse(localStorage.getItem("chisono_data"))
-      //   .UnitaOperativa_Tipo_ID,
       show_async: 0,
-      // triggerNews: 0,
       news_mondo: JSON.parse(localStorage.getItem("news_mondo")),
       urlRami: localStorage.getItem("urlRami"),
       isEnergy: JSON.parse(localStorage.getItem("chisono_data"))
@@ -206,12 +197,34 @@ export default {
     this.$forceUpdate();
   },
   methods: {
+    async set_aua() {
+      // console.log("Accesso Aua");
+      // console.log("valore di AUA" + localStorage.getItem("AUA"));
+      if (localStorage.getItem("AUA")) {
+        // console.log("registro");
+        let params = {
+          utente: localStorage.getItem("userID"),
+          piattaforma: "AUA",
+        };
+        try {
+          await axios.post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.set_accesso,
+            { params }
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    },
     async conta_accesso(settore) {
       let params = {
         utente: localStorage.getItem("userID"),
         piattaforma: settore,
       };
       try {
+        this.set_aua();
         await axios
           .post(
             this.$custom_json.base_url +
@@ -350,4 +363,3 @@ export default {
   },
 };
 </script>
-

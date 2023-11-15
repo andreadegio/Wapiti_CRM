@@ -2,9 +2,8 @@
   <div class="flex-row align-items-center sfondo">
     <img class="login_sx" src="img/login/login_sx.png" />
     <img class="login_dx" src="img/login/login_dx.png" />
-    
+
     <CContainer class="pt-5">
-      
       <CRow class="justify-content-center">
         <CCol md="4" sm="1"> </CCol>
         <CCol md="4" sm="10">
@@ -103,7 +102,6 @@
 import store from "../../store";
 
 export default {
-  // components: { CoreUIIcons },
   name: "Login",
   data() {
     return {
@@ -154,11 +152,10 @@ export default {
   height: 100vh;
 }
 
-
 .login-img {
   /* position: absolute; */
   z-index: 10;
- 
+
   padding-bottom: 2.5rem;
   /* margin: auto; */
 }
@@ -227,5 +224,4 @@ export default {
   border-radius: 5px;
   /* border: solid 1px #d8dbe07d; */
 }
-
 </style>
