@@ -5,12 +5,10 @@
       class="c-header c-header-light c-header-fixed c-header-with-subheader"
     >
       <CHeaderNav class="d-md-down-none mr-auto">
-        <CHeaderNavItem
-          class="px-3"
-          target="_self"
-        >
-        <a href="/dashboard">
-          <img src="/img/logo_abyway.png" width="200px" /></a>
+        <CHeaderNavItem class="px-3" target="_self">
+          <a href="/dashboard">
+            <img src="/img/logo_abyway.png" width="200px"
+          /></a>
         </CHeaderNavItem>
       </CHeaderNav>
       <CHeaderNav v-show="city" class="d-md-down-none mr-auto">
@@ -152,7 +150,7 @@ export default {
     this.interval = setInterval(() => {
       this.get_notifiche_formazione();
       this.get_notifiche_commerciale();
-    }, 3000);
+    }, 30000);
     // Controllo se dev'essere aggiornato e forzato il logout di tutti gli utenti ogni 10 minuti
     this.check_ver = setInterval(() => {
       let url =
@@ -300,5 +298,3 @@ export default {
   },
 };
 </script>
-
-
