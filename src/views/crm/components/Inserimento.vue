@@ -370,6 +370,52 @@ export default {
         { text: "Vicenza (VI)", value: "Vicenza (VI)" },
         { text: "Viterbo (VT)", value: "Viterbo (VT)" },
       ],
+      blackListProv: [
+        "Napoli (NA)",
+        "Caserta (CE)",
+        "Matera (MT)",
+        "Crotone (KR)",
+        "Foggia (FG)",
+      ],
+      blackListCity: [
+        { "Roma (RM)": ["Ostia"] },
+        { "Salerno (SA)": ["Salerno", "Pontecagnano", "Eboli"] },
+        { "Cosenza (CS)": ["Cassano Allo Jonio", "Scalea", "Praia a Mare"] },
+        {
+          "Vibo Valentia (VV)": [
+            "San Calogero",
+            "Joppolo",
+            "Jonadi",
+            "Rombiolo",
+            "Mileto",
+          ],
+        },
+        { "Catanzaro (CZ)": ["Guardavalle"] },
+        {
+          "Reggio Calabria (RC)": [
+            "San Luca",
+            "Africo",
+            "Bovalino",
+            "Benestare",
+            "Natile",
+            "Bianco",
+            "Platì",
+            "San Ferdinando",
+          ],
+        },
+        {
+          "Catania (CT)": [
+            "Adrano",
+            "Gravina",
+            "Misterbianco",
+            "Lentini",
+            "Carlentini",
+          ],
+        },
+        { "Trapani (TP)": ["Castelvetrano", "Castellammare del Golfo"] },
+        { "Caltanisetta (CL)": ["Gela", "Priolo", "Niscemi"] },
+      ],
+      checkblacklist: false,
     };
   },
   mounted() {
@@ -377,6 +423,10 @@ export default {
     this.getTipologia();
   },
   watch: {
+    provincia() {
+      this.isBlackList(this.provincia);
+      this.isBlackListCity(this.provincia);
+    },
     tipoPersona() {
       // Inizializzo i campi se passo da una tipologia all'altra
       this.nome = "";
@@ -392,6 +442,46 @@ export default {
     },
   },
   methods: {
+    isBlackList(prov) {
+      if (this.blackListProv.includes(prov)) {
+        console.log("provincia in blacklist");
+        this.$alert(
+          "Questa provincia rientra nella blacklist, non sarà possibile inserire il candidato",
+          "Attenzione",
+          "warning"
+        );
+        this.checkblacklist = true;
+      }
+    },
+    isBlackListCity(prov) {
+      let found = false;
+      let blacklistedCities = [];
+
+      for (let i = 0; i < this.blackListCity.length; i++) {
+        const entry = this.blackListCity[i];
+        const province = Object.keys(entry)[0]; // Ottieni la chiave (provincia)
+        const cities = entry[province]; // Ottieni le città associate alla provincia
+
+        if (province.includes(prov)) {
+          found = true;
+          blacklistedCities = cities;
+          break; // Interrompi il ciclo una volta trovata la corrispondenza
+        }
+      }
+
+      if (found) {
+        //   console.log("Provincia in blacklist:", prov);
+        //   console.log("Città sulla blacklist:", blacklistedCities);
+        this.$alert(
+          `La provincia ${prov} rientra nella blacklist. Le città sulla blacklist sono: ${blacklistedCities.join(
+            ", "
+          )}`,
+          "Attenzione",
+          "warning"
+        );
+        this.checkblacklist = true;
+      }
+    },
     updateRegion() {
       // mappatura delle province alle regioni:
       const provinceToRegionMap = {
@@ -579,6 +669,15 @@ export default {
       }
     },
     async salvaContatto() {
+      // Controllo se siamo in presenza di blacklist
+      if (this.checkblacklist) {
+        this.$alert(
+          "Non è possibile aggiungere questo contatto in quanto la zona è sulla blacklist",
+          "Attenzione",
+          "warning"
+        );
+        return;
+      }
       // Controllo campi obbligatori
       if (this.tipoPersona === "PF") {
         if (

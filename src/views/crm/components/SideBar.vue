@@ -129,7 +129,7 @@
           >
         </div>
       </CNavItem>
-      <CNavItem>
+      <!-- <CNavItem>
         <div class="side_btn" @click="buttonClicked('follow_up')">
           <div
             class="side_btn_ico"
@@ -142,6 +142,22 @@
           </div>
           <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
             >Follow-up</span
+          >
+        </div>
+      </CNavItem> -->
+      <CNavItem>
+        <div class="side_btn" @click="buttonClicked('social')">
+          <div
+            class="side_btn_ico"
+            v-c-tooltip="{
+              content: 'Follow-up',
+              placement: 'right',
+            }"
+          >
+            <i class="fas fa-share-alt"></i>
+          </div>
+          <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
+            >Social / Email</span
           >
         </div>
       </CNavItem>

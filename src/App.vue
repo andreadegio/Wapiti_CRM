@@ -335,7 +335,7 @@ hr:after {
   margin-bottom: auto;
 }
 .nav-pills .nav-link {
-  font-size: 1.3rem !important;
+  font-size: 1.2vw !important;
   font-weight: 500 !important;
 }
 .active {

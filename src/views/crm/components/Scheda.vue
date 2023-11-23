@@ -1,5 +1,28 @@
 <template>
   <div>
+    <v-dialog v-model="editMode">
+      <v-card>
+        <v-card-title>Modifica Contatto</v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-row v-for="(value, key) in editedCandidato" :key="key">
+              <v-col cols="6">
+                <v-text-field
+                  outlined
+                  v-if="key !== 'id_anagrafica'"
+                  v-model="editedCandidato[key]"
+                  :label="key"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="primary" @click="saveChanges">Salva</v-btn>
+          <v-btn @click="closeEditModal">Annulla</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-list three-line subheader>
       <v-subheader class="display-1"
         >{{ candidato.candidato }}
@@ -16,7 +39,7 @@
                 color="#1f4b6b"
                 v-bind="attrs"
                 v-on="on"
-                class="disabled_input"
+                @click="openEditModal"
               >
                 <i class="fas fa-pencil-alt"></i>
               </v-btn>
@@ -25,7 +48,6 @@
           </v-tooltip>
         </p>
       </v-subheader>
-
       <v-row
         class="mt-2"
         style="background-color: #b2dfdb; border-radius: 10px"
@@ -262,6 +284,8 @@ export default {
       selectedCandidato: {},
       infoWindowOptions: { pixelOffset: { width: 0, height: -30 } },
       infoWindowOpen: false,
+      editMode: false,
+      editedCandidato: { ...this.candidato }, // Clonare il candidato originale
     };
   },
   mounted() {
@@ -269,6 +293,20 @@ export default {
   },
 
   methods: {
+    openEditModal() {
+      this.editMode = true;
+    },
+    closeEditModal() {
+      // Chiudi la modale e annulla le modifiche
+      this.editMode = false;
+      this.editedCandidato = { ...this.candidato }; // Reimposta i dati modificati ai valori originali
+    },
+    saveChanges() {
+      // Salvataggio delle modifiche
+      // Esempio: Aggiorna i dati del candidato originale con i nuovi dati modificati
+      this.candidato = { ...this.editedCandidato };
+      this.editMode = false; // Chiudi la modale dopo il salvataggio
+    },
     indirizzo_completo(candidato) {
       if (candidato.via || candidato.comune || candidato.provincia) {
         return true;

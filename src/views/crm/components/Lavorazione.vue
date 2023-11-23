@@ -262,8 +262,12 @@
             >
               <v-icon>mdi-close</v-icon>
             </v-btn>
-            Lavorazione:&nbsp; {{ candidato.candidato }} &nbsp; contatto
-            inserito in data: &nbsp;{{ candidato.data_ins | formatDate }}
+            Lavorazione:&nbsp; {{ candidato.candidato }} &nbsp;
+            <small>
+              contatto inserito in data: &nbsp;{{
+                candidato.data_ins | formatDate
+              }}</small
+            >
             <v-spacer></v-spacer>
             <v-alert
               dense
@@ -609,13 +613,21 @@ export default {
   computed: {
     anaIncompleta() {
       // criteri per stabilire se l'anagrafica è incompleta
-      if (this.candidato.tel != null && this.candidato.cel != null) {
+
+      if (
+        this.candidato.tipologia == "PF" &&
+        this.candidato.cf != "" &&
+        (this.candidato.tel != null || this.candidato.cel != null) &&
+        this.candidato.mail != null
+      ) {
         return false;
       }
-      if (this.candidato.tipologia == "PF" && this.candidato.cf != "") {
-        return false;
-      }
-      if (this.candidato.tipologia == "PG" && this.candidato.piva != "") {
+      if (
+        this.candidato.tipologia == "PG" &&
+        this.candidato.piva != "" &&
+        (this.candidato.tel != null || this.candidato.cel != null) &&
+        this.candidato.mail != null
+      ) {
         return false;
       }
       return true;

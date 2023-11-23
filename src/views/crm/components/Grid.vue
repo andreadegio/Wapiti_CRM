@@ -138,6 +138,9 @@ export default {
       if (this.gridType === "follow_up") {
         this.step = 8;
       }
+      if (this.gridType === "social") {
+        this.step = 12;
+      }
 
       if (this.step != 0) {
         // Se è stato scelto un pulsante valido allora recupero le liste
@@ -182,7 +185,6 @@ export default {
           } else {
             candidato = item.nome + " " + item.cognome;
           }
-
           return {
             ...item,
             candidato: candidato,
