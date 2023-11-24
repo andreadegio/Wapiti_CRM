@@ -45,6 +45,7 @@
   },
   "crm": {
     "newContatto": "CRM/salvaContatto",
+    "editContatto": "CRM/editContatto",
     "addSource": "CRM/addSource",
     "getSource": "CRM/getSource",
     "getTipo": "CRM/getTipo",

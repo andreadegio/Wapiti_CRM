@@ -1,243 +1,228 @@
 <template>
   <div>
-    <div class="text-center display-1">NUOVO CONTATTO</div>
-    <div>
-      <v-container>
-        <v-form>
-          <v-radio-group v-model="tipoPersona" row class="pb-2">
-            <template v-slot:label>
-              <div>Tipologia</div>
-            </template>
-            <v-radio label="Persona Fisica" value="PF"></v-radio>
-            <v-radio label="Persona Giuridica" value="PG"></v-radio>
-          </v-radio-group>
+    <v-container>
+      <v-form>
+        <v-radio-group v-model="tipoPersona" row class="pb-2">
+          <template v-slot:label>
+            <div>Tipologia</div>
+          </template>
+          <v-radio label="Persona Fisica" value="PF"></v-radio>
+          <v-radio label="Persona Giuridica" value="PG"></v-radio>
+        </v-radio-group>
 
-          <v-row v-if="tipoPersona === 'PF'">
+        <v-row v-if="tipoPersona === 'PF'">
+          <v-col cols="12" sm="4" md="4">
+            <v-text-field outlined v-model="nome" label="Nome *"></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="4" md="4">
+            <v-text-field
+              outlined
+              v-model="cognome"
+              label="Cognome *"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="4" md="4">
+            <v-text-field
+              outlined
+              v-model="cf"
+              label="Codice Fiscale"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col v-if="tipoPersona === 'PG'" cols="12" sm="4" md="4">
+            <v-text-field
+              outlined
+              v-model="ragioneSociale"
+              label="Ragione Sociale *"
+            ></v-text-field>
+          </v-col>
+          <v-col v-if="tipoPersona === 'PG'" cols="12" sm="4" md="4">
+            <v-text-field
+              outlined
+              v-model="partitaIva"
+              label="Partita IVA *"
+            ></v-text-field>
+          </v-col>
+          <v-col v-if="tipoPersona === 'PG'" cols="12" sm="4" md="4">
+            <v-text-field
+              outlined
+              v-model="referente"
+              label="Referente"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+        <section :class="{ disabled_input: tipoPersona === '' }">
+          <v-row>
             <v-col cols="12" sm="4" md="4">
               <v-text-field
                 outlined
-                v-model="nome"
-                label="Nome *"
+                v-model="agenzia"
+                label="Agenzia"
               ></v-text-field>
             </v-col>
             <v-col cols="12" sm="4" md="4">
-              <v-text-field
+              <v-select
+                id="originOption"
                 outlined
-                v-model="cognome"
-                label="Cognome *"
-              ></v-text-field>
+                v-model="provenienza"
+                :items="originiOptions"
+                item-value="id_origin"
+                item-text="desc"
+                label="Origine del contatto"
+              ></v-select>
+              <div class="nuova_origine" @click="addOriginOption()">
+                <i class="fas fa-plus-circle fa-2x"> </i>
+                <p style="margin-left: 0.5rem">Aggiungi nuova origine</p>
+              </div>
             </v-col>
             <v-col cols="12" sm="4" md="4">
+              <v-select
+                outlined
+                v-model="tipologia"
+                :items="tipologiaOptions"
+                item-value="id_tipologia"
+                item-text="desc"
+                label="Tipologia"
+              ></v-select
+            ></v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="12" sm="2" md="2">
+              <v-radio-group v-model="iscrittoRui" row class="iscrittoRui">
+                <template v-slot:label>
+                  <div>Iscritto al RUI</div>
+                </template>
+                <v-radio label="Si" value="si"></v-radio>
+                <v-radio label="No" value="no" checked></v-radio>
+              </v-radio-group>
+            </v-col>
+            <v-col cols="12" sm="3" md="3">
               <v-text-field
                 outlined
-                v-model="cf"
-                label="Codice Fiscale"
+                v-if="iscrittoRui === 'si'"
+                v-model="numeroIscrizione"
+                label="Numero Iscrizione"
+              ></v-text-field
+            ></v-col>
+            <v-col cols="12" sm="3" md="3">
+              <v-text-field
+                outlined
+                v-if="iscrittoRui === 'si'"
+                v-model="dataIscrizione"
+                label="Data Iscrizione"
+                type="date"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field
+                outlined
+                v-model="cellulare"
+                label="Cellulare"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field
+                outlined
+                v-model="telefono"
+                label="Telefono"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field
+                outlined
+                v-model="email"
+                label="Email"
               ></v-text-field>
             </v-col>
           </v-row>
           <v-row>
-            <v-col v-if="tipoPersona === 'PG'" cols="12" sm="4" md="4">
+            <v-col cols="12" sm="4" md="4">
+              <v-text-field outlined v-model="via" label="Via"></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="4" md="4">
               <v-text-field
                 outlined
-                v-model="ragioneSociale"
-                label="Ragione Sociale *"
+                v-model="civico"
+                label="N° Civico"
               ></v-text-field>
             </v-col>
-            <v-col v-if="tipoPersona === 'PG'" cols="12" sm="4" md="4">
+            <v-col cols="12" sm="4" md="4">
               <v-text-field
                 outlined
-                v-model="partitaIva"
-                label="Partita IVA *"
+                v-model="cap"
+                label="CAP"
+              ></v-text-field> </v-col
+          ></v-row>
+          <v-row>
+            <v-col cols="12" sm="4" md="4">
+              <v-text-field
+                outlined
+                v-model="comune"
+                label="Comune"
               ></v-text-field>
             </v-col>
-            <v-col v-if="tipoPersona === 'PG'" cols="12" sm="4" md="4">
+
+            <v-col cols="12" md="4" sm="4">
+              <v-select
+                outlined
+                id="province"
+                v-model="provincia"
+                @change="updateRegion"
+                :items="province"
+                label="Provincia"
+              ></v-select>
+            </v-col>
+
+            <v-col cols="12" md="4" sm="4">
               <v-text-field
                 outlined
-                v-model="referente"
-                label="Referente"
+                readonly
+                id="regione"
+                v-model="regione"
+                label="Regione"
               ></v-text-field>
             </v-col>
           </v-row>
-          <section :class="{ disabled_input: tipoPersona === '' }">
-            <v-row>
-              <v-col cols="12" sm="4" md="4">
-                <v-text-field
-                  outlined
-                  v-model="agenzia"
-                  label="Agenzia"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="4" md="4">
-                <v-select
-                  id="originOption"
-                  outlined
-                  v-model="provenienza"
-                  :items="originiOptions"
-                  item-value="id_origin"
-                  item-text="desc"
-                  label="Origine del contatto"
-                ></v-select>
-                <div class="nuova_origine" @click="addOriginOption()">
-                  <i class="fas fa-plus-circle fa-2x"> </i>
-                  <p style="margin-left: 0.5rem">Aggiungi nuova origine</p>
-                </div>
-              </v-col>
-              <v-col cols="12" sm="4" md="4">
-                <v-select
-                  outlined
-                  v-model="tipologia"
-                  :items="tipologiaOptions"
-                  item-value="id_tipologia"
-                  item-text="desc"
-                  label="Tipologia"
-                ></v-select
-              ></v-col>
-              <!-- <v-col cols="12" sm="3" md="3">
-                <v-select
-                  outlined
-                  v-model="priorita"
-                  :items="['Alta', 'Normale']"
-                  label="Priorità"
-                ></v-select>
-              </v-col> -->
-            </v-row>
-            <v-row>
-              <v-col cols="12" sm="2" md="2">
-                <v-radio-group v-model="iscrittoRui" row class="iscrittoRui">
-                  <template v-slot:label>
-                    <div>Iscritto al RUI</div>
-                  </template>
-                  <v-radio label="Si" value="si"></v-radio>
-                  <v-radio label="No" value="no" checked></v-radio>
-                </v-radio-group>
-              </v-col>
-              <v-col cols="12" sm="3" md="3">
-                <v-text-field
-                  outlined
-                  v-if="iscrittoRui === 'si'"
-                  v-model="numeroIscrizione"
-                  label="Numero Iscrizione"
-                ></v-text-field
-              ></v-col>
-              <v-col cols="12" sm="3" md="3">
-                <v-text-field
-                  outlined
-                  v-if="iscrittoRui === 'si'"
-                  v-model="dataIscrizione"
-                  label="Data Iscrizione"
-                  type="date"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-
-            <v-row>
-              <v-col cols="12" sm="6" md="4">
-                <v-text-field
-                  outlined
-                  v-model="cellulare"
-                  label="Cellulare"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6" md="4">
-                <v-text-field
-                  outlined
-                  v-model="telefono"
-                  label="Telefono"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6" md="4">
-                <v-text-field
-                  outlined
-                  v-model="email"
-                  label="Email"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col cols="12" sm="4" md="4">
-                <v-text-field outlined v-model="via" label="Via"></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="4" md="4">
-                <v-text-field
-                  outlined
-                  v-model="civico"
-                  label="N° Civico"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="4" md="4">
-                <v-text-field
-                  outlined
-                  v-model="cap"
-                  label="CAP"
-                ></v-text-field> </v-col
-            ></v-row>
-            <v-row>
-              <v-col cols="12" sm="4" md="4">
-                <v-text-field
-                  outlined
-                  v-model="comune"
-                  label="Comune"
-                ></v-text-field>
-              </v-col>
-
-              <v-col cols="12" md="4" sm="4">
-                <v-select
-                  outlined
-                  id="province"
-                  v-model="provincia"
-                  @change="updateRegion"
-                  :items="province"
-                  label="Provincia"
-                ></v-select>
-              </v-col>
-
-              <v-col cols="12" md="4" sm="4">
-                <v-text-field
-                  outlined
-                  readonly
-                  id="regione"
-                  v-model="regione"
-                  label="Regione"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-            <v-row class="border mb-4">
-              <v-col cols="12" sm="6" md="4" class="text-center h5">
-                Profili social:
-              </v-col>
-              <v-col cols="12" sm="6" md="4">
-                <v-text-field
-                  outlined
-                  prepend-inner-icon="mdi-facebook"
-                  v-model="facebook"
-                  label="Facebook"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6" md="4">
-                <v-text-field
-                  outlined
-                  prepend-inner-icon="mdi-linkedin"
-                  v-model="linkedin"
-                  label="Linkedin"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-textarea v-model="note" label="Note" outlined></v-textarea>
-            </v-row>
-            <v-row>
-              <v-btn
-                color="primary"
-                elevation="2"
-                large
-                @click="salvaContatto()"
-                >Salva</v-btn
-              >
-            </v-row>
-          </section>
-        </v-form>
-      </v-container>
-    </div>
+          <v-row class="border pb-0">
+            <v-col cols="12" sm="6" md="4" class="text-center h5">
+              Profili social:
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field
+                outlined
+                prepend-inner-icon="mdi-facebook"
+                v-model="facebook"
+                label="Facebook"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field
+                outlined
+                prepend-inner-icon="mdi-linkedin"
+                v-model="linkedin"
+                label="Linkedin"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row class="mt-4">
+            <CButton
+              class="mx-2"
+              color="danger"
+              @click="$emit('annulla')"
+              variant="ghost"
+              ><i class="fas fa-times"></i>&nbsp; Annulla
+            </CButton>
+            <v-btn color="#1f4b6b" dark @click="salvaModifiche()"
+              ><i class="far fa-save"></i> &nbsp; Salva
+            </v-btn>
+          </v-row>
+        </section>
+      </v-form>
+    </v-container>
   </div>
 </template>
 
@@ -245,34 +230,39 @@
 import axios from "axios";
 
 export default {
+  props: {
+    candidato: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
-      tipoPersona: "",
-      nome: "",
-      cognome: "",
-      cf: "",
-      ragioneSociale: "",
-      partitaIva: "",
-      referente: "",
-      agenzia: "",
-      provenienza: "",
-      tipologia: "",
+      tipoPersona: this.candidato.pf_pg,
+      nome: this.candidato.nome,
+      cognome: this.candidato.cognome,
+      cf: this.candidato.cf,
+      ragioneSociale: this.candidato.rag_soc,
+      partitaIva: this.candidato.piva,
+      referente: this.candidato.referente,
+      agenzia: this.candidato.agenzia,
+      provenienza: null,
+      tipologia: this.candidato.id_tipologia.toString(),
       priorita: "Normale",
-      iscrittoRui: "no",
-      cellulare: "",
-      telefono: "",
-      email: "",
-      linkedin: "",
-      facebook: "",
-      via: "",
-      civico: "",
-      comune: "",
-      provincia: "",
-      regione: "",
-      cap: "",
-      numeroIscrizione: "",
-      dataIscrizione: null,
-      note: "",
+      iscrittoRui: this.candidato.numRui != "" ? "si" : "no",
+      cellulare: this.candidato.cell,
+      telefono: this.candidato.telefono,
+      email: this.candidato.mail,
+      via: this.candidato.via,
+      civico: this.candidato.civico,
+      comune: this.candidato.comune,
+      provincia: this.candidato.provincia,
+      regione: this.candidato.regione,
+      cap: this.candidato.cap,
+      numeroIscrizione: this.candidato.numRui,
+      dataIscrizione: this.candidato.dataRui,
+      facebook: this.candidato.facebook,
+      linkedin: this.candidato.linkedin,
       originiOptions: [],
       tipologiaOptions: [],
       province: [
@@ -449,19 +439,6 @@ export default {
     provincia() {
       this.isBlackList(this.provincia);
       this.isBlackListCity(this.provincia);
-    },
-    tipoPersona() {
-      // Inizializzo i campi se passo da una tipologia all'altra
-      this.nome = "";
-      this.cognome = "";
-      this.cf = "";
-      this.ragioneSociale = "";
-      this.partitaIva = "";
-      this.referente = " ";
-    },
-    iscrittoRui() {
-      this.numeroIscrizione = "";
-      this.dataIscrizione = null;
     },
   },
   methods: {
@@ -671,6 +648,12 @@ export default {
           )
           .then((response) => {
             this.originiOptions = response.data;
+            const matchingOption = this.originiOptions.find(
+              (option) => option.desc == this.candidato.origine
+            );
+            if (matchingOption) {
+              this.provenienza = matchingOption.id_origin;
+            }
           });
       } catch (error) {
         console.error(error);
@@ -691,7 +674,35 @@ export default {
         console.error(error);
       }
     },
-    async salvaContatto() {
+    async salvaModifiche() {
+      //   let datiAggiornati = {
+      //     id_anagrafica: this.candidato.id_anagrafica,
+      //     id_step: this.candidato.id_step,
+      //     id_tipologia: this.tipologia,
+      //     pf_pg: this.tipoPersona,
+      //     nome: this.nome,
+      //     cognome: this.cognome,
+      //     agenzia: this.agenzia,
+      //     rag_soc: this.ragioneSociale,
+      //     referente: this.referente,
+      //     cf: this.cf,
+      //     piva: this.partitaIva,
+      //     id_origin: this.provenienza,
+      //     priorita: "Normale",
+      //     numRui: this.numeroIscrizione,
+      //     dataRui: this.dataIscrizione,
+      //     cell: this.cellulare,
+      //     telefono: this.telefono,
+      //     mail: this.email,
+      //     linkedin: this.linkedin,
+      //     facebook: this.facebook,
+      //     via: this.via,
+      //     civico: this.civico,
+      //     cap: this.cap,
+      //     comune: this.comune,
+      //     provincia: this.provincia,
+      //     regione: this.regione,
+      //   };
       // Controllo se siamo in presenza di blacklist
       if (this.checkblacklist) {
         this.$alert(
@@ -729,7 +740,6 @@ export default {
           return;
         }
       }
-      // Controllo formale dei dati
       var param = {
         utente: JSON.parse(localStorage.getItem("chisono_data")).Nominativo,
         idUtente: JSON.parse(localStorage.getItem("chisono_data")).idUtente,
@@ -758,7 +768,8 @@ export default {
         cap: this.cap,
         numeroIscrizione: this.numeroIscrizione,
         dataIscrizione: this.dataIscrizione,
-        note: this.note,
+        id_anagrafica: this.candidato.id_anagrafica,
+        step: this.candidato.id_step,
       };
       // invio i dati al backend
       try {
@@ -766,15 +777,16 @@ export default {
           .post(
             this.$custom_json.base_url +
               this.$custom_json.api_url +
-              this.$custom_json.crm.newContatto,
+              this.$custom_json.crm.editContatto,
             param
           )
           .then((response) => {
             var message = response.data.message;
             switch (response.data.esito) {
               case "OK":
-                this.$alert(message, "OK", "success");
-                this.$emit("showgrid", "default");
+                // this.$alert(message, "OK", "success");
+
+                this.$emit("saveChanges");
                 break;
               case "KO":
                 this.$alert(message, "Attenzione", "warning");

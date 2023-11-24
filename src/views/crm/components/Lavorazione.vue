@@ -286,7 +286,10 @@
               </v-btn>
             </v-toolbar-items>
           </v-toolbar>
-          <scheda :candidato="candidato"></scheda>
+          <scheda
+            :candidato="candidato"
+            @updateCandidato="updateCandidato"
+          ></scheda>
           <v-divider></v-divider>
           <section id="modalita_contatto">
             <h3 style="color: #1f4b6b">
@@ -295,7 +298,24 @@
             <small
               >Seleziona il metodo utilizzato per contattare il candidato</small
             >
+
             <v-row>
+              <v-overlay v-if="candidato.richiama" :value="candidato.richiama">
+                <v-alert color="blue" dense elevation="6" type="error">
+                  La chiamata è stata programmata per il giorno
+                  {{ candidato.richiama[0].giorno | formatDate }} alle ore
+                  {{ candidato.richiama[0].orario }}</v-alert
+                >
+                <v-btn
+                  color="#1f4b6b"
+                  @click="
+                    dialog = false;
+                    resetBeforeClose();
+                  "
+                >
+                  Chiudi scheda
+                </v-btn>
+              </v-overlay>
               <v-col cols="12" sm="6" md="6">
                 <v-radio-group v-model="metodoContatto" row>
                   <v-radio
@@ -316,7 +336,7 @@
                 </v-radio-group>
               </v-col>
               <v-col
-                v-if="metodoContatto === 'telefono'"
+                v-if="metodoContatto == 'telefono'"
                 cols="12"
                 sm="4"
                 md="4"
@@ -489,6 +509,9 @@ export default {
     scheda,
   },
   props: ["step", "itemId", "candidato"],
+  mounted() {
+    this.checkRichiama();
+  },
   watch: {
     metodoContatto() {
       this.preferenzaDemo = false;
@@ -546,6 +569,32 @@ export default {
     };
   },
   methods: {
+    checkRichiama() {
+      //controllo se il candidato è allo step è 2 (richiama)
+      if (this.candidato.richiama) {
+        const giornoRichiamo = new Date(this.candidato.richiama[0].giorno);
+        const oggi = new Date();
+
+        // Trasformo le date in formato "YYYY-MM-DD" per poterle confrontare correttamente
+        const formattedGiornoRichiamo = giornoRichiamo
+          .toISOString()
+          .slice(0, 10);
+        const formattedOggi = oggi.toISOString().slice(0, 10);
+
+        if (formattedGiornoRichiamo === formattedOggi) {
+          // La data è odierna
+          console.log("Il richiamo è oggi!");
+          this.candidato._classes = "green accent-3";
+        } else if (formattedGiornoRichiamo > formattedOggi) {
+          // La data è futura
+          console.log("Il richiamo è in futuro.");
+        } else {
+          // La data è già trascorsa
+          console.log("Il richiamo è già passato.");
+          this.candidato._classes = "red";
+        }
+      }
+    },
     resetBeforeClose() {
       this.metodoContatto = null;
       this.accetta = false;
@@ -608,6 +657,9 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    updateCandidato() {
+      this.$emit("aggiorna_grid", this.step);
     },
   },
   computed: {

@@ -2,25 +2,16 @@
   <div>
     <v-dialog v-model="editMode">
       <v-card>
-        <v-card-title>Modifica Contatto</v-card-title>
+        <v-card-title>Modifica {{ candidato.candidato }}</v-card-title>
         <v-card-text>
           <v-container>
-            <v-row v-for="(value, key) in editedCandidato" :key="key">
-              <v-col cols="6">
-                <v-text-field
-                  outlined
-                  v-if="key !== 'id_anagrafica'"
-                  v-model="editedCandidato[key]"
-                  :label="key"
-                ></v-text-field>
-              </v-col>
-            </v-row>
+            <editContatto
+              :candidato="editedCandidato"
+              @saveChanges="saveChanges"
+              @annulla="editMode = !editMode"
+            ></editContatto>
           </v-container>
         </v-card-text>
-        <v-card-actions>
-          <v-btn color="primary" @click="saveChanges">Salva</v-btn>
-          <v-btn @click="closeEditModal">Annulla</v-btn>
-        </v-card-actions>
       </v-card>
     </v-dialog>
     <v-list three-line subheader>
@@ -66,7 +57,9 @@
           <v-list-item>
             <v-list-item-content>
               <v-list-item-title>Telefono</v-list-item-title>
-              <v-list-item-subtitle>{{ candidato.tel }}</v-list-item-subtitle>
+              <v-list-item-subtitle>{{
+                candidato.telefono
+              }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-col>
@@ -121,7 +114,9 @@
           <v-list-item>
             <v-list-item-content>
               <v-list-item-title>Iscrizione RUI</v-list-item-title>
-              <v-list-item-subtitle>{{ candidato.type }}</v-list-item-subtitle>
+              <v-list-item-subtitle>{{
+                candidato.numRui
+              }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </v-col>
@@ -130,7 +125,7 @@
             <v-list-item-content>
               <v-list-item-title>Provenienza</v-list-item-title>
               <v-list-item-subtitle>{{
-                candidato.contact_origin
+                candidato.origine
               }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
@@ -142,7 +137,7 @@
             <v-list-item-content>
               <v-list-item-title>Regione</v-list-item-title>
               <v-list-item-subtitle>{{
-                candidato.region
+                candidato.regione
               }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
@@ -268,7 +263,11 @@ Vue.use(VueGoogleMaps, {
   },
   installComponents: true,
 });
+import editContatto from "./edit.vue";
 export default {
+  components: {
+    editContatto,
+  },
   name: "scheda",
   props: {
     candidato: {
@@ -299,12 +298,13 @@ export default {
     closeEditModal() {
       // Chiudi la modale e annulla le modifiche
       this.editMode = false;
-      this.editedCandidato = { ...this.candidato }; // Reimposta i dati modificati ai valori originali
     },
     saveChanges() {
       // Salvataggio delle modifiche
       // Esempio: Aggiorna i dati del candidato originale con i nuovi dati modificati
-      this.candidato = { ...this.editedCandidato };
+      // console.log(datiAggiornati);
+      // this.candidato = { ...datiAggiornati };
+      this.$emit("updateCandidato");
       this.editMode = false; // Chiudi la modale dopo il salvataggio
     },
     indirizzo_completo(candidato) {
