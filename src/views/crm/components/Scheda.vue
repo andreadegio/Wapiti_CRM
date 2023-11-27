@@ -14,12 +14,52 @@
         </v-card-text>
       </v-card>
     </v-dialog>
+    <v-dialog v-model="logMode" width="600px">
+      <v-card>
+        <v-card-title>
+          <span class="text-h5"
+            >Cronologia delle operazioni sul candidato
+            {{ candidato.candidato }}</span
+          >
+        </v-card-title>
+        <v-card-text>
+          <logCandidato
+            :candidato="candidato"
+            @annulla="logMode = !logMode"
+          ></logCandidato>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn outlined color="blue-grey" text @click="logMode = !logMode">
+            <i class="fas fa-times"></i>&nbsp; chiudi
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-list three-line subheader>
       <v-subheader class="display-1"
         >{{ candidato.candidato }}
-        <!-- <v-btn color="warning" fab x-small dark class="ml-2">
+        <!-- <v-btn color="warning" fab x-small class="ml-2">
           <v-icon>mdi-alarm</v-icon>
         </v-btn> -->
+        <p style="margin-bottom: 0px !important; margin-left: 1rem">
+          <v-tooltip bottom color="#1f4b6b">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                color="warning"
+                fab
+                x-small
+                class="ml-2"
+                v-bind="attrs"
+                v-on="on"
+                @click="openLogModal"
+              >
+                <v-icon>mdi-alarm</v-icon>
+              </v-btn>
+            </template>
+            <span>Cronologia Operazioni</span>
+          </v-tooltip>
+        </p>
         <p style="margin-bottom: 0px !important; margin-left: 1rem">
           <v-tooltip bottom color="#1f4b6b">
             <template v-slot:activator="{ on, attrs }">
@@ -38,6 +78,12 @@
             <span>Modifica contatto</span>
           </v-tooltip>
         </p>
+
+        <v-alert dense type="warning" v-if="candidato.richiama" class="ml-4">
+          Attenzione il candidato è stato già contattato
+          {{ candidato.richiama.length }}
+          {{ candidato.richiama.length > 1 ? "volte" : "volta" }}</v-alert
+        >
       </v-subheader>
       <v-row
         class="mt-2"
@@ -264,9 +310,11 @@ Vue.use(VueGoogleMaps, {
   installComponents: true,
 });
 import editContatto from "./edit.vue";
+import logCandidato from "./logCandidato.vue";
 export default {
   components: {
     editContatto,
+    logCandidato,
   },
   name: "scheda",
   props: {
@@ -284,6 +332,7 @@ export default {
       infoWindowOptions: { pixelOffset: { width: 0, height: -30 } },
       infoWindowOpen: false,
       editMode: false,
+      logMode: false,
       editedCandidato: { ...this.candidato }, // Clonare il candidato originale
     };
   },
@@ -295,9 +344,16 @@ export default {
     openEditModal() {
       this.editMode = true;
     },
+    openLogModal() {
+      this.logMode = true;
+    },
     closeEditModal() {
       // Chiudi la modale e annulla le modifiche
       this.editMode = false;
+    },
+    closeLogModal() {
+      // Chiudi la modale e annulla le modifiche
+      this.logMode = false;
     },
     saveChanges() {
       // Salvataggio delle modifiche

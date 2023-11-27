@@ -209,16 +209,14 @@
             </v-col>
           </v-row>
           <v-row class="mt-4">
-            <CButton
-              class="mx-2"
-              color="danger"
-              @click="$emit('annulla')"
-              variant="ghost"
-              ><i class="fas fa-times"></i>&nbsp; Annulla
-            </CButton>
-            <v-btn color="#1f4b6b" dark @click="salvaModifiche()"
-              ><i class="far fa-save"></i> &nbsp; Salva
-            </v-btn>
+            <v-card-actions>
+              <v-btn color="red" outlined @click="$emit('annulla')">
+                <i class="fas fa-times"></i>&nbsp; Annulla
+              </v-btn>
+              <v-btn color="#1f4b6b" dark @click="salvaModifiche()"
+                ><i class="far fa-save"></i> &nbsp; Salva
+              </v-btn>
+            </v-card-actions>
           </v-row>
         </section>
       </v-form>

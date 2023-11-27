@@ -280,16 +280,78 @@
               Attenzione la scheda anagrafica è incompleta</v-alert
             >
             <v-spacer></v-spacer>
-            <v-toolbar-items>
+            <!-- <v-toolbar-items>
               <v-btn text dark @click="dialog2 = true"
                 ><i class="fas fa-save fa-2x"></i> &nbsp; Salva
               </v-btn>
-            </v-toolbar-items>
+            </v-toolbar-items> -->
           </v-toolbar>
           <scheda
             :candidato="candidato"
             @updateCandidato="updateCandidato"
           ></scheda>
+          <v-overlay
+            v-if="candidato.richiama"
+            :value="candidato.richiama && !forzaChiamata"
+          >
+            <div v-if="scadenza == 'waiting'">
+              <v-alert color="blue" dense elevation="6" type="error">
+                La chiamata è stata programmata per il giorno
+                {{ candidato.richiama[0].giorno | formatDate }} alle ore
+                {{ candidato.richiama[0].orario }}</v-alert
+              >
+              <v-btn
+                color="blue-grey lighten-2"
+                @click="
+                  dialog = false;
+                  resetBeforeClose();
+                "
+              >
+                Chiudi scheda
+              </v-btn>
+              <v-btn color="success" @click="forzaChiamata = true" class="ml-4">
+                Chiama adesso
+              </v-btn>
+            </div>
+            <div v-if="scadenza == 'oggi'">
+              <v-alert color="green" dense elevation="6" type="error">
+                La chiamata è stata programmata per oggi alle ore
+                {{ candidato.richiama[0].orario }}</v-alert
+              >
+              <v-btn
+                color="blue-grey lighten-2"
+                @click="
+                  dialog = false;
+                  resetBeforeClose();
+                "
+              >
+                Chiudi scheda
+              </v-btn>
+              <v-btn color="success" @click="forzaChiamata = true" class="ml-4">
+                Chiama adesso
+              </v-btn>
+            </div>
+            <div v-if="scadenza == 'scaduto'">
+              <v-alert color="red" dense elevation="6" type="error">
+                Appuntamento scaduto. La chiamata era stata programmata per il
+                giorno
+                {{ candidato.richiama[0].giorno | formatDate }} alle ore
+                {{ candidato.richiama[0].orario }}</v-alert
+              >
+              <v-btn
+                color="blue-grey lighten-2"
+                @click="
+                  dialog = false;
+                  resetBeforeClose();
+                "
+              >
+                Chiudi scheda
+              </v-btn>
+              <v-btn color="warning" @click="forzaChiamata = true" class="ml-4">
+                Chiama adesso
+              </v-btn>
+            </div>
+          </v-overlay>
           <v-divider></v-divider>
           <section id="modalita_contatto">
             <h3 style="color: #1f4b6b">
@@ -300,22 +362,6 @@
             >
 
             <v-row>
-              <v-overlay v-if="candidato.richiama" :value="candidato.richiama">
-                <v-alert color="blue" dense elevation="6" type="error">
-                  La chiamata è stata programmata per il giorno
-                  {{ candidato.richiama[0].giorno | formatDate }} alle ore
-                  {{ candidato.richiama[0].orario }}</v-alert
-                >
-                <v-btn
-                  color="#1f4b6b"
-                  @click="
-                    dialog = false;
-                    resetBeforeClose();
-                  "
-                >
-                  Chiudi scheda
-                </v-btn>
-              </v-overlay>
               <v-col cols="12" sm="6" md="6">
                 <v-radio-group v-model="metodoContatto" row>
                   <v-radio
@@ -495,6 +541,22 @@
             </v-row>
           </section>
           <v-divider></v-divider>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="blue-grey"
+              outlined
+              @click="
+                dialog = false;
+                resetBeforeClose();
+              "
+            >
+              <i class="fas fa-times"></i>&nbsp; Chiudi
+            </v-btn>
+            <v-btn color="#1f4b6b" dark @click="dialog2 = true"
+              ><i class="fas fa-save fa-2x"></i> &nbsp; Salva
+            </v-btn>
+          </v-card-actions>
         </v-container>
       </v-card>
     </v-dialog>
@@ -510,7 +572,7 @@ export default {
   },
   props: ["step", "itemId", "candidato"],
   mounted() {
-    this.checkRichiama();
+    this.checkScadenza();
   },
   watch: {
     metodoContatto() {
@@ -536,6 +598,8 @@ export default {
   },
   data() {
     return {
+      scadenza: "waiting",
+      forzaChiamata: false,
       today: new Date().toISOString().substr(0, 10),
       dialog: false,
       dialog2: false,
@@ -569,8 +633,8 @@ export default {
     };
   },
   methods: {
-    checkRichiama() {
-      //controllo se il candidato è allo step è 2 (richiama)
+    checkScadenza() {
+      //assegno la scadenza
       if (this.candidato.richiama) {
         const giornoRichiamo = new Date(this.candidato.richiama[0].giorno);
         const oggi = new Date();
@@ -583,19 +647,19 @@ export default {
 
         if (formattedGiornoRichiamo === formattedOggi) {
           // La data è odierna
-          console.log("Il richiamo è oggi!");
-          this.candidato._classes = "green accent-3";
+          this.scadenza = "oggi";
         } else if (formattedGiornoRichiamo > formattedOggi) {
           // La data è futura
-          console.log("Il richiamo è in futuro.");
+          this.scadenza = "waiting";
         } else {
           // La data è già trascorsa
-          console.log("Il richiamo è già passato.");
-          this.candidato._classes = "red";
+          this.scadenza = "scaduto";
         }
       }
     },
     resetBeforeClose() {
+      this.scadenza = "waiting";
+      this.forzaChiamata = false;
       this.metodoContatto = null;
       this.accetta = false;
       this.rifiuta = false;
@@ -664,12 +728,10 @@ export default {
   },
   computed: {
     anaIncompleta() {
-      // criteri per stabilire se l'anagrafica è incompleta
-
       if (
         this.candidato.tipologia == "PF" &&
         this.candidato.cf != "" &&
-        (this.candidato.tel != null || this.candidato.cel != null) &&
+        (this.candidato.telefono != null || this.candidato.cell != null) &&
         this.candidato.mail != null
       ) {
         return false;
@@ -677,7 +739,7 @@ export default {
       if (
         this.candidato.tipologia == "PG" &&
         this.candidato.piva != "" &&
-        (this.candidato.tel != null || this.candidato.cel != null) &&
+        (this.candidato.telefono != null || this.candidato.cell != null) &&
         this.candidato.mail != null
       ) {
         return false;
