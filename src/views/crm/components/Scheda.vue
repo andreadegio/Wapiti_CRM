@@ -24,7 +24,9 @@
         </v-card-title>
         <v-card-text>
           <logCandidato
+            v-if="logMode"
             :candidato="candidato"
+            :listaLog="logData"
             @annulla="logMode = !logMode"
           ></logCandidato>
         </v-card-text>
@@ -57,7 +59,7 @@
                 <v-icon>mdi-alarm</v-icon>
               </v-btn>
             </template>
-            <span>Cronologia Operazioni</span>
+            <span>Cronologia</span>
           </v-tooltip>
         </p>
         <p style="margin-bottom: 0px !important; margin-left: 1rem">
@@ -299,6 +301,7 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 import geojson from "./../../../../public/geojson/geojson.json";
 import Vue from "vue";
 import * as VueGoogleMaps from "vue2-google-maps";
@@ -344,8 +347,22 @@ export default {
     openEditModal() {
       this.editMode = true;
     },
-    openLogModal() {
-      this.logMode = true;
+    async openLogModal() {
+      let params = {
+        idAnagrafica: this.candidato.id_anagrafica,
+      };
+      try {
+        const response = await axios.post(
+          this.$custom_json.base_url +
+            this.$custom_json.api_url +
+            this.$custom_json.crm.getLogByIdAnagrafica,
+          params
+        );
+        this.logData = response.data;
+        this.logMode = true;
+      } catch (error) {
+        console.error("Errore durante il recupero dei log:", error);
+      }
     },
     closeEditModal() {
       // Chiudi la modale e annulla le modifiche
