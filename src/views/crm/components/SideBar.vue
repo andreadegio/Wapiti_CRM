@@ -150,7 +150,7 @@
           <div
             class="side_btn_ico"
             v-c-tooltip="{
-              content: 'Follow-up',
+              content: 'Social / Email',
               placement: 'right',
             }"
           >

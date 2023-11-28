@@ -18,7 +18,7 @@
       <v-card>
         <v-card-title>
           <span class="text-h5"
-            >Cronologia delle operazioni sul candidato
+            >Cronologia delle operazioni sul candidato<br />
             {{ candidato.candidato }}</span
           >
         </v-card-title>
