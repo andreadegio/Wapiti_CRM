@@ -53,7 +53,10 @@
     "lavoraContatto": "CRM/lavoraContatto",
     "eliminaContatto": "CRM/eliminaContatto",
     "insertNota": "CRM/insertNota",
-    "getLogByIdAnagrafica": "CRM/getLogByIdAnagrafica"
+    "getLogByIdAnagrafica": "CRM/getLogByIdAnagrafica",
+    "getFilesById": "CRM/getFilesById",
+    "getListaDocs": "CRM/getListaDocs",
+    "getPresignedUrl": "CRM/getPresignedUrl"
   },
   "servizi_broker": "https://servizi.documentale.cloud/AibaJSON2023-test/",
   "servizi_energy": "https://abyenergy.it/servizitest/",

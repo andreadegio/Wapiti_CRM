@@ -162,9 +162,11 @@
           <v-list-item>
             <v-list-item-content>
               <v-list-item-title>Iscrizione RUI</v-list-item-title>
-              <v-list-item-subtitle>{{
-                candidato.numRui
-              }}</v-list-item-subtitle>
+              <v-list-item-subtitle
+                >{{ candidato.RUI }} (n°{{
+                  candidato.numRui
+                }})</v-list-item-subtitle
+              >
             </v-list-item-content>
           </v-list-item>
         </v-col>

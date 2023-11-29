@@ -31,7 +31,16 @@
       <template #actions="row">
         <td>
           <div class="d-flex">
+            <ValidaDoc
+              v-if="row.item.id_step == 9"
+              class="ml-2"
+              :itemId="row.item.id"
+              :candidato="row.item"
+              :step="step"
+              @aggiorna_grid="aggiorna_grid"
+            ></ValidaDoc>
             <Lavorazione
+              v-if="row.item.id_step != 9"
               class="ml-2"
               :itemId="row.item.id"
               :candidato="row.item"
@@ -55,11 +64,13 @@
 import axios from "axios";
 import Note from "./Note.vue";
 import Lavorazione from "./Lavorazione.vue";
+import ValidaDoc from "./ValidaDoc.vue";
 import Elimina from "./Elimina.vue";
 export default {
   name: "Grid",
   components: {
     Note,
+    ValidaDoc,
     Lavorazione,
     Elimina,
   },
@@ -146,44 +157,6 @@ export default {
       if (this.step != 0) {
         // Se è stato scelto un pulsante valido allora recupero le liste
         this.aggiorna_grid(this.step);
-        // this.getLista(this.step).then((candidati) => {
-        //   this.items = candidati.map((item) => {
-        //     if (item.rag_soc) {
-        //       var candidato = item.rag_soc;
-        //     } else {
-        //       candidato = item.nome + " " + item.cognome;
-        //     }
-        //     if (this.items.richiama) {
-        //       const giornoRichiamo = new Date(
-        //         this.candidato.richiama[0].giorno
-        //       );
-        //       const oggi = new Date();
-
-        //       // Trasformo le date in formato "YYYY-MM-DD" per poterle confrontare correttamente
-        //       const formattedGiornoRichiamo = giornoRichiamo
-        //         .toISOString()
-        //         .slice(0, 10);
-        //       const formattedOggi = oggi.toISOString().slice(0, 10);
-
-        //       if (formattedGiornoRichiamo === formattedOggi) {
-        //         // La data è odierna
-        //         console.log("Il richiamo è oggi!");
-        //         this.items._classes = "green accent-3";
-        //       } else if (formattedGiornoRichiamo > formattedOggi) {
-        //         // La data è futura
-        //         console.log("Il richiamo è in futuro.");
-        //       } else {
-        //         // La data è già trascorsa
-        //         console.log("Il richiamo è già passato.");
-        //         this.items._classes = "red";
-        //       }
-        //     }
-        //     return {
-        //       ...item,
-        //       candidato: candidato,
-        //     };
-        //   });
-        // });
       }
     },
 
