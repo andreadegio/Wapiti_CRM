@@ -56,7 +56,9 @@
     "getLogByIdAnagrafica": "CRM/getLogByIdAnagrafica",
     "getFilesById": "CRM/getFilesById",
     "getListaDocs": "CRM/getListaDocs",
-    "getPresignedUrl": "CRM/getPresignedUrl"
+    "getPresignedUrl": "CRM/getPresignedUrl",
+    "validaDocs": "CRM/validaDocs",
+    "rifiutaDocs": "CRM/rifiutaDocs"
   },
   "servizi_broker": "https://servizi.documentale.cloud/AibaJSON2023-test/",
   "servizi_energy": "https://abyenergy.it/servizitest/",

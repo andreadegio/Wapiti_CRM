@@ -19,6 +19,31 @@
         </v-card-text>
       </v-card>
     </v-dialog>
+    <v-dialog v-model="showMotivationModal" max-width="600">
+      <v-card>
+        <v-card-title> Motivazione del rifiuto </v-card-title>
+        <v-card-text>
+          <v-list v-for="(file, index) in selectedDocuments" :key="index">
+            <v-list-item>
+              <v-list-item-content>
+                {{ file.label }}
+                <v-text-field
+                  v-model="file.motivation"
+                  label="Motivazione del rifiuto"
+                  outlined
+                  counter="100"
+                  :rules="[(v) => !!v || 'Inserisci la motivazione']"
+                ></v-text-field>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="red" text @click="cancelRefuse">Annulla</v-btn>
+          <v-btn color="red" @click="confirmRefuse">Conferma</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-dialog
       v-model="dialog"
       fullscreen
@@ -140,7 +165,7 @@
                     <td>
                       <v-checkbox
                         v-if="item.validato != 1"
-                        v-model="item.selected"
+                        v-model="item.selezionato"
                         :disabled="item.validato === null"
                       ></v-checkbox>
                     </td>
@@ -150,35 +175,26 @@
             </v-simple-table>
           </section>
           <v-divider></v-divider>
-          <section>
-            <div>
-              <h3 style="color: #1f4b6b">
-                <strong>Opzioni:</strong>
-              </h3>
-              <small
-                >Scegli se procedere, rifiutare, programmare una demo oppure
-                riprogrammare la call
-              </small>
-
-              <v-row> </v-row>
+          <section id="Opzioni" class="text-right">
+            <h3 style="color: #1f4b6b">
+              <strong>Opzioni:</strong>
+            </h3>
+            <small>Scegli se validare o rifiutare i file selezionati </small>
+            <div class="options-container">
+              <v-btn color="#1f4b6b" dark @click="validaDocumenti">
+                <i class="fas fa-check-circle fa-2x"></i> &nbsp; Valida
+              </v-btn>
+              <v-btn class="ml-2" color="red" dark @click="rifiutaDocumenti">
+                <i class="fas fa-times-circle fa-2x"></i> &nbsp; Rifiuta
+              </v-btn>
             </div>
           </section>
 
           <v-divider></v-divider>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn
-              color="blue-grey"
-              outlined
-              @click="
-                dialog = false;
-                resetBeforeClose();
-              "
-            >
+            <v-btn color="blue-grey" outlined @click="dialog = false">
               <i class="fas fa-times"></i>&nbsp; Chiudi
-            </v-btn>
-            <v-btn color="#1f4b6b" dark @click="dialog2 = true"
-              ><i class="fas fa-save fa-2x"></i> &nbsp; Salva
             </v-btn>
           </v-card-actions>
         </v-container>
@@ -197,20 +213,131 @@ export default {
   props: ["step", "itemId", "candidato"],
   data() {
     return {
-      selected: [],
+      selectedDocuments: [],
       previewFileName: "",
       fileRichiesti: [],
       uploadedFiles: [],
       today: new Date().toISOString().substr(0, 10),
       dialog: false,
       preview: false,
+      showMotivationModal: false,
       previewUrl: "",
       user: JSON.parse(localStorage.getItem("chisono_data")),
     };
   },
   methods: {
+    async validaDocumenti() {
+      const selectedDocumentsToValidate = this.fileRichiesti.filter(
+        (doc) => doc.selezionato
+      );
+      // lista dei documenti selezionati
+      this.selectedDocuments = selectedDocumentsToValidate;
+      if (this.selectedDocuments.length === 0) {
+        this.$alert("Selezionare almeno un documento", "Attenzine", "warning");
+        return;
+      }
+      let params = {
+        elencoFile: this.selectedDocuments,
+        idUtente: this.user["idUtente"],
+        nomeUtente: this.user["Nominativo"],
+      };
+      try {
+        await axios
+          .post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.crm.validaDocs,
+            params
+          )
+          .then((response) => {
+            var message = response.data.message;
+            switch (response.data.esito) {
+              case "OK":
+                this.$alert(message, "OK", "success");
+                break;
+              case "KO":
+                this.$alert(message, "Attenzione", "warning");
+                break;
+            }
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    rifiutaDocumenti() {
+      const selectedDocumentsToReject = this.fileRichiesti.filter(
+        (doc) => doc.selezionato
+      );
+      this.selectedDocuments = selectedDocumentsToReject;
+      if (this.selectedDocuments.length === 0) {
+        this.$alert("Selezionare almeno un documento", "Attenzione", "warning");
+        return;
+      }
+      this.showMotivationModal = true;
+    },
+    cancelRefuse() {
+      // Chiudi la modale e resetta le motivazioni
+      this.showMotivationModal = false;
+      this.selectedDocuments.forEach((file) => {
+        file.motivation = ""; // Resetta le motivazioni inserite
+      });
+    },
+
+    async confirmRefuse() {
+      // Verifica se tutte le motivazioni sono state inserite
+      const motivazioniIncomplete = this.selectedDocuments.some(
+        (file) => !file.motivation
+      );
+
+      if (motivazioniIncomplete) {
+        // Mostra un messaggio all'utente o gestisci in base alle tue esigenze
+        alert("Si prega di compilare tutte le motivazioni prima di procedere.");
+        return; // Interrompi il processo se le motivazioni non sono state inserite per tutti i file
+      }
+      // Invia i dati al backend
+      const motivazioni = this.selectedDocuments.map((file) => ({
+        idDoc: file.idDoc,
+        motivation: file.motivation,
+      }));
+      let params = {
+        elencoFile: motivazioni,
+        idUtente: this.user["idUtente"],
+        nomeUtente: this.user["Nominativo"],
+      };
+      try {
+        await axios
+          .post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.crm.rifiutaDocs,
+            params
+          )
+          .then((response) => {
+            var message = response.data.message;
+            switch (response.data.esito) {
+              case "OK":
+                this.$alert(message, "OK", "success");
+                break;
+              case "KO":
+                this.$alert(message, "Attenzione", "warning");
+                break;
+            }
+          });
+      } catch (error) {
+        console.log(error);
+      }
+      // Chiudi la modale e resetta le motivazioni
+      this.showMotivationModal = false;
+      this.selectedDocuments.forEach((file) => {
+        file.motivation = ""; // Resetta le motivazioni inserite
+      });
+    },
+
     updateCandidato() {
       this.$emit("aggiorna_grid", this.step);
+      this.getFileRichiesti();
+      this.getUploadedFiles();
     },
     async getUploadedFiles() {
       let params = {
@@ -280,10 +407,11 @@ export default {
           if (uploadedDoc) {
             // console.log("trovato");
             // Se il documento è stato trovato in uploadedFiles, aggiorna i valori in file richiesti
+            docRic.idDoc = uploadedDoc.id;
             docRic.validato = uploadedDoc.validato;
             docRic.data_ins = uploadedDoc.data_ins;
             docRic.disabled = true;
-            // docRic.selezionato = uploadedDoc.validato == 1 ? true : false;
+            docRic.selezionato = false; //utilizzato per marcare i doc da validare o rifiutare
           }
         });
       }
@@ -341,5 +469,10 @@ export default {
 .disabled_input {
   pointer-events: none;
   opacity: 0.5;
+}
+.options-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 </style>
