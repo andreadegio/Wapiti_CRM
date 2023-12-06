@@ -9,15 +9,19 @@ BEGIN
         a.pf_pg AS tipologia,
         t.desc AS RUI,
         p.desc AS origine,
-        a.rui as numRui
+        a.rui as numRui,
+        d.giorno as giorno_demo,
+        d.orario as orario_demo        
     FROM
         crm_anagrafica a
     INNER JOIN
         crm_provenienza p ON a.id_origin = p.id_origin
     INNER JOIN
         crm_tipologia t ON a.id_tipologia = t.id_tipologia
-	 INNER JOIN
+	INNER JOIN
         crm_step s ON a.id_step = s.id_step
+	LEFT JOIN
+		crm_demo d ON a.id_anagrafica = d.id_anagrafica
     WHERE
 		a.active = 1
         and a.id_step IN (',step_value,')

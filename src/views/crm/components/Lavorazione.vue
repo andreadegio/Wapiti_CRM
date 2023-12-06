@@ -31,7 +31,8 @@
           <v-container>
             <div class="text-h5" style="color: #1f4b6b">
               Conferma di aver contattato <br />
-              {{ candidato.candidato }} <br />tramite {{ metodoContatto }}
+              {{ candidato.candidato }} <br />tramite
+              {{ metodoContatto }}
             </div>
             <section>
               <div
@@ -138,7 +139,8 @@
           <v-container>
             <div class="text-h5" style="color: #1f4b6b">
               Conferma di aver contattato <br />
-              {{ candidato.candidato }} <br />tramite {{ metodoContatto }}
+              {{ candidato.candidato }} <br />tramite
+              {{ metodoContatto == "forza_mail" ? "mail" : "mail" }}
             </div>
             <section>
               <div
@@ -186,7 +188,9 @@
                   </template>
                 </v-checkbox>
                 <v-checkbox
-                  v-if="metodoContatto == 'email'"
+                  v-if="
+                    metodoContatto == 'email' || metodoContatto == 'forza_mail'
+                  "
                   style="font-weight: 600"
                   v-model="confermaMail"
                   label="Conferma di voler contattare tramite l'invio della mail"
@@ -246,7 +250,7 @@
     >
       <template v-slot:activator="{ on, attrs }">
         <v-btn color="#1f4b6b" dark v-bind="attrs" v-on="on">
-          <i class="fas fa-user-edit"> </i> &nbsp;Gestisci
+          <i class="fas fa-user-edit"> </i> &nbsp;Contatta
         </v-btn>
       </template>
       <v-card>
@@ -353,193 +357,208 @@
             </div>
           </v-overlay>
           <v-divider></v-divider>
-          <section id="modalita_contatto">
-            <h3 style="color: #1f4b6b">
-              <strong>Modalità di contatto:</strong>
-            </h3>
-            <small
-              >Seleziona il metodo utilizzato per contattare il candidato</small
+          <div v-if="candidato.richiama && candidato.richiama.length > 2">
+            <p class="h5" style="color: red">
+              Sono stati fatti già {{ candidato.richiama.length }} tentativi di
+              contatto telefonico, inviare un email al candidato oppure
+              rimuoverlo
+            </p>
+            <v-btn
+              color="#1f4b6b"
+              dark
+              @click="(dialog2 = true), (metodoContatto = 'forza_mail')"
+              >Invia Mail</v-btn
             >
-
-            <v-row>
-              <v-col cols="12" sm="6" md="6">
-                <v-radio-group v-model="metodoContatto" row>
-                  <v-radio
-                    label="Telefono"
-                    value="telefono"
-                    :disabled="!candidato.tel && !candidato.cell"
-                  ></v-radio>
-                  <v-radio
-                    label="Email"
-                    value="email"
-                    :disabled="richiama || !candidato.mail"
-                  ></v-radio>
-                  <v-radio
-                    label="Social"
-                    value="social"
-                    :disabled="richiama"
-                  ></v-radio>
-                </v-radio-group>
-              </v-col>
-              <v-col
-                v-if="metodoContatto == 'telefono'"
-                cols="12"
-                sm="4"
-                md="4"
-                :class="{
-                  disabled_input: richiama || rifiuta,
-                }"
+          </div>
+          <div v-if="candidato.richiama && candidato.richiama.length <= 2">
+            <section id="modalita_contatto">
+              <h3 style="color: #1f4b6b">
+                <strong>Modalità di contatto:</strong>
+              </h3>
+              <small
+                >Seleziona il metodo utilizzato per contattare il
+                candidato</small
               >
-                <v-btn color="warning">Questionario assuntivo</v-btn>
-              </v-col>
-            </v-row>
-          </section>
-          <v-divider></v-divider>
-          <v-tooltip
-            top
-            :color="metodoContatto !== 'telefono' ? 'warning' : 'transparent'"
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <section v-bind="attrs" v-on="on" id="opzioni_contatto">
-                <div
+              <v-row>
+                <v-col cols="12" sm="6" md="6">
+                  <v-radio-group v-model="metodoContatto" row>
+                    <v-radio
+                      label="Telefono"
+                      value="telefono"
+                      :disabled="!candidato.tel && !candidato.cell"
+                    ></v-radio>
+                    <v-radio
+                      label="Email"
+                      value="email"
+                      :disabled="richiama || !candidato.mail"
+                    ></v-radio>
+                    <v-radio
+                      label="Social"
+                      value="social"
+                      :disabled="richiama"
+                    ></v-radio>
+                  </v-radio-group>
+                </v-col>
+                <v-col
+                  v-if="metodoContatto == 'telefono'"
+                  cols="12"
+                  sm="4"
+                  md="4"
                   :class="{
-                    disabled_input:
-                      !metodoContatto || metodoContatto != 'telefono',
+                    disabled_input: richiama || rifiuta,
                   }"
                 >
-                  <h3 style="color: #1f4b6b">
-                    <strong>Opzioni:</strong>
-                  </h3>
-                  <small
-                    >Scegli se procedere, rifiutare, programmare una demo oppure
-                    riprogrammare la call
-                  </small>
-                  <v-row>
-                    <v-col
-                      cols="12"
-                      sm="4"
-                      md="4"
-                      :class="{
-                        disabled_input: richiama || rifiuta || preferenzaDemo,
-                      }"
-                    >
-                      <v-checkbox
-                        style="font-weight: 600; color: #1f4b6b !important"
-                        v-model="accetta"
-                        :checked="preferenzaDemo"
-                        :label="'Accetta / Interessato'"
-                      ></v-checkbox>
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      sm="4"
-                      md="4"
-                      :class="{
-                        disabled_input: richiama || accetta || preferenzaDemo,
-                      }"
-                    >
-                      <v-checkbox
-                        style="font-weight: 600; color: #1f4b6b !important"
-                        v-model="rifiuta"
-                        color="red darken-3"
-                        :label="'Rifiuta / Non interessato'"
-                      ></v-checkbox>
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col
-                      cols="12"
-                      sm="4"
-                      md="4"
-                      :class="{ disabled_input: richiama || rifiuta }"
-                    >
-                      <v-checkbox
-                        style="font-weight: 600; color: #1f4b6b !important"
-                        v-model="preferenzaDemo"
-                        :label="'Prenota una Demo'"
-                      ></v-checkbox>
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      sm="4"
-                      md="4"
-                      :class="{
-                        disabled_input: rifiuta || accetta || preferenzaDemo,
-                      }"
-                    >
-                      <v-checkbox
-                        style="font-weight: 600; color: #1f4b6b !important"
-                        v-model="richiama"
-                        :label="'Riprogramma telefonata'"
-                      ></v-checkbox>
-                    </v-col>
-                  </v-row>
-                </div>
-              </section>
-            </template>
-            <span v-if="metodoContatto !== 'telefono'"
-              >Disponibili solo per contatto telefonico</span
+                  <v-btn color="warning">Questionario assuntivo</v-btn>
+                </v-col>
+              </v-row>
+            </section>
+            <v-divider></v-divider>
+            <v-tooltip
+              top
+              :color="metodoContatto !== 'telefono' ? 'warning' : 'transparent'"
             >
-          </v-tooltip>
-          <v-divider v-if="preferenzaDemo || richiama"></v-divider>
-          <section>
-            <v-row>
-              <v-col cols="12" sm="4" md="4" v-if="preferenzaDemo">
-                <div>
-                  <v-date-picker
-                    v-model="dataDemo"
-                    color="#1f4b6b"
-                    no-title
-                    locale="it-it"
-                    format="dd/MM/yyyy"
-                    :min="today"
-                  ></v-date-picker>
-                </div>
-              </v-col>
-              <v-col cols="12" sm="4" md="4" v-if="preferenzaDemo">
-                <div>
-                  <v-select
-                    v-model="oraDemo"
-                    label="Orario appuntamento"
-                    prepend-inner-icon="mdi-clock-time-four-outline"
-                    outlined
-                    :items="rangeOrari"
-                  ></v-select>
-                </div>
-              </v-col>
-              <v-col cols="12" sm="4" md="4" v-if="richiama">
-                <div>
-                  <v-date-picker
-                    v-model="dataChiamata"
-                    color="#1f4b6b"
-                    no-title
-                    locale="it-it"
-                    format="dd/MM/yyyy"
-                    :min="today"
-                  ></v-date-picker>
-                </div>
-              </v-col>
-              <v-col cols="12" sm="4" md="4" v-if="richiama">
-                <div>
-                  <v-select
-                    v-model="oraChiamata"
-                    label="Orario nuova chiamata"
-                    prepend-inner-icon="mdi-clock-time-four-outline"
-                    outlined
-                    :items="rangeOrari"
-                  ></v-select>
-                </div>
-                <div>
-                  <v-textarea
-                    v-model="motivoRichiama"
-                    rows="3"
-                    label="Motivo"
-                    outlined
-                  ></v-textarea>
-                </div>
-              </v-col>
-            </v-row>
-          </section>
+              <template v-slot:activator="{ on, attrs }">
+                <section v-bind="attrs" v-on="on" id="opzioni_contatto">
+                  <div
+                    :class="{
+                      disabled_input:
+                        !metodoContatto || metodoContatto != 'telefono',
+                    }"
+                  >
+                    <h3 style="color: #1f4b6b">
+                      <strong>Opzioni:</strong>
+                    </h3>
+                    <small
+                      >Scegli se procedere, rifiutare, programmare una demo
+                      oppure riprogrammare la call
+                    </small>
+                    <v-row>
+                      <v-col
+                        cols="12"
+                        sm="4"
+                        md="4"
+                        :class="{
+                          disabled_input: richiama || rifiuta || preferenzaDemo,
+                        }"
+                      >
+                        <v-checkbox
+                          style="font-weight: 600; color: #1f4b6b !important"
+                          v-model="accetta"
+                          :checked="preferenzaDemo"
+                          :label="'Accetta / Interessato'"
+                        ></v-checkbox>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="4"
+                        md="4"
+                        :class="{
+                          disabled_input: richiama || accetta || preferenzaDemo,
+                        }"
+                      >
+                        <v-checkbox
+                          style="font-weight: 600; color: #1f4b6b !important"
+                          v-model="rifiuta"
+                          color="red darken-3"
+                          :label="'Rifiuta / Non interessato'"
+                        ></v-checkbox>
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col
+                        cols="12"
+                        sm="4"
+                        md="4"
+                        :class="{ disabled_input: richiama || rifiuta }"
+                      >
+                        <v-checkbox
+                          style="font-weight: 600; color: #1f4b6b !important"
+                          v-model="preferenzaDemo"
+                          :label="'Prenota una Demo'"
+                        ></v-checkbox>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        sm="4"
+                        md="4"
+                        :class="{
+                          disabled_input: rifiuta || accetta || preferenzaDemo,
+                        }"
+                      >
+                        <v-checkbox
+                          style="font-weight: 600; color: #1f4b6b !important"
+                          v-model="richiama"
+                          :label="'Riprogramma telefonata'"
+                        ></v-checkbox>
+                      </v-col>
+                    </v-row>
+                  </div>
+                </section>
+              </template>
+              <span v-if="metodoContatto !== 'telefono'"
+                >Disponibili solo per contatto telefonico</span
+              >
+            </v-tooltip>
+            <v-divider v-if="preferenzaDemo || richiama"></v-divider>
+            <section>
+              <v-row>
+                <v-col cols="12" sm="4" md="4" v-if="preferenzaDemo">
+                  <div>
+                    <v-date-picker
+                      v-model="dataDemo"
+                      color="#1f4b6b"
+                      no-title
+                      locale="it-it"
+                      format="dd/MM/yyyy"
+                      :min="today"
+                    ></v-date-picker>
+                  </div>
+                </v-col>
+                <v-col cols="12" sm="4" md="4" v-if="preferenzaDemo">
+                  <div>
+                    <v-select
+                      v-model="oraDemo"
+                      label="Orario appuntamento"
+                      prepend-inner-icon="mdi-clock-time-four-outline"
+                      outlined
+                      :items="rangeOrari"
+                    ></v-select>
+                  </div>
+                </v-col>
+                <v-col cols="12" sm="4" md="4" v-if="richiama">
+                  <div>
+                    <v-date-picker
+                      v-model="dataChiamata"
+                      color="#1f4b6b"
+                      no-title
+                      locale="it-it"
+                      format="dd/MM/yyyy"
+                      :min="today"
+                    ></v-date-picker>
+                  </div>
+                </v-col>
+                <v-col cols="12" sm="4" md="4" v-if="richiama">
+                  <div>
+                    <v-select
+                      v-model="oraChiamata"
+                      label="Orario nuova chiamata"
+                      prepend-inner-icon="mdi-clock-time-four-outline"
+                      outlined
+                      :items="rangeOrari"
+                    ></v-select>
+                  </div>
+                  <div>
+                    <v-textarea
+                      v-model="motivoRichiama"
+                      rows="3"
+                      label="Motivo"
+                      outlined
+                    ></v-textarea>
+                  </div>
+                </v-col>
+              </v-row>
+            </section>
+          </div>
           <v-divider></v-divider>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -752,7 +771,10 @@ export default {
           return false;
         }
       }
-      if (this.metodoContatto === "email") {
+      if (
+        this.metodoContatto == "email" ||
+        this.metodoContatto == "forza_mail"
+      ) {
         return !this.confermaMail;
       }
       if (this.metodoContatto === "telefono") {

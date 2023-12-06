@@ -44,6 +44,59 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-dialog v-model="confermaFormazione" max-width="600px" persistent>
+      <v-card class="text-center">
+        <div class="text-center text-h5">Conferma procedura di formazione</div>
+        <v-card-text class="my-4">
+          Confermando permetti l'accesso alla sezione formativa del candidato<br />
+          <b>{{ candidato.candidato }}</b>
+          <br />
+          pur rimanendo dei documenti da ricevere e validare
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="red darken-1"
+            outlined
+            text
+            @click="confermaFormazione = false"
+            >Annulla</v-btn
+          >
+          <v-btn
+            color="green darken-1"
+            dark
+            @click="passaggio_formazione('parziale')"
+            >Conferma</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-dialog v-model="passaggioFormazione" max-width="600px" persistent>
+      <v-card class="text-center">
+        <div class="text-center text-h5">Conferma procedura di formazione</div>
+        <v-card-text class="my-4">
+          Confermando permetti l'accesso alla sezione formativa del candidato<br />
+          <b>{{ candidato.candidato }}</b>
+          <br />
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="red darken-1"
+            outlined
+            text
+            @click="confermaFormazione = false"
+            >Annulla</v-btn
+          >
+          <v-btn
+            color="green darken-1"
+            dark
+            @click="passaggio_formazione('completo')"
+            >Conferma</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-dialog
       v-model="dialog"
       fullscreen
@@ -146,8 +199,9 @@
                           : "Documento validato"
                       }}
                     </td>
-                    <td>
+                    <td style="cursor: pointer; padding: 10px">
                       <v-img
+                        style="border: 1px solid grey"
                         height="100"
                         width="100"
                         v-if="item.validato != null"
@@ -179,12 +233,52 @@
             <h3 style="color: #1f4b6b">
               <strong>Opzioni:</strong>
             </h3>
-            <small>Scegli se validare o rifiutare i file selezionati </small>
+            <small v-if="!tuttiDocumentiValidati"
+              >Scegli se validare o rifiutare i file selezionati
+            </small>
+            <small v-else
+              >Sono stati caricati tutti i documenti avanza alla
+              formazione</small
+            >
             <div class="options-container">
-              <v-btn color="#1f4b6b" dark @click="validaDocumenti">
+              <!-- Tutti i documenti inviati documentazione completa -->
+              <v-btn
+                v-if="tuttiDocumentiValidati && attivaFormazione"
+                color="success"
+                dark
+                @click="passaggioFormazione = true"
+              >
+                <i class="fas fa-check-circle fa-2x"></i> &nbsp; Formazione
+              </v-btn>
+              <!-- Solo documenti obbligatori documentazione parziale -->
+              <v-btn
+                v-if="
+                  attivaFormazione &&
+                  candidato.id_step == 9 &&
+                  !tuttiDocumentiValidati
+                "
+                color="success"
+                dark
+                @click="confermaFormazione = true"
+              >
+                <i class="fas fa-check-circle fa-2x"></i> &nbsp; Formazione
+              </v-btn>
+              <v-btn
+                v-if="!tuttiDocumentiValidati"
+                class="ml-2"
+                color="#1f4b6b"
+                dark
+                @click="validaDocumenti"
+              >
                 <i class="fas fa-check-circle fa-2x"></i> &nbsp; Valida
               </v-btn>
-              <v-btn class="ml-2" color="red" dark @click="rifiutaDocumenti">
+              <v-btn
+                v-if="!tuttiDocumentiValidati"
+                class="ml-2"
+                color="red"
+                dark
+                @click="rifiutaDocumenti"
+              >
                 <i class="fas fa-times-circle fa-2x"></i> &nbsp; Rifiuta
               </v-btn>
             </div>
@@ -219,6 +313,8 @@ export default {
       uploadedFiles: [],
       today: new Date().toISOString().substr(0, 10),
       dialog: false,
+      confermaFormazione: false,
+      passaggioFormazione: false,
       preview: false,
       showMotivationModal: false,
       previewUrl: "",
@@ -238,6 +334,7 @@ export default {
       }
       let params = {
         elencoFile: this.selectedDocuments,
+        idCandidato: this.candidato["id_anagrafica"],
         idUtente: this.user["idUtente"],
         nomeUtente: this.user["Nominativo"],
       };
@@ -253,7 +350,9 @@ export default {
             var message = response.data.message;
             switch (response.data.esito) {
               case "OK":
+                this.updateCandidato();
                 this.$alert(message, "OK", "success");
+
                 break;
               case "KO":
                 this.$alert(message, "Attenzione", "warning");
@@ -299,11 +398,14 @@ export default {
       const motivazioni = this.selectedDocuments.map((file) => ({
         idDoc: file.idDoc,
         motivation: file.motivation,
+        label: file.label,
       }));
       let params = {
         elencoFile: motivazioni,
         idUtente: this.user["idUtente"],
         nomeUtente: this.user["Nominativo"],
+        emailCandidato: this.candidato["mail"],
+        candidato: this.candidato,
       };
       try {
         await axios
@@ -318,9 +420,11 @@ export default {
             switch (response.data.esito) {
               case "OK":
                 this.$alert(message, "OK", "success");
+                this.updateCandidato();
                 break;
               case "KO":
                 this.$alert(message, "Attenzione", "warning");
+                this.updateCandidato();
                 break;
             }
           });
@@ -416,6 +520,7 @@ export default {
         });
       }
     },
+
     openPreview(doc) {
       let params = {
         nomeFile: doc.tipo + ".pdf",
@@ -441,8 +546,90 @@ export default {
           // Gestisci l'errore, ad esempio mostrando un messaggio all'utente
         });
     },
+    async passaggio_formazione(tipologia) {
+      console.log(tipologia);
+      if (tipologia == "parziale") {
+        // Passaggio allo stato 13 (Formazione con documentazione incompleta)
+        let params = {
+          nomeUtente: this.user["Nominativo"],
+          idUtente: this.user["idUtente"],
+          idCandidato: this.candidato["id_anagrafica"],
+          emailCandidato: this.candidato["mail"],
+          candidato: this.candidato,
+        };
+        try {
+          await axios
+            .post(
+              this.$custom_json.base_url +
+                this.$custom_json.api_url +
+                this.$custom_json.crm.formazioneNoDocs,
+              params
+            )
+            .then((response) => {
+              var message = response.data.message;
+              switch (response.data.esito) {
+                case "OK":
+                  this.$alert(message, "OK", "success");
+                  this.updateCandidato();
+                  this.passaggioFormazione = false;
+                  break;
+                case "KO":
+                  this.$alert(message, "Attenzione", "warning");
+                  break;
+              }
+            });
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        let params = {
+          nomeUtente: this.user["Nominativo"],
+          idUtente: this.user["idUtente"],
+          idCandidato: this.candidato["id_anagrafica"],
+          emailCandidato: this.candidato["mail"],
+          candidato: this.candidato,
+        };
+        try {
+          await axios
+            .post(
+              this.$custom_json.base_url +
+                this.$custom_json.api_url +
+                this.$custom_json.crm.formazione,
+              params
+            )
+            .then((response) => {
+              var message = response.data.message;
+              switch (response.data.esito) {
+                case "OK":
+                  this.$alert(message, "OK", "success");
+                  this.updateCandidato();
+                  this.confermaFormazione = false;
+                  break;
+                case "KO":
+                  this.$alert(message, "Attenzione", "warning");
+                  break;
+              }
+            });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    },
   },
   computed: {
+    tuttiDocumentiValidati() {
+      return this.fileRichiesti.every((docRic) => {
+        const uploadedDoc = this.uploadedFiles.find(
+          (uploadedDoc) => uploadedDoc.tipo_documento === docRic.tipo
+        );
+        return uploadedDoc && uploadedDoc.validato === 1;
+      });
+    },
+    attivaFormazione() {
+      return this.fileRichiesti
+        .filter((doc) => doc.req)
+        .every((doc) => doc.validato === 1);
+    },
     anaIncompleta() {
       if (
         this.candidato.tipologia == "PF" &&

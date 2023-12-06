@@ -24,15 +24,50 @@
           </div>
         </td>
       </template>
+      <template #candidato="{ item }">
+        <td style="cursor: pointer">{{ item.candidato }}</td>
+      </template>
       <template #data_ins="{ item }">
         <td>{{ item.data_ins | formatDate }}</td>
+      </template>
+      <template #giorno_demo="{ item }">
+        <td>{{ item.giorno_demo | formatDate }} ore {{ item.orario_demo }}</td>
       </template>
 
       <template #actions="row">
         <td>
           <div class="d-flex">
+            <Attivazione
+              v-if="gridType === 'attivazione_account'"
+              class="ml-2"
+              :itemId="row.item.id"
+              :candidato="row.item"
+              :step="step"
+              @aggiorna_grid="aggiorna_grid"
+            ></Attivazione>
+            <Formazione
+              v-if="gridType === 'formazione'"
+              class="ml-2"
+              :itemId="row.item.id"
+              :candidato="row.item"
+              :step="step"
+              @aggiorna_grid="aggiorna_grid"
+            ></Formazione>
+            <Demo
+              v-if="row.item.id_step == 3"
+              class="ml-2"
+              :itemId="row.item.id"
+              :candidato="row.item"
+              :step="step"
+              @aggiorna_grid="aggiorna_grid"
+            ></Demo>
             <ValidaDoc
-              v-if="row.item.id_step == 9"
+              v-if="
+                row.item.id_step == 9 ||
+                row.item.id_step == 5 ||
+                row.item.id_step == 13 ||
+                row.item.id_step == 14
+              "
               class="ml-2"
               :itemId="row.item.id"
               :candidato="row.item"
@@ -40,7 +75,7 @@
               @aggiorna_grid="aggiorna_grid"
             ></ValidaDoc>
             <Lavorazione
-              v-if="row.item.id_step != 9"
+              v-if="gridType === 'primo_contatto'"
               class="ml-2"
               :itemId="row.item.id"
               :candidato="row.item"
@@ -48,6 +83,14 @@
               @aggiorna_grid="aggiorna_grid"
               @updateCandidato="getLista"
             ></Lavorazione>
+            <Informazioni
+              class="ml-2"
+              :itemId="row.item.id"
+              :candidato="row.item"
+              :step="step"
+              @aggiorna_grid="aggiorna_grid"
+              @updateCandidato="getLista"
+            ></Informazioni>
             <Note :itemId="row.item.id" :candidato="row.item.candidato"></Note>
             <Elimina
               :candidato="row.item"
@@ -66,6 +109,10 @@ import Note from "./Note.vue";
 import Lavorazione from "./Lavorazione.vue";
 import ValidaDoc from "./ValidaDoc.vue";
 import Elimina from "./Elimina.vue";
+import Demo from "./Demo.vue";
+import Formazione from "./Formazione.vue";
+import Attivazione from "./Attivazione.vue";
+import Informazioni from "./Informazioni.vue";
 export default {
   name: "Grid",
   components: {
@@ -73,6 +120,10 @@ export default {
     ValidaDoc,
     Lavorazione,
     Elimina,
+    Demo,
+    Formazione,
+    Attivazione,
+    Informazioni,
   },
   props: {
     gridType: {
@@ -106,17 +157,33 @@ export default {
   methods: {
     updateFields() {
       // Logica per aggiornare il valore di "fields" in base a "gridType"
-      this.fields = [
-        { key: "stato", label: "Stato" },
-        { key: "tipologia", label: "PF/PG" },
-        { key: "candidato", label: "Candidato" },
-        { key: "RUI", label: "RUI" },
-        { key: "origine", label: "Fonte" },
-        { key: "provincia", label: "Provincia" },
-        { key: "regione", label: "Regione" },
-        { key: "data_ins", label: "Inserito il" },
-        { key: "actions", label: "Azioni" },
-      ];
+      switch (this.gridType) {
+        case "webinar":
+          this.fields = [
+            { key: "stato", label: "Stato" },
+            { key: "tipologia", label: "PF/PG" },
+            { key: "candidato", label: "Candidato" },
+            { key: "giorno_demo", label: "Appuntamento" },
+            { key: "regione", label: "Regione" },
+            { key: "data_ins", label: "Inserito il" },
+            { key: "actions", label: "Azioni" },
+          ];
+          break;
+
+        default:
+          this.fields = [
+            { key: "stato", label: "Stato" },
+            { key: "tipologia", label: "PF/PG" },
+            { key: "candidato", label: "Candidato" },
+            { key: "RUI", label: "RUI" },
+            { key: "origine", label: "Fonte" },
+            { key: "provincia", label: "Provincia" },
+            { key: "regione", label: "Regione" },
+            { key: "data_ins", label: "Inserito il" },
+            { key: "actions", label: "Azioni" },
+          ];
+          break;
+      }
     },
     updateItems() {
       // Logica per aggiornare il valore di "items" in base a "gridType"
@@ -136,11 +203,11 @@ export default {
         // stato = "Sollecito";
       }
       if (this.gridType === "registrazione_documentazione") {
-        this.step = [5, 9];
+        this.step = [5, 9, 13, 14];
         // stato = "Registrazione";
       }
       if (this.gridType === "formazione") {
-        this.step = 6;
+        this.step = [6, 13, 14];
         // stato = "Formazione";
       }
       if (this.gridType === "attivazione_account") {

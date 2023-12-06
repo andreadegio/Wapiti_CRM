@@ -41,9 +41,6 @@
     <v-list three-line subheader>
       <v-subheader class="display-1"
         >{{ candidato.candidato }}
-        <!-- <v-btn color="warning" fab x-small class="ml-2">
-          <v-icon>mdi-alarm</v-icon>
-        </v-btn> -->
         <p style="margin-bottom: 0px !important; margin-left: 1rem">
           <v-tooltip bottom color="#1f4b6b">
             <template v-slot:activator="{ on, attrs }">
@@ -60,6 +57,24 @@
               </v-btn>
             </template>
             <span>Cronologia</span>
+          </v-tooltip>
+        </p>
+        <p style="margin-bottom: 0px !important; margin-left: 1rem">
+          <v-tooltip bottom color="#1f4b6b">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                color="primary"
+                fab
+                x-small
+                class="ml-2"
+                v-bind="attrs"
+                v-on="on"
+                @click="openNoteModal"
+              >
+                <i class="far fa-edit"></i>
+              </v-btn>
+            </template>
+            <span>Visualizza Note</span>
           </v-tooltip>
         </p>
         <p style="margin-bottom: 0px !important; margin-left: 1rem">
@@ -350,6 +365,23 @@ export default {
       this.editMode = true;
     },
     async openLogModal() {
+      let params = {
+        idAnagrafica: this.candidato.id_anagrafica,
+      };
+      try {
+        const response = await axios.post(
+          this.$custom_json.base_url +
+            this.$custom_json.api_url +
+            this.$custom_json.crm.getLogByIdAnagrafica,
+          params
+        );
+        this.logData = response.data;
+        this.logMode = true;
+      } catch (error) {
+        console.error("Errore durante il recupero dei log:", error);
+      }
+    },
+    async openNoteModal() {
       let params = {
         idAnagrafica: this.candidato.id_anagrafica,
       };

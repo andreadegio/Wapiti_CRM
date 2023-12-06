@@ -58,7 +58,12 @@
     "getListaDocs": "CRM/getListaDocs",
     "getPresignedUrl": "CRM/getPresignedUrl",
     "validaDocs": "CRM/validaDocs",
-    "rifiutaDocs": "CRM/rifiutaDocs"
+    "rifiutaDocs": "CRM/rifiutaDocs",
+    "formazioneNoDocs": "CRM/formazioneNoDocs",
+    "formazione": "CRM/formazione",
+    "accettaDemo": "CRM/accettaDemo",
+    "completaFormazione": "CRM/completaFormazione",
+    "AttivaCandidato": "CRM/AttivaCandidato"
   },
   "servizi_broker": "https://servizi.documentale.cloud/AibaJSON2023-test/",
   "servizi_energy": "https://abyenergy.it/servizitest/",

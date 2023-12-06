@@ -1,51 +1,46 @@
 <template>
   <v-dialog v-model="dialog2" max-width="600px" persistent>
     <template v-slot:activator="{ on, attrs }">
-      <!-- <v-btn color="blue-grey" dark v-bind="attrs" v-on="on" class="ml-2">
-        <i class="far fa-edit"></i> Aggiungi nota
-      </v-btn> -->
-      <CButton
-        v-bind="attrs"
-        v-on="on"
-        class="mx-2"
-        color="danger"
-        variant="ghost"
-        ><i class="fas fa-user-slash"></i>&nbsp;Rifiuta
-      </CButton>
+      <v-btn color="#1f4b6b" dark v-bind="attrs" v-on="on"
+        ><i class="fas fa-chalkboard-teacher"></i>&nbsp;Formazione
+      </v-btn>
     </template>
     <v-card class="text-center">
       <v-card-text>
         <v-container>
-          <div class="text-h5" style="color: darkred">
-            Conferma di voler eliminare <br />
-            {{ candidato.candidato }}
+          <div class="text-h5" style="color: #1f4b6b">
+            Il Candidato <br />
+            {{ candidato.candidato }} <br />
+            ha completato la sessione formativa
           </div>
           <section>
             <div class="container pb-0">
               <div class="pb-3 font-weight-bold h5">
-                Scrivi la motivazione per cui vuoi eliminare il candidato
+                Descrivi come si è svolta la formazione
               </div>
 
-              <v-textarea rows="4" outlined v-model="notaDel"></v-textarea>
+              <v-textarea
+                rows="4"
+                outlined
+                v-model="notaFormazione"
+              ></v-textarea>
             </div>
             <v-divider class="mt-0"></v-divider>
-            <v-row align-content="center">
-              <v-checkbox
-                style="font-weight: 600; color: darkred !important"
-                color="red darken-3"
-                v-model="confermaDel"
-              >
-                <template v-slot:label>
-                  <span style="color: darkred !important"
-                    >Confermando elimini il contato dall'elenco</span
-                  >
-                </template>
-              </v-checkbox>
+            <v-row class="text-center">
+              <v-container>
+                <v-row>
+                  <v-checkbox style="font-weight: 600" v-model="prosegui">
+                    <template v-slot:label>
+                      <span>Conferma di aver terminato la formazione</span>
+                    </template>
+                  </v-checkbox>
+                </v-row>
+              </v-container>
             </v-row>
             <v-row>
               <v-col cols="12" sm="6" md="6">
                 <small>
-                  Eliminato in data e ora<br />
+                  Salvato in data e ora<br />
                   <strong>{{ new Date().toLocaleString("it-IT") }}</strong>
                 </small>
               </v-col>
@@ -72,11 +67,12 @@
           ><i class="fas fa-times"></i>&nbsp; Annulla
         </CButton>
         <v-btn
+          v-if="prosegui"
           color="#1f4b6b"
           dark
-          @click="(dialog2 = false), EliminaContatto()"
+          @click="(dialog2 = false), AvanzaCandidato()"
           :class="{ disabled_input: isSaveButtonDisabled }"
-          ><i class="far fa-trash-alt"></i> &nbsp;Elimina
+          ><i class="far fa-save"></i> &nbsp;Salva
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -85,11 +81,11 @@
 <script>
 import axios from "axios";
 export default {
-  name: "RimuoviContatto",
+  name: "Formazione",
   props: ["candidato", "step"],
   computed: {
     isSaveButtonDisabled() {
-      if (this.notaDel && this.confermaDel) {
+      if (this.notaFormazione && this.prosegui) {
         return false;
       }
       return true;
@@ -98,16 +94,17 @@ export default {
   data() {
     return {
       dialog2: false,
-      notaDel: "",
-      confermaDel: false,
+      notaFormazione: "",
+
+      prosegui: false,
       user: JSON.parse(localStorage.getItem("chisono_data")),
     };
   },
   methods: {
-    async EliminaContatto() {
+    async AvanzaCandidato() {
       let params = {
         contatto: this.candidato,
-        notaDel: this.notaDel || "",
+        notaFormazione: this.notaFormazione || "",
         utente: this.user,
       };
       try {
@@ -115,7 +112,7 @@ export default {
           .post(
             this.$custom_json.base_url +
               this.$custom_json.api_url +
-              this.$custom_json.crm.eliminaContatto,
+              this.$custom_json.crm.completaFormazione,
             params
           )
           .then((response) => {
@@ -134,9 +131,10 @@ export default {
         console.log(error);
       }
     },
+
     resetModaleConferme() {
-      this.confermaDel = false;
-      this.notaDel = "";
+      this.prosegui = false;
+      this.notaFormazione = "";
     },
   },
 };

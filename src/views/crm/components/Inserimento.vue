@@ -427,16 +427,13 @@ export default {
           ],
         },
         {
-          "Catania (CT)": [
-            "Adrano",
-            "Gravina",
-            "Misterbianco",
-            "Lentini",
-            "Carlentini",
-          ],
+          "Catania (CT)": ["Adrano", "Gravina", "Misterbianco"],
+        },
+        {
+          "Siracusa (SR)": ["Lentini", "Carlentini", "Priolo"],
         },
         { "Trapani (TP)": ["Castelvetrano", "Castellammare del Golfo"] },
-        { "Caltanisetta (CL)": ["Gela", "Priolo", "Niscemi"] },
+        { "Caltanisetta (CL)": ["Gela", "Niscemi"] },
       ],
       checkblacklist: false,
     };
