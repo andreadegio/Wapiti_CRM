@@ -38,6 +38,30 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-dialog v-model="noteMode" width="600px">
+      <v-card>
+        <v-card-title>
+          <span class="text-h5"
+            >Elenco delle note aggiunte al candidato<br />
+            {{ candidato.candidato }}</span
+          >
+        </v-card-title>
+        <v-card-text>
+          <noteCandidato
+            v-if="noteMode"
+            :candidato="candidato"
+            :listaNote="noteData"
+            @annulla="noteMode = !noteMode"
+          ></noteCandidato>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn outlined color="blue-grey" text @click="noteMode = !noteMode">
+            <i class="fas fa-times"></i>&nbsp; chiudi
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-list three-line subheader>
       <v-subheader class="display-1"
         >{{ candidato.candidato }}
@@ -95,12 +119,6 @@
             <span>Modifica contatto</span>
           </v-tooltip>
         </p>
-
-        <v-alert dense type="warning" v-if="candidato.richiama" class="ml-4">
-          Attenzione il candidato è stato già contattato
-          {{ candidato.richiama.length }}
-          {{ candidato.richiama.length > 1 ? "volte" : "volta" }}</v-alert
-        >
       </v-subheader>
       <v-row
         class="mt-2"
@@ -331,10 +349,12 @@ Vue.use(VueGoogleMaps, {
 });
 import editContatto from "./edit.vue";
 import logCandidato from "./logCandidato.vue";
+import noteCandidato from "./noteCandidato.vue";
 export default {
   components: {
     editContatto,
     logCandidato,
+    noteCandidato,
   },
   name: "scheda",
   props: {
@@ -353,6 +373,9 @@ export default {
       infoWindowOpen: false,
       editMode: false,
       logMode: false,
+      noteMode: false,
+      logData: [],
+      noteData: [],
       editedCandidato: { ...this.candidato }, // Clonare il candidato originale
     };
   },
@@ -389,11 +412,11 @@ export default {
         const response = await axios.post(
           this.$custom_json.base_url +
             this.$custom_json.api_url +
-            this.$custom_json.crm.getLogByIdAnagrafica,
+            this.$custom_json.crm.getNoteByIdAnagrafica,
           params
         );
-        this.logData = response.data;
-        this.logMode = true;
+        this.noteData = response.data;
+        this.noteMode = true;
       } catch (error) {
         console.error("Errore durante il recupero dei log:", error);
       }

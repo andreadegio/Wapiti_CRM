@@ -128,6 +128,14 @@ export default {
       user: JSON.parse(localStorage.getItem("chisono_data")),
     };
   },
+  watch: {
+    confermaDel() {
+      this.confermaDel ? (this.prosegui = false) : this.prosegui;
+    },
+    prosegui() {
+      this.prosegui ? (this.confermaDel = false) : this.confermaDel;
+    },
+  },
   methods: {
     async AvanzaCandidato() {
       let params = {

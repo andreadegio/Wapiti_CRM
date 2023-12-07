@@ -2,7 +2,7 @@
   <v-dialog v-model="dialog" persistent max-width="600px">
     <template v-slot:activator="{ on, attrs }">
       <v-btn color="blue-grey" dark v-bind="attrs" v-on="on" class="ml-2">
-        <i class="far fa-edit"></i>&nbsp;Nota
+        <i class="far fa-edit"></i>&nbsp;Note
       </v-btn>
     </template>
     <v-card>
@@ -74,6 +74,7 @@ export default {
     async saveNote() {
       let params = {
         note: this.nota,
+        fase: "Inserimento Manuale",
         idAnagrafica: this.itemId,
         utente: JSON.parse(localStorage.getItem("chisono_data")),
       };

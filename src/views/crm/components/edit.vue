@@ -673,34 +673,6 @@ export default {
       }
     },
     async salvaModifiche() {
-      //   let datiAggiornati = {
-      //     id_anagrafica: this.candidato.id_anagrafica,
-      //     id_step: this.candidato.id_step,
-      //     id_tipologia: this.tipologia,
-      //     pf_pg: this.tipoPersona,
-      //     nome: this.nome,
-      //     cognome: this.cognome,
-      //     agenzia: this.agenzia,
-      //     rag_soc: this.ragioneSociale,
-      //     referente: this.referente,
-      //     cf: this.cf,
-      //     piva: this.partitaIva,
-      //     id_origin: this.provenienza,
-      //     priorita: "Normale",
-      //     numRui: this.numeroIscrizione,
-      //     dataRui: this.dataIscrizione,
-      //     cell: this.cellulare,
-      //     telefono: this.telefono,
-      //     mail: this.email,
-      //     linkedin: this.linkedin,
-      //     facebook: this.facebook,
-      //     via: this.via,
-      //     civico: this.civico,
-      //     cap: this.cap,
-      //     comune: this.comune,
-      //     provincia: this.provincia,
-      //     regione: this.regione,
-      //   };
       // Controllo se siamo in presenza di blacklist
       if (this.checkblacklist) {
         this.$alert(

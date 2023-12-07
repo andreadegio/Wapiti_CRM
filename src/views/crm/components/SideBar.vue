@@ -161,6 +161,38 @@
           >
         </div>
       </CNavItem>
+      <CNavItem>
+        <div class="side_btn" @click="buttonClicked('utenti_attivi')">
+          <div
+            class="side_btn_ico"
+            v-c-tooltip="{
+              content: 'Utenti attivi',
+              placement: 'right',
+            }"
+          >
+            <i class="fas fa-users"></i>
+          </div>
+          <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
+            >Utenti attivi</span
+          >
+        </div>
+      </CNavItem>
+      <CNavItem>
+        <div class="side_btn_deleted" @click="buttonClicked('eliminati')">
+          <div
+            class="side_btn_ico_deleted"
+            v-c-tooltip="{
+              content: 'Eliminati',
+              placement: 'right',
+            }"
+          >
+            <i class="far fa-trash-alt"></i>
+          </div>
+          <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
+            >Eliminati</span
+          >
+        </div>
+      </CNavItem>
     </CNav>
   </div>
 </template>
@@ -203,13 +235,27 @@ export default {
   border: 1px solid #1f4b6b;
   background-color: #1f4b6b7a;
 }
+.side_btn_deleted {
+  display: flex;
+  border: 1px solid darkred;
+  background-color: rgb(123, 83, 83);
+}
 .side_btn_ico {
   background-color: #1f4b6b;
   padding: 5px;
   color: white;
-  font-size: 2rem;
-  min-width: 50px;
-  min-height: 53px;
+  font-size: 1.3rem;
+  min-width: 40px;
+  min-height: 40px;
+  text-align: center;
+}
+.side_btn_ico_deleted {
+  background-color: darkred;
+  padding: 5px;
+  color: white;
+  font-size: 1.3rem;
+  min-width: 40px;
+  min-height: 40px;
   text-align: center;
 }
 .side_desc {
@@ -217,6 +263,7 @@ export default {
   padding: 5px;
   color: white;
   font-weight: 600;
+  font-size: 0.9rem;
 }
 .sidebar-container {
   width: max-content;

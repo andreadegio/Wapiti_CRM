@@ -15,6 +15,23 @@
           <section>
             <div class="container pb-0">
               <div class="pb-3 font-weight-bold h5">
+                Inserisci le credenziali assegnate per l'accesso alla
+                piattaforma Abyway
+              </div>
+              <v-text-field
+                outlined
+                v-model="username"
+                label="Username"
+              ></v-text-field>
+              <v-text-field
+                v-model="password"
+                outlined
+                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="show1 ? 'text' : 'password'"
+                label="Password"
+                @click:append="show1 = !show1"
+              ></v-text-field>
+              <div class="pb-3 font-weight-bold h5">
                 Breve descrizione sull'attivazione
               </div>
 
@@ -84,7 +101,12 @@ export default {
   props: ["candidato", "step"],
   computed: {
     isSaveButtonDisabled() {
-      if (this.notaAttivazione && this.attiva) {
+      if (
+        this.notaAttivazione &&
+        this.attiva &&
+        this.username &&
+        this.password
+      ) {
         return false;
       }
       return true;
@@ -94,8 +116,10 @@ export default {
     return {
       dialog2: false,
       notaAttivazione: "",
-
+      password: "",
+      username: "",
       attiva: false,
+      show1: false,
       user: JSON.parse(localStorage.getItem("chisono_data")),
     };
   },
@@ -103,6 +127,8 @@ export default {
     async AttivaCandidato() {
       let params = {
         contatto: this.candidato,
+        userBroker: this.username,
+        pwdBroker: this.password,
         notaAttivazione: this.notaAttivazione || "",
         utente: this.user,
       };

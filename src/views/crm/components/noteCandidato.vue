@@ -3,19 +3,19 @@
     <v-timeline-item
       :color="getItemColor(item)"
       small
-      v-for="item in listaLog"
-      :key="item.id_log"
+      v-for="item in listaNote"
+      :key="item.id_note"
     >
       <v-row class="pt-1">
         <v-col cols="3">
-          <strong>{{ item.data | formatDate }}</strong>
+          <strong>{{ item.data_ins | formatDate }}</strong>
         </v-col>
         <v-col>
-          <strong>{{ item.action }}</strong>
+          <strong>{{ item.fase }}</strong>
           <div class="text-caption">
-            {{ item.desc }}
+            {{ item.testo }}
             <br /><cite style="font-size: 0.6rem; color: #1f4b6b !important">{{
-              item.nome_user
+              item.id_user_name
             }}</cite>
           </div>
         </v-col>
@@ -31,7 +31,7 @@ export default {
       type: Object,
       required: true,
     },
-    listaLog: {
+    listaNote: {
       type: Array,
       default: () => [],
     },
@@ -41,16 +41,14 @@ export default {
   },
   methods: {
     getItemColor(item) {
-      return item.action === "NUOVO INSERIMENTO"
+      return item.fase === "NUOVO INSERIMENTO"
         ? "green"
-        : item.action === "ATTIVAZIONE UTENTE"
-        ? "green"
-        : item.action === "ELIMINATO"
+        : item.fase === "ELIMINATO"
         ? "red"
         : this.getTimelineColor(item);
     },
     getTimelineColor(item) {
-      return this.listaLog.indexOf(item) % 2 == 0
+      return this.listaNote.indexOf(item) % 2 === 0
         ? "#1f4b6b"
         : "teal lighten-3";
     },

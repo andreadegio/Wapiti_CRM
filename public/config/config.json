@@ -54,6 +54,7 @@
     "eliminaContatto": "CRM/eliminaContatto",
     "insertNota": "CRM/insertNota",
     "getLogByIdAnagrafica": "CRM/getLogByIdAnagrafica",
+    "getNoteByIdAnagrafica": "CRM/getNoteByIdAnagrafica",
     "getFilesById": "CRM/getFilesById",
     "getListaDocs": "CRM/getListaDocs",
     "getPresignedUrl": "CRM/getPresignedUrl",

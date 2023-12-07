@@ -1,4 +1,4 @@
-<template >
+<template>
   <div>
     <CModal
       color="dark"
@@ -213,10 +213,10 @@
       <CDropdownItem to="/Crm" v-if="admin">
         <i class="fas fa-address-book"></i> <span class="pl-1">CRM</span>
       </CDropdownItem>
-      <CDropdownItem to="/Calendario" v-if="admin">
+      <!-- <CDropdownItem to="/Calendario" v-if="admin">
         <i class="far fa-calendar-alt"></i>
         <span class="pl-1">Appuntamenti</span>
-      </CDropdownItem>
+      </CDropdownItem> -->
       <CDropdownItem to="/Accessi_stat" v-if="admin">
         <i class="far fa-chart-bar"> </i> <span class="pl-1">Accessi</span>
       </CDropdownItem>

@@ -93,6 +93,7 @@
             ></Informazioni>
             <Note :itemId="row.item.id" :candidato="row.item.candidato"></Note>
             <Elimina
+              v-if="gridType != 'eliminati'"
               :candidato="row.item"
               :step="step"
               @aggiorna_grid="aggiorna_grid"
@@ -219,6 +220,12 @@ export default {
       }
       if (this.gridType === "social") {
         this.step = 12;
+      }
+      if (this.gridType === "utenti_attivi") {
+        this.step = 15;
+      }
+      if (this.gridType === "eliminati") {
+        this.step = 10;
       }
 
       if (this.step != 0) {

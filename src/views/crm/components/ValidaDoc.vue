@@ -46,7 +46,7 @@
     </v-dialog>
     <v-dialog v-model="confermaFormazione" max-width="600px" persistent>
       <v-card class="text-center">
-        <div class="text-center text-h5">Conferma procedura di formazione</div>
+        <div class="text-center text-h5">Accesso alla Formazione</div>
         <v-card-text class="my-4">
           Confermando permetti l'accesso alla sezione formativa del candidato<br />
           <b>{{ candidato.candidato }}</b>
@@ -73,7 +73,7 @@
     </v-dialog>
     <v-dialog v-model="passaggioFormazione" max-width="600px" persistent>
       <v-card class="text-center">
-        <div class="text-center text-h5">Conferma procedura di formazione</div>
+        <div class="text-center text-h5">Accesso alla Formazione</div>
         <v-card-text class="my-4">
           Confermando permetti l'accesso alla sezione formativa del candidato<br />
           <b>{{ candidato.candidato }}</b>

@@ -294,66 +294,85 @@
             :candidato="candidato"
             @updateCandidato="updateCandidato"
           ></scheda>
+
           <v-overlay
             v-if="candidato.richiama"
             :value="candidato.richiama && !forzaChiamata"
           >
-            <div v-if="scadenza == 'waiting'">
-              <v-alert color="blue" dense elevation="6" type="error">
-                La chiamata è stata programmata per il giorno
-                {{ candidato.richiama[0].giorno | formatDate }} alle ore
-                {{ candidato.richiama[0].orario }}</v-alert
-              >
-              <v-btn
-                color="blue-grey lighten-2"
-                @click="
-                  dialog = false;
-                  resetBeforeClose();
-                "
-              >
-                Chiudi scheda
-              </v-btn>
-              <v-btn color="success" @click="forzaChiamata = true" class="ml-4">
-                Chiama adesso
-              </v-btn>
-            </div>
-            <div v-if="scadenza == 'oggi'">
-              <v-alert color="green" dense elevation="6" type="error">
-                La chiamata è stata programmata per oggi alle ore
-                {{ candidato.richiama[0].orario }}</v-alert
-              >
-              <v-btn
-                color="blue-grey lighten-2"
-                @click="
-                  dialog = false;
-                  resetBeforeClose();
-                "
-              >
-                Chiudi scheda
-              </v-btn>
-              <v-btn color="success" @click="forzaChiamata = true" class="ml-4">
-                Chiama adesso
-              </v-btn>
-            </div>
-            <div v-if="scadenza == 'scaduto'">
-              <v-alert color="red" dense elevation="6" type="error">
-                Appuntamento scaduto. La chiamata era stata programmata per il
-                giorno
-                {{ candidato.richiama[0].giorno | formatDate }} alle ore
-                {{ candidato.richiama[0].orario }}</v-alert
-              >
-              <v-btn
-                color="blue-grey lighten-2"
-                @click="
-                  dialog = false;
-                  resetBeforeClose();
-                "
-              >
-                Chiudi scheda
-              </v-btn>
-              <v-btn color="warning" @click="forzaChiamata = true" class="ml-4">
-                Chiama adesso
-              </v-btn>
+            <div
+              style="background-color: white; max-width: 600px; padding: 20px"
+            >
+              <div v-if="scadenza == 'waiting'">
+                <v-alert color="blue" dense elevation="6" type="error">
+                  La chiamata è stata programmata per il giorno<br />
+                  <strong>{{
+                    candidato.richiama[0].giorno | formatDate
+                  }}</strong>
+                  alle ore {{ candidato.richiama[0].orario }}</v-alert
+                >
+                <v-btn
+                  color="blue-grey lighten-2"
+                  @click="
+                    dialog = false;
+                    resetBeforeClose();
+                  "
+                >
+                  Chiudi
+                </v-btn>
+                <v-btn
+                  color="success"
+                  @click="forzaChiamata = true"
+                  class="ml-4"
+                >
+                  Chiama adesso
+                </v-btn>
+              </div>
+              <div v-if="scadenza == 'oggi'">
+                <v-alert color="green" dense elevation="6" type="error">
+                  La chiamata è stata programmata per oggi alle ore
+                  {{ candidato.richiama[0].orario }}</v-alert
+                >
+                <v-btn
+                  color="blue-grey lighten-2"
+                  @click="
+                    dialog = false;
+                    resetBeforeClose();
+                  "
+                >
+                  Chiudi
+                </v-btn>
+                <v-btn
+                  color="success"
+                  @click="forzaChiamata = true"
+                  class="ml-4"
+                >
+                  Chiama adesso
+                </v-btn>
+              </div>
+              <div v-if="scadenza == 'scaduto'">
+                <v-alert color="red" dense elevation="6" type="error">
+                  Appuntamento scaduto. La chiamata era stata programmata per il
+                  giorno
+                  {{ candidato.richiama[0].giorno | formatDate }} alle ore
+                  {{ candidato.richiama[0].orario }}</v-alert
+                >
+                <v-btn
+                  color="blue-grey lighten-2"
+                  @click="
+                    dialog = false;
+                    resetBeforeClose();
+                  "
+                >
+                  Chiudi
+                </v-btn>
+                <v-btn
+                  color="warning"
+                  @click="forzaChiamata = true"
+                  class="ml-4"
+                >
+                  Chiama adesso
+                </v-btn>
+              </div>
             </div>
           </v-overlay>
           <v-divider></v-divider>
@@ -370,14 +389,25 @@
               >Invia Mail</v-btn
             >
           </div>
-          <div v-if="candidato.richiama && candidato.richiama.length <= 2">
+          <div v-else>
             <section id="modalita_contatto">
               <h3 style="color: #1f4b6b">
                 <strong>Modalità di contatto:</strong>
               </h3>
+
               <small
                 >Seleziona il metodo utilizzato per contattare il
                 candidato</small
+              >
+              <v-alert
+                dense
+                type="warning"
+                v-if="candidato.richiama"
+                class="ml-4"
+              >
+                Attenzione il candidato è stato già contattato
+                {{ candidato.richiama.length }}
+                {{ candidato.richiama.length > 1 ? "volte" : "volta" }}</v-alert
               >
               <v-row>
                 <v-col cols="12" sm="6" md="6">
@@ -751,7 +781,7 @@ export default {
         this.candidato.tipologia == "PF" &&
         this.candidato.cf != "" &&
         (this.candidato.telefono != null || this.candidato.cell != null) &&
-        this.candidato.mail != null
+        this.candidato.mail
       ) {
         return false;
       }
@@ -759,7 +789,7 @@ export default {
         this.candidato.tipologia == "PG" &&
         this.candidato.piva != "" &&
         (this.candidato.telefono != null || this.candidato.cell != null) &&
-        this.candidato.mail != null
+        this.candidato.mail
       ) {
         return false;
       }
