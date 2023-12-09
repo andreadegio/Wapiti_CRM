@@ -64,7 +64,8 @@
     "formazione": "CRM/formazione",
     "accettaDemo": "CRM/accettaDemo",
     "completaFormazione": "CRM/completaFormazione",
-    "AttivaCandidato": "CRM/AttivaCandidato"
+    "AttivaCandidato": "CRM/AttivaCandidato",
+    "PrenotaFormazione": "CRM/PrenotaFormazione"
   },
   "servizi_broker": "https://servizi.documentale.cloud/AibaJSON2023-test/",
   "servizi_energy": "https://abyenergy.it/servizitest/",

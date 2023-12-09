@@ -11,7 +11,11 @@ BEGIN
         p.desc AS origine,
         a.rui as numRui,
         d.giorno as giorno_demo,
-        d.orario as orario_demo        
+        d.orario as orario_demo,
+        f.data_formazione as data_formazione,
+        f.ora_formazione as ora_formazione,
+        f.id_formatore as id_formatore,
+        f.nome_formatore as formatore
     FROM
         crm_anagrafica a
     INNER JOIN
@@ -22,9 +26,10 @@ BEGIN
         crm_step s ON a.id_step = s.id_step
 	LEFT JOIN
 		crm_demo d ON a.id_anagrafica = d.id_anagrafica
+	LEFT JOIN
+		crm_formazione f ON a.id_anagrafica = f.id_anagrafica
     WHERE
-		a.active = 1
-        and a.id_step IN (',step_value,')
+        a.id_step IN (',step_value,')
     ORDER BY
         a.id_step;');
         PREPARE stmt FROM @sql;

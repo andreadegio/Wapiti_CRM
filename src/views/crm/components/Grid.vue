@@ -33,6 +33,11 @@
       <template #giorno_demo="{ item }">
         <td>{{ item.giorno_demo | formatDate }} ore {{ item.orario_demo }}</td>
       </template>
+      <template #giorno_formazione="{ item }">
+        <td>
+          {{ item.data_formazione | formatDate }} ore {{ item.ora_formazione }}
+        </td>
+      </template>
 
       <template #actions="row">
         <td>
@@ -46,13 +51,21 @@
               @aggiorna_grid="aggiorna_grid"
             ></Attivazione>
             <Formazione
-              v-if="gridType === 'formazione'"
+              v-if="gridType === 'formazione' && row.item.formatore"
               class="ml-2"
               :itemId="row.item.id"
               :candidato="row.item"
               :step="step"
               @aggiorna_grid="aggiorna_grid"
             ></Formazione>
+            <PrenotaFormazione
+              v-if="gridType === 'formazione' && !row.item.formatore"
+              class="ml-2"
+              :itemId="row.item.id"
+              :candidato="row.item"
+              :step="step"
+              @aggiorna_grid="aggiorna_grid"
+            ></PrenotaFormazione>
             <Demo
               v-if="row.item.id_step == 3"
               class="ml-2"
@@ -62,12 +75,7 @@
               @aggiorna_grid="aggiorna_grid"
             ></Demo>
             <ValidaDoc
-              v-if="
-                row.item.id_step == 9 ||
-                row.item.id_step == 5 ||
-                row.item.id_step == 13 ||
-                row.item.id_step == 14
-              "
+              v-if="gridType === 'registrazione_documentazione'"
               class="ml-2"
               :itemId="row.item.id"
               :candidato="row.item"
@@ -75,7 +83,7 @@
               @aggiorna_grid="aggiorna_grid"
             ></ValidaDoc>
             <Lavorazione
-              v-if="gridType === 'primo_contatto'"
+              v-if="gridType === 'primo_contatto' || gridType === 'social'"
               class="ml-2"
               :itemId="row.item.id"
               :candidato="row.item"
@@ -112,6 +120,7 @@ import ValidaDoc from "./ValidaDoc.vue";
 import Elimina from "./Elimina.vue";
 import Demo from "./Demo.vue";
 import Formazione from "./Formazione.vue";
+import PrenotaFormazione from "./PrenotaFormazione.vue";
 import Attivazione from "./Attivazione.vue";
 import Informazioni from "./Informazioni.vue";
 export default {
@@ -125,6 +134,7 @@ export default {
     Formazione,
     Attivazione,
     Informazioni,
+    PrenotaFormazione,
   },
   props: {
     gridType: {
@@ -165,6 +175,17 @@ export default {
             { key: "tipologia", label: "PF/PG" },
             { key: "candidato", label: "Candidato" },
             { key: "giorno_demo", label: "Appuntamento" },
+            { key: "regione", label: "Regione" },
+            { key: "data_ins", label: "Inserito il" },
+            { key: "actions", label: "Azioni" },
+          ];
+          break;
+        case "formazione":
+          this.fields = [
+            { key: "stato", label: "Stato" },
+            { key: "tipologia", label: "PF/PG" },
+            { key: "candidato", label: "Candidato" },
+            { key: "giorno_formazione", label: "Appuntamento" },
             { key: "regione", label: "Regione" },
             { key: "data_ins", label: "Inserito il" },
             { key: "actions", label: "Azioni" },
@@ -281,6 +302,28 @@ export default {
               item._classes = "red";
             }
           }
+          if (this.gridType == "formazione" && !item.formatore) {
+            // SE IL CANDIDATO NON HA ANCORA PRENOTATO EVIDENZIO LA RIGA
+            item._classes = "orange darken-4";
+          }
+          // Se ha già prenotato la data per la formazione allora controllo se è scaduta, se è oggi o se deve arrivare
+          if (this.gridType == "formazione" && item.formatore) {
+            const giornoFormazione = new Date(item.data_formazione);
+            const oggi = new Date();
+            const formattedOggi = oggi.toISOString().slice(0, 10);
+            const formattedGiornoFormazione = giornoFormazione
+              .toISOString()
+              .slice(0, 10);
+            if (formattedGiornoFormazione === formattedOggi) {
+              item._classes = "green accent-3";
+            } else if (formattedGiornoFormazione > formattedOggi) {
+              // la data è futura non cambio colore alla riga
+            } else {
+              // data scaduta
+              item._classes = "red";
+            }
+          }
+
           return {
             ...item,
             candidato: candidato,
