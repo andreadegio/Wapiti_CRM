@@ -178,6 +178,22 @@
         </div>
       </CNavItem>
       <CNavItem>
+        <div class="side_btn" @click="buttonClicked('ricerca')">
+          <div
+            class="side_btn_ico"
+            v-c-tooltip="{
+              content: 'Utenti attivi',
+              placement: 'right',
+            }"
+          >
+            <i class="fas fa-search"></i>
+          </div>
+          <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
+            >Ricerca</span
+          >
+        </div>
+      </CNavItem>
+      <CNavItem>
         <div class="side_btn_deleted" @click="buttonClicked('eliminati')">
           <div
             class="side_btn_ico_deleted"
@@ -189,7 +205,7 @@
             <i class="far fa-trash-alt"></i>
           </div>
           <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
-            >Eliminati</span
+            >Rifiutati</span
           >
         </div>
       </CNavItem>

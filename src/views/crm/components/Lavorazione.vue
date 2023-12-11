@@ -24,7 +24,9 @@
         <v-btn color="primary" @click="dialog2 = !dialog2">Chiudi</v-btn>
       </v-card>
       <v-card
-        v-else-if="metodoContatto == 'telefono' && combinazioni"
+        v-else-if="
+          metodoContatto == 'telefono' && combinazioni && candidato.mail
+        "
         class="text-center"
       >
         <v-card-text>
@@ -134,13 +136,26 @@
           </v-btn>
         </v-card-actions>
       </v-card>
+      <v-card
+        v-else-if="
+          metodoContatto == 'telefono' && combinazioni && !candidato.mail
+        "
+        class="text-center"
+      >
+        <h1 class="title mb-4" style="color: red">Indirizzo email assente</h1>
+        <p class="mb-5">
+          Non è possibile proseguire se non si inserisce un'indirizzo email
+          valido nella scheda del candidato.
+        </p>
+        <v-btn color="primary" @click="dialog2 = !dialog2">Chiudi</v-btn>
+      </v-card>
       <v-card v-else-if="metodoContatto != 'telefono'" class="text-center">
         <v-card-text>
           <v-container>
             <div class="text-h5" style="color: #1f4b6b">
               Conferma di aver contattato <br />
               {{ candidato.candidato }} <br />tramite
-              {{ metodoContatto == "forza_mail" ? "mail" : "mail" }}
+              {{ metodoContatto == "forza_mail" ? "mail" : "social" }}
             </div>
             <section>
               <div
@@ -415,7 +430,7 @@
                     <v-radio
                       label="Telefono"
                       value="telefono"
-                      :disabled="!candidato.tel && !candidato.cell"
+                      :disabled="!candidato.telefono && !candidato.cell"
                     ></v-radio>
                     <v-radio
                       label="Email"

@@ -101,11 +101,17 @@
             ></Informazioni>
             <Note :itemId="row.item.id" :candidato="row.item.candidato"></Note>
             <Elimina
-              v-if="gridType != 'eliminati'"
+              v-if="gridType != 'eliminati' && row.item.id_step != 10"
               :candidato="row.item"
               :step="step"
               @aggiorna_grid="aggiorna_grid"
             ></Elimina>
+            <Ripristina
+              v-if="gridType == 'eliminati' || row.item.id_step == 10"
+              :candidato="row.item"
+              :step="step"
+              @aggiorna_grid="aggiorna_grid"
+            ></Ripristina>
           </div>
         </td>
       </template>
@@ -118,6 +124,7 @@ import Note from "./Note.vue";
 import Lavorazione from "./Lavorazione.vue";
 import ValidaDoc from "./ValidaDoc.vue";
 import Elimina from "./Elimina.vue";
+import Ripristina from "./Ripristina.vue";
 import Demo from "./Demo.vue";
 import Formazione from "./Formazione.vue";
 import PrenotaFormazione from "./PrenotaFormazione.vue";
@@ -135,6 +142,7 @@ export default {
     Attivazione,
     Informazioni,
     PrenotaFormazione,
+    Ripristina,
   },
   props: {
     gridType: {
@@ -187,7 +195,6 @@ export default {
             { key: "candidato", label: "Candidato" },
             { key: "giorno_formazione", label: "Appuntamento" },
             { key: "regione", label: "Regione" },
-            { key: "data_ins", label: "Inserito il" },
             { key: "actions", label: "Azioni" },
           ];
           break;
@@ -225,7 +232,7 @@ export default {
         // stato = "Sollecito";
       }
       if (this.gridType === "registrazione_documentazione") {
-        this.step = [5, 9, 13, 14];
+        this.step = [5, 9, 13, 14, 16, 17, 18, 19];
         // stato = "Registrazione";
       }
       if (this.gridType === "formazione") {
@@ -233,7 +240,7 @@ export default {
         // stato = "Formazione";
       }
       if (this.gridType === "attivazione_account") {
-        this.step = 7;
+        this.step = [7, 16, 18];
         // stato = "Da attivare";
       }
       if (this.gridType === "follow_up") {
@@ -243,10 +250,13 @@ export default {
         this.step = 12;
       }
       if (this.gridType === "utenti_attivi") {
-        this.step = 15;
+        this.step = [15, 17, 19];
       }
       if (this.gridType === "eliminati") {
         this.step = 10;
+      }
+      if (this.gridType === "ricerca") {
+        this.step = 99;
       }
 
       if (this.step != 0) {

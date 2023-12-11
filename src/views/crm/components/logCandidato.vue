@@ -47,6 +47,8 @@ export default {
         ? "green"
         : item.action === "ELIMINATO"
         ? "red"
+        : item.action === "RIFIUTATO"
+        ? "red"
         : this.getTimelineColor(item);
     },
     getTimelineColor(item) {

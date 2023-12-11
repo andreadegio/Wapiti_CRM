@@ -97,6 +97,62 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-dialog v-model="completaCaricamento" max-width="600px" persistent>
+      <v-card class="text-center">
+        <div class="text-center text-h5">
+          Completa il caricamento di tutti i file
+        </div>
+        <v-card-text class="my-4">
+          Confermando confermi che il candidato ha provveduto a caricare tutti i
+          documenti necessari<br />
+          <b>{{ candidato.candidato }}</b>
+          <br />
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="red darken-1"
+            outlined
+            text
+            @click="completaCaricamento = false"
+            >Annulla</v-btn
+          >
+          <v-btn
+            color="green darken-1"
+            dark
+            @click="chiudiCaricamento('caricamento')"
+            >Conferma</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-dialog v-model="chiudiAttivazione" max-width="600px" persistent>
+      <v-card class="text-center">
+        <div class="text-center text-h5">Completa attivazione</div>
+        <v-card-text class="my-4">
+          Confermando confermi che il candidato ha provveduto a caricare tutti i
+          documenti necessari<br />
+          <b>{{ candidato.candidato }}</b>
+          <br />
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="red darken-1"
+            outlined
+            text
+            @click="chiudiAttivazione = false"
+            >Annulla</v-btn
+          >
+          <v-btn
+            color="green darken-1"
+            dark
+            @click="chiudiCaricamento('attivazione')"
+            >Conferma</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-dialog
       v-model="dialog"
       fullscreen
@@ -237,13 +293,38 @@
               >Scegli se validare o rifiutare i file selezionati
             </small>
             <small v-else
-              >Sono stati caricati tutti i documenti avanza alla
-              formazione</small
+              >Sono stati caricati tutti i documenti avanza allo step
+              successivo</small
             >
             <div class="options-container">
               <!-- Tutti i documenti inviati documentazione completa -->
+              <!-- completamento da utente attivo -->
               <v-btn
-                v-if="tuttiDocumentiValidati && attivaFormazione"
+                v-if="tuttiDocumentiValidati && candidato.id_step == 17"
+                color="success"
+                dark
+                @click="chiudiAttivazione = true"
+              >
+                <i class="fas fa-check-circle fa-2x"></i> &nbsp; Completa
+                Attivazione
+              </v-btn>
+              <!-- completamento da utente in attesa di formazione che completa il caricamento -->
+              <v-btn
+                v-if="tuttiDocumentiValidati && candidato.id_step == 16"
+                color="success"
+                dark
+                @click="completaCaricamento = true"
+              >
+                <i class="fas fa-check-circle fa-2x"></i> &nbsp; Completa
+                Caricamento
+              </v-btn>
+              <!-- completamento da utente in attesa di registrazione documenti -->
+              <v-btn
+                v-if="
+                  tuttiDocumentiValidati &&
+                  candidato.id_step == 9 &&
+                  attivaFormazione
+                "
                 color="success"
                 dark
                 @click="passaggioFormazione = true"
@@ -315,6 +396,8 @@ export default {
       dialog: false,
       confermaFormazione: false,
       passaggioFormazione: false,
+      chiudiAttivazione: false,
+      completaCaricamento: false,
       preview: false,
       showMotivationModal: false,
       previewUrl: "",
@@ -502,14 +585,12 @@ export default {
       // Itera sui documenti richiesti
       if (this.uploadedFiles.length > 0 && this.fileRichiesti.length > 0) {
         this.fileRichiesti.forEach((docRic) => {
-          // console.log("dentro");
           // Trova il corrispondente documento in uploadedFiles
           const uploadedDoc = this.uploadedFiles.find(
             (uploadedDoc) => uploadedDoc.tipo_documento == docRic.tipo
           );
 
           if (uploadedDoc) {
-            // console.log("trovato");
             // Se il documento è stato trovato in uploadedFiles, aggiorna i valori in file richiesti
             docRic.idDoc = uploadedDoc.id;
             docRic.validato = uploadedDoc.validato;
@@ -547,7 +628,7 @@ export default {
         });
     },
     async passaggio_formazione(tipologia) {
-      console.log(tipologia);
+      // console.log(tipologia);
       if (tipologia == "parziale") {
         // Passaggio allo stato 13 (Formazione con documentazione incompleta)
         let params = {
@@ -571,7 +652,7 @@ export default {
                 case "OK":
                   this.$alert(message, "OK", "success");
                   this.updateCandidato();
-                  this.passaggioFormazione = false;
+                  this.confermaFormazione = false;
                   break;
                 case "KO":
                   this.$alert(message, "Attenzione", "warning");
@@ -595,6 +676,79 @@ export default {
               this.$custom_json.base_url +
                 this.$custom_json.api_url +
                 this.$custom_json.crm.formazione,
+              params
+            )
+            .then((response) => {
+              var message = response.data.message;
+              switch (response.data.esito) {
+                case "OK":
+                  this.$alert(message, "OK", "success");
+                  this.updateCandidato();
+                  this.confermaFormazione = false;
+                  break;
+                case "KO":
+                  this.$alert(message, "Attenzione", "warning");
+                  break;
+              }
+            });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    },
+    async chiudiCaricamento(tipologia) {
+      // console.log(tipologia);
+      if (tipologia == "caricamento") {
+        // Passaggio allo 7 (in attesa di attivazione)
+        let params = {
+          nomeUtente: this.user["Nominativo"],
+          idUtente: this.user["idUtente"],
+          idCandidato: this.candidato["id_anagrafica"],
+          emailCandidato: this.candidato["mail"],
+          candidato: this.candidato,
+          step: 7,
+        };
+        try {
+          await axios
+            .post(
+              this.$custom_json.base_url +
+                this.$custom_json.api_url +
+                this.$custom_json.crm.chiudiCaricamento,
+              params
+            )
+            .then((response) => {
+              var message = response.data.message;
+              switch (response.data.esito) {
+                case "OK":
+                  this.$alert(message, "OK", "success");
+                  this.updateCandidato();
+                  this.passaggioFormazione = false;
+                  break;
+                case "KO":
+                  this.$alert(message, "Attenzione", "warning");
+                  break;
+              }
+            });
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        // attivazione
+        //Passaggio allo stato 15 (utente attivo)
+        let params = {
+          nomeUtente: this.user["Nominativo"],
+          idUtente: this.user["idUtente"],
+          idCandidato: this.candidato["id_anagrafica"],
+          emailCandidato: this.candidato["mail"],
+          candidato: this.candidato,
+          step: 15,
+        };
+        try {
+          await axios
+            .post(
+              this.$custom_json.base_url +
+                this.$custom_json.api_url +
+                this.$custom_json.crm.chiudiCaricamento,
               params
             )
             .then((response) => {
