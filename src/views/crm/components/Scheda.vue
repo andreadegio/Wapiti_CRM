@@ -337,7 +337,7 @@
 </template>
 <script>
 import axios from "axios";
-import geojson from "./../../../../public/geojson/geojson.json";
+import geojson from "/public/geojson/geojson.json";
 import Vue from "vue";
 import * as VueGoogleMaps from "vue2-google-maps";
 Vue.use(VueGoogleMaps, {
