@@ -344,24 +344,19 @@
               >
                 <i class="fas fa-check-circle fa-2x"></i> &nbsp; Formazione
               </v-btn>
-              <v-btn
-                v-if="!tuttiDocumentiValidati"
-                class="ml-2"
-                color="#1f4b6b"
-                dark
-                @click="validaDocumenti"
-              >
-                <i class="fas fa-check-circle fa-2x"></i> &nbsp; Valida
-              </v-btn>
-              <v-btn
-                v-if="!tuttiDocumentiValidati"
-                class="ml-2"
-                color="red"
-                dark
-                @click="rifiutaDocumenti"
-              >
-                <i class="fas fa-times-circle fa-2x"></i> &nbsp; Rifiuta
-              </v-btn>
+              <section v-if="!tuttiDocumentiValidati">
+                <v-btn
+                  class="ml-2"
+                  color="#1f4b6b"
+                  dark
+                  @click="validaDocumenti"
+                >
+                  <i class="fas fa-check-circle fa-2x"></i> &nbsp; Valida
+                </v-btn>
+                <v-btn class="ml-2" color="red" dark @click="rifiutaDocumenti">
+                  <i class="fas fa-times-circle fa-2x"></i> &nbsp; Rifiuta
+                </v-btn>
+              </section>
             </div>
           </section>
 

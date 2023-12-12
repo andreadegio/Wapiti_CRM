@@ -208,16 +208,15 @@
               ></v-text-field>
             </v-col>
           </v-row>
-          <v-row class="mt-4">
-            <v-card-actions>
-              <v-btn color="red" outlined @click="$emit('annulla')">
-                <i class="fas fa-times"></i>&nbsp; Annulla
-              </v-btn>
-              <v-btn color="#1f4b6b" dark @click="salvaModifiche()"
-                ><i class="far fa-save"></i> &nbsp; Salva
-              </v-btn>
-            </v-card-actions>
-          </v-row>
+          <v-card-actions class="mt-3">
+            <v-spacer></v-spacer>
+            <v-btn color="blue-grey" outlined @click="$emit('annulla')">
+              <i class="fas fa-times"></i>&nbsp; Annulla
+            </v-btn>
+            <v-btn color="#1f4b6b" dark @click="salvaModifiche()"
+              ><i class="fas fa-save fa-2x"></i> &nbsp; Salva
+            </v-btn>
+          </v-card-actions>
         </section>
       </v-form>
     </v-container>

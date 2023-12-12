@@ -24,9 +24,6 @@
           </div>
         </td>
       </template>
-      <template #candidato="{ item }">
-        <td style="cursor: pointer">{{ item.candidato }}</td>
-      </template>
       <template #data_ins="{ item }">
         <td>{{ item.data_ins | formatDate }}</td>
       </template>
@@ -36,6 +33,22 @@
       <template #giorno_formazione="{ item }">
         <td>
           {{ item.data_formazione | formatDate }} ore {{ item.ora_formazione }}
+        </td>
+      </template>
+      <template #opzioni="row">
+        <td>
+          <div class="d-flex">
+            <Informazioni
+              class="ml-2"
+              :itemId="row.item.id"
+              :candidato="row.item"
+              :step="step"
+              @aggiorna_grid="aggiorna_grid"
+              @updateCandidato="getLista"
+            ></Informazioni>
+            <Note :itemId="row.item.id" :candidato="row.item"></Note>
+            <Log :itemId="row.item.id" :candidato="row.item"></Log>
+          </div>
         </td>
       </template>
 
@@ -91,15 +104,6 @@
               @aggiorna_grid="aggiorna_grid"
               @updateCandidato="getLista"
             ></Lavorazione>
-            <Informazioni
-              class="ml-2"
-              :itemId="row.item.id"
-              :candidato="row.item"
-              :step="step"
-              @aggiorna_grid="aggiorna_grid"
-              @updateCandidato="getLista"
-            ></Informazioni>
-            <Note :itemId="row.item.id" :candidato="row.item.candidato"></Note>
             <Elimina
               v-if="gridType != 'eliminati' && row.item.id_step != 10"
               :candidato="row.item"
@@ -120,7 +124,8 @@
 </template>
 <script>
 import axios from "axios";
-import Note from "./Note.vue";
+import Note from "./noteCandidato.vue";
+import Log from "./logCandidato.vue";
 import Lavorazione from "./Lavorazione.vue";
 import ValidaDoc from "./ValidaDoc.vue";
 import Elimina from "./Elimina.vue";
@@ -134,6 +139,7 @@ export default {
   name: "Grid",
   components: {
     Note,
+    Log,
     ValidaDoc,
     Lavorazione,
     Elimina,
@@ -156,14 +162,15 @@ export default {
       items: [],
       fields: [
         { key: "stato", label: "Stato" },
-        { key: "tipologia", label: "PF/PG" },
+        // { key: "tipologia", label: "PF/PG" },
         { key: "candidato", label: "Candidato" },
-        { key: "RUI", label: "RUI" },
+        { key: "RUI", label: "Tipologia" },
         { key: "origine", label: "Fonte" },
         { key: "provincia", label: "Provincia" },
         { key: "regione", label: "Regione" },
         { key: "data_ins", label: "Inserito il" },
         { key: "actions", label: "Azioni" },
+        { key: "opzioni", label: "Opzioni" },
       ],
     };
   },
@@ -180,36 +187,39 @@ export default {
         case "webinar":
           this.fields = [
             { key: "stato", label: "Stato" },
-            { key: "tipologia", label: "PF/PG" },
+            // { key: "tipologia", label: "PF/PG" },
             { key: "candidato", label: "Candidato" },
             { key: "giorno_demo", label: "Appuntamento" },
             { key: "regione", label: "Regione" },
             { key: "data_ins", label: "Inserito il" },
             { key: "actions", label: "Azioni" },
+            { key: "opzioni", label: "Opzioni" },
           ];
           break;
         case "formazione":
           this.fields = [
             { key: "stato", label: "Stato" },
-            { key: "tipologia", label: "PF/PG" },
+            // { key: "tipologia", label: "PF/PG" },
             { key: "candidato", label: "Candidato" },
             { key: "giorno_formazione", label: "Appuntamento" },
             { key: "regione", label: "Regione" },
             { key: "actions", label: "Azioni" },
+            { key: "opzioni", label: "Opzioni" },
           ];
           break;
 
         default:
           this.fields = [
             { key: "stato", label: "Stato" },
-            { key: "tipologia", label: "PF/PG" },
+            // { key: "tipologia", label: "PF/PG" },
             { key: "candidato", label: "Candidato" },
-            { key: "RUI", label: "RUI" },
+            { key: "RUI", label: "Tipologia" },
             { key: "origine", label: "Fonte" },
             { key: "provincia", label: "Provincia" },
             { key: "regione", label: "Regione" },
             { key: "data_ins", label: "Inserito il" },
             { key: "actions", label: "Azioni" },
+            { key: "opzioni", label: "Opzioni" },
           ];
           break;
       }

@@ -11,7 +11,6 @@
             <v-radio label="Persona Fisica" value="PF"></v-radio>
             <v-radio label="Persona Giuridica" value="PG"></v-radio>
           </v-radio-group>
-
           <v-row v-if="tipoPersona === 'PF'">
             <v-col cols="12" sm="4" md="4">
               <v-text-field
@@ -93,13 +92,13 @@
                 ></v-select
               ></v-col>
               <!-- <v-col cols="12" sm="3" md="3">
-                <v-select
-                  outlined
-                  v-model="priorita"
-                  :items="['Alta', 'Normale']"
-                  label="Priorità"
-                ></v-select>
-              </v-col> -->
+                  <v-select
+                    outlined
+                    v-model="priorita"
+                    :items="['Alta', 'Normale']"
+                    label="Priorità"
+                  ></v-select>
+                </v-col> -->
             </v-row>
             <v-row>
               <v-col cols="12" sm="2" md="2">
@@ -129,7 +128,6 @@
                 ></v-text-field>
               </v-col>
             </v-row>
-
             <v-row>
               <v-col cols="12" sm="6" md="4">
                 <v-text-field
@@ -179,7 +177,6 @@
                   label="Comune"
                 ></v-text-field>
               </v-col>
-
               <v-col cols="12" md="4" sm="4">
                 <v-select
                   outlined
@@ -190,7 +187,6 @@
                   label="Provincia"
                 ></v-select>
               </v-col>
-
               <v-col cols="12" md="4" sm="4">
                 <v-text-field
                   outlined
@@ -225,15 +221,12 @@
             <v-row>
               <v-textarea v-model="note" label="Note" outlined></v-textarea>
             </v-row>
-            <v-row>
-              <v-btn
-                color="primary"
-                elevation="2"
-                large
-                @click="salvaContatto()"
-                >Salva</v-btn
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="#1f4b6b" dark @click="salvaContatto()"
+                ><i class="fas fa-save fa-2x"></i> &nbsp; Salva</v-btn
               >
-            </v-row>
+            </v-card-actions>
           </section>
         </v-form>
       </v-container>
@@ -471,6 +464,8 @@ export default {
           "warning"
         );
         this.checkblacklist = true;
+      } else {
+        this.checkblacklist = false;
       }
     },
     isBlackListCity(prov) {
@@ -500,6 +495,8 @@ export default {
           "warning"
         );
         this.checkblacklist = true;
+      } else {
+        this.checkblacklist = false;
       }
     },
     updateRegion() {

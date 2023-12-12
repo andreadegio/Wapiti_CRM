@@ -1,16 +1,19 @@
 <template>
   <div>
+    <v-tooltip bottom color="#1f4b6b">
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn fab x-small v-bind="attrs" v-on="on" @click="dialog = true">
+          <i class="far fa-address-card fa-2x"></i>
+        </v-btn>
+      </template>
+      <span>Scheda anagrafica</span>
+    </v-tooltip>
     <v-dialog
       v-model="dialog"
       fullscreen
       hide-overlay
       transition="dialog-bottom-transition"
     >
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn color="#1f4b6b" outlined v-bind="attrs" v-on="on">
-          <i class="far fa-address-card"></i> &nbsp;Scheda
-        </v-btn>
-      </template>
       <v-card>
         <v-container>
           <v-toolbar dark color="#1f4b6b">

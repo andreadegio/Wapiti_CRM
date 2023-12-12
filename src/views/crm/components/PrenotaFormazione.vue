@@ -127,6 +127,7 @@ export default {
       dataFormazione: null,
       oraFormazione: null,
       user: JSON.parse(localStorage.getItem("chisono_data")),
+      today: new Date().toISOString().substr(0, 10),
     };
   },
   methods: {

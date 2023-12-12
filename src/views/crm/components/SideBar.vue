@@ -43,7 +43,22 @@
           >
         </div>
       </CNavItem>
-
+      <CNavItem>
+        <div class="side_btn" @click="buttonClicked('social')">
+          <div
+            class="side_btn_ico"
+            v-c-tooltip="{
+              content: 'Social / Email',
+              placement: 'right',
+            }"
+          >
+            <i class="fas fa-share-alt"></i>
+          </div>
+          <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
+            >Social / Email</span
+          >
+        </div>
+      </CNavItem>
       <CNavItem>
         <div class="side_btn" @click="buttonClicked('webinar')">
           <div
@@ -145,22 +160,6 @@
           >
         </div>
       </CNavItem> -->
-      <CNavItem>
-        <div class="side_btn" @click="buttonClicked('social')">
-          <div
-            class="side_btn_ico"
-            v-c-tooltip="{
-              content: 'Social / Email',
-              placement: 'right',
-            }"
-          >
-            <i class="fas fa-share-alt"></i>
-          </div>
-          <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
-            >Social / Email</span
-          >
-        </div>
-      </CNavItem>
       <CNavItem>
         <div class="side_btn" @click="buttonClicked('utenti_attivi')">
           <div
