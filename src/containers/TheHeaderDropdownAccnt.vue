@@ -281,11 +281,22 @@ export default {
     Logout() {
       // // funzione di logout. Viene chiamata la pagina del broker e di energy e dopo 2 secondi viene effettuato il redirect alla login
       this.logout_modale = true;
-      store.commit("user_logout");
-      setTimeout(() => {
-        window.open(this.$custom_json.logout_url_energy, "_self");
-        window.open(this.$custom_json.logout_url, "_self");
-      }, 2000);
+
+      let aua = localStorage.getItem("AUA");
+      if (aua) {
+        console.log("AUA_logout");
+        store.commit("user_logout");
+        setTimeout(() => {
+          window.open(this.$custom_json.logout_url_energy, "_self");
+          window.open(this.$custom_json.logout_url, "_self");
+        }, 2000);
+      } else {
+        store.commit("user_logout");
+        setTimeout(() => {
+          window.open(this.$custom_json.logout_url_energy, "_self");
+          window.open(this.$custom_json.logout_url, "_self");
+        }, 2000);
+      }
     },
   },
 };
