@@ -52,54 +52,65 @@
             :candidato="candidato"
             @updateCandidato="updateCandidato"
           ></scheda>
-
           <v-divider></v-divider>
-          <section>
-            <h3 style="color: #1f4b6b">
-              <strong>Documenti caricati:</strong>
-            </h3>
-            <v-simple-table dense>
-              <template v-slot:default>
-                <thead>
-                  <tr>
-                    <th class="text-left">Documento</th>
-                    <th class="text-left">Anteprima</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="item in fileRichiesti" :key="item.label">
-                    <td>
-                      {{ item.label }}<br />
-                      <i
-                        class="far fa-pause-circle fa-lg"
-                        v-show="item.validato == 0"
-                      ></i>
-                      <i
-                        class="far fa-check-circle fa-lg"
-                        v-show="item.validato == 1"
-                      ></i>
-                      <small
-                        :style="{
-                          color:
-                            item.validato == 0
-                              ? 'orange'
-                              : item.validato == 1
-                              ? 'green'
-                              : '',
-                        }"
-                      >
-                        {{
-                          item.validato == null
-                            ? "Documento non ancora caricato"
-                            : item.validato == 0
-                            ? "Caricato, in attesa di validazione"
-                            : "Documento validato"
-                        }}</small
-                      >
-                    </td>
+          <v-tabs centered color="warning">
+            <v-tab
+              ><v-icon left>mdi-file-document-edit-outline</v-icon
+              >Documentazione</v-tab
+            >
+            <v-tab
+              ><v-icon left> mdi-information-variant-circle-outline </v-icon
+              >info</v-tab
+            >
 
-                    <td style="cursor: pointer; padding: 10px">
-                      <v-img
+            <v-tab-item>
+              <v-divider></v-divider>
+              <section id="documenti caricati" v-if="uploadedFiles.length > 0">
+                <h3 style="color: #1f4b6b">
+                  <strong>Documenti caricati:</strong>
+                </h3>
+                <v-simple-table dense>
+                  <template v-slot:default>
+                    <thead>
+                      <tr>
+                        <th class="text-left">Documento</th>
+                        <th class="text-left">Anteprima</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="item in fileRichiesti" :key="item.label">
+                        <td>
+                          {{ item.label }}<br />
+                          <i
+                            class="far fa-pause-circle fa-lg"
+                            v-show="item.validato == 0"
+                          ></i>
+                          <i
+                            class="far fa-check-circle fa-lg"
+                            v-show="item.validato == 1"
+                          ></i>
+                          <small
+                            :style="{
+                              color:
+                                item.validato == 0
+                                  ? 'orange'
+                                  : item.validato == 1
+                                  ? 'green'
+                                  : '',
+                            }"
+                          >
+                            {{
+                              item.validato == null
+                                ? "Documento non ancora caricato"
+                                : item.validato == 0
+                                ? "Caricato, in attesa di validazione"
+                                : "Documento validato"
+                            }}</small
+                          >
+                        </td>
+
+                        <td style="cursor: pointer; padding: 10px">
+                          <!-- <v-img
                         style="border: 1px solid grey"
                         height="100"
                         width="100"
@@ -113,13 +124,29 @@
                           '.jpg'
                         "
                         @click="openPreview(item)"
-                      ></v-img>
-                    </td>
-                  </tr>
-                </tbody>
-              </template>
-            </v-simple-table>
-          </section>
+                      ></v-img> -->
+                        </td>
+                      </tr>
+                    </tbody>
+                  </template>
+                </v-simple-table>
+              </section>
+              <section v-else>
+                <h3 style="color: #1f4b6b">
+                  <strong>Documenti caricati:</strong>
+                </h3>
+                <p>Nessun documento caricato per questo utente.</p>
+              </section>
+            </v-tab-item>
+            <v-tab-item>
+              <v-divider></v-divider>
+              <section>
+                <div>Lista delle operazioni effettuate</div>
+              </section>
+            </v-tab-item>
+          </v-tabs>
+
+          <v-divider></v-divider>
 
           <v-card-actions>
             <v-spacer></v-spacer>
