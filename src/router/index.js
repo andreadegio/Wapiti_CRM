@@ -309,6 +309,8 @@ router.beforeEach((to, from, next) => {
       localStorage.setItem("lastLogin", data_login);
       localStorage.setItem("AUA", true);
       next();
+    } else {
+      localStorage.setItem("AUA", false);
     }
 
     if (to.query.auth == "1" || localStorage.getItem("utente") == "ok") {
