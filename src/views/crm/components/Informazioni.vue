@@ -1,5 +1,25 @@
 <template>
   <div>
+    <v-dialog v-model="preview" max-width="800px">
+      <v-card>
+        <v-toolbar dark color="#1f4b6b">
+          {{ previewFileName }}
+          <v-spacer></v-spacer>
+          <v-btn icon @click="preview = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-toolbar>
+        <v-card-text>
+          <object
+            width="100%"
+            height="600"
+            :data="previewUrl"
+            type="application/pdf"
+          ></object>
+          <!-- <iframe width="100%" height="600px" :src="previewUrl"></iframe> -->
+        </v-card-text>
+      </v-card>
+    </v-dialog>
     <v-tooltip bottom color="#1f4b6b">
       <template v-slot:activator="{ on, attrs }">
         <v-btn
@@ -81,15 +101,7 @@
                       <tr v-for="item in fileRichiesti" :key="item.label">
                         <td>
                           {{ item.label }}<br />
-                          <i
-                            class="far fa-pause-circle fa-lg"
-                            v-show="item.validato == 0"
-                          ></i>
-                          <i
-                            class="far fa-check-circle fa-lg"
-                            v-show="item.validato == 1"
-                          ></i>
-                          <small
+                          <p
                             :style="{
                               color:
                                 item.validato == 0
@@ -99,32 +111,42 @@
                                   : '',
                             }"
                           >
-                            {{
-                              item.validato == null
-                                ? "Documento non ancora caricato"
-                                : item.validato == 0
-                                ? "Caricato, in attesa di validazione"
-                                : "Documento validato"
-                            }}</small
-                          >
+                            <i
+                              class="far fa-pause-circle fa-lg"
+                              v-show="item.validato == 0"
+                            ></i>
+                            <i
+                              class="far fa-check-circle fa-lg"
+                              v-show="item.validato == 1"
+                            ></i>
+                            <small>
+                              {{
+                                item.validato == null
+                                  ? "Documento non ancora caricato"
+                                  : item.validato == 0
+                                  ? "Caricato, in attesa di validazione"
+                                  : "Documento validato"
+                              }}</small
+                            >
+                          </p>
                         </td>
 
                         <td style="cursor: pointer; padding: 10px">
-                          <!-- <v-img
-                        style="border: 1px solid grey"
-                        height="100"
-                        width="100"
-                        v-if="item.validato != null"
-                        :src="
-                          $custom_json.base_url +
-                          $custom_json.api_url +
-                          'crm/pub/thumbs/' +
-                          candidato.id_anagrafica +
-                          item.tipo +
-                          '.jpg'
-                        "
-                        @click="openPreview(item)"
-                      ></v-img> -->
+                          <v-img
+                            style="border: 1px solid grey"
+                            height="100"
+                            width="100"
+                            v-if="item.validato != null"
+                            :src="
+                              $custom_json.base_url +
+                              $custom_json.api_url +
+                              'crm/pub/thumbs/' +
+                              candidato.id_anagrafica +
+                              item.tipo +
+                              '.jpg'
+                            "
+                            @click="openPreview(item)"
+                          ></v-img>
                         </td>
                       </tr>
                     </tbody>
@@ -135,7 +157,7 @@
                 <h3 style="color: #1f4b6b">
                   <strong>Documenti caricati:</strong>
                 </h3>
-                <p>Nessun documento caricato per questo utente.</p>
+                <p>Il candidato non ha caricato documenti</p>
               </section>
             </v-tab-item>
             <v-tab-item>
@@ -172,12 +194,40 @@ export default {
   data() {
     return {
       dialog: false,
+      previewFileName: "",
+      preview: false,
+      previewUrl: "",
       uploadedFiles: [],
       fileRichiesti: [],
       user: JSON.parse(localStorage.getItem("chisono_data")),
     };
   },
   methods: {
+    openPreview(doc) {
+      let params = {
+        nomeFile: doc.tipo + ".pdf",
+        idAnagrafica: this.candidato.id_anagrafica,
+      };
+
+      axios
+        .post(
+          this.$custom_json.base_url +
+            this.$custom_json.api_url +
+            this.$custom_json.crm.getPresignedUrl,
+          params
+        )
+        .then((response) => {
+          const presignedUrl = response.data.presignedUrl;
+          this.previewFileName = doc.label;
+          // Apri l'URL prefirmato nella modale di anteprima
+          this.previewUrl = presignedUrl; // Assegna l'URL prefirmato a una variabile nel data
+          this.preview = true; // Mostra la modale di anteprima
+        })
+        .catch((error) => {
+          console.error("Errore nel recuperare l'URL prefirmato:", error);
+          // Gestisci l'errore, ad esempio mostrando un messaggio all'utente
+        });
+    },
     updateCandidato() {
       this.$emit("aggiorna_grid", this.step);
     },

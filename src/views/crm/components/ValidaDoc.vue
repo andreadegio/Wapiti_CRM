@@ -2,12 +2,13 @@
   <div>
     <v-dialog v-model="preview" max-width="800px">
       <v-card>
-        <v-card-title>
-          Preview di {{ previewFileName }}
+        <v-toolbar dark color="#1f4b6b">
+          {{ previewFileName }}
+          <v-spacer></v-spacer>
           <v-btn icon @click="preview = false">
             <v-icon>mdi-close</v-icon>
           </v-btn>
-        </v-card-title>
+        </v-toolbar>
         <v-card-text>
           <object
             width="100%"
