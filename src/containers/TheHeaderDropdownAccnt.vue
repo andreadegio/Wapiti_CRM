@@ -276,7 +276,7 @@ export default {
       this.logout_modale = true;
 
       let aua = localStorage.getItem("AUA");
-      if (aua) {
+      if (aua === true) {
         console.log("AUA_logout");
         store.commit("user_logout");
         setTimeout(() => {
