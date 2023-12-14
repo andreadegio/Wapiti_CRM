@@ -447,7 +447,7 @@ export default {
       this.cf = "";
       this.ragioneSociale = "";
       this.partitaIva = "";
-      this.referente = " ";
+      this.referente = "";
     },
     iscrittoRui() {
       this.numeroIscrizione = "";

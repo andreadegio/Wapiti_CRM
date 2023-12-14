@@ -68,6 +68,7 @@
                     <section
                       id="documenti caricati"
                       v-if="uploadedFiles.length > 0"
+                      class="text-left"
                     >
                       <h3 style="color: #1f4b6b">
                         <strong>Documenti caricati:</strong>
@@ -151,13 +152,13 @@
                 </v-tabs>
                 <v-divider></v-divider
               ></v-col>
-              <v-col cols="6">
+              <v-col cols="12" sm="4">
                 <section
                   style="
-                    border: 1px solid #1f4b6b;
+                    border: 1px solid red;
                     border-radius: 5px;
                     padding: 20px;
-                    background-color: rgb(241, 231, 214);
+                    background-color: rgb(249, 242, 230);
                   "
                 >
                   <div>
@@ -170,11 +171,13 @@
                     </div>
                     <v-text-field
                       outlined
+                      background-color="white"
                       v-model="username"
                       label="Username"
                     ></v-text-field>
                     <v-text-field
                       v-model="password"
+                      background-color="white"
                       outlined
                       :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                       :type="show1 ? 'text' : 'password'"
@@ -185,6 +188,7 @@
                       Breve descrizione sull'attivazione
                     </div>
                     <v-textarea
+                      background-color="white"
                       rows="4"
                       outlined
                       v-model="notaAttivazione"
