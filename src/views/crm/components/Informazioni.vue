@@ -163,7 +163,14 @@
             <v-tab-item>
               <v-divider></v-divider>
               <section>
-                <div>Lista delle operazioni effettuate</div>
+                <div>Credenziali Upload</div>
+                <div>
+                  Invia nuovamente la mail con le istruzioni (pin e link) per
+                  accedere alla pagina di upload documenti
+                </div>
+                <v-btn color="#1f4b6b" dark @click="recuperaCredenziali()"
+                  ><i class="fas fa-mail-bulk"></i>&nbsp;Invia mail</v-btn
+                >
               </section>
             </v-tab-item>
           </v-tabs>
@@ -203,6 +210,35 @@ export default {
     };
   },
   methods: {
+    async recuperaCredenziali() {
+      let params = {
+        contatto: this.candidato,
+        utente: this.user,
+      };
+      try {
+        await axios
+          .post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.crm.recuperaCredenziali,
+            params
+          )
+          .then((response) => {
+            var message = response.data.message;
+            switch (response.data.esito) {
+              case "OK":
+                this.$alert(message, "OK", "success");
+
+                break;
+              case "KO":
+                this.$alert(message, "Attenzione", "warning");
+                break;
+            }
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
     openPreview(doc) {
       let params = {
         nomeFile: doc.tipo + ".pdf",

@@ -416,6 +416,7 @@ export default {
         idCandidato: this.candidato["id_anagrafica"],
         idUtente: this.user["idUtente"],
         nomeUtente: this.user["Nominativo"],
+        contatto: this.candidato,
       };
       try {
         await axios

@@ -161,68 +161,77 @@
                     background-color: rgb(249, 242, 230);
                   "
                 >
-                  <div>
-                    <div
-                      class="pb-3 font-weight-bold h5"
-                      style="color: #1f4b6b"
-                    >
-                      Inserisci le credenziali assegnate per l'accesso alla
-                      piattaforma Abyway
+                  <div v-if="!bloccaAttivazione">
+                    <div>
+                      <div
+                        class="pb-3 font-weight-bold h5"
+                        style="color: #1f4b6b"
+                      >
+                        Inserisci le credenziali assegnate per l'accesso alla
+                        piattaforma Abyway
+                      </div>
+                      <v-text-field
+                        outlined
+                        background-color="white"
+                        v-model="username"
+                        label="Username"
+                      ></v-text-field>
+                      <v-text-field
+                        v-model="password"
+                        background-color="white"
+                        outlined
+                        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                        :type="show1 ? 'text' : 'password'"
+                        label="Password"
+                        @click:append="show1 = !show1"
+                      ></v-text-field>
+                      <div class="pb-3 font-weight-bold h5">
+                        Breve descrizione sull'attivazione
+                      </div>
+                      <v-textarea
+                        background-color="white"
+                        rows="4"
+                        outlined
+                        v-model="notaAttivazione"
+                      ></v-textarea>
                     </div>
-                    <v-text-field
-                      outlined
-                      background-color="white"
-                      v-model="username"
-                      label="Username"
-                    ></v-text-field>
-                    <v-text-field
-                      v-model="password"
-                      background-color="white"
-                      outlined
-                      :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                      :type="show1 ? 'text' : 'password'"
-                      label="Password"
-                      @click:append="show1 = !show1"
-                    ></v-text-field>
-                    <div class="pb-3 font-weight-bold h5">
-                      Breve descrizione sull'attivazione
-                    </div>
-                    <v-textarea
-                      background-color="white"
-                      rows="4"
-                      outlined
-                      v-model="notaAttivazione"
-                    ></v-textarea>
+                    <v-divider class="mt-0"></v-divider>
+                    <v-row class="text-center">
+                      <v-container>
+                        <v-row>
+                          <v-checkbox style="font-weight: 600" v-model="attiva">
+                            <template v-slot:label>
+                              <span>Conferma di voler attivare l'utente</span>
+                            </template>
+                          </v-checkbox>
+                        </v-row>
+                      </v-container>
+                    </v-row>
+                    <v-row>
+                      <v-col cols="12" sm="6" md="6">
+                        <small>
+                          Salvato in data e ora<br />
+                          <strong>{{
+                            new Date().toLocaleString("it-IT")
+                          }}</strong>
+                        </small>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="6">
+                        <small>
+                          Operatore<br />
+                          <strong>{{ user.Nominativo }}</strong>
+                        </small>
+                      </v-col>
+                    </v-row>
                   </div>
-                  <v-divider class="mt-0"></v-divider>
-                  <v-row class="text-center">
-                    <v-container>
-                      <v-row>
-                        <v-checkbox style="font-weight: 600" v-model="attiva">
-                          <template v-slot:label>
-                            <span>Conferma di voler attivare l'utente</span>
-                          </template>
-                        </v-checkbox>
-                      </v-row>
-                    </v-container>
-                  </v-row>
-                  <v-row>
-                    <v-col cols="12" sm="6" md="6">
-                      <small>
-                        Salvato in data e ora<br />
-                        <strong>{{
-                          new Date().toLocaleString("it-IT")
-                        }}</strong>
-                      </small>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="6">
-                      <small>
-                        Operatore<br />
-                        <strong>{{ user.Nominativo }}</strong>
-                      </small>
-                    </v-col>
-                  </v-row>
+                  <div v-else class="">
+                    <div class="font-weight-black">
+                      <i class="fas fa-exclamation-triangle fa-2x"></i>
+                      Attivazione bloccata per documentazione incompleta
+                    </div>
+                  </div>
                 </section>
+
                 <v-card-actions class="mt-4">
                   <v-spacer></v-spacer>
                   <CButton
@@ -233,7 +242,7 @@
                       resetModaleConferme();
                     "
                     variant="ghost"
-                    ><i class="fas fa-times"></i>&nbsp; Annulla
+                    ><i class="fas fa-times"></i>&nbsp; Chiudi
                   </CButton>
                   <v-btn
                     color="#1f4b6b"
@@ -273,6 +282,7 @@ export default {
   },
   data() {
     return {
+      bloccaAttivazione: false,
       dialog2: false,
       notaAttivazione: "",
       password: "",
@@ -384,6 +394,21 @@ export default {
             docRic.selezionato = false; //utilizzato per marcare i doc da validare o rifiutare
           }
         });
+        // Trova il documento richiesto con attivazione = true
+        const documentoAttivato = this.fileRichiesti.find(
+          (doc) => doc.attivazione === true
+        );
+        if (documentoAttivato) {
+          // Trova il corrispondente documento caricato
+          const uploadedDoc = this.uploadedFiles.find(
+            (uploadedDoc) =>
+              uploadedDoc.tipo_documento === documentoAttivato.tipo
+          );
+          if (!uploadedDoc) {
+            // Se non trovo il documento richesto allora blocco l'attivazione
+            this.bloccaAttivazione = true;
+          }
+        }
       }
     },
     async AttivaCandidato() {
