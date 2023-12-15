@@ -481,6 +481,8 @@ export default {
           "warning"
         );
         this.checkblacklist = true;
+      } else {
+        this.checkblacklist = false;
       }
     },
     isBlackListCity(prov) {
