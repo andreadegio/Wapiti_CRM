@@ -34,6 +34,10 @@
           <v-tooltip bottom color="#1f4b6b">
             <template v-slot:activator="{ on, attrs }">
               <v-btn
+                :disabled="
+                  candidato.id_segnalatore &&
+                  candidato.id_referente != user.idUtente
+                "
                 small
                 icon
                 outlined
@@ -294,6 +298,7 @@ export default {
   },
   data() {
     return {
+      user: JSON.parse(localStorage.getItem("chisono_data")),
       showMaps: false,
       mapCenter: { lat: 44.478214183349834, lng: 10.533467586367085 }, // Coordinatacentrale iniziale
       geojsonData: geojson,

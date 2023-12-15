@@ -53,7 +53,13 @@
       </template>
 
       <template #actions="row">
-        <td>
+        <td
+          v-if="
+            (row.item.id_segnalatore != null &&
+              row.item.id_referente == user.idUtente) ||
+            row.item.id_segnalatore == null
+          "
+        >
           <div class="d-flex">
             <Attivazione
               v-if="gridType === 'attivazione_account'"
@@ -118,6 +124,7 @@
             ></Ripristina>
           </div>
         </td>
+        <td v-else>Questo candidato è assegnato ad un'altro operatore</td>
       </template>
     </CDataTable>
   </div>
@@ -158,6 +165,7 @@ export default {
   },
   data() {
     return {
+      user: JSON.parse(localStorage.getItem("chisono_data")),
       step: 0,
       items: [],
       fields: [
