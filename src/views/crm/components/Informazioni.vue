@@ -168,7 +168,10 @@
                   Invia nuovamente la mail con le istruzioni (pin e link) per
                   accedere alla pagina di upload documenti
                 </div>
-                <v-btn color="#1f4b6b" dark @click="recuperaCredenziali()"
+                <v-btn
+                  :disabled="candidato.id_step < 3"
+                  color="#1f4b6b"
+                  @click="recuperaCredenziali()"
                   ><i class="fas fa-mail-bulk"></i>&nbsp;Invia mail</v-btn
                 >
               </section>
