@@ -84,6 +84,19 @@
               <v-col cols="12" sm="4" md="4">
                 <v-select
                   outlined
+                  :disabled="provenienza != 8"
+                  v-model="id_segnalatore"
+                  :items="segnalatori"
+                  label="Segnalatore"
+                  item-value="id"
+                  item-text="cognome"
+                ></v-select>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12" sm="4" md="4">
+                <v-select
+                  outlined
                   v-model="tipologia"
                   :items="tipologiaOptions"
                   item-value="id_tipologia"
@@ -91,16 +104,6 @@
                   label="Tipologia"
                 ></v-select
               ></v-col>
-              <!-- <v-col cols="12" sm="3" md="3">
-                  <v-select
-                    outlined
-                    v-model="priorita"
-                    :items="['Alta', 'Normale']"
-                    label="Priorità"
-                  ></v-select>
-                </v-col> -->
-            </v-row>
-            <v-row>
               <v-col cols="12" sm="2" md="2">
                 <v-radio-group v-model="iscrittoRui" row class="iscrittoRui">
                   <template v-slot:label>
@@ -429,9 +432,14 @@ export default {
         { "Caltanisetta (CL)": ["Gela", "Niscemi"] },
       ],
       checkblacklist: false,
+      segnalatori: [],
+      id_segnalatore: null,
+      nome_segnalatore: "",
+      id_referente: null,
     };
   },
   mounted() {
+    this.getSegnalatori();
     this.getProvenienze();
     this.getTipologia();
   },
@@ -452,6 +460,19 @@ export default {
     iscrittoRui() {
       this.numeroIscrizione = "";
       this.dataIscrizione = null;
+    },
+    id_segnalatore() {
+      // quando cambia l'id del segnalatore assegno nome e id referente per poi salvare su db
+      const segnalatore = this.segnalatori.find(
+        (segnalatore) => segnalatore.id === this.id_segnalatore
+      );
+
+      if (segnalatore) {
+        this.nome_segnalatore = segnalatore.nome + " " + segnalatore.cognome;
+        this.id_referente = segnalatore.id_referente;
+      } else {
+        return null; // Se l'id non viene trovato, puoi gestire questo scenario a tuo piacimento
+      }
     },
   },
   methods: {
@@ -670,6 +691,21 @@ export default {
         console.error(error);
       }
     },
+    async getSegnalatori() {
+      try {
+        await axios
+          .get(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.crm.getSegnalatori
+          )
+          .then((response) => {
+            this.segnalatori = response.data;
+          });
+      } catch (error) {
+        console.error(error);
+      }
+    },
     async getTipologia() {
       try {
         await axios
@@ -753,6 +789,9 @@ export default {
         numeroIscrizione: this.numeroIscrizione,
         dataIscrizione: this.dataIscrizione,
         note: this.note,
+        id_segnalatore: this.id_segnalatore,
+        nome_segnalatore: this.nome_segnalatore,
+        id_referente: this.id_referente,
       };
       // invio i dati al backend
       try {

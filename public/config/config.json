@@ -68,7 +68,8 @@
     "completaFormazione": "CRM/completaFormazione",
     "AttivaCandidato": "CRM/AttivaCandidato",
     "PrenotaFormazione": "CRM/PrenotaFormazione",
-    "recuperaCredenziali": "CRM/recuperaCredenziali"
+    "recuperaCredenziali": "CRM/recuperaCredenziali",
+    "getSegnalatori": "CRM/getSegnalatori"
   },
   "servizi_broker": "https://servizi.documentale.cloud/AibaJSON2023-test/",
   "servizi_energy": "https://abyenergy.it/servizitest/",
