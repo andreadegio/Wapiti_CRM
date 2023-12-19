@@ -14,7 +14,9 @@
       pagination
       striped
       :items-per-page-select="{ label: 'Risultati per pagina' }"
-      :noItemsView="{ noItems: 'Nessun contatto presente' }"
+      :noItemsView="{
+        noItems: noItemsMessage,
+      }"
     >
       <template #tipologia="{ item }">
         <td style="text-align: center !important">
@@ -124,7 +126,9 @@
             ></Ripristina>
           </div>
         </td>
-        <td v-else>Questo candidato è assegnato ad un'altro operatore</td>
+        <td v-else style="color: #1f4b6b">
+          <strong>Questo candidato è assegnato ad un'altro operatore</strong>
+        </td>
       </template>
     </CDataTable>
   </div>
@@ -166,6 +170,7 @@ export default {
   data() {
     return {
       user: JSON.parse(localStorage.getItem("chisono_data")),
+      nascondiElem: false,
       step: 0,
       items: [],
       fields: [
@@ -181,6 +186,13 @@ export default {
         { key: "opzioni", label: "Opzioni" },
       ],
     };
+  },
+  computed: {
+    noItemsMessage() {
+      return this.nascondiElem
+        ? "Non sei abilitato"
+        : "Nessun contatto presente";
+    },
   },
   watch: {
     gridType() {
@@ -284,7 +296,6 @@ export default {
     },
 
     async getLista(stato) {
-      //  console.log(stato);
       let param = { step: stato };
       try {
         const response = await axios.post(
@@ -293,71 +304,83 @@ export default {
             this.$custom_json.crm.getListaByStep,
           param
         );
-        return response.data; // Restituisci i dati dalla risposta
+        return response.data;
       } catch (error) {
         console.error(error);
-        return []; // In caso di errore, ritorna un array vuoto ogestisci l'errore in un altro modo
+        return [];
       }
     },
     async aggiorna_grid(state) {
-      this.getLista(state).then((candidati) => {
-        this.items = candidati.map((item) => {
-          if (item.rag_soc) {
-            var candidato = item.rag_soc;
-          } else {
-            candidato = item.nome + " " + item.cognome;
-          }
-          if (item.richiama) {
-            const giornoRichiamo = new Date(item.richiama[0].giorno);
-            const oggi = new Date();
-
-            // Trasformo le date in formato "YYYY-MM-DD" per poterle confrontare correttamente
-            const formattedGiornoRichiamo = giornoRichiamo
-              .toISOString()
-              .slice(0, 10);
-            const formattedOggi = oggi.toISOString().slice(0, 10);
-
-            if (formattedGiornoRichiamo === formattedOggi) {
-              // La data è odierna
-              // console.log("Il richiamo è oggi!");
-              item._classes = "green accent-3";
-            } else if (formattedGiornoRichiamo > formattedOggi) {
-              // La data è futura
-              // console.log("Il richiamo è in futuro.");
+      if (
+        this.user["idUtente"] == 140 &&
+        this.gridType != "attivazione_account" &&
+        this.gridType != "utenti_attivi" &&
+        this.gridType != "eliminati" &&
+        this.gridType != "ricerca"
+      ) {
+        this.items = [];
+        this.nascondiElem = true;
+      } else {
+        this.nascondiElem = false;
+        this.getLista(state).then((candidati) => {
+          this.items = candidati.map((item) => {
+            if (item.rag_soc) {
+              var candidato = item.rag_soc;
             } else {
-              // La data è già trascorsa
-              // console.log("Il richiamo è già passato.");
-              item._classes = "red";
+              candidato = item.nome + " " + item.cognome;
             }
-          }
-          if (this.gridType == "formazione" && !item.formatore) {
-            // SE IL CANDIDATO NON HA ANCORA PRENOTATO EVIDENZIO LA RIGA
-            item._classes = "orange darken-4";
-          }
-          // Se ha già prenotato la data per la formazione allora controllo se è scaduta, se è oggi o se deve arrivare
-          if (this.gridType == "formazione" && item.formatore) {
-            const giornoFormazione = new Date(item.data_formazione);
-            const oggi = new Date();
-            const formattedOggi = oggi.toISOString().slice(0, 10);
-            const formattedGiornoFormazione = giornoFormazione
-              .toISOString()
-              .slice(0, 10);
-            if (formattedGiornoFormazione === formattedOggi) {
-              item._classes = "green accent-3";
-            } else if (formattedGiornoFormazione > formattedOggi) {
-              // la data è futura non cambio colore alla riga
-            } else {
-              // data scaduta
-              item._classes = "red";
-            }
-          }
+            if (item.richiama) {
+              const giornoRichiamo = new Date(item.richiama[0].giorno);
+              const oggi = new Date();
 
-          return {
-            ...item,
-            candidato: candidato,
-          };
+              // Trasformo le date in formato "YYYY-MM-DD" per poterle confrontare correttamente
+              const formattedGiornoRichiamo = giornoRichiamo
+                .toISOString()
+                .slice(0, 10);
+              const formattedOggi = oggi.toISOString().slice(0, 10);
+
+              if (formattedGiornoRichiamo === formattedOggi) {
+                // La data è odierna
+                // console.log("Il richiamo è oggi!");
+                item._classes = "green accent-3";
+              } else if (formattedGiornoRichiamo > formattedOggi) {
+                // La data è futura
+                // console.log("Il richiamo è in futuro.");
+              } else {
+                // La data è già trascorsa
+                // console.log("Il richiamo è già passato.");
+                item._classes = "red";
+              }
+            }
+            if (this.gridType == "formazione" && !item.formatore) {
+              // SE IL CANDIDATO NON HA ANCORA PRENOTATO EVIDENZIO LA RIGA
+              item._classes = "orange darken-4";
+            }
+            // Se ha già prenotato la data per la formazione allora controllo se è scaduta, se è oggi o se deve arrivare
+            if (this.gridType == "formazione" && item.formatore) {
+              const giornoFormazione = new Date(item.data_formazione);
+              const oggi = new Date();
+              const formattedOggi = oggi.toISOString().slice(0, 10);
+              const formattedGiornoFormazione = giornoFormazione
+                .toISOString()
+                .slice(0, 10);
+              if (formattedGiornoFormazione === formattedOggi) {
+                item._classes = "green accent-3";
+              } else if (formattedGiornoFormazione > formattedOggi) {
+                // la data è futura non cambio colore alla riga
+              } else {
+                // data scaduta
+                item._classes = "red";
+              }
+            }
+
+            return {
+              ...item,
+              candidato: candidato,
+            };
+          });
         });
-      });
+      }
     },
   },
   mounted() {

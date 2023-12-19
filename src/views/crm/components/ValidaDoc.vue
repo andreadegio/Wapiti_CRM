@@ -286,85 +286,104 @@
             </v-simple-table>
           </section>
           <v-divider></v-divider>
-          <section id="Opzioni" class="text-right">
-            <h3 style="color: #1f4b6b">
-              <strong>Opzioni:</strong>
-            </h3>
-            <small v-if="!tuttiDocumentiValidati"
-              >Scegli se validare o rifiutare i file selezionati
-            </small>
-            <small v-else
-              >Sono stati caricati tutti i documenti avanza allo step
-              successivo</small
-            >
-            <div class="options-container">
-              <!-- Tutti i documenti inviati documentazione completa -->
-              <!-- completamento da utente attivo -->
-              <v-btn
-                v-if="tuttiDocumentiValidati && candidato.id_step == 17"
-                color="success"
-                dark
-                @click="chiudiAttivazione = true"
-              >
-                <i class="fas fa-check-circle fa-2x"></i> &nbsp; Completa
-                Attivazione
-              </v-btn>
-              <!-- completamento da utente in attesa di formazione che completa il caricamento -->
-              <v-btn
-                v-if="tuttiDocumentiValidati && candidato.id_step == 16"
-                color="success"
-                dark
-                @click="completaCaricamento = true"
-              >
-                <i class="fas fa-check-circle fa-2x"></i> &nbsp; Completa
-                Caricamento
-              </v-btn>
-              <!-- completamento da utente in attesa di registrazione documenti -->
-              <v-btn
-                v-if="
-                  tuttiDocumentiValidati &&
-                  candidato.id_step == 9 &&
-                  attivaFormazione
-                "
-                color="success"
-                dark
-                @click="passaggioFormazione = true"
-              >
-                <i class="fas fa-check-circle fa-2x"></i> &nbsp; Formazione
-              </v-btn>
-              <!-- Solo documenti obbligatori documentazione parziale -->
-              <v-btn
-                v-if="
-                  attivaFormazione &&
-                  candidato.id_step == 9 &&
-                  !tuttiDocumentiValidati
-                "
-                color="success"
-                dark
-                @click="confermaFormazione = true"
-              >
-                <i class="fas fa-check-circle fa-2x"></i> &nbsp; Formazione
-              </v-btn>
-              <section v-if="!tuttiDocumentiValidati">
-                <v-btn
-                  class="ml-2"
-                  color="#1f4b6b"
-                  dark
-                  @click="validaDocumenti"
-                >
-                  <i class="fas fa-check-circle fa-2x"></i> &nbsp; Valida
-                </v-btn>
-                <v-btn class="ml-2" color="red" dark @click="rifiutaDocumenti">
-                  <i class="fas fa-times-circle fa-2x"></i> &nbsp; Rifiuta
-                </v-btn>
+          <v-tooltip
+            right
+            :color="uploadedFiles.length === 0 ? 'warning' : 'transparent'"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <section v-bind="attrs" v-on="on" id="Opzioni" class="text-right">
+                <div :class="{ disabled_input: uploadedFiles.length === 0 }">
+                  <h3 style="color: #1f4b6b">
+                    <strong>Opzioni:</strong>
+                  </h3>
+                  <small v-if="!tuttiDocumentiValidati"
+                    >Scegli se validare o rifiutare i file selezionati
+                  </small>
+                  <small v-else
+                    >Sono stati caricati tutti i documenti avanza allo step
+                    successivo</small
+                  >
+                  <div class="options-container">
+                    <!-- Tutti i documenti inviati documentazione completa -->
+                    <!-- completamento da utente attivo -->
+                    <v-btn
+                      v-if="tuttiDocumentiValidati && candidato.id_step == 17"
+                      color="success"
+                      dark
+                      @click="chiudiAttivazione = true"
+                    >
+                      <i class="fas fa-check-circle fa-2x"></i> &nbsp; Completa
+                      Attivazione
+                    </v-btn>
+                    <!-- completamento da utente in attesa di formazione che completa il caricamento -->
+                    <v-btn
+                      v-if="tuttiDocumentiValidati && candidato.id_step == 16"
+                      color="success"
+                      dark
+                      @click="completaCaricamento = true"
+                    >
+                      <i class="fas fa-check-circle fa-2x"></i> &nbsp; Completa
+                      Caricamento
+                    </v-btn>
+                    <!-- completamento da utente in attesa di registrazione documenti -->
+                    <v-btn
+                      v-if="
+                        tuttiDocumentiValidati &&
+                        candidato.id_step == 9 &&
+                        attivaFormazione
+                      "
+                      color="success"
+                      dark
+                      @click="passaggioFormazione = true"
+                    >
+                      <i class="fas fa-check-circle fa-2x"></i> &nbsp;
+                      Formazione
+                    </v-btn>
+                    <!-- Solo documenti obbligatori documentazione parziale -->
+                    <v-btn
+                      v-if="
+                        attivaFormazione &&
+                        candidato.id_step == 9 &&
+                        !tuttiDocumentiValidati
+                      "
+                      color="success"
+                      dark
+                      @click="confermaFormazione = true"
+                    >
+                      <i class="fas fa-check-circle fa-2x"></i> &nbsp;
+                      Formazione
+                    </v-btn>
+                    <section v-if="!tuttiDocumentiValidati">
+                      <v-btn
+                        class="ml-2"
+                        color="#1f4b6b"
+                        dark
+                        @click="validaDocumenti"
+                      >
+                        <i class="fas fa-check-circle fa-2x"></i> &nbsp; Valida
+                      </v-btn>
+                      <v-btn
+                        class="ml-2"
+                        color="red"
+                        dark
+                        @click="rifiutaDocumenti"
+                      >
+                        <i class="fas fa-times-circle fa-2x"></i> &nbsp; Rifiuta
+                      </v-btn>
+                    </section>
+                  </div>
+                </div>
               </section>
-            </div>
-          </section>
+            </template>
+            <span v-if="uploadedFiles.length === 0">
+              Nessun documento presente</span
+            >
+          </v-tooltip>
 
           <v-divider></v-divider>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue-grey" outlined @click="dialog = false">
+            <v-btn color="black" outlined @click="dialog = false">
               <i class="fas fa-times"></i>&nbsp; Chiudi
             </v-btn>
           </v-card-actions>

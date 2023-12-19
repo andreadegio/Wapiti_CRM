@@ -30,7 +30,7 @@
               <v-btn
                 outlined
                 color="blue-grey"
-                text
+                dark
                 @click="
                   noteMode = !noteMode;
                   nota = '';

@@ -38,15 +38,14 @@
                   candidato.id_segnalatore &&
                   candidato.id_referente != user.idUtente
                 "
-                small
-                icon
-                outlined
-                color="#1f4b6b"
+                fab
+                x-small
+                color="white"
                 v-bind="attrs"
                 v-on="on"
                 @click="openEditModal"
               >
-                <i class="fas fa-pencil-alt"></i>
+                <i class="fas fa-pencil-alt fa-2x"></i>
               </v-btn>
             </template>
             <span>Modifica contatto</span>

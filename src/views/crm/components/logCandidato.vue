@@ -52,7 +52,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn outlined color="blue-grey" text @click="logMode = !logMode">
+          <v-btn outlined color="blue-grey" dark @click="logMode = !logMode">
             <i class="fas fa-times"></i>&nbsp; chiudi
           </v-btn>
         </v-card-actions>

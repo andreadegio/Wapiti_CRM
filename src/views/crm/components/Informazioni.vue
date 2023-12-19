@@ -71,7 +71,9 @@
 
           <v-divider></v-divider>
           <v-tabs centered color="warning">
-            <v-tab>Dati Anagrafici</v-tab>
+            <v-tab>
+              <v-icon left>mdi-account-tie </v-icon>Dati Anagrafici</v-tab
+            >
 
             <v-tab
               ><v-icon left>mdi-file-document-edit-outline</v-icon
@@ -177,8 +179,9 @@
                   accedere alla pagina di upload documenti
                 </div>
                 <v-btn
-                  :disabled="candidato.id_step < 3"
+                  outlined
                   color="#1f4b6b"
+                  :disabled="candidato.id_step < 3"
                   @click="recuperaCredenziali()"
                   ><i class="fas fa-mail-bulk"></i>&nbsp;Invia mail</v-btn
                 >
@@ -190,7 +193,7 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="#1f4b6b" dark @click="dialog = false">
+            <v-btn outlined color="blue-grey" dark @click="dialog = false">
               <i class="fas fa-times"></i>&nbsp; Chiudi
             </v-btn>
           </v-card-actions>
