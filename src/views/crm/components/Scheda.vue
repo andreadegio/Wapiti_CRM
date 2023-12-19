@@ -54,6 +54,7 @@
         </p>
       </v-subheader>
       <v-row
+        dense
         class="mt-2"
         style="background-color: #b2dfdb; border-radius: 10px"
       >
@@ -142,6 +143,49 @@
               <v-list-item-title>Provenienza</v-list-item-title>
               <v-list-item-subtitle>{{
                 candidato.origine
+              }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col v-if="candidato.nome_segnalatore">
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>Segnalatore</v-list-item-title>
+              <v-list-item-subtitle>{{
+                candidato.nome_segnalatore
+              }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-col>
+        <v-col v-if="candidato.nome_segnalatore">
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>Referente Aby</v-list-item-title>
+              <v-list-item-subtitle
+                >{{ abyRef ? abyRef.nome : "" }} &nbsp;
+                {{ abyRef ? abyRef.cognome : "" }}</v-list-item-subtitle
+              >
+            </v-list-item-content>
+          </v-list-item>
+        </v-col>
+        <v-col v-if="candidato.facebook">
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>Profilo Facebook</v-list-item-title>
+              <v-list-item-subtitle>{{
+                candidato.facebook
+              }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-col>
+        <v-col v-if="candidato.linkedin">
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>Profilo LinkedIn</v-list-item-title>
+              <v-list-item-subtitle>{{
+                candidato.linkedin
               }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
@@ -269,7 +313,7 @@
   </div>
 </template>
 <script>
-// import axios from "axios";
+import axios from "axios";
 import geojson from "/public/geojson/geojson.json";
 import Vue from "vue";
 import * as VueGoogleMaps from "vue2-google-maps";
@@ -307,13 +351,36 @@ export default {
       infoWindowOpen: false,
       editMode: false,
       editedCandidato: { ...this.candidato }, // Clonare il candidato originale
+      abyRef: [],
     };
   },
   mounted() {
     this.geocodeCenter(); // Chiamata alla funzione di geocodifica
+    this.getAbyRef();
   },
 
   methods: {
+    async getAbyRef() {
+      if (this.candidato["id_segnalatore"]) {
+        let param = {
+          idAbyRef: this.candidato["id_referente"],
+        };
+        try {
+          await axios
+            .post(
+              this.$custom_json.base_url +
+                this.$custom_json.api_url +
+                this.$custom_json.crm.getAbyRef,
+              param
+            )
+            .then((response) => {
+              this.abyRef = response.data[0];
+            });
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    },
     openEditModal() {
       this.editMode = true;
     },

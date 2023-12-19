@@ -68,20 +68,28 @@
             >
             <v-spacer></v-spacer>
           </v-toolbar>
-          <scheda
-            :candidato="candidato"
-            @updateCandidato="updateCandidato"
-          ></scheda>
+
           <v-divider></v-divider>
           <v-tabs centered color="warning">
+            <v-tab>Dati Anagrafici</v-tab>
+
             <v-tab
               ><v-icon left>mdi-file-document-edit-outline</v-icon
               >Documentazione</v-tab
             >
             <v-tab
               ><v-icon left> mdi-information-variant-circle-outline </v-icon
-              >info</v-tab
+              >info - utility</v-tab
             >
+            <v-tab-item>
+              <v-divider></v-divider>
+              <section>
+                <scheda
+                  :candidato="candidato"
+                  @updateCandidato="updateCandidato"
+                ></scheda>
+              </section>
+            </v-tab-item>
 
             <v-tab-item>
               <v-divider></v-divider>
