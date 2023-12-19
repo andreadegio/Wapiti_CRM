@@ -438,9 +438,15 @@ export default {
       ],
       checkblacklist: false,
       segnalatori: [],
-      id_segnalatore: this.candidato.id_segnalatore.toString(),
-      nome_segnalatore: this.candidato.nome_segnalatore,
-      id_referente: this.candidato.id_referente.toString(),
+      id_segnalatore: this.candidato.id_segnalatore
+        ? this.candidato.id_segnalatore.toString()
+        : "",
+      nome_segnalatore: this.candidato.nome_segnalatore
+        ? this.candidato.nome_segnalatore
+        : "",
+      id_referente: this.candidato.id_referente
+        ? this.candidato.id_referente.toString()
+        : "",
     };
   },
   mounted() {
