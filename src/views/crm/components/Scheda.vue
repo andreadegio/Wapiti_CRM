@@ -163,8 +163,9 @@
             <v-list-item-content>
               <v-list-item-title>Referente Aby</v-list-item-title>
               <v-list-item-subtitle
-                >{{ abyRef ? abyRef.nome : "" }} &nbsp;
-                {{ abyRef ? abyRef.cognome : "" }}</v-list-item-subtitle
+                >{{ abyRef ? abyRef.nome : "" }}&nbsp;{{
+                  abyRef ? abyRef.cognome : ""
+                }}</v-list-item-subtitle
               >
             </v-list-item-content>
           </v-list-item>
