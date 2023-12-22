@@ -6,6 +6,7 @@
   "cloud_url": "cloud/",
   "token_meteo": "ce77bfd7b2ab0fd9947d367622a17c78",
   "url_meteo": "https://api.openweathermap.org/data/2.5/weather",
+  "urlUtils3": "https://abyway-staging.navert.cloud/API/crm/pub/S3utils.php",
   "ep_api": {
     "listanews_home": "listanewshome",
     "listanews": "listanews",
@@ -45,6 +46,7 @@
   },
   "crm": {
     "newContatto": "CRM/salvaContatto",
+    "newContattoSegnalatore": "CRM/salvaContattoSegnalatore",
     "editContatto": "CRM/editContatto",
     "addSource": "CRM/addSource",
     "getSource": "CRM/getSource",

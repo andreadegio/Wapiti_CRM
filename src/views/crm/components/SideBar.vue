@@ -9,8 +9,73 @@
       </button>
     </div>
 
-    <!-- Contenuto della sidebar -->
-    <CNav vertical class="sidebar">
+    <CNav vertical class="sidebar" v-if="userCRMInfo.idRuolo == 6">
+      <CNavItem>
+        <div class="side_btn" @click="buttonClicked('new_segnalatore')">
+          <div
+            class="side_btn_ico"
+            v-c-tooltip="{
+              content: 'Aggiungi candidature',
+              placement: 'right',
+            }"
+          >
+            <i class="fas fa-user-plus"></i>
+          </div>
+          <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
+            >Aggiungi candidato</span
+          >
+        </div>
+      </CNavItem>
+      <CNavItem>
+        <div class="side_btn" @click="buttonClicked('utenti_attivi')">
+          <div
+            class="side_btn_ico"
+            v-c-tooltip="{
+              content: 'Utenti attivi',
+              placement: 'right',
+            }"
+          >
+            <i class="fas fa-users"></i>
+          </div>
+          <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
+            >Utenti attivati</span
+          >
+        </div>
+      </CNavItem>
+      <CNavItem>
+        <div class="side_btn" @click="buttonClicked('ricerca')">
+          <div
+            class="side_btn_ico"
+            v-c-tooltip="{
+              content: 'Utenti attivi',
+              placement: 'right',
+            }"
+          >
+            <i class="fas fa-search"></i>
+          </div>
+          <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
+            >Ricerca</span
+          >
+        </div>
+      </CNavItem>
+      <CNavItem>
+        <div class="side_btn_deleted" @click="buttonClicked('eliminati')">
+          <div
+            class="side_btn_ico_deleted"
+            v-c-tooltip="{
+              content: 'Eliminati',
+              placement: 'right',
+            }"
+          >
+            <i class="far fa-trash-alt"></i>
+          </div>
+          <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
+            >Rifiutati</span
+          >
+        </div>
+      </CNavItem>
+    </CNav>
+    <CNav vertical class="sidebar" v-if="userCRMInfo.idRuolo != 6">
       <CNavItem>
         <div class="side_btn" @click="buttonClicked('new')">
           <div
@@ -172,7 +237,7 @@
             <i class="fas fa-users"></i>
           </div>
           <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
-            >Utenti attivi</span
+            >Utenti attivati</span
           >
         </div>
       </CNavItem>
@@ -219,6 +284,7 @@ export default {
     return {
       sidebarHidden: false,
       sidebarDisplay: "lg",
+      userCRMInfo: JSON.parse(localStorage.getItem("userCRMInfo")),
     };
   },
   methods: {

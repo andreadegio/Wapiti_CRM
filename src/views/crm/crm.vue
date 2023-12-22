@@ -6,10 +6,18 @@
         <!-- Contenuto principale della pagina -->
         <Stats v-if="gridType === 'default'" />
         <Grid
-          v-if="gridType !== 'default' && gridType !== 'new'"
+          v-if="
+            gridType !== 'default' &&
+            gridType !== 'new' &&
+            gridType !== 'new_segnalatore'
+          "
           :gridType="gridType"
         />
         <AddContact v-if="gridType === 'new'" @showgrid="showGrid" />
+        <AddSegnalatore
+          v-if="gridType === 'new_segnalatore'"
+          @showgrid="showGrid"
+        />
       </div>
     </div>
   </v-app>
@@ -19,6 +27,7 @@ import SideBar from "./components/SideBar.vue";
 import Stats from "./components/stats.vue";
 import Grid from "./components/Grid.vue";
 import AddContact from "./components/Inserimento.vue";
+import AddSegnalatore from "./components/Insert_segnalatore.vue";
 
 export default {
   name: "Crm_home",
@@ -27,6 +36,7 @@ export default {
     Stats,
     Grid,
     AddContact,
+    AddSegnalatore,
   },
   data() {
     return {
