@@ -73,7 +73,8 @@
     "recuperaCredenziali": "CRM/recuperaCredenziali",
     "getSegnalatori": "CRM/getSegnalatori",
     "getAbyRef": "CRM/getAbyRef",
-    "accessoCRM": "CRM/accessoCRM"
+    "accessoCRM": "CRM/accessoCRM",
+    "sendMail": "CRM/sendMail"
   },
   "servizi_broker": "https://servizi.documentale.cloud/AibaJSON2023-test/",
   "servizi_energy": "https://abyenergy.it/servizitest/",

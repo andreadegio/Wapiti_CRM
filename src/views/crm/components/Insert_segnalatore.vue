@@ -361,7 +361,14 @@
               dense
               outlined
             ></v-textarea>
-
+            <div v-if="uploading" class="overlay">
+              <v-progress-circular
+                :size="70"
+                :width="7"
+                color="primary"
+                indeterminate
+              ></v-progress-circular>
+            </div>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn text @click="e1 > 1 ? (e1 = e1 - 1) : (e1 = 1)">
@@ -579,6 +586,8 @@ export default {
       uploadedFiles: [],
       fileRichiesti: [],
       paramTipo: "", // USATO PER I QUERYPARAMETERS
+      queryString: "", //USATO PER UPLOAD
+      uploading: false,
     };
   },
   mounted() {
@@ -895,7 +904,9 @@ export default {
         id_segnalatore: this.userCRMInfo.id,
         nome_segnalatore:
           this.userCRMInfo.nome + " " + this.userCRMInfo.cognome,
+        mail_segnalatore: this.userCRMInfo.mail,
         id_referente: this.userCRMInfo.id_referente,
+        disponeDocumenti: this.disponeDocumenti,
       };
       // invio i dati al backend
       try {
@@ -911,11 +922,7 @@ export default {
             var lastInsert = response.data.lastInsert;
             switch (response.data.esito) {
               case "OK":
-                this.$alert(
-                  message + " ultimo ID " + lastInsert,
-                  "OK",
-                  "success"
-                );
+                this.inviaFile(lastInsert);
                 this.$emit("showgrid", "default");
                 break;
               case "KO":
@@ -947,10 +954,7 @@ export default {
         });
 
         if (!checkFiles) {
-          console.log(
-            "Nessun file caricato. Impossibile inviare la richiesta."
-          );
-          alert("Non hai selezionato nessun file");
+          this.$alert("Candidato inserito senza documenti", "OK", "success");
           // Aggiungi un messaggio di feedback all'utente per informare che nessun file è stato caricato
           return; // Esci dalla funzione se nessun file è stato caricato
         }
@@ -982,12 +986,15 @@ export default {
           }
         });
         // Query string per l'upload
-        const queryString =
-          "?id=" + lastId + "&t=" + this.paramTipo + "&i=" + this.iscrittoRui ==
-          "si"
-            ? 1
-            : 0;
-        formData.append("queryParameters", queryString);
+        this.queryString =
+          "?id=" +
+          lastId +
+          "&t=" +
+          this.paramTipo +
+          "&i=" +
+          (this.iscrittoRui == "si" ? 1 : 0);
+
+        formData.append("queryParameters", this.queryString);
 
         fetch(this.$custom_json.urlUtils3, {
           method: "POST",
@@ -1005,10 +1012,7 @@ export default {
 
             if (risposta.esito == "OK") {
               this.uploading = false;
-              console.log("Caricamento avvenuto con successo");
-              window.alert("Caricamento avvenuto con successo");
-              this.fetchUploadedFiles(); // Chiamata API per ottenere uploadedFiles
-              this.fetchFileRichiesti(); // Chiamata API per ottenere fileRichiesti
+              this.$alert("Caricamento avvenuto con successo", "OK", "success");
             } else {
               console.error(
                 "Errore durante l'upload dei file:",
@@ -1021,8 +1025,12 @@ export default {
           .catch((error) => {
             console.error("Errore durante la richiesta al server:", error);
           });
+      } else {
+        // non dispone dei documenti
+        this.$alert("Candidato inserito senza documenti", "OK", "success");
       }
     },
+
     async getFileRichiesti() {
       switch (this.tipologia) {
         case "1":
@@ -1052,7 +1060,7 @@ export default {
           params
         );
         this.fileRichiesti = response.data;
-        this.matchAndUpdateDocuments(); // Dopo aver recuperato fileRichiesti per tipologia di rapporto, fa il match
+        // this.matchAndUpdateDocuments(); // Dopo aver recuperato fileRichiesti per tipologia di rapporto, fa il match
       } catch (error) {
         console.error("Errore durante il recupero dei files richiesti", error);
       }

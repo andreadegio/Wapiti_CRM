@@ -1,5 +1,49 @@
 <template>
   <div>
+    <v-dialog v-model="sendMail" width="600px">
+      <v-card>
+        <v-card-title> </v-card-title>
+        <v-card-text>
+          <span class="text-h5"
+            >Invia un messaggio al
+            {{ dest == "ref" ? "referente" : "segnalatore" }}
+            {{
+              dest == "ref"
+                ? candidato.referente_nome + " " + candidato.referente_cognome
+                : candidato.nome_segnalatore
+            }}</span
+          >
+          <v-container>
+            <v-textarea rows="4" outlined v-model="message"></v-textarea>
+            <v-card-actions
+              ><v-spacer></v-spacer>
+              <v-btn
+                outlined
+                color="blue-grey"
+                dark
+                @click="
+                  sendMail = !sendMail;
+                  message = '';
+                "
+              >
+                <i class="fas fa-times"></i>&nbsp; chiudi
+              </v-btn>
+
+              <v-btn
+                style="color: white"
+                color="#1f4b6b"
+                @click="send()"
+                :disabled="!message"
+                ><i class="far fa-paper-plane"></i> &nbsp; Invia
+              </v-btn>
+            </v-card-actions>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-dialog v-model="preview" max-width="800px">
       <v-card>
         <v-toolbar dark color="#1f4b6b">
@@ -173,10 +217,10 @@
             <v-tab-item>
               <v-divider></v-divider>
               <section>
-                <div>Credenziali Upload</div>
+                <div><strong>Credenziali per Upload</strong></div>
                 <div>
-                  Invia nuovamente la mail con le istruzioni (pin e link) per
-                  accedere alla pagina di upload documenti
+                  Invia nuovamente la mail al candidato con le istruzioni (pin e
+                  link) per accedere alla pagina di upload documenti
                 </div>
                 <v-btn
                   outlined
@@ -184,6 +228,38 @@
                   :disabled="candidato.id_step < 3"
                   @click="recuperaCredenziali()"
                   ><i class="fas fa-mail-bulk"></i>&nbsp;Invia mail</v-btn
+                >
+              </section>
+              <section v-if="candidato.nome_segnalatore">
+                <v-divider dark></v-divider>
+                <div>
+                  <strong>Invia messaggio al segnalatore </strong>
+                </div>
+                <div>
+                  Invia un messaggio al segnalatore
+                  {{ candidato.nome_segnalatore }} per segnalare anomalie o
+                  richiedere informazioni
+                </div>
+                <v-btn
+                  outlined
+                  color="#1f4b6b"
+                  @click="messaggio('segnalatore')"
+                  ><i class="far fa-envelope"></i>&nbsp;Invia messaggio</v-btn
+                >
+              </section>
+              <section v-if="candidato.referente_nome">
+                <v-divider dark></v-divider>
+                <div>
+                  <strong>Invia messaggio al referente </strong>
+                </div>
+                <div>
+                  Invia un messaggio al referente
+                  {{ candidato.referente_nome }}
+                  {{ candidato.referente_cognome }} per segnalare anomalie o
+                  richiedere informazioni
+                </div>
+                <v-btn outlined color="#1f4b6b" @click="messaggio('referente')"
+                  ><i class="far fa-envelope"></i>&nbsp;Invia messaggio</v-btn
                 >
               </section>
             </v-tab-item>
@@ -215,6 +291,9 @@ export default {
   data() {
     return {
       dialog: false,
+      sendMail: false,
+      dest: null,
+      message: null,
       previewFileName: "",
       preview: false,
       previewUrl: "",
@@ -224,6 +303,50 @@ export default {
     };
   },
   methods: {
+    messaggio(to) {
+      switch (to) {
+        case "referente":
+          this.dest = "ref";
+          break;
+        case "segnalatore":
+          this.dest = "segn";
+          break;
+      }
+      this.sendMail = true;
+    },
+    async send() {
+      let params = {
+        contatto: this.candidato,
+        utente: this.user,
+        messaggio: this.message,
+        destinatario: this.dest,
+      };
+      try {
+        await axios
+          .post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.crm.sendMail,
+            params
+          )
+          .then((response) => {
+            var message = response.data.message;
+            switch (response.data.esito) {
+              case "OK":
+                this.$alert(message, "OK", "success");
+                this.sendMail = false;
+                message = "";
+                break;
+              case "KO":
+                this.$alert(message, "Attenzione", "warning");
+                break;
+            }
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     async recuperaCredenziali() {
       let params = {
         contatto: this.candidato,
@@ -242,7 +365,6 @@ export default {
             switch (response.data.esito) {
               case "OK":
                 this.$alert(message, "OK", "success");
-
                 break;
               case "KO":
                 this.$alert(message, "Attenzione", "warning");

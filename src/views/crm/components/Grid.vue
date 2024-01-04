@@ -170,6 +170,7 @@ export default {
   data() {
     return {
       user: JSON.parse(localStorage.getItem("chisono_data")),
+      userCRMInfo: JSON.parse(localStorage.getItem("userCRMInfo")),
       nascondiElem: false,
       step: 0,
       items: [],
@@ -323,62 +324,71 @@ export default {
       } else {
         this.nascondiElem = false;
         this.getLista(state).then((candidati) => {
-          this.items = candidati.map((item) => {
-            if (item.rag_soc) {
-              var candidato = item.rag_soc;
-            } else {
-              candidato = item.nome + " " + item.cognome;
-            }
-            if (item.richiama) {
-              const giornoRichiamo = new Date(item.richiama[0].giorno);
-              const oggi = new Date();
-
-              // Trasformo le date in formato "YYYY-MM-DD" per poterle confrontare correttamente
-              const formattedGiornoRichiamo = giornoRichiamo
-                .toISOString()
-                .slice(0, 10);
-              const formattedOggi = oggi.toISOString().slice(0, 10);
-
-              if (formattedGiornoRichiamo === formattedOggi) {
-                // La data è odierna
-                // console.log("Il richiamo è oggi!");
-                item._classes = "green accent-3";
-              } else if (formattedGiornoRichiamo > formattedOggi) {
-                // La data è futura
-                // console.log("Il richiamo è in futuro.");
+          this.items = candidati
+            .filter((item) => {
+              // Aggiungi qui la logica per il controllo dell'accesso agli elementi
+              if (this.userCRMInfo.idRuolo == "6") {
+                return item.id_segnalatore == this.userCRMInfo.id;
               } else {
-                // La data è già trascorsa
-                // console.log("Il richiamo è già passato.");
-                item._classes = "red";
+                return true; // Se l'utente non ha il ruolo 6, mostra tutti gli elementi
               }
-            }
-            if (this.gridType == "formazione" && !item.formatore) {
-              // SE IL CANDIDATO NON HA ANCORA PRENOTATO EVIDENZIO LA RIGA
-              item._classes = "orange darken-4";
-            }
-            // Se ha già prenotato la data per la formazione allora controllo se è scaduta, se è oggi o se deve arrivare
-            if (this.gridType == "formazione" && item.formatore) {
-              const giornoFormazione = new Date(item.data_formazione);
-              const oggi = new Date();
-              const formattedOggi = oggi.toISOString().slice(0, 10);
-              const formattedGiornoFormazione = giornoFormazione
-                .toISOString()
-                .slice(0, 10);
-              if (formattedGiornoFormazione === formattedOggi) {
-                item._classes = "green accent-3";
-              } else if (formattedGiornoFormazione > formattedOggi) {
-                // la data è futura non cambio colore alla riga
+            })
+            .map((item) => {
+              if (item.rag_soc) {
+                var candidato = item.rag_soc;
               } else {
-                // data scaduta
-                item._classes = "red";
+                candidato = item.nome + " " + item.cognome;
               }
-            }
+              if (item.richiama) {
+                const giornoRichiamo = new Date(item.richiama[0].giorno);
+                const oggi = new Date();
 
-            return {
-              ...item,
-              candidato: candidato,
-            };
-          });
+                // Trasformo le date in formato "YYYY-MM-DD" per poterle confrontare correttamente
+                const formattedGiornoRichiamo = giornoRichiamo
+                  .toISOString()
+                  .slice(0, 10);
+                const formattedOggi = oggi.toISOString().slice(0, 10);
+
+                if (formattedGiornoRichiamo === formattedOggi) {
+                  // La data è odierna
+                  // console.log("Il richiamo è oggi!");
+                  item._classes = "green accent-3";
+                } else if (formattedGiornoRichiamo > formattedOggi) {
+                  // La data è futura
+                  // console.log("Il richiamo è in futuro.");
+                } else {
+                  // La data è già trascorsa
+                  // console.log("Il richiamo è già passato.");
+                  item._classes = "red";
+                }
+              }
+              if (this.gridType == "formazione" && !item.formatore) {
+                // SE IL CANDIDATO NON HA ANCORA PRENOTATO EVIDENZIO LA RIGA
+                item._classes = "orange darken-4";
+              }
+              // Se ha già prenotato la data per la formazione allora controllo se è scaduta, se è oggi o se deve arrivare
+              if (this.gridType == "formazione" && item.formatore) {
+                const giornoFormazione = new Date(item.data_formazione);
+                const oggi = new Date();
+                const formattedOggi = oggi.toISOString().slice(0, 10);
+                const formattedGiornoFormazione = giornoFormazione
+                  .toISOString()
+                  .slice(0, 10);
+                if (formattedGiornoFormazione === formattedOggi) {
+                  item._classes = "green accent-3";
+                } else if (formattedGiornoFormazione > formattedOggi) {
+                  // la data è futura non cambio colore alla riga
+                } else {
+                  // data scaduta
+                  item._classes = "red";
+                }
+              }
+
+              return {
+                ...item,
+                candidato: candidato,
+              };
+            });
         });
       }
     },

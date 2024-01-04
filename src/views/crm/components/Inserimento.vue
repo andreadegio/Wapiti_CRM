@@ -150,7 +150,7 @@
                 <v-text-field
                   outlined
                   v-model="email"
-                  label="Email"
+                  label="Email *"
                 ></v-text-field>
               </v-col>
             </v-row>

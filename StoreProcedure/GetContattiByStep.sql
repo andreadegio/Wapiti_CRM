@@ -5,18 +5,21 @@ BEGIN
             SELECT
                 a.*,
                 a.id_anagrafica AS id,
+                a.pf_pg AS tipologia,
+                a.rui as numRui,
                 s.desc as stato,
                 s.color as _classes,
-                a.pf_pg AS tipologia,
                 t.desc AS RUI,
                 p.desc AS origine,
-                a.rui as numRui,
                 d.giorno as giorno_demo,
                 d.orario as orario_demo,
                 f.data_formazione as data_formazione,
                 f.ora_formazione as ora_formazione,
                 f.id_formatore as id_formatore,
-                f.nome_formatore as formatore
+                f.nome_formatore as formatore,
+                u.nome as referente_nome,
+                u.cognome as referente_cognome,
+                u.mail as referente_mail
             FROM
                 crm_anagrafica a
             LEFT JOIN
@@ -29,6 +32,8 @@ BEGIN
                 crm_demo d ON a.id_anagrafica = d.id_anagrafica
             LEFT JOIN
                 crm_formazione f ON a.id_anagrafica = f.id_anagrafica
+			LEFT JOIN
+				crm_users u ON a.id_referente = u.idbroker
             ORDER BY
                 a.id_step;';
     ELSE
@@ -36,18 +41,21 @@ BEGIN
             SELECT
                 a.*,
                 a.id_anagrafica AS id,
+                a.pf_pg AS tipologia,
+                a.rui as numRui,
                 s.desc as stato,
                 s.color as _classes,
-                a.pf_pg AS tipologia,
                 t.desc AS RUI,
                 p.desc AS origine,
-                a.rui as numRui,
                 d.giorno as giorno_demo,
                 d.orario as orario_demo,
                 f.data_formazione as data_formazione,
                 f.ora_formazione as ora_formazione,
                 f.id_formatore as id_formatore,
-                f.nome_formatore as formatore
+                f.nome_formatore as formatore,
+                u.nome as referente_nome,
+                u.cognome as referente_cognome,
+                u.mail as referente_mail
             FROM
                 crm_anagrafica a
             LEFT JOIN
@@ -60,6 +68,8 @@ BEGIN
                 crm_demo d ON a.id_anagrafica = d.id_anagrafica
             LEFT JOIN
                 crm_formazione f ON a.id_anagrafica = f.id_anagrafica
+			LEFT JOIN
+				crm_users u ON a.id_referente = u.idbroker
             WHERE
                 a.id_step IN (', step_value, ')
             ORDER BY
