@@ -47,7 +47,7 @@
           <div
             class="side_btn_ico"
             v-c-tooltip="{
-              content: 'Utenti attivi',
+              content: 'Ricerca',
               placement: 'right',
             }"
           >
@@ -55,6 +55,22 @@
           </div>
           <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
             >Ricerca</span
+          >
+        </div>
+      </CNavItem>
+      <CNavItem>
+        <div class="side_btn" @click="buttonClicked('default')">
+          <div
+            class="side_btn_ico"
+            v-c-tooltip="{
+              content: 'Stats',
+              placement: 'right',
+            }"
+          >
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
+            >Statistiche</span
           >
         </div>
       </CNavItem>
@@ -246,7 +262,7 @@
           <div
             class="side_btn_ico"
             v-c-tooltip="{
-              content: 'Utenti attivi',
+              content: 'Ricerca',
               placement: 'right',
             }"
           >
@@ -254,6 +270,22 @@
           </div>
           <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
             >Ricerca</span
+          >
+        </div>
+      </CNavItem>
+      <CNavItem>
+        <div class="side_btn" @click="buttonClicked('default')">
+          <div
+            class="side_btn_ico"
+            v-c-tooltip="{
+              content: 'Stats',
+              placement: 'right',
+            }"
+          >
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
+            >Statistiche</span
           >
         </div>
       </CNavItem>

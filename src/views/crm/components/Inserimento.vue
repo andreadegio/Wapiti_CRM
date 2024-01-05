@@ -101,7 +101,7 @@
                   :items="tipologiaOptions"
                   item-value="id_tipologia"
                   item-text="desc"
-                  label="Tipologia"
+                  label="Tipologia *"
                 ></v-select
               ></v-col>
               <v-col cols="12" sm="2" md="2">
@@ -435,6 +435,7 @@ export default {
       segnalatori: [],
       id_segnalatore: null,
       nome_segnalatore: "",
+      mail_segnalatore: "",
       id_referente: null,
     };
   },
@@ -444,6 +445,14 @@ export default {
     this.getTipologia();
   },
   watch: {
+    provenienza() {
+      if (this.provenienza != 8) {
+        this.id_segnalatore = null;
+        this.nome_segnalatore = null;
+        this.id_referente = null;
+        this.mail_segnalatore = null;
+      }
+    },
     provincia() {
       this.isBlackList(this.provincia);
       this.isBlackListCity(this.provincia);
@@ -470,6 +479,7 @@ export default {
       if (segnalatore) {
         this.nome_segnalatore = segnalatore.nome + " " + segnalatore.cognome;
         this.id_referente = segnalatore.id_referente;
+        this.mail_segnalatore = segnalatore.mail;
       } else {
         return null; // Se l'id non viene trovato, puoi gestire questo scenario a tuo piacimento
       }
@@ -791,6 +801,7 @@ export default {
         note: this.note,
         id_segnalatore: this.id_segnalatore,
         nome_segnalatore: this.nome_segnalatore,
+        mail_segnalatore: this.mail_segnalatore,
         id_referente: this.id_referente,
       };
       // invio i dati al backend

@@ -275,7 +275,7 @@
                     >
                       <strong>{{ item.label }}</strong
                       ><br />
-                      <small v-if="item.label == 'Visura camerale'">
+                      <!-- <small v-if="item.label == 'Visura camerale'">
                         Non più vecchia di 6 mesi</small
                       >
                       <small
@@ -290,6 +290,108 @@
                           >Se non disponi della copia contratto, scarica
                           l'autocertificazione per inviarci gli estremi di
                           polizza
+                        </strong></small
+                      > -->
+                      <small v-if="item.label == 'Visura camerale'">
+                        Non più vecchia di 6 mesi</small
+                      >
+                      <small
+                        v-if="
+                          item.label == 'Autocertificazione titolo di studio'
+                        "
+                      >
+                        <u>Diploma o Laurea</u></small
+                      >
+                      <small v-if="item.label == 'Polizza RC Professionale'">
+                        <strong
+                          >Se non disponi della copia contratto, scarica
+                          l'autocertificazione per inviarci gli estremi di
+                          polizza -
+                          <a
+                            href="https://abyway-staging.navert.cloud/API/crm/pub/Moduli/Autocertificazione Polizza RC Professionale.pdf"
+                            target="_blank"
+                            ><u>Scarica modulo</u></a
+                          >
+                          -
+                        </strong></small
+                      >
+                      <small v-if="item.label == 'Moduli dati intermediario'">
+                        <strong
+                          >Scarica il modulo da compilare -
+                          <a
+                            href="https://abyway-staging.navert.cloud/API/crm/pub/Moduli/MODULO DATI INTERMEDIARIO.pdf"
+                            target="_blank"
+                            ><u>Scarica modulo</u></a
+                          >
+                          -
+                        </strong></small
+                      >
+                      <small
+                        v-if="
+                          item.label == 'Dichiarazione requisiti di onorabilità'
+                        "
+                      >
+                        <strong
+                          >Scarica il modulo da compilare -
+                          <a
+                            href="https://abyway-staging.navert.cloud/API/crm/pub/Moduli/DICHIARAZIONE REQUISITI ONORABILITA.pdf"
+                            target="_blank"
+                            ><u>Scarica modulo</u></a
+                          >
+                          -
+                        </strong></small
+                      >
+                      <small
+                        v-if="
+                          item.label ==
+                          'Autocertificazione casellario giudiziario e carichi pendenti'
+                        "
+                      >
+                        <strong
+                          >Scarica il modulo da compilare -
+                          <a
+                            href="https://abyway-staging.navert.cloud/API/crm/pub/Moduli/Dichiarazione_del_casellario_giudiziale_e_dei_carichi_pendenti_penali.pdf"
+                            target="_blank"
+                            ><u>Scarica modulo</u></a
+                          >
+                          -
+                        </strong></small
+                      >
+                      <small
+                        v-if="
+                          item.label == 'Autocertificazione titolo di studio'
+                        "
+                      >
+                        <strong
+                          >Scarica il modulo da compilare -
+                          <a
+                            href="https://abyway-staging.navert.cloud/API/crm/pub/Moduli/AUTOCERTIFICAZIONE-DIPLOMA.pdf"
+                            target="_blank"
+                            ><u>Scarica modulo</u></a
+                          >
+                          -
+                        </strong></small
+                      >
+                      <small v-if="item.label == 'Modulo censimento ufficio'">
+                        <strong
+                          >Scarica il modulo da compilare -
+                          <a
+                            href="https://abyway-staging.navert.cloud/API/crm/pub/Moduli/MODULO CENSIMENTO UFFICI.pdf"
+                            target="_blank"
+                            ><u>Scarica modulo</u></a
+                          >
+                          -
+                        </strong></small
+                      >
+                      <small v-if="item.label == 'Modalità di incasso polizze'">
+                        <strong
+                          >Scarica il modulo da compilare -
+                          <a
+                            href="https://abyway-staging.navert.cloud/API/crm/pub/Moduli/DICHIARAZIONE MODALITA INCASSO POLIZZE.pdf"
+                            target="_blank"
+                            ><u>Scarica modulo</u></a
+                          >
+                          -
                         </strong></small
                       >
                     </div>

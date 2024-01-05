@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- <div class="display-1">Effettua una selezione</div> -->
     <c-row>
       <CCol>
         <CWidgetIcon
