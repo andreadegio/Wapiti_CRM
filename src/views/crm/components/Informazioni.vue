@@ -320,6 +320,7 @@ export default {
         utente: this.user,
         messaggio: this.message,
         destinatario: this.dest,
+        mittente: JSON.parse(localStorage.getItem("userCRMInfo")).mail,
       };
       try {
         await axios
