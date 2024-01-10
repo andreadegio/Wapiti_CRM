@@ -308,7 +308,10 @@
                           l'autocertificazione per inviarci gli estremi di
                           polizza -
                           <a
-                            href="https://abyway-staging.navert.cloud/API/crm/pub/Moduli/Autocertificazione Polizza RC Professionale.pdf"
+                            :href="
+                              $custom_json.base_url +
+                              'API/crm/pub/Moduli/Autocertificazione Polizza RC Professionale.pdf'
+                            "
                             target="_blank"
                             ><u>Scarica modulo</u></a
                           >
@@ -319,7 +322,10 @@
                         <strong
                           >Scarica il modulo da compilare -
                           <a
-                            href="https://abyway-staging.navert.cloud/API/crm/pub/Moduli/MODULO DATI INTERMEDIARIO.pdf"
+                            :href="
+                              $custom_json.base_url +
+                              'API/crm/pub/Moduli/MODULO DATI INTERMEDIARIO.pdf'
+                            "
                             target="_blank"
                             ><u>Scarica modulo</u></a
                           >
@@ -334,7 +340,10 @@
                         <strong
                           >Scarica il modulo da compilare -
                           <a
-                            href="https://abyway-staging.navert.cloud/API/crm/pub/Moduli/DICHIARAZIONE REQUISITI ONORABILITA.pdf"
+                            :href="
+                              $custom_json.base_url +
+                              'API/crm/pub/Moduli/DICHIARAZIONE REQUISITI ONORABILITA.pdf'
+                            "
                             target="_blank"
                             ><u>Scarica modulo</u></a
                           >
@@ -350,7 +359,10 @@
                         <strong
                           >Scarica il modulo da compilare -
                           <a
-                            href="https://abyway-staging.navert.cloud/API/crm/pub/Moduli/Dichiarazione_del_casellario_giudiziale_e_dei_carichi_pendenti_penali.pdf"
+                            :href="
+                              $custom_json.base_url +
+                              'API/crm/pub/Moduli/Dichiarazione_del_casellario_giudiziale_e_dei_carichi_pendenti_penali.pdf'
+                            "
                             target="_blank"
                             ><u>Scarica modulo</u></a
                           >
@@ -365,7 +377,10 @@
                         <strong
                           >Scarica il modulo da compilare -
                           <a
-                            href="https://abyway-staging.navert.cloud/API/crm/pub/Moduli/AUTOCERTIFICAZIONE-DIPLOMA.pdf"
+                            :href="
+                              $custom_json.base_url +
+                              'API/crm/pub/Moduli/AUTOCERTIFICAZIONE-DIPLOMA.pdf'
+                            "
                             target="_blank"
                             ><u>Scarica modulo</u></a
                           >
@@ -376,7 +391,10 @@
                         <strong
                           >Scarica il modulo da compilare -
                           <a
-                            href="https://abyway-staging.navert.cloud/API/crm/pub/Moduli/MODULO CENSIMENTO UFFICI.pdf"
+                            :href="
+                              $custom_json.base_url +
+                              'API/crm/pub/Moduli/MODULO CENSIMENTO UFFICI.pdf'
+                            "
                             target="_blank"
                             ><u>Scarica modulo</u></a
                           >
@@ -387,7 +405,10 @@
                         <strong
                           >Scarica il modulo da compilare -
                           <a
-                            href="https://abyway-staging.navert.cloud/API/crm/pub/Moduli/DICHIARAZIONE MODALITA INCASSO POLIZZE.pdf"
+                            :href="
+                              $custom_json.base_url +
+                              'API/crm/pub/Moduli/DICHIARAZIONE MODALITA INCASSO POLIZZE.pdf'
+                            "
                             target="_blank"
                             ><u>Scarica modulo</u></a
                           >

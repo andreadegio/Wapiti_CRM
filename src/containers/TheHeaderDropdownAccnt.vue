@@ -261,7 +261,6 @@ export default {
       logout_modale: false,
       show_profile: false,
       url_logout: "",
-      // accessoCRM: false,
       user: JSON.parse(localStorage.getItem("chisono_data")),
       userCRMInfo: [],
     };
