@@ -136,7 +136,7 @@
             <i class="fas fa-share-alt"></i>
           </div>
           <span :class="{ 'd-none': sidebarHidden }" class="side_desc"
-            >Social / Email</span
+            >Inviti Social / Email</span
           >
         </div>
       </CNavItem>

@@ -448,6 +448,7 @@
                       small-chips
                       :name="item.tipo"
                       :disabled="item.disabled"
+                      accept=".pdf"
                     ></v-file-input>
                   </v-col>
                 </v-row>

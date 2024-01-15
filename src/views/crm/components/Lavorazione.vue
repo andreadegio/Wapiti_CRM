@@ -444,7 +444,7 @@
                     ></v-radio>
                   </v-radio-group>
                 </v-col>
-                <v-col
+                <!-- <v-col
                   v-if="metodoContatto == 'telefono'"
                   cols="12"
                   sm="4"
@@ -454,7 +454,7 @@
                   }"
                 >
                   <v-btn color="warning">Questionario assuntivo</v-btn>
-                </v-col>
+                </v-col> -->
               </v-row>
             </section>
             <v-divider></v-divider>
