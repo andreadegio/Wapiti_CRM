@@ -251,7 +251,7 @@ export default {
       this.step = 0;
 
       if (this.gridType === "primo_contatto") {
-        this.step = [1, 2];
+        this.step = [1, 2, 20];
         // stato = "Nuovo";
       }
       if (this.gridType === "webinar") {
@@ -326,7 +326,6 @@ export default {
         this.getLista(state).then((candidati) => {
           this.items = candidati
             .filter((item) => {
-              // Aggiungi qui la logica per il controllo dell'accesso agli elementi
               if (this.userCRMInfo.idRuolo == "6") {
                 return item.id_segnalatore == this.userCRMInfo.id;
               } else {

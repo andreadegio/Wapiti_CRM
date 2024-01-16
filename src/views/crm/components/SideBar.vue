@@ -58,7 +58,7 @@
           >
         </div>
       </CNavItem>
-      <CNavItem>
+      <!-- <CNavItem>
         <div class="side_btn" @click="buttonClicked('default')">
           <div
             class="side_btn_ico"
@@ -73,7 +73,7 @@
             >Statistiche</span
           >
         </div>
-      </CNavItem>
+      </CNavItem> -->
       <CNavItem>
         <div class="side_btn_deleted" @click="buttonClicked('eliminati')">
           <div
@@ -273,7 +273,7 @@
           >
         </div>
       </CNavItem>
-      <CNavItem>
+      <!-- <CNavItem>
         <div class="side_btn" @click="buttonClicked('default')">
           <div
             class="side_btn_ico"
@@ -288,7 +288,7 @@
             >Statistiche</span
           >
         </div>
-      </CNavItem>
+      </CNavItem> -->
       <CNavItem>
         <div class="side_btn_deleted" @click="buttonClicked('eliminati')">
           <div
