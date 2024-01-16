@@ -1,6 +1,6 @@
 <template>
   <div
-    id="app"
+    id="app_firma"
     style="margin-top: 20px; padding-left: 20px; background-color: white"
   >
     <CModal
@@ -10,7 +10,7 @@
       style="z-index: 30"
       size="lg"
     >
-      <template #header style="background-color: #1f4b6b !important">
+      <template #header>
         <strong style="text-transform: uppercase">Istruzioni</strong>
         <CButton class="close" @click="help = false">
           <!-- <button type="button" class="close" aria-label="Close"> -->
@@ -254,7 +254,7 @@ export default {
 </script>
 
 <style>
-#app {
+#app_firma {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }

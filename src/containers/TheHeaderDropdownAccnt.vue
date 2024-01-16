@@ -210,6 +210,13 @@
       <CDropdownHeader tag="div" class="text-center" color="light" v-if="admin">
         <strong>Utility</strong>
       </CDropdownHeader>
+      <CDropdownItem to="/Crm" v-if="admin && accessoCRM">
+        <i class="fas fa-address-book"></i> <span class="pl-1">CRM</span>
+      </CDropdownItem>
+      <!-- <CDropdownItem to="/Calendario" v-if="admin">
+        <i class="far fa-calendar-alt"></i>
+        <span class="pl-1">Appuntamenti</span>
+      </CDropdownItem> -->
       <CDropdownItem to="/Accessi_stat" v-if="admin">
         <i class="far fa-chart-bar"> </i> <span class="pl-1">Accessi</span>
       </CDropdownItem>
@@ -241,24 +248,55 @@
 </template>
 
 <script>
+import axios from "axios";
 import { cilAccountLogout } from "@coreui/icons";
 import store from "../store";
 export default {
-  name: "TheHeaderDropdownAccnt",
+  name: "MenuUser",
   logout_ico: cilAccountLogout,
   data() {
     return {
       admin: false,
       firma: false,
-      user: [],
       logout_modale: false,
       show_profile: false,
       url_logout: "",
-      itemsCount: 42,
+      user: JSON.parse(localStorage.getItem("chisono_data")),
+      userCRMInfo: [],
     };
   },
-
+  computed: {
+    accessoCRM() {
+      return this.userCRMInfo ? true : false;
+    },
+  },
+  mounted() {
+    this.getUserCRMInfo();
+  },
   methods: {
+    async getUserCRMInfo() {
+      let param = {
+        idUtente: this.user["idUtente"],
+      };
+      try {
+        await axios
+          .post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.crm.accessoCRM,
+            param
+          )
+          .then((response) => {
+            this.userCRMInfo = response.data;
+            localStorage.setItem(
+              "userCRMInfo",
+              JSON.stringify(this.userCRMInfo)
+            );
+          });
+      } catch (error) {
+        console.error(error);
+      }
+    },
     aggiornaSede() {
       this.admin = JSON.parse(localStorage.getItem("chisono_data")).Is_Sede;
       this.firma = JSON.parse(
@@ -267,7 +305,6 @@ export default {
       // console.log("agg_sede");
     },
     Get_user() {
-      this.user = JSON.parse(localStorage.getItem("chisono_data"));
       this.show_profile = true;
     },
 

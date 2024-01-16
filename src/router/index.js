@@ -71,10 +71,13 @@ const Statistiche = () =>
   );
 const Accessi_stat = () => import("@/views/statistiche/Accessi_stat");
 const GeneratoreFirme = () => import("@/views/GeneratoreFirme/abysign");
+const Calendario = () => import("@/views/Calendario/calendario");
+const Kanban = () => import("@/views/KanbanContatti/KanbanBoard");
 const StatistichePortali = () =>
   import(
     /* webpackChunkName: "Statistiche" */ "@/views/statistiche/StatistichePortali"
   );
+const Crm = () => import("@/views/crm/crm");
 
 // Views - Page - Gas
 const Comingsoon_gas = () => import("@/views/pages/Comingsoon_gas");
@@ -243,9 +246,24 @@ function configRoutes() {
           component: Accessi_stat,
         },
         {
+          path: "/Crm",
+          name: "Crm",
+          component: Crm,
+        },
+        {
           path: "/GeneratoreFirme",
           name: "abysign",
           component: GeneratoreFirme,
+        },
+        {
+          path: "/Calendario",
+          name: "calendario",
+          component: Calendario,
+        },
+        {
+          path: "/Kanban",
+          name: "kanbanBoard",
+          component: Kanban,
         },
         {
           path: "Statistiche/:portale",
@@ -326,6 +344,7 @@ router.beforeEach((to, from, next) => {
 });
 
 router.onError((error) => {
+
     console.log("Errore di caricamento " + error.message); 
     const targetPath = router.history.pending.fullPath;
     // console.log("target path " + targetPath);
@@ -336,6 +355,7 @@ router.onError((error) => {
     router.replace(targetPath);
     // router.push(targetPath);
     // console.log("history replace");
+
 });
 
 export default router;
