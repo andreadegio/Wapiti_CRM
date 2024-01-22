@@ -1,6 +1,9 @@
 <template>
   <div class="grid">
     <!-- {{ gridType }} -->
+    <div class="text-right">
+      Totale Candidati nella lista: {{ items.length }}
+    </div>
     <CDataTable
       :items="items"
       :fields="fields"
