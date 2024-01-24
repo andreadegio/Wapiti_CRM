@@ -1,6 +1,9 @@
 <template>
   <div class="grid">
     <!-- {{ gridType }} -->
+    <div class="text-right">
+      Totale Candidati nella lista: {{ items.length }}
+    </div>
     <CDataTable
       :items="items"
       :fields="fields"
@@ -88,7 +91,7 @@
               @aggiorna_grid="aggiorna_grid"
             ></PrenotaFormazione>
             <Demo
-              v-if="row.item.id_step == 3"
+              v-if="row.item.id_step == 3 && gridType === 'webinar'"
               class="ml-2"
               :itemId="row.item.id"
               :candidato="row.item"
@@ -314,6 +317,7 @@ export default {
     async aggiorna_grid(state) {
       if (
         this.user["idUtente"] == 140 &&
+        this.gridType != "formazione" &&
         this.gridType != "attivazione_account" &&
         this.gridType != "utenti_attivi" &&
         this.gridType != "eliminati" &&
