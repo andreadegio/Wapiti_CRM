@@ -1,7 +1,7 @@
 <template>
   <div class="grid">
     <!-- {{ gridType }} -->
-    <div class="text-right">
+    <div class="text-center">
       Totale Candidati nella lista: {{ items.length }}
     </div>
     <CDataTable
