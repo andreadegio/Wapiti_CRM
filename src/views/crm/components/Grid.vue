@@ -4,6 +4,16 @@
     <div class="text-center">
       Totale Candidati nella lista: {{ items.length }}
     </div>
+    <div
+      class="text-center"
+      v-if="user['idUtente'] != 140 && userCRMInfo.idRuolo != '2'"
+    >
+      <v-checkbox
+        v-model="filtroOperatore"
+        label="Mostra solo i miei contatti:"
+      ></v-checkbox>
+    </div>
+
     <CDataTable
       :items="items"
       :fields="fields"
@@ -172,6 +182,7 @@ export default {
   },
   data() {
     return {
+      filtroOperatore: true,
       user: JSON.parse(localStorage.getItem("chisono_data")),
       userCRMInfo: JSON.parse(localStorage.getItem("userCRMInfo")),
       nascondiElem: false,
@@ -199,6 +210,19 @@ export default {
     },
   },
   watch: {
+    filtroOperatore() {
+      if (
+        this.filtroOperatore == true &&
+        this.user["idUtente"] != 140 &&
+        this.userCRMInfo.idRuolo != "2"
+      ) {
+        this.items = this.items.filter((item) => {
+          return item.user_ins_id == this.userCRMInfo.idbroker;
+        });
+      } else {
+        this.aggiorna_grid(this.step);
+      }
+    },
     gridType() {
       this.updateFields();
       this.updateItems();
@@ -331,9 +355,17 @@ export default {
           this.items = candidati
             .filter((item) => {
               if (this.userCRMInfo.idRuolo == "6") {
-                return item.id_segnalatore == this.userCRMInfo.id;
+                return item.id_segnalatore == this.userCRMInfo.idbroker;
               } else {
-                return true; // Se l'utente non ha il ruolo 6, mostra tutti gli elementi
+                if (
+                  this.filtroOperatore == true &&
+                  this.user["idUtente"] != 140 &&
+                  this.userCRMInfo.idRuolo != "2"
+                ) {
+                  return item.user_ins_id == this.userCRMInfo.idbroker;
+                } else {
+                  return true; // Se l'utente non ha il ruolo 6, mostra tutti gli elementi
+                }
               }
             })
             .map((item) => {
