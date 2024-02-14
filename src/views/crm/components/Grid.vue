@@ -6,7 +6,7 @@
     </div>
     <div
       class="text-center"
-      v-if="user['idUtente'] != 140 && userCRMInfo.idRuolo != '2'"
+      v-if="user['idUtente'] != 140 && userCRMInfo.idRuolo != '2' && gridType !='formazione'"
     >
       <v-checkbox
         v-model="filtroOperatore"
@@ -364,7 +364,13 @@ export default {
                 ) {
                   return item.user_ins_id == this.userCRMInfo.idbroker;
                 } else {
-                  return true; // Se l'utente non ha il ruolo 6, mostra tutti gli elementi
+                  if (this.gridType == "formazione"
+                    && this.user["idUtente"] != 140
+                    && this.userCRMInfo.idRuolo == "7") {
+                    return true; // Se siamo in formazione e l'utente è un operatore allora mostro tutti i candidati
+                  } else {
+                    return true; // Se l'utente non ha il ruolo 6, mostra tutti gli elementi
+                  }
                 }
               }
             })
