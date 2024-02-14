@@ -45,13 +45,13 @@ Vue.use(VueFileAgent);
 
 Vue.use(VueSimpleAlert);
 
-// const axiosFileUploader = axios.create({
-//   baseURL: "https://www.abyway.it/API",
-// });
-
 const axiosFileUploader = axios.create({
-  baseURL: "https://abyway-staging.navert.cloud/API",
+  baseURL: "https://www.abyway.it/API",
 });
+
+// const axiosFileUploader = axios.create({
+//   baseURL: "https://abyway-staging.navert.cloud/API",
+// });
 
 Vue.use(VueFormulate, {
   uploader: axiosFileUploader,
