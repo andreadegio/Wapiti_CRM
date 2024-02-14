@@ -1,6 +1,7 @@
 {
   "base_url": "https://abyway-staging.navert.cloud/",
   "urlEnergy": "https://abyenergy.it/test/login.aspx",
+  "url_elearning_rami": "https://gestionv1-c113523.evolcampus.com/acceso.php",
   "img_news_url": "upload/news/",
   "api_url": "API/",
   "cloud_url": "cloud/",
