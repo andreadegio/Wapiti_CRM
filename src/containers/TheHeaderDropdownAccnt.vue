@@ -227,6 +227,16 @@
       >
         <i class="fas fa-tv"></i> <span class="pl-1">Gestione TV</span>
       </CDropdownItem>
+      <CDropdownHeader tag="div" class="text-center" color="light" v-if="user.Is_Abilitato_Elearning">
+        <strong>Formazione</strong>
+      </CDropdownHeader>
+      <CDropdownItem
+        :href="$custom_json.url_elearning_rami"
+        target="_blank"
+        v-if="user.Is_Abilitato_Elearning"
+      >
+      <i class="fas fa-graduation-cap"></i> <span class="pl-1">E-learning</span>
+      </CDropdownItem>
 
       <CDropdownHeader tag="div" class="text-center" color="light">
         <strong>Account</strong>
