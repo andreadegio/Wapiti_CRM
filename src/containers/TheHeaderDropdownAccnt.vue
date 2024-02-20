@@ -210,7 +210,7 @@
       <CDropdownHeader tag="div" class="text-center" color="light" v-if="admin">
         <strong>Utility</strong>
       </CDropdownHeader>
-      <CDropdownItem to="/Crm" v-if="admin && accessoCRM">
+      <CDropdownItem to="/Crm" v-if="accessoCRM">
         <i class="fas fa-address-book"></i> <span class="pl-1">CRM</span>
       </CDropdownItem>
       <!-- <CDropdownItem to="/Calendario" v-if="admin">
@@ -277,7 +277,8 @@ export default {
   },
   computed: {
     accessoCRM() {
-      return this.userCRMInfo ? true : false;
+      console.log(this.userCRMInfo.idbroker);
+      return this.userCRMInfo.idbroker ? true : false;
     },
   },
   mounted() {
