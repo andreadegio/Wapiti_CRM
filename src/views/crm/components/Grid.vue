@@ -72,7 +72,7 @@
           v-if="
             (row.item.id_segnalatore != null &&
               row.item.id_referente == user.idUtente) ||
-            row.item.id_segnalatore == null
+            row.item.id_segnalatore == null || user.idUtente == 140
           "
         >
           <div class="d-flex">
