@@ -28,7 +28,7 @@
             ></span>
             <br />
             <p class="titolo_pulsante_stat">Statistiche</p>
-            <p class="pulsante_stat" style="color: white">Gas & Luce</p>
+            <p class="pulsante_stat" style="color: white">Energia</p>
           </CWidgetSimple>
         </CCardLink>
       </CCol>

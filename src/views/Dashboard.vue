@@ -119,7 +119,7 @@
                 "
                 ><CCardTitle class="grow titolo_piattaforme">
                   <span class="portali">Piattaforma</span>
-                  <h1 class="pulsante_portali">GAS E LUCE</h1>
+                  <h1 class="pulsante_portali">ENERGIA</h1>
                 </CCardTitle>
               </CCard>
             </CCardLink>
@@ -138,7 +138,7 @@
                 "
                 ><CCardTitle class="grow titolo_piattaforme">
                   <span class="portali">Piattaforma</span>
-                  <h1 class="pulsante_portali">GAS E LUCE</h1>
+                  <h1 class="pulsante_portali">ENERGIA</h1>
                 </CCardTitle>
               </CCard>
             </CCardLink>

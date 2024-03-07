@@ -154,6 +154,11 @@
       v-show="company == 'NAV'"
       :recapiti="recapiti"
     />
+    <SignaturePatrocinium
+      class="preview"
+      v-show="company == 'PAT'"
+      :recapiti="recapiti"
+    />
     </div>
   </div>
 </template>
@@ -164,6 +169,7 @@ import SignatureAbyServizi from "./components/SignAbyServizi.vue";
 import SignatureAby from "./components/SignAby.vue";
 import SignatureAbyPoint from "./components/SignAbyPoint.vue";
 import SignatureNavert from "./components/SignNavert.vue";
+import SignaturePatrocinium from "./components/SignPatrocinium.vue";
 import Configuratore from "./components/Configuratore.vue";
 
 export default {
@@ -174,6 +180,7 @@ export default {
     SignatureAby,
     SignatureAbyPoint,
     SignatureNavert,
+    SignaturePatrocinium,
     Configuratore,
   },
   data() {

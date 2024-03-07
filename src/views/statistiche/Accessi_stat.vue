@@ -47,7 +47,7 @@
           <span class="py-3">
             <i class="far fa-lightbulb fa-3x"></i>
             <br />
-            Piattaforma<br />Gas & Luce
+            Piattaforma<br />Energia
           </span>
         </CWidgetBrand>
       </CCol>
@@ -102,7 +102,7 @@
           <span class="py-3">
             <i class="far fa-lightbulb fa-3x"></i>
             <br />
-            Piattaforma<br />Gas & Luce
+            Piattaforma<br />Energia
           </span>
         </CWidgetBrand>
       </CCol>
@@ -152,7 +152,7 @@
           <span class="py-3">
             <i class="far fa-lightbulb fa-3x"></i>
             <br />
-            Piattaforma<br />Gas & Luce
+            Piattaforma<br />Energia
           </span>
         </CWidgetBrand>
       </CCol>
