@@ -86,6 +86,25 @@
               </CCard>
             </CCardLink>
           </div>
+          <div v-if="isRami" class="col-sm">
+            <CCardLink @click="conta_accesso('ramiNext')" target="_self">
+              <CCard
+                class="text-center elevation-6 portali-btn grow"
+                body-wrapper
+                style="
+                  height: 200px;
+                  background-image: url('img/buttons/rami.png');
+                  background-position: center;
+                  z-index: 0;
+                  background-size: cover;
+                "
+                ><CCardTitle class="grow titolo_piattaforme">
+                  <span class="portali">Piattaforma</span>
+                  <h1 class="pulsante_portali">ABY NEXT 2</h1>
+                </CCardTitle>
+              </CCard>
+            </CCardLink>
+          </div>
           <div v-else class="col-sm">
             <CCardLink to="Comingsoon_rami2" target="_self">
               <CCard
@@ -184,6 +203,7 @@ export default {
       show_async: 0,
       news_mondo: JSON.parse(localStorage.getItem("news_mondo")),
       urlRami: localStorage.getItem("urlRami"),
+      urlRamiNext2: localStorage.getItem("urlRamiNext2"),
       isEnergy: JSON.parse(localStorage.getItem("chisono_data"))
         .Abilitato_Energy,
       isRami: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Rami,
@@ -245,6 +265,13 @@ export default {
                   window.location.href = this.urlRami;
                 } else {
                   window.location.href = localStorage.getItem("urlRami");
+                }
+                break;
+              case "ramiNext":
+                if (this.urlRamiNext2) {
+                  window.location.href = this.urlRamiNext2;
+                } else {
+                  window.location.href = localStorage.getItem("urlRamiNext2");
                 }
                 break;
               default:
