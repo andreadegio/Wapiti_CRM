@@ -86,7 +86,7 @@
               </CCard>
             </CCardLink>
           </div>
-          <div v-if="isRami" class="col-sm">
+          <!-- <div v-if="isRami" class="col-sm">
             <CCardLink @click="conta_accesso('ramiNext')" target="_self">
               <CCard
                 class="text-center elevation-6 portali-btn grow"
@@ -104,7 +104,7 @@
                 </CCardTitle>
               </CCard>
             </CCardLink>
-          </div>
+          </div> -->
           <div v-else class="col-sm">
             <CCardLink to="Comingsoon_rami2" target="_self">
               <CCard
@@ -213,10 +213,35 @@ export default {
   },
   mounted() {
     this.get_avvisiToast();
+    // this.abyNext2();
     // this.meteo();
     this.$forceUpdate();
   },
   methods: {
+    // async abyNext2() {
+    //     // =================== ACCESSO PER ABYNEXT 2 ===============================
+    //   try {
+    //       let userID = localStorage.getItem("userID");
+    //                           var paramNext2 = {
+    //                   id: userID,
+    //                   user: "sdfghblzs",
+    //                   pwd: "lkdfasvdfg"
+    //                 };
+    //                 axios
+    //                   .post(
+    //                     this.$custom_json.base_url +
+    //                       this.$custom_json.api_url +
+    //                       this.$custom_json.ep_api.getUrlNext2,
+    //                     paramNext2
+    //                   )
+    //                   .then((response) => {
+    //                     localStorage.setItem("urlRamiNext2", "https://abynextp.aby.it/?token=" + response.data.token);
+    //                     // this.urlRami = response.data;
+    //                   });
+    //               } catch (error) {
+    //                 console.log("impossibile recuperare jwt rami " + error);
+    //               }
+    // },
     async set_aua() {
       // console.log("Accesso Aua");
       // console.log("valore di AUA" + localStorage.getItem("AUA"));

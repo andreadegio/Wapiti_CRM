@@ -155,27 +155,7 @@ export default {
                   } catch (error) {
                     console.log("impossibile recuperare jwt rami " + error);
                   }
-                  // =================== ACCESSO PER ABYNEXT 2 ===============================
-                  try {
-                    var paramNext2 = {
-                      id: 58,
-                      user: "sdfghblzs",
-                      pwd: "lkdfasvdfg"
-                    };
-                    axios
-                      .post(
-                        this.$custom_json.base_url +
-                          this.$custom_json.api_url +
-                          this.$custom_json.ep_api.getUrlNext2,
-                        paramNext2
-                      )
-                      .then((response) => {
-                        localStorage.setItem("urlRamiNext2", "https://abynextp.aby.it/?token=" + response.data.token);
-                        // this.urlRami = response.data;
-                      });
-                  } catch (error) {
-                    console.log("impossibile recuperare jwt rami " + error);
-                  }
+                
                 }
               }.bind(this)
             )
