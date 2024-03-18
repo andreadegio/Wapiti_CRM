@@ -155,6 +155,7 @@ export default {
                   } catch (error) {
                     console.log("impossibile recuperare jwt rami " + error);
                   }
+                
                 }
               }.bind(this)
             )

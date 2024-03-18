@@ -74,7 +74,7 @@
                     {{
                       recapiti.sel_telefono
                         ? recapiti.telefono
-                        : "+39 02 86882871"
+                        : "+39 0187 17870"
                     }}&nbsp;{{
                       recapiti.sel_interno
                         ? "(interno " + recapiti.interno + ")"
@@ -244,7 +244,7 @@
       align="center"
       style="font-weight: 500; font-family: Montserrat; font-size: 10px"
     >
-      Aby Energy Srl. - Partita IVA e Codice Fiscale: 01421080456 - Numero REA: MS-139699 
+      Aby Servizi Srl. - Partita IVA e Codice Fiscale: 01317370458 - Numero REA: MS-131272 
     </div>
     <div
       style="

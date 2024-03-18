@@ -199,7 +199,7 @@
         </CListGroup>
 
         <CCardHeader class="d-flex justify-content-between py-4">
-          <div class="text-center w-100 contatti-titolo"><strong class="h3">GAS E LUCE</strong>
+          <div class="text-center w-100 contatti-titolo"><strong class="h3">ENERGIA</strong>
           </div>
         </CCardHeader>
 

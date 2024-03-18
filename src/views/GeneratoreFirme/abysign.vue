@@ -38,7 +38,7 @@
                     <li>
                       Per cambiare il <b>Numero di telefono</b> spunta la
                       casella "Cambia numero fisso" altrimenti
-                      <em>di default assegna il numero +39 02 86882871</em>
+                      <em>di default assegna il numero +39 0187 17870</em>
                     </li>
                     <li>
                       Per mostrare l'<b>Interno</b> del centralino, spunta la
@@ -56,8 +56,7 @@
                       Per cambiare l'Indirizzo della <b>Sede Legale</b> spunta la casella "Cambia
                       Sede Legale" e compila il campo, altrimenti
                       <em
-                        >di default assegna "Via Monte Napoleone 8, 20121 Milano
-                        (MI)"</em
+                        >di default assegna "Via Gandhi 8, 54011 Aulla (MS)"</em
                       >
                     </li>
                     <li>
@@ -154,6 +153,11 @@
       v-show="company == 'NAV'"
       :recapiti="recapiti"
     />
+    <SignaturePatrocinium
+      class="preview"
+      v-show="company == 'PAT'"
+      :recapiti="recapiti"
+    />
     </div>
   </div>
 </template>
@@ -164,6 +168,7 @@ import SignatureAbyServizi from "./components/SignAbyServizi.vue";
 import SignatureAby from "./components/SignAby.vue";
 import SignatureAbyPoint from "./components/SignAbyPoint.vue";
 import SignatureNavert from "./components/SignNavert.vue";
+import SignaturePatrocinium from "./components/SignPatrocinium.vue";
 import Configuratore from "./components/Configuratore.vue";
 
 export default {
@@ -174,6 +179,7 @@ export default {
     SignatureAby,
     SignatureAbyPoint,
     SignatureNavert,
+    SignaturePatrocinium,
     Configuratore,
   },
   data() {

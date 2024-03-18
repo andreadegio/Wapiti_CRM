@@ -97,7 +97,7 @@
           class="titolo-display text-center"
           style="font-weight: initial !important"
         >
-          Gas e Luce
+         Energia
         </h1>
         <!-- <p class="lead">
           Materiale e comunicazioni commerciali per il mondo Energy
