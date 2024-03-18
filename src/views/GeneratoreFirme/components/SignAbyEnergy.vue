@@ -74,7 +74,7 @@
                     {{
                       recapiti.sel_telefono
                         ? recapiti.telefono
-                        : "+39 02 86882871"
+                        : "+39 0187 17870"
                     }}&nbsp;{{
                       recapiti.sel_interno
                         ? "(interno " + recapiti.interno + ")"
