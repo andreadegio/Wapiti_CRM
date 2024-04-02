@@ -219,7 +219,8 @@ export default {
   },
   methods: {
     async abyNext2() {
-        // =================== ACCESSO PER ABYNEXT 2 ===============================
+      // =================== ACCESSO PER ABYNEXT 2 ===============================
+      let baseUrlNext2 = this.$custom_json.ep_api.baseUrlNext2;
       try {
           let userID = localStorage.getItem("userID");
                               var paramNext2 = {
@@ -235,7 +236,7 @@ export default {
                         paramNext2
                       )
                       .then((response) => {
-                        localStorage.setItem("urlRamiNext2", "https://abynextp.aby.it/?token=" + response.data.token);
+                        localStorage.setItem("urlRamiNext2", baseUrlNext2 + "?token=" + response.data.token);
                         // this.urlRami = response.data;
                       });
                   } catch (error) {
