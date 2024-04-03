@@ -213,35 +213,36 @@ export default {
   },
   mounted() {
     this.get_avvisiToast();
-    // this.abyNext2();
+    this.abyNext2();
     // this.meteo();
     this.$forceUpdate();
   },
   methods: {
-    // async abyNext2() {
-    //     // =================== ACCESSO PER ABYNEXT 2 ===============================
-    //   try {
-    //       let userID = localStorage.getItem("userID");
-    //                           var paramNext2 = {
-    //                   id: userID,
-    //                   user: "sdfghblzs",
-    //                   pwd: "lkdfasvdfg"
-    //                 };
-    //                 axios
-    //                   .post(
-    //                     this.$custom_json.base_url +
-    //                       this.$custom_json.api_url +
-    //                       this.$custom_json.ep_api.getUrlNext2,
-    //                     paramNext2
-    //                   )
-    //                   .then((response) => {
-    //                     localStorage.setItem("urlRamiNext2", "https://abynextp.aby.it/?token=" + response.data.token);
-    //                     // this.urlRami = response.data;
-    //                   });
-    //               } catch (error) {
-    //                 console.log("impossibile recuperare jwt rami " + error);
-    //               }
-    // },
+    async abyNext2() {
+      // =================== ACCESSO PER ABYNEXT 2 ===============================
+      let baseUrlNext2 = this.$custom_json.ep_api.baseUrlNext2;
+      try {
+          let userID = localStorage.getItem("userID");
+                              var paramNext2 = {
+                      id: userID,
+                      user: "sdfghblzs",
+                      pwd: "lkdfasvdfg"
+                    };
+                    axios
+                      .post(
+                        this.$custom_json.base_url +
+                          this.$custom_json.api_url +
+                          this.$custom_json.ep_api.getUrlNext2,
+                        paramNext2
+                      )
+                      .then((response) => {
+                        localStorage.setItem("urlRamiNext2", baseUrlNext2 + "?token=" + response.data.token);
+                        // this.urlRami = response.data;
+                      });
+                  } catch (error) {
+                    console.log("impossibile recuperare jwt rami " + error);
+                  }
+    },
     async set_aua() {
       // console.log("Accesso Aua");
       // console.log("valore di AUA" + localStorage.getItem("AUA"));
