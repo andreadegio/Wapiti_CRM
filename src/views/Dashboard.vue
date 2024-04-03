@@ -86,7 +86,7 @@
               </CCard>
             </CCardLink>
           </div>
-          <div v-if="isRami" class="col-sm">
+          <!-- <div v-if="isRami" class="col-sm">
             <CCardLink @click="conta_accesso('ramiNext')" target="_self">
               <CCard
                 class="text-center elevation-6 portali-btn grow"
@@ -104,7 +104,7 @@
                 </CCardTitle>
               </CCard>
             </CCardLink>
-          </div>
+          </div> -->
           <div v-else class="col-sm">
             <CCardLink to="Comingsoon_rami2" target="_self">
               <CCard
