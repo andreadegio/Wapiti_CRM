@@ -79,6 +79,9 @@ const StatistichePortali = () =>
   );
 const Crm = () => import("@/views/crm/crm");
 
+// E-learning CRM
+const Elearning = () => import("@/views/e-learning/corsi");
+
 // Views - Page - Gas
 const Comingsoon_gas = () => import("@/views/pages/Comingsoon_gas");
 // Views - Page -Rami
@@ -275,6 +278,14 @@ function configRoutes() {
       meta: { requiresAuth: true },
     },
     {
+      path: "/e-learning",
+      name: "E-learning",
+      component: Elearning,
+      meta: {
+        public: true,
+      },
+    },
+    {
       path: "/login",
       name: "Login",
       component: Login,
@@ -316,7 +327,7 @@ router.beforeEach((to, from, next) => {
     }
 
     //CONTROLLO SE PROVENGO DA AUA
-    if (to.query.aua == 1 && to.query.u!="" && to.query.p!="") {
+    if (to.query.aua == 1 && to.query.u != "" && to.query.p != "") {
       let user = atob(to.query.u);
       let passwd = atob(to.query.p);
       let data_login = new Date();
@@ -344,18 +355,16 @@ router.beforeEach((to, from, next) => {
 });
 
 router.onError((error) => {
-
-    console.log("Errore di caricamento " + error.message); 
-    const targetPath = router.history.pending.fullPath;
-    // console.log("target path " + targetPath);
-    // router.replace(targetPath);
-    // window.location.reload();
-    // router.push("Dashboard");
-    history.replaceState("", "", targetPath);
-    router.replace(targetPath);
-    // router.push(targetPath);
-    // console.log("history replace");
-
+  console.log("Errore di caricamento " + error.message);
+  const targetPath = router.history.pending.fullPath;
+  // console.log("target path " + targetPath);
+  // router.replace(targetPath);
+  // window.location.reload();
+  // router.push("Dashboard");
+  history.replaceState("", "", targetPath);
+  router.replace(targetPath);
+  // router.push(targetPath);
+  // console.log("history replace");
 });
 
 export default router;
