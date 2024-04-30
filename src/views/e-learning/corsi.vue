@@ -1,21 +1,41 @@
 <template>
-    <div>
-        <h1 class="text-center">Corso</h1>
-        <v-app>
-            <v-container fluid grid-list-md >
-                <v-layout row wrap align-start justify-space-around fill-height>
-                    <!-- Sezione Dati Generali -->
-                    <v-flex xs12 sm6 md4 lg3 xl2 order-xs5 order-sm7 order-md5 order-lg4>
-                        <datigenerali :corso='corso'></datigenerali>
-                    </v-flex>
-                    
-                    <!-- Sezione Descrizione e Modalità-->
-                    <v-flex xs12 sm10 offset-sm1 >
-                        <descrizionimodalita :corso='corso'></descrizionimodalita>
-                    </v-flex>
-                    
-                </v-layout>
-            </v-container>
-        </v-app>
-    </div>
+    <v-app>
+        <v-app-bar app>
+            <h1 class="text-center">Corso</h1>
+        </v-app-bar>
+        <v-main>
+
+            <v-row>
+                <v-col cols="9" style="background-color: blue; height: 100%;">
+                    <v-row style="background-color: red; display: flex;  padding: 1rem;"> Video
+
+                    </v-row>
+                    <v-row style="background-color: green;  padding: 1rem;">Descrizione
+
+                    </v-row>
+                </v-col>
+
+                <v-col cols="3" id="sidebar-corso">Elenco
+
+                </v-col>
+            </v-row>
+
+
+        </v-main>
+    </v-app>
+
 </template>
+<script>
+
+</script>
+<style scoped>
+#sidebar-corso {
+    background-color: brown;
+    padding: 1rem;
+    overflow: auto;
+    position: fixed;
+    height: 100%;
+    z-index: 1;
+    right: 0;
+}
+</style>
