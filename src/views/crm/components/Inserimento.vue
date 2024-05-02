@@ -74,7 +74,7 @@
                   :items="originiOptions"
                   item-value="id_origin"
                   item-text="desc"
-                  label="Origine del contatto"
+                  label="Origine del contatto *"
                 ></v-select>
                 <div class="nuova_origine" @click="addOriginOption()">
                   <i class="fas fa-plus-circle fa-2x"> </i>
@@ -187,7 +187,7 @@
                   v-model="provincia"
                   @change="updateRegion"
                   :items="province"
-                  label="Provincia"
+                  label="Provincia *"
                 ></v-select>
               </v-col>
               <v-col cols="12" md="4" sm="4">
@@ -746,7 +746,10 @@ export default {
         if (
           !this.nome ||
           !this.cognome ||
-          (!this.telefono && !this.cellulare && !this.email)
+          (!this.telefono && !this.cellulare && !this.email) ||
+          !this.provenienza ||
+          !this.tipologia ||
+          !this.provincia
         ) {
           this.$alert(
             "Compila i campi obbligatori per Persona Fisica.",
@@ -759,7 +762,10 @@ export default {
         if (
           !this.ragioneSociale ||
           (!this.telefono && !this.cellulare && !this.email) ||
-          !this.partitaIva
+          !this.partitaIva ||
+          !this.provenienza ||
+          !this.tipologia ||
+          !this.provincia
         ) {
           this.$alert(
             "Compila i campi obbligatori per Persona Giuridica.",

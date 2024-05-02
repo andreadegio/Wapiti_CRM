@@ -10,8 +10,8 @@ const TheContainer = () => import("@/containers/TheContainer");
 const Dashboard = () => import("@/views/Dashboard");
 
 // Views - News
-const News = () => import("@/views/news/GestioneNews");
-const Elenco_news = () => import("@/views/news/Elenco_news");
+// const News = () => import("@/views/news/GestioneNews");
+// const Elenco_news = () => import("@/views/news/Elenco_news");
 const NewsOperativeBroker = () => import("@/views/news/NewsOperativeBroker");
 const GestioneNewsBroker = () => import("@/views/news/GestioneNewsBroker");
 
@@ -115,16 +115,16 @@ function configRoutes() {
           name: "Dashboard",
           component: Dashboard,
         },
-        {
-          path: "/Gestione_news_Mondo",
-          name: "GestioneNews",
-          component: News,
-        },
-        {
-          path: "/Elenco_news",
-          name: "Elenco_news",
-          component: Elenco_news,
-        },
+        // {
+        //   path: "/Gestione_news_Mondo",
+        //   name: "GestioneNews",
+        //   component: News,
+        // },
+        // {
+        //   path: "/Elenco_news",
+        //   name: "Elenco_news",
+        //   component: Elenco_news,
+        // },
         {
           path: "/Documentale",
           name: "Documentale",
@@ -316,7 +316,7 @@ router.beforeEach((to, from, next) => {
     }
 
     //CONTROLLO SE PROVENGO DA AUA
-    if (to.query.aua == 1 && to.query.u!="" && to.query.p!="") {
+    if (to.query.aua == 1 && to.query.u != "" && to.query.p != "") {
       let user = atob(to.query.u);
       let passwd = atob(to.query.p);
       let data_login = new Date();
@@ -344,18 +344,16 @@ router.beforeEach((to, from, next) => {
 });
 
 router.onError((error) => {
-
-    console.log("Errore di caricamento " + error.message); 
-    const targetPath = router.history.pending.fullPath;
-    // console.log("target path " + targetPath);
-    // router.replace(targetPath);
-    // window.location.reload();
-    // router.push("Dashboard");
-    history.replaceState("", "", targetPath);
-    router.replace(targetPath);
-    // router.push(targetPath);
-    // console.log("history replace");
-
+  console.log("Errore di caricamento " + error.message);
+  const targetPath = router.history.pending.fullPath;
+  // console.log("target path " + targetPath);
+  // router.replace(targetPath);
+  // window.location.reload();
+  // router.push("Dashboard");
+  history.replaceState("", "", targetPath);
+  router.replace(targetPath);
+  // router.push(targetPath);
+  // console.log("history replace");
 });
 
 export default router;

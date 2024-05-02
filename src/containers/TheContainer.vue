@@ -1,6 +1,6 @@
 <template>
   <div class="c-app">
-    <CWrapper v-if="loading && get_recapiti && get_news">
+    <CWrapper v-if="loading && get_recapiti">
       <TheHeader id="header" />
       <div class="c-body">
         <main class="c-main">
@@ -14,9 +14,7 @@
       <TheFooter id="footer" v-show="this.$route.path == '/dashboard'" />
     </CWrapper>
     <div v-else style="position: relative; width: 100%; top: 50%; left: 50%">
-      <img
-        src="img/loader.gif"
-        style="
+      <img src="img/loader.gif" style="
           position: fixed;
           top: 50%;
           left: 50%;
@@ -25,8 +23,7 @@
           -ms-transform: translate(-50%, -50%);
           -o-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-        "
-      />
+        " />
     </div>
   </div>
 </template>
@@ -45,15 +42,15 @@ export default {
   data() {
     return {
       // userID: "",
-      news_mondo: [],
+      // news_mondo: [],
       loading: false,
       get_recapiti: false,
-      get_news: false,
-      url_versione :"",
+      // get_news: false,
+      url_versione: "",
     };
   },
   created() {
-    this.url_versione =this.$custom_json.base_url +this.$custom_json.api_url +this.$custom_json.ep_api.get_version;
+    this.url_versione = this.$custom_json.base_url + this.$custom_json.api_url + this.$custom_json.ep_api.get_version;
     if (this.$route.query.auth == "1") {
       store.commit("user_login", this.url_versione);
       this.$router.push("dashboard");
@@ -130,7 +127,7 @@ export default {
                   risposta_chisono.data.idUnitaOperativa
                 );
                 // console.log("START ALTRE FUNZIONI");
-                this.load_news(); // ultime news mondo
+                // this.load_news(); // ultime news mondo
                 this.recapitiAby(); // recupero i recapiti aby
                 // controllo se sono abilitato all'utilizzo del portale rami
                 if (risposta_chisono.data.Abilitato_Rami) {
@@ -144,8 +141,8 @@ export default {
                     axios
                       .post(
                         this.$custom_json.base_url +
-                          this.$custom_json.api_url +
-                          this.$custom_json.ep_api.getUrlRami,
+                        this.$custom_json.api_url +
+                        this.$custom_json.ep_api.getUrlRami,
                         param
                       )
                       .then((response) => {
@@ -155,7 +152,7 @@ export default {
                   } catch (error) {
                     console.log("impossibile recuperare jwt rami " + error);
                   }
-                
+
                 }
               }.bind(this)
             )
@@ -171,7 +168,7 @@ export default {
           this.$router.push("login");
         }
       }
-      this.load_news(); // ultime news mondo
+      // this.load_news(); // ultime news mondo
       this.recapitiAby(); // recupero i recapiti aby
       // console.log("CHIUSURA LOADER");
       this.loading = true;
@@ -208,54 +205,54 @@ export default {
       // console.log("RISPOSTA Recapiti");
       this.get_recapiti = true;
     },
-    async load_news() {
-      // console.log("START News");
-      var chiamata_news = [];
-      try {
-        await axios
-          .get(
-            this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.listanews_home
-          )
-          .then((response) => {
-            chiamata_news = response.data;
-          });
-        this.news_mondo = chiamata_news.map((item, id) => {
-          return { ...item, id };
-        });
+    // async load_news() {
+    //   // console.log("START News");
+    //   var chiamata_news = [];
+    //   try {
+    //     await axios
+    //       .get(
+    //         this.$custom_json.base_url +
+    //           this.$custom_json.api_url +
+    //           this.$custom_json.ep_api.listanews_home
+    //       )
+    //       .then((response) => {
+    //         chiamata_news = response.data;
+    //       });
+    //     this.news_mondo = chiamata_news.map((item, id) => {
+    //       return { ...item, id };
+    //     });
 
-        localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
-      } catch (error) {
-        // alert(JSON.parse(localStorage.getItem("news_mondo")));
-        if (localStorage.getItem("news_mondo") != null) {
-          this.news_mondo = JSON.parse(localStorage.getItem("news_mondo"));
-        } else {
-          // in caso di chiamata fallita e contenuto non presente nello storage tento una seconda volta
-          try {
-            await axios
-              .get(
-                this.$custom_json.base_url +
-                  this.$custom_json.api_url +
-                  this.$custom_json.ep_api.listanews_home
-              )
-              .then((response) => {
-                chiamata_news = response.data;
-                // console.log("RISPOSTA News");
-              });
-            this.news_mondo = chiamata_news.map((item, id) => {
-              return { ...item, id };
-            });
+    //     localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
+    //   } catch (error) {
+    //     // alert(JSON.parse(localStorage.getItem("news_mondo")));
+    //     if (localStorage.getItem("news_mondo") != null) {
+    //       this.news_mondo = JSON.parse(localStorage.getItem("news_mondo"));
+    //     } else {
+    //       // in caso di chiamata fallita e contenuto non presente nello storage tento una seconda volta
+    //       try {
+    //         await axios
+    //           .get(
+    //             this.$custom_json.base_url +
+    //               this.$custom_json.api_url +
+    //               this.$custom_json.ep_api.listanews_home
+    //           )
+    //           .then((response) => {
+    //             chiamata_news = response.data;
+    //             // console.log("RISPOSTA News");
+    //           });
+    //         this.news_mondo = chiamata_news.map((item, id) => {
+    //           return { ...item, id };
+    //         });
 
-            localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
-          } catch (error) {
-            // se ricevo il secondo errore allora mosto la sezione vuota
-            this.news_mondo = "";
-          }
-        }
-      }
-      this.get_news = true;
-    },
+    //         localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
+    //       } catch (error) {
+    //         // se ricevo il secondo errore allora mosto la sezione vuota
+    //         this.news_mondo = "";
+    //       }
+    //     }
+    //   }
+    //   this.get_news = true;
+    // },
   },
 };
 </script>
@@ -265,18 +262,23 @@ html,
 body {
   height: 100%;
 }
+
 .new_fluid {
   padding-left: 0;
   padding-right: 0;
   height: 100%;
   min-height: 100%;
-  height: auto !important; /* cross-browser */
-  height: 100%; /* cross-browser */
+  height: auto !important;
+  /* cross-browser */
+  height: 100%;
+  /* cross-browser */
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s;
 }
+
 .fade-enter,
 .fade-leave-to {
   opacity: 0;

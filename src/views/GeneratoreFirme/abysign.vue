@@ -38,7 +38,7 @@
                     <li>
                       Per cambiare il <b>Numero di telefono</b> spunta la
                       casella "Cambia numero fisso" altrimenti
-                      <em>di default assegna il numero +39 02 86882871</em>
+                      <em>di default assegna il numero +39 0187 17870</em>
                     </li>
                     <li>
                       Per mostrare l'<b>Interno</b> del centralino, spunta la
@@ -56,8 +56,7 @@
                       Per cambiare l'Indirizzo della <b>Sede Legale</b> spunta la casella "Cambia
                       Sede Legale" e compila il campo, altrimenti
                       <em
-                        >di default assegna "Via Monte Napoleone 8, 20121 Milano
-                        (MI)"</em
+                        >di default assegna "Via Gandhi 8, 54011 Aulla (MS)"</em
                       >
                     </li>
                     <li>

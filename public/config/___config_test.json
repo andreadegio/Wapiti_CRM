@@ -70,7 +70,7 @@
     "Download_Documentale_Audit": "Download_Documentale_Audit",
     "Download_Documentale_Rilievi": "Download_Documentale_Rilievi"
   },
-  "login_url": "https://broker.abybroker.it/accesso/login.aspx?r=staging",
+  "login_url": "https://broker.abybroker.it/accessonuovo-test/login.aspx?r=staging",
   "login_url_energy": "https://abyenergy.it/Test/accesso.aspx?r=staging",
   "logout_url_energy": "https://abyenergy.it/Test/logout.aspx",
   "logout_url": "https://broker.abybroker.it/BN2023-test/logout.aspx"
