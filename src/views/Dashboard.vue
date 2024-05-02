@@ -1,12 +1,7 @@
 <template>
   <div v-if="show_async !== 3">
-    <CToaster
-      id="messaggi_toast"
-      v-for="(avviso, index) in avvisiToast"
-      :key="index"
-      position="top-center"
-      :autohide="5000"
-    >
+    <CToaster id="messaggi_toast" v-for="(avviso, index) in avvisiToast" :key="index" position="top-center"
+      :autohide="5000">
       <template>
         <CToast color="info" :show="true">
           <template #header>
@@ -31,7 +26,7 @@
               <contattiAby :recapitiParent="recapiti" class="h-100" />
             </CCol>
           </div>
-          <div class="col-sm p-0">
+          <!-- <div class="col-sm p-0">
             <CCol class="h-100">
               <NewsMondo
                 class="h-100"
@@ -39,7 +34,7 @@
                 @reload_mondo="reload_mondo()"
               />
             </CCol>
-          </div>
+          </div> -->
         </div>
       </CCol>
       <CCol md="1"> </CCol>
@@ -50,17 +45,14 @@
         <div class="row">
           <div class="col-sm">
             <CCardLink target="_self" @click="conta_accesso('broker')">
-              <CCard
-                class="text-center elevation-6 portali-btn grow"
-                body-wrapper
-                style="
+              <CCard class="text-center elevation-6 portali-btn grow" body-wrapper style="
                   height: 200px;
                   background-image: url('img/buttons/auto.png');
                   background-position: center;
                   z-index: 0;
                   background-size: cover;
-                "
-                ><CCardTitle class="grow titolo_piattaforme">
+                ">
+                <CCardTitle class="grow titolo_piattaforme">
                   <span class="portali">Piattaforma</span>
                   <h1 class="pulsante_portali">ASSICURAZIONI</h1>
                 </CCardTitle>
@@ -69,17 +61,14 @@
           </div>
           <div v-if="isRami" class="col-sm">
             <CCardLink @click="conta_accesso('rami')" target="_self">
-              <CCard
-                class="text-center elevation-6 portali-btn grow"
-                body-wrapper
-                style="
+              <CCard class="text-center elevation-6 portali-btn grow" body-wrapper style="
                   height: 200px;
                   background-image: url('img/buttons/rami.png');
                   background-position: center;
                   z-index: 0;
                   background-size: cover;
-                "
-                ><CCardTitle class="grow titolo_piattaforme">
+                ">
+                <CCardTitle class="grow titolo_piattaforme">
                   <span class="portali">Piattaforma</span>
                   <h1 class="pulsante_portali">PROFESSIONISTI</h1>
                 </CCardTitle>
@@ -107,17 +96,14 @@
           </div> -->
           <div v-else class="col-sm">
             <CCardLink to="Comingsoon_rami2" target="_self">
-              <CCard
-                class="text-center elevation-6 portali-btn grow"
-                body-wrapper
-                style="
+              <CCard class="text-center elevation-6 portali-btn grow" body-wrapper style="
                   height: 200px;
                   background-image: url('img/buttons/rami.png');
                   background-position: center;
                   z-index: 0;
                   background-size: cover;
-                "
-                ><CCardTitle class="grow titolo_piattaforme">
+                ">
+                <CCardTitle class="grow titolo_piattaforme">
                   <span class="portali">Piattaforma</span>
                   <h1 class="pulsante_portali">PROFESSIONISTI</h1>
                 </CCardTitle>
@@ -126,17 +112,14 @@
           </div>
           <div class="col-sm" v-if="!isEnergy">
             <CCardLink to="Comingsoon_gas" target="_self">
-              <CCard
-                class="text-center elevation-6 portali-btn grow"
-                body-wrapper
-                style="
+              <CCard class="text-center elevation-6 portali-btn grow" body-wrapper style="
                   height: 200px;
                   background-image: url('img/buttons/energy.png');
                   background-position: center;
                   z-index: 0;
                   background-size: cover;
-                "
-                ><CCardTitle class="grow titolo_piattaforme">
+                ">
+                <CCardTitle class="grow titolo_piattaforme">
                   <span class="portali">Piattaforma</span>
                   <h1 class="pulsante_portali">ENERGIA</h1>
                 </CCardTitle>
@@ -145,17 +128,14 @@
           </div>
           <div class="col-sm" v-else>
             <CCardLink @click="conta_accesso('energy')">
-              <CCard
-                class="text-center elevation-6 portali-btn grow"
-                body-wrapper
-                style="
+              <CCard class="text-center elevation-6 portali-btn grow" body-wrapper style="
                   height: 200px;
                   background-image: url('img/buttons/energy.png');
                   background-position: center;
                   z-index: 0;
                   background-size: cover;
-                "
-                ><CCardTitle class="grow titolo_piattaforme">
+                ">
+                <CCardTitle class="grow titolo_piattaforme">
                   <span class="portali">Piattaforma</span>
                   <h1 class="pulsante_portali">ENERGIA</h1>
                 </CCardTitle>
@@ -168,9 +148,7 @@
     </CRow>
   </div>
   <div v-else style="position: relative; width: 100%; top: 50%; left: 50%">
-    <img
-      src="img/loader.gif"
-      style="
+    <img src="img/loader.gif" style="
         position: fixed;
         top: 50%;
         left: 50%;
@@ -179,14 +157,13 @@
         -ms-transform: translate(-50%, -50%);
         -o-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
-      "
-    />
+      " />
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import NewsMondo from "./../containers/NewsMondo";
+// import NewsMondo from "./../containers/NewsMondo";
 import AreaManager from "./../containers/ContattiAreaManager";
 import ContattiAby from "./../containers/ContattiAby";
 
@@ -195,13 +172,13 @@ export default {
   components: {
     AreaManager,
     ContattiAby,
-    NewsMondo,
+    // NewsMondo,
   },
   data() {
     return {
       newsModal: false,
       show_async: 0,
-      news_mondo: JSON.parse(localStorage.getItem("news_mondo")),
+      // news_mondo: JSON.parse(localStorage.getItem("news_mondo")),
       urlRami: localStorage.getItem("urlRami"),
       urlRamiNext2: localStorage.getItem("urlRamiNext2"),
       isEnergy: JSON.parse(localStorage.getItem("chisono_data"))
@@ -222,26 +199,26 @@ export default {
       // =================== ACCESSO PER ABYNEXT 2 ===============================
       let baseUrlNext2 = this.$custom_json.ep_api.baseUrlNext2;
       try {
-          let userID = localStorage.getItem("userID");
-                              var paramNext2 = {
-                      id: userID,
-                      user: "sdfghblzs",
-                      pwd: "lkdfasvdfg"
-                    };
-                    axios
-                      .post(
-                        this.$custom_json.base_url +
-                          this.$custom_json.api_url +
-                          this.$custom_json.ep_api.getUrlNext2,
-                        paramNext2
-                      )
-                      .then((response) => {
-                        localStorage.setItem("urlRamiNext2", baseUrlNext2 + "?token=" + response.data.token);
-                        // this.urlRami = response.data;
-                      });
-                  } catch (error) {
-                    console.log("impossibile recuperare jwt rami " + error);
-                  }
+        let userID = localStorage.getItem("userID");
+        var paramNext2 = {
+          id: userID,
+          user: "sdfghblzs",
+          pwd: "lkdfasvdfg"
+        };
+        axios
+          .post(
+            this.$custom_json.base_url +
+            this.$custom_json.api_url +
+            this.$custom_json.ep_api.getUrlNext2,
+            paramNext2
+          )
+          .then((response) => {
+            localStorage.setItem("urlRamiNext2", baseUrlNext2 + "?token=" + response.data.token);
+            // this.urlRami = response.data;
+          });
+      } catch (error) {
+        console.log("impossibile recuperare jwt rami " + error);
+      }
     },
     async set_aua() {
       // console.log("Accesso Aua");
@@ -255,8 +232,8 @@ export default {
         try {
           await axios.post(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.set_accesso,
+            this.$custom_json.api_url +
+            this.$custom_json.ep_api.set_accesso,
             { params }
           );
         } catch (error) {
@@ -274,8 +251,8 @@ export default {
         await axios
           .post(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.set_accesso,
+            this.$custom_json.api_url +
+            this.$custom_json.ep_api.set_accesso,
             { params }
           )
           .then((response) => {
@@ -354,8 +331,8 @@ export default {
         await axios
           .post(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.get_avvisiToast
+            this.$custom_json.api_url +
+            this.$custom_json.ep_api.get_avvisiToast
           )
           .then((response) => {
             this.avvisiToast = response.data;
@@ -366,53 +343,53 @@ export default {
     },
 
     // Funzione che richiamo in caso di mancato caricamento delle news al primo accesso
-    async reload_mondo() {
-      // CARICO LE ULTIME 3 NEWS MONDO PER LA HOME
-      var chiamata_news = [];
-      //provo la chiamata all'end-point se l'esito è OK assegno il valore e scrivo nello storage
-      try {
-        await axios
-          .get(
-            this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              "listanewshome"
-          )
-          .then((response) => {
-            chiamata_news = response.data;
-          });
-        this.news_mondo = chiamata_news.map((item, id) => {
-          return { ...item, id };
-        });
-        localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
-      } catch (error) {
-        //se non ricevo una risposta valida allora guardo se nello storage c'è un salvataggio dei dati e recupero
-        // provvisoriamente quelli
-        if (localStorage.getItem("news_mondo") != null) {
-          this.news_mondo = JSON.parse(localStorage.getItem("news_mondo"));
-        } else {
-          // in caso di chiamata fallita e contenuto non presente nello storage tento una seconda volta
-          try {
-            await axios
-              .get(
-                this.$custom_json.base_url +
-                  this.$custom_json.api_url +
-                  this.$custom_json.ep_api.listanews_home
-              )
-              .then((response) => {
-                chiamata_news = response.data;
-              });
-            this.news_mondo = chiamata_news.map((item, id) => {
-              return { ...item, id };
-            });
+    // async reload_mondo() {
+    //   // CARICO LE ULTIME 3 NEWS MONDO PER LA HOME
+    //   var chiamata_news = [];
+    //   //provo la chiamata all'end-point se l'esito è OK assegno il valore e scrivo nello storage
+    //   try {
+    //     await axios
+    //       .get(
+    //         this.$custom_json.base_url +
+    //         this.$custom_json.api_url +
+    //         "listanewshome"
+    //       )
+    //       .then((response) => {
+    //         chiamata_news = response.data;
+    //       });
+    //     this.news_mondo = chiamata_news.map((item, id) => {
+    //       return { ...item, id };
+    //     });
+    //     localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
+    //   } catch (error) {
+    //     //se non ricevo una risposta valida allora guardo se nello storage c'è un salvataggio dei dati e recupero
+    //     // provvisoriamente quelli
+    //     if (localStorage.getItem("news_mondo") != null) {
+    //       this.news_mondo = JSON.parse(localStorage.getItem("news_mondo"));
+    //     } else {
+    //       // in caso di chiamata fallita e contenuto non presente nello storage tento una seconda volta
+    //       try {
+    //         await axios
+    //           .get(
+    //             this.$custom_json.base_url +
+    //             this.$custom_json.api_url +
+    //             this.$custom_json.ep_api.listanews_home
+    //           )
+    //           .then((response) => {
+    //             chiamata_news = response.data;
+    //           });
+    //         this.news_mondo = chiamata_news.map((item, id) => {
+    //           return { ...item, id };
+    //         });
 
-            localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
-          } catch (error) {
-            // se ricevo il secondo errore allora mosto la sezione vuota
-            this.news_mondo = "";
-          }
-        }
-      }
-    },
+    //         localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
+    //       } catch (error) {
+    //         // se ricevo il secondo errore allora mosto la sezione vuota
+    //         this.news_mondo = "";
+    //       }
+    //     }
+    //   }
+    // },
   },
 };
 </script>
