@@ -75,25 +75,22 @@
               </CCard>
             </CCardLink>
           </div>
-          <!-- <div v-if="isRami" class="col-sm">
+          <div v-if="isRami" class="col-sm">
             <CCardLink @click="conta_accesso('ramiNext')" target="_self">
-              <CCard
-                class="text-center elevation-6 portali-btn grow"
-                body-wrapper
-                style="
+              <CCard class="text-center elevation-6 portali-btn grow" body-wrapper style="
                   height: 200px;
                   background-image: url('img/buttons/rami.png');
                   background-position: center;
                   z-index: 0;
                   background-size: cover;
-                "
-                ><CCardTitle class="grow titolo_piattaforme">
+                ">
+                <CCardTitle class="grow titolo_piattaforme">
                   <span class="portali">Piattaforma</span>
                   <h1 class="pulsante_portali">ABY NEXT 2</h1>
                 </CCardTitle>
               </CCard>
             </CCardLink>
-          </div> -->
+          </div>
           <div v-else class="col-sm">
             <CCardLink to="Comingsoon_rami2" target="_self">
               <CCard class="text-center elevation-6 portali-btn grow" body-wrapper style="
