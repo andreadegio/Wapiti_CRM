@@ -10,8 +10,8 @@ const TheContainer = () => import("@/containers/TheContainer");
 const Dashboard = () => import("@/views/Dashboard");
 
 // Views - News
-const News = () => import("@/views/news/GestioneNews");
-const Elenco_news = () => import("@/views/news/Elenco_news");
+// const News = () => import("@/views/news/GestioneNews");
+// const Elenco_news = () => import("@/views/news/Elenco_news");
 const NewsOperativeBroker = () => import("@/views/news/NewsOperativeBroker");
 const GestioneNewsBroker = () => import("@/views/news/GestioneNewsBroker");
 
@@ -118,16 +118,16 @@ function configRoutes() {
           name: "Dashboard",
           component: Dashboard,
         },
-        {
-          path: "/Gestione_news_Mondo",
-          name: "GestioneNews",
-          component: News,
-        },
-        {
-          path: "/Elenco_news",
-          name: "Elenco_news",
-          component: Elenco_news,
-        },
+        // {
+        //   path: "/Gestione_news_Mondo",
+        //   name: "GestioneNews",
+        //   component: News,
+        // },
+        // {
+        //   path: "/Elenco_news",
+        //   name: "Elenco_news",
+        //   component: Elenco_news,
+        // },
         {
           path: "/Documentale",
           name: "Documentale",
