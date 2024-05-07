@@ -1,24 +1,36 @@
 <template>
     <v-app>
         <v-app-bar app>
-            <h1 class="text-center">Corso</h1>
+            <h1 class="text-center">Corso di formazione per la piattaforma Abyway</h1>
         </v-app-bar>
         <v-main>
             <v-row>
-                <v-col cols="9" style="background-color: blue; height: 100%;">
-                    <v-row style="background-color: red; display: flex;  padding: 1rem;">
-                        Video
-                        <video id="videoPlayer" controls disabled>
+                <v-col cols="9" style="height: 100%;">
+                    <v-row
+                        style="background-color: #474747; display: flex; align-items: center; justify-content: center;  padding: 1rem; ">
+
+                        <video id="videoPlayer" controls disabled width="80%vw">
                             <source src="video/accademy/dashboard.mp4" type="video/mp4">
                             Il tuo browser non supporta il tag video.
                         </video>
                     </v-row>
-                    <v-row style="background-color: green;  padding: 1rem;">
-                        Descrizione
+                    <v-row style="padding: 1rem;">
+                        <p class="h2">Descrizione</p>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni illo exercitationem
+                            repudiandae sunt natus soluta cupiditate doloremque dolor quasi? Nam perferendis, maxime
+                            quas facilis illum repudiandae velit temporibus doloribus molestias!</p>
+
                     </v-row>
                 </v-col>
                 <v-col cols="3" id="sidebar-corso">
-                    Elenco
+                    <p class="h2">Contenuto del corso</p>
+                    <v-list>
+                        <v-list-item v-for="corso in video" :key="corso.id">
+                            <i class="far fa-play-circle"></i> &nbsp; {{ corso.titolo }}
+
+                        </v-list-item>
+                        <v-divider></v-divider>
+                    </v-list>
                 </v-col>
             </v-row>
         </v-main>
@@ -26,7 +38,20 @@
 </template>
 <script>
 export default {
-    name: 'MainLayout',
+    name: 'VideoFormazione',
+    data() {
+        return {
+            video: [{
+                id: 1,
+                titolo: "Dashboard Abyway",
+                descrizione: "Video introduttivo alla dashboard di Abyway.",
+                durata: "9'36\"",
+                file: "video/accademy/dashboard.mp4",
+            }
+
+            ],
+        }
+    },
     mounted() {
         const videoPlayer = document.getElementById('videoPlayer');
 
@@ -49,7 +74,7 @@ export default {
 </script>
 <style scoped>
 #sidebar-corso {
-    background-color: brown;
+    /* background-color: brown; */
     padding: 1rem;
     overflow: auto;
     position: fixed;
