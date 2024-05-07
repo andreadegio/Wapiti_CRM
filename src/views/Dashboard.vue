@@ -75,22 +75,6 @@
               </CCard>
             </CCardLink>
           </div>
-          <div v-if="isRami" class="col-sm">
-            <CCardLink @click="conta_accesso('ramiNext')" target="_self">
-              <CCard class="text-center elevation-6 portali-btn grow" body-wrapper style="
-                  height: 200px;
-                  background-image: url('img/buttons/rami.png');
-                  background-position: center;
-                  z-index: 0;
-                  background-size: cover;
-                ">
-                <CCardTitle class="grow titolo_piattaforme">
-                  <span class="portali">Piattaforma</span>
-                  <h1 class="pulsante_portali">ABY NEXT 2</h1>
-                </CCardTitle>
-              </CCard>
-            </CCardLink>
-          </div>
           <div v-else class="col-sm">
             <CCardLink to="Comingsoon_rami2" target="_self">
               <CCard class="text-center elevation-6 portali-btn grow" body-wrapper style="
@@ -103,6 +87,22 @@
                 <CCardTitle class="grow titolo_piattaforme">
                   <span class="portali">Piattaforma</span>
                   <h1 class="pulsante_portali">PROFESSIONISTI</h1>
+                </CCardTitle>
+              </CCard>
+            </CCardLink>
+          </div>
+          <div v-if="isRami && isNext2" class="col-sm">
+            <CCardLink @click="conta_accesso('ramiNext')" target="_self">
+              <CCard class="text-center elevation-6 portali-btn grow" body-wrapper style="
+                  height: 200px;
+                  background-image: url('img/buttons/rami.png');
+                  background-position: center;
+                  z-index: 0;
+                  background-size: cover;
+                ">
+                <CCardTitle class="grow titolo_piattaforme">
+                  <span class="portali">Piattaforma</span>
+                  <h1 class="pulsante_portali">TEST ABYNEXT</h1>
                 </CCardTitle>
               </CCard>
             </CCardLink>
@@ -181,6 +181,7 @@ export default {
       isEnergy: JSON.parse(localStorage.getItem("chisono_data"))
         .Abilitato_Energy,
       isRami: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Rami,
+      isNext2: false,
       avvisiToast: null,
       recapiti: JSON.parse(localStorage.getItem("RecapitiAby")),
     };
@@ -190,6 +191,12 @@ export default {
     this.abyNext2();
     // this.meteo();
     this.$forceUpdate();
+    if (JSON.parse(localStorage.getItem("chisono_data")).UnitaOperativa_Tipo == "GESTIONE DIRETTA" || JSON.parse(localStorage.getItem("chisono_data")).UnitaOperativa_Tipo == "ABY POINT") {
+      this.isNext2 = true;
+    }
+    else {
+      this.isNext2 = false;
+    }
   },
   methods: {
     async abyNext2() {
@@ -212,6 +219,7 @@ export default {
           .then((response) => {
             localStorage.setItem("urlRamiNext2", baseUrlNext2 + "?token=" + response.data.token);
             // this.urlRami = response.data;
+
           });
       } catch (error) {
         console.log("impossibile recuperare jwt rami " + error);
