@@ -25,8 +25,8 @@
                 <v-col cols="3" id="sidebar-corso">
                     <p class="h2">Contenuto del corso</p>
                     <v-list>
-                        <v-list-item v-for="corso in video" :key="corso.id">
-                            <i class="far fa-play-circle"></i> &nbsp; {{ corso.titolo }}
+                        <v-list-item v-for="(corso, index) in video" :key="index">
+                            <i class="far fa-play-circle"></i> &nbsp;{{ index + 1 }}. &nbsp; {{ corso.titolo }}
 
                         </v-list-item>
                         <v-divider></v-divider>
@@ -47,8 +47,14 @@ export default {
                 descrizione: "Video introduttivo alla dashboard di Abyway.",
                 durata: "9'36\"",
                 file: "video/accademy/dashboard.mp4",
+            },
+            {
+                id: 2,
+                titolo: "Area Statistiche",
+                descrizione: "Video introduttivo alle statistiche.",
+                durata: "3'04\"",
+                file: "video/accademy/dashboard.mp4",
             }
-
             ],
         }
     },
