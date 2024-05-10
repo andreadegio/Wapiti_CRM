@@ -181,7 +181,7 @@ export default {
       isEnergy: JSON.parse(localStorage.getItem("chisono_data"))
         .Abilitato_Energy,
       isRami: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Rami,
-      isNext2: false,
+      isNext2: true,
       avvisiToast: null,
       recapiti: JSON.parse(localStorage.getItem("RecapitiAby")),
     };
@@ -191,12 +191,12 @@ export default {
     this.abyNext2();
     // this.meteo();
     this.$forceUpdate();
-    if (JSON.parse(localStorage.getItem("chisono_data")).UnitaOperativa_Tipo == "GESTIONE DIRETTA" || JSON.parse(localStorage.getItem("chisono_data")).UnitaOperativa_Tipo == "ABY POINT") {
-      this.isNext2 = true;
-    }
-    else {
-      this.isNext2 = false;
-    }
+    // if (JSON.parse(localStorage.getItem("chisono_data")).UnitaOperativa_Tipo == "GESTIONE DIRETTA" || JSON.parse(localStorage.getItem("chisono_data")).UnitaOperativa_Tipo == "ABY POINT") {
+    //   this.isNext2 = true;
+    // }
+    // else {
+    //   this.isNext2 = false;
+    // }
   },
   methods: {
     async abyNext2() {
@@ -347,54 +347,6 @@ export default {
       }
     },
 
-    // Funzione che richiamo in caso di mancato caricamento delle news al primo accesso
-    // async reload_mondo() {
-    //   // CARICO LE ULTIME 3 NEWS MONDO PER LA HOME
-    //   var chiamata_news = [];
-    //   //provo la chiamata all'end-point se l'esito è OK assegno il valore e scrivo nello storage
-    //   try {
-    //     await axios
-    //       .get(
-    //         this.$custom_json.base_url +
-    //         this.$custom_json.api_url +
-    //         "listanewshome"
-    //       )
-    //       .then((response) => {
-    //         chiamata_news = response.data;
-    //       });
-    //     this.news_mondo = chiamata_news.map((item, id) => {
-    //       return { ...item, id };
-    //     });
-    //     localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
-    //   } catch (error) {
-    //     //se non ricevo una risposta valida allora guardo se nello storage c'è un salvataggio dei dati e recupero
-    //     // provvisoriamente quelli
-    //     if (localStorage.getItem("news_mondo") != null) {
-    //       this.news_mondo = JSON.parse(localStorage.getItem("news_mondo"));
-    //     } else {
-    //       // in caso di chiamata fallita e contenuto non presente nello storage tento una seconda volta
-    //       try {
-    //         await axios
-    //           .get(
-    //             this.$custom_json.base_url +
-    //             this.$custom_json.api_url +
-    //             this.$custom_json.ep_api.listanews_home
-    //           )
-    //           .then((response) => {
-    //             chiamata_news = response.data;
-    //           });
-    //         this.news_mondo = chiamata_news.map((item, id) => {
-    //           return { ...item, id };
-    //         });
-
-    //         localStorage.setItem("news_mondo", JSON.stringify(this.news_mondo));
-    //       } catch (error) {
-    //         // se ricevo il secondo errore allora mosto la sezione vuota
-    //         this.news_mondo = "";
-    //       }
-    //     }
-    //   }
-    // },
   },
 };
 </script>
