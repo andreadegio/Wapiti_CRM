@@ -8,8 +8,10 @@
                 <v-col cols="9">
                     <v-row v-if="selectedVideo" class="video-container">
                         <div class="video-wrapper">
-                            <video id="videoPlayer" :src="selectedVideo.file" width="80%vw" controlsList="nodownload"
+                            <video id="videoPlayer" :src="selectedVideo.file" width="80%vw"
+                                :controls="selectedVideo.completed" controlsList="nodownload"
                                 @timeupdate="updateProgress">
+                                <!-- disablePictureInPicture -->
                                 <source :src="selectedVideo.file" type="video/mp4">
                                 Il tuo browser non supporta il tag video.
                             </video>
@@ -50,8 +52,9 @@
                         <div>
                             <p class="h3 mb-0">Contenuto del corso</p>
                         </div>
-                        <div style="max-width: 100px;"><small>Avanzamento: 50% <v-progress-linear
-                                    value="50"></v-progress-linear></small></div>
+                        <div style="max-width: 100px;"><small>Avanzamento: {{ avanzamento }}% <v-progress-linear
+                                    :value="calculateProgress()"></v-progress-linear></small>
+                        </div>
                     </div>
                     <v-list>
                         <v-list-item v-for="(video, index) in video" :key="index" @click="selectVideo(video, index)"
@@ -71,7 +74,7 @@
                                 </div>
                             </div>
                         </v-list-item>
-                        <v-list-item class="elencoVideo non-cliccabile">
+                        <v-list-item id="quiz" class="elencoVideo non-cliccabile">
                             <div>
                                 <div class="h5">
                                     Quiz Finale
@@ -98,6 +101,7 @@ export default {
             selectedVideoIndex: null,
             currentTime: '0:00',
             totalTime: '0:00',
+            avanzamento: 0,
             video: [{
                 id: 1,
                 titolo: "Dashboard Abyway",
@@ -105,22 +109,22 @@ export default {
                 durata: "9'36\"",
                 file: "video/accademy/dashboard.mp4",
                 active: true,
-                completed: true,
+                completed: false,
             },
             {
                 id: 2,
                 titolo: "Simulazione su veicolo",
                 descrizione: "Video formativo per effettuare simulazioni.",
-                durata: "3'04\"",
+                durata: "22'51\"",
                 file: "video/accademy/Simulazione su nuovo veicolo.mp4",
-                active: true,
+                active: false,
                 completed: false,
             },
             {
                 id: 3,
                 titolo: "Stampe contratti e certificati",
                 descrizione: "Video formativo per la stampa contratti e certificati.",
-                durata: "15'44\"",
+                durata: "8'48\"",
                 file: "video/accademy/Stampa copia contratto e certificato.mp4",
                 active: false,
                 completed: false,
@@ -129,17 +133,13 @@ export default {
                 id: 4,
                 titolo: "Acquisto",
                 descrizione: "Video formativo per l'acquisto di un preventivo.",
-                durata: "22'39\"",
+                durata: "18'50\"",
                 file: "video/accademy/Acquisto.mp4",
                 active: false,
                 completed: false
             }
             ],
-            videoResumed: [{
-                id_video: 2,
-                timestampInizio: '00:30',
-
-            }],
+            videoResumed: [],
         }
     },
     methods: {
@@ -173,8 +173,63 @@ export default {
             const currentSeconds = Math.floor(videoPlayer.currentTime % 60);
             // Aggiorno il valore della variabile per visualizzare il tempo corrente
             this.currentTime = `${currentMinutes}:${currentSeconds.toString().padStart(2, '0')}`;
-        }
+        },
+        saveCurrentTime() {
+            // Salva il tempo corrente del video in riproduzione
+            if (this.selectedVideo) {
+                const videoPlayer = document.getElementById('videoPlayer');
+                const currentTime = videoPlayer.currentTime;
+                const timeInMinutes = Math.floor(currentTime / 60);
+                const timeInSeconds = Math.floor(currentTime % 60);
+                const timestampInizio = `${timeInMinutes}:${timeInSeconds}`;
 
+                // Aggiorna o aggiungi il valore timestampInizio nell'oggetto videoResumed
+                const index = this.videoResumed.findIndex(item => item.id_video === this.selectedVideo.id);
+                if (index !== -1) {
+                    this.videoResumed[index].timestampInizio = timestampInizio;
+                } else {
+                    this.videoResumed.push({
+                        id_video: this.selectedVideo.id,
+                        timestampInizio: timestampInizio
+                    });
+                }
+            }
+        },
+        endedVideo() {
+            // Salva il completamento del video in corso
+            if (this.selectedVideo) {
+                // Aggiorno il completamento del video e sblocco quello successivo
+                const index = this.video.findIndex(item => item.id === this.selectedVideo.id);
+                if (index !== -1) {
+                    this.video[index].completed = true;
+                    if (index + 1 < this.video.length) {
+                        this.video[index + 1].active = true;
+                    } else {
+                        console.log("Questo è l'ultimo video della lista.");
+                        // ABILITO IL QUIZ
+                        this.$alert("Hai completato tutti i video, adesso esegui il quiz per procedere con l'abilitazione dell'utente", "OK", "success");
+                        const quizElement = document.getElementById('quiz');
+                        if (quizElement) {
+                            quizElement.classList.remove('non-cliccabile');
+                        }
+                    }
+                } else {
+                    console.log("video non trovato");
+                }
+            }
+        },
+        calculateProgress() {
+            const completedVideos = this.video.filter(video => video.completed).length;
+            const totalVideos = this.video.length;
+
+            const totalItems = totalVideos + 1;
+            if (totalItems === 0) {
+                this.avanzamento = 0; // Per evitare divisioni per zero
+            }
+
+            this.avanzamento = Math.round((completedVideos / totalItems) * 100);
+            return this.avanzamento;
+        }
     },
     watch: {
         selectedVideo() {
@@ -190,10 +245,13 @@ export default {
                     videoPlayer.addEventListener('pause', () => {
                         // Traccia la pausa del video
                         console.log("video in pausa");
+                        this.saveCurrentTime();
                     });
                     videoPlayer.addEventListener('ended', () => {
                         // Traccia la fine della riproduzione del video
                         console.log("fine del video");
+                        this.endedVideo();
+
                     });
                     videoPlayer.onloadedmetadata = () => {
                         // Calcolo la durata totale del video

@@ -81,6 +81,7 @@ const Crm = () => import("@/views/crm/crm");
 
 // E-learning CRM
 const Elearning = () => import("@/views/e-learning/corsi");
+const ElearningLogin = () => import("@/views/e-learning/ElearningLogin");
 
 // Views - Page - Gas
 const Comingsoon_gas = () => import("@/views/pages/Comingsoon_gas");
@@ -100,8 +101,6 @@ Vue.use(Router);
 const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
-  // linkActiveClass: "active",
-  // scrollBehavior: () => ({ y: 0 }),
   routes: configRoutes(),
 });
 
@@ -118,16 +117,6 @@ function configRoutes() {
           name: "Dashboard",
           component: Dashboard,
         },
-        // {
-        //   path: "/Gestione_news_Mondo",
-        //   name: "GestioneNews",
-        //   component: News,
-        // },
-        // {
-        //   path: "/Elenco_news",
-        //   name: "Elenco_news",
-        //   component: Elenco_news,
-        // },
         {
           path: "/Documentale",
           name: "Documentale",
@@ -283,8 +272,18 @@ function configRoutes() {
       component: Elearning,
       meta: {
         public: true,
+        requiresAuthElearning: true,
       },
     },
+    {
+      path: "/e-learning-login",
+      name: "LoginElearning",
+      component: ElearningLogin,
+      meta: {
+        public: true,
+      },
+    },
+
     {
       path: "/login",
       name: "Login",
@@ -349,22 +348,31 @@ router.beforeEach((to, from, next) => {
         name: "Login",
       });
     }
+  } else if (to.matched.some((record) => record.meta.requiresAuthElearning)) {
+    if (!isAuthenticatedElearning()) {
+      // L'utente non è autenticato nella piattaforma di e-learning, reindirizzalo alla pagina di login dell'e-learning
+      next({
+        name: "LoginElearning",
+      });
+    } else {
+      // L'utente è autenticato nella piattaforma di e-learning, permetti la navigazione
+      next();
+    }
   } else {
     next();
   }
 });
 
+// Funzione per controllare se l'utente è autenticato nella piattaforma di e-learning
+function isAuthenticatedElearning() {
+  return localStorage.getItem("tokenElearning") !== null;
+}
+
 router.onError((error) => {
   console.log("Errore di caricamento " + error.message);
   const targetPath = router.history.pending.fullPath;
-  // console.log("target path " + targetPath);
-  // router.replace(targetPath);
-  // window.location.reload();
-  // router.push("Dashboard");
   history.replaceState("", "", targetPath);
   router.replace(targetPath);
-  // router.push(targetPath);
-  // console.log("history replace");
 });
 
 export default router;
