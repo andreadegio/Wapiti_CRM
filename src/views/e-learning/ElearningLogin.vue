@@ -22,10 +22,11 @@
                       <v-otp-input v-model="otp" length="8" required></v-otp-input>
                       <div v-show="messaggio_errore" style="color: darkred; font-weight: bold">
                         <CAlert color="danger" closeButton>
-                          Pin errato
+                          {{ testo_errore }}
                         </CAlert>
                       </div>
-                      <v-btn type="submit" block color="#1f4b6b" class="entra_btn" :loading="loading">Accedi</v-btn>
+                      <v-btn type="submit" block color="#1f4b6b" class="entra_btn" :loading="loading"
+                        elevation="5">Accedi</v-btn>
                     </form>
                   </v-card-text>
                 </CRow>
@@ -48,15 +49,18 @@ export default {
   data() {
     return {
       messaggio_errore: false,
+      testo_errore: "",
       otp: null,
       queryParams: {},
       loading: false,
+
     };
   },
   created() {
-    // Al caricamento della login controllo: se arrivo con un errore di autenticazione lo mostro altrimenti svuoto il local storage chiamando la funzione "user_logout"
+    // Al caricamento della login controllo: se arrivo con un errore 
     if (this.$route.query.errore) {
       this.messaggio_errore = true;
+      this.testo_errore = "Errore, eseguire l'accesso con il link originale"
       this.$router.push("e-learning-login");
     }
     // Se ci sono parametri nella query string, rimuovili e aggiornali
@@ -66,24 +70,36 @@ export default {
       this.$router.replace({ ...this.$route, query: {} }); // Rimuovi i parametri dalla query string
     }
     // console.log(this.queryParams.user);
-
-
   },
 
   methods: {
     login() {
       this.loading = true; // Mostra il loader sul pulsante
 
-      // Esegui la richiesta HTTP POST per l'autenticazione
-      axios.post('URL_DEL_TUO_ENDPOINT_BACKEND', {
-        otp: this.otp,
-        parametriQuery: this.queryParams
+
+      axios.post(this.$custom_json.base_url +
+        this.$custom_json.api_url +
+        this.$custom_json.accademy.loginBypin, {
+        pin: this.otp,
+        id: this.queryParams.id
       })
         .then(response => {
-          // Gestisci la risposta dal backend
-          console.log('Risposta dal backend:', response.data);
+          if (response.data.message == 'OK') {
+            this.$store.commit('setUserId', this.queryParams.id);
+            this.$store.commit('setLoggedInUser', this.queryParams.utente);
+            localStorage.setItem("tokenElearning", "SLKJDO20300SLXPA...A38902");
+            this.$router.push({
+              path: '/e-learning'
+            });
+          }
+          else {
+            this.testo_errore = response.data.message;
+            this.messaggio_errore = true;
+          }
+
           // Esempio: reindirizza l'utente a una nuova pagina dopo il successo
-          this.$router.push({ path: '/pagina-di-successo', query: { auth: true } });
+
+
         })
         .catch(error => {
           // Gestisci gli errori

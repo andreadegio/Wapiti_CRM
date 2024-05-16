@@ -47,6 +47,7 @@
     "vue-masonry-wall": "^0.3.1",
     "vue-pdf": "^4.2.0",
     "vue-router": "^3.4.9",
+    "vue-router-transitions": "0.0.7",
     "vue-simple-alert": "^1.1.1",
     "vue-stepper": "~1.4.2",
     "vue-table-to-excel": "^1.0.6",

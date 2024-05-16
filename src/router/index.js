@@ -80,7 +80,9 @@ const StatistichePortali = () =>
 const Crm = () => import("@/views/crm/crm");
 
 // E-learning CRM
-const Elearning = () => import("@/views/e-learning/corsi");
+const ElearningCorso = () => import("@/views/e-learning/corsi");
+const ElearningDashboard = () =>
+  import("@/views/e-learning/elearningDashboard");
 const ElearningLogin = () => import("@/views/e-learning/ElearningLogin");
 
 // Views - Page - Gas
@@ -269,10 +271,21 @@ function configRoutes() {
     {
       path: "/e-learning",
       name: "E-learning",
-      component: Elearning,
+      component: ElearningDashboard,
       meta: {
         public: true,
         requiresAuthElearning: true,
+        transition: "fade",
+      },
+    },
+    {
+      path: "/e-learningCorso",
+      name: "E-learningCorso",
+      component: ElearningCorso,
+      meta: {
+        public: true,
+        requiresAuthElearning: true,
+        transition: "fade",
       },
     },
     {
@@ -281,6 +294,7 @@ function configRoutes() {
       component: ElearningLogin,
       meta: {
         public: true,
+        transition: "fade",
       },
     },
 

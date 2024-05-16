@@ -79,6 +79,9 @@
     "accessoCRM": "CRM/accessoCRM",
     "sendMail": "CRM/sendMail"
   },
+  "accademy": {
+    "loginBypin": "ACCADEMY/getPinById"
+  },
   "servizi_broker": "https://servizi.documentale.cloud/AibaJSON2023-test/",
   "servizi_energy": "https://abyenergy.it/servizitest/",
   "broker_veicoli": "https://broker.abybroker.it/BN2023-test/AreaOperazioni.aspx",
