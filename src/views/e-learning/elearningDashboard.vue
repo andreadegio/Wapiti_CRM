@@ -22,10 +22,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="strumenti_profile pl-5">
+                    <div class="strumenti_profile px-5">
                         <div class="menu_strumenti my-2">
                             <i class="fas fa-envelope-open-text"></i>
-                            <p> Contatta il Tutor</p><br />
+                            <p> Contatta il tuo Tutor</p><br />
                             <v-divider></v-divider>
                             <i class="fas fa-sign-out-alt"></i>
                             <p>Esci</p><br />
@@ -35,48 +35,70 @@
                 <v-col cols="12" md="8">
                     <div class="h3" style="color: #1f4b6b;"> Corsi disponibili</div>
                     <div class="corsi">
-                        <v-row class="fill-height">
-                            <v-col cols="12" md="3" lg="3" v-for="course in courses" :key="course.id">
+                        <v-row class="fill-height" v-if="loadingCourses">
+                            <v-col cols="12" md="3" lg="3">
                                 <div class="course-card">
-                                    <div class="card-container">
+                                    <v-skeleton-loader class="mx-auto" max-width="300" type="card"></v-skeleton-loader>
+                                </div>
+                            </v-col>
+                            <v-col cols="12" md="3" lg="3">
+                                <div class="course-card">
+                                    <v-skeleton-loader class="mx-auto" max-width="300" type="card"></v-skeleton-loader>
+                                </div>
+                            </v-col>
+                            <v-col cols="12" md="3" lg="3">
+                                <div class="course-card">
+                                    <v-skeleton-loader class="mx-auto" max-width="300" type="card"></v-skeleton-loader>
+                                </div>
+                            </v-col>
 
-                                        <v-img :src="course.image" class="course-image" height="200">
-                                            <template v-slot:placeholder>
-                                                <v-row class="fill-height ma-0" align="center" justify="center">
-                                                    <v-progress-circular indeterminate
-                                                        color="grey lighten-5"></v-progress-circular>
-                                                </v-row>
-                                            </template>
-                                        </v-img>
-                                    </div>
-                                    <div class="titoli">
-                                        <div class="course-title mt-4">{{ course.title }}</div>
-                                        <div class="course-subtitle mt-3">{{ course.instructor }}</div>
-                                    </div>
-                                    <v-divider></v-divider>
-                                    <div class="course-info">
-                                        <v-row>
-                                            <v-col cols="6">
-                                                <div class="course-lessons">
-                                                    <i class="fas fa-video"></i> &nbsp; {{ course.lessons }}
-                                                    Video
-                                                </div>
-                                            </v-col>
-                                            <v-col cols="6">
-                                                <div class="course-duration">
-                                                    <i class="fas fa-stopwatch"></i> &nbsp; {{ course.duration.hours
-                                                    }} h {{ course.duration.minutes
-                                                    }} min
-                                                </div>
-                                            </v-col>
-                                        </v-row>
-                                    </div>
-                                    <!--                                     
+                        </v-row>
+                        <v-row v-else class="fill-height">
+                            <v-col cols="12" md="3" lg="3" v-for="course in courses" :key="course.id">
+                                <router-link :to="{
+                                    name: `E-learningCorso`,
+                                    params: { course: course },
+                                }" style="text-decoration: none; color: inherit;">
+                                    <div class="course-card">
+                                        <div class="card-container">
+
+                                            <v-img :src="course.cover" class="course-image" height="200">
+                                                <template v-slot:placeholder>
+                                                    <v-row class="fill-height ma-0" align="center" justify="center">
+                                                        <v-progress-circular indeterminate
+                                                            color="grey lighten-5"></v-progress-circular>
+                                                    </v-row>
+                                                </template>
+                                            </v-img>
+                                        </div>
+                                        <div class="titoli">
+                                            <div class="course-title mt-4">{{ course.corso }}</div>
+                                            <div class="course-subtitle mt-3">{{ course.descrizione }}</div>
+                                        </div>
+                                        <v-divider></v-divider>
+                                        <div class="course-info">
+                                            <v-row>
+                                                <v-col cols="6">
+                                                    <div class="course-lessons">
+                                                        <i class="fas fa-video"></i> &nbsp; {{ course.video.length }}
+                                                        Video
+                                                    </div>
+                                                </v-col>
+                                                <v-col cols="6">
+                                                    <div class="course-duration">
+                                                        <i class="fas fa-stopwatch"></i> &nbsp; {{ course.durata_totale
+                                                        }}
+                                                    </div>
+                                                </v-col>
+                                            </v-row>
+                                        </div>
+                                        <!--                                     
                                     <div>
                                         <v-btn text color="primary">Vai al corso</v-btn>
 
                                     </div> -->
-                                </div>
+                                    </div>
+                                </router-link>
                             </v-col>
                         </v-row>
                     </div>
@@ -89,32 +111,29 @@
     </v-app>
 </template>
 <script>
+import axios from "axios";
 export default {
+    name: "AbyAccademy",
 
     data() {
         return {
+            loadingCourses: false,
             benvenuto: "",
-            utente: this.$store.state.loggedInUser,
-            courses: [
-                {
-                    id: 1,
-                    image: "https://dreamslms-wp.dreamstechnologies.com/wp-content/uploads/2023/01/course-15-4.jpg",
-                    title: "Corso di Formazione",
-                    instructor: "Corso per abilitazione utente",
-                    lessons: 4,
-                    duration: {
-                        hours: 2,
-                        minutes: 30
-                    },
-                    rating: 4,
-                    ratingCount: 1
-                },
-                // Add more courses here
-            ]
+            utente: "",
+            courses: []
         };
     },
-    created() {
+    async created() {
         this.setBenvenuto();
+        // Recupera le informazioni sui corsi
+        await this.fetchCourses();
+
+        // Recupera le informazioni dell'utente
+        await this.fetchUserInfo();
+
+        // Nascondi il loader dopo che entrambe le richieste sono state completate
+        this.loading = false;
+
     },
     methods: {
         setBenvenuto() {
@@ -126,6 +145,43 @@ export default {
                 this.benvenuto = "Buon pomeriggio";
             } else {
                 this.benvenuto = "Buona sera";
+            }
+        },
+        async fetchCourses() {
+            let params = {
+                id: sessionStorage.getItem('learningUserId')
+            };
+            try {
+                // Effettua la chiamata al backend per recuperare i corsi disponibili
+                await axios.post(this.$custom_json.base_url +
+                    this.$custom_json.api_url +
+                    this.$custom_json.accademy.getElearningCourses, params).then(response => {
+                        // Assegna i dati ricevuti dalla chiamata alla variabile courses
+                        this.courses = response.data;
+                    })
+            } catch (error) {
+                // Gestisci gli errori, ad esempio mostrando un messaggio all'utente
+                console.error('Errore durante il recupero dei corsi:', error);
+            }
+        },
+        async fetchUserInfo() {
+            try {
+                // Recupera l'ID dell'utente dal sessionStorage
+                const userId = sessionStorage.getItem('learningUserId');
+                // Effettua la chiamata al backend per recuperare le informazioni dell'utente
+
+                await axios.post(this.$custom_json.base_url
+                    + this.$custom_json.api_url +
+                    this.$custom_json.accademy.getUserInfoById,
+                    { id: userId })
+                    .then(response => {
+                        // Assegna i dati ricevuti dalla chiamata alla variabile user
+                        sessionStorage.setItem('learningUtente', JSON.stringify(response.data.utente));
+                        response.data.utente[0].pf_pg == "PF" ? this.utente = response.data.utente[0].nome + " " + response.data.utente[0].cognome : this.utente = response.data.utente[0].rag_soc;
+                    })
+            } catch (error) {
+                // Gestisci gli errori, ad esempio mostrando un messaggio all'utente
+                console.error('Errore durante il recupero delle informazioni dell\'utente:', error);
             }
         }
     },

@@ -1,7 +1,8 @@
 <template>
     <v-app>
         <v-app-bar app>
-            <h1 class="text-center">Corso di formazione per la piattaforma Abyway</h1>
+            <img class="immagine" src="img/Aby-Accademy_small.png" />
+            <h1 class="text-center" style="color: #1f4b6b">{{ course.corso }}</h1>
         </v-app-bar>
         <v-main>
             <v-row>
@@ -102,46 +103,54 @@ export default {
             currentTime: '0:00',
             totalTime: '0:00',
             avanzamento: 0,
-            video: [{
-                id: 1,
-                titolo: "Dashboard Abyway",
-                descrizione: "Video formativo per l'uso della dashboard di Abyway.",
-                durata: "9'36\"",
-                file: "video/accademy/dashboard.mp4",
-                active: true,
-                completed: false,
-            },
-            {
-                id: 2,
-                titolo: "Simulazione su veicolo",
-                descrizione: "Video formativo per effettuare simulazioni.",
-                durata: "22'51\"",
-                file: "video/accademy/Simulazione su nuovo veicolo.mp4",
-                active: false,
-                completed: false,
-            },
-            {
-                id: 3,
-                titolo: "Stampe contratti e certificati",
-                descrizione: "Video formativo per la stampa contratti e certificati.",
-                durata: "8'48\"",
-                file: "video/accademy/Stampa copia contratto e certificato.mp4",
-                active: false,
-                completed: false,
-            },
-            {
-                id: 4,
-                titolo: "Acquisto",
-                descrizione: "Video formativo per l'acquisto di un preventivo.",
-                durata: "18'50\"",
-                file: "video/accademy/Acquisto.mp4",
-                active: false,
-                completed: false
-            }
-            ],
-            videoResumed: [],
+            video: this.course.video,
+            // video: [{
+            //     id: 1,
+            //     titolo: "Dashboard Abyway",
+            //     descrizione: "Video formativo per l'uso della dashboard di Abyway.",
+            //     durata: "9'36\"",
+            //     file: "video/accademy/dashboard.mp4",
+            //     active: true,
+            //     completed: false,
+            // },
+            // {
+            //     id: 2,
+            //     titolo: "Simulazione su veicolo",
+            //     descrizione: "Video formativo per effettuare simulazioni.",
+            //     durata: "22'51\"",
+            //     file: "video/accademy/Simulazione su nuovo veicolo.mp4",
+            //     active: false,
+            //     completed: false,
+            // },
+            // {
+            //     id: 3,
+            //     titolo: "Stampe contratti e certificati",
+            //     descrizione: "Video formativo per la stampa contratti e certificati.",
+            //     durata: "8'48\"",
+            //     file: "video/accademy/Stampa copia contratto e certificato.mp4",
+            //     active: false,
+            //     completed: false,
+            // },
+            // {
+            //     id: 4,
+            //     titolo: "Acquisto",
+            //     descrizione: "Video formativo per l'acquisto di un preventivo.",
+            //     durata: "18'50\"",
+            //     file: "video/accademy/Acquisto.mp4",
+            //     active: false,
+            //     completed: false
+            // }
+            // ],
+            // videoResumed: [],
         }
     },
+    props: {
+        course: {
+            type: Object,
+            required: true
+        }
+    },
+
     methods: {
         selectVideo(video, index) {
             this.selectedVideoIndex = index;
@@ -184,11 +193,11 @@ export default {
                 const timestampInizio = `${timeInMinutes}:${timeInSeconds}`;
 
                 // Aggiorna o aggiungi il valore timestampInizio nell'oggetto videoResumed
-                const index = this.videoResumed.findIndex(item => item.id_video === this.selectedVideo.id);
+                const index = this.course.video.findIndex(item => item.id === this.selectedVideo.id);
                 if (index !== -1) {
-                    this.videoResumed[index].timestampInizio = timestampInizio;
+                    this.course.video[index].timestampInizio = timestampInizio;
                 } else {
-                    this.videoResumed.push({
+                    this.course.video.push({
                         id_video: this.selectedVideo.id,
                         timestampInizio: timestampInizio
                     });
@@ -263,7 +272,8 @@ export default {
 
 
                     // Controlla se l'ID del video è presente in videoResumed
-                    const resumedVideo = this.videoResumed.find(item => item.id_video === this.selectedVideo.id);
+                    const resumedVideo = this.selectedVideo;
+
                     if (resumedVideo) {
                         const videoPlayer = document.getElementById('videoPlayer');
                         const timeParts = resumedVideo.timestampInizio.split(':');
@@ -283,6 +293,12 @@ export default {
 }
 </script>
 <style scoped>
+.immagine {
+    height: inherit;
+    background-color: white;
+    margin-right: 1rem;
+}
+
 #sidebar-corso {
     background-color: white;
     padding: 1rem;

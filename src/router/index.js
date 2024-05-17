@@ -80,10 +80,10 @@ const StatistichePortali = () =>
 const Crm = () => import("@/views/crm/crm");
 
 // E-learning CRM
-const ElearningCorso = () => import("@/views/e-learning/corsi");
+const ElearningCorso = () => import("@/views/e-learning/elearningCorso");
 const ElearningDashboard = () =>
   import("@/views/e-learning/elearningDashboard");
-const ElearningLogin = () => import("@/views/e-learning/ElearningLogin");
+const ElearningLogin = () => import("@/views/e-learning/elearningLogin");
 
 // Views - Page - Gas
 const Comingsoon_gas = () => import("@/views/pages/Comingsoon_gas");
@@ -279,9 +279,10 @@ function configRoutes() {
       },
     },
     {
-      path: "/e-learningCorso",
+      path: "/e-learningCorso/",
       name: "E-learningCorso",
       component: ElearningCorso,
+      props: true,
       meta: {
         public: true,
         requiresAuthElearning: true,
@@ -379,7 +380,7 @@ router.beforeEach((to, from, next) => {
 
 // Funzione per controllare se l'utente è autenticato nella piattaforma di e-learning
 function isAuthenticatedElearning() {
-  return localStorage.getItem("tokenElearning") !== null;
+  return sessionStorage.getItem("tokenElearning") !== null;
 }
 
 router.onError((error) => {

@@ -85,9 +85,8 @@ export default {
       })
         .then(response => {
           if (response.data.message == 'OK') {
-            this.$store.commit('setUserId', this.queryParams.id);
-            this.$store.commit('setLoggedInUser', this.queryParams.utente);
-            localStorage.setItem("tokenElearning", "SLKJDO20300SLXPA...A38902");
+            sessionStorage.setItem('learningUserId', this.queryParams.id);
+            sessionStorage.setItem("tokenElearning", "SLKJDO20300SLXPA...A38902");
             this.$router.push({
               path: '/e-learning'
             });
