@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <v-app-bar app>
+        <v-app-bar app style="background-color: white;">
             <img class="immagine" src="img/Aby-Accademy_small.png" />
             <h1 style="color: #1f4b6b">Aby Accademy</h1>
         </v-app-bar>
@@ -24,11 +24,39 @@
                     </div>
                     <div class="strumenti_profile px-5">
                         <div class="menu_strumenti my-2">
-                            <i class="fas fa-envelope-open-text"></i>
-                            <p> Contatta il tuo Tutor</p><br />
+                            <v-dialog transition="dialog-top-transition" max-width="600">
+                                <template v-slot:activator="{ on, attrs }">
+
+                                    <div class="btn_strumenti" v-bind="attrs" v-on="on">
+                                        <i class="fas fa-envelope-open-text"></i>
+                                        <p class="btn_strumenti"> Contatta il tuo Tutor</p>
+                                    </div>
+                                </template>
+                                <template v-slot:default="dialog">
+                                    <v-card>
+                                        <v-toolbar color="primary" dark>Contatta il tutor</v-toolbar>
+                                        <v-card-text>
+                                            <div class="text-h2 pa-12">Oggetto
+                                                <br>
+                                                messaggio
+                                                <br>
+                                                annulla
+
+                                                invia
+                                            </div>
+                                        </v-card-text>
+                                        <v-card-actions class="justify-end">
+                                            <v-btn text @click="dialog.value = false">Close</v-btn>
+                                        </v-card-actions>
+                                    </v-card>
+                                </template>
+                            </v-dialog>
+
                             <v-divider></v-divider>
-                            <i class="fas fa-sign-out-alt"></i>
-                            <p>Esci</p><br />
+                            <div class="btn_strumenti">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <p class="btn_strumenti">Esci</p>
+                            </div>
                         </div>
                     </div>
                 </v-col>
@@ -75,7 +103,11 @@
                                             <div class="course-title mt-4">{{ course.corso }}</div>
                                             <div class="course-subtitle mt-3">{{ course.descrizione }}</div>
                                         </div>
-                                        <v-divider></v-divider>
+
+                                        <v-progress-linear :value="course.avanzamento" class="mt-3"></v-progress-linear>
+                                        <cite style="color: #1f4b6b !important;">{{
+                                    course.avanzamento }}%
+                                            completato</cite>
                                         <div class="course-info">
                                             <v-row>
                                                 <v-col cols="6">
@@ -117,10 +149,10 @@ export default {
 
     data() {
         return {
-            loadingCourses: false,
+            loadingCourses: true,
             benvenuto: "",
             utente: "",
-            courses: []
+            courses: [],
         };
     },
     async created() {
@@ -131,11 +163,40 @@ export default {
         // Recupera le informazioni dell'utente
         await this.fetchUserInfo();
 
+        // Recupera l'avanamento del corso;
+        await this.fetchAvanzamento();
+
         // Nascondi il loader dopo che entrambe le richieste sono state completate
-        this.loading = false;
+        this.loadingCourses = false;
 
     },
     methods: {
+        async fetchAvanzamento() {
+            let totalCompletedVideos = 0;
+            let totalVideos = 0;
+            let avanzamento = 0;
+            let quizAvailable = false;
+
+            // Itera su ciascun corso e calcola il numero di video completati e il numero totale di video
+            this.courses.forEach(course => {
+                totalCompletedVideos += course.video.filter(video => video.completed).length;
+                totalVideos += course.video.length;
+                course.quiz == 1 ? quizAvailable = true : quizAvailable = false;
+            });
+            if (totalVideos === 0) {
+                avanzamento = 0; // Per evitare divisioni per zero
+            } else {
+                quizAvailable ? totalVideos = totalVideos + 1 : totalVideos;
+                avanzamento = Math.round((totalCompletedVideos / (totalVideos)) * 100);
+            }
+
+            // Aggiungi l'avanzamento a ciascun corso
+            this.courses.forEach(course => {
+                course.avanzamento = avanzamento;
+            });
+
+            return;
+        },
         setBenvenuto() {
             const now = new Date();
             const hour = now.getHours();
@@ -320,6 +381,10 @@ export default {
 .menu_strumenti p {
     display: inline-block;
     vertical-align: middle;
+}
+
+.btn_strumenti:hover {
+    color: #ef7918;
 }
 
 @media only screen and (max-width: 960px) {

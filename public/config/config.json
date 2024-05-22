@@ -82,7 +82,10 @@
   "accademy": {
     "loginBypin": "ACCADEMY/getPinById",
     "getElearningCourses": "ACCADEMY/getElearningCourses",
-    "getUserInfoById": "ACCADEMY/getUserInfoById"
+    "getUserInfoById": "ACCADEMY/getUserInfoById",
+    "updateVideo": "ACCADEMY/updateVideo",
+    "getQuiz": "ACCADEMY/getQuiz",
+    "sendAnswers": "ACCADEMY/sendAnswers"
   },
   "servizi_broker": "https://servizi.documentale.cloud/AibaJSON2023-test/",
   "servizi_energy": "https://abyenergy.it/servizitest/",
