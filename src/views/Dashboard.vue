@@ -181,22 +181,21 @@ export default {
       isEnergy: JSON.parse(localStorage.getItem("chisono_data"))
         .Abilitato_Energy,
       isRami: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Rami,
-      isNext2: true,
+      isNext2: false,
       avvisiToast: null,
       recapiti: JSON.parse(localStorage.getItem("RecapitiAby")),
     };
   },
   mounted() {
     this.get_avvisiToast();
-    this.abyNext2();
     // this.meteo();
     this.$forceUpdate();
-    // if (JSON.parse(localStorage.getItem("chisono_data")).UnitaOperativa_Tipo == "GESTIONE DIRETTA" || JSON.parse(localStorage.getItem("chisono_data")).UnitaOperativa_Tipo == "ABY POINT") {
-    //   this.isNext2 = true;
-    // }
-    // else {
-    //   this.isNext2 = false;
-    // }
+    if (JSON.parse(localStorage.getItem("chisono_data")).UnitaOperativa_Tipo == "GESTIONE DIRETTA" || JSON.parse(localStorage.getItem("chisono_data")).UnitaOperativa_Tipo == "ABY POINT") {
+      this.isNext2 = true;
+    }
+    else {
+      this.isNext2 = false;
+    }
   },
   methods: {
     async abyNext2() {
@@ -209,18 +208,18 @@ export default {
           user: "sdfghblzs",
           pwd: "lkdfasvdfg"
         };
-        axios
+        var response = await axios
           .post(
             this.$custom_json.base_url +
             this.$custom_json.api_url +
             this.$custom_json.ep_api.getUrlNext2,
             paramNext2
-          )
-          .then((response) => {
-            localStorage.setItem("urlRamiNext2", baseUrlNext2 + "?token=" + response.data.token);
-            // this.urlRami = response.data;
+          );
 
-          });
+        localStorage.setItem(
+          "urlRamiNext2",
+          baseUrlNext2 + "?token=" + response.data.token
+        );
       } catch (error) {
         console.log("impossibile recuperare jwt rami " + error);
       }
@@ -260,7 +259,7 @@ export default {
             this.$custom_json.ep_api.set_accesso,
             { params }
           )
-          .then((response) => {
+          .then(async (response) => {
             switch (settore) {
               case "broker":
                 window.location.href = this.$custom_json.broker_veicoli;
@@ -276,6 +275,7 @@ export default {
                 }
                 break;
               case "ramiNext":
+                await this.abyNext2();
                 if (this.urlRamiNext2) {
                   window.location.href = this.urlRamiNext2;
                 } else {
