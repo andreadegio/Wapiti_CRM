@@ -197,7 +197,14 @@ export default {
       this.isNext2 = false;
     }
   },
-  methods: {
+  methods: {                
+    // attiva/disattiva il loader, emettendo un evento
+    // che viene ascoltato da TheContainer
+    // se specificato un timeout, il loader torna allo stato precedente
+    setLoading(is_loading, timeout_ms = null) {
+      this.$emit("set-loading", is_loading, timeout_ms);
+    },
+
     async abyNext2() {
       // =================== ACCESSO PER ABYNEXT 2 ===============================
       let baseUrlNext2 = this.$custom_json.ep_api.baseUrlNext2;
@@ -275,12 +282,16 @@ export default {
                 }
                 break;
               case "ramiNext":
+                this.setLoading(false, 10 * 1000);
+
                 await this.abyNext2();
+
                 if (this.urlRamiNext2) {
                   window.location.href = this.urlRamiNext2;
                 } else {
                   window.location.href = localStorage.getItem("urlRamiNext2");
                 }
+                
                 break;
               default:
                 break;
