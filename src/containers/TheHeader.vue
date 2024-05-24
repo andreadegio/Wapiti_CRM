@@ -24,7 +24,7 @@
         </CHeaderNavItem>
       </CHeaderNav>
       <CHeaderNav class="mr-4">
-        <TheHeaderDropdownAccnt />
+        <TheHeaderDropdownAccnt @set-loading="setLoading" />
       </CHeaderNav>
     </CHeader>
     <CRow id="nav-menu">
@@ -182,6 +182,13 @@ export default {
     clearInterval(this.interval);
   },
   methods: {
+    // attiva/disattiva il loader, emettendo un evento
+    // che viene ascoltato da TheContainer
+    // se specificato un timeout, il loader torna allo stato precedente
+    setLoading(is_loading, timeout_ms = null) {
+      this.$emit("set-loading", is_loading, timeout_ms);
+    },
+
     async chisono_energy() {
       if (!localStorage.getItem("idUtenteEnergy")) {
         // console.log("chiamo il servizio energy");
