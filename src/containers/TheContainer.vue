@@ -1,12 +1,12 @@
 <template>
   <div class="c-app">
     <CWrapper v-if="loading && get_recapiti">
-      <TheHeader id="header" />
+      <TheHeader id="header" @set-loading="onSetLoading" />
       <div class="c-body">
         <main class="c-main">
           <CContainer fluid class="new_fluid" style="">
             <transition name="fade" mode="out-in">
-              <router-view :key="$route.path"></router-view>
+              <router-view :key="$route.path" @set-loading="onSetLoading"></router-view>
             </transition>
           </CContainer>
         </main>
@@ -253,7 +253,21 @@ export default {
     //   }
     //   this.get_news = true;
     // },
+
+    // nell'html trovi @set-loading="onSetLoading"
+    // quando il componente figlio (es. Dashboard) emette l'evento "set-loading"
+    // il padre (questo componente) esegue la funzione onSetLoading
+    onSetLoading(is_loading, timeout_ms = null) {
+      console.debug("thecontainer.onSetLoading", is_loading, timeout_ms);
+      this.loading = is_loading;
+
+      if(timeout_ms !== null) { 
+        setTimeout(() => { this.loading = !is_loading; }, timeout_ms);
+      }
+    },
+    
   },
+
 };
 </script>
 
