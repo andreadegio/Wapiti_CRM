@@ -4,33 +4,17 @@
     <div class="text-center">
       Totale Candidati nella lista: {{ items.length }}
     </div>
-    <div
-      class="text-center"
-      v-if="user['idUtente'] != 140 && userCRMInfo.idRuolo != '2' && gridType !='formazione'"
-    >
-      <v-checkbox
-        v-model="filtroOperatore"
-        label="Mostra solo i miei contatti:"
-      ></v-checkbox>
+    <div class="text-center" v-if="user['idUtente'] != 140 && userCRMInfo.idRuolo != '2' && gridType != 'formazione'">
+      <v-checkbox v-model="filtroOperatore" label="Mostra solo i miei contatti:"></v-checkbox>
     </div>
 
-    <CDataTable
-      :items="items"
-      :fields="fields"
-      :table-filter="{
+    <CDataTable :items="items" :fields="fields" :table-filter="{
         placeholder: 'Ricerca...',
         label: 'Ricerca:',
-      }"
-      sorter
-      hover
-      :itemsPerPage="20"
-      pagination
-      striped
-      :items-per-page-select="{ label: 'Risultati per pagina' }"
+      }" sorter hover :itemsPerPage="20" pagination striped :items-per-page-select="{ label: 'Risultati per pagina' }"
       :noItemsView="{
         noItems: noItemsMessage,
-      }"
-    >
+      }">
       <template #tipologia="{ item }">
         <td style="text-align: center !important">
           <div>
@@ -53,14 +37,8 @@
       <template #opzioni="row">
         <td>
           <div class="d-flex">
-            <Informazioni
-              class="ml-2"
-              :itemId="row.item.id"
-              :candidato="row.item"
-              :step="step"
-              @aggiorna_grid="aggiorna_grid"
-              @updateCandidato="getLista"
-            ></Informazioni>
+            <Informazioni class="ml-2" :itemId="row.item.id" :candidato="row.item" :step="step"
+              @aggiorna_grid="aggiorna_grid" @updateCandidato="getLista"></Informazioni>
             <Note :itemId="row.item.id" :candidato="row.item"></Note>
             <Log :itemId="row.item.id" :candidato="row.item"></Log>
           </div>
@@ -68,75 +46,35 @@
       </template>
 
       <template #actions="row">
-        <td
-          v-if="
-            (row.item.id_segnalatore != null &&
-              row.item.id_referente == user.idUtente) ||
-            row.item.id_segnalatore == null || user.idUtente == 140
-          "
-        >
+        <td v-if="(row.item.id_segnalatore != null &&
+        row.item.id_referente == user.idUtente) ||
+        row.item.id_segnalatore == null || user.idUtente == 140
+        ">
           <div class="d-flex">
-            <Attivazione
-              v-if="gridType === 'attivazione_account'"
-              class="ml-2"
-              :itemId="row.item.id"
-              :candidato="row.item"
-              :step="step"
-              @aggiorna_grid="aggiorna_grid"
-            ></Attivazione>
-            <Formazione
+            <Attivazione v-if="gridType === 'attivazione_account'" class="ml-2" :itemId="row.item.id"
+              :candidato="row.item" :step="step" @aggiorna_grid="aggiorna_grid"></Attivazione>
+            <!-- <Formazione
               v-if="gridType === 'formazione' && row.item.formatore"
               class="ml-2"
               :itemId="row.item.id"
               :candidato="row.item"
               :step="step"
               @aggiorna_grid="aggiorna_grid"
-            ></Formazione>
-            <PrenotaFormazione
-              v-if="gridType === 'formazione' && !row.item.formatore"
-              class="ml-2"
-              :itemId="row.item.id"
-              :candidato="row.item"
-              :step="step"
-              @aggiorna_grid="aggiorna_grid"
-            ></PrenotaFormazione>
-            <Demo
-              v-if="row.item.id_step == 3 && gridType === 'webinar'"
-              class="ml-2"
-              :itemId="row.item.id"
-              :candidato="row.item"
-              :step="step"
-              @aggiorna_grid="aggiorna_grid"
-            ></Demo>
-            <ValidaDoc
-              v-if="gridType === 'registrazione_documentazione'"
-              class="ml-2"
-              :itemId="row.item.id"
-              :candidato="row.item"
-              :step="step"
-              @aggiorna_grid="aggiorna_grid"
-            ></ValidaDoc>
-            <Lavorazione
-              v-if="gridType === 'primo_contatto' || gridType === 'social'"
-              class="ml-2"
-              :itemId="row.item.id"
-              :candidato="row.item"
-              :step="step"
-              @aggiorna_grid="aggiorna_grid"
-              @updateCandidato="getLista"
-            ></Lavorazione>
-            <Elimina
-              v-if="gridType != 'eliminati' && row.item.id_step != 10"
-              :candidato="row.item"
-              :step="step"
-              @aggiorna_grid="aggiorna_grid"
-            ></Elimina>
-            <Ripristina
-              v-if="gridType == 'eliminati' || row.item.id_step == 10"
-              :candidato="row.item"
-              :step="step"
-              @aggiorna_grid="aggiorna_grid"
-            ></Ripristina>
+            ></Formazione> -->
+            <PrenotaFormazione v-if="gridType === 'formazione' && !row.item.formatore" class="ml-2"
+              :itemId="row.item.id" :candidato="row.item" :step="step" @aggiorna_grid="aggiorna_grid">
+            </PrenotaFormazione>
+            <Demo v-if="row.item.id_step == 3 && gridType === 'webinar'" class="ml-2" :itemId="row.item.id"
+              :candidato="row.item" :step="step" @aggiorna_grid="aggiorna_grid"></Demo>
+            <ValidaDoc v-if="gridType === 'registrazione_documentazione'" class="ml-2" :itemId="row.item.id"
+              :candidato="row.item" :step="step" @aggiorna_grid="aggiorna_grid"></ValidaDoc>
+            <Lavorazione v-if="gridType === 'primo_contatto' || gridType === 'social'" class="ml-2"
+              :itemId="row.item.id" :candidato="row.item" :step="step" @aggiorna_grid="aggiorna_grid"
+              @updateCandidato="getLista"></Lavorazione>
+            <Elimina v-if="gridType != 'eliminati' && row.item.id_step != 10" :candidato="row.item" :step="step"
+              @aggiorna_grid="aggiorna_grid"></Elimina>
+            <Ripristina v-if="gridType == 'eliminati' || row.item.id_step == 10" :candidato="row.item" :step="step"
+              @aggiorna_grid="aggiorna_grid"></Ripristina>
           </div>
         </td>
         <td v-else style="color: #1f4b6b">
@@ -155,7 +93,7 @@ import ValidaDoc from "./ValidaDoc.vue";
 import Elimina from "./Elimina.vue";
 import Ripristina from "./Ripristina.vue";
 import Demo from "./Demo.vue";
-import Formazione from "./Formazione.vue";
+// import Formazione from "./Formazione.vue";
 import PrenotaFormazione from "./PrenotaFormazione.vue";
 import Attivazione from "./Attivazione.vue";
 import Informazioni from "./Informazioni.vue";
@@ -168,7 +106,7 @@ export default {
     Lavorazione,
     Elimina,
     Demo,
-    Formazione,
+    // Formazione,
     Attivazione,
     Informazioni,
     PrenotaFormazione,
@@ -249,7 +187,7 @@ export default {
             { key: "stato", label: "Stato" },
             // { key: "tipologia", label: "PF/PG" },
             { key: "candidato", label: "Candidato" },
-            { key: "giorno_formazione", label: "Appuntamento" },
+            { key: "giorno_formazione", label: "Inizio E-learning" },
             { key: "regione", label: "Regione" },
             { key: "actions", label: "Azioni" },
             { key: "opzioni", label: "Opzioni" },
@@ -328,8 +266,8 @@ export default {
       try {
         const response = await axios.post(
           this.$custom_json.base_url +
-            this.$custom_json.api_url +
-            this.$custom_json.crm.getListaByStep,
+          this.$custom_json.api_url +
+          this.$custom_json.crm.getListaByStep,
           param
         );
         return response.data;
@@ -403,27 +341,27 @@ export default {
                   item._classes = "red";
                 }
               }
-              if (this.gridType == "formazione" && !item.formatore) {
-                // SE IL CANDIDATO NON HA ANCORA PRENOTATO EVIDENZIO LA RIGA
-                item._classes = "orange darken-4";
-              }
-              // Se ha già prenotato la data per la formazione allora controllo se è scaduta, se è oggi o se deve arrivare
-              if (this.gridType == "formazione" && item.formatore) {
-                const giornoFormazione = new Date(item.data_formazione);
-                const oggi = new Date();
-                const formattedOggi = oggi.toISOString().slice(0, 10);
-                const formattedGiornoFormazione = giornoFormazione
-                  .toISOString()
-                  .slice(0, 10);
-                if (formattedGiornoFormazione === formattedOggi) {
-                  item._classes = "green accent-3";
-                } else if (formattedGiornoFormazione > formattedOggi) {
-                  // la data è futura non cambio colore alla riga
-                } else {
-                  // data scaduta
-                  item._classes = "red";
-                }
-              }
+              // if (this.gridType == "formazione" && !item.formatore) {
+              //   // SE IL CANDIDATO NON HA ANCORA PRENOTATO EVIDENZIO LA RIGA
+              //   item._classes = "orange darken-4";
+              // }
+              // // Se ha già prenotato la data per la formazione allora controllo se è scaduta, se è oggi o se deve arrivare
+              // if (this.gridType == "formazione" && item.formatore) {
+              //   const giornoFormazione = new Date(item.data_formazione);
+              //   const oggi = new Date();
+              //   const formattedOggi = oggi.toISOString().slice(0, 10);
+              //   const formattedGiornoFormazione = giornoFormazione
+              //     .toISOString()
+              //     .slice(0, 10);
+              //   if (formattedGiornoFormazione === formattedOggi) {
+              //     item._classes = "green accent-3";
+              //   } else if (formattedGiornoFormazione > formattedOggi) {
+              //     // la data è futura non cambio colore alla riga
+              //   } else {
+              //     // data scaduta
+              //     item._classes = "red";
+              //   }
+              // }
 
               return {
                 ...item,

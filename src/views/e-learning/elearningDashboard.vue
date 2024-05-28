@@ -1,8 +1,8 @@
 <template>
     <v-app>
         <v-app-bar app style="background-color: white;">
-            <img class="immagine" src="img/Aby-Accademy_small.png" />
-            <h1 style="color: #1f4b6b">Aby Accademy</h1>
+            <img class="immagine" src="img/Aby-Academy_small.png" />
+            <h1 style="color: #1f4b6b">Aby Academy</h1>
         </v-app-bar>
 
         <v-main style="margin-top: 2rem; margin-left: 1rem; margin-right: 1rem;">
@@ -24,36 +24,34 @@
                     </div>
                     <div class="strumenti_profile px-5">
                         <div class="menu_strumenti my-2">
-                            <v-dialog transition="dialog-top-transition" max-width="600">
+                            <v-dialog v-model="dialog" transition="dialog-top-transition" max-width="600">
                                 <template v-slot:activator="{ on, attrs }">
-
                                     <div class="btn_strumenti" v-bind="attrs" v-on="on">
                                         <i class="fas fa-envelope-open-text"></i>
-                                        <p class="btn_strumenti"> Contatta il tuo Tutor</p>
+                                        <p class="btn_strumenti">Contatta il tuo Tutor</p>
                                     </div>
                                 </template>
-                                <template v-slot:default="dialog">
-                                    <v-card>
-                                        <v-toolbar color="primary" dark>Contatta il tutor</v-toolbar>
-                                        <v-card-text>
-                                            <div class="text-h2 pa-12">Oggetto
-                                                <br>
-                                                messaggio
-                                                <br>
-                                                annulla
-
-                                                invia
-                                            </div>
-                                        </v-card-text>
-                                        <v-card-actions class="justify-end">
-                                            <v-btn text @click="dialog.value = false">Close</v-btn>
-                                        </v-card-actions>
-                                    </v-card>
-                                </template>
+                                <v-card>
+                                    <v-toolbar color="primary" dark>Contatta il tutor</v-toolbar>
+                                    <v-card-text>
+                                        <v-form ref="form" v-model="valid" lazy-validation>
+                                            <v-text-field v-model="subject"
+                                                :rules="[v => !!v || 'L\'oggetto è richiesto']" label="Oggetto"
+                                                required></v-text-field>
+                                            <v-textarea v-model="message"
+                                                :rules="[v => !!v || 'Il messaggio è richiesto']" label="Messaggio"
+                                                required></v-textarea>
+                                        </v-form>
+                                    </v-card-text>
+                                    <v-card-actions class="justify-end">
+                                        <v-btn text @click="dialog = false">Annulla</v-btn>
+                                        <v-btn color="primary" @click="sendEmail">Invia</v-btn>
+                                    </v-card-actions>
+                                </v-card>
                             </v-dialog>
 
                             <v-divider></v-divider>
-                            <div class="btn_strumenti">
+                            <div class="btn_strumenti" @click="logout">
                                 <i class="fas fa-sign-out-alt"></i>
                                 <p class="btn_strumenti">Esci</p>
                             </div>
@@ -145,10 +143,14 @@
 <script>
 import axios from "axios";
 export default {
-    name: "AbyAccademy",
+    name: "AbyAcademy",
 
     data() {
         return {
+            dialog: false,
+            valid: false,
+            subject: '',
+            mesasge: '',
             loadingCourses: true,
             benvenuto: "",
             utente: "",
@@ -167,10 +169,23 @@ export default {
         await this.fetchAvanzamento();
 
         // Nascondi il loader dopo che entrambe le richieste sono state completate
-        this.loadingCourses = false;
+        setTimeout(() => { this.loadingCourses = false }, 2000);
+        // this.loadingCourses = false;
 
     },
     methods: {
+        sendEmail() {
+            if (this.$refs.form.validate()) {
+
+                console.log('Oggetto:', this.subject);
+                console.log('Messaggio:', this.message);
+                this.dialog = false;
+            }
+        },
+        logout() {
+
+            console.log('Logout');
+        },
         async fetchAvanzamento() {
             let totalCompletedVideos = 0;
             let totalVideos = 0;
@@ -216,7 +231,7 @@ export default {
                 // Effettua la chiamata al backend per recuperare i corsi disponibili
                 await axios.post(this.$custom_json.base_url +
                     this.$custom_json.api_url +
-                    this.$custom_json.accademy.getElearningCourses, params).then(response => {
+                    this.$custom_json.academy.getElearningCourses, params).then(response => {
                         // Assegna i dati ricevuti dalla chiamata alla variabile courses
                         this.courses = response.data;
                     })
@@ -233,7 +248,7 @@ export default {
 
                 await axios.post(this.$custom_json.base_url
                     + this.$custom_json.api_url +
-                    this.$custom_json.accademy.getUserInfoById,
+                    this.$custom_json.academy.getUserInfoById,
                     { id: userId })
                     .then(response => {
                         // Assegna i dati ricevuti dalla chiamata alla variabile user
@@ -385,6 +400,7 @@ export default {
 
 .btn_strumenti:hover {
     color: #ef7918;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 960px) {

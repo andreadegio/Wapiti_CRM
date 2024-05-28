@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <v-app-bar app style="background-color: white;">
-            <img class="immagine" src="img/Aby-Accademy_small.png" />
+            <img class="immagine" src="img/Aby-Academy_small.png" />
             <h1 class="text-center" style="color: #1f4b6b">{{ course.corso }}</h1>
         </v-app-bar>
         <v-main>
@@ -12,7 +12,6 @@
                             <div class="video-wrapper">
                                 <video id="videoPlayer" :src="selectedVideo.file" width="80%vw" :controls="false"
                                     controlsList="nodownload" @timeupdate="updateProgress">
-                                    <!-- disablePictureInPicture -->
                                     <source :src="selectedVideo.file" type="video/mp4">
                                     Il tuo browser non supporta il tag video.
                                 </video>
@@ -52,11 +51,13 @@
                             <v-col cols="12">
                                 <h2 class="text-center">{{ quiz.title }}</h2>
                                 <v-form @submit.prevent="submitQuiz">
-                                    <div v-for="(question, index) in questions" :key="index">
+                                    <div v-for="(question, index) in questions" :key="index"
+                                        :class="getQuestionClass(question.id)">
                                         <p style="font-weight: bold;">{{ index + 1 }}. {{ question.question_text }}</p>
                                         <v-radio-group v-model="answers[question.id]" :key="question.id">
                                             <v-radio v-for="answer in question.answers" :key="answer.id"
-                                                :label="answer.answer_text" :value="answer.id"></v-radio>
+                                                :label="answer.answer_text" :value="answer.id"
+                                                :class="getAnswerClass(question.id, answer.id)"></v-radio>
                                         </v-radio-group>
                                     </div>
                                     <v-btn type="submit" color="primary">Invia il test</v-btn>
@@ -90,13 +91,13 @@
                                         Completato </v-chip>
                                     <v-chip v-if="video.active && !video.completed" class="ma-2" small color="orange"
                                         text-color="white">
-                                        In corso... </v-chip>
+                                        Da vedere... </v-chip>
                                 </div>
                             </div>
                         </v-list-item>
                         <v-list-item v-if="course.quiz" id="quiz" class="elencoVideo"
                             @click="getQuiz(course.id); showQuiz = true; selectedVideoIndex = null"
-                            :class="{ 'selected': showQuiz, 'non-cliccabile': !quiz }">
+                            :class="{ 'selected': showQuiz, 'non-cliccabile': !quiz_btn }">
                             <div>
                                 <div class="h5">
                                     Quiz Finale
@@ -112,6 +113,8 @@
         </v-main>
     </v-app>
 </template>
+
+
 <script>
 import axios from 'axios';
 export default {
@@ -126,9 +129,12 @@ export default {
             avanzamento: 0,
             video: this.course.video,
             showQuiz: false,
-            quiz: false,
+            quiz: [],
+            quiz_btn: false,
             questions: [],
-            answers: {}
+            answers: {},
+            detailedAnswers: [],
+            retry: false
         }
     },
     props: {
@@ -139,24 +145,52 @@ export default {
     },
 
     methods: {
-        async getQuiz(Corso) {
-            // console.log("id corso" + Corso);
-            let params = {
-                idCorso: Corso,
-            };
-            try {
 
-                await axios.post(this.$custom_json.base_url +
-                    this.$custom_json.api_url +
-                    this.$custom_json.accademy.getQuiz, params).then(response => {
-                        this.quiz = response.data.quiz;
-                        this.questions = response.data.questions;
+        async getQuiz(Corso) {
+
+            if (this.quiz.length == 0 || this.retry) {
+                this.retry = false;
+
+                let params = {
+                    idCorso: Corso,
+                };
+                try {
+                    const response = await axios.post(this.$custom_json.base_url +
+                        this.$custom_json.api_url +
+                        this.$custom_json.academy.getQuiz, params);
+
+                    let allQuestions = response.data.questions;
+                    this.quiz = response.data.quiz;
+
+                    // Mischio le domande e prendo le prime 10
+                    this.questions = this.shuffleArray(allQuestions).slice(0, 10);
+
+                    // Mischio le risposte per ogni domanda
+                    this.questions.forEach(question => {
+                        question.answers = this.shuffleArray(question.answers);
                     });
-            } catch (error) {
-                console.error(error);
+                } catch (error) {
+                    console.error(error);
+                }
             }
         },
+
+
+        shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        },
+        allQuestionsAnswered() {
+            return this.questions.every(question => this.answers[question.id] !== undefined);
+        },
         async submitQuiz() {
+            if (!this.allQuestionsAnswered()) {
+                alert('Per favore rispondi a tutte le domande prima di inviare il quiz.');
+                return;
+            }
             let params = {
                 quizId: this.quiz.id,
                 userId: sessionStorage.getItem('learningUserId'),
@@ -168,14 +202,80 @@ export default {
             try {
                 await axios.post(this.$custom_json.base_url +
                     this.$custom_json.api_url +
-                    this.$custom_json.accademy.sendAnswers, params).then(response => {
+                    this.$custom_json.academy.sendAnswers, params).then(response => {
+                        const roundedScore = Math.round(response.data.score);
+                        if (response.data.passed) {
+                            // alert(`Hai superato il quiz rispondendo correttamente al ${roundedScore}% delle domande!`);
+                            this.$alert("Hai superato il quiz rispondendo correttamente al " + roundedScore + "% delle domande!", "OK", "success").then(() => {
+                                this.displayResults(response.data.detailedAnswers);
+                                // aggiorno il completamento al 100%
 
-                        alert(`Your score: ${response.data.score}%`);
+                                // passo di stato il candidato 
+                                this.avanzaCandidato();
+
+                            });
+
+                        } else {
+                            this.$alert("Non hai superato il quiz. Hai risposto correttamente solo al " + roundedScore + "% delle domande, per superare il test devi raggiungere il 70% di risposte corrette", "", "error").then(() => {
+                                //     alert(`Non hai superato il quiz. Hai risposto correttamente al ${roundedScore}% delle domande.`);
+                                this.retry = true;
+                                this.questions = [];
+                                this.answers = [];
+                                this.getQuiz(this.course.id);
+
+                            });
+                        }
+
                     });
             } catch (error) {
                 console.error(error);
             }
         },
+        displayResults(detailedAnswers) {
+            this.detailedAnswers = detailedAnswers;
+            this.renderQuiz();
+        },
+        getQuestionClass(questionId) {
+
+            let answerDetail = undefined;
+
+            for (let i = 0; i < this.detailedAnswers.length; i++) {
+
+                if (this.detailedAnswers[i].questionId == questionId) {
+                    answerDetail = this.detailedAnswers[i];
+                    break;
+                }
+            }
+
+
+
+            if (answerDetail) {
+                return answerDetail.isCorrect ? 'correct' : 'incorrect';
+            }
+            return '';
+        },
+
+
+        getAnswerClass(questionId, answerId) {
+            const answerDetail = this.detailedAnswers.find(detail => detail.questionId == questionId);
+            if (answerDetail) {
+                if (answerDetail.answerId == answerId) {
+
+                    return answerDetail.isCorrect ? 'correct-answer' : 'incorrect-answer';
+                }
+                if (answerDetail.selected && answerDetail.answerId != answerId) {
+
+                    return 'incorrect-selected';
+                }
+            }
+
+
+            return '';
+        },
+        renderQuiz() {
+            this.$forceUpdate();
+        },
+
         selectVideo(video, index) {
             this.selectedVideoIndex = index;
             this.selectedVideo = video;
@@ -243,7 +343,7 @@ export default {
                     };
                     await axios.post(this.$custom_json.base_url +
                         this.$custom_json.api_url +
-                        this.$custom_json.accademy.updateVideo, params);
+                        this.$custom_json.academy.updateVideo, params);
                 }
                 catch (error) {
                     // console.log(error);
@@ -287,7 +387,7 @@ export default {
                 };
                 await axios.post(this.$custom_json.base_url +
                     this.$custom_json.api_url +
-                    this.$custom_json.accademy.updateVideo, params);
+                    this.$custom_json.academy.updateVideo, params);
             }
             catch (error) {
                 console.log(error);
@@ -301,22 +401,43 @@ export default {
             if (totalItems === 0) {
                 this.avanzamento = 0; // Per evitare divisioni per zero
             }
-            // console.log("completati " + completedVideos + " totali " + this.video.length);
-            // if (completedVideos === this.video.length) {
-            //     this.quiz = true;
-
-            //     this.$alert("Hai completato tutti i video del corso di formazione, adesso puoi eseguire il quiz finale", "OK", "success");
-            //     const quizElement = document.getElementById('quiz');
-
-
-            //     if (quizElement) {
-            //         quizElement.classList.remove('non-cliccabile');
-            //     }
-            // }
 
             this.avanzamento = Math.round((completedVideos / totalItems) * 100);
             return this.avanzamento;
-        }
+        },
+        async avanzaCandidato() {
+            let params = {
+                contatto: JSON.parse(sessionStorage.getItem("learningUtente")),
+                notaFormazione: "Corso di formazione superato con esito positivo",
+                utente: {
+                    Nominativo: "SysAdmin",
+                    idUtente: 14
+                },
+            };
+            try {
+                await axios
+                    .post(
+                        this.$custom_json.base_url +
+                        this.$custom_json.api_url +
+                        this.$custom_json.crm.completaElearning,
+                        params
+                    )
+                    .then((response) => {
+                        var message = response.data.message;
+                        switch (response.data.esito) {
+                            case "OK":
+                                this.$alert(message, "OK", "success");
+                                this.$emit("aggiorna_grid", this.step);
+                                break;
+                            case "KO":
+                                this.$alert(message, "Attenzione", "warning");
+                                break;
+                        }
+                    });
+            } catch (error) {
+                console.log(error);
+            }
+        },
     },
     watch: {
 
@@ -367,7 +488,7 @@ export default {
     mounted() {
         const completedVideos = this.video.filter(video => video.completed).length;
         if (completedVideos === this.video.length) {
-            this.quiz = true;
+            this.quiz_btn = true;
             const quizElement = document.getElementById('quiz');
 
 
@@ -379,6 +500,26 @@ export default {
 }
 </script>
 <style scoped>
+.correct {
+    background-color: lightgreen !important;
+}
+
+.incorrect {
+    background-color: lightcoral !important;
+}
+
+.correct-answer {
+    color: green !important;
+}
+
+.incorrect-answer {
+    color: red !important;
+}
+
+.incorrect-selected {
+    color: red !important;
+}
+
 .immagine {
     height: inherit;
     background-color: white;

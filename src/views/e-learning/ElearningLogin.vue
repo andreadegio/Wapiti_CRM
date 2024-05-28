@@ -8,7 +8,7 @@
           <CCol md="4" sm="1"> </CCol>
           <CCol md="4" sm="10">
             <CRow class="pt-3 pb-3 text-center m-0" align-horizontal="center">
-              <img class="login-img" src="img/Aby-Accademy_small.png" />
+              <img class="login-img" src="img/Aby-Academy_small.png" />
             </CRow>
             <CRow align-horizontal="center" class="m-0">
               <div class="testo_login">
@@ -41,11 +41,10 @@
 </template>
 
 <script>
-// import store from "../../store";
 import axios from 'axios';
 
 export default {
-  name: "LoginAccademy",
+  name: "LoginAcademy",
   data() {
     return {
       messaggio_errore: false,
@@ -79,7 +78,7 @@ export default {
 
       axios.post(this.$custom_json.base_url +
         this.$custom_json.api_url +
-        this.$custom_json.accademy.loginBypin, {
+        this.$custom_json.academy.loginBypin, {
         pin: this.otp,
         id: this.queryParams.id
       })
