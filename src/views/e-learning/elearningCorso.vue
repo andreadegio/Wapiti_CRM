@@ -134,7 +134,7 @@ export default {
             questions: [],
             answers: {},
             detailedAnswers: [],
-            retry: false
+            retry: true
         }
     },
     props: {
@@ -369,8 +369,7 @@ export default {
                         const quizElement = document.getElementById('quiz');
                         if (quizElement) {
                             quizElement.classList.remove('non-cliccabile');
-
-
+                            this.quiz_btn = true;
                         }
                     }
                 } else {
