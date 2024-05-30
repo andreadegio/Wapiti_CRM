@@ -181,7 +181,7 @@ export default {
       isEnergy: JSON.parse(localStorage.getItem("chisono_data"))
         .Abilitato_Energy,
       isRami: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Rami,
-      isNext2: false,
+      isNext2: true,
       avvisiToast: null,
       recapiti: JSON.parse(localStorage.getItem("RecapitiAby")),
     };
@@ -190,12 +190,6 @@ export default {
     this.get_avvisiToast();
     // this.meteo();
     this.$forceUpdate();
-    if (JSON.parse(localStorage.getItem("chisono_data")).UnitaOperativa_Tipo == "GESTIONE DIRETTA" || JSON.parse(localStorage.getItem("chisono_data")).UnitaOperativa_Tipo == "ABY POINT") {
-      this.isNext2 = true;
-    }
-    else {
-      this.isNext2 = false;
-    }
   },
   methods: {                
     // attiva/disattiva il loader, emettendo un evento
