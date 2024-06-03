@@ -188,17 +188,17 @@ export default {
   },
   mounted() {
     this.get_avvisiToast();
-    this.abyNext2();
     // this.meteo();
     this.$forceUpdate();
-    // if (JSON.parse(localStorage.getItem("chisono_data")).UnitaOperativa_Tipo == "GESTIONE DIRETTA" || JSON.parse(localStorage.getItem("chisono_data")).UnitaOperativa_Tipo == "ABY POINT") {
-    //   this.isNext2 = true;
-    // }
-    // else {
-    //   this.isNext2 = false;
-    // }
   },
-  methods: {
+  methods: {                
+    // attiva/disattiva il loader, emettendo un evento
+    // che viene ascoltato da TheContainer
+    // se specificato un timeout, il loader torna allo stato precedente
+    setLoading(is_loading, timeout_ms = null) {
+      this.$emit("set-loading", is_loading, timeout_ms);
+    },
+
     async abyNext2() {
       // =================== ACCESSO PER ABYNEXT 2 ===============================
       let baseUrlNext2 = this.$custom_json.ep_api.baseUrlNext2;
@@ -209,18 +209,18 @@ export default {
           user: "sdfghblzs",
           pwd: "lkdfasvdfg"
         };
-        axios
+        var response = await axios
           .post(
             this.$custom_json.base_url +
             this.$custom_json.api_url +
             this.$custom_json.ep_api.getUrlNext2,
             paramNext2
-          )
-          .then((response) => {
-            localStorage.setItem("urlRamiNext2", baseUrlNext2 + "?token=" + response.data.token);
-            // this.urlRami = response.data;
+          );
 
-          });
+        localStorage.setItem(
+          "urlRamiNext2",
+          baseUrlNext2 + "?token=" + response.data.token
+        );
       } catch (error) {
         console.log("impossibile recuperare jwt rami " + error);
       }
@@ -260,7 +260,7 @@ export default {
             this.$custom_json.ep_api.set_accesso,
             { params }
           )
-          .then((response) => {
+          .then(async (response) => {
             switch (settore) {
               case "broker":
                 window.location.href = this.$custom_json.broker_veicoli;
@@ -276,11 +276,16 @@ export default {
                 }
                 break;
               case "ramiNext":
+                this.setLoading(false, 10 * 1000);
+
+                await this.abyNext2();
+
                 if (this.urlRamiNext2) {
                   window.location.href = this.urlRamiNext2;
                 } else {
                   window.location.href = localStorage.getItem("urlRamiNext2");
                 }
+                
                 break;
               default:
                 break;

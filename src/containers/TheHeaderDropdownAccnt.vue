@@ -213,6 +213,11 @@
       <CDropdownItem to="/Crm" v-if="accessoCRM">
         <i class="fas fa-address-book"></i> <span class="pl-1">CRM</span>
       </CDropdownItem>
+
+      <CDropdownItem @click="vaiSuAbyNext2Prod" v-show="admin">
+        <i class="fas fa-fire-extinguisher"></i> <span class="pl-1">AbyNext2 PROD</span>
+      </CDropdownItem>
+
       <!-- <CDropdownItem to="/Calendario" v-if="admin">
         <i class="far fa-calendar-alt"></i>
         <span class="pl-1">Appuntamenti</span>
@@ -284,7 +289,43 @@ export default {
   mounted() {
     this.getUserCRMInfo();
   },
-  methods: {
+  methods: {                
+    // attiva/disattiva il loader, emettendo un evento
+    // che viene ascoltato da TheHeader che propaga a TheContainer
+    // se specificato un timeout, il loader torna allo stato precedente
+    setLoading(is_loading, timeout_ms = null) {
+      this.$emit("set-loading", is_loading, timeout_ms);
+    },
+
+    async vaiSuAbyNext2Prod() {
+      // =================== ACCESSO PER ABYNEXT 2 ===============================
+      try {
+        this.setLoading(false, 10000);
+
+        let url = this.$custom_json.base_url
+          + this.$custom_json.api_url
+          + this.$custom_json.ep_api.getUrlNext2_prod;
+
+        let params = {
+          id: localStorage.getItem("userID"),
+          user: "sdfghblzs",
+          pwd: "lkdfasvdfg"
+        };
+
+        let response = await axios.post(url, params);
+        // TODO: gestisci errore di risposta
+
+        let url_abynext2_prod = this.$custom_json.ep_api.baseUrlNext2_prod
+          + "?token="
+          + response.data.token;
+
+        window.location.href = url_abynext2_prod;
+
+      } catch (error) {
+        console.error("impossibile recuperare jwt rami " + error);
+      }
+    },
+
     async getUserCRMInfo() {
       let param = {
         idUtente: this.user["idUtente"],
