@@ -133,6 +133,24 @@
                         </p>
                       </div>
                     </div>
+
+                    <div
+                      v-show="dati_modale.has_ticket"
+                      class="riga_contatto flex-column align-middle"
+                    >
+                      <div class="icona_contatto_modale mr-3 align-middle">
+                        <i class="far fa-question-circle"></i>
+                      </div>
+                      <div class="recapito_dettaglio d-inline-block align-middle" >
+                        <p class="p-0 m-0" >
+                          <span>Apri un ticket </span>
+                          <a style="font-size: 1.5rem" :href="dati_modale.ticket_link" target="_blank">
+                            <b>cliccando qui</b>
+                          </a>
+                        </p>                        
+                      </div>
+                    </div>
+
                   </CCardBody>
                 </CCard>
               </CCol>
@@ -301,7 +319,15 @@ export default {
         mailForm:
           this.recapiti[index].Area.Telefono
             .DestinatarioDelCliccaPerEssereRichiamato,
+        has_ticket: false,
+        ticket_link: "",
       };
+
+      if(this.recapiti[index].Area.hasOwnProperty('Ticket')) {
+        this.dati_modale.has_ticket = this.recapiti[index].Area.Ticket.Link !== "";
+        this.dati_modale.ticket_link = this.recapiti[index].Area.Ticket.Link;
+      }
+
       // console.log(this.dati_modale.descrizione.length);
       // console.log(index);
     },
