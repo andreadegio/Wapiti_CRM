@@ -43,6 +43,8 @@
       <CCol md="1"> </CCol>
       <CCol sm="10" md="10">
         <div class="row">
+
+          <!-- BROKERNET RCA -->
           <div class="col-sm">
             <CCardLink target="_self" @click="conta_accesso('broker')">
               <CCard class="text-center elevation-6 portali-btn grow" body-wrapper style="
@@ -54,13 +56,15 @@
                 ">
                 <CCardTitle class="grow titolo_piattaforme">
                   <span class="portali">Piattaforma</span>
-                  <h1 class="pulsante_portali">ASSICURAZIONI</h1>
+                  <h1 class="pulsante_portali">RC AUTO</h1>
                 </CCardTitle>
               </CCard>
             </CCardLink>
           </div>
-          <div v-if="isRami" class="col-sm">
-            <CCardLink @click="conta_accesso('rami')" target="_self">
+
+          <!-- ABYNEXT2 RAMI -->
+          <div v-if="isRami && isNext2" class="col-sm">
+            <CCardLink @click="conta_accesso('ramiNext')" target="_self">
               <CCard class="text-center elevation-6 portali-btn grow" body-wrapper style="
                   height: 200px;
                   background-image: url('img/buttons/rami.png');
@@ -70,7 +74,7 @@
                 ">
                 <CCardTitle class="grow titolo_piattaforme">
                   <span class="portali">Piattaforma</span>
-                  <h1 class="pulsante_portali">PROFESSIONISTI</h1>
+                  <h1 class="pulsante_portali">ALTRI RAMI</h1>
                 </CCardTitle>
               </CCard>
             </CCardLink>
@@ -86,27 +90,13 @@
                 ">
                 <CCardTitle class="grow titolo_piattaforme">
                   <span class="portali">Piattaforma</span>
-                  <h1 class="pulsante_portali">PROFESSIONISTI</h1>
+                  <h1 class="pulsante_portali">ALTRI RAMI</h1>
                 </CCardTitle>
               </CCard>
             </CCardLink>
           </div>
-          <div v-if="isRami && isNext2" class="col-sm">
-            <CCardLink @click="conta_accesso('ramiNext')" target="_self">
-              <CCard class="text-center elevation-6 portali-btn grow" body-wrapper style="
-                  height: 200px;
-                  background-image: url('img/buttons/rami.png');
-                  background-position: center;
-                  z-index: 0;
-                  background-size: cover;
-                ">
-                <CCardTitle class="grow titolo_piattaforme">
-                  <span class="portali">Piattaforma</span>
-                  <h1 class="pulsante_portali">TEST ABYNEXT</h1>
-                </CCardTitle>
-              </CCard>
-            </CCardLink>
-          </div>
+
+          <!-- ABY ENEREGY GAS LUCE -->
           <div class="col-sm" v-if="!isEnergy">
             <CCardLink to="Comingsoon_gas" target="_self">
               <CCard class="text-center elevation-6 portali-btn grow" body-wrapper style="
@@ -139,6 +129,8 @@
               </CCard>
             </CCardLink>
           </div>
+
+
         </div>
       </CCol>
       <CCol md="1"> </CCol>
