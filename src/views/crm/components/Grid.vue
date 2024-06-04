@@ -61,9 +61,9 @@
               :step="step"
               @aggiorna_grid="aggiorna_grid"
             ></Formazione> -->
-            <PrenotaFormazione v-if="gridType === 'formazione' && !row.item.formatore" class="ml-2"
+            <!-- <PrenotaFormazione v-if="gridType === 'formazione' && !row.item.formatore" class="ml-2"
               :itemId="row.item.id" :candidato="row.item" :step="step" @aggiorna_grid="aggiorna_grid">
-            </PrenotaFormazione>
+            </PrenotaFormazione> -->
             <Demo v-if="row.item.id_step == 3 && gridType === 'webinar'" class="ml-2" :itemId="row.item.id"
               :candidato="row.item" :step="step" @aggiorna_grid="aggiorna_grid"></Demo>
             <ValidaDoc v-if="gridType === 'registrazione_documentazione'" class="ml-2" :itemId="row.item.id"
@@ -93,8 +93,7 @@ import ValidaDoc from "./ValidaDoc.vue";
 import Elimina from "./Elimina.vue";
 import Ripristina from "./Ripristina.vue";
 import Demo from "./Demo.vue";
-// import Formazione from "./Formazione.vue";
-import PrenotaFormazione from "./PrenotaFormazione.vue";
+
 import Attivazione from "./Attivazione.vue";
 import Informazioni from "./Informazioni.vue";
 export default {
@@ -106,10 +105,10 @@ export default {
     Lavorazione,
     Elimina,
     Demo,
-    // Formazione,
+
     Attivazione,
     Informazioni,
-    PrenotaFormazione,
+
     Ripristina,
   },
   props: {
@@ -188,7 +187,7 @@ export default {
             // { key: "tipologia", label: "PF/PG" },
             { key: "candidato", label: "Candidato" },
             { key: "giorno_formazione", label: "Inizio E-learning" },
-            { key: "regione", label: "Regione" },
+            { key: "avanzamento_corso", label: "Avanzamento corso" },
             { key: "actions", label: "Azioni" },
             { key: "opzioni", label: "Opzioni" },
           ];
