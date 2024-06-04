@@ -214,8 +214,8 @@
         <i class="fas fa-address-book"></i> <span class="pl-1">CRM</span>
       </CDropdownItem>
 
-      <CDropdownItem @click="vaiSuAbyNext2Prod" v-show="admin">
-        <i class="fas fa-fire-extinguisher"></i> <span class="pl-1">AbyNext2 PROD</span>
+      <CDropdownItem @click="vaiSuAbyNext1" v-show="is_abilitato_rami">
+        <i class="fas fa-fire-extinguisher"></i> <span class="pl-1">Piattaforma PROFESSIONISTI</span>
       </CDropdownItem>
 
       <!-- <CDropdownItem to="/Calendario" v-if="admin">
@@ -278,6 +278,7 @@ export default {
       url_logout: "",
       user: JSON.parse(localStorage.getItem("chisono_data")),
       userCRMInfo: [],
+      is_abilitato_rami: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Rami,
     };
   },
   computed: {
@@ -295,6 +296,31 @@ export default {
     // se specificato un timeout, il loader torna allo stato precedente
     setLoading(is_loading, timeout_ms = null) {
       this.$emit("set-loading", is_loading, timeout_ms);
+    },
+
+    async vaiSuAbyNext1() {
+      // =================== ACCESSO PER ABYNEXT 2 ===============================
+      try {
+        this.setLoading(false, 10000);
+
+        let url = this.$custom_json.base_url
+          + this.$custom_json.api_url
+          + this.$custom_json.ep_api.getUrlRami;
+
+        let params = {
+          id_persona_operativa: localStorage.getItem("userID"),
+        };
+
+        let response = await axios.post(url, params);
+        // TODO: gestisci errore di risposta
+
+        let url_abynext1 = response.data;
+
+        window.location.href = url_abynext1;
+
+      } catch (error) {
+        console.error("impossibile recuperare url auth abynext1 " + error);
+      }
     },
 
     async vaiSuAbyNext2Prod() {
@@ -322,7 +348,7 @@ export default {
         window.location.href = url_abynext2_prod;
 
       } catch (error) {
-        console.error("impossibile recuperare jwt rami " + error);
+        console.error("impossibile recuperare jwt abynext2 " + error);
       }
     },
 
