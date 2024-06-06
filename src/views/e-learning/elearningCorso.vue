@@ -60,7 +60,7 @@
                                                 :class="getAnswerClass(question.id, answer.id)"></v-radio>
                                         </v-radio-group>
                                     </div>
-                                    <v-btn v-show="avanzamento < 100" type="submit" color="primary">Invia il
+                                    <v-btn v-if="send_quiz_btn" type="submit" color="primary">Invia il
                                         test</v-btn>
                                 </v-form>
                             </v-col>
@@ -140,7 +140,8 @@ export default {
             questions: [],
             answers: {},
             detailedAnswers: [],
-            retry: true
+            retry: true,
+            send_quiz_btn: true,
         }
     },
     props: {
@@ -216,6 +217,7 @@ export default {
                             this.$alert("Hai superato il quiz rispondendo correttamente al " + roundedScore + "% delle domande!", "OK", "success").then(() => {
                                 // aggiorno il completamento al 100%
                                 this.avanzamento = 100;
+                                this.send_quiz_btn = false;
                                 this.displayResults(response.data.detailedAnswers);
 
                                 // passo di stato il candidato 
@@ -419,7 +421,7 @@ export default {
         async avanzaCandidato() {
             let params = {
                 contatto: JSON.parse(sessionStorage.getItem("learningUtente")),
-                notaFormazione: "Corso di formazione superato con esito positivo",
+                notaFormazione: this.course.corso + " superato con esito positivo",
                 utente: {
                     Nominativo: "SysAdmin",
                     idUtente: 14
