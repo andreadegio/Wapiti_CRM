@@ -10,7 +10,8 @@
                     <div v-if="!showQuiz">
                         <v-row v-if="selectedVideo" class="video-container">
                             <div class="video-wrapper">
-                                <video id="videoPlayer" :src="selectedVideo.file" width="80%vw" :controls="false"
+                                <video id="videoPlayer" :src="selectedVideo.file" width="80%vw"
+                                    :controls="selectedVideo.completed" disablePictureInPicture
                                     controlsList="nodownload" @timeupdate="updateProgress">
                                     <source :src="selectedVideo.file" type="video/mp4">
                                     Il tuo browser non supporta il tag video.
