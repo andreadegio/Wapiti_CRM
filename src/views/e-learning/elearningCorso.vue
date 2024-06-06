@@ -65,9 +65,10 @@
                                 </v-form>
                             </v-col>
                         </v-row>
-                        <v-row class="ml-3 mt-2" v-else style="justify-content: center; display: grid;">
-                            <h1 style="color: #1f4b6b">Test finale superato</h1><br>
-                            <img src="video/academy/graduate.png">
+                        <v-row class="ml-3 mt-2 text-center" v-else style="justify-content: center; display: grid;">
+                            <h1 class="my-4" style="color: #1f4b6b">Test finale superato</h1><br>
+                            <img src="video/academy/graduate.png" style="margin: 0 auto;">
+                            <h1 class="text-center my-3" style="color: #1f4b6b">Voto: {{ course.votoQuiz }}</h1><br>
                         </v-row>
                     </div>
 

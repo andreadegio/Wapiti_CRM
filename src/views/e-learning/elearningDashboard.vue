@@ -176,17 +176,54 @@ export default {
 
     },
     methods: {
-        sendEmail() {
+        async sendEmail() {
             if (this.$refs.form.validate()) {
+                // console.log('Oggetto:', this.subject);
+                // console.log('Messaggio:', this.message);
+                let params = {
+                    candidato: this.utente,
+                    messaggio: this.message,
+                    oggetto: this.subject,
+                    destinatari: "formatori",
+                    mittente: JSON.parse(sessionStorage.getItem("learningUtente"))[0].mail,
+                };
+                console.log(params);
+                try {
+                    await axios
+                        .post(
+                            this.$custom_json.base_url +
+                            this.$custom_json.api_url +
+                            this.$custom_json.academy.sendMailFormatore,
+                            params
+                        )
+                        .then((response) => {
+                            var esito = response.data.message;
+                            switch (response.data.esito) {
+                                case "OK":
 
-                console.log('Oggetto:', this.subject);
-                console.log('Messaggio:', this.message);
-                this.dialog = false;
+                                    this.$alert(esito, "OK", "success");
+                                    this.dialog = false;
+                                    esito = "";
+                                    this.message = null;
+                                    this.subject = null;
+                                    break;
+                                case "KO":
+                                    this.$alert(esito, "Attenzione", "warning");
+                                    break;
+                            }
+                        });
+                } catch (error) {
+                    console.log(error);
+                }
+
             }
         },
         logout() {
-
-            console.log('Logout');
+            let idUser = sessionStorage.getItem("learningUserId");
+            // Svuoto il sessionStorage
+            sessionStorage.clear();
+            // Reindirizzo alla pagina di login usando Vue Router
+            this.$router.push({ path: '/e-learning-login', query: { id: idUser } });
         },
         async fetchAvanzamento() {
             let totalCompletedVideos = 0;
