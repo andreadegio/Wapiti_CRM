@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <v-app-bar app style="background-color: white;">
-            <img class="immagine" src="img/Aby-Academy_small.png" />
+            <img class="immagine" src="img/Aby-Academy_small.png" @click="$router.go(-1)" style="cursor: pointer;" />
             <h1 class="text-center" style="color: #1f4b6b">{{ course.corso }}</h1>
         </v-app-bar>
         <v-main>
@@ -47,7 +47,7 @@
                         </v-row>
                     </div>
                     <div v-else>
-                        <v-row class="ml-3 mt-2">
+                        <v-row class="ml-3 mt-2" v-if="avanzamento < 100">
                             <v-col cols="12">
                                 <h2 class="text-center">{{ quiz.title }}</h2>
                                 <v-form @submit.prevent="submitQuiz">
@@ -60,9 +60,14 @@
                                                 :class="getAnswerClass(question.id, answer.id)"></v-radio>
                                         </v-radio-group>
                                     </div>
-                                    <v-btn type="submit" color="primary">Invia il test</v-btn>
+                                    <v-btn v-show="avanzamento < 100" type="submit" color="primary">Invia il
+                                        test</v-btn>
                                 </v-form>
                             </v-col>
+                        </v-row>
+                        <v-row class="ml-3 mt-2" v-else style="justify-content: center; display: grid;">
+                            <h1 style="color: #1f4b6b">Test finale superato</h1><br>
+                            <img src="video/academy/graduate.png">
                         </v-row>
                     </div>
 
@@ -193,6 +198,7 @@ export default {
             }
             let params = {
                 quizId: this.quiz.id,
+                courseId: this.course.id,
                 userId: sessionStorage.getItem('learningUserId'),
                 answers: Object.keys(this.answers).map(questionId => ({
                     questionId: parseInt(questionId),
@@ -207,8 +213,9 @@ export default {
                         if (response.data.passed) {
                             // alert(`Hai superato il quiz rispondendo correttamente al ${roundedScore}% delle domande!`);
                             this.$alert("Hai superato il quiz rispondendo correttamente al " + roundedScore + "% delle domande!", "OK", "success").then(() => {
-                                this.displayResults(response.data.detailedAnswers);
                                 // aggiorno il completamento al 100%
+                                this.avanzamento = 100;
+                                this.displayResults(response.data.detailedAnswers);
 
                                 // passo di stato il candidato 
                                 this.avanzaCandidato();
@@ -393,15 +400,19 @@ export default {
             }
         },
         calculateProgress() {
-            const completedVideos = this.video.filter(video => video.completed).length;
-            const totalVideos = this.video.length;
+            if (this.course.superato) {
+                this.avanzamento = 100
+            } else {
+                const completedVideos = this.video.filter(video => video.completed).length;
+                const totalVideos = this.video.length;
 
-            const totalItems = this.course.quiz == 1 ? totalVideos + 1 : totalVideos;
-            if (totalItems === 0) {
-                this.avanzamento = 0; // Per evitare divisioni per zero
+                const totalItems = this.course.quiz == 1 ? totalVideos + 1 : totalVideos;
+                if (totalItems === 0) {
+                    this.avanzamento = 0; // Per evitare divisioni per zero
+                }
+
+                this.avanzamento = Math.round((completedVideos / totalItems) * 100);
             }
-
-            this.avanzamento = Math.round((completedVideos / totalItems) * 100);
             return this.avanzamento;
         },
         async avanzaCandidato() {
@@ -425,7 +436,7 @@ export default {
                         var message = response.data.message;
                         switch (response.data.esito) {
                             case "OK":
-                                this.$alert(message, "OK", "success");
+                                this.$alert(message, "Congratulazioni!", "success");
                                 this.$emit("aggiorna_grid", this.step);
                                 break;
                             case "KO":

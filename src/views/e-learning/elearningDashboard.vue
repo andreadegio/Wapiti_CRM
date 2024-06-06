@@ -96,6 +96,8 @@
                                                     </v-row>
                                                 </template>
                                             </v-img>
+                                            <img src="video/academy/graduate.png" class="badge_graduate"
+                                                v-if="course.avanzamento == 100">
                                         </div>
                                         <div class="titoli">
                                             <div class="course-title mt-4">{{ course.corso }}</div>
@@ -150,7 +152,7 @@ export default {
             dialog: false,
             valid: false,
             subject: '',
-            mesasge: '',
+            message: '',
             loadingCourses: true,
             benvenuto: "",
             utente: "",
@@ -169,7 +171,7 @@ export default {
         await this.fetchAvanzamento();
 
         // Nascondi il loader dopo che entrambe le richieste sono state completate
-        setTimeout(() => { this.loadingCourses = false }, 2000);
+        setTimeout(() => { this.loadingCourses = false }, 1000);
         // this.loadingCourses = false;
 
     },
@@ -207,7 +209,11 @@ export default {
 
             // Aggiungi l'avanzamento a ciascun corso
             this.courses.forEach(course => {
-                course.avanzamento = avanzamento;
+                if (course.superato == 1) {
+                    course.avanzamento = 100;
+                } else {
+                    course.avanzamento = avanzamento;
+                }
             });
 
             return;
@@ -268,6 +274,14 @@ export default {
 </script>
 
 <style scoped>
+.badge_graduate {
+    position: absolute;
+    width: 50px;
+    left: auto;
+    right: 2rem;
+    top: 20vh;
+}
+
 .course-card {
     margin-bottom: 20px;
     border-radius: 10px;

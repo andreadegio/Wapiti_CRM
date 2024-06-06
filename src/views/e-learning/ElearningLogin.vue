@@ -74,8 +74,6 @@ export default {
   methods: {
     login() {
       this.loading = true; // Mostra il loader sul pulsante
-
-
       axios.post(this.$custom_json.base_url +
         this.$custom_json.api_url +
         this.$custom_json.academy.loginBypin, {

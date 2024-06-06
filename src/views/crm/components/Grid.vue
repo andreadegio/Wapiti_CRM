@@ -34,6 +34,11 @@
           {{ item.data_formazione | formatDate }} ore {{ item.ora_formazione }}
         </td>
       </template>
+      <template #avanzamento_corso="{ item }">
+        <td>
+          {{ item.corso[0].avanzamento }}%
+        </td>
+      </template>
       <template #opzioni="row">
         <td>
           <div class="d-flex">
@@ -166,6 +171,38 @@ export default {
     },
   },
   methods: {
+    async fetchAvanzamento(item) {
+
+      // console.log(item);
+      let totalCompletedVideos = 0;
+      let totalVideos = 0;
+      let avanzamento = 0;
+      let quizAvailable = false;
+
+      // Itera su ciascun corso e calcola il numero di video completati e il numero totale di video
+      item.corso.forEach(course => {
+        totalCompletedVideos += course.video.filter(video => video.completed).length;
+        totalVideos += course.video.length;
+        course.quiz == 1 ? quizAvailable = true : quizAvailable = false;
+      });
+      if (totalVideos === 0) {
+        avanzamento = 0; // Per evitare divisioni per zero
+      } else {
+        quizAvailable ? totalVideos = totalVideos + 1 : totalVideos;
+        avanzamento = Math.round((totalCompletedVideos / (totalVideos)) * 100);
+      }
+      if (item.corso[0].superato == 1) {
+        avanzamento = 100;
+      }
+      // console.log(item.corso[0].superato);
+      // Aggiungi l'avanzamento a ciascun corso
+      item.corso.forEach(course => {
+        course.avanzamento = avanzamento;
+      });
+
+
+      return;
+    },
     updateFields() {
       // Logica per aggiornare il valore di "fields" in base a "gridType"
       switch (this.gridType) {
@@ -340,11 +377,11 @@ export default {
                   item._classes = "red";
                 }
               }
-              // if (this.gridType == "formazione" && !item.formatore) {
-              //   // SE IL CANDIDATO NON HA ANCORA PRENOTATO EVIDENZIO LA RIGA
-              //   item._classes = "orange darken-4";
-              // }
-              // // Se ha già prenotato la data per la formazione allora controllo se è scaduta, se è oggi o se deve arrivare
+              if (this.gridType == "formazione") {
+                // SE IL CANDIDATO NON HA ANCORA PRENOTATO EVIDENZIO LA RIGA
+                this.fetchAvanzamento(item);
+              }
+              // Se ha già prenotato la data per la formazione allora controllo se è scaduta, se è oggi o se deve arrivare
               // if (this.gridType == "formazione" && item.formatore) {
               //   const giornoFormazione = new Date(item.data_formazione);
               //   const oggi = new Date();
