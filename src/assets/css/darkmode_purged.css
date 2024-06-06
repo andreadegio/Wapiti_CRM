@@ -16,9 +16,9 @@
 .dark-mode li a.nav-link {
   color: #c6c6c6 !important;
 }
-.dark-mode #new_home {
+/* .dark-mode #new_home {
   background-color: #16171d !important;
-}
+} */
 .dark-mode .c-body {
   padding-top: 7rem;
 }

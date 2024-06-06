@@ -79,6 +79,12 @@ const StatistichePortali = () =>
   );
 const Crm = () => import("@/views/crm/crm");
 
+// E-learning CRM
+const ElearningCorso = () => import("@/views/e-learning/elearningCorso");
+const ElearningDashboard = () =>
+  import("@/views/e-learning/elearningDashboard");
+const ElearningLogin = () => import("@/views/e-learning/elearningLogin");
+
 // Views - Page - Gas
 const Comingsoon_gas = () => import("@/views/pages/Comingsoon_gas");
 // Views - Page -Rami
@@ -97,8 +103,6 @@ Vue.use(Router);
 const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
-  // linkActiveClass: "active",
-  // scrollBehavior: () => ({ y: 0 }),
   routes: configRoutes(),
 });
 
@@ -115,16 +119,6 @@ function configRoutes() {
           name: "Dashboard",
           component: Dashboard,
         },
-        // {
-        //   path: "/Gestione_news_Mondo",
-        //   name: "GestioneNews",
-        //   component: News,
-        // },
-        // {
-        //   path: "/Elenco_news",
-        //   name: "Elenco_news",
-        //   component: Elenco_news,
-        // },
         {
           path: "/Documentale",
           name: "Documentale",
@@ -275,6 +269,37 @@ function configRoutes() {
       meta: { requiresAuth: true },
     },
     {
+      path: "/e-learning",
+      name: "E-learning",
+      component: ElearningDashboard,
+      meta: {
+        public: true,
+        requiresAuthElearning: true,
+        transition: "fade",
+      },
+    },
+    {
+      path: "/e-learningCorso/",
+      name: "E-learningCorso",
+      component: ElearningCorso,
+      props: true,
+      meta: {
+        public: true,
+        requiresAuthElearning: true,
+        transition: "fade",
+      },
+    },
+    {
+      path: "/e-learning-login",
+      name: "LoginElearning",
+      component: ElearningLogin,
+      meta: {
+        public: true,
+        transition: "fade",
+      },
+    },
+
+    {
       path: "/login",
       name: "Login",
       component: Login,
@@ -338,22 +363,31 @@ router.beforeEach((to, from, next) => {
         name: "Login",
       });
     }
+  } else if (to.matched.some((record) => record.meta.requiresAuthElearning)) {
+    if (!isAuthenticatedElearning()) {
+      // L'utente non è autenticato nella piattaforma di e-learning, reindirizzalo alla pagina di login dell'e-learning
+      next({
+        name: "LoginElearning",
+      });
+    } else {
+      // L'utente è autenticato nella piattaforma di e-learning, permetti la navigazione
+      next();
+    }
   } else {
     next();
   }
 });
 
+// Funzione per controllare se l'utente è autenticato nella piattaforma di e-learning
+function isAuthenticatedElearning() {
+  return sessionStorage.getItem("tokenElearning") !== null;
+}
+
 router.onError((error) => {
   console.log("Errore di caricamento " + error.message);
   const targetPath = router.history.pending.fullPath;
-  // console.log("target path " + targetPath);
-  // router.replace(targetPath);
-  // window.location.reload();
-  // router.push("Dashboard");
   history.replaceState("", "", targetPath);
   router.replace(targetPath);
-  // router.push(targetPath);
-  // console.log("history replace");
 });
 
 export default router;
