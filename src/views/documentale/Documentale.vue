@@ -1,12 +1,8 @@
 <template>
-  <CContainer
-    id="doc"
-    class="min-vh-100 pt-2"
-    style="
+  <CContainer id="doc" class="min-vh-100 pt-2" style="
       background: rgb(255, 255, 255) url('img/filigrana.jpg') no-repeat scroll
         0% 0%;
-    "
-  >
+    ">
     <div>
       <CRow class="pl-3 mt-2" style="justify-content: center">
         <!-- <h1 class="mb-3 titolo_sezione">Documentale</h1> -->
@@ -18,968 +14,629 @@
         <CCol class="file_manager" md="3">
           <!-- Intermediari Emittenti e Proponenti -->
 
-          <div
-            v-for="folder in intermediari_list"
-            :key="folder.slug"
-            class="folder parent pt-0 pl-2"
-          >
-            <div
-              class="py-1"
-              style="border-bottom: 1px solid lightgray"
-              v-if="folder.visible == 'admin' && admin"
-            >
-              <span
-                @click="
-                  call_folder_list(folder);
-                  subAuto = false;
-                  dove_sono = folder.slug;
-                  color = 'white';
-                "
-                style="white-space: nowrap"
-                class="icon_folder h5"
-                :class="{ highlight: dove_sono == folder.slug }"
-              >
-                {{ folder.nome }}</span
-              >
+          <div v-for="folder in intermediari_list" :key="folder.slug" class="folder parent pt-0 pl-2">
+            <div class="py-1" style="border-bottom: 1px solid lightgray" v-if="folder.visible == 'admin' && admin">
+              <span @click="
+            call_folder_list(folder);
+          subAuto = false;
+          dove_sono = folder.slug;
+          color = 'white';
+          " style="white-space: nowrap" class="icon_folder h5" :class="{ highlight: dove_sono == folder.slug }">
+                {{ folder.nome }}</span>
             </div>
-            <div
-              class="py-1"
-              style="border-bottom: 1px solid lightgray"
-              v-if="folder.visible == 'all'"
-            >
-              <span
-                @click="
-                  call_folder_list(folder);
-                  subAuto = false;
-                  dove_sono = folder.slug;
-                  color = 'white';
-                "
-                style="white-space: nowrap"
-                class="icon_folder h5"
-                :class="{ highlight: dove_sono == folder.slug }"
-              >
-                {{ folder.nome }}</span
-              >
+            <div class="py-1" style="border-bottom: 1px solid lightgray" v-if="folder.visible == 'all'">
+              <span @click="
+            call_folder_list(folder);
+          subAuto = false;
+          dove_sono = folder.slug;
+          color = 'white';
+          " style="white-space: nowrap" class="icon_folder h5" :class="{ highlight: dove_sono == folder.slug }">
+                {{ folder.nome }}</span>
             </div>
           </div>
           <!-- Documenti Broker -->
           <div v-if="!admin">
-            <div
-              v-for="folder in documenti_list"
-              :key="folder.slug"
-              class="folder parent pt-0 pl-2 py-1"
-              style="border-bottom: 1px solid lightgray"
-            >
-              <span
-                @click="
-                  call_folder_list(folder);
-                  subAuto = false;
-                  dove_sono = folder.slug;
-                  color = '';
-                "
-                style="white-space: nowrap"
-                class="icon_folder h5"
-                :class="{ highlight: dove_sono == folder.slug }"
-              >
-                {{ folder.nome }}</span
-              >
-              <li
-                v-for="items in folder.childs"
-                :key="items.slug"
-                class="folder h6 pl-3"
-              >
+            <div v-for="folder in documenti_list" :key="folder.slug" class="folder parent pt-0 pl-2 py-1"
+              style="border-bottom: 1px solid lightgray">
+              <span @click="
+            call_folder_list(folder);
+          subAuto = false;
+          dove_sono = folder.slug;
+          color = '';
+          " style="white-space: nowrap" class="icon_folder h5" :class="{ highlight: dove_sono == folder.slug }">
+                {{ folder.nome }}</span>
+              <li v-for="items in folder.childs" :key="items.slug" class="folder h6 pl-3">
                 └
-                <span
-                  @click="
-                    call_subfolder_list(items, folder);
-                    dove_sono = items.slug;
-                  "
-                  class="icon_folder"
-                  :class="{ highlight: dove_sono == items.slug }"
-                  style="white-space: nowrap"
-                  >{{ items.nome }}</span
-                >
+                <span @click="
+            call_subfolder_list(items, folder);
+          dove_sono = items.slug;
+          " class="icon_folder" :class="{ highlight: dove_sono == items.slug }" style="white-space: nowrap">{{
+            items.nome }}</span>
               </li>
             </div>
           </div>
           <!-- Settori -->
-          <div
-            v-for="folder in folder_list"
-            :key="folder.slug"
-            class="folder parent pt-0 pl-2 py-1"
-            style="border-bottom: 1px solid lightgray"
-          >
-            <span
-              @click="
-                call_folder_list(folder);
-                dove_sono = folder.slug;
-                subAuto = true;
-                color = '';
-              "
-              style="white-space: nowrap"
-              class="icon_folder h5"
-              :class="{ highlight: dove_sono == folder.slug }"
-            >
-              {{ folder.nome }}</span
-            >
-            <li
-              v-show="subAuto"
-              v-for="items in folder.childs"
-              :key="items.slug"
-              class="folder h6 pl-3"
-            >
+          <div v-for="folder in folder_list" :key="folder.slug" class="folder parent pt-0 pl-2 py-1"
+            style="border-bottom: 1px solid lightgray">
+            <span @click="
+            call_folder_list(folder);
+          dove_sono = folder.slug;
+          subAuto = true;
+          color = '';
+          " style="white-space: nowrap" class="icon_folder h5" :class="{ highlight: dove_sono == folder.slug }">
+              {{ folder.nome }}</span>
+            <li v-show="subAuto" v-for="items in folder.childs" :key="items.slug" class="folder h6 pl-3">
               └
-              <span
-                @click="
-                  call_subfolder_list(items, folder);
-                  dove_sono = items.slug;
-                "
-                class="icon_folder"
-                :class="{ highlight: dove_sono == items.slug }"
-                style="white-space: nowrap"
-                >{{ items.nome }}</span
-              >
+              <span @click="
+            call_subfolder_list(items, folder);
+          dove_sono = items.slug;
+          " class="icon_folder" :class="{ highlight: dove_sono == items.slug }" style="white-space: nowrap">{{
+            items.nome }}</span>
               <div class="pl-4" v-show="items.slug == 'ALTRE_GARANZIE'">
-                <li
-                  v-for="tipo in altre_gar"
-                  :key="tipo.index"
-                  class="folder h6 pl-3"
-                >
-                  └
-                  <span
-                    class="icon_folder"
-                    style="white-space: nowrap"
-                    @click="
-                      filter_garanzie(tipo);
-                      dove_sono = tipo;
-                    "
-                    :class="{ highlight: dove_sono == tipo }"
-                    >{{ tipo }}</span
-                  >
-                </li>
-              </div>
-              <div class="pl-4" v-show="items.slug == 'ALTRI_SERVIZI'">
-                <li
-                  v-for="tipo in altri_servizi"
-                  :key="tipo.index"
-                  class="folder h6"
-                >
-                  └
-                  <span
-                    class="icon_folder"
-                    style="white-space: nowrap"
-                    @click="
-                      filter_servizi(tipo);
-                      dove_sono = tipo;
-                    "
-                    :class="{ highlight: dove_sono == tipo }"
-                    >{{ tipo }}</span
-                  >
-                </li>
-              </div>
-            </li>
-          </div>
-          <!-- NON AUTO -->
-          <div
-            v-for="folder in rami_list"
-            :key="folder.slug"
-            class="folder parent pt-0 pl-2 py-1"
-            style="border-bottom: 1px solid lightgray"
-          >
-            <span
-              @click="
-                call_folder_rami(folder);
-                subAuto = false;
-                dove_sono = folder.slug;
-              "
-              style="white-space: nowrap"
-              class="icon_folder h5"
-              :class="{ highlight: dove_sono == folder.slug }"
-            >
-              {{ folder.nome }}</span
-            >
-            <li
-              v-for="tipo in non_auto"
-              :key="tipo.index"
-              class="folder h6 pl-3"
-            >
+            <li v-for="tipo in altre_gar" :key="tipo.index" class="folder h6 pl-3">
               └
-              <span
-                class="icon_folder"
-                style="white-space: nowrap"
-                @click="
-                  call_sub_rami(tipo.idTipo, tipo.name);
-                  dove_sono = tipo.name;
-                "
-                :class="{ highlight: dove_sono == tipo.name }"
-                >{{ tipo.name }}</span
-              >
-              <div
-                class="pl-4"
-                v-show="
-                  lista_sub_prod.length > 0 &&
-                  tipo.idTipo == lista_sub_prod[0].idTipo
-                "
-              >
-                <li
-                  v-for="subcat in lista_sub_prod"
-                  :key="subcat.index"
-                  class="folder h6 pl-3"
-                >
-                  └
-                  <span
-                    class="icon_folder"
-                    style="white-space: nowrap"
-                    @click="
-                      filter_rami(subcat.name);
-                      dove_sono = subcat.name;
-                    "
-                    :class="{ highlight: dove_sono == subcat.name }"
-                    >{{ subcat.name }}</span
-                  >
-                </li>
-              </div>
+              <span class="icon_folder" style="white-space: nowrap" @click="
+            filter_garanzie(tipo);
+          dove_sono = tipo;
+          " :class="{ highlight: dove_sono == tipo }">{{ tipo }}</span>
             </li>
           </div>
-        </CCol>
+          <div class="pl-4" v-show="items.slug == 'ALTRI_SERVIZI'">
+            <li v-for="tipo in altri_servizi" :key="tipo.index" class="folder h6">
+              └
+              <span class="icon_folder" style="white-space: nowrap" @click="
+            filter_servizi(tipo);
+          dove_sono = tipo;
+          " :class="{ highlight: dove_sono == tipo }">{{ tipo }}</span>
+            </li>
+          </div>
+          </li>
+    </div>
+    <!-- NON AUTO -->
+    <div v-for="folder in rami_list" :key="folder.slug" class="folder parent pt-0 pl-2 py-1"
+      style="border-bottom: 1px solid lightgray">
+      <span @click="
+            call_folder_rami(folder);
+          subAuto = false;
+          dove_sono = folder.slug;
+          " style="white-space: nowrap" class="icon_folder h5" :class="{ highlight: dove_sono == folder.slug }">
+        {{ folder.nome }}</span>
+      <li v-for="tipo in non_auto" :key="tipo.index" class="folder h6 pl-3">
+        └
+        <span class="icon_folder" style="white-space: nowrap" @click="
+            call_sub_rami(tipo.idTipo, tipo.name);
+          dove_sono = tipo.name;
+          " :class="{ highlight: dove_sono == tipo.name }">{{ tipo.name }}</span>
+        <div class="pl-4" v-show="lista_sub_prod.length > 0 &&
+            tipo.idTipo == lista_sub_prod[0].idTipo
+            ">
+      <li v-for="subcat in lista_sub_prod" :key="subcat.index" class="folder h6 pl-3">
+        └
+        <span class="icon_folder" style="white-space: nowrap" @click="
+            filter_rami(subcat.name);
+          dove_sono = subcat.name;
+          " :class="{ highlight: dove_sono == subcat.name }">{{ subcat.name }}</span>
+      </li>
+    </div>
+    </li>
+    </div>
+    </CCol>
 
-        <!-- colonna centrale elenco file browser -->
-        <CCol md="9" :style="{ 'background-color': color }">
-          <div>
-            <!-- breadcrumbs -->
-            <div v-if="breadcrumbs.length > 0" id="breadcrumbs" class="pt-3">
-              <span style="border: 1px solid; border-radius: 3px; padding: 2px">
-                <font-awesome-icon
-                  :icon="breadcrumbs[0][1]"
-                ></font-awesome-icon>
-                {{ breadcrumbs[0][0] }}
-              </span>
-              <span v-if="breadcrumbs.length >= 2" style="padding: 2px"
-                ><i class="fas fa-chevron-right"></i
-              ></span>
-              <span
-                v-if="breadcrumbs.length >= 2"
-                style="border: 1px solid; border-radius: 3px; padding: 2px"
-                >{{ breadcrumbs[1][0] }}</span
-              >
-              <span v-if="breadcrumbs.length == 3" style="padding: 2px"
-                ><i class="fas fa-chevron-right"></i
-              ></span>
-              <span
-                v-if="breadcrumbs.length == 3"
-                style="border: 1px solid; border-radius: 3px; padding: 2px"
-                >{{ breadcrumbs[2][0] }}</span
-              >
-              <div class="pt-5" v-if="settore == 'DOCUMENTI'">
-                <span>
-                  <div
-                    v-for="folder in documenti_list"
-                    :key="folder.name"
-                    class="pt-0"
-                  >
-                    <div v-show="folder.subFolder">
-                      <table
-                        class="table table-striped table-bordered table-hover"
-                        style="border: 0 !important"
-                      >
-                        <thead>
-                          <tr>
-                            <th
-                              style="
+    <!-- colonna centrale elenco file browser -->
+    <CCol md="9" :style="{ 'background-color': color }">
+      <div>
+        <!-- breadcrumbs -->
+        <div v-if="breadcrumbs.length > 0" id="breadcrumbs" class="pt-3">
+          <span style="border: 1px solid; border-radius: 3px; padding: 2px">
+            <font-awesome-icon :icon="breadcrumbs[0][1]"></font-awesome-icon>
+            {{ breadcrumbs[0][0] }}
+          </span>
+          <span v-if="breadcrumbs.length >= 2" style="padding: 2px"><i class="fas fa-chevron-right"></i></span>
+          <span v-if="breadcrumbs.length >= 2" style="border: 1px solid; border-radius: 3px; padding: 2px">{{
+            breadcrumbs[1][0] }}</span>
+          <span v-if="breadcrumbs.length == 3" style="padding: 2px"><i class="fas fa-chevron-right"></i></span>
+          <span v-if="breadcrumbs.length == 3" style="border: 1px solid; border-radius: 3px; padding: 2px">{{
+            breadcrumbs[2][0] }}</span>
+          <div class="pt-5" v-if="settore == 'DOCUMENTI'">
+            <span>
+              <div v-for="folder in documenti_list" :key="folder.name" class="pt-0">
+                <div v-show="folder.subFolder">
+                  <table class="table table-striped table-bordered table-hover" style="border: 0 !important">
+                    <thead>
+                      <tr>
+                        <th style="
                                 border-left: 0 !important;
                                 border-right: 0 !important;
-                              "
-                              class="text-center"
-                            >
-                              Seleziona una cartella
-                            </th>
-                            <th
-                              style="
+                              " class="text-center">
+                          Seleziona una cartella
+                        </th>
+                        <th style="
                                 border-left: 0 !important;
                                 border-right: 0 !important;
-                              "
-                            ></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr
-                            v-for="items in folder.childs"
-                            :key="items.nome"
-                            @click="
-                              call_subfolder_list(items, folder);
-                              dove_sono = items.slug;
-                            "
-                            style="cursor: pointer"
-                          >
-                            <td
-                              style="
+                              "></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="items in folder.childs" :key="items.nome" @click="
+            call_subfolder_list(items, folder);
+          dove_sono = items.slug;
+          " style="cursor: pointer">
+                        <td style="
                                 border-left: 0 !important;
                                 border-right: 0 !important;
-                              "
-                            >
-                              <span class="icon_folder pr-2"></span
-                              >{{ items.nome }}
-                            </td>
+                              ">
+                          <span class="icon_folder pr-2"></span>{{ items.nome }}
+                        </td>
 
-                            <td
-                              class="text-right"
-                              style="
+                        <td class="text-right" style="
                                 border-left: 0 !important;
                                 border-right: 0 !important;
-                              "
-                            ></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </span>
-              </div>
-              <!-- SETTORI 1 E 2 -->
-              <div class="pt-5" v-if="settore == 'SETTORI 1 E 2'">
-                <span>
-                  <div
-                    v-for="folder in folder_list"
-                    :key="folder.name"
-                    class="pt-0"
-                  >
-                    <div v-show="folder.subFolder">
-                      <table
-                        class="table table-striped table-bordered table-hover"
-                        style="border: 0 !important"
-                      >
-                        <thead>
-                          <tr>
-                            <th
-                              style="
-                                border-left: 0 !important;
-                                border-right: 0 !important;
-                              "
-                              class="text-center"
-                            >
-                              Seleziona una cartella
-                            </th>
-                            <th
-                              style="
-                                border-left: 0 !important;
-                                border-right: 0 !important;
-                              "
-                            ></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr
-                            v-for="items in folder.childs"
-                            :key="items.nome"
-                            @click="
-                              call_subfolder_list(items, folder);
-                              dove_sono = items.slug;
-                            "
-                            style="cursor: pointer"
-                          >
-                            <td
-                              style="
-                                border-left: 0 !important;
-                                border-right: 0 !important;
-                              "
-                            >
-                              <span class="icon_folder pr-2"></span
-                              >{{ items.nome }}
-                            </td>
-
-                            <td
-                              class="text-right"
-                              style="
-                                border-left: 0 !important;
-                                border-right: 0 !important;
-                              "
-                            ></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <div class="text-left">
-                        <CButton
-                          color="primary"
-                          style="color: white; padding: 8px"
-                          square
-                          size="sm"
-                          @click="download_excel_auto()"
-                          ><i class="fas fa-file-excel fa-2x"></i> &nbsp;
-                          Esporta Catalogo</CButton
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </span>
-              </div>
-              <!-- SETTORE NON AUTO -->
-              <div class="pt-2" v-if="settore == 'RAMI'">
-                <span>
-                  <div class="pt-0">
-                    <div>
-                      <table
-                        class="table table-striped table-bordered table-hover"
-                        style="border: 0 !important"
-                      >
-                        <thead>
-                          <tr>
-                            <th
-                              style="
-                                border-left: 0 !important;
-                                border-right: 0 !important;
-                              "
-                              class="text-center"
-                            >
-                              Effettua una scelta
-                            </th>
-                            <th
-                              style="
-                                border-left: 0 !important;
-                                border-right: 0 !important;
-                              "
-                            ></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr
-                            v-for="tipo in non_auto"
-                            :key="tipo.index"
-                            @click="
-                              call_sub_rami(tipo.idTipo, tipo.name);
-                              dove_sono = tipo.name;
-                            "
-                            style="cursor: pointer"
-                          >
-                            <td
-                              style="
-                                border-left: 0 !important;
-                                border-right: 0 !important;
-                              "
-                            >
-                              <span class="icon_folder pr-2"></span
-                              >{{ tipo.name }}
-                            </td>
-
-                            <td
-                              class="text-right"
-                              style="
-                                border-left: 0 !important;
-                                border-right: 0 !important;
-                              "
-                            ></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class="text-left">
-                      <CButton
-                        color="primary"
-                        style="color: white; padding: 8px"
-                        square
-                        size="sm"
-                        @click="download_excel_rami()"
-                        ><i class="fas fa-file-excel fa-2x"></i> &nbsp; Esporta
-                        Catalogo</CButton
-                      >
-                    </div>
-                  </div>
-                </span>
-              </div>
-            </div>
-            <div v-else class="pt-5 display-4">
-              <font-awesome-icon icon="arrow-left"></font-awesome-icon> Effettua
-              una selezione
-            </div>
-            <div
-              v-show="vuoto && settore != 'RAMI'"
-              class="pt-5 h4 text-center"
-            >
-              - Al momento non ci sono documenti disponibili -
-            </div>
-            <!-- DATA TABLE PER ORGANIGRAMMA ABY -->
-            <div class="pt-2" v-if="settore === 'ORGANIGRAMMA ABY BROKER'">
-              <CDataTable
-                id="int_table"
-                ref="tabella_ORGANIGRAMMA ABY"
-                :items="files"
-                :fields="fields_ORGANIGRAMMA"
-                sorter
-                hover
-                border
-                :itemsPerPage="20"
-                pagination
-                :table-filter="{
-                  placeholder: 'Ricerca...',
-                  label: 'Ricerca:',
-                }"
-                striped
-                :items-per-page-select="{ label: 'Risultati per pagina' }"
-                :noItemsView="{ noItems: ' ' }"
-              >
-                <template #Download="{ item }">
-                  <td class="text-center">
-                    <a
-                      :href="item.Nomefile"
-                      @click.prevent="
-                        preview(item.Nomefile, 'ORGANIGRAMMA');
-                        titoloModale(dove_sono, item.Descrizione);
-                      "
-                    >
-                      <i class="fas fa-download fa-2x"></i
-                    ></a>
-                  </td>
-                </template>
-              </CDataTable>
-            </div>
-            <!-- DATA TABLE PER CIRCOLARI -->
-            <div
-              class="pt-2"
-              v-if="
-                (settore === 'CIRCOLARI INTERNE' && vuoto == false) ||
-                (settore === 'CIRCOLARI OPERATIVE' && vuoto == false)
-              "
-            >
-              <CDataTable
-                id="int_table"
-                ref="tabella_CIRCOLARI"
-                :items="files"
-                :fields="fields_CIRCOLARI"
-                sorter
-                hover
-                border
-                :itemsPerPage="20"
-                pagination
-                :table-filter="{
-                  placeholder: 'Ricerca...',
-                  label: 'Ricerca:',
-                }"
-                striped
-                :items-per-page-select="{ label: 'Risultati per pagina' }"
-                :noItemsView="{ noItems: ' ' }"
-              >
-                <template #Download="{ item }">
-                  <td class="text-center">
-                    <a
-                      :href="item.Id"
-                      @click.prevent="
-                        preview(item.Id, 'CIRCOLARI');
-                        titoloModale(dove_sono, item.Titolo);
-                      "
-                    >
-                      <i class="fas fa-download fa-2x"></i
-                    ></a>
-                  </td>
-                </template>
-              </CDataTable>
-            </div>
-            <!-- DATA TABLE PER DOCUMENTI INTERMEDIARIO -->
-            <div
-              class="pt-2"
-              v-if="
-                settore === 'INTERMEDIARIO' ||
-                (settore === 'PRECONTRATTUALE' && vuoto == false)
-              "
-            >
-              <CDataTable
-                :itemsPerPage="20"
-                id="int_table"
-                ref="tabella_doc"
-                :items="files"
-                :fields="fields_DOCUMENTI"
-                hover
-                border
-                striped
-                :noItemsView="{ noItems: ' ' }"
-              >
-                <template #visualizza="{ item }">
-                  <td class="py-2 text-center">
-                    <CButton
-                      v-if="item.Nomefile !== ''"
-                      color="primary"
-                      variant="outline"
-                      square
-                      size="sm"
-                      @click="
-                        preview(item.Nomefile, 'INTERMEDIARIO');
-                        titoloModale(dove_sono, item.Descrizione);
-                      "
-                    >
-                      Visualizza
-                    </CButton>
-                  </td>
-                </template>
-              </CDataTable>
-            </div>
-            <!-- DATA TABLE PER EMITTENTI -->
-            <div class="pt-2" v-if="settore === 'INTERMEDIARI EMITTENTI'">
-              <div class="row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4 text-center"></div>
-                <div class="col-sm-4 text-right">
-                  Totale Intermediari Emittenti: <b>{{ files.length }}</b>
+                              "></td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
-              <CDataTable
-                id="emittenti_table"
-                :items="files"
-                :fields="
-                  admin
-                    ? fields_INTERMEDIARI_EMITTENTI_ADMIN
-                    : fields_INTERMEDIARI_EMITTENTI
-                "
-                ref="tabella_doc"
-                sorter
-                hover
-                border
-                :itemsPerPage="20"
-                pagination
-                :table-filter="{
-                  placeholder: 'Ricerca...',
-                  label: 'Ricerca:',
-                }"
-                striped
-                :items-per-page-select="{ label: 'Risultati per pagina' }"
-                :noItemsView="{ noItems: ' ' }"
-              >
-                <template #Descrizione="{ item }">
-                  <td class="text-center">
-                    {{ item.Descrizione.split(" ")[0] }}
-                  </td>
-                </template>
-                <template #RUI="{ item }">
-                  <td class="text-center">{{ item.RUI }}</td>
-                </template>
-                <template #Quanti_prodotti_in_uso="{ item }">
-                  <td class="text-center">
-                    <router-link
-                      :to="{
-                        name: 'DettagliIntermediario',
-                        params: {
-                          intermediario: item,
-                          elenco: files,
-                        },
-                      }"
-                    >
-                      <CButton
-                        size="sm"
-                        color="primary"
-                        variant="outline"
-                        v-c-tooltip="
-                          'Clicca per visualizzare i Prodotti in uso'
-                        "
-                      >
-                        {{ item.Quanti_prodotti_in_uso }}
-                        {{
-                          item.Quanti_prodotti_in_uso == 1
-                            ? "prodotto"
-                            : "prodotti"
-                        }}
-                        in uso
-                      </CButton>
-                    </router-link>
-                  </td>
-                </template>
-                <template #POG="{ item }">
-                  <td class="py-2 text-center">
-                    <CButton
-                      v-if="item.POG !== ''"
-                      color="primary"
-                      variant="outline"
-                      square
-                      size="sm"
-                      @click="
-                        preview(item.POG, 'INTERMEDIARIO');
-                        titoloModale('EMITTENTE', item.Descrizione, 'POG');
-                      "
-                    >
-                      Visualizza
-                    </CButton>
-                  </td>
-                </template>
+            </span>
+          </div>
+          <!-- SETTORI 1 E 2 -->
+          <div class="pt-5" v-if="settore == 'SETTORI 1 E 2'">
+            <span>
+              <div v-for="folder in folder_list" :key="folder.name" class="pt-0">
+                <div v-show="folder.subFolder">
+                  <table class="table table-striped table-bordered table-hover" style="border: 0 !important">
+                    <thead>
+                      <tr>
+                        <th style="
+                                border-left: 0 !important;
+                                border-right: 0 !important;
+                              " class="text-center">
+                          Seleziona una cartella
+                        </th>
+                        <th style="
+                                border-left: 0 !important;
+                                border-right: 0 !important;
+                              "></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="items in folder.childs" :key="items.nome" @click="
+            call_subfolder_list(items, folder);
+          dove_sono = items.slug;
+          " style="cursor: pointer">
+                        <td style="
+                                border-left: 0 !important;
+                                border-right: 0 !important;
+                              ">
+                          <span class="icon_folder pr-2"></span>{{ items.nome }}
+                        </td>
 
-                <template #RilieviDiAby="{ item }">
-                  <td class="py-2 text-center">
-                    <router-link
-                      :to="{
-                        name: 'Rilievi_Audit',
-                        params: {
-                          intermediario: item,
-                          oldData: files,
-                          origine: 'Emittenti',
-                          richiesta: 'Aby',
-                        },
-                      }"
-                    >
-                      <CButton size="sm" color="primary" variant="outline">
-                        Mostra
-                      </CButton>
-                    </router-link>
-                  </td>
-                </template>
-                <template #RilieviIntermediari="{ item }">
-                  <td class="py-2 text-center">
-                    <router-link
-                      :to="{
-                        name: 'Rilievi_Audit',
-                        params: {
-                          intermediario: item,
-                          oldData: files,
-                          origine: 'Emittenti',
-                          richiesta: 'Int',
-                        },
-                      }"
-                    >
-                      <CButton size="sm" color="primary" variant="outline">
-                        Mostra
-                      </CButton>
-                    </router-link>
-                  </td>
-                </template>
-                <template #Audit="{ item }">
-                  <td class="py-2 text-center">
-                    <router-link
-                      :to="{
-                        name: 'Rilievi_Audit',
-                        params: {
-                          intermediario: item,
-                          oldData: files,
-                          origine: 'Emittenti',
-                          richiesta: 'Aud',
-                        },
-                      }"
-                    >
-                      <CButton size="sm" color="primary" variant="outline">
-                        Mostra
-                      </CButton>
-                    </router-link>
-                  </td>
-                </template>
-              </CDataTable>
+                        <td class="text-right" style="
+                                border-left: 0 !important;
+                                border-right: 0 !important;
+                              "></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="text-left">
+                    <CButton color="primary" style="color: white; padding: 8px" square size="sm"
+                      @click="download_excel_auto()"><i class="fas fa-file-excel fa-2x"></i> &nbsp;
+                      Esporta Catalogo</CButton>
+                  </div>
+                </div>
+              </div>
+            </span>
+          </div>
+          <!-- SETTORE NON AUTO -->
+          <div class="pt-2" v-if="settore == 'RAMI'">
+            <span>
+              <div class="pt-0">
+                <div>
+                  <table class="table table-striped table-bordered table-hover" style="border: 0 !important">
+                    <thead>
+                      <tr>
+                        <th style="
+                                border-left: 0 !important;
+                                border-right: 0 !important;
+                              " class="text-center">
+                          Effettua una scelta
+                        </th>
+                        <th style="
+                                border-left: 0 !important;
+                                border-right: 0 !important;
+                              "></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="tipo in non_auto" :key="tipo.index" @click="
+            call_sub_rami(tipo.idTipo, tipo.name);
+          dove_sono = tipo.name;
+          " style="cursor: pointer">
+                        <td style="
+                                border-left: 0 !important;
+                                border-right: 0 !important;
+                              ">
+                          <span class="icon_folder pr-2"></span>{{ tipo.name }}
+                        </td>
+
+                        <td class="text-right" style="
+                                border-left: 0 !important;
+                                border-right: 0 !important;
+                              "></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="text-left">
+                  <CButton color="primary" style="color: white; padding: 8px" square size="sm"
+                    @click="download_excel_rami()"><i class="fas fa-file-excel fa-2x"></i> &nbsp; Esporta
+                    Catalogo</CButton>
+                </div>
+              </div>
+            </span>
+          </div>
+        </div>
+        <div v-else class="pt-5 display-4">
+          <font-awesome-icon icon="arrow-left"></font-awesome-icon> Effettua
+          una selezione
+        </div>
+        <div v-show="vuoto && settore != 'RAMI'" class="pt-5 h4 text-center">
+          - Al momento non ci sono documenti disponibili -
+        </div>
+        <!-- DATA TABLE PER ORGANIGRAMMA ABY -->
+        <div class="pt-2" v-if="settore === 'ORGANIGRAMMA ABY BROKER'">
+          <CDataTable id="int_table" ref="tabella_ORGANIGRAMMA ABY" :items="files" :fields="fields_ORGANIGRAMMA" sorter
+            hover border :itemsPerPage="20" pagination :table-filter="{
+            placeholder: 'Ricerca...',
+            label: 'Ricerca:',
+          }" striped :items-per-page-select="{ label: 'Risultati per pagina' }" :noItemsView="{ noItems: ' ' }">
+            <template #Download="{ item }">
+              <td class="text-center">
+                <a :href="item.Nomefile" @click.prevent="
+            preview(item.Nomefile, 'ORGANIGRAMMA');
+          titoloModale(dove_sono, item.Descrizione);
+          ">
+                  <i class="fas fa-download fa-2x"></i></a>
+              </td>
+            </template>
+          </CDataTable>
+        </div>
+        <div class="pt-2" v-if="settore === 'WHISTLEBLOWING'">
+          <CDataTable id="WB_table" ref="tabella_WHISTLEBLOWING" :items="files" :fields="fields_WHISTLEBLOWING" sorter
+            hover border :itemsPerPage="20" pagination :table-filter="{
+            placeholder: 'Ricerca...',
+            label: 'Ricerca:',
+          }" striped :items-per-page-select="{ label: 'Risultati per pagina' }" :noItemsView="{ noItems: ' ' }">
+            <template #Download="{ item }">
+              <td class="text-center">
+                <a :href="item.Nomefile" @click.prevent="
+            preview(item.Nomefile, 'WHISTLEBLOWING');
+          titoloModale(dove_sono, item.Descrizione);
+          ">
+                  <i class="fas fa-download fa-2x"></i></a>
+              </td>
+            </template>
+          </CDataTable>
+        </div>
+        <!-- DATA TABLE PER CIRCOLARI -->
+        <div class="pt-2" v-if="(settore === 'CIRCOLARI INTERNE' && vuoto == false) ||
+            (settore === 'CIRCOLARI OPERATIVE' && vuoto == false)
+            ">
+          <CDataTable id="int_table" ref="tabella_CIRCOLARI" :items="files" :fields="fields_CIRCOLARI" sorter hover
+            border :itemsPerPage="20" pagination :table-filter="{
+            placeholder: 'Ricerca...',
+            label: 'Ricerca:',
+          }" striped :items-per-page-select="{ label: 'Risultati per pagina' }" :noItemsView="{ noItems: ' ' }">
+            <template #Download="{ item }">
+              <td class="text-center">
+                <a :href="item.Id" @click.prevent="
+            preview(item.Id, 'CIRCOLARI');
+          titoloModale(dove_sono, item.Titolo);
+          ">
+                  <i class="fas fa-download fa-2x"></i></a>
+              </td>
+            </template>
+          </CDataTable>
+        </div>
+        <!-- DATA TABLE PER DOCUMENTI INTERMEDIARIO -->
+        <div class="pt-2" v-if="settore === 'INTERMEDIARIO' ||
+            (settore === 'PRECONTRATTUALE' && vuoto == false)
+            ">
+          <CDataTable :itemsPerPage="20" id="int_table" ref="tabella_doc" :items="files" :fields="fields_DOCUMENTI"
+            hover border striped :noItemsView="{ noItems: ' ' }">
+            <template #visualizza="{ item }">
+              <td class="py-2 text-center">
+                <CButton v-if="item.Nomefile !== ''" color="primary" variant="outline" square size="sm" @click="
+            preview(item.Nomefile, 'INTERMEDIARIO');
+          titoloModale(dove_sono, item.Descrizione);
+          ">
+                  Visualizza
+                </CButton>
+              </td>
+            </template>
+          </CDataTable>
+        </div>
+        <!-- DATA TABLE PER EMITTENTI -->
+        <div class="pt-2" v-if="settore === 'INTERMEDIARI EMITTENTI'">
+          <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4 text-center"></div>
+            <div class="col-sm-4 text-right">
+              Totale Intermediari Emittenti: <b>{{ files.length }}</b>
             </div>
-            <!-- DATA TABLE PER PROPONENTI -->
-            <div class="pt-2" v-if="settore === 'INTERMEDIARI PROPONENTI'">
-              <p class="text-right">
-                Totale Intermediari Proponenti: <b>{{ files.length }}</b>
-              </p>
-              <CDataTable
-                id="proponenti_table"
-                :items="files"
-                :fields="fields_INTERMEDIARI_PROPONENTI"
-                ref="tabella_doc"
-                sorter
-                hover
-                border
-                :itemsPerPage="20"
-                pagination
-                :table-filter="{
-                  placeholder: 'Ricerca...',
-                  label: 'Ricerca:',
-                }"
-                striped
-                :items-per-page-select="{ label: 'Risultati per pagina' }"
-                :noItemsView="{ noItems: ' ' }"
-              >
-                <template #Descrizione="{ item }">
-                  <td class="text-center">
-                    {{ item.Descrizione.split(" ")[0] }}
-                  </td>
-                </template>
-                <template #RUI="{ item }">
-                  <td class="text-center">{{ item.RUI }}</td>
-                </template>
-                <template #Quante_unita_operative_attive="{ item }">
-                  <td class="text-center">
-                    <router-link
-                      :to="{
-                        name: 'DettagliProponente',
-                        params: {
-                          intermediario: item,
-                          proponenti: files,
-                        },
-                      }"
-                    >
-                      <CButton
-                        size="sm"
-                        color="primary"
-                        variant="outline"
-                        v-c-tooltip="
-                          'Clicca per visualizzare le unità operative'
-                        "
-                      >
-                        {{ item.Quante_unita_operative_attive }}
-                        {{
-                          item.Quante_unita_operative_attive == 1
-                            ? "Unità operativa"
-                            : "Unità operative"
-                        }}
-                      </CButton>
-                    </router-link>
-                  </td>
-                </template>
-                <template #POG="{ item }">
-                  <td class="py-2 text-center">
-                    <CButton
-                      v-if="item.POG !== ''"
-                      color="primary"
-                      variant="outline"
-                      square
-                      size="sm"
-                      @click="
-                        preview(item.POG, 'INTERMEDIARIO');
-                        titoloModale('PROPONENTE', item.Descrizione, 'POG');
-                      "
-                    >
-                      Visualizza
-                    </CButton>
-                  </td>
-                </template>
-                <template #RilieviDiAby="{ item }">
-                  <td class="py-2 text-center">
-                    <router-link
-                      :to="{
-                        name: 'Rilievi_Audit',
-                        params: {
-                          intermediario: item,
-                          oldData: files,
-                          origine: 'Proponenti',
-                          richiesta: 'Aby',
-                        },
-                      }"
-                    >
-                      <CButton size="sm" color="primary" variant="outline">
-                        Mostra
-                      </CButton>
-                    </router-link>
-                  </td>
-                </template>
-                <template #RilieviIntermediari="{ item }">
-                  <td class="py-2 text-center">
-                    <router-link
-                      :to="{
-                        name: 'Rilievi_Audit',
-                        params: {
-                          intermediario: item,
-                          oldData: files,
-                          origine: 'Proponenti',
-                          richiesta: 'Int',
-                        },
-                      }"
-                    >
-                      <CButton size="sm" color="primary" variant="outline">
-                        Mostra
-                      </CButton>
-                    </router-link>
-                  </td>
-                </template>
-                <template #Audit="{ item }">
-                  <td class="py-2 text-center">
-                    <router-link
-                      :to="{
-                        name: 'Rilievi_Audit',
-                        params: {
-                          intermediario: item,
-                          oldData: files,
-                          origine: 'Proponenti',
-                          richiesta: 'Aud',
-                        },
-                      }"
-                    >
-                      <CButton size="sm" color="primary" variant="outline">
-                        Mostra
-                      </CButton>
-                    </router-link>
-                  </td>
-                </template>
-              </CDataTable>
-            </div>
-            <!-- DATA TABLE PER UNITA' OPERATIVE -->
-            <div class="pt-2" v-if="settore === 'UNITA OPERATIVE'">
-              <p class="text-right">
-                Totale Unità Operative: <b>{{ files.length }}</b>
-              </p>
-              <CDataTable
-                id="UO_table"
-                :items="files"
-                :fields="fields_UO"
-                ref="tabella_doc"
-                sorter
-                hover
-                border
-                :itemsPerPage="20"
-                pagination
-                :table-filter="{
-                  placeholder: 'Ricerca...',
-                  label: 'Ricerca:',
-                }"
-                striped
-                :items-per-page-select="{ label: 'Risultati per pagina' }"
-                :noItemsView="{ noItems: ' ' }"
-              >
-                <template #RUI="{ item }">
-                  <td class="text-center">{{ item.RUI }}</td>
-                </template>
-                <template #RilieviDiAby="{ item }">
-                  <td class="py-2 text-center">
-                    <router-link
-                      :to="{
-                        name: 'Rilievi_Audit',
-                        params: {
-                          intermediario: item,
-                          oldData: files,
-                          origine: 'UO',
-                          richiesta: 'Aby',
-                        },
-                      }"
-                    >
-                      <CButton size="sm" color="primary" variant="outline">
-                        Mostra
-                      </CButton>
-                    </router-link>
-                  </td>
-                </template>
-                <template #RilieviIntermediari="{ item }">
-                  <td class="py-2 text-center">
-                    <router-link
-                      :to="{
-                        name: 'Rilievi_Audit',
-                        params: {
-                          intermediario: item,
-                          oldData: files,
-                          origine: 'UO',
-                          richiesta: 'Int',
-                        },
-                      }"
-                    >
-                      <CButton size="sm" color="primary" variant="outline">
-                        Mostra
-                      </CButton>
-                    </router-link>
-                  </td>
-                </template>
-                <template #Audit="{ item }">
-                  <td class="py-2 text-center">
-                    <router-link
-                      :to="{
-                        name: 'Rilievi_Audit',
-                        params: {
-                          intermediario: item,
-                          oldData: files,
-                          origine: 'UO',
-                          richiesta: 'Aud',
-                        },
-                      }"
-                    >
-                      <CButton size="sm" color="primary" variant="outline">
-                        Mostra
-                      </CButton>
-                    </router-link>
-                  </td>
-                </template>
-              </CDataTable>
-            </div>
-            <!-- DATA TABLE PER RCA -->
-            <div class="pt-2" v-if="settore === 'RC AUTO'">
-              <!-- <div class="text-center">
+          </div>
+          <CDataTable id="emittenti_table" :items="files" :fields="admin
+            ? fields_INTERMEDIARI_EMITTENTI_ADMIN
+            : fields_INTERMEDIARI_EMITTENTI
+            " ref="tabella_doc" sorter hover border :itemsPerPage="20" pagination :table-filter="{
+            placeholder: 'Ricerca...',
+            label: 'Ricerca:',
+          }" striped :items-per-page-select="{ label: 'Risultati per pagina' }" :noItemsView="{ noItems: ' ' }">
+            <template #Descrizione="{ item }">
+              <td class="text-center">
+                {{ item.Descrizione.split(" ")[0] }}
+              </td>
+            </template>
+            <template #RUI="{ item }">
+              <td class="text-center">{{ item.RUI }}</td>
+            </template>
+            <template #Quanti_prodotti_in_uso="{ item }">
+              <td class="text-center">
+                <router-link :to="{
+            name: 'DettagliIntermediario',
+            params: {
+              intermediario: item,
+              elenco: files,
+            },
+          }">
+                  <CButton size="sm" color="primary" variant="outline" v-c-tooltip="'Clicca per visualizzare i Prodotti in uso'
+            ">
+                    {{ item.Quanti_prodotti_in_uso }}
+                    {{
+            item.Quanti_prodotti_in_uso == 1
+              ? "prodotto"
+              : "prodotti"
+          }}
+                    in uso
+                  </CButton>
+                </router-link>
+              </td>
+            </template>
+            <template #POG="{ item }">
+              <td class="py-2 text-center">
+                <CButton v-if="item.POG !== ''" color="primary" variant="outline" square size="sm" @click="
+            preview(item.POG, 'INTERMEDIARIO');
+          titoloModale('EMITTENTE', item.Descrizione, 'POG');
+          ">
+                  Visualizza
+                </CButton>
+              </td>
+            </template>
+
+            <template #RilieviDiAby="{ item }">
+              <td class="py-2 text-center">
+                <router-link :to="{
+            name: 'Rilievi_Audit',
+            params: {
+              intermediario: item,
+              oldData: files,
+              origine: 'Emittenti',
+              richiesta: 'Aby',
+            },
+          }">
+                  <CButton size="sm" color="primary" variant="outline">
+                    Mostra
+                  </CButton>
+                </router-link>
+              </td>
+            </template>
+            <template #RilieviIntermediari="{ item }">
+              <td class="py-2 text-center">
+                <router-link :to="{
+            name: 'Rilievi_Audit',
+            params: {
+              intermediario: item,
+              oldData: files,
+              origine: 'Emittenti',
+              richiesta: 'Int',
+            },
+          }">
+                  <CButton size="sm" color="primary" variant="outline">
+                    Mostra
+                  </CButton>
+                </router-link>
+              </td>
+            </template>
+            <template #Audit="{ item }">
+              <td class="py-2 text-center">
+                <router-link :to="{
+            name: 'Rilievi_Audit',
+            params: {
+              intermediario: item,
+              oldData: files,
+              origine: 'Emittenti',
+              richiesta: 'Aud',
+            },
+          }">
+                  <CButton size="sm" color="primary" variant="outline">
+                    Mostra
+                  </CButton>
+                </router-link>
+              </td>
+            </template>
+          </CDataTable>
+        </div>
+        <!-- DATA TABLE PER PROPONENTI -->
+        <div class="pt-2" v-if="settore === 'INTERMEDIARI PROPONENTI'">
+          <p class="text-right">
+            Totale Intermediari Proponenti: <b>{{ files.length }}</b>
+          </p>
+          <CDataTable id="proponenti_table" :items="files" :fields="fields_INTERMEDIARI_PROPONENTI" ref="tabella_doc"
+            sorter hover border :itemsPerPage="20" pagination :table-filter="{
+            placeholder: 'Ricerca...',
+            label: 'Ricerca:',
+          }" striped :items-per-page-select="{ label: 'Risultati per pagina' }" :noItemsView="{ noItems: ' ' }">
+            <template #Descrizione="{ item }">
+              <td class="text-center">
+                {{ item.Descrizione.split(" ")[0] }}
+              </td>
+            </template>
+            <template #RUI="{ item }">
+              <td class="text-center">{{ item.RUI }}</td>
+            </template>
+            <template #Quante_unita_operative_attive="{ item }">
+              <td class="text-center">
+                <router-link :to="{
+            name: 'DettagliProponente',
+            params: {
+              intermediario: item,
+              proponenti: files,
+            },
+          }">
+                  <CButton size="sm" color="primary" variant="outline" v-c-tooltip="'Clicca per visualizzare le unità operative'
+            ">
+                    {{ item.Quante_unita_operative_attive }}
+                    {{
+            item.Quante_unita_operative_attive == 1
+              ? "Unità operativa"
+              : "Unità operative"
+          }}
+                  </CButton>
+                </router-link>
+              </td>
+            </template>
+            <template #POG="{ item }">
+              <td class="py-2 text-center">
+                <CButton v-if="item.POG !== ''" color="primary" variant="outline" square size="sm" @click="
+            preview(item.POG, 'INTERMEDIARIO');
+          titoloModale('PROPONENTE', item.Descrizione, 'POG');
+          ">
+                  Visualizza
+                </CButton>
+              </td>
+            </template>
+            <template #RilieviDiAby="{ item }">
+              <td class="py-2 text-center">
+                <router-link :to="{
+            name: 'Rilievi_Audit',
+            params: {
+              intermediario: item,
+              oldData: files,
+              origine: 'Proponenti',
+              richiesta: 'Aby',
+            },
+          }">
+                  <CButton size="sm" color="primary" variant="outline">
+                    Mostra
+                  </CButton>
+                </router-link>
+              </td>
+            </template>
+            <template #RilieviIntermediari="{ item }">
+              <td class="py-2 text-center">
+                <router-link :to="{
+            name: 'Rilievi_Audit',
+            params: {
+              intermediario: item,
+              oldData: files,
+              origine: 'Proponenti',
+              richiesta: 'Int',
+            },
+          }">
+                  <CButton size="sm" color="primary" variant="outline">
+                    Mostra
+                  </CButton>
+                </router-link>
+              </td>
+            </template>
+            <template #Audit="{ item }">
+              <td class="py-2 text-center">
+                <router-link :to="{
+            name: 'Rilievi_Audit',
+            params: {
+              intermediario: item,
+              oldData: files,
+              origine: 'Proponenti',
+              richiesta: 'Aud',
+            },
+          }">
+                  <CButton size="sm" color="primary" variant="outline">
+                    Mostra
+                  </CButton>
+                </router-link>
+              </td>
+            </template>
+          </CDataTable>
+        </div>
+        <!-- DATA TABLE PER UNITA' OPERATIVE -->
+        <div class="pt-2" v-if="settore === 'UNITA OPERATIVE'">
+          <p class="text-right">
+            Totale Unità Operative: <b>{{ files.length }}</b>
+          </p>
+          <CDataTable id="UO_table" :items="files" :fields="fields_UO" ref="tabella_doc" sorter hover border
+            :itemsPerPage="20" pagination :table-filter="{
+            placeholder: 'Ricerca...',
+            label: 'Ricerca:',
+          }" striped :items-per-page-select="{ label: 'Risultati per pagina' }" :noItemsView="{ noItems: ' ' }">
+            <template #RUI="{ item }">
+              <td class="text-center">{{ item.RUI }}</td>
+            </template>
+            <template #RilieviDiAby="{ item }">
+              <td class="py-2 text-center">
+                <router-link :to="{
+            name: 'Rilievi_Audit',
+            params: {
+              intermediario: item,
+              oldData: files,
+              origine: 'UO',
+              richiesta: 'Aby',
+            },
+          }">
+                  <CButton size="sm" color="primary" variant="outline">
+                    Mostra
+                  </CButton>
+                </router-link>
+              </td>
+            </template>
+            <template #RilieviIntermediari="{ item }">
+              <td class="py-2 text-center">
+                <router-link :to="{
+            name: 'Rilievi_Audit',
+            params: {
+              intermediario: item,
+              oldData: files,
+              origine: 'UO',
+              richiesta: 'Int',
+            },
+          }">
+                  <CButton size="sm" color="primary" variant="outline">
+                    Mostra
+                  </CButton>
+                </router-link>
+              </td>
+            </template>
+            <template #Audit="{ item }">
+              <td class="py-2 text-center">
+                <router-link :to="{
+            name: 'Rilievi_Audit',
+            params: {
+              intermediario: item,
+              oldData: files,
+              origine: 'UO',
+              richiesta: 'Aud',
+            },
+          }">
+                  <CButton size="sm" color="primary" variant="outline">
+                    Mostra
+                  </CButton>
+                </router-link>
+              </td>
+            </template>
+          </CDataTable>
+        </div>
+        <!-- DATA TABLE PER RCA -->
+        <div class="pt-2" v-if="settore === 'RC AUTO'">
+          <!-- <div class="text-center">
                 <CButton
                   color="primary"
                   style="color: white; padding: 8px"
@@ -991,254 +648,143 @@
                 >
               </div> -->
 
-              <CDataTable
-                id="rc_table"
-                :items="files"
-                :fields="fields_RCA"
-                ref="tabella_doc"
-                :itemsPerPage="20"
-                sorter
-                hover
-                border
-                pagination
-                :table-filter="{
-                  placeholder: 'Ricerca...',
-                  label: 'Ricerca:',
-                }"
-                striped
-                :items-per-page-select="{ label: 'Risultati per pagina' }"
-                :noItemsView="{ noItems: ' ' }"
-              >
-                <template #visualizza_POG="{ item }">
-                  <td class="py-2 text-center">
-                    <CButton
-                      v-if="item.Pog !== ''"
-                      color="primary"
-                      variant="outline"
-                      square
-                      size="sm"
-                      @click="
-                        preview(item.Pog, 'RCA');
-                        titoloModale('RC AUTO', item.Descrizione, 'POG');
-                      "
-                    >
-                      Visualizza
-                    </CButton>
-                  </td>
-                </template>
-                <template #visualizza="{ item }">
-                  <td class="py-2 text-center">
-                    <CButton
-                      v-if="item.Nomefile !== ''"
-                      color="primary"
-                      variant="outline"
-                      square
-                      size="sm"
-                      @click="
-                        preview(item.Nomefile, 'RCA');
-                        titoloModale(
-                          'RC AUTO',
-                          item.Descrizione,
-                          'SET INFORMATIVO'
-                        );
-                      "
-                    >
-                      Visualizza
-                    </CButton>
-                  </td>
-                </template>
-              </CDataTable>
-            </div>
-            <!-- DATA TABLE PER SERVIZI NON ASSICURATIVI -->
-            <div class="pt-2" v-if="settore === 'SERVIZI NON ASSICURATIVI'">
-              <CDataTable
-                id="altre_table"
-                :items="files"
-                ref="tabella_doc"
-                :fields="fields_SERVIZI"
-                :itemsPerPage="20"
-                sorter
-                hover
-                border
-                pagination
-                :column-filter-value="{ Tipo: filtro_gar }"
-                :table-filter="{
-                  placeholder: 'Ricerca...',
-                  label: 'Ricerca:',
-                }"
-                striped
-                :items-per-page-select="{ label: 'Risultati per pagina' }"
-                :noItemsView="{ noItems: ' ' }"
-              >
-                <template #visualizza="{ item }">
-                  <td class="py-2 text-center">
-                    <CButton
-                      v-if="item.Nomefile !== ''"
-                      color="primary"
-                      variant="outline"
-                      square
-                      size="sm"
-                      @click="
-                        preview(item.Nomefile, 'NON_ASSICURATIVI');
-                        titoloModale(
-                          item.Tipo,
-                          item.Descrizione,
-                          'SET INFORMATIVO'
-                        );
-                      "
-                    >
-                      Visualizza
-                    </CButton>
-                  </td>
-                </template>
-              </CDataTable>
-            </div>
-            <!-- DATA TABLE PER ALTRE GARANZIE -->
-            <div class="pt-2" v-if="settore === 'ALTRE GARANZIE'">
-              <CDataTable
-                id="altre_table"
-                ref="tabella_doc"
-                :items="files"
-                :fields="fields_ALTRE"
-                :itemsPerPage="20"
-                sorter
-                hover
-                pagination
-                border
-                :column-filter-value="{ Tipo: filtro_gar }"
-                :table-filter="{
-                  placeholder: 'Ricerca...',
-                  label: 'Ricerca:',
-                }"
-                striped
-                :items-per-page-select="{ label: 'Risultati per pagina' }"
-                :noItemsView="{ noItems: ' ' }"
-              >
-                <template #visualizza_POG="{ item }">
-                  <td class="py-2 text-center">
-                    <CButton
-                      v-if="item.Pog !== ''"
-                      color="primary"
-                      variant="outline"
-                      square
-                      size="sm"
-                      @click="
-                        preview(item.Pog, 'ALTRE_GARANZIE');
-                        titoloModale(item.Tipo, item.Descrizione, 'POG');
-                      "
-                    >
-                      Visualizza
-                    </CButton>
-                  </td>
-                </template>
-                <template #visualizza="{ item }">
-                  <td class="py-2 text-center">
-                    <CButton
-                      v-if="item.Nomefile !== ''"
-                      color="primary"
-                      variant="outline"
-                      square
-                      size="sm"
-                      @click="
-                        preview(item.Nomefile, 'ALTRE_GARANZIE');
-                        titoloModale(
-                          item.Tipo,
-                          item.Descrizione,
-                          'SET INFORMATIVO'
-                        );
-                      "
-                    >
-                      Visualizza
-                    </CButton>
-                  </td>
-                </template>
-              </CDataTable>
-            </div>
-            <!-- DATA TABLE PER NON AUTO -->
-            <div class="pt-2" v-if="settore === 'RAMI_DATA' && !vuoto">
-              <CDataTable
-                :itemsPerPage="20"
-                id="rami_table"
-                ref="tabella_doc"
-                :items="files"
-                :fields="fields_RAMI"
-                sorter
-                hover
-                pagination
-                border
-                :column-filter-value="{ Tipo: filtro_rami }"
-                :table-filter="{
-                  placeholder: 'Ricerca...',
-                  label: 'Ricerca:',
-                }"
-                striped
-                :items-per-page-select="{ label: 'Risultati per pagina' }"
-                :noItemsView="{ noItems: ' ' }"
-              >
-                <template #visualizza_POG="{ item }">
-                  <td class="py-2 text-center">
-                    <CButton
-                      v-if="item.Pog !== ''"
-                      color="primary"
-                      variant="outline"
-                      square
-                      size="sm"
-                      @click="
-                        preview(item.Pog, 'RAMI');
-                        titoloModale(item.Tipo, item.Descrizione, 'POG');
-                      "
-                    >
-                      Visualizza
-                    </CButton>
-                  </td>
-                </template>
-                <template #visualizza="{ item }">
-                  <td class="py-2 text-center">
-                    <CButton
-                      v-if="item.Nomefile !== ''"
-                      color="primary"
-                      variant="outline"
-                      square
-                      size="sm"
-                      @click="
-                        preview(item.Nomefile, 'RAMI');
-                        titoloModale(
-                          item.Tipo,
-                          item.Descrizione,
-                          'SET INFORMATIVO'
-                        );
-                      "
-                    >
-                      Visualizza
-                    </CButton>
-                  </td>
-                </template>
-                <template #SchedaTecnica="{ item }">
-                  <td class="py-2 text-center">
-                    <CButton
-                      v-if="item.Nomefile == 'prova'"
-                      color="primary"
-                      variant="outline"
-                      square
-                      size="sm"
-                      @click="
-                        preview(item.Nomefile, 'RAMI');
-                        titoloModale(
-                          item.Tipo,
-                          item.Descrizione,
-                          'SET INFORMATIVO'
-                        );
-                      "
-                    >
-                      Visualizza
-                    </CButton>
-                  </td>
-                </template>
-              </CDataTable>
-            </div>
-          </div>
-        </CCol>
-      </CRow>
+          <CDataTable id="rc_table" :items="files" :fields="fields_RCA" ref="tabella_doc" :itemsPerPage="20" sorter
+            hover border pagination :table-filter="{
+            placeholder: 'Ricerca...',
+            label: 'Ricerca:',
+          }" striped :items-per-page-select="{ label: 'Risultati per pagina' }" :noItemsView="{ noItems: ' ' }">
+            <template #visualizza_POG="{ item }">
+              <td class="py-2 text-center">
+                <CButton v-if="item.Pog !== ''" color="primary" variant="outline" square size="sm" @click="
+            preview(item.Pog, 'RCA');
+          titoloModale('RC AUTO', item.Descrizione, 'POG');
+          ">
+                  Visualizza
+                </CButton>
+              </td>
+            </template>
+            <template #visualizza="{ item }">
+              <td class="py-2 text-center">
+                <CButton v-if="item.Nomefile !== ''" color="primary" variant="outline" square size="sm" @click="
+            preview(item.Nomefile, 'RCA');
+          titoloModale(
+            'RC AUTO',
+            item.Descrizione,
+            'SET INFORMATIVO'
+          );
+          ">
+                  Visualizza
+                </CButton>
+              </td>
+            </template>
+          </CDataTable>
+        </div>
+        <!-- DATA TABLE PER SERVIZI NON ASSICURATIVI -->
+        <div class="pt-2" v-if="settore === 'SERVIZI NON ASSICURATIVI'">
+          <CDataTable id="altre_table" :items="files" ref="tabella_doc" :fields="fields_SERVIZI" :itemsPerPage="20"
+            sorter hover border pagination :column-filter-value="{ Tipo: filtro_gar }" :table-filter="{
+            placeholder: 'Ricerca...',
+            label: 'Ricerca:',
+          }" striped :items-per-page-select="{ label: 'Risultati per pagina' }" :noItemsView="{ noItems: ' ' }">
+            <template #visualizza="{ item }">
+              <td class="py-2 text-center">
+                <CButton v-if="item.Nomefile !== ''" color="primary" variant="outline" square size="sm" @click="
+            preview(item.Nomefile, 'NON_ASSICURATIVI');
+          titoloModale(
+            item.Tipo,
+            item.Descrizione,
+            'SET INFORMATIVO'
+          );
+          ">
+                  Visualizza
+                </CButton>
+              </td>
+            </template>
+          </CDataTable>
+        </div>
+        <!-- DATA TABLE PER ALTRE GARANZIE -->
+        <div class="pt-2" v-if="settore === 'ALTRE GARANZIE'">
+          <CDataTable id="altre_table" ref="tabella_doc" :items="files" :fields="fields_ALTRE" :itemsPerPage="20" sorter
+            hover pagination border :column-filter-value="{ Tipo: filtro_gar }" :table-filter="{
+            placeholder: 'Ricerca...',
+            label: 'Ricerca:',
+          }" striped :items-per-page-select="{ label: 'Risultati per pagina' }" :noItemsView="{ noItems: ' ' }">
+            <template #visualizza_POG="{ item }">
+              <td class="py-2 text-center">
+                <CButton v-if="item.Pog !== ''" color="primary" variant="outline" square size="sm" @click="
+            preview(item.Pog, 'ALTRE_GARANZIE');
+          titoloModale(item.Tipo, item.Descrizione, 'POG');
+          ">
+                  Visualizza
+                </CButton>
+              </td>
+            </template>
+            <template #visualizza="{ item }">
+              <td class="py-2 text-center">
+                <CButton v-if="item.Nomefile !== ''" color="primary" variant="outline" square size="sm" @click="
+            preview(item.Nomefile, 'ALTRE_GARANZIE');
+          titoloModale(
+            item.Tipo,
+            item.Descrizione,
+            'SET INFORMATIVO'
+          );
+          ">
+                  Visualizza
+                </CButton>
+              </td>
+            </template>
+          </CDataTable>
+        </div>
+        <!-- DATA TABLE PER NON AUTO -->
+        <div class="pt-2" v-if="settore === 'RAMI_DATA' && !vuoto">
+          <CDataTable :itemsPerPage="20" id="rami_table" ref="tabella_doc" :items="files" :fields="fields_RAMI" sorter
+            hover pagination border :column-filter-value="{ Tipo: filtro_rami }" :table-filter="{
+            placeholder: 'Ricerca...',
+            label: 'Ricerca:',
+          }" striped :items-per-page-select="{ label: 'Risultati per pagina' }" :noItemsView="{ noItems: ' ' }">
+            <template #visualizza_POG="{ item }">
+              <td class="py-2 text-center">
+                <CButton v-if="item.Pog !== ''" color="primary" variant="outline" square size="sm" @click="
+            preview(item.Pog, 'RAMI');
+          titoloModale(item.Tipo, item.Descrizione, 'POG');
+          ">
+                  Visualizza
+                </CButton>
+              </td>
+            </template>
+            <template #visualizza="{ item }">
+              <td class="py-2 text-center">
+                <CButton v-if="item.Nomefile !== ''" color="primary" variant="outline" square size="sm" @click="
+            preview(item.Nomefile, 'RAMI');
+          titoloModale(
+            item.Tipo,
+            item.Descrizione,
+            'SET INFORMATIVO'
+          );
+          ">
+                  Visualizza
+                </CButton>
+              </td>
+            </template>
+            <template #SchedaTecnica="{ item }">
+              <td class="py-2 text-center">
+                <CButton v-if="item.Nomefile == 'prova'" color="primary" variant="outline" square size="sm" @click="
+            preview(item.Nomefile, 'RAMI');
+          titoloModale(
+            item.Tipo,
+            item.Descrizione,
+            'SET INFORMATIVO'
+          );
+          ">
+                  Visualizza
+                </CButton>
+              </td>
+            </template>
+          </CDataTable>
+        </div>
+      </div>
+    </CCol>
+    </CRow>
     </div>
   </CContainer>
 </template>
@@ -1301,6 +847,20 @@ const fields_CIRCOLARI = [
   },
 ];
 const fields_ORGANIGRAMMA = [
+  {
+    key: "Descrizione",
+    _style: "font-weight: bold; text-align:center;",
+    label: "Descrizione",
+  },
+  {
+    key: "Download",
+    label: "Download",
+    sorter: false,
+    filter: false,
+    _style: "text-align:center;",
+  },
+];
+const fields_WHISTLEBLOWING = [
   {
     key: "Descrizione",
     _style: "font-weight: bold; text-align:center;",
@@ -1660,6 +1220,7 @@ export default {
       fields_UO,
       fields_CIRCOLARI,
       fields_ORGANIGRAMMA,
+      fields_WHISTLEBLOWING,
       fields_RAMI,
       // fields_SETTORE12,
 
@@ -1744,7 +1305,6 @@ export default {
       };
       this.settore = origine.slug;
       this.dove_sono = origine.slug;
-
       this.breadcrumbs = []; // per popolare il Breadcrumbs
       this.breadcrumbs.push([origine.nome, origine.ico]);
       this.files = JSON.parse(localStorage.getItem("elenco_origine"));
@@ -2074,7 +1634,7 @@ export default {
             elenco = response.data;
             var lookup = {};
             var items = elenco;
-            for (var item, i = 0; (item = items[i++]); ) {
+            for (var item, i = 0; (item = items[i++]);) {
               var name = item.Tipo;
               var idTipo = item.Id;
 
@@ -2123,7 +1683,7 @@ export default {
       this.files = elenco;
       var lista_prod = [];
       var lookup = {};
-      for (var item, i = 0; (item = elenco[i++]); ) {
+      for (var item, i = 0; (item = elenco[i++]);) {
         var name = item.Tipo;
         var idTipo = item.idTipo;
 
@@ -2168,7 +1728,7 @@ export default {
             elenco = response.data;
             var lookup = {};
             var items = elenco;
-            for (var item, i = 0; (item = items[i++]); ) {
+            for (var item, i = 0; (item = items[i++]);) {
               var name = item.Tipo;
 
               if (!(name in lookup)) {
@@ -2303,6 +1863,11 @@ export default {
             this.$custom_json.servizi_broker +
             this.$custom_json.ep_broker.documentale_DocumentiIntermediario;
           break;
+        case "WHISTLEBLOWING":
+          end_point =
+            this.$custom_json.servizi_broker +
+            this.$custom_json.ep_broker.Download_Documentale_Whistleblowing;
+          break;
         case "INTERMEDIARIO":
           end_point =
             this.$custom_json.servizi_broker +
@@ -2377,6 +1942,7 @@ export default {
 .parent {
   padding-top: 3em;
 }
+
 .folder {
   cursor: pointer;
   list-style-type: none;
@@ -2390,6 +1956,7 @@ export default {
   font-weight: 900;
   padding-right: 5px;
 }
+
 .icon_folder:hover::before {
   content: "\f07c";
   font-family: "Font Awesome 5 free";
@@ -2398,6 +1965,7 @@ export default {
   font-weight: 900;
   padding-right: 5px;
 }
+
 .icon_folder.highlight::before {
   content: "\f07c";
   font-family: "Font Awesome 5 free";
@@ -2406,9 +1974,11 @@ export default {
   font-weight: 900;
   padding-right: 5px;
 }
+
 .highlight {
   font-weight: bold;
 }
+
 #doc {
   background-size: cover !important;
   background-position: right !important;
