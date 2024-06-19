@@ -5,7 +5,7 @@
             <h1 style="color: #1f4b6b">Aby Academy</h1>
         </v-app-bar>
 
-        <v-main style="margin-top: 2rem; margin-left: 1rem; margin-right: 1rem;">
+        <v-main style="margin-top: 2rem; margin-left: 1rem; margin-right: 1rem; overflow-y: clip;">
             <v-row>
                 <v-col cols="12" md="1"></v-col> <!-- Spazio iniziale -->
                 <v-col cols="12" md="2">
@@ -51,7 +51,7 @@
                             </v-dialog>
 
                             <v-divider></v-divider>
-                            <div class="btn_strumenti" @click="logout">
+                            <div v-if="!userAbyway" class="btn_strumenti" @click="logout">
                                 <i class="fas fa-sign-out-alt"></i>
                                 <p class="btn_strumenti">Esci</p>
                             </div>
@@ -62,17 +62,17 @@
                     <div class="h3" style="color: #1f4b6b;"> Corsi disponibili</div>
                     <div class="corsi">
                         <v-row class="fill-height" v-if="loadingCourses">
-                            <v-col cols="12" md="3" lg="3">
+                            <v-col cols="12" md="4" lg="4">
                                 <div class="course-card">
                                     <v-skeleton-loader class="mx-auto" max-width="300" type="card"></v-skeleton-loader>
                                 </div>
                             </v-col>
-                            <v-col cols="12" md="3" lg="3">
+                            <v-col cols="12" md="4" lg="4">
                                 <div class="course-card">
                                     <v-skeleton-loader class="mx-auto" max-width="300" type="card"></v-skeleton-loader>
                                 </div>
                             </v-col>
-                            <v-col cols="12" md="3" lg="3">
+                            <v-col cols="12" md="4" lg="4">
                                 <div class="course-card">
                                     <v-skeleton-loader class="mx-auto" max-width="300" type="card"></v-skeleton-loader>
                                 </div>
@@ -80,7 +80,7 @@
 
                         </v-row>
                         <v-row v-else class="fill-height">
-                            <v-col cols="12" md="3" lg="3" v-for="course in courses" :key="course.id">
+                            <v-col cols="12" md="4" lg="4" v-for="course in courses" :key="course.id">
                                 <router-link :to="{
                                     name: `E-learningCorso`,
                                     params: { course: course },
@@ -157,6 +157,7 @@ export default {
             benvenuto: "",
             utente: "",
             courses: [],
+            userAbyway: sessionStorage.getItem("AbywayLearning"),
         };
     },
     async created() {
@@ -267,29 +268,57 @@ export default {
             }
         },
         async fetchCourses() {
-            let params = {
-                id: sessionStorage.getItem('learningUserId')
-            };
-            try {
-                // Effettua la chiamata al backend per recuperare i corsi disponibili
-                await axios.post(this.$custom_json.base_url +
+            if (sessionStorage.getItem("AbywayLearning")){
+                // Accedo da abyway
+                this.utente = sessionStorage.getItem("Nominativo");
+                // console.log("provengo da Abywyay");
+                let params = {
+                    id: sessionStorage.getItem('learningUserId'),
+                    abywayLearning: sessionStorage.getItem("AbywayLearning"),
+                    utente: localStorage.getItem("chisono_data")
+                };
+                try {
+                    await axios.post(this.$custom_json.base_url +
                     this.$custom_json.api_url +
                     this.$custom_json.academy.getElearningCourses, params).then(response => {
                         // Assegna i dati ricevuti dalla chiamata alla variabile courses
                         this.courses = response.data;
                     })
-            } catch (error) {
+                } catch (error) {
                 // Gestisci gli errori, ad esempio mostrando un messaggio all'utente
                 console.error('Errore durante il recupero dei corsi:', error);
+                }
+
             }
+            else
+                {
+                    let params = {
+                    id: sessionStorage.getItem('learningUserId')
+                    };
+                    try {
+                        // Effettua la chiamata al backend per recuperare i corsi disponibili
+                        await axios.post(this.$custom_json.base_url +
+                            this.$custom_json.api_url +
+                            this.$custom_json.academy.getElearningCourses, params).then(response => {
+                                // Assegna i dati ricevuti dalla chiamata alla variabile courses
+                                this.courses = response.data;
+                            })
+                    } catch (error) {
+                        // Gestisci gli errori, ad esempio mostrando un messaggio all'utente
+                        console.error('Errore durante il recupero dei corsi:', error);
+                    }
+                }
         },
         async fetchUserInfo() {
             try {
                 // Recupera l'ID dell'utente dal sessionStorage
                 const userId = sessionStorage.getItem('learningUserId');
                 // Effettua la chiamata al backend per recuperare le informazioni dell'utente
-
-                await axios.post(this.$custom_json.base_url
+                if (sessionStorage.getItem("AbywayLearning")) {
+                    // Accedo da abyway
+                    this.utente = sessionStorage.getItem("Nominativo");
+                } else {
+                    await axios.post(this.$custom_json.base_url
                     + this.$custom_json.api_url +
                     this.$custom_json.academy.getUserInfoById,
                     { id: userId })
@@ -298,6 +327,8 @@ export default {
                         sessionStorage.setItem('learningUtente', JSON.stringify(response.data.utente));
                         response.data.utente[0].pf_pg == "PF" ? this.utente = response.data.utente[0].nome + " " + response.data.utente[0].cognome : this.utente = response.data.utente[0].rag_soc;
                     })
+                }
+                
             } catch (error) {
                 // Gestisci gli errori, ad esempio mostrando un messaggio all'utente
                 console.error('Errore durante il recupero delle informazioni dell\'utente:', error);

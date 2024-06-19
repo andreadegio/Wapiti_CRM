@@ -11,8 +11,9 @@
                         <v-row v-if="selectedVideo" class="video-container">
                             <div class="video-wrapper">
                                 <video id="videoPlayer" :src="selectedVideo.file" width="80%vw"
-                                    :controls="selectedVideo.completed" disablePictureInPicture
+                                    :controls="selectedVideo.completed" 
                                     controlsList="nodownload" @timeupdate="updateProgress">
+                                    <!-- disablePictureInPicture -->
                                     <source :src="selectedVideo.file" type="video/mp4">
                                     Il tuo browser non supporta il tag video.
                                 </video>
@@ -107,7 +108,7 @@
                             :class="{ 'selected': showQuiz, 'non-cliccabile': !quiz_btn }">
                             <div>
                                 <div class="h5">
-                                    Quiz Finale
+                                    Quiz Finale 
                                 </div>
                                 <div>
                                     <i class="fas fa-user-graduate"></i> &nbsp;Quiz di fine corso
@@ -143,6 +144,7 @@ export default {
             detailedAnswers: [],
             retry: true,
             send_quiz_btn: true,
+            userAbyway: sessionStorage.getItem("AbywayLearning"),
         }
     },
     props: {
@@ -203,6 +205,7 @@ export default {
                 quizId: this.quiz.id,
                 courseId: this.course.id,
                 userId: sessionStorage.getItem('learningUserId'),
+                abywayLearning: this.userAbyway,
                 answers: Object.keys(this.answers).map(questionId => ({
                     questionId: parseInt(questionId),
                     answerId: this.answers[questionId]
@@ -222,7 +225,10 @@ export default {
                                 this.displayResults(response.data.detailedAnswers);
 
                                 // passo di stato il candidato 
-                                this.avanzaCandidato();
+                                if (!this.userAbyway) {
+                                    this.avanzaCandidato();    
+                                }
+                                
 
                             });
 
@@ -344,13 +350,14 @@ export default {
                     });
                 }
                 try {
-                    // Salva il tempo corrente del video in riproduzione e sul db
+                    // Salva il tempo corrente del video in riproduzione sul db
                     let params = {
                         idUser: sessionStorage.getItem('learningUserId'),
                         idVideo: this.selectedVideo.id,
                         idCorso: this.course.id,
                         tipo: "TIME",
                         timestampInizio: timestampInizio,
+                        abywayLearning: this.userAbyway,
                     };
                     await axios.post(this.$custom_json.base_url +
                         this.$custom_json.api_url +
@@ -394,6 +401,7 @@ export default {
                     idVideo: this.selectedVideo.id,
                     idCorso: this.course.id,
                     tipo: "COMPLETED",
+                    abywayLearning: this.userAbyway,
                 };
                 await axios.post(this.$custom_json.base_url +
                     this.$custom_json.api_url +
@@ -441,7 +449,7 @@ export default {
                         switch (response.data.esito) {
                             case "OK":
                                 this.$alert(message, "Congratulazioni!", "success");
-                                this.$emit("aggiorna_grid", this.step);
+                                // this.$emit("aggiorna_grid", this.step);
                                 break;
                             case "KO":
                                 this.$alert(message, "Attenzione", "warning");
