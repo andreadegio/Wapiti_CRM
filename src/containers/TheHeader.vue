@@ -5,12 +5,10 @@
       class="c-header c-header-light c-header-fixed c-header-with-subheader"
     >
       <CHeaderNav class="d-md-down-none mr-auto">
-        <CHeaderNavItem
-          class="px-3"
-          target="_self"
-        >
-        <a href="/dashboard">
-          <img src="/img/logo_abyway.png" width="200px" /></a>
+        <CHeaderNavItem class="px-3" target="_self">
+          <a href="/dashboard">
+            <img src="/img/logo_abyway.png" width="200px"
+          /></a>
         </CHeaderNavItem>
       </CHeaderNav>
       <CHeaderNav v-show="city" class="d-md-down-none mr-auto">
@@ -26,7 +24,7 @@
         </CHeaderNavItem>
       </CHeaderNav>
       <CHeaderNav class="mr-4">
-        <TheHeaderDropdownAccnt />
+        <TheHeaderDropdownAccnt @set-loading="setLoading" />
       </CHeaderNav>
     </CHeader>
     <CRow id="nav-menu">
@@ -152,7 +150,7 @@ export default {
     this.interval = setInterval(() => {
       this.get_notifiche_formazione();
       this.get_notifiche_commerciale();
-    }, 3000);
+    }, 30000);
     // Controllo se dev'essere aggiornato e forzato il logout di tutti gli utenti ogni 10 minuti
     this.check_ver = setInterval(() => {
       let url =
@@ -184,6 +182,13 @@ export default {
     clearInterval(this.interval);
   },
   methods: {
+    // attiva/disattiva il loader, emettendo un evento
+    // che viene ascoltato da TheContainer
+    // se specificato un timeout, il loader torna allo stato precedente
+    setLoading(is_loading, timeout_ms = null) {
+      this.$emit("set-loading", is_loading, timeout_ms);
+    },
+
     async chisono_energy() {
       if (!localStorage.getItem("idUtenteEnergy")) {
         // console.log("chiamo il servizio energy");
@@ -300,5 +305,3 @@ export default {
   },
 };
 </script>
-
-

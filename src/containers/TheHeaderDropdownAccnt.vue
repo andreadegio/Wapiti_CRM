@@ -1,4 +1,4 @@
-<template >
+<template>
   <div>
     <CModal
       color="dark"
@@ -210,13 +210,18 @@
       <CDropdownHeader tag="div" class="text-center" color="light" v-if="admin">
         <strong>Utility</strong>
       </CDropdownHeader>
-      <CDropdownItem to="/Crm" v-if="admin">
+      <CDropdownItem to="/Crm" v-if="accessoCRM">
         <i class="fas fa-address-book"></i> <span class="pl-1">CRM</span>
       </CDropdownItem>
-      <CDropdownItem to="/Calendario" v-if="admin">
+
+      <CDropdownItem @click="vaiSuAbyNext1" v-show="is_abilitato_rami">
+        <i class="fas fa-fire-extinguisher"></i> <span class="pl-1">Piattaforma PROFESSIONISTI</span>
+      </CDropdownItem>
+
+      <!-- <CDropdownItem to="/Calendario" v-if="admin">
         <i class="far fa-calendar-alt"></i>
         <span class="pl-1">Appuntamenti</span>
-      </CDropdownItem>
+      </CDropdownItem> -->
       <CDropdownItem to="/Accessi_stat" v-if="admin">
         <i class="far fa-chart-bar"> </i> <span class="pl-1">Accessi</span>
       </CDropdownItem>
@@ -226,6 +231,16 @@
         v-if="admin"
       >
         <i class="fas fa-tv"></i> <span class="pl-1">Gestione TV</span>
+      </CDropdownItem>
+      <CDropdownHeader tag="div" class="text-center" color="light" v-if="user.Is_Abilitato_Elearning">
+        <strong>Formazione</strong>
+      </CDropdownHeader>
+      <CDropdownItem
+        :href="$custom_json.url_elearning_rami"
+        target="_blank"
+        v-if="user.Is_Abilitato_Elearning"
+      >
+      <i class="fas fa-graduation-cap"></i> <span class="pl-1">E-learning</span>
       </CDropdownItem>
 
       <CDropdownHeader tag="div" class="text-center" color="light">
@@ -248,24 +263,118 @@
 </template>
 
 <script>
+import axios from "axios";
 import { cilAccountLogout } from "@coreui/icons";
 import store from "../store";
 export default {
-  name: "TheHeaderDropdownAccnt",
+  name: "MenuUser",
   logout_ico: cilAccountLogout,
   data() {
     return {
       admin: false,
       firma: false,
-      user: [],
       logout_modale: false,
       show_profile: false,
       url_logout: "",
-      itemsCount: 42,
+      user: JSON.parse(localStorage.getItem("chisono_data")),
+      userCRMInfo: [],
+      is_abilitato_rami: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Rami,
     };
   },
+  computed: {
+    accessoCRM() {
+      console.log(this.userCRMInfo.idbroker);
+      return this.userCRMInfo.idbroker ? true : false;
+    },
+  },
+  mounted() {
+    this.getUserCRMInfo();
+  },
+  methods: {                
+    // attiva/disattiva il loader, emettendo un evento
+    // che viene ascoltato da TheHeader che propaga a TheContainer
+    // se specificato un timeout, il loader torna allo stato precedente
+    setLoading(is_loading, timeout_ms = null) {
+      this.$emit("set-loading", is_loading, timeout_ms);
+    },
 
-  methods: {
+    async vaiSuAbyNext1() {
+      // =================== ACCESSO PER ABYNEXT 2 ===============================
+      try {
+        this.setLoading(false, 10000);
+
+        let url = this.$custom_json.base_url
+          + this.$custom_json.api_url
+          + this.$custom_json.ep_api.getUrlRami;
+
+        let params = {
+          id_persona_operativa: localStorage.getItem("userID"),
+        };
+
+        let response = await axios.post(url, params);
+        // TODO: gestisci errore di risposta
+
+        let url_abynext1 = response.data;
+
+        window.location.href = url_abynext1;
+
+      } catch (error) {
+        console.error("impossibile recuperare url auth abynext1 " + error);
+      }
+    },
+
+    async vaiSuAbyNext2Prod() {
+      // =================== ACCESSO PER ABYNEXT 2 ===============================
+      try {
+        this.setLoading(false, 10000);
+
+        let url = this.$custom_json.base_url
+          + this.$custom_json.api_url
+          + this.$custom_json.ep_api.getUrlNext2_prod;
+
+        let params = {
+          id: localStorage.getItem("userID"),
+          user: "sdfghblzs",
+          pwd: "lkdfasvdfg"
+        };
+
+        let response = await axios.post(url, params);
+        // TODO: gestisci errore di risposta
+
+        let url_abynext2_prod = this.$custom_json.ep_api.baseUrlNext2_prod
+          + "?token="
+          + response.data.token;
+
+        window.location.href = url_abynext2_prod;
+
+      } catch (error) {
+        console.error("impossibile recuperare jwt abynext2 " + error);
+      }
+    },
+
+    async getUserCRMInfo() {
+      let param = {
+        idUtente: this.user["idUtente"],
+      };
+      try {
+        await axios
+          .post(
+            this.$custom_json.base_url +
+              this.$custom_json.api_url +
+              this.$custom_json.crm.accessoCRM,
+            param
+          )
+          .then((response) => {
+            this.userCRMInfo = response.data;
+            localStorage.setItem(
+              "userCRMInfo",
+              JSON.stringify(this.userCRMInfo)
+            );
+          });
+      } catch (error) {
+        console.error(error);
+      }
+    },
     aggiornaSede() {
       this.admin = JSON.parse(localStorage.getItem("chisono_data")).Is_Sede;
       this.firma = JSON.parse(
@@ -274,18 +383,28 @@ export default {
       // console.log("agg_sede");
     },
     Get_user() {
-      this.user = JSON.parse(localStorage.getItem("chisono_data"));
       this.show_profile = true;
     },
 
     Logout() {
       // // funzione di logout. Viene chiamata la pagina del broker e di energy e dopo 2 secondi viene effettuato il redirect alla login
       this.logout_modale = true;
-      store.commit("user_logout");
-      setTimeout(() => {
-        window.open(this.$custom_json.logout_url_energy, "_self");
-        window.open(this.$custom_json.logout_url, "_self");
-      }, 2000);
+
+      let aua = localStorage.getItem("AUA");
+      if (aua === true) {
+        console.log("AUA_logout");
+        store.commit("user_logout");
+        setTimeout(() => {
+          window.open(this.$custom_json.logout_url_energy, "_self");
+          window.open(this.$custom_json.logout_aua_url, "_self");
+        }, 2000);
+      } else {
+        store.commit("user_logout");
+        setTimeout(() => {
+          window.open(this.$custom_json.logout_url_energy, "_self");
+          window.open(this.$custom_json.logout_url, "_self");
+        }, 2000);
+      }
     },
   },
 };

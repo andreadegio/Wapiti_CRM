@@ -1,9 +1,8 @@
 <template>
-  <CContainer
-    id="cover_gas"
-    class="d-flex align-items-center min-vh-100"
-    style="background: rgb(255, 255, 255) url('img/filigranaGas.jpg') no-repeat scroll 0% 0%;"
-  >
+  <CContainer id="cover_gas" class="d-flex align-items-center min-vh-100" style="
+      background: rgb(255, 255, 255) url('img/filigranaGas.jpg') no-repeat
+        scroll 0% 0%;
+    ">
     <CRow class="w-100 justify-content-center">
       <CCol md="6">
         <div class="w-100 justify-content-center text-center pb-5">
@@ -13,8 +12,8 @@
             <br />
             <h3>
               Per ulteriori informazioni e chiarimenti è possibile contattare<br />
-              la direzione di ABY ENERGY attraverso l’indirizzo di posta
-              elettronica dedicato:<br />direzione@abyenergy.it
+              la direzione di ABY ENERGIA attraverso l’indirizzo di posta
+              elettronica dedicato:<br />assistenza@abyservizi.it
             </h3>
 
             <p class="text-muted pt-3"></p>

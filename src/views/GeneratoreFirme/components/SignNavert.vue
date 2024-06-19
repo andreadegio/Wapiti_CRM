@@ -74,7 +74,7 @@
                     {{
                       recapiti.sel_telefono
                         ? recapiti.telefono
-                        : "+39 02 86882871"
+                        : "+39 0187 17870"
                     }}&nbsp;{{
                       recapiti.sel_interno
                         ? "(interno " + recapiti.interno + ")"
@@ -154,7 +154,7 @@
                   <td v-else>
                     Sede Legale:
                     <a
-                      href="https://maps.google.com/?q=Via Monte Napoleone 8, 20121 Milano (MI)"
+                      href="https://maps.google.com/?q=Via Gandhi 8, 54011 Aulla (MS)"
                       style="
                         text-decoration: none;
                         color: #575756;
@@ -163,7 +163,7 @@
                       "
                       target="_blank"
                     >
-                      20121 Milano via Monte Napoleone 8
+                      54011 Aulla via Gandhi 8
                     </a>
                   </td>
                 </tr>

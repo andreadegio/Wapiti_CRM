@@ -2,9 +2,8 @@
   <div class="flex-row align-items-center sfondo">
     <img class="login_sx" src="img/login/login_sx.png" />
     <img class="login_dx" src="img/login/login_dx.png" />
-    
-    <CContainer class="pt-5">
-      
+
+    <CContainer class="pt-5" style="height: 100vh;">
       <CRow class="justify-content-center">
         <CCol md="4" sm="1"> </CCol>
         <CCol md="4" sm="10">
@@ -13,8 +12,7 @@
             <span class="testo_login">
               Una serie di strumenti indispensabili, sviluppati per
               semplificarti il lavoro e fornire<br />un servizio professionale
-              al Cliente. <br /> </span
-            ><span class="payoff"><i>Tutto questo è AbyWay!</i></span>
+              al Cliente. <br /> </span><span class="payoff"><i>Tutto questo è AbyWay!</i></span>
           </CRow>
           <CRow align-horizontal="center" class="m-0">
             <div>
@@ -22,63 +20,30 @@
                 <span class="h1 login-txt"><strong>Login</strong></span>
               </CRow>
               <CRow align-horizontal="center" class="m-0">
-                <form
-                  id="formLogin"
-                  @submit="getUserValue"
-                  :action="login_url"
-                  method="post"
-                >
-                  <CRow
-                    align-horizontal="center"
-                    class="m-0 pt-3 pb-3 text-center"
-                  >
-                    <CInput
-                      id="user"
-                      class="col-sm-10 pl-0 pr-0 mb-0"
-                      placeholder="Username"
-                      name="user"
-                      size="lg"
-                    >
+                <form id="formLogin" @submit="getUserValue" :action="login_url" method="post">
+                  <CRow align-horizontal="center" class="m-0 pt-3 pb-3 text-center">
+                    <CInput id="user" class="col-sm-10 pl-0 pr-0 mb-0" placeholder="Username" name="user" size="lg">
                       <template #prepend-content>
                         <i class="fas fa-user"></i>
                         <!-- <CIcon name="cil-user"/> -->
                       </template>
                     </CInput>
 
-                    <CInput
-                      id="password"
-                      class="col-sm-10 pl-0 pr-0 mb-0"
-                      placeholder="Password"
-                      type="password"
-                      autocomplete="current-password"
-                      name="password"
-                      size="lg"
-                    >
+                    <CInput id="password" class="col-sm-10 pl-0 pr-0 mb-0" placeholder="Password" type="password"
+                      autocomplete="current-password" name="password" size="lg">
                       <template #prepend-content>
                         <i class="fas fa-unlock-alt"></i>
                         <!-- <CIcon name="cil-shield-alt"/> -->
                       </template>
                     </CInput>
-                    <input
-                      name="72aeb0fc-7bd8-11e5-b78d-00505693441e"
-                      type="hidden"
-                      value="securetoken"
-                    />
-                    <div
-                      v-show="messaggio_errore"
-                      style="color: darkred; font-weight: bold"
-                    >
+                    <input name="72aeb0fc-7bd8-11e5-b78d-00505693441e" type="hidden" value="securetoken" />
+                    <div v-show="messaggio_errore" style="color: darkred; font-weight: bold">
                       <CAlert color="danger" closeButton>
                         Credenziali errate
                       </CAlert>
                     </div>
-                    <CInput
-                      id="accedi_btn"
-                      type="submit"
-                      color="primary"
-                      class="col-sm-10 mt-0 mb-0 px-0"
-                      value="Accedi"
-                    >
+                    <CInput id="accedi_btn" type="submit" color="primary" class="col-sm-10 mt-0 mb-0 px-0"
+                      value="Accedi">
                     </CInput>
                   </CRow>
                 </form>
@@ -91,9 +56,7 @@
     </CContainer>
     <CFooter style="color: white; background: none; border: none">
       <div class="mfs-auto">
-        <span class="mr-1" style="color: #768192"
-          ><em>Powered by Navert S.r.l.</em></span
-        >
+        <span class="mr-1" style="color: #768192"><em>Powered by Navert S.r.l.</em></span>
       </div>
     </CFooter>
   </div>
@@ -103,7 +66,6 @@
 import store from "../../store";
 
 export default {
-  // components: { CoreUIIcons },
   name: "Login",
   data() {
     return {
@@ -143,6 +105,7 @@ export default {
   font-family: Shadows;
   src: url("/img/fonts/Shadows.ttf");
 }
+
 .sfondo {
   /* background: url("/img/slide_1_bg.jpg") bottom right,
     linear-gradient(to right bottom, #1cc7d0, #013ca6, #013ca6, #1cc7d0) !important; */
@@ -154,11 +117,10 @@ export default {
   height: 100vh;
 }
 
-
 .login-img {
   /* position: absolute; */
   z-index: 10;
- 
+
   padding-bottom: 2.5rem;
   /* margin: auto; */
 }
@@ -182,6 +144,7 @@ export default {
   max-height: 30%;
   z-index: 0;
 }
+
 .testo_login {
   color: #1f4b6b !important;
   font-size: 1rem;
@@ -227,5 +190,4 @@ export default {
   border-radius: 5px;
   /* border: solid 1px #d8dbe07d; */
 }
-
 </style>

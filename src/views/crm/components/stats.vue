@@ -1,6 +1,7 @@
 <template>
   <div>
-    <c-row>
+    <div class="display-1"><- Seleziona un'area</div>
+    <!-- <c-row>
       <CCol>
         <CWidgetIcon
           header="25"
@@ -63,7 +64,7 @@
           <i class="fas fa-headset"></i>
         </CWidgetIcon>
       </CCol>
-    </c-row>
+    </c-row> -->
   </div>
 </template>
 <style scoped>

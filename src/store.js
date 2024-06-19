@@ -9,7 +9,7 @@ const state = {
   sidebarMinimize: false,
   utente: null,
   aree: [],
-  url_versione:"",
+  url_versione: "",
 };
 
 const mutations = {
