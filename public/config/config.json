@@ -115,7 +115,9 @@
     "Download_Circolari": "Download_Documentale_Circolari",
     "Download_Documentale_Audit": "Download_Documentale_Audit",
     "Download_Documentale_Rilievi": "Download_Documentale_Rilievi",
-    "Documentale_AltriRamiCatalogoProdotti": "Documentale_AltriRamiCatalogoProdotti"
+    "Documentale_AltriRamiCatalogoProdotti": "Documentale_AltriRamiCatalogoProdotti",
+    "Documentale_Whistleblowing": "Documentale_Whistleblowing",
+    "Download_Documentale_Whistleblowing": "Download_Documentale_Whistleblowing/"
   },
   "login_url": "https://broker.abybroker.it/accesso/login.aspx?r=staging",
   "login_url_energy": "https://abyenergy.it/Test/accesso.aspx?r=staging",

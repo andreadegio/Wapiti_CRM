@@ -10,6 +10,15 @@ const intermediari_list = [
     visible: "all",
   },
   {
+    nome: "WHISTLEBLOWING",
+    slug: "WHISTLEBLOWING",
+    tipo: "folder",
+    ico: "file-signature",
+    URL: "Documentale_Whistleblowing",
+    subFolder: false,
+    visible: "all",
+  },
+  {
     nome: "CIRCOLARI OPERATIVE",
     slug: "CIRCOLARI OPERATIVE",
     tipo: "folder",
@@ -50,10 +59,10 @@ const intermediari_list = [
     slug: "UNITA OPERATIVE",
     tipo: "folder",
     ico: "store",
-    URL:"UnitaOperative_Di_Aby_Broker",
+    URL: "UnitaOperative_Di_Aby_Broker",
     subFolder: false,
     visible: "admin",
-  },  
+  },
 ];
 
 const documenti_list = [
@@ -95,7 +104,7 @@ const rami_list = [
     ico: "user-shield",
     URL: "Documentale_AltriRamiElencoSettori",
     subFolder: true,
-  }
+  },
 ];
 
 const folder_list = [
@@ -132,7 +141,7 @@ const folder_list = [
         subFolder: true,
       },
     ],
-  }
+  },
   // {
   //   nome: "GAS E LUCE",
   //   tipo: "folder",
