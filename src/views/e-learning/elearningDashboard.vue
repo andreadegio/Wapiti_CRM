@@ -3,6 +3,12 @@
         <v-app-bar app style="background-color: white;">
             <img class="immagine" src="img/Aby-Academy_small.png" />
             <h1 style="color: #1f4b6b">Aby Academy</h1>
+            <v-spacer></v-spacer>
+            <div v-if="userAbyway" class="btn_strumenti" @click="goAbyway">
+                <i class="fas fa-arrow-left"></i>
+                Torna su Abyway
+            </div>
+
         </v-app-bar>
 
         <v-main style="margin-top: 2rem; margin-left: 1rem; margin-right: 1rem; overflow-y: clip;">
@@ -55,6 +61,10 @@
                                 <i class="fas fa-sign-out-alt"></i>
                                 <p class="btn_strumenti">Esci</p>
                             </div>
+                            <div v-else-if="userAbyway" class="btn_strumenti" @click="goAbyway">
+                                <i class=" fas fa-sign-out-alt"></i>
+                                <p class="btn_strumenti">Torna su Abyway</p>
+                            </div>
                         </div>
                     </div>
                 </v-col>
@@ -82,9 +92,9 @@
                         <v-row v-else class="fill-height">
                             <v-col cols="12" md="4" lg="4" v-for="course in courses" :key="course.id">
                                 <router-link :to="{
-                                    name: `E-learningCorso`,
-                                    params: { course: course },
-                                }" style="text-decoration: none; color: inherit;">
+                name: `E-learningCorso`,
+                params: { course: course },
+            }" style="text-decoration: none; color: inherit;">
                                     <div class="course-card">
                                         <div class="card-container">
 
@@ -106,7 +116,7 @@
 
                                         <v-progress-linear :value="course.avanzamento" class="mt-3"></v-progress-linear>
                                         <cite style="color: #1f4b6b !important;">{{
-                                    course.avanzamento }}%
+                course.avanzamento }}%
                                             completato</cite>
                                         <div class="course-info">
                                             <v-row>
@@ -226,6 +236,11 @@ export default {
             // Reindirizzo alla pagina di login usando Vue Router
             this.$router.push({ path: '/e-learning-login', query: { id: idUser } });
         },
+        goAbyway() {
+
+            // Reindirizzo alla pagina di login usando Vue Router
+            this.$router.push({ path: '/dashboard' });
+        },
         async fetchAvanzamento() {
             let totalCompletedVideos = 0;
             let totalVideos = 0;
@@ -268,7 +283,7 @@ export default {
             }
         },
         async fetchCourses() {
-            if (sessionStorage.getItem("AbywayLearning")){
+            if (sessionStorage.getItem("AbywayLearning")) {
                 // Accedo da abyway
                 this.utente = sessionStorage.getItem("Nominativo");
                 // console.log("provengo da Abywyay");
@@ -279,35 +294,34 @@ export default {
                 };
                 try {
                     await axios.post(this.$custom_json.base_url +
-                    this.$custom_json.api_url +
-                    this.$custom_json.academy.getElearningCourses, params).then(response => {
-                        // Assegna i dati ricevuti dalla chiamata alla variabile courses
-                        this.courses = response.data;
-                    })
+                        this.$custom_json.api_url +
+                        this.$custom_json.academy.getElearningCourses, params).then(response => {
+                            // Assegna i dati ricevuti dalla chiamata alla variabile courses
+                            this.courses = response.data;
+                        })
                 } catch (error) {
-                // Gestisci gli errori, ad esempio mostrando un messaggio all'utente
-                console.error('Errore durante il recupero dei corsi:', error);
+                    // Gestisci gli errori, ad esempio mostrando un messaggio all'utente
+                    console.error('Errore durante il recupero dei corsi:', error);
                 }
 
             }
-            else
-                {
-                    let params = {
+            else {
+                let params = {
                     id: sessionStorage.getItem('learningUserId')
-                    };
-                    try {
-                        // Effettua la chiamata al backend per recuperare i corsi disponibili
-                        await axios.post(this.$custom_json.base_url +
-                            this.$custom_json.api_url +
-                            this.$custom_json.academy.getElearningCourses, params).then(response => {
-                                // Assegna i dati ricevuti dalla chiamata alla variabile courses
-                                this.courses = response.data;
-                            })
-                    } catch (error) {
-                        // Gestisci gli errori, ad esempio mostrando un messaggio all'utente
-                        console.error('Errore durante il recupero dei corsi:', error);
-                    }
+                };
+                try {
+                    // Effettua la chiamata al backend per recuperare i corsi disponibili
+                    await axios.post(this.$custom_json.base_url +
+                        this.$custom_json.api_url +
+                        this.$custom_json.academy.getElearningCourses, params).then(response => {
+                            // Assegna i dati ricevuti dalla chiamata alla variabile courses
+                            this.courses = response.data;
+                        })
+                } catch (error) {
+                    // Gestisci gli errori, ad esempio mostrando un messaggio all'utente
+                    console.error('Errore durante il recupero dei corsi:', error);
                 }
+            }
         },
         async fetchUserInfo() {
             try {
@@ -319,16 +333,16 @@ export default {
                     this.utente = sessionStorage.getItem("Nominativo");
                 } else {
                     await axios.post(this.$custom_json.base_url
-                    + this.$custom_json.api_url +
-                    this.$custom_json.academy.getUserInfoById,
-                    { id: userId })
-                    .then(response => {
-                        // Assegna i dati ricevuti dalla chiamata alla variabile user
-                        sessionStorage.setItem('learningUtente', JSON.stringify(response.data.utente));
-                        response.data.utente[0].pf_pg == "PF" ? this.utente = response.data.utente[0].nome + " " + response.data.utente[0].cognome : this.utente = response.data.utente[0].rag_soc;
-                    })
+                        + this.$custom_json.api_url +
+                        this.$custom_json.academy.getUserInfoById,
+                        { id: userId })
+                        .then(response => {
+                            // Assegna i dati ricevuti dalla chiamata alla variabile user
+                            sessionStorage.setItem('learningUtente', JSON.stringify(response.data.utente));
+                            response.data.utente[0].pf_pg == "PF" ? this.utente = response.data.utente[0].nome + " " + response.data.utente[0].cognome : this.utente = response.data.utente[0].rag_soc;
+                        })
                 }
-                
+
             } catch (error) {
                 // Gestisci gli errori, ad esempio mostrando un messaggio all'utente
                 console.error('Errore durante il recupero delle informazioni dell\'utente:', error);

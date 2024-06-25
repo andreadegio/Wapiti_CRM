@@ -1,12 +1,6 @@
 <template>
   <div>
-    <CModal
-      color="dark"
-      centered
-      :show.sync="show_profile"
-      style="z-index: 30"
-      size="lg"
-    >
+    <CModal color="dark" centered :show.sync="show_profile" style="z-index: 30" size="lg">
       <template #header>
         <strong style="text-transform: uppercase">Profilo Utente</strong>
         <CButton class="close" @click="show_profile = false">
@@ -33,106 +27,63 @@
                       <p><b>Unità Operativa:</b> {{ user.UnitaOperativa }}</p>
 
                       <p><b>Intermediario:</b> {{ user.Intermediario }}</p>
-                      <p
-                        style="text-transform: capitalize"
-                        v-show="user.DirettoreCommerciale"
-                      >
+                      <p style="text-transform: capitalize" v-show="user.DirettoreCommerciale">
                         <b>Direttore Commerciale:</b>
-                        {{ user.DirettoreCommerciale | capitalize }} (<em
-                          style="text-transform: lowercase"
-                          >{{ user.DirettoreCommerciale_Email }}</em
-                        >)
+                        {{ user.DirettoreCommerciale | capitalize }} (<em style="text-transform: lowercase">{{
+      user.DirettoreCommerciale_Email }}</em>)
                       </p>
-                      <p
-                        style="text-transform: capitalize"
-                        v-show="user.AreaManager"
-                      >
+                      <p style="text-transform: capitalize" v-show="user.AreaManager">
                         <b>Area Manager:</b>
-                        {{ user.AreaManager | capitalize }} (<em
-                          style="text-transform: lowercase"
-                          >{{ user.AreaManager_Email }}</em
-                        >)
+                        {{ user.AreaManager | capitalize }} (<em style="text-transform: lowercase">{{
+      user.AreaManager_Email }}</em>)
                       </p>
                     </div>
-                    <div
-                      class="pt-3 pb-2 text-center text-uppercase"
-                      style="font-weight: bold"
-                    >
+                    <div class="pt-3 pb-2 text-center text-uppercase" style="font-weight: bold">
                       Piattaforme operative abilitate:
                     </div>
 
                     <CRow class="py-4" style="justify-content: center">
                       <CCol sm="3" class="text-center mx-2 border">
-                        <CRow align-horizontal="center" class="bg-broker"
-                          ><span class="py-3 intestazione_accessi">
+                        <CRow align-horizontal="center" class="bg-broker"><span class="py-3 intestazione_accessi">
                             <i class="fas fa-car-alt fa-3x"></i>
                             <br />
-                            Piattaforma<br />Assicurazioni</span
-                          ></CRow
-                        >
-                        <CRow align-horizontal="center"
-                          ><div
-                            v-show="user.Abilitato_Auto"
-                            class="py-3"
-                            style="color: green"
-                          >
+                            Piattaforma<br />Assicurazioni</span></CRow>
+                        <CRow align-horizontal="center">
+                          <div v-show="user.Abilitato_Auto" class="py-3" style="color: green">
                             <i class="fas fa-check fa-3x"></i>
                           </div>
-                          <div
-                            v-show="!user.Abilitato_Auto"
-                            class="py-3"
-                            style="color: red"
-                          >
-                            <i class="fas fa-times fa-3x"></i></div
-                        ></CRow>
+                          <div v-show="!user.Abilitato_Auto" class="py-3" style="color: red">
+                            <i class="fas fa-times fa-3x"></i>
+                          </div>
+                        </CRow>
                       </CCol>
                       <CCol sm="3" class="text-center mx-2 border">
-                        <CRow align-horizontal="center" class="bg-rami"
-                          ><span class="py-3 intestazione_accessi">
+                        <CRow align-horizontal="center" class="bg-rami"><span class="py-3 intestazione_accessi">
                             <i class="fas fa-user-tie fa-3x"></i>
                             <br />
-                            Piattaforma<br />Professionisti</span
-                          ></CRow
-                        >
-                        <CRow align-horizontal="center"
-                          ><div
-                            v-show="user.Abilitato_Rami"
-                            class="py-3"
-                            style="color: green"
-                          >
+                            Piattaforma<br />Professionisti</span></CRow>
+                        <CRow align-horizontal="center">
+                          <div v-show="user.Abilitato_Rami" class="py-3" style="color: green">
                             <i class="fas fa-check fa-3x"></i>
                           </div>
-                          <div
-                            v-show="!user.Abilitato_Rami"
-                            class="py-3"
-                            style="color: red"
-                          >
-                            <i class="fas fa-times fa-3x"></i></div
-                        ></CRow>
+                          <div v-show="!user.Abilitato_Rami" class="py-3" style="color: red">
+                            <i class="fas fa-times fa-3x"></i>
+                          </div>
+                        </CRow>
                       </CCol>
                       <CCol sm="3" class="text-center mx-2 border">
-                        <CRow align-horizontal="center" class="bg-energy"
-                          ><span class="py-3 intestazione_accessi">
+                        <CRow align-horizontal="center" class="bg-energy"><span class="py-3 intestazione_accessi">
                             <i class="far fa-lightbulb fa-3x"></i>
                             <br />
-                            Piattaforma<br />Gas & Luce</span
-                          ></CRow
-                        >
-                        <CRow align-horizontal="center"
-                          ><div
-                            v-show="user.Abilitato_Energy"
-                            class="py-3"
-                            style="color: green"
-                          >
+                            Piattaforma<br />Gas & Luce</span></CRow>
+                        <CRow align-horizontal="center">
+                          <div v-show="user.Abilitato_Energy" class="py-3" style="color: green">
                             <i class="fas fa-check fa-3x"></i>
                           </div>
-                          <div
-                            v-show="!user.Abilitato_Energy"
-                            class="py-3"
-                            style="color: red"
-                          >
-                            <i class="fas fa-times fa-3x"></i></div
-                        ></CRow>
+                          <div v-show="!user.Abilitato_Energy" class="py-3" style="color: red">
+                            <i class="fas fa-times fa-3x"></i>
+                          </div>
+                        </CRow>
                       </CCol>
                     </CRow>
                   </CCardBody>
@@ -144,26 +95,14 @@
       </template>
 
       <template #footer>
-        <CButton
-          @click="show_profile = false"
-          color="dark"
-          size="sm"
-          variant="outline"
-        >
+        <CButton @click="show_profile = false" color="dark" size="sm" variant="outline">
           Chiudi
         </CButton>
       </template>
     </CModal>
 
-    <CModal
-      id="logout_modale"
-      color="dark"
-      centered
-      :show.sync="logout_modale"
-      style="z-index: 30"
-      size="sm"
-      :closeOnBackdrop="false"
-    >
+    <CModal id="logout_modale" color="dark" centered :show.sync="logout_modale" style="z-index: 30" size="sm"
+      :closeOnBackdrop="false">
       <template #header>
         <strong style="text-transform: uppercase">Logout</strong>
       </template>
@@ -172,11 +111,8 @@
           <CContainer fluid>
             <CRow class="justify-content-center">
               <img src="img/logout.gif" />
-              <span class="text-center"
-                ><strong
-                  >Chiusura in corso...<br />Attendi 5 secondi e sarai
-                  reindirizzato alla pagina di login.</strong
-                >
+              <span class="text-center"><strong>Chiusura in corso...<br />Attendi 5 secondi e sarai
+                  reindirizzato alla pagina di login.</strong>
               </span>
             </CRow>
           </CContainer>
@@ -188,20 +124,11 @@
       </template>
     </CModal>
 
-    <CDropdown
-      inNav
-      class="c-header-nav-items"
-      placement="bottom-end"
-      add-menu-classes="pt-0"
-    >
+    <CDropdown inNav class="c-header-nav-items" placement="bottom-end" add-menu-classes="pt-0">
       <template #toggler>
         <CHeaderNavLink>
-          <div
-            @click="aggiornaSede()"
-            id="user_option"
-            class="c-avatar"
-            v-c-tooltip="{ content: 'OPZIONI', placement: 'bottom-end' }"
-          >
+          <div @click="aggiornaSede()" id="user_option" class="c-avatar"
+            v-c-tooltip="{ content: 'OPZIONI', placement: 'bottom-end' }">
             <CIcon name="cil-user" style="margin-right: 0 !important" />
             <!-- <img src="img/avatars/7.jpg" class="c-avatar-img" /> -->
           </div>
@@ -225,23 +152,19 @@
       <CDropdownItem to="/Accessi_stat" v-if="admin">
         <i class="far fa-chart-bar"> </i> <span class="pl-1">Accessi</span>
       </CDropdownItem>
-      <CDropdownItem
-        href="https://www.abyway.it/Monitor/GestioneMonitor.html"
-        target="_blank"
-        v-if="admin"
-      >
+      <CDropdownItem href="https://www.abyway.it/Monitor/GestioneMonitor.html" target="_blank" v-if="admin">
         <i class="fas fa-tv"></i> <span class="pl-1">Gestione TV</span>
       </CDropdownItem>
       <CDropdownHeader tag="div" class="text-center" color="light" v-if="user.Is_Abilitato_Elearning">
         <strong>Formazione</strong>
       </CDropdownHeader>
-      <CDropdownItem
-        :href="$custom_json.url_elearning_rami"
-        target="_blank"
-        v-if="user.Is_Abilitato_Elearning"
-      >
-      <i class="fas fa-graduation-cap"></i> <span class="pl-1">E-learning</span>
+      <CDropdownItem :href="$custom_json.url_elearning_rami" target="_blank" v-if="user.Is_Abilitato_Elearning">
+        <i class="fas fa-graduation-cap"></i> <span class="pl-1">E-learning</span>
       </CDropdownItem>
+      <CDropdownItem to="/e-learning">
+        <i class="fas fa-user-graduate"></i> <span class="pl-1">Aby Academy</span>
+      </CDropdownItem>
+
 
       <CDropdownHeader tag="div" class="text-center" color="light">
         <strong>Account</strong>
@@ -290,7 +213,7 @@ export default {
   mounted() {
     this.getUserCRMInfo();
   },
-  methods: {                
+  methods: {
     // attiva/disattiva il loader, emettendo un evento
     // che viene ascoltato da TheHeader che propaga a TheContainer
     // se specificato un timeout, il loader torna allo stato precedente
@@ -360,8 +283,8 @@ export default {
         await axios
           .post(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.crm.accessoCRM,
+            this.$custom_json.api_url +
+            this.$custom_json.crm.accessoCRM,
             param
           )
           .then((response) => {

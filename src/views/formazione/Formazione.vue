@@ -1,46 +1,27 @@
 <template>
   <div class="pt-2" :class="corsi_filtrati.length && 'formazione_style'">
-    
+
     <div v-if="corsi_filtrati.length > 0" class="row display-4 pb-3">
       <div class="col-12 text-center formazione-titolo">Area Formazione</div>
     </div>
-    <p
-      v-if="corsi_filtrati.length > 0"
-      class="text-center formazione-contatore"
-      style="font-weight: 600; font-variant: small-caps; margin-bottom: 0px !important; "
-    >
+    <p v-if="corsi_filtrati.length > 0" class="text-center formazione-contatore"
+      style="font-weight: 600; font-variant: small-caps; margin-bottom: 0px !important; ">
       Corsi presenti: {{ corsi_filtrati.length }}
     </p>
     <div id="filtro_ricerca" class="mt-2 mx-5 riquadro row">
       <div class="text-left col-sm-3 separatore">
         <strong> <i class="fas fa-filter"></i> Filtra per anno:</strong>
-        <treeselect
-          v-model="filtroAnno"
-          class=" ml-2 filtro"
-          :multiple="false"
-          :options="anni_select"
-          :max-height="300"
-          placeholder="Seleziona un anno"
-        />
+        <treeselect v-model="filtroAnno" class=" ml-2 filtro" :multiple="false" :options="anni_select" :max-height="300"
+          placeholder="Seleziona un anno" />
       </div>
       <div class="text-left col-sm-3 separatore">
         <strong> <i class="fas fa-filter"></i> Filtra per categoria:</strong>
-        <treeselect
-          v-model="filtroCat"
-          class=" ml-2 filtro"
-          :multiple="false"
-          :options="categorie"
-          :max-height="300"
-          placeholder="Seleziona una categoria"
-        />
+        <treeselect v-model="filtroCat" class=" ml-2 filtro" :multiple="false" :options="categorie" :max-height="300"
+          placeholder="Seleziona una categoria" />
       </div>
       <div class="text-left col-sm-3 separatore">
-        <strong><i class="fas fa-search"></i> Ricerca: </strong><br/>
-        <input
-          v-model="ricercaTxt"
-          id="ricercaTesto"
-          placeholder="Testo da cercare"
-          class="filtro mx-1 inputSearch"
+        <strong><i class="fas fa-search"></i> Ricerca: </strong><br />
+        <input v-model="ricercaTxt" id="ricercaTesto" placeholder="Testo da cercare" class="filtro mx-1 inputSearch"
           style="
             border-bottom: 1px solid gray ;
             border-left: 0 ;
@@ -52,13 +33,12 @@
             margin-bottom: 0 ;
             width: 100%;
             line-height: 2rem;
-          "
-        />
+          " />
       </div>
-      
+
       <div class="text-right col-sm-3" v-if="admin">
-        <CLink to="AdminFormazione" style="color: #ef7918 !important"
-          ><CIcon name="cil-settings" /><strong> Gestione contenuti</strong>
+        <CLink to="AdminFormazione" style="color: #ef7918 !important">
+          <CIcon name="cil-settings" /><strong> Gestione contenuti</strong>
         </CLink>
       </div>
     </div>
@@ -71,54 +51,73 @@
       <div class="col-sm-12">
         <div class="row justify-content-center">
           <CCardGroup class="latest col-10">
-            <div
-              class="col-lg-3 col-sm-6 px-0"
-              v-for="(item, index) in corsi_filtrati"
-              :key="index"
-            >
-              <CCard class="mx-1 card_materiale">
-                <CLink
-                  :to="{
-                    name: 'Corso',
-                    params: {
-                      corso: item.titolo,
-                      id: item.id,
-                      lista_corsi: corsi,
-                    },
-                  }"
-                >
-                  <CCardImg
-                    :src="$custom_json.base_url + item.copertina"
-                    style="height: 15rem; object-fit: cover"
-                    alt="- IMPOSSIBILE CARICARE -"
-                  >
+            <div class="col-lg-3 col-sm-6 px-0">
+              <CCard class="mx-1 card_materiale" style="overflow: hidden;">
+                <CLink to="/e-learning">
+                  <CCardImg src="https://www.aby.it/team/academy/elearning.jpg" style="height: 15rem; object-fit: cover"
+                    alt="- IMPOSSIBILE CARICARE -">
                   </CCardImg>
-                  <CBadge
-                    v-if="
-                      lista_nuovi != null && lista_nuovi.includes(item.id_corso)
-                    "
-                    color="danger"
-                    class="badgeNuovo"
-                    >Nuovo
+                  <CBadge color="danger" class="badgeNuovo">Nuovo
                   </CBadge>
-                  <CBadge
-                   v-if="item.priority == 1"                    
-                    class="badgePin"
-                    ><i class="fas fa-thumbtack fa-2x"></i><br/><p style="color: black !important;">Importante</p>
+                  <CBadge class="badgePin"><i class="fas fa-thumbtack fa-2x"></i><br />
+                    <p style="color: white !important;">Importante</p>
                   </CBadge>
 
-                  <CCardBody
-                    class="py-1 px-2 card_post"
-                    :style="{ '--bgColor': item.color_categoria }"
-                    style="min-height: 10rem"
-                  >
+                  <CCardBody class="py-1 px-2 mx-2 " style="min-height: 10rem">
+                    <div class="text-uppercase settore_color pt-3">
+                      <strong>
+                        <u>ABY ACADEMY</u>
+                      </strong>
+                    </div>
+
+                    <div class="titolo text-left pt-3">Aby Academy
+                    </div>
+                    <div class="row dettagli pt-4 pb-5 text-center">
+                      <div class="col-6">
+                        <i class="far fa-calendar-alt"></i>
+                        01/07/2024
+                      </div>
+                      <div class="col-6">
+                        <i class="far fa-clock"></i> 120 minuti
+                      </div>
+                    </div>
+                    <div class="text-right"></div>
+                  </CCardBody>
+                  <CCardFooter class="text-right py-2">
+                    <strong>Accedi alla Piattaforma...</strong>
+                  </CCardFooter>
+                </CLink>
+              </CCard>
+            </div>
+            <div class="col-lg-3 col-sm-6 px-0" v-for="(item, index) in corsi_filtrati" :key="index">
+              <CCard class="mx-1 card_materiale" style="overflow: hidden;">
+                <CLink :to="{
+    name: 'Corso',
+    params: {
+      corso: item.titolo,
+      id: item.id,
+      lista_corsi: corsi,
+    },
+  }">
+                  <CCardImg :src="$custom_json.base_url + item.copertina" style="height: 15rem; object-fit: cover"
+                    alt="- IMPOSSIBILE CARICARE -">
+                  </CCardImg>
+                  <CBadge v-if="lista_nuovi != null && lista_nuovi.includes(item.id_corso)
+    " color="danger" class="badgeNuovo">Nuovo
+                  </CBadge>
+                  <CBadge v-if="item.priority == 1" class="badgePin"><i class="fas fa-thumbtack fa-2x"></i><br />
+                    <p style="color: black !important;">Importante</p>
+                  </CBadge>
+
+                  <CCardBody class="py-1 px-2 card_post mx-2" :style="{ '--bgColor': item.color_categoria }"
+                    style="min-height: 10rem">
                     <div class="text-uppercase settore_color pt-3">
                       <strong>
                         <u>{{ item.categoria }}</u>
                       </strong>
                     </div>
 
-                    <div class="titolo text-left pt-3" >{{ item.titolo }}
+                    <div class="titolo text-left pt-3">{{ item.titolo }}
                     </div>
                     <div class="row dettagli pt-4 pb-5 text-center">
                       <div class="col-6">
@@ -132,13 +131,10 @@
                     <div class="text-right"></div>
                   </CCardBody>
                   <CCardFooter class="text-right py-2">
-                    <div
-                      class="views"
-                      v-c-tooltip="{
-                        content: 'Visualizzazioni ',
-                        placement: 'bottom-end',
-                      }"
-                    >
+                    <div class="views" v-c-tooltip="{
+    content: 'Visualizzazioni ',
+    placement: 'bottom-end',
+  }">
                       <i class="far fa-eye"></i> {{ item.visite }}
                     </div>
                     <strong>Vai al corso...</strong>
@@ -237,8 +233,8 @@ export default {
         await axios
           .post(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.get_toSee,
+            this.$custom_json.api_url +
+            this.$custom_json.ep_api.get_toSee,
             { params }
           )
           .then((response) => {
@@ -260,8 +256,8 @@ export default {
         await axios
           .post(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.lista_corsi,
+            this.$custom_json.api_url +
+            this.$custom_json.ep_api.lista_corsi,
             { params },
             {
               header: {
@@ -306,8 +302,8 @@ export default {
         await axios
           .post(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.categorie_formazione,
+            this.$custom_json.api_url +
+            this.$custom_json.ep_api.categorie_formazione,
 
             {
               header: {
@@ -338,25 +334,27 @@ export default {
   width: 50%;
   left: 0;
   height: 8px;
-  background: linear-gradient(
-    to right,
-    var(--bgColor) 60%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(to right,
+      var(--bgColor) 60%,
+      rgba(255, 255, 255, 0) 100%);
   /* border-top: 8px solid var(--bgColor); */
 }
+
 .latest a:hover {
   text-decoration: none;
 }
+
 .settore_color {
   /* color: var(--bgColor); */
   opacity: 0.6;
   padding-top: 4px !important;
   margin-left: -5px !important;
 }
-.separatore{
+
+.separatore {
   border-right: 1px dotted gray;
 }
+
 .titolo {
   font-size: 1.8rem !important;
   max-width: 95%;
@@ -372,15 +370,18 @@ export default {
   letter-spacing: 0.025em;
   color: #ef7918 !important;
 }
+
 .card-img,
 .card-img-bottom {
   border-bottom-right-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
 }
+
 .formazione_style {
   display: grid;
   overflow: hidden;
 }
+
 .badgeNuovo {
   position: absolute;
   z-index: 99;
@@ -390,6 +391,7 @@ export default {
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
     0 6px 10px 0 rgba(0, 0, 0, 0.55), 0 1px 18px 0 rgba(223, 78, 78, 0.83) !important;
 }
+
 .badgePin {
   transform: rotate(25deg);
   color: red;
@@ -402,10 +404,12 @@ export default {
     0 6px 10px 0 rgba(0, 0, 0, 0.55), 0 1px 18px 0 rgba(223, 78, 78, 0.83) !important;
      */
 }
-.fa-thumbtack{
+
+.fa-thumbtack {
   stroke: rgba(0, 0, 0, 0.73);
   stroke-width: 20;
 }
+
 .riquadro {
   border: 1px solid lightgray;
   border-radius: 10px;
@@ -413,6 +417,7 @@ export default {
   background-color: aliceblue;
   margin-bottom: 3px !important;
 }
+
 .views {
   position: absolute;
   top: auto;
@@ -421,11 +426,13 @@ export default {
   color: rgb(164, 160, 160);
   font-size: 0.7rem;
 }
+
 .filtro {
   display: inline-table;
   vertical-align: middle;
   padding: 0px;
 }
+
 #ricercaTesto .form-control {
   border-bottom: 1px solid gray !important;
   border-left: 0 !important;
@@ -437,4 +444,3 @@ export default {
   margin-bottom: 0 !important;
 }
 </style>
-
