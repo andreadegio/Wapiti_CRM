@@ -183,7 +183,7 @@ export default {
     // this.meteo();
     this.$forceUpdate();
   },
-  methods: {                
+  methods: {
     // attiva/disattiva il loader, emettendo un evento
     // che viene ascoltato da TheContainer
     // se specificato un timeout, il loader torna allo stato precedente
@@ -218,7 +218,7 @@ export default {
       }
     },
     async set_aua() {
-      // console.log("Accesso Aua");
+      console.log("Accesso Aua");
       // console.log("valore di AUA" + localStorage.getItem("AUA"));
       if (localStorage.getItem("AUA")) {
         // console.log("registro");
@@ -277,7 +277,7 @@ export default {
                 } else {
                   window.location.href = localStorage.getItem("urlRamiNext2");
                 }
-                
+
                 break;
               default:
                 break;

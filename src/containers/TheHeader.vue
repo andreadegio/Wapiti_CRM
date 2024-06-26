@@ -1,25 +1,19 @@
 <template>
   <div class="theheader">
     <!-- <CHeader fixed with-subheader light class="d-flex justify-content-between fixed-nav"> -->
-    <CHeader
-      class="c-header c-header-light c-header-fixed c-header-with-subheader"
-    >
+    <CHeader class="c-header c-header-light c-header-fixed c-header-with-subheader">
       <CHeaderNav class="d-md-down-none mr-auto">
         <CHeaderNavItem class="px-3" target="_self">
           <a href="/dashboard">
-            <img src="/img/logo_abyway.png" width="200px"
-          /></a>
+            <img src="/img/logo_abyway.png" width="200px" /></a>
         </CHeaderNavItem>
       </CHeaderNav>
       <CHeaderNav v-show="city" class="d-md-down-none mr-auto">
         <CHeaderNavItem class="px-3">
           <h4>
             <em style="font-size: 1rem">{{ city }} {{ temp }}°C </em>
-            <img
-              style="margin-left: 5px; max-width: 42px"
-              :src="ico_meteo"
-              v-c-tooltip="{ content: desc_meteo, placement: 'bottom-end' }"
-            />
+            <img style="margin-left: 5px; max-width: 42px" :src="ico_meteo"
+              v-c-tooltip="{ content: desc_meteo, placement: 'bottom-end' }" />
           </h4>
         </CHeaderNavItem>
       </CHeaderNav>
@@ -30,82 +24,33 @@
     <CRow id="nav-menu">
       <CCol md="1"></CCol>
       <CCol md="10">
-        <CNav
-          variant="pills"
-          justified
-          fill
-          class="c-header-light secondary-menu my-1"
-          id="new_menu"
-        >
-          <CNavItem
-            :class="$route.path == '/dashboard' ? 'active' : ''"
-            class="grow"
-            :to="{ path: '/dashboard' }"
-            target="_self"
-            ><i class="fas fa-home"></i> Dashboard</CNavItem
-          >
-          <CNavItem
-            :class="$route.path == '/StatistichePortali' ? 'active' : ''"
-            class="grow"
-            v-if="isEnergy && idUtenteEnergy != '-1'"
-            :to="{ path: '/StatistichePortali' }"
-            target="_self"
-            ><i class="far fa-chart-bar"></i> Statistiche</CNavItem
-          >
-          <CNavItem
-            :class="$route.path == '/Statistiche/broker' ? 'active' : ''"
-            class="grow"
-            v-else
-            :to="{ path: '/Statistiche/broker' }"
-            target="_self"
-            ><i class="far fa-chart-bar"></i> Statistiche</CNavItem
-          >
-          <CNavItem
-            :class="$route.path == '/Commerciale' ? 'active' : ''"
-            class="grow"
-            :to="{ path: '/Commerciale' }"
-            target="_self"
-            ><i class="fas fa-user-tie"></i> Area Commerciale
-            <CBadge
-              v-show="notificheCommerciale > 0"
-              color="danger"
-              class="badgeNotifiche"
-              >{{ notificheCommerciale }}</CBadge
-            ></CNavItem
-          >
-          <CNavItem
-            :class="$route.path == '/Formazione' ? 'active' : ''"
-            class="grow"
-            :to="{ path: '/Formazione' }"
-            target="_self"
-            ><i class="fas fa-user-graduate"></i> Formazione
-            <CBadge
-              v-show="notificheFormazione > 0"
-              color="danger"
-              class="badgeNotifiche"
-              >{{ notificheFormazione }}</CBadge
-            ></CNavItem
-          >
-          <CNavItem
-            :class="$route.path == '/Comingsoon' ? 'active' : ''"
-            class="grow"
-            :to="{ path: '/Comingsoon' }"
-            target="_self"
-            ><i class="fas fa-calculator"></i> Amministrazione</CNavItem
-          >
-          <CNavItem
-            :class="
-              $route.path == '/Documentale'
-                ? $route.path == '/Documentale/Intermediario'
-                  ? 'active'
-                  : 'active'
-                : ''
-            "
-            class="grow"
-            :to="{ path: '/Documentale' }"
-            target="_self"
-            ><i class="fas fa-file-signature"></i> Documentale</CNavItem
-          >
+        <CNav variant="pills" justified fill class="c-header-light secondary-menu my-1" id="new_menu">
+          <CNavItem :class="$route.path == '/dashboard' ? 'active' : ''" class="grow" :to="{ path: '/dashboard' }"
+            target="_self"><i class="fas fa-home"></i> Dashboard</CNavItem>
+          <CNavItem :class="$route.path == '/StatistichePortali' ? 'active' : ''" class="grow"
+            v-if="isEnergy && idUtenteEnergy != '-1'" :to="{ path: '/StatistichePortali' }" target="_self"><i
+              class="far fa-chart-bar"></i> Statistiche</CNavItem>
+          <CNavItem :class="$route.path == '/Statistiche/broker' ? 'active' : ''" class="grow" v-else
+            :to="{ path: '/Statistiche/broker' }" target="_self"><i class="far fa-chart-bar"></i> Statistiche</CNavItem>
+          <CNavItem :class="$route.path == '/Commerciale' ? 'active' : ''" class="grow" :to="{ path: '/Commerciale' }"
+            target="_self"><i class="fas fa-user-tie"></i> Area Commerciale
+            <CBadge v-show="notificheCommerciale > 0" color="danger" class="badgeNotifiche">{{ notificheCommerciale }}
+            </CBadge>
+          </CNavItem>
+          <CNavItem :class="$route.path == '/Formazione' ? 'active' : ''" class="grow" :to="{ path: '/Formazione' }"
+            target="_self"><i class="fas fa-user-graduate"></i> Formazione
+            <CBadge v-show="notificheFormazione > 0" color="danger" class="badgeNotifiche">{{ notificheFormazione }}
+            </CBadge>
+          </CNavItem>
+          <CNavItem :class="$route.path == '/Comingsoon' ? 'active' : ''" class="grow" :to="{ path: '/Comingsoon' }"
+            target="_self"><i class="fas fa-calculator"></i> Amministrazione</CNavItem>
+          <CNavItem :class="$route.path == '/Documentale'
+          ? $route.path == '/Documentale/Intermediario'
+            ? 'active'
+            : 'active'
+          : ''
+        " class="grow" :to="{ path: '/Documentale' }" target="_self"><i class="fas fa-file-signature"></i>
+            Documentale</CNavItem>
         </CNav>
       </CCol>
       <CCol md="1"></CCol>
@@ -170,7 +115,7 @@ export default {
           //     " con " +
           //     last_version
           // );
-          console.log("logout_forzato");
+          // console.log("logout_forzato");
           this.$router.push("login");
 
           return;
@@ -268,8 +213,8 @@ export default {
         await axios
           .post(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.get_notifiche,
+            this.$custom_json.api_url +
+            this.$custom_json.ep_api.get_notifiche,
             { params }
           )
           .then((response) => {
@@ -291,8 +236,8 @@ export default {
         await axios
           .post(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.get_notifiche,
+            this.$custom_json.api_url +
+            this.$custom_json.ep_api.get_notifiche,
             { params }
           )
           .then((response) => {

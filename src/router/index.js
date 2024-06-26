@@ -364,13 +364,13 @@ router.beforeEach((to, from, next) => {
       });
     }
   } else if (to.matched.some((record) => record.meta.requiresAuthElearning)) {
-    if (!isAuthenticatedElearning()) {
-      // L'utente non è autenticato nella piattaforma di e-learning, reindirizzalo alla pagina di login dell'e-learning
+    if (!isAuthenticatedElearning() && !isAuthenticatedAbyway()) {
+      // L'utente non è autenticato in nessuna delle due piattaforme, reindirizzalo alla pagina di login dell'e-learning
       next({
         name: "LoginElearning",
       });
     } else {
-      // L'utente è autenticato nella piattaforma di e-learning, permetti la navigazione
+      // L'utente è autenticato almeno in una delle due piattaforme, permetti la navigazione
       next();
     }
   } else {
@@ -381,6 +381,20 @@ router.beforeEach((to, from, next) => {
 // Funzione per controllare se l'utente è autenticato nella piattaforma di e-learning
 function isAuthenticatedElearning() {
   return sessionStorage.getItem("tokenElearning") !== null;
+}
+function isAuthenticatedAbyway() {
+  if (localStorage.getItem("utente") == "ok") {
+    let userIdAbyway = localStorage.getItem("userID");
+    let Nominativo= JSON.parse(localStorage.getItem("chisono_data")).Nominativo;
+    sessionStorage.setItem("Nominativo", Nominativo); 
+    sessionStorage.setItem("AbywayLearning",true);
+    sessionStorage.setItem("learningUserId", userIdAbyway);
+
+    sessionStorage.setItem("tokenElearning", "SLKJDO20300SLXPA...A38902");
+    return true;
+  } else {
+    return false;
+  }
 }
 
 router.onError((error) => {
