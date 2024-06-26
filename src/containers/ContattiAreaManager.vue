@@ -1,15 +1,8 @@
 <template>
   <div class="h-100">
-    <CModal
-      color="dark"
-      centered
-      :show.sync="modale"
-      style="z-index: 30"
-      size="lg"
-    >
+    <CModal color="dark" centered :show.sync="modale" style="z-index: 30" size="lg">
       <template #header style="background-color: #1f4b6b !important">
-        <strong class="h4" style="text-transform: uppercase"
-          >Recapiti per {{ modale_recapiti.Descrizione }}
+        <strong class="h4" style="text-transform: uppercase">Recapiti per {{ modale_recapiti.Descrizione }}
         </strong>
         <CButton class="close" @click="modale = false">
           <span aria-hidden="true">&times;</span>
@@ -32,11 +25,8 @@
                       </p> -->
                     </div>
                     <p class="text-muted"></p>
-                    <div
-                      class="riga_contatto align-middle"
-                      style="border-top: 1px solid rgb(249, 223, 195)"
-                      v-show="modale_recapiti.Telefono"
-                    >
+                    <div class="riga_contatto align-middle" style="border-top: 1px solid rgb(249, 223, 195)"
+                      v-show="modale_recapiti.Telefono">
                       <div class="icona_contatto_modale mr-3 align-middle">
                         <i class="fas fa-phone fa-fw"></i>
                       </div>
@@ -57,50 +47,30 @@
                           </p>
                           <div class="form-row py-2">
                             <div class="form-group col-md-6 m-0 py-0">
-                              <input
-                                type="text"
-                                pattern="[0-9]+"
-                                class="form-control"
-                                v-model="inputTelefono"
-                                id="inputTelefono"
-                                placeholder="Telefono"
-                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                              />
+                              <input type="text" pattern="[0-9]+" class="form-control" v-model="inputTelefono"
+                                id="inputTelefono" placeholder="Telefono"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                             </div>
-                            <CButton
-                              @click="
-                                invia_contatto(
-                                  inputTelefono,
-                                  modale_recapiti.Email,
-                                  modale_recapiti.Descrizione
-                                )
-                              "
-                              style="color: white"
-                              color="primary"
-                              class="ml-2"
-                              ><i class="fas fa-share"></i> Invia
-                              Richiesta</CButton
-                            >
+                            <CButton @click="
+      invia_contatto(
+        inputTelefono,
+        modale_recapiti.Email,
+        modale_recapiti.Descrizione
+      )
+      " style="color: white" color="primary" class="ml-2"><i class="fas fa-share"></i> Invia
+                              Richiesta</CButton>
                           </div>
                         </div>
-                        <div
-                          class="text-muted"
-                          style="font-size: 0.9rem"
-                          v-show="
-                            modale_recapiti.TelefonoOraMattina &&
-                            modale_recapiti.TelefonoOraPomeriggio
-                          "
-                        >
+                        <div class="text-muted" style="font-size: 0.9rem" v-show="modale_recapiti.TelefonoOraMattina &&
+      modale_recapiti.TelefonoOraPomeriggio
+      ">
                           (orario {{ modale_recapiti.TelefonoOraMattina }} /
                           {{ modale_recapiti.TelefonoOraPomeriggio }} )
                         </div>
                       </div>
                     </div>
-                    <div
-                      class="riga_contatto align-middle"
-                      style="border-top: 1px solid rgb(249, 223, 195)"
-                      v-show="modale_recapiti.Cell"
-                    >
+                    <div class="riga_contatto align-middle" style="border-top: 1px solid rgb(249, 223, 195)"
+                      v-show="modale_recapiti.Cell">
                       <div class="icona_contatto_modale mr-3 align-middle">
                         <i class="fas fa-mobile-alt fa-fw"></i>
                       </div>
@@ -113,40 +83,30 @@
                         </div>
                       </div>
                     </div>
-                    <div
-                      class="riga_contatto align-middle py-4"
-                      v-show="modale_recapiti.Email"
-                    >
+                    <div class="riga_contatto align-middle py-4" v-show="modale_recapiti.Email">
                       <div class="icona_contatto_modale mr-3 align-middle">
                         <i class="far fa-envelope fa-fw"></i>
                       </div>
-                      <div
-                        class="recapito_dettaglio d-inline-block align-middle"
-                      >
+                      <div class="recapito_dettaglio d-inline-block align-middle">
                         {{ modale_recapiti.Nome ? "Mail" : "Mandaci una mail" }}
                         <p class="p-0 m-0 mail">
-                          <a :href="'mailto:'+modale_recapiti.Email">
-                            <p class="mail">{{ modale_recapiti.Email }}</p></a
-                          >
+                          <a :href="'mailto:' + modale_recapiti.Email">
+                            <p class="mail">{{ modale_recapiti.Email }}</p>
+                          </a>
                         </p>
 
                         <div class="text-muted small_text"></div>
                       </div>
                     </div>
-                 
+
                   </CCardBody>
                 </CCard>
               </CCol>
             </CRow>
           </CContainer>
         </div>
-        <CButton
-          @click="modale = false"
-          color="dark"
-          size="sm"
-          variant="outline"
-          style="margin-left: auto; margin-right: auto; display: flex"
-        >
+        <CButton @click="modale = false" color="dark" size="sm" variant="outline"
+          style="margin-left: auto; margin-right: auto; display: flex">
           Chiudi
         </CButton>
       </template>
@@ -156,36 +116,24 @@
       </template>
     </CModal>
     <CCard class="mb-0 h-100">
-      <CCardHeader class="main_title d-flex justify-content-between" >
+      <CCardHeader class="main_title d-flex justify-content-between">
         <strong class="h3 titolo_gradient">{{ chisono.Divisione_UnitaOperativa }}</strong>
         <div class="card-header-actions"></div>
       </CCardHeader>
       <CCardHeader class="d-flex justify-content-between py-4">
-        <div class="text-center w-100 contatti-titolo" ><strong class="h3 ">ASSICURAZIONI</strong>
+        <div class="text-center w-100 contatti-titolo"><strong class="h3 ">ASSICURAZIONI</strong>
         </div>
       </CCardHeader>
       <CCardBody class="manager news_card py-0">
         <CListGroup class="contatto">
-          <CListGroupItem
-            v-for="(contatto, index) in recapiti_assicurazioni"
-            :key="index"
-            class="flex-column align-items-start grow"
-          >
-            <div
-              class="d-flex w-100 py-2"
-              style="text-transform: uppercase"
-              @click="show_recapito(index, 'auto')"
-            >
-              <div
-                v-show="contatto.FontAweSomeIcon"
-                class="icona_contatto mr-3"
-                v-html="contatto.FontAweSomeIcon"
-              ></div>
+          <CListGroupItem v-for="(contatto, index) in recapiti_assicurazioni" :key="index"
+            class="flex-column align-items-start grow">
+            <div class="d-flex w-100 py-2" style="text-transform: uppercase" @click="show_recapito(index, 'auto')">
+              <div v-show="contatto.FontAweSomeIcon" class="icona_contatto mr-3" v-html="contatto.FontAweSomeIcon">
+              </div>
               <div class="recapito_name">
-                <strong
-                  >{{ contatto.Descrizione }}
-                  </strong
-                >
+                <strong>{{ contatto.Descrizione }}
+                </strong>
                 <br />
                 <div class="small_text">
                   (Clicca per visualizzare le modalità di contatto)
@@ -204,22 +152,12 @@
         </CCardHeader>
 
         <CListGroup class="contatto">
-          <CListGroupItem
-            v-for="(contatto, index) in recapiti_energy"
-            :key="index"
-            v-if="contatto.Descrizione != 'Direttore Commerciale'"
-            class="flex-column align-items-start grow"
-          >
-            <div
-              class="d-flex w-100 justify-content-between py-2"
-              style="text-transform: uppercase"
-              @click="show_recapito(index, 'energy')"
-            >
-              <div
-                v-show="contatto.FontAweSomeIcon"
-                class="icona_contatto mr-3"
-                v-html="contatto.FontAweSomeIcon"
-              ></div>
+          <CListGroupItem v-for="(contatto, index) in recapiti_energy" :key="index"
+            v-if="contatto.Descrizione != 'Direttore Commerciale'" class="flex-column align-items-start grow">
+            <div class="d-flex w-100 justify-content-between py-2" style="text-transform: uppercase"
+              @click="show_recapito(index, 'energy')">
+              <div v-show="contatto.FontAweSomeIcon" class="icona_contatto mr-3" v-html="contatto.FontAweSomeIcon">
+              </div>
               <div class="recapito_name">
                 <strong>{{ contatto.Descrizione }} </strong>
                 <div class="small_text">
@@ -340,12 +278,12 @@ export default {
           axios
             .post(
               this.$custom_json.base_url +
-                this.$custom_json.api_url +
-                this.$custom_json.ep_api.richiesta_contatto,
+              this.$custom_json.api_url +
+              this.$custom_json.ep_api.richiesta_contatto,
               { params }
             )
             .then((response) => {
-              console.log(response.data);
+              // console.log(response.data);
               this.invio = false;
               this.$alert(
                 "Sarai ricontattato quanto prima",

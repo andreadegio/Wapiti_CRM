@@ -206,7 +206,7 @@ export default {
   },
   computed: {
     accessoCRM() {
-      console.log(this.userCRMInfo.idbroker);
+      // console.log(this.userCRMInfo.idbroker);
       return this.userCRMInfo.idbroker ? true : false;
     },
   },
@@ -315,7 +315,7 @@ export default {
 
       let aua = localStorage.getItem("AUA");
       if (aua === true) {
-        console.log("AUA_logout");
+        // console.log("AUA_logout");
         store.commit("user_logout");
         setTimeout(() => {
           window.open(this.$custom_json.logout_url_energy, "_self");

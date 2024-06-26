@@ -191,14 +191,15 @@ export default {
             if (this.$refs.form.validate()) {
                 // console.log('Oggetto:', this.subject);
                 // console.log('Messaggio:', this.message);
+                let mailUser = this.userAbyway ? JSON.parse(localStorage.getItem("chisono_data")).Email : JSON.parse(sessionStorage.getItem("learningUtente"))[0].mail;
                 let params = {
                     candidato: this.utente,
                     messaggio: this.message,
                     oggetto: this.subject,
                     destinatari: "formatori",
-                    mittente: JSON.parse(sessionStorage.getItem("learningUtente"))[0].mail,
+                    mittente: mailUser,
                 };
-                console.log(params);
+                // console.log(params);
                 try {
                     await axios
                         .post(
