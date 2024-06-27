@@ -93,7 +93,7 @@
                             <v-col cols="12" md="4" lg="4" v-for="course in courses" :key="course.id">
                                 <router-link :to="{
                 name: `E-learningCorso`,
-                params: { course: course },
+                params: { corso_scelto: course },
             }" style="text-decoration: none; color: inherit;">
                                     <div class="course-card">
                                         <div class="card-container">
