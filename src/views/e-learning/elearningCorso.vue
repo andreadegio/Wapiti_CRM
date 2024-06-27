@@ -10,10 +10,16 @@
                     <div v-if="!showQuiz">
                         <v-row v-if="selectedVideo" class="video-container">
                             <div class="video-wrapper">
-                                <video id="videoPlayer" :src="selectedVideo.file" width="80%vw"
-                                    :controls="selectedVideo.completed" 
-                                    controlsList="nodownload" @timeupdate="updateProgress">
-                                    <!-- disablePictureInPicture -->
+                                <video v-if="userAbyway" id="videoPlayer" :src="selectedVideo.file" width="80%vw"
+                                    controlsList="nodownload" controls="true" @timeupdate="updateProgress">
+
+                                    <source :src="selectedVideo.file" type="video/mp4">
+                                    Il tuo browser non supporta il tag video.
+                                </video>
+                                <video v-else id="videoPlayer" :src="selectedVideo.file" width="80%vw"
+                                    :controls="selectedVideo.completed" controlsList="nodownload"
+                                    @timeupdate="updateProgress" disablePictureInPicture>
+
                                     <source :src="selectedVideo.file" type="video/mp4">
                                     Il tuo browser non supporta il tag video.
                                 </video>
@@ -22,11 +28,15 @@
                             </div>
                             <div class="controls-wrapper">
                                 <div class="controls">
-                                    <v-btn @click="rewindVideo" fab dark large color="warning">
+                                    <v-btn @click="rewindVideo" fab small dark color="light-blue darken-4">
                                         <v-icon>mdi-rewind</v-icon>
                                     </v-btn>
                                     <v-btn @click="playPauseVideo" class="mx-2" fab dark large color="warning">
                                         <v-icon>{{ isPlaying ? 'mdi-pause' : 'mdi-play' }}</v-icon>
+                                    </v-btn>
+                                    <v-btn v-if="userAbyway || selectedVideo.completed" @click="forwardVideo" fab dark
+                                        small color="light-blue darken-4">
+                                        <v-icon>mdi-fast-forward</v-icon>
                                     </v-btn>
                                 </div>
                             </div>
@@ -68,9 +78,14 @@
                             </v-col>
                         </v-row>
                         <v-row class="ml-3 mt-2 text-center" v-else style="justify-content: center; display: grid;">
-                            <h1 class="my-4" style="color: #1f4b6b">Test finale superato</h1><br>
-                            <img src="video/academy/graduate.png" style="margin: 0 auto;">
-                            <h1 class="text-center my-3" style="color: #1f4b6b">Voto: {{ course.votoQuiz }}</h1><br>
+                            <h1 class="my-4 animate__animated animate__wobble animate__delay-500ms"
+                                style="color: #1f4b6b">Test finale
+                                superato</h1><br>
+                            <img class="animate__animated animate__zoomIn" src="video/academy/graduate.png"
+                                style="margin: 0 auto;">
+                            <div class="mt-2 animate__animated animate__pulse animate__infinite">
+                                <h1 class="text-center my-3 " style="color: #1f4b6b">Voto: {{ course.votoQuiz }}</h1>
+                            </div><br>
                         </v-row>
                     </div>
 
@@ -84,7 +99,7 @@
                                     :value="calculateProgress()"></v-progress-linear></small>
                         </div>
                     </div>
-                    <v-list>
+                    <v-list v-if="!userAbyway">
                         <v-list-item v-for="(video, index) in video" :key="index"
                             @click="selectVideo(video, index); showQuiz = false;"
                             :class="{ 'selected': index === selectedVideoIndex, 'non-cliccabile': !video.active }"
@@ -108,7 +123,38 @@
                             :class="{ 'selected': showQuiz, 'non-cliccabile': !quiz_btn }">
                             <div>
                                 <div class="h5">
-                                    Quiz Finale 
+                                    Quiz Finale
+                                </div>
+                                <div>
+                                    <i class="fas fa-user-graduate"></i> &nbsp;Quiz di fine corso
+                                </div>
+                            </div>
+                        </v-list-item>
+                    </v-list>
+                    <v-list v-else>
+                        <v-list-item v-for="(video, index) in video" :key="index"
+                            @click="selectVideo(video, index); showQuiz = false;"
+                            :class="{ 'selected': index === selectedVideoIndex }" class="elencoVideo">
+                            <div>
+                                <div class="h5">
+                                    {{ index + 1 }}. &nbsp; {{ video.titolo }}
+                                </div>
+                                <div>
+                                    <i class="far fa-play-circle"></i> &nbsp;durata: {{ video.durata }}
+                                    <v-chip v-if="video.completed" class="ma-2" small color="green" text-color="white">
+                                        Completato </v-chip>
+                                    <v-chip v-if="video.active && !video.completed" class="ma-2" small color="orange"
+                                        text-color="white">
+                                        Da vedere... </v-chip>
+                                </div>
+                            </div>
+                        </v-list-item>
+                        <v-list-item v-if="course.quiz" id="quiz" class="elencoVideo"
+                            @click="getQuiz(course.id); showQuiz = true; selectedVideoIndex = null"
+                            :class="{ 'selected': showQuiz }">
+                            <div>
+                                <div class="h5">
+                                    Quiz Finale
                                 </div>
                                 <div>
                                     <i class="fas fa-user-graduate"></i> &nbsp;Quiz di fine corso
@@ -124,6 +170,7 @@
 
 
 <script>
+import "animate.css";
 import axios from 'axios';
 export default {
     name: 'VideoFormazione',
@@ -226,9 +273,9 @@ export default {
 
                                 // passo di stato il candidato 
                                 if (!this.userAbyway) {
-                                    this.avanzaCandidato();    
+                                    this.avanzaCandidato();
                                 }
-                                
+
 
                             });
 
@@ -313,6 +360,10 @@ export default {
             const videoPlayer = document.getElementById('videoPlayer');
             videoPlayer.currentTime -= 5; // Andare indietro di 5 secondi
         },
+        forwardVideo() {
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.currentTime += 5; // Andare avanti di 5 secondi
+        },
         updateProgress() {
             const videoPlayer = document.getElementById('videoPlayer');
             const progressBar = document.getElementById('progressBar');
@@ -382,8 +433,12 @@ export default {
                         // console.log("Questo è l'ultimo video della lista.");
                         // ABILITO IL QUIZ
                         this.quiz = true;
+                        if (!this.userAbyway) {
+                            this.$alert("Hai completato tutti i video del corso di formazione, adesso puoi eseguire il quiz finale", "OK", "success");
+                        } else {
+                            this.$alert("Hai visualizzato tutti i video del corso", "OK", "success");
+                        }
 
-                        this.$alert("Hai completato tutti i video del corso di formazione, adesso puoi eseguire il quiz finale", "OK", "success");
                         const quizElement = document.getElementById('quiz');
                         if (quizElement) {
                             quizElement.classList.remove('non-cliccabile');
