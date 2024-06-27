@@ -78,9 +78,14 @@
                             </v-col>
                         </v-row>
                         <v-row class="ml-3 mt-2 text-center" v-else style="justify-content: center; display: grid;">
-                            <h1 class="my-4" style="color: #1f4b6b">Test finale superato</h1><br>
-                            <img src="video/academy/graduate.png" style="margin: 0 auto;">
-                            <h1 class="text-center my-3" style="color: #1f4b6b">Voto: {{ course.votoQuiz }}</h1><br>
+                            <h1 class="my-4 animate__animated animate__wobble animate__delay-500ms"
+                                style="color: #1f4b6b">Test finale
+                                superato</h1><br>
+                            <img class="animate__animated animate__zoomIn" src="video/academy/graduate.png"
+                                style="margin: 0 auto;">
+                            <div class="mt-2 animate__animated animate__pulse animate__infinite">
+                                <h1 class="text-center my-3 " style="color: #1f4b6b">Voto: {{ course.votoQuiz }}</h1>
+                            </div><br>
                         </v-row>
                     </div>
 
@@ -165,6 +170,7 @@
 
 
 <script>
+import "animate.css";
 import axios from 'axios';
 export default {
     name: 'VideoFormazione',
