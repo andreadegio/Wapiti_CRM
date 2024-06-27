@@ -78,14 +78,23 @@
                             </v-col>
                         </v-row>
                         <v-row class="ml-3 mt-2 text-center" v-else style="justify-content: center; display: grid;">
-                            <h1 class="my-4 animate__animated animate__wobble animate__delay-500ms"
-                                style="color: #1f4b6b">Test finale
-                                superato</h1><br>
-                            <img class="animate__animated animate__zoomIn" src="video/academy/graduate.png"
-                                style="margin: 0 auto;">
-                            <div class="mt-2 animate__animated animate__pulse animate__infinite">
-                                <h1 class="text-center my-3 " style="color: #1f4b6b">Voto: {{ course.votoQuiz }}</h1>
-                            </div><br>
+                            <div ref="resultContent" :class="{ 'no-animations': disableAnimations }">
+                                <h1 class="my-4 animate__animated animate__wobble animate__delay-500ms"
+                                    style="color: #1f4b6b">Test finale
+                                    superato</h1><br>
+                                <img class="animate__animated animate__zoomIn" src="video/academy/graduate.png"
+                                    style="margin: 0 auto;">
+                                <div class="mt-2 animate__animated animate__pulse animate__infinite">
+                                    <h1 class="text-center my-3 " style="color: #1f4b6b">Voto: {{ course.votoQuiz }}
+                                    </h1>
+                                </div><br>
+                            </div>
+                            <v-btn v-if="userAbyway" @click="captureAndShare" color="#1f4b6b" class="mt-4"
+                                style="color: white;">Condividi il
+                                tuo risultato! <v-icon right dark>
+                                    mdi-share-variant
+                                </v-icon></v-btn>
+                            <a ref="downloadLink" style="display: none;">Scarica immagine</a>
                         </v-row>
                     </div>
 
@@ -171,11 +180,13 @@
 
 <script>
 import "animate.css";
+import html2canvas from 'html2canvas';
 import axios from 'axios';
 export default {
     name: 'VideoFormazione',
     data() {
         return {
+            disableAnimations: false,
             isPlaying: false,
             selectedVideo: null,
             selectedVideoIndex: null,
@@ -202,6 +213,46 @@ export default {
     },
 
     methods: {
+        async captureAndShare() {
+            this.disableAnimations = true;
+            await this.$nextTick(); // Assicurarsi che le modifiche al DOM siano completate
+
+            const resultContent = this.$refs.resultContent;
+            const canvas = await html2canvas(resultContent);
+
+            this.disableAnimations = false;
+
+            canvas.toBlob(blob => {
+                const file = new File([blob], 'result.png', { type: 'image/png' });
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+
+                const shareData = {
+                    files: dataTransfer.files,
+                    title: 'Ho superato il ' + this.course.corso + '!',
+                    text: `Ho ottenuto un voto di ${this.course.votoQuiz} nel test finale. Condividi anche tu il tuo risultato!`
+                };
+
+                if (navigator.canShare && navigator.canShare(shareData)) {
+                    navigator.share(shareData).catch(error => {
+                        console.error('Sharing failed', error);
+                        this.downloadImage(blob);
+                    });
+                } else {
+                    this.downloadImage(blob);
+                }
+            });
+        },
+        downloadImage(blob) {
+            const url = URL.createObjectURL(blob);
+            const downloadLink = this.$refs.downloadLink;
+            downloadLink.href = url;
+            downloadLink.download = 'result.png';
+            downloadLink.style.display = 'block';
+            downloadLink.click();
+            downloadLink.style.display = 'none';
+            URL.revokeObjectURL(url);
+        },
 
         async getQuiz(Corso) {
 
@@ -661,5 +712,10 @@ export default {
 .controls {
     display: flex;
     align-items: center;
+}
+
+.no-animations * {
+    animation: none !important;
+    transition: none !important;
 }
 </style>
