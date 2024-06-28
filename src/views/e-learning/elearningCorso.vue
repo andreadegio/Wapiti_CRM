@@ -52,20 +52,20 @@
                                 </div>
                             </v-row>
                             <v-row style="padding: 1rem;">
-                                <v-tabs>
+                                <v-tabs color="deep-orange">
                                     <v-tab v-if="$vuetify.breakpoint.mdAndDown">
-                                        <v-icon>mdi-video</v-icon>
+                                        <v-icon>mdi-video</v-icon> &nbsp;
                                         <span>Contenuto del corso</span>
                                     </v-tab>
                                     <v-tab v-if="selectedVideo">
-                                        <v-icon>mdi-book</v-icon>
+                                        <v-icon>mdi-book</v-icon> &nbsp;
                                         <span>Descrizione</span>
                                     </v-tab>
 
                                     <!-- TAB DEI VIDEO -->
                                     <v-tab-item v-if="$vuetify.breakpoint.mdAndDown">
                                         <div>
-                                            <div style="max-width: 100px;">
+                                            <div>
                                                 <small>Avanzamento: {{ avanzamento }}% <v-progress-linear
                                                         :value="calculateProgress()"></v-progress-linear></small>
                                             </div>
@@ -133,7 +133,8 @@
                                     </v-tab-item>
                                     <!-- TAB DESCRIZIONE -->
                                     <v-tab-item>
-                                        <div class="mt-3 " v-if="selectedVideo">{{ selectedVideo.descrizione }}</div>
+                                        <div class="mt-3 ml-2 " v-if="selectedVideo">{{ selectedVideo.descrizione }}
+                                        </div>
                                     </v-tab-item>
 
                                 </v-tabs>
@@ -184,20 +185,20 @@
                                     @click="course.superato = 0">Ripeti il quiz!</v-btn>
                             </v-row>
                             <v-row style="padding: 1rem;">
-                                <v-tabs>
+                                <v-tabs color="deep-orange">
                                     <v-tab v-if="$vuetify.breakpoint.mdAndDown">
-                                        <v-icon>mdi-video</v-icon>
+                                        <v-icon>mdi-video</v-icon> &nbsp;
                                         <span>Contenuto del corso</span>
                                     </v-tab>
                                     <v-tab v-if="selectedVideo">
-                                        <v-icon>mdi-book</v-icon>
+                                        <v-icon>mdi-book</v-icon> &nbsp;
                                         <span>Descrizione</span>
                                     </v-tab>
 
                                     <!-- TAB DEI VIDEO -->
                                     <v-tab-item v-if="$vuetify.breakpoint.mdAndDown">
                                         <div>
-                                            <div style="max-width: 100px;">
+                                            <div>
                                                 <small>Avanzamento: {{ avanzamento }}% <v-progress-linear
                                                         :value="calculateProgress()"></v-progress-linear></small>
                                             </div>
@@ -265,7 +266,8 @@
                                     </v-tab-item>
                                     <!-- TAB DESCRIZIONE -->
                                     <v-tab-item>
-                                        <div class="mt-3 " v-if="selectedVideo">{{ selectedVideo.descrizione }}</div>
+                                        <div class="mt-3 ml-2 " v-if="selectedVideo">{{ selectedVideo.descrizione }}
+                                        </div>
                                     </v-tab-item>
 
                                 </v-tabs>
@@ -275,7 +277,7 @@
                     <v-col v-if="!$vuetify.breakpoint.mdAndDown" cols="12" md="3" id="sidebar-corso">
                         <div>
                             <p class="h3 mb-0">Contenuto del corso</p>
-                            <div style="max-width: 100px;">
+                            <div>
                                 <small>Avanzamento: {{ avanzamento }}% <v-progress-linear
                                         :value="calculateProgress()"></v-progress-linear></small>
                             </div>
