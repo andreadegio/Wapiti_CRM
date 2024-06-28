@@ -91,7 +91,7 @@
                                                 </div>
                                             </v-list-item>
                                             <v-list-item v-if="course.quiz" id="quiz" class="elencoVideo"
-                                                @click="getQuiz(course.id); showQuiz = true; selectedVideoIndex = null"
+                                                @click="getQuiz(course.id); showQuiz = true; scrollToTop(); selectedVideo = null; selectedVideoIndex = null"
                                                 :class="{ 'selected': showQuiz, 'non-cliccabile': !quiz_btn }">
                                                 <div>
                                                     <div class="h5">Quiz Finale</div>
@@ -120,7 +120,7 @@
                                                 </div>
                                             </v-list-item>
                                             <v-list-item v-if="course.quiz" id="quiz" class="elencoVideo"
-                                                @click="getQuiz(course.id); showQuiz = true; selectedVideoIndex = null"
+                                                @click="getQuiz(course.id); showQuiz = true; scrollToTop(); selectedVideo = null; selectedVideoIndex = null"
                                                 :class="{ 'selected': showQuiz }">
                                                 <div>
                                                     <div class="h5">Quiz Finale</div>
@@ -183,6 +183,93 @@
                                 <v-btn v-if="userAbyway" class="mt-3" color="warning"
                                     @click="course.superato = 0">Ripeti il quiz!</v-btn>
                             </v-row>
+                            <v-row style="padding: 1rem;">
+                                <v-tabs>
+                                    <v-tab v-if="$vuetify.breakpoint.mdAndDown">
+                                        <v-icon>mdi-video</v-icon>
+                                        <span>Contenuto del corso</span>
+                                    </v-tab>
+                                    <v-tab v-if="selectedVideo">
+                                        <v-icon>mdi-book</v-icon>
+                                        <span>Descrizione</span>
+                                    </v-tab>
+
+                                    <!-- TAB DEI VIDEO -->
+                                    <v-tab-item v-if="$vuetify.breakpoint.mdAndDown">
+                                        <div>
+                                            <div style="max-width: 100px;">
+                                                <small>Avanzamento: {{ avanzamento }}% <v-progress-linear
+                                                        :value="calculateProgress()"></v-progress-linear></small>
+                                            </div>
+                                        </div>
+                                        <v-list v-if="!userAbyway">
+                                            <v-list-item v-for="(video, index) in video" :key="index"
+                                                @click="selectVideo(video, index); showQuiz = false;"
+                                                :class="{ 'selected': index === selectedVideoIndex, 'non-cliccabile': !video.active }"
+                                                class="elencoVideo">
+                                                <div>
+                                                    <div class="h5">
+                                                        {{ index + 1 }}. &nbsp; {{ video.titolo }}
+                                                    </div>
+                                                    <div>
+                                                        <i class="far fa-play-circle"></i> &nbsp;durata: {{ video.durata
+                                                        }}
+                                                        <v-chip v-if="video.completed" class="ma-2" small color="green"
+                                                            text-color="white">Completato</v-chip>
+                                                        <v-chip v-if="video.active && !video.completed" class="ma-2"
+                                                            small color="orange" text-color="white">Da
+                                                            vedere...</v-chip>
+                                                    </div>
+                                                </div>
+                                            </v-list-item>
+                                            <v-list-item v-if="course.quiz" id="quiz" class="elencoVideo"
+                                                @click="getQuiz(course.id); showQuiz = true; scrollToTop(); selectedVideo = null; selectedVideoIndex = null"
+                                                :class="{ 'selected': showQuiz, 'non-cliccabile': !quiz_btn }">
+                                                <div>
+                                                    <div class="h5">Quiz Finale</div>
+                                                    <div>
+                                                        <i class="fas fa-user-graduate"></i> &nbsp;Quiz di fine corso
+                                                    </div>
+                                                </div>
+                                            </v-list-item>
+                                        </v-list>
+                                        <v-list v-else>
+                                            <v-list-item v-for="(video, index) in video" :key="index"
+                                                @click="selectVideo(video, index); showQuiz = false;"
+                                                :class="{ 'selected': index === selectedVideoIndex }"
+                                                class="elencoVideo">
+                                                <div>
+                                                    <div class="h5">{{ index + 1 }}. &nbsp; {{ video.titolo }}</div>
+                                                    <div>
+                                                        <i class="far fa-play-circle"></i> &nbsp;durata: {{ video.durata
+                                                        }}
+                                                        <v-chip v-if="video.completed" class="ma-2" small color="green"
+                                                            text-color="white">Completato</v-chip>
+                                                        <v-chip v-if="video.active && !video.completed" class="ma-2"
+                                                            small color="orange" text-color="white">Da
+                                                            vedere...</v-chip>
+                                                    </div>
+                                                </div>
+                                            </v-list-item>
+                                            <v-list-item v-if="course.quiz" id="quiz" class="elencoVideo"
+                                                @click="getQuiz(course.id); scrollToTop(); showQuiz = true; selectedVideo = null; selectedVideoIndex = null"
+                                                :class="{ 'selected': showQuiz }">
+                                                <div>
+                                                    <div class="h5">Quiz Finale</div>
+                                                    <div>
+                                                        <i class="fas fa-user-graduate"></i> &nbsp;Quiz di fine corso
+                                                    </div>
+                                                </div>
+                                            </v-list-item>
+                                        </v-list>
+                                    </v-tab-item>
+                                    <!-- TAB DESCRIZIONE -->
+                                    <v-tab-item>
+                                        <div class="mt-3 " v-if="selectedVideo">{{ selectedVideo.descrizione }}</div>
+                                    </v-tab-item>
+
+                                </v-tabs>
+                            </v-row>
                         </div>
                     </v-col>
                     <v-col v-if="!$vuetify.breakpoint.mdAndDown" cols="12" md="3" id="sidebar-corso">
@@ -212,7 +299,7 @@
                                 </div>
                             </v-list-item>
                             <v-list-item v-if="course.quiz" id="quiz" class="elencoVideo"
-                                @click="getQuiz(course.id); showQuiz = true; selectedVideoIndex = null"
+                                @click="getQuiz(course.id); showQuiz = true; scrollToTop(); selectedVideoIndex = null"
                                 :class="{ 'selected': showQuiz, 'non-cliccabile': !quiz_btn }">
                                 <div>
                                     <div class="h5">Quiz Finale</div>
@@ -238,7 +325,7 @@
                                 </div>
                             </v-list-item>
                             <v-list-item v-if="course.quiz" id="quiz" class="elencoVideo"
-                                @click="getQuiz(course.id); showQuiz = true; selectedVideoIndex = null"
+                                @click="getQuiz(course.id); showQuiz = true; scrollToTop(); selectedVideo = null; selectedVideoIndex = null"
                                 :class="{ 'selected': showQuiz }">
                                 <div>
                                     <div class="h5">Quiz Finale</div>
