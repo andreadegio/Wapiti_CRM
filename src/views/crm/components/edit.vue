@@ -15,90 +15,45 @@
             <v-text-field outlined v-model="nome" label="Nome *"></v-text-field>
           </v-col>
           <v-col cols="12" sm="4" md="4">
-            <v-text-field
-              outlined
-              v-model="cognome"
-              label="Cognome *"
-            ></v-text-field>
+            <v-text-field outlined v-model="cognome" label="Cognome *"></v-text-field>
           </v-col>
           <v-col cols="12" sm="4" md="4">
-            <v-text-field
-              outlined
-              v-model="cf"
-              label="Codice Fiscale"
-            ></v-text-field>
+            <v-text-field outlined v-model="cf" label="Codice Fiscale"></v-text-field>
           </v-col>
         </v-row>
         <v-row>
           <v-col v-if="tipoPersona === 'PG'" cols="12" sm="4" md="4">
-            <v-text-field
-              outlined
-              v-model="ragioneSociale"
-              label="Ragione Sociale *"
-            ></v-text-field>
+            <v-text-field outlined v-model="ragioneSociale" label="Ragione Sociale *"></v-text-field>
           </v-col>
           <v-col v-if="tipoPersona === 'PG'" cols="12" sm="4" md="4">
-            <v-text-field
-              outlined
-              v-model="partitaIva"
-              label="Partita IVA *"
-            ></v-text-field>
+            <v-text-field outlined v-model="partitaIva" label="Partita IVA *"></v-text-field>
           </v-col>
           <v-col v-if="tipoPersona === 'PG'" cols="12" sm="4" md="4">
-            <v-text-field
-              outlined
-              v-model="referente"
-              label="Referente"
-            ></v-text-field>
+            <v-text-field outlined v-model="referente" label="Referente"></v-text-field>
           </v-col>
         </v-row>
         <section :class="{ disabled_input: tipoPersona === '' }">
           <v-row>
             <v-col cols="12" sm="4" md="4">
-              <v-text-field
-                outlined
-                v-model="agenzia"
-                label="Agenzia"
-              ></v-text-field>
+              <v-text-field outlined v-model="agenzia" label="Agenzia"></v-text-field>
             </v-col>
             <v-col cols="12" sm="4" md="4">
-              <v-select
-                id="originOption"
-                outlined
-                v-model="provenienza"
-                :items="originiOptions"
-                item-value="id_origin"
-                item-text="desc"
-                label="Origine del contatto"
-              ></v-select>
+              <v-select id="originOption" outlined v-model="provenienza" :items="originiOptions" item-value="id_origin"
+                item-text="desc" label="Origine del contatto"></v-select>
               <div class="nuova_origine" @click="addOriginOption()">
                 <i class="fas fa-plus-circle fa-2x"> </i>
                 <p style="margin-left: 0.5rem">Aggiungi nuova origine</p>
               </div>
             </v-col>
             <v-col cols="12" sm="4" md="4">
-              <v-select
-                outlined
-                :disabled="provenienza != 8"
-                v-model="id_segnalatore"
-                :items="segnalatori"
-                label="Segnalatore"
-                item-value="id"
-                item-text="cognome"
-              ></v-select>
+              <v-select outlined :disabled="provenienza != 8" v-model="id_segnalatore" :items="segnalatori"
+                label="Segnalatore" item-value="id" item-text="cognome"></v-select>
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="12" sm="4" md="4">
-              <v-select
-                outlined
-                v-model="tipologia"
-                :items="tipologiaOptions"
-                item-value="id_tipologia"
-                item-text="desc"
-                label="Tipologia"
-              ></v-select
-            ></v-col>
+              <v-select outlined v-model="tipologia" :items="tipologiaOptions" item-value="id_tipologia"
+                item-text="desc" label="Tipologia"></v-select></v-col>
             <v-col cols="12" sm="2" md="2">
               <v-radio-group v-model="iscrittoRui" row class="iscrittoRui">
                 <template v-slot:label>
@@ -109,45 +64,23 @@
               </v-radio-group>
             </v-col>
             <v-col cols="12" sm="3" md="3">
-              <v-text-field
-                outlined
-                v-if="iscrittoRui === 'si'"
-                v-model="numeroIscrizione"
-                label="Numero Iscrizione"
-              ></v-text-field
-            ></v-col>
+              <v-text-field outlined v-if="iscrittoRui === 'si'" v-model="numeroIscrizione"
+                label="Numero Iscrizione"></v-text-field></v-col>
             <v-col cols="12" sm="3" md="3">
-              <v-text-field
-                outlined
-                v-if="iscrittoRui === 'si'"
-                v-model="dataIscrizione"
-                label="Data Iscrizione"
-                type="date"
-              ></v-text-field>
+              <v-text-field outlined v-if="iscrittoRui === 'si'" v-model="dataIscrizione" label="Data Iscrizione"
+                type="date"></v-text-field>
             </v-col>
           </v-row>
 
           <v-row>
             <v-col cols="12" sm="6" md="4">
-              <v-text-field
-                outlined
-                v-model="cellulare"
-                label="Cellulare"
-              ></v-text-field>
+              <v-text-field outlined v-model="cellulare" label="Cellulare"></v-text-field>
             </v-col>
             <v-col cols="12" sm="6" md="4">
-              <v-text-field
-                outlined
-                v-model="telefono"
-                label="Telefono"
-              ></v-text-field>
+              <v-text-field outlined v-model="telefono" label="Telefono"></v-text-field>
             </v-col>
             <v-col cols="12" sm="6" md="4">
-              <v-text-field
-                outlined
-                v-model="email"
-                label="Email"
-              ></v-text-field>
+              <v-text-field outlined v-model="email" label="Email"></v-text-field>
             </v-col>
           </v-row>
           <v-row>
@@ -155,47 +88,22 @@
               <v-text-field outlined v-model="via" label="Via"></v-text-field>
             </v-col>
             <v-col cols="12" sm="4" md="4">
-              <v-text-field
-                outlined
-                v-model="civico"
-                label="N° Civico"
-              ></v-text-field>
+              <v-text-field outlined v-model="civico" label="N° Civico"></v-text-field>
             </v-col>
             <v-col cols="12" sm="4" md="4">
-              <v-text-field
-                outlined
-                v-model="cap"
-                label="CAP"
-              ></v-text-field> </v-col
-          ></v-row>
+              <v-text-field outlined v-model="cap" label="CAP"></v-text-field> </v-col></v-row>
           <v-row>
             <v-col cols="12" sm="4" md="4">
-              <v-text-field
-                outlined
-                v-model="comune"
-                label="Comune"
-              ></v-text-field>
+              <v-text-field outlined v-model="comune" label="Comune"></v-text-field>
             </v-col>
 
             <v-col cols="12" md="4" sm="4">
-              <v-select
-                outlined
-                id="province"
-                v-model="provincia"
-                @change="updateRegion"
-                :items="province"
-                label="Provincia"
-              ></v-select>
+              <v-select outlined id="province" v-model="provincia" @change="updateRegion" :items="province"
+                label="Provincia"></v-select>
             </v-col>
 
             <v-col cols="12" md="4" sm="4">
-              <v-text-field
-                outlined
-                readonly
-                id="regione"
-                v-model="regione"
-                label="Regione"
-              ></v-text-field>
+              <v-text-field outlined readonly id="regione" v-model="regione" label="Regione"></v-text-field>
             </v-col>
           </v-row>
           <v-row class="border pb-0">
@@ -203,20 +111,12 @@
               Profili social:
             </v-col>
             <v-col cols="12" sm="6" md="4">
-              <v-text-field
-                outlined
-                prepend-inner-icon="mdi-facebook"
-                v-model="facebook"
-                label="Facebook"
-              ></v-text-field>
+              <v-text-field outlined prepend-inner-icon="mdi-facebook" v-model="facebook"
+                label="Facebook"></v-text-field>
             </v-col>
             <v-col cols="12" sm="6" md="4">
-              <v-text-field
-                outlined
-                prepend-inner-icon="mdi-linkedin"
-                v-model="linkedin"
-                label="Linkedin"
-              ></v-text-field>
+              <v-text-field outlined prepend-inner-icon="mdi-linkedin" v-model="linkedin"
+                label="Linkedin"></v-text-field>
             </v-col>
           </v-row>
           <v-card-actions class="mt-3">
@@ -224,8 +124,7 @@
             <v-btn color="blue-grey" outlined @click="$emit('annulla')">
               <i class="fas fa-times"></i>&nbsp; Annulla
             </v-btn>
-            <v-btn color="#1f4b6b" dark @click="salvaModifiche()"
-              ><i class="fas fa-save fa-2x"></i> &nbsp; Salva
+            <v-btn color="#1f4b6b" dark @click="salvaModifiche()"><i class="fas fa-save fa-2x"></i> &nbsp; Salva
             </v-btn>
           </v-card-actions>
         </section>
@@ -480,7 +379,7 @@ export default {
   methods: {
     isBlackList(prov) {
       if (this.blackListProv.includes(prov)) {
-        console.log("provincia in blacklist");
+        // console.log("provincia in blacklist");
         this.$alert(
           "Questa provincia rientra nella blacklist, non sarà possibile inserire il candidato",
           "Attenzione",
@@ -650,8 +549,8 @@ export default {
             axios
               .post(
                 this.$custom_json.base_url +
-                  this.$custom_json.api_url +
-                  this.$custom_json.crm.addSource,
+                this.$custom_json.api_url +
+                this.$custom_json.crm.addSource,
                 param
               )
               .then((response) => {
@@ -681,8 +580,8 @@ export default {
         await axios
           .get(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.crm.getSource
+            this.$custom_json.api_url +
+            this.$custom_json.crm.getSource
           )
           .then((response) => {
             this.originiOptions = response.data;
@@ -702,8 +601,8 @@ export default {
         await axios
           .get(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.crm.getSegnalatori
+            this.$custom_json.api_url +
+            this.$custom_json.crm.getSegnalatori
           )
           .then((response) => {
             this.segnalatori = response.data;
@@ -717,8 +616,8 @@ export default {
         await axios
           .get(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.crm.getTipo
+            this.$custom_json.api_url +
+            this.$custom_json.crm.getTipo
           )
           .then((response) => {
             this.tipologiaOptions = response.data;
@@ -804,8 +703,8 @@ export default {
         await axios
           .post(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.crm.editContatto,
+            this.$custom_json.api_url +
+            this.$custom_json.crm.editContatto,
             param
           )
           .then((response) => {
@@ -833,10 +732,12 @@ export default {
   margin-top: 0px !important;
   padding-top: 0px !important;
 }
+
 .disabled_input {
   pointer-events: none;
   opacity: 0.5;
 }
+
 .nuova_origine {
   cursor: pointer;
   color: #1976d2;

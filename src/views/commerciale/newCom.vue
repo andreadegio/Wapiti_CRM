@@ -19,13 +19,7 @@
         <span></span>
       </template>
     </CModal>
-    <CModal
-      :show.sync="selezionaImmagini"
-      color="dark"
-      centered
-      style="z-index: 30"
-      size="lg"
-    >
+    <CModal :show.sync="selezionaImmagini" color="dark" centered style="z-index: 30" size="lg">
       <template #header>
         <span class="text-uppercase">
           <strong>Ricerca immagini</strong>
@@ -40,13 +34,8 @@
         <div v-if="searchResult != null">
           {{ searchResult }}
         </div>
-        <div
-          v-if="loader == true"
-          style="position: relative; width: 100%; top: 50%; left: 50%"
-        >
-          <img
-            src= "/img/loader.gif"
-            style="
+        <div v-if="loader == true" style="position: relative; width: 100%; top: 50%; left: 50%">
+          <img src="/img/loader.gif" style="
               position: fixed;
               top: 50%;
               left: 50%;
@@ -55,8 +44,7 @@
               -ms-transform: translate(-50%, -50%);
               -o-transform: translate(-50%, -50%);
               transform: translate(-50%, -50%);
-            "
-          />
+            " />
           <!-- <div class="lds-grid">
             <div></div>
             <div></div>
@@ -69,17 +57,9 @@
             <div></div>
           </div> -->
         </div>
-        <div
-          class="m-3 col-lg-3 col-sm-6"
-          v-for="(immagine, id) in elencoImg"
-          :key="id"
-        >
-          <img
-            class="selImg"
-            :src="immagine.urls.thumb"
-            :alt="immagine.id"
-            @click="selectImg(immagine.id, immagine.urls.thumb)"
-          />
+        <div class="m-3 col-lg-3 col-sm-6" v-for="(immagine, id) in elencoImg" :key="id">
+          <img class="selImg" :src="immagine.urls.thumb" :alt="immagine.id"
+            @click="selectImg(immagine.id, immagine.urls.thumb)" />
         </div>
       </div>
 
@@ -87,15 +67,10 @@
         <em><small>Fonte immagini Unsplash.com </small></em>
       </template>
     </CModal>
-    <div
-      style="background-color: white; border-radius: 0.3rem"
-      class="container mt-2 card_post"
-      :style="{ '--bgColor': $attrs.colore }"
-    >
+    <div style="background-color: white; border-radius: 0.3rem" class="container mt-2 card_post"
+      :style="{ '--bgColor': $attrs.colore }">
       <div class="breadcrumbs">
-        <CLink @click="back()" class="breadcrumbs_link"
-          >Gestione {{ $route.params.settore }}</CLink
-        >
+        <CLink @click="back()" class="breadcrumbs_link">Gestione {{ $route.params.settore }}</CLink>
         > Nuova Comunicazione
       </div>
       <div class="row justify-content-center">
@@ -115,100 +90,56 @@
             </div>
           </div> -->
           <div class="row cover_box mb-3">
-            <span class="mb-2"
-              ><strong>Seleziona l'area di competenza:</strong></span
-            >
+            <span class="mb-2"><strong>Seleziona l'area di competenza:</strong></span>
             <div class="control">
-              <treeselect
-                :multiple="false"
-                :always-open="false"
-                :options="$attrs.lista_aree"
-                :max-height="300"
-                placeholder="Seleziona l'area"
-                v-model="area_post"
-              />
+              <treeselect :multiple="false" :always-open="false" :options="$attrs.lista_aree" :max-height="300"
+                placeholder="Seleziona l'area" v-model="area_post" />
             </div>
           </div>
           <div class="cover_box mb-3">
             <span><strong>Titolo:</strong></span>
-            <CInput
-              type="text"
-              v-model="titolo_post"
-              placeholder="Assegna un titolo a questo caricamento Es. Set Informativo ABC"
-              maxlength="100"
-            />
+            <CInput type="text" v-model="titolo_post"
+              placeholder="Assegna un titolo a questo caricamento Es. Set Informativo ABC" maxlength="100" />
           </div>
           <div class="cover_box mb-3">
             <span><strong>Sottotitolo:</strong></span>
-            <CInput
-              type="text"
-              v-model="subtitle_post"
-              placeholder="Assegna un sottotitolo"
-              maxlength="200"
-            />
+            <CInput type="text" v-model="subtitle_post" placeholder="Assegna un sottotitolo" maxlength="200" />
           </div>
           <div class="row">
             <div class="col-sm-6">
               <div class="row cover_box">
-                <span class="mb-2"
-                  ><strong
-                    >Carica o cerca un'immagine per la copertina:</strong
-                  ></span
-                >
+                <span class="mb-2"><strong>Carica o cerca un'immagine per la copertina:</strong></span>
                 <div class="row m-0">
-                  <div
-                    class="col-sm-4 justify-content-center"
-                    style="background-color: #f0f0f0; border-radius: 0.3rem"
-                  >
+                  <div class="col-sm-4 justify-content-center" style="background-color: #f0f0f0; border-radius: 0.3rem">
                     <img v-if="thumb" :src="thumb" class="p-0 m-0 thumbImg" />
                     <img v-if="thumb2" :src="thumb2" class="p-0 m-0 thumbImg" />
                   </div>
                   <div id="carica_cover" class="col-sm-8">
                     <input type="file" @change="previewFiles" ref="file" />
                     <div class="input-group mt-2">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Che immagine vuoi cercare?"
-                        ref="query"
-                        v-on:keyup.enter="searchImg($refs.query.value)"
-                      />
+                      <input type="text" class="form-control" placeholder="Che immagine vuoi cercare?" ref="query"
+                        v-on:keyup.enter="searchImg($refs.query.value)" />
                       <div class="input-group-append">
-                        <button
-                          class="btn btn-secondary"
-                          type="button"
-                          @click="searchImg($refs.query.value)"
-                        >
+                        <button class="btn btn-secondary" type="button" @click="searchImg($refs.query.value)">
                           <i class="fa fa-search"></i>
                         </button>
                       </div>
                     </div>
                   </div>
                 </div>
-                <button
-                  v-if="thumb || thumb2"
-                  @click="resetCover"
-                  style="color: darkred; margin-right: auto; margin-left: 50%"
-                >
+                <button v-if="thumb || thumb2" @click="resetCover"
+                  style="color: darkred; margin-right: auto; margin-left: 50%">
                   <i class="far fa-trash-alt fa-2x"></i>
                 </button>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="row cover_box">
-                <span class="mb-2"
-                  ><strong>Chi può accedere a questi contenuti?</strong></span
-                >
+                <span class="mb-2"><strong>Chi può accedere a questi contenuti?</strong></span>
 
                 <div class="control">
-                  <treeselect
-                    v-model="permessi"
-                    :multiple="true"
-                    :always-open="false"
-                    :options="options"
-                    :max-height="300"
-                    placeholder="Seleziona per tipologia di rapporto"
-                  />
+                  <treeselect v-model="permessi" :multiple="true" :always-open="false" :options="options"
+                    :max-height="300" placeholder="Seleziona per tipologia di rapporto" />
                 </div>
               </div>
             </div>
@@ -221,44 +152,20 @@
           <div class="row cover_box">
             <span class="mb-2"><strong>Aggiungi allegati:</strong></span>
             <div class="control">
-              <VueFileAgent
-                class="mx-5"
-                ref="vueFileAgent"
-                :editable="true"
-                :theme="'list'"
-                :multiple="true"
-                :deletable="true"
-                :meta="true"
-                :accept="'image/*,.zip,.pdf,.doc,.xls,.xlsx,.docx,.ppt,.pptx,video/*'"
-                :maxSize="'200MB'"
-                :maxFiles="14"
-                :helpText="'Seleziona o trascina qui i file'"
-                :errorText="{
-                  type: 'Tipo di file non consentito',
-                  size: 'La dimensione dei file non può superare i 10MB',
-                }"
-                @select="filesSelected($event)"
-                @beforedelete="onBeforeDelete($event)"
-                @delete="fileDeleted($event)"
-                v-model="fileRecords"
-              ></VueFileAgent>
+              <VueFileAgent class="mx-5" ref="vueFileAgent" :editable="true" :theme="'list'" :multiple="true"
+                :deletable="true" :meta="true" :accept="'image/*,.zip,.pdf,.doc,.xls,.xlsx,.docx,.ppt,.pptx,video/*'"
+                :maxSize="'200MB'" :maxFiles="14" :helpText="'Seleziona o trascina qui i file'" :errorText="{
+      type: 'Tipo di file non consentito',
+      size: 'La dimensione dei file non può superare i 10MB',
+    }" @select="filesSelected($event)" @beforedelete="onBeforeDelete($event)" @delete="fileDeleted($event)"
+                v-model="fileRecords"></VueFileAgent>
             </div>
           </div>
           <div class="container">
-            <CButton
-              color="primary"
-              class=""
-              style="color: white"
-              name="salva"
-              @click="salva()"
-              ><i class="far fa-save"></i> Salva</CButton
-            >
-            <CButton
-              class="ml-2"
-              color="primary"
-              variant="outline"
-              @click="back()"
-              ><i class="fas fa-times"></i> Annulla
+            <CButton color="primary" class="" style="color: white" name="salva" @click="salva()"><i
+                class="far fa-save"></i>
+              Salva</CButton>
+            <CButton class="ml-2" color="primary" variant="outline" @click="back()"><i class="fas fa-times"></i> Annulla
             </CButton>
           </div>
         </div>
@@ -357,8 +264,8 @@ export default {
         await axios
           .post(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.categorie
+            this.$custom_json.api_url +
+            this.$custom_json.ep_api.categorie
           )
           .then((response) => {
             // la risposta con l'elenco delle categorie  la salvo nello storage
@@ -407,8 +314,8 @@ export default {
         await axios
           .post(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.searchImg,
+            this.$custom_json.api_url +
+            this.$custom_json.ep_api.searchImg,
             param
           )
           .then((response) => {
@@ -522,7 +429,7 @@ export default {
                   params_allegati
                 )
                 .then((response) => {
-                  console.log(response.data);
+                  // console.log(response.data);
                   this.$alert(
                     "Comunicazione pubblicata correttamente",
                     "Completato",
@@ -581,20 +488,21 @@ export default {
   display: block;
   width: 15%;
   height: 15px;
-  background: linear-gradient(
-    to right,
-    var(--bgColor) 60%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(to right,
+      var(--bgColor) 60%,
+      rgba(255, 255, 255, 0) 100%);
   /* border-top: 15px solid var(--bgColor); */
 }
+
 .thumbImg {
   max-width: 100%;
   max-height: 100%;
 }
+
 .selImg {
   cursor: pointer;
 }
+
 .cover_box {
   border: 1px solid rgb(218, 218, 218);
   padding: 0.4rem;
@@ -602,13 +510,16 @@ export default {
   border-radius: 0.3rem;
   background-color: #ebedef;
 }
+
 .ql-container.ql-snow {
   border-radius: 0 0 0.5rem 0.5rem !important;
   background-color: white;
 }
+
 .ql-toolbar.ql-snow {
   border-radius: 0.5rem 0.5rem 0 0 !important;
 }
+
 .breadcrumbs_link {
   color: var(--bgColor) !important;
   text-decoration: underline;
@@ -622,6 +533,7 @@ export default {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 600;
 }
+
 .breadcrumbs {
   color: var(--bgColor);
   font-size: 14px;

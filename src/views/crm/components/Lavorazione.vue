@@ -444,6 +444,30 @@
                     ></v-radio>
                   </v-radio-group>
                 </v-col>
+                <v-col
+                  v-if="metodoContatto == 'telefono'"
+                  cols="12"
+                  sm="3"
+                  md="3"
+                  :class="{
+                    disabled_input: richiama || rifiuta,
+                  }"
+                >
+                <v-checkbox label="Interessato al settore Altri Rami"></v-checkbox>
+                  
+                </v-col>
+                <v-col
+                  v-if="metodoContatto == 'telefono'"
+                  cols="12"
+                  sm="3"
+                  md="3"
+                  :class="{
+                    disabled_input: richiama || rifiuta,
+                  }"
+                >
+                <v-checkbox label="Interessato al settore Energia"></v-checkbox>
+                  
+                </v-col>
                 <!-- <v-col
                   v-if="metodoContatto == 'telefono'"
                   cols="12"
