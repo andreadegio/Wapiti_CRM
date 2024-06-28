@@ -362,7 +362,7 @@ export default {
     width: 50px;
     left: auto;
     right: 2rem;
-    top: 20vh;
+    top: 185px;
 }
 
 .course-card {
