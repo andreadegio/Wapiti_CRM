@@ -49,8 +49,8 @@
     </v-dialog>
     <v-dialog v-model="dialog2" fullscreen hide-overlay transition="dialog-bottom-transition" persistent>
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="#1f4b6b" dark v-bind="attrs" v-on="on" @click="getUploadedFiles()"><i
-            class="fas fa-user-lock"></i>&nbsp;Attiva account
+        <v-btn v-if="user['idUtente'] == 140 || userCRMInfo.idRuolo == '2'" color="#1f4b6b" dark v-bind="attrs"
+          v-on="on" @click="getUploadedFiles()"><i class="fas fa-user-lock"></i>&nbsp;Attiva account
         </v-btn>
       </template>
       <v-card class="text-center">
@@ -290,6 +290,7 @@ export default {
       uploadedFiles: [],
       fileRichiesti: [],
       user: JSON.parse(localStorage.getItem("chisono_data")),
+      userCRMInfo: JSON.parse(localStorage.getItem("userCRMInfo")),
     };
   },
   methods: {

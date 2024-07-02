@@ -1,54 +1,27 @@
 <template>
   <CContainer id="cover_admin" class="align-items-center min-vh-100">
     <div>
-      <new-corso
-        v-show="addCorso"
-        @back="step_back"
-        class="animate__animated animate__fadeIn"
-      />
-      <archivio
-        v-show="showArchivio"
-        @back="step_back"
-        class="animate__animated animate__fadeIn"
-      />
-      <gest-cat
-        v-show="showCategorie"
-        @back="step_back"
-        class="animate__animated animate__fadeIn"
-      />
+      <new-corso v-show="addCorso" @back="step_back" class="animate__animated animate__fadeIn" />
+      <archivio v-show="showArchivio" @back="step_back" class="animate__animated animate__fadeIn" />
+      <gest-cat v-show="showCategorie" @back="step_back" class="animate__animated animate__fadeIn" />
       <div v-show="home" class="container">
         <div class="row text-center mt-5 riga">
-          <div
-            class="col-md-2 action justify-content-center"
-            @click="(addCorso = true), (home = false)"
-          >
-            <i
-              class="
+          <div class="col-md-2 action justify-content-center" @click="(addCorso = true), (home = false)">
+            <i class="
                 fas
                 fa-user-graduate fa-3x
                 animate__animated animate__bounce
-              "
-            ></i>
+              "></i>
             <br /><span>Nuovo<br />Corso</span>
           </div>
 
-          <div
-            class="col-md-2 action"
-            @click="(showCategorie = true), (home = false)"
-          >
-            <i
-              class="fas fa-list-ol fa-3x animate__animated animate__bounce"
-            ></i>
+          <div class="col-md-2 action" @click="(showCategorie = true), (home = false)">
+            <i class="fas fa-list-ol fa-3x animate__animated animate__bounce"></i>
             <br /><span>Gestione<br />Categorie</span>
           </div>
-          <div
-            class="col-md-2 action"
-            @click="(showArchivio = true), (home = false)"
-          >
+          <div class="col-md-2 action" @click="(showArchivio = true), (home = false)">
             <i
-              class="fas fa-archive fa-3x animate__animated animate__bounce"
-            ></i
-            ><br /><span>Visualizza<br />Archivio</span>
+              class="fas fa-archive fa-3x animate__animated animate__bounce"></i><br /><span>Visualizza<br />Archivio</span>
           </div>
         </div>
       </div>
@@ -60,7 +33,7 @@
 import newCorso from "./newCorso.vue"; // componente per l'inserimento di un nuovo corso
 import Archivio from "./GestioneCorsi.vue"; //componente per la gestione dei corsi
 import GestCat from "./GestCat.vue"; // componente per la gestione delle categorie
-import "animate.css";
+// import "animate.css";
 import axios from "axios";
 
 export default {
@@ -103,7 +76,7 @@ export default {
     step_back() {
       this.addCorso = false;
       this.showArchivio = false;
-      this.showCategorie= false;
+      this.showCategorie = false;
       this.home = true;
     },
 
@@ -113,8 +86,8 @@ export default {
         await axios
           .post(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.tipologie_rapporto
+            this.$custom_json.api_url +
+            this.$custom_json.ep_api.tipologie_rapporto
           )
           .then((response) => {
             // la risposta con l'elenco delle tipologie di rapporto la salvo nello storage
@@ -138,6 +111,7 @@ export default {
 .riga {
   justify-content: center;
 }
+
 .action {
   text-align: center;
   cursor: pointer;
@@ -151,12 +125,14 @@ export default {
   color: rgb(255, 255, 255);
   max-width: 15rem;
 }
+
 .action:hover {
   -webkit-box-shadow: 5px 5px 12px 0px #747474;
   -moz-box-shadow: 5px 5px 12px 0px #747474;
   -o-box-shadow: 5px 5px 12px 0px #747474;
   box-shadow: 5px 5px 12px 0px #747474;
 }
+
 .action:hover svg {
   transform: translateY(-2rem);
 }

@@ -4,7 +4,8 @@
     <div class="text-center">
       Totale Candidati nella lista: {{ items.length }}
     </div>
-    <div class="text-center" v-if="user['idUtente'] != 140 && userCRMInfo.idRuolo != '2' && gridType != 'formazione'">
+
+    <div class="text-center" v-if="user['idUtente'] != 140 && gridType != 'formazione' && userCRMInfo.idRuolo != '2'">
       <v-checkbox v-model="filtroOperatore" label="Mostra solo i miei contatti:"></v-checkbox>
     </div>
 
@@ -333,10 +334,10 @@ export default {
               } else {
                 if (
                   this.filtroOperatore == true &&
-                  this.user["idUtente"] != 140 &&
-                  this.userCRMInfo.idRuolo != "2"
+                  this.user["idUtente"] != 140
+                  // && this.userCRMInfo.idRuolo != "2"
                 ) {
-                  return item.user_ins_id == this.userCRMInfo.idbroker;
+                  return item.user_ins_id == this.userCRMInfo.idbroker || item.id_referente == this.userCRMInfo.idbroker;
                 } else {
                   if (this.gridType == "formazione"
                     && this.user["idUtente"] != 140

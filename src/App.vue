@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import "animate.css";
 import store from "./store";
 import Transition from 'vue-router-transitions';
 // import { Transition } from '@vue/vue-router-transitions';

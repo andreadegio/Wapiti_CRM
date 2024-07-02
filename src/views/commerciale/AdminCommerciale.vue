@@ -1,65 +1,31 @@
 <template>
-  <CContainer
-    id="cover_admin"
-    :style="{ '--urlImg': urlImgSettore }"
-    class="align-items-center min-vh-100"
-  >
+  <CContainer id="cover_admin" :style="{ '--urlImg': urlImgSettore }" class="align-items-center min-vh-100">
     <div>
-      <new-com
-        v-show="addCom"
-        @back="step_back"
-        :colore="coloreSettore"
-        class="animate__animated animate__fadeIn"
-        :lista_aree="lista_aree"
-      />
-      <new-upload
-        v-show="addFile"
-        @back="step_back"
-        :colore="coloreSettore"
-        :lista_aree="lista_aree"
-        class="animate__animated animate__fadeIn"
-      />
-      <archivio
-        v-show="showArchivio"
-        :colore="coloreSettore"
-        :settore="$attrs.settore"
-        :lista_aree="lista_aree"
-        @back="step_back"
-        class="animate__animated animate__fadeIn"
-      />
+      <new-com v-show="addCom" @back="step_back" :colore="coloreSettore" class="animate__animated animate__fadeIn"
+        :lista_aree="lista_aree" />
+      <new-upload v-show="addFile" @back="step_back" :colore="coloreSettore" :lista_aree="lista_aree"
+        class="animate__animated animate__fadeIn" />
+      <archivio v-show="showArchivio" :colore="coloreSettore" :settore="$attrs.settore" :lista_aree="lista_aree"
+        @back="step_back" class="animate__animated animate__fadeIn" />
       <div v-show="home" class="container">
         <div class="row text-center mt-5 riga">
-          <div
-            class="col-md-2 action justify-content-center"
-            :style="{ '--bgColor': coloreSettore }"
-            @click="(addCom = true), (home = false)"
-          >
+          <div class="col-md-2 action justify-content-center" :style="{ '--bgColor': coloreSettore }"
+            @click="(addCom = true), (home = false)">
             <i class="fas fa-rss fa-3x animate__animated animate__bounce"></i>
             <br /><span>Nuova<br />Comunicazione</span>
           </div>
-          <div
-            class="col-md-2 action"
-            :style="{ '--bgColor': coloreSettore }"
-            @click="(addFile = true), (home = false)"
-          >
-            <i
-              class="
+          <div class="col-md-2 action" :style="{ '--bgColor': coloreSettore }"
+            @click="(addFile = true), (home = false)">
+            <i class="
                 fas
                 fa-cloud-upload-alt fa-3x
                 animate__animated animate__bounce
-              "
-            ></i
-            ><br /><span>Carica<br />Materiale</span>
+              "></i><br /><span>Carica<br />Materiale</span>
           </div>
-          <div
-            class="col-md-2 action"
-            :style="{ '--bgColor': coloreSettore }"
-            @click="(showArchivio = true), (home = false)"
-          >
+          <div class="col-md-2 action" :style="{ '--bgColor': coloreSettore }"
+            @click="(showArchivio = true), (home = false)">
             <i
-              class="fas fa-archive fa-3x animate__animated animate__bounce"
-            ></i
-            ><br /><span>Visualizza<br />Archivio</span>
+              class="fas fa-archive fa-3x animate__animated animate__bounce"></i><br /><span>Visualizza<br />Archivio</span>
           </div>
         </div>
       </div>
@@ -71,7 +37,7 @@
 import NewCom from "./newCom.vue"; // componente per l'inserimento di una nuova comunicazione
 import NewUpload from "./newUpload.vue"; // componente per l'inserimento di un nuovo contenuto (file)
 import Archivio from "./gestMateriale.vue"; //componente per la gestione dei post(materiale + comunicazioni)
-import "animate.css";
+// import "animate.css";
 import axios from "axios";
 
 export default {
@@ -140,8 +106,8 @@ export default {
         await axios
           .post(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.area,
+            this.$custom_json.api_url +
+            this.$custom_json.ep_api.area,
             { params }
           )
           .then((response) => {
@@ -162,8 +128,8 @@ export default {
         await axios
           .post(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.tipologie_rapporto
+            this.$custom_json.api_url +
+            this.$custom_json.ep_api.tipologie_rapporto
           )
           .then((response) => {
             //       this.tipologie =  [
@@ -191,8 +157,8 @@ export default {
         await axios
           .post(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.color_settore,
+            this.$custom_json.api_url +
+            this.$custom_json.ep_api.color_settore,
             { params }
           )
           .then((response) => {
@@ -217,6 +183,7 @@ export default {
 .riga {
   justify-content: center;
 }
+
 .action {
   text-align: center;
   cursor: pointer;
@@ -230,12 +197,14 @@ export default {
   color: rgb(255, 255, 255);
   max-width: 15rem;
 }
+
 .action:hover {
   -webkit-box-shadow: 5px 5px 12px 0px #747474;
   -moz-box-shadow: 5px 5px 12px 0px #747474;
   -o-box-shadow: 5px 5px 12px 0px #747474;
   box-shadow: 5px 5px 12px 0px #747474;
 }
+
 .action:hover svg {
   transform: translateY(-2rem);
 }
