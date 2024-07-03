@@ -345,7 +345,7 @@
 </template>
 
 <script>
-import "animate.css";
+// import "animate.css";
 import html2canvas from 'html2canvas';
 import axios from 'axios';
 export default {
