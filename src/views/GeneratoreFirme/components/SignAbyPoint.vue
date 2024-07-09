@@ -179,7 +179,7 @@
       {{recapiti.datiSoc}}
     </div>
     <div v-else class="text-center" style="font-weight: 500; font-family: Montserrat; font-size: 10px">
-      Aby Broker Srl. - Partita IVA e Codice Fiscale: 00803170141 - Numero REA: MI-2057530 - Iscrizione RUI:
+      Aby Broker Srl. - Partita IVA e Codice Fiscale: 00803170141 - Numero REA: MS-120836 - Iscrizione RUI:
       B000137063 <br> Iscrizione al Registro delle Imprese di Massa Carrara: 00803170141 - Capitale sociale: €
       1.000.000,00
     </div>
