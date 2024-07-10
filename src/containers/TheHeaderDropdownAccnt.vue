@@ -207,7 +207,7 @@ export default {
       user: JSON.parse(localStorage.getItem("chisono_data")),
       userCRMInfo: [],
       is_abilitato_rami: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Rami,
-      is_abilitato_selly_nlt: true,
+      is_abilitato_selly_nlt: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Noleggio_4YL,
     };
   },
   computed: {
@@ -251,8 +251,8 @@ export default {
         //   + "&token=" + token;
 
         // window.open(verifica_auth, "_blank");
-        window.location.href = url_selly;
-        // window.open(url_selly, "_blank");
+        // window.location.href = url_selly;
+        window.open(url_selly, "_blank");
         // window.location.href = url_selly;
 
       } catch (error) {
