@@ -145,6 +145,10 @@
         <i class="fas fa-fire-extinguisher"></i> <span class="pl-1">Piattaforma PROFESSIONISTI</span>
       </CDropdownItem>
 
+      <CDropdownItem @click="vaiSuSelly" v-show="is_abilitato_selly_nlt">
+        <i class="fas fa-tv"></i> <span class="pl-1">Selly NLT</span>
+      </CDropdownItem>
+
       <!-- <CDropdownItem to="/Calendario" v-if="admin">
         <i class="far fa-calendar-alt"></i>
         <span class="pl-1">Appuntamenti</span>
@@ -155,6 +159,7 @@
       <CDropdownItem href="https://www.abyway.it/Monitor/GestioneMonitor.html" target="_blank" v-if="admin">
         <i class="fas fa-tv"></i> <span class="pl-1">Gestione TV</span>
       </CDropdownItem>
+
       <CDropdownHeader tag="div" class="text-center" color="light" v-if="user.Is_Abilitato_Elearning">
         <strong>Formazione</strong>
       </CDropdownHeader>
@@ -202,6 +207,7 @@ export default {
       user: JSON.parse(localStorage.getItem("chisono_data")),
       userCRMInfo: [],
       is_abilitato_rami: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Rami,
+      is_abilitato_selly_nlt: true,
     };
   },
   computed: {
@@ -219,6 +225,54 @@ export default {
     // se specificato un timeout, il loader torna allo stato precedente
     setLoading(is_loading, timeout_ms = null) {
       this.$emit("set-loading", is_loading, timeout_ms);
+    },
+
+    async vaiSuSelly() {
+      // =================== ACCESSO PER ABYNEXT 2 ===============================
+      try {
+        this.setLoading(false, 10000);
+
+        let token = await this.generaAuthToken();
+
+        // richiesta a selly
+        let params = {
+          token: token,
+          id_utente: localStorage.getItem("userID"),
+          email: localStorage.getItem("userID")+"@aby.sell-y.it"
+        }
+
+        let base64_params = btoa(JSON.stringify(params));
+
+        let url_selly = this.$custom_json.selly_nlt.url_selly
+          + "?info=" + base64_params;
+
+        // let verifica_auth = this.$custom_json.selly_nlt.url_accesso
+        //   + "/selly/auth?id_utente=" + localStorage.getItem("userID")
+        //   + "&token=" + token;
+
+        // window.open(verifica_auth, "_blank");
+        window.location.href = url_selly;
+        // window.open(url_selly, "_blank");
+        // window.location.href = url_selly;
+
+      } catch (error) {
+        console.error("Errore Auth Selly", error);
+      }
+    },
+
+
+    async generaAuthToken() {
+      let url = this.$custom_json.selly_nlt.url_accesso
+        + this.$custom_json.selly_nlt.endpoint_auth_token
+        + "?id_utente=" + localStorage.getItem("userID");
+
+      let response = await axios.get(url);
+
+      if(!response.data || !response.data.token){
+        throw new Error("[TheHeaderDropdownAccnt.vaiSuSelly] response genera auth vuota o token auth non presente", response.data);
+      }
+      
+      return response.data.token;
     },
 
     async vaiSuAbyNext1() {
