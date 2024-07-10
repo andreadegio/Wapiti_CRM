@@ -125,7 +125,7 @@ export default {
   },
   data() {
     return {
-      filtroOperatore: true,
+      filtroOperatore: JSON.parse(localStorage.getItem("userCRMInfo")).idRuolo == "2" ? false : true,
       user: JSON.parse(localStorage.getItem("chisono_data")),
       userCRMInfo: JSON.parse(localStorage.getItem("userCRMInfo")),
       nascondiElem: false,
