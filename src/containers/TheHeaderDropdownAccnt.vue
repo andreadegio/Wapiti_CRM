@@ -146,7 +146,7 @@
       </CDropdownItem>
 
       <CDropdownItem @click="vaiSuSelly" v-show="is_abilitato_selly_nlt">
-        <i class="fas fa-tv"></i> <span class="pl-1">Selly NLT</span>
+        <i class="fas fa-car"></i> <span class="pl-1">Selly NLT</span>
       </CDropdownItem>
 
       <!-- <CDropdownItem to="/Calendario" v-if="admin">
@@ -246,13 +246,20 @@ export default {
         let url_selly = this.$custom_json.selly_nlt.url_selly
           + "?info=" + base64_params;
 
+        // crea link e simula click, per aprira in 1 altra tab senza blocco popup firefox
+        let link = document.createElement('a');
+        link.target = '_blank';
+        link.href = url_selly;
+        link.click();
+        link.remove();
+
+        // console.log(url_selly);
+
         // let verifica_auth = this.$custom_json.selly_nlt.url_accesso
         //   + "/selly/auth?id_utente=" + localStorage.getItem("userID")
         //   + "&token=" + token;
 
         // window.open(verifica_auth, "_blank");
-        // window.location.href = url_selly;
-        window.open(url_selly, "_blank");
         // window.location.href = url_selly;
 
       } catch (error) {
@@ -266,7 +273,7 @@ export default {
         + this.$custom_json.selly_nlt.endpoint_auth_token
         + "?id_utente=" + localStorage.getItem("userID");
 
-      let response = await axios.get(url);
+      let response = await axios.get(url, { withCredentials: true });
 
       if(!response.data || !response.data.token){
         throw new Error("[TheHeaderDropdownAccnt.vaiSuSelly] response genera auth vuota o token auth non presente", response.data);
