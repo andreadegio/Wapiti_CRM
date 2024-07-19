@@ -246,21 +246,7 @@ export default {
         let url_selly = this.$custom_json.selly_nlt.url_selly
           + "?info=" + base64_params;
 
-        // crea link e simula click, per aprira in 1 altra tab senza blocco popup firefox
-        let link = document.createElement('a');
-        link.target = '_blank';
-        link.href = url_selly;
-        link.click();
-        link.remove();
-
-        // console.log(url_selly);
-
-        // let verifica_auth = this.$custom_json.selly_nlt.url_accesso
-        //   + "/selly/auth?id_utente=" + localStorage.getItem("userID")
-        //   + "&token=" + token;
-
-        // window.open(verifica_auth, "_blank");
-        // window.location.href = url_selly;
+        window.location.href = url_selly;
 
       } catch (error) {
         console.error("Errore Auth Selly", error);
