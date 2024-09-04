@@ -3,10 +3,7 @@
     <div class="copertina">
       <CImg :src="$custom_json.base_url + lista_corsi[id].copertina" />
 
-      <section
-        class="box_contenuti"
-        :style="{ '--bgColor': lista_corsi[id].color_settore }"
-      >
+      <section class="box_contenuti" :style="{ '--bgColor': lista_corsi[id].color_settore }">
         <!-- <div
           class="text-uppercase settore_color py-3"
           :style="{ '--bgColor': lista_corsi[id].color_settore }"
@@ -15,11 +12,7 @@
             ><u>{{ lista_corsi[id].categoria }}</u></strong
           >
         </div> -->
-        <CBadge
-          v-if="lista_nuovi.includes(lista_corsi[id].id_corso)"
-          color="danger"
-          class="badgeNuovo"
-          >Nuovo
+        <CBadge v-if="lista_nuovi.includes(lista_corsi[id].id_corso)" color="danger" class="badgeNuovo">Nuovo
         </CBadge>
         <div class="titolo pb-3">{{ lista_corsi[id].titolo }}</div>
         <div class="sottotitolo pb-3">
@@ -41,69 +34,45 @@
         <div class="col-md-1"></div>
         <div class="col-md-7">
           <div class="contenuto pb-4">
-            <span class="descrizione_header"
-              >Cosa imparerai con questo corso</span
-            >
-            <div
-              class="descrizione_corso text-justify pt-3 pl-3"
-              v-html="lista_corsi[id].contenuto"
-            ></div>
+            <span class="descrizione_header">Cosa imparerai con questo corso</span>
+            <div class="descrizione_corso text-justify pt-3 pl-3" v-html="lista_corsi[id].contenuto"></div>
           </div>
 
           <span class="obiettivi_header">
             <CImg src="/img/formazione/obiettivo.png" width="3%" /> Obiettivi di
-            questo corso</span
-          >
-          <div
-            class="descrizione_obiettivi text-justify pt-2 pl-3"
-            v-html="lista_corsi[id].obiettivi"
-          ></div>
+            questo corso
+          </span>
+          <div class="descrizione_obiettivi text-justify pt-2 pl-3" v-html="lista_corsi[id].obiettivi"></div>
         </div>
 
-        <div
-          class="col-md-3 colonna_dx"
-          v-show="lista_corsi[id].allegati && lista_corsi[id].files.length > 0"
-        >
+        <div class="col-md-3 colonna_dx" v-show="lista_corsi[id].allegati && lista_corsi[id].files.length > 0">
           <div class="allegati">
             <span class="titolo_allegati ml-3">
-              <i class="fas fa-paperclip"></i> Materiale del corso:</span
-            >
+              <i class="fas fa-paperclip"></i> Materiale del corso:</span>
 
-            <div class="listaFile text-center">
-              <div
-                class="file"
-                v-for="allegato in lista_corsi[id].files"
-                :key="allegato.nome_file"
-              >
-                <div
-                  class="cloud"
-                  @click="
-                    (showDoc = true),
-                      (file =
-                        $custom_json.base_url +
-                        allegato.percorso_file +
-                        '/' +
-                        allegato.nome_file),
-                      (ext = allegato.ext_file.toUpperCase()),
-                      (nome_file = allegato.nome_file)
-                  "
-                >
-                  <div :class="allegato.ext_file.toUpperCase()">
-                    <div class="desc_elemento mx-3">
-                      {{ allegato.nome_file }}
-                    </div>
-                  </div>
-                </div>
+            <div class="listaFile">
+              <div class="file" v-for="allegato in lista_corsi[id].files" :key="allegato.nome_file">
+                <CRow class="cloud" @click="
+        (showDoc = true),
+        (file =
+          $custom_json.base_url +
+          allegato.percorso_file +
+          '/' +
+          allegato.nome_file),
+        (ext = allegato.ext_file.toUpperCase()),
+        (nome_file = allegato.nome_file)">
+                  <CCol :class="allegato.ext_file.toUpperCase()" sm="2" class="text-center pr-0">
+
+                  </CCol>
+                  <CCol sm="10" class="desc_elemento col-sm pl-0">
+                    {{ allegato.nome_file }}
+                  </CCol>
+                </CRow>
               </div>
             </div>
           </div>
-          <Visualizzatore
-            :showDoc="showDoc"
-            :file="file"
-            :ext="ext"
-            :nome_file="nome_file"
-            @aggiorna_modale="aggiorna_modale"
-          />
+          <Visualizzatore :showDoc="showDoc" :file="file" :ext="ext" :nome_file="nome_file"
+            @aggiorna_modale="aggiorna_modale" />
         </div>
         <div class="col-md-1"></div>
       </div>
@@ -114,51 +83,38 @@
         <hr />
         <div class="row">
           <div class="col-6 text-right navigazione-col">
-            <span
-              class="text-muted indicatore"
-              style="font-size: 1rem"
-              v-if="lista_corsi[id].id < last"
-              >Precedente <br
-            /></span>
+            <span class="text-muted indicatore" style="font-size: 1rem" v-if="lista_corsi[id].id < last">Precedente
+              <br /></span>
 
             <span class="prev text-muted h6" v-if="lista_corsi[id].id < last">
-              <CLink
-                :to="{
-                  name: 'Corso',
-                  params: {
-                    corso: lista_corsi[lista_corsi[id].id + 1].titolo,
-                    id: lista_corsi[lista_corsi[id].id + 1].id,
-                    lista_corsi: lista_corsi,
-                  },
-                }"
-              >
+              <CLink :to="{
+        name: 'Corso',
+        params: {
+          corso: lista_corsi[lista_corsi[id].id + 1].titolo,
+          id: lista_corsi[lista_corsi[id].id + 1].id,
+          lista_corsi: lista_corsi,
+        },
+      }">
                 <em v-if="lista_corsi[id].id < last">{{
-                  lista_corsi[lista_corsi[id].id + 1].titolo
-                }}</em>
+        lista_corsi[lista_corsi[id].id + 1].titolo
+      }}</em>
               </CLink>
             </span>
           </div>
           <div class="col-6">
-            <span
-              class="text-muted"
-              style="font-size: 1rem"
-              v-if="lista_corsi[id].id != 0"
-              >Successiva <br
-            /></span>
+            <span class="text-muted" style="font-size: 1rem" v-if="lista_corsi[id].id != 0">Successiva <br /></span>
             <span class="next text-muted h6" v-if="lista_corsi[id].id != 0">
-              <CLink
-                :to="{
-                  name: 'Corso',
-                  params: {
-                    corso: lista_corsi[lista_corsi[id].id - 1].titolo,
-                    id: lista_corsi[lista_corsi[id].id - 1].id,
-                    lista_corsi: lista_corsi,
-                  },
-                }"
-              >
+              <CLink :to="{
+        name: 'Corso',
+        params: {
+          corso: lista_corsi[lista_corsi[id].id - 1].titolo,
+          id: lista_corsi[lista_corsi[id].id - 1].id,
+          lista_corsi: lista_corsi,
+        },
+      }">
                 <em v-if="lista_corsi[id].id != 0">{{
-                  lista_corsi[lista_corsi[id].id - 1].titolo
-                }}</em>
+        lista_corsi[lista_corsi[id].id - 1].titolo
+                  }}</em>
               </CLink>
             </span>
           </div>
@@ -212,8 +168,8 @@ export default {
         await axios
           .post(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.get_toSee,
+            this.$custom_json.api_url +
+            this.$custom_json.ep_api.get_toSee,
             { params }
           )
           .then((response) => {
@@ -235,8 +191,8 @@ export default {
         try {
           await axios.post(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.set_letta,
+            this.$custom_json.api_url +
+            this.$custom_json.ep_api.set_letta,
             { registro }
           );
         } catch (error) {
@@ -256,9 +212,11 @@ export default {
   /* margin-left: 50%; */
   margin-right: auto;
 }
+
 .modal-body {
   max-height: none !important;
 }
+
 .box_contenuti::before {
   content: "";
   display: block;
@@ -267,17 +225,17 @@ export default {
   width: 50%;
   left: 1rem;
   height: 8px;
-  background: linear-gradient(
-    to right,
-    var(--bgColor) 60%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(to right,
+      var(--bgColor) 60%,
+      rgba(255, 255, 255, 0) 100%);
   /* border-top: 8px solid var(--bgColor); */
 }
+
 .settore_color {
   color: var(--bgColor);
   opacity: 0.5;
 }
+
 .box_contenuti {
   background-color: rgba(255, 255, 255, 0.871);
   top: 10%;
@@ -286,6 +244,7 @@ export default {
   padding: 3rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.08);
 }
+
 .data {
   color: #ef7918;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -301,6 +260,7 @@ export default {
   line-height: 2rem;
   font-weight: 350;
 }
+
 .sottotitolo {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -309,6 +269,7 @@ export default {
   font-weight: 300;
   font-style: oblique;
 }
+
 .copertina img {
   vertical-align: middle;
   max-height: 350px;
@@ -318,6 +279,7 @@ export default {
   border: 0;
   opacity: 0.6 !important;
 }
+
 .titolo_allegati {
   font-size: 1.8rem;
   font-weight: 300;
@@ -326,6 +288,7 @@ export default {
   color: gray;
   font-style: oblique;
 }
+
 .obiettivi_header {
   font-size: 2rem;
   font-weight: 300;
@@ -334,6 +297,7 @@ export default {
   color: gray;
   font-style: oblique;
 }
+
 .descrizione_obiettivi {
   font-size: 1rem;
   font-weight: 300;
@@ -341,6 +305,7 @@ export default {
   color: black;
   font-style: oblique;
 }
+
 .descrizione_header {
   font-size: 3rem;
   font-weight: 300;
@@ -349,18 +314,21 @@ export default {
   color: gray;
   font-style: oblique;
 }
+
 .descrizione_corso {
   font-size: 1.2rem;
   font-weight: 100;
   padding-bottom: 2rem;
   color: black;
 }
+
 .colonna_dx {
   -webkit-box-shadow: 5px 5px 20px -1px #00000070;
   -moz-box-shadow: 5px 5px 20px -1px #00000070;
   -o-box-shadow: 5px 5px 20px -1px #00000070;
   box-shadow: 5px 5px 20px -1px #00000070;
 }
+
 .dettagli {
   font-size: 0.8rem !important;
   text-transform: uppercase;
@@ -368,17 +336,21 @@ export default {
   color: #ef7918 !important;
   font-weight: 600;
 }
+
 .navigazione {
   font-weight: lighter;
   line-height: 1.5rem;
 }
+
 .navigazione span {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 1.5rem;
 }
+
 .navigazione-col {
   border-right: 2px solid gray;
 }
+
 .prev::before {
   content: "\f104";
   font-family: "Font Awesome 5 free";
@@ -387,6 +359,7 @@ export default {
   font-weight: 700;
   padding-right: 8px;
 }
+
 .next::after {
   content: "\f105";
   font-family: "Font Awesome 5 free";
@@ -395,6 +368,7 @@ export default {
   font-weight: 700;
   padding-left: 8px;
 }
+
 .badgeNuovo {
   position: absolute;
   z-index: 99;
@@ -402,6 +376,7 @@ export default {
   padding: 0.4em 0.4em !important;
   top: 10%;
 }
+
 /* SEZIONE ALLEGATI  */
 @import "/css/cloud.css";
 
