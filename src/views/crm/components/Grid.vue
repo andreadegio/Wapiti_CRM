@@ -10,9 +10,9 @@
     </div>
 
     <CDataTable :items="items" :fields="fields" :table-filter="{
-        placeholder: 'Ricerca...',
-        label: 'Ricerca:',
-      }" sorter hover :itemsPerPage="20" pagination striped :items-per-page-select="{ label: 'Risultati per pagina' }"
+      placeholder: 'Ricerca...',
+      label: 'Ricerca:',
+    }" sorter hover :itemsPerPage="20" pagination striped :items-per-page-select="{ label: 'Risultati per pagina' }"
       :noItemsView="{
         noItems: noItemsMessage,
       }">
@@ -52,9 +52,9 @@
       </template>
 
       <template #actions="row">
-        <td v-if="(row.item.id_segnalatore != null &&
-        row.item.id_referente == user.idUtente) ||
-        row.item.id_segnalatore == null || user.idUtente == 140
+        <td v-if="(row.item.id_segnalatore &&
+          row.item.id_referente == user.idUtente) ||
+          (row.item.id_segnalatore == null && row.item.user_ins_id == user.idUtente) || user.idUtente == 140
         ">
           <div class="d-flex">
             <Attivazione v-if="gridType === 'attivazione_account'" class="ml-2" :itemId="row.item.id"
@@ -160,7 +160,12 @@ export default {
         this.userCRMInfo.idRuolo != "2"
       ) {
         this.items = this.items.filter((item) => {
-          return item.user_ins_id == this.userCRMInfo.idbroker;
+          if (item.id_referente) {
+            return item.id_referente == this.userCRMInfo.idbroker;
+          }
+          else {
+            return item.user_ins_id == this.userCRMInfo.idbroker;
+          }
         });
       } else {
         this.aggiorna_grid(this.step);
@@ -337,7 +342,14 @@ export default {
                   this.user["idUtente"] != 140
                   // && this.userCRMInfo.idRuolo != "2"
                 ) {
-                  return item.user_ins_id == this.userCRMInfo.idbroker || item.id_referente == this.userCRMInfo.idbroker;
+                  if (item.id_referente) {
+                    return item.id_referente == this.userCRMInfo.idbroker;
+                  }
+                  else {
+                    return item.user_ins_id == this.userCRMInfo.idbroker;
+                  }
+                  // return item.user_ins_id == this.userCRMInfo.idbroker || item.id_referente == this.userCRMInfo.idbroker;
+                  //return item.id_referente == this.userCRMInfo.idbroker;
                 } else {
                   if (this.gridType == "formazione"
                     && this.user["idUtente"] != 140
