@@ -90,7 +90,7 @@ const Comingsoon_gas = () => import("@/views/pages/Comingsoon_gas");
 // Views - Page -Rami
 const Comingsoon_rami = () => import("@/views/pages/Comingsoon_rami");
 const Comingsoon_rami2 = () => import("@/views/pages/Comingsoon_rami2");
-
+const Comingsoon_NLT = () => import("@/views/pages/Comingsoon_NLT");
 // Views - Pages
 const Comingsoon = () => import("@/views/pages/Comingsoon");
 const Profilo = () => import("@/views/pages/Profilo");
@@ -213,6 +213,11 @@ function configRoutes() {
           path: "/Comingsoon",
           name: "Comingsoon",
           component: Comingsoon,
+        },
+        {
+          path: "/Comingsoon_NLT",
+          name: "Comingsoon_NLT",
+          component: Comingsoon_NLT,
         },
         {
           path: "/Comingsoon_gas",
@@ -385,9 +390,11 @@ function isAuthenticatedElearning() {
 function isAuthenticatedAbyway() {
   if (localStorage.getItem("utente") == "ok") {
     let userIdAbyway = localStorage.getItem("userID");
-    let Nominativo= JSON.parse(localStorage.getItem("chisono_data")).Nominativo;
-    sessionStorage.setItem("Nominativo", Nominativo); 
-    sessionStorage.setItem("AbywayLearning",true);
+    let Nominativo = JSON.parse(
+      localStorage.getItem("chisono_data")
+    ).Nominativo;
+    sessionStorage.setItem("Nominativo", Nominativo);
+    sessionStorage.setItem("AbywayLearning", true);
     sessionStorage.setItem("learningUserId", userIdAbyway);
 
     sessionStorage.setItem("tokenElearning", "SLKJDO20300SLXPA...A38902");

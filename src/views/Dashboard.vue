@@ -11,35 +11,7 @@
         </CToast>
       </template>
     </CToaster>
-
-    <CRow class="pt-3">
-      <CCol md="1"> </CCol>
-      <CCol sm="10" md="10">
-        <div class="row">
-          <div class="col-sm p-0">
-            <CCol class="h-100">
-              <AreaManager />
-            </CCol>
-          </div>
-          <div class="col-sm p-0">
-            <CCol class="h-100">
-              <contattiAby :recapitiParent="recapiti" class="h-100" />
-            </CCol>
-          </div>
-          <!-- <div class="col-sm p-0">
-            <CCol class="h-100">
-              <NewsMondo
-                class="h-100"
-                :newsParent="news_mondo"
-                @reload_mondo="reload_mondo()"
-              />
-            </CCol>
-          </div> -->
-        </div>
-      </CCol>
-      <CCol md="1"> </CCol>
-    </CRow>
-    <CRow align-horizontal="center">
+    <CRow align-horizontal="center" class="pt-5">
       <CCol md="1"> </CCol>
       <CCol sm="10" md="10">
         <div class="row">
@@ -129,12 +101,73 @@
               </CCard>
             </CCardLink>
           </div>
+          <!-- SALLY NLT -->
+          <div class="col-sm" v-if="!is_abilitato_selly_nlt">
+            <CCardLink to="Comingsoon_NLT" target="_self">
+              <CCard class="text-center elevation-6 portali-btn grow" body-wrapper style="
+                  height: 200px;
+                  background-image: url('img/buttons/NLT.png');
+                  background-position: center;
+                  z-index: 0;
+                  background-size: cover;
+                ">
+                <CCardTitle class="grow titolo_piattaforme">
+                  <span class="portali">Piattaforma</span>
+                  <h1 class="pulsante_portali">NLT</h1>
+                </CCardTitle>
+              </CCard>
+            </CCardLink>
+          </div>
+          <div class="col-sm" v-else>
+            <CCardLink @click="vaiSuSelly">
+              <CCard class="text-center elevation-6 portali-btn grow" body-wrapper style="
+                  height: 200px;
+                  background-image: url('img/buttons/NLT.png');
+                  background-position: center;
+                  z-index: 0;
+                  background-size: cover;
+                ">
+                <CCardTitle class="grow titolo_piattaforme">
+                  <span class="portali">Piattaforma</span>
+                  <h1 class="pulsante_portali">NLT</h1>
+                </CCardTitle>
+              </CCard>
+            </CCardLink>
+          </div>
 
 
         </div>
       </CCol>
       <CCol md="1"> </CCol>
     </CRow>
+    <CRow class="pt-1">
+      <CCol md="1"> </CCol>
+      <CCol sm="10" md="10">
+        <div class="row">
+          <div class="col-sm p-0">
+            <CCol class="h-100">
+              <AreaManager />
+            </CCol>
+          </div>
+          <div class="col-sm p-0">
+            <CCol class="h-100">
+              <contattiAby :recapitiParent="recapiti" class="h-100" />
+            </CCol>
+          </div>
+          <!-- <div class="col-sm p-0">
+            <CCol class="h-100">
+              <NewsMondo
+                class="h-100"
+                :newsParent="news_mondo"
+                @reload_mondo="reload_mondo()"
+              />
+            </CCol>
+          </div> -->
+        </div>
+      </CCol>
+      <CCol md="1"> </CCol>
+    </CRow>
+
   </div>
   <div v-else style="position: relative; width: 100%; top: 50%; left: 50%">
     <img src="img/loader.gif" style="
@@ -173,6 +206,7 @@ export default {
       isEnergy: JSON.parse(localStorage.getItem("chisono_data"))
         .Abilitato_Energy,
       isRami: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Rami,
+      is_abilitato_selly_nlt: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Noleggio_4YL,
       isNext2: true,
       avvisiToast: null,
       recapiti: JSON.parse(localStorage.getItem("RecapitiAby")),
@@ -184,6 +218,46 @@ export default {
     this.$forceUpdate();
   },
   methods: {
+    async vaiSuSelly() {
+      // =================== ACCESSO PER SALLY ===============================
+      try {
+        this.setLoading(false, 10000);
+
+        let token = await this.generaAuthToken();
+
+        // richiesta a selly
+        let params = {
+          token: token,
+          id_utente: localStorage.getItem("userID"),
+          email: localStorage.getItem("userID") + "@aby.sell-y.it"
+        }
+
+        let base64_params = btoa(JSON.stringify(params));
+
+        let url_selly = this.$custom_json.selly_nlt.url_selly
+          + "?info=" + base64_params;
+
+        window.location.href = url_selly;
+
+      } catch (error) {
+        console.error("Errore Auth Selly", error);
+      }
+    },
+    async generaAuthToken() {
+      let url = this.$custom_json.selly_nlt.url_accesso
+        + this.$custom_json.selly_nlt.endpoint_auth_token
+        + "?id_utente=" + localStorage.getItem("userID");
+
+      let response = await axios.get(url, { withCredentials: true });
+
+      if (!response.data || !response.data.token) {
+        throw new Error("[TheHeaderDropdownAccnt.vaiSuSelly] response genera auth vuota o token auth non presente", response.data);
+      }
+
+      return response.data.token;
+    },
+
+
     // attiva/disattiva il loader, emettendo un evento
     // che viene ascoltato da TheContainer
     // se specificato un timeout, il loader torna allo stato precedente

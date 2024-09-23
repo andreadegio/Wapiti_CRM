@@ -30,12 +30,12 @@
                       <p style="text-transform: capitalize" v-show="user.DirettoreCommerciale">
                         <b>Direttore Commerciale:</b>
                         {{ user.DirettoreCommerciale | capitalize }} (<em style="text-transform: lowercase">{{
-      user.DirettoreCommerciale_Email }}</em>)
+                          user.DirettoreCommerciale_Email }}</em>)
                       </p>
                       <p style="text-transform: capitalize" v-show="user.AreaManager">
                         <b>Area Manager:</b>
                         {{ user.AreaManager | capitalize }} (<em style="text-transform: lowercase">{{
-      user.AreaManager_Email }}</em>)
+                          user.AreaManager_Email }}</em>)
                       </p>
                     </div>
                     <div class="pt-3 pb-2 text-center text-uppercase" style="font-weight: bold">
@@ -142,20 +142,20 @@
       </CDropdownItem>
 
       <CDropdownItem @click="vaiSuAbyNext1" v-show="is_abilitato_rami">
-        <i class="fas fa-fire-extinguisher"></i> <span class="pl-1">Piattaforma PROFESSIONISTI</span>
+        <i class="fas fa-fire-extinguisher"></i> <span class="pl-1">Piattaforma Professionisti</span>
       </CDropdownItem>
-
+      <!-- 
       <CDropdownItem @click="vaiSuSelly" v-show="is_abilitato_selly_nlt">
         <i class="fas fa-car"></i> <span class="pl-1">Selly NLT</span>
-      </CDropdownItem>
+      </CDropdownItem> -->
 
       <!-- <CDropdownItem to="/Calendario" v-if="admin">
         <i class="far fa-calendar-alt"></i>
         <span class="pl-1">Appuntamenti</span>
       </CDropdownItem> -->
-      <CDropdownItem to="/Accessi_stat" v-if="admin">
+      <!-- <CDropdownItem to="/Accessi_stat" v-if="admin">
         <i class="far fa-chart-bar"> </i> <span class="pl-1">Accessi</span>
-      </CDropdownItem>
+      </CDropdownItem> -->
       <CDropdownItem href="https://www.abyway.it/Monitor/GestioneMonitor.html" target="_blank" v-if="admin">
         <i class="fas fa-tv"></i> <span class="pl-1">Gestione TV</span>
       </CDropdownItem>
@@ -227,31 +227,31 @@ export default {
       this.$emit("set-loading", is_loading, timeout_ms);
     },
 
-    async vaiSuSelly() {
-      // =================== ACCESSO PER ABYNEXT 2 ===============================
-      try {
-        this.setLoading(false, 10000);
+    // async vaiSuSelly() {
+    //   // =================== ACCESSO PER ABYNEXT 2 ===============================
+    //   try {
+    //     this.setLoading(false, 10000);
 
-        let token = await this.generaAuthToken();
+    //     let token = await this.generaAuthToken();
 
-        // richiesta a selly
-        let params = {
-          token: token,
-          id_utente: localStorage.getItem("userID"),
-          email: localStorage.getItem("userID")+"@aby.sell-y.it"
-        }
+    //     // richiesta a selly
+    //     let params = {
+    //       token: token,
+    //       id_utente: localStorage.getItem("userID"),
+    //       email: localStorage.getItem("userID") + "@aby.sell-y.it"
+    //     }
 
-        let base64_params = btoa(JSON.stringify(params));
+    //     let base64_params = btoa(JSON.stringify(params));
 
-        let url_selly = this.$custom_json.selly_nlt.url_selly
-          + "?info=" + base64_params;
+    //     let url_selly = this.$custom_json.selly_nlt.url_selly
+    //       + "?info=" + base64_params;
 
-        window.location.href = url_selly;
+    //     window.location.href = url_selly;
 
-      } catch (error) {
-        console.error("Errore Auth Selly", error);
-      }
-    },
+    //   } catch (error) {
+    //     console.error("Errore Auth Selly", error);
+    //   }
+    // },
 
 
     async generaAuthToken() {
@@ -261,10 +261,10 @@ export default {
 
       let response = await axios.get(url, { withCredentials: true });
 
-      if(!response.data || !response.data.token){
+      if (!response.data || !response.data.token) {
         throw new Error("[TheHeaderDropdownAccnt.vaiSuSelly] response genera auth vuota o token auth non presente", response.data);
       }
-      
+
       return response.data.token;
     },
 
