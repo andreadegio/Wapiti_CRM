@@ -129,7 +129,8 @@
                 ">
                 <CCardTitle class="grow titolo_piattaforme">
                   <span class="portali">Piattaforma</span>
-                  <h1 class="pulsante_portali">NLT</h1>
+                  <h1 class="pulsante_portali">NOLEGGIO</h1>
+                  <h3 style="color: white;">LUNGO TERMINE</h3>
                 </CCardTitle>
               </CCard>
             </CCardLink>

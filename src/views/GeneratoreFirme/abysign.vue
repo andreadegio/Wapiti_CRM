@@ -1,15 +1,6 @@
 <template>
-  <div
-    id="app_firma"
-    style="margin-top: 20px; padding-left: 20px; background-color: white"
-  >
-    <CModal
-      color="dark"
-      centered
-      :show.sync="help"
-      style="z-index: 30"
-      size="lg"
-    >
+  <div id="app_firma" style="margin-top: 20px; padding-left: 20px; background-color: white">
+    <CModal color="dark" centered :show.sync="help" style="z-index: 30" size="lg">
       <template #header>
         <strong style="text-transform: uppercase">Istruzioni</strong>
         <CButton class="close" @click="help = false">
@@ -25,8 +16,7 @@
                 <div>
                   <span class="py-5">
                     SEGUI QUESTE ISTRUZIONI PER CREARE LA FIRMA PER IL TUO
-                    SOFTWARE DI POSTA ELETTRONICA:</span
-                  ><br /><br />
+                    SOFTWARE DI POSTA ELETTRONICA:</span><br /><br />
                   <ol>
                     <li>Seleziona l'<b>Azienda</b></li>
                     <li>Inserisci il <b>Nome</b> e <b>Cognome</b></li>
@@ -55,9 +45,7 @@
                     <li>
                       Per cambiare l'Indirizzo della <b>Sede Legale</b> spunta la casella "Cambia
                       Sede Legale" e compila il campo, altrimenti
-                      <em
-                        >di default assegna "Via Gandhi 8, 54011 Aulla (MS)"</em
-                      >
+                      <em>di default assegna "Via Gandhi 8, 54011 Aulla (MS)"</em>
                     </li>
                     <li>
                       Per mostrare l'Indirizzo della <b>Sede Operativa</b> spunta la casella "Mostra
@@ -87,40 +75,19 @@
       </template>
     </CModal>
     <span class="text-center"><b>GENERATORE FIRME EMAIL</b> &nbsp;</span>
-    <CButton
-      style="color: white"
-      shape="pill"
-      color="primary"
-      @click="help = true"
-    >
+    <CButton style="color: white" shape="pill" color="primary" @click="help = true">
       <i class="fas fa-info"></i>
     </CButton>
-    <Configuratore
-      class="configuratore"
-      :recapiti="recapiti"
-      @switchAzienda="switchAzienda"
-      @changeRecapiti="changeRecapiti"
-    />
+    <Configuratore class="configuratore" :recapiti="recapiti" @switchAzienda="switchAzienda"
+      @changeRecapiti="changeRecapiti" />
     <div style="text-align: center">
-      <v-btn
-        v-if="company != ''"
-        class="mx-2"
-        color="#1f4b6b"
-        style="color: white"
-        @click="copy4outlook(company)"
-        :disabled="recapiti.nome == ''"
-      >
+      <v-btn v-if="company != ''" class="mx-2" color="#1f4b6b" style="color: white" @click="copy4outlook(company)"
+        :disabled="recapiti.nome == ''">
         Copia per Outlook
       </v-btn>
       &nbsp;
-      <v-btn
-        v-if="company != ''"
-        class="mx-2"
-        color="#1f4b6b"
-        style="color: white"
-        @click="copytohtml(company)"
-        :disabled="recapiti.nome == ''"
-      >
+      <v-btn v-if="company != ''" class="mx-2" color="#1f4b6b" style="color: white" @click="copytohtml(company)"
+        :disabled="recapiti.nome == ''">
         Copia in HTML
       </v-btn>
     </div>
@@ -128,36 +95,13 @@
 
     <div v-if="company != ''" style="text-align: center;"><b>ANTEPRIMA DELLA FIRMA CREATA</b></div>
     <div style="max-width: 80%;margin-left: auto;margin-right: auto;">
-    <SignatureAby
-      class="preview"
-      v-show="company == 'ABY'"
-      :recapiti="recapiti"
-    />
-    <SignatureAbyPoint
-      class="preview"
-      v-show="company == 'POINT'"
-      :recapiti="recapiti"
-    />
-    <SignatureAbyEnergy
-      class="preview"
-      v-show="company == 'ENERGY'"
-      :recapiti="recapiti"
-    />
-    <SignatureAbyServizi
-      class="preview"
-      v-show="company == 'SERVIZI'"
-      :recapiti="recapiti"
-    />
-    <SignatureNavert
-      class="preview"
-      v-show="company == 'NAV'"
-      :recapiti="recapiti"
-    />
-    <SignaturePatrocinium
-      class="preview"
-      v-show="company == 'PAT'"
-      :recapiti="recapiti"
-    />
+      <SignatureAby class="preview" v-show="company == 'ABY'" :recapiti="recapiti" />
+      <SignatureAbyPoint class="preview" v-show="company == 'POINT'" :recapiti="recapiti" />
+      <SignatureAbyStore class="preview" v-show="company == 'STORE'" :recapiti="recapiti" />
+      <SignatureAbyEnergy class="preview" v-show="company == 'ENERGY'" :recapiti="recapiti" />
+      <SignatureAbyServizi class="preview" v-show="company == 'SERVIZI'" :recapiti="recapiti" />
+      <SignatureNavert class="preview" v-show="company == 'NAV'" :recapiti="recapiti" />
+      <SignaturePatrocinium class="preview" v-show="company == 'PAT'" :recapiti="recapiti" />
     </div>
   </div>
 </template>
@@ -167,6 +111,7 @@ import SignatureAbyEnergy from "./components/SignAbyEnergy.vue";
 import SignatureAbyServizi from "./components/SignAbyServizi.vue";
 import SignatureAby from "./components/SignAby.vue";
 import SignatureAbyPoint from "./components/SignAbyPoint.vue";
+import SignatureAbyStore from "./components/SignAbyStore.vue";
 import SignatureNavert from "./components/SignNavert.vue";
 import SignaturePatrocinium from "./components/SignPatrocinium.vue";
 import Configuratore from "./components/Configuratore.vue";
@@ -178,6 +123,7 @@ export default {
     SignatureAbyServizi,
     SignatureAby,
     SignatureAbyPoint,
+    SignatureAbyStore,
     SignatureNavert,
     SignaturePatrocinium,
     Configuratore,
@@ -264,11 +210,13 @@ export default {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
+
 .configuratore {
   border: 1px dashed gray;
   padding: 20px;
   margin: 10px;
 }
+
 .preview {
   border: 1px dashed gray;
   padding: 20px;

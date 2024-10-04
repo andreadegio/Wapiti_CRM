@@ -1,10 +1,10 @@
 <template>
-  <div id="firma_POINT" style="font-family: Montserrat">
+  <div id="firma_STORE" style="font-family: Montserrat">
     <table width="100%" style="color: #575756">
       <tbody>
         <tr>
           <td rowspan="4" width="160">
-            <img src="https://www.aby.it/team/aby/sign/img/Logo_Aby.png" alt="Aby" width="150" />
+            <img src="https://www.aby.it/team/aby/sign/img/AbyStore.png" alt="Aby" width="150" />
           </td>
           <td width="1%"></td>
           <td rowspan="2" width="30%" style="
@@ -24,7 +24,7 @@
               " v-if="recapiti.mostra_ruolo">
               <i>{{
                 recapiti.ruolo != "" ? recapiti.ruolo : "Ruolo Aziendale"
-                }}&nbsp;<br />{{
+              }}&nbsp;<br />{{
                   recapiti.ruolo2 != "" ? recapiti.ruolo2 : ""
                 }}</i>
             </div>
@@ -216,7 +216,7 @@
 
 <script>
 export default {
-  name: "SignAbyPoint",
+  name: "SignAbyStore",
   props: ["recapiti"],
 };
 </script>

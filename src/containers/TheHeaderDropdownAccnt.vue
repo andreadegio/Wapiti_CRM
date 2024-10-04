@@ -137,6 +137,9 @@
       <CDropdownHeader tag="div" class="text-center" color="light" v-if="admin">
         <strong>Utility</strong>
       </CDropdownHeader>
+      <CDropdownItem href="https://www.abyway.it/Monitor/GestioneMonitor.html" target="_blank" v-if="admin">
+        <i class="fas fa-tv"></i> <span class="pl-1">Gestione TV</span>
+      </CDropdownItem>
       <CDropdownItem to="/Crm" v-if="accessoCRM">
         <i class="fas fa-address-book"></i> <span class="pl-1">CRM</span>
       </CDropdownItem>
@@ -144,21 +147,14 @@
       <CDropdownItem @click="vaiSuAbyNext1" v-show="is_abilitato_rami">
         <i class="fas fa-fire-extinguisher"></i> <span class="pl-1">Piattaforma Professionisti</span>
       </CDropdownItem>
-      <!-- 
-      <CDropdownItem @click="vaiSuSelly" v-show="is_abilitato_selly_nlt">
-        <i class="fas fa-car"></i> <span class="pl-1">Selly NLT</span>
-      </CDropdownItem> -->
-
       <!-- <CDropdownItem to="/Calendario" v-if="admin">
         <i class="far fa-calendar-alt"></i>
         <span class="pl-1">Appuntamenti</span>
-      </CDropdownItem> -->
-      <!-- <CDropdownItem to="/Accessi_stat" v-if="admin">
+      </CDropdownItem> 
+       <CDropdownItem to="/Accessi_stat" v-if="admin">
         <i class="far fa-chart-bar"> </i> <span class="pl-1">Accessi</span>
       </CDropdownItem> -->
-      <CDropdownItem href="https://www.abyway.it/Monitor/GestioneMonitor.html" target="_blank" v-if="admin">
-        <i class="fas fa-tv"></i> <span class="pl-1">Gestione TV</span>
-      </CDropdownItem>
+
 
       <CDropdownHeader tag="div" class="text-center" color="light" v-if="user.Is_Abilitato_Elearning">
         <strong>Formazione</strong>
