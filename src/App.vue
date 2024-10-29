@@ -60,6 +60,10 @@ export default {
   background-color: #607d8b !important;
 }
 
+.bg-nlt {
+  background-color: darkcyan !important;
+}
+
 .bg-energy {
   background-color: green !important;
 }
@@ -422,7 +426,7 @@ hr:after {
 }
 
 .nav-pills .nav-link {
-  font-size: 1.2vw !important;
+  font-size: 0.9vw !important;
   font-weight: 500 !important;
 }
 

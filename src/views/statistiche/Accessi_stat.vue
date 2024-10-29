@@ -1,19 +1,23 @@
 <template>
   <CContainer class="text-center" style="background-color: white">
     <p class="display-3 mb-5">Accessi alle piattaforme</p>
-    <CRow style="border-top: 1px solid lightgray">
-      <CCol col="12" sm="2">
+    <CRow style="border-top: 1px solid lightgray" v-show="spin">
+      <CCol col="12" sm="3">
         <h1>Totali</h1>
         <cite>dal 7/4/2022</cite>
       </CCol>
+      <CCol col="12" sm="9">
+        <v-progress-circular :size="50" color="primary" indeterminate></v-progress-circular>
+      </CCol>
+    </CRow>
+    <CRow v-show="!spin" style="border-top: 1px solid lightgray">
       <CCol col="12" sm="3">
-        <CWidgetBrand
-          color="broker"
-          :rightHeader="accessi_totali.Broker_totale"
-          rightFooter="Totali"
-          :leftHeader="accessi_totali.Broker_unici"
-          leftFooter="univoci"
-        >
+        <h1>Totali</h1>
+        <cite>dal 7/4/2022</cite>
+      </CCol>
+      <CCol col="12" sm="2">
+        <CWidgetBrand color="broker" :rightHeader="accessi_totali.Broker_totale" rightFooter="Totali"
+          :leftHeader="accessi_totali.Broker_unici" leftFooter="univoci">
           <span class="py-3">
             <i class="fas fa-car-alt fa-3x"></i>
             <br />
@@ -21,14 +25,9 @@
           </span>
         </CWidgetBrand>
       </CCol>
-      <CCol col="12" sm="3">
-        <CWidgetBrand
-          color="rami"
-          :rightHeader="accessi_totali.Rami_totale"
-          rightFooter="Totali"
-          :leftHeader="accessi_totali.Rami_unici"
-          leftFooter="univoci"
-        >
+      <CCol col="12" sm="2">
+        <CWidgetBrand color="rami" :rightHeader="accessi_totali.Rami_totale" rightFooter="Totali"
+          :leftHeader="accessi_totali.Rami_unici" leftFooter="univoci">
           <span class="py-3">
             <i class="fas fa-user-tie fa-3x"></i>
             <br />
@@ -36,14 +35,19 @@
           </span>
         </CWidgetBrand>
       </CCol>
-      <CCol col="12" sm="3">
-        <CWidgetBrand
-          color="energy"
-          :rightHeader="accessi_totali.Energy_totale"
-          rightFooter="Totali"
-          :leftHeader="accessi_totali.Energy_unici"
-          leftFooter="univoci"
-        >
+      <CCol col="12" sm="2">
+        <CWidgetBrand color="nlt" :rightHeader="accessi_totali.NLT_totale" rightFooter="Totali"
+          :leftHeader="accessi_totali.NLT_unici" leftFooter="univoci">
+          <span class="py-3">
+            <i class="fas fa-car-side fa-3x"></i>
+            <br />
+            Piattaforma<br />Noleggio lungo termine
+          </span>
+        </CWidgetBrand>
+      </CCol>
+      <CCol col="12" sm="2">
+        <CWidgetBrand color="energy" :rightHeader="accessi_totali.Energy_totale" rightFooter="Totali"
+          :leftHeader="accessi_totali.Energy_unici" leftFooter="univoci">
           <span class="py-3">
             <i class="far fa-lightbulb fa-3x"></i>
             <br />
@@ -51,74 +55,29 @@
           </span>
         </CWidgetBrand>
       </CCol>
+
     </CRow>
-    <CRow
-      style="
+    <CRow v-show="spin" style="
         border-top: 1px solid lightgray;
         border-bottom: 1px solid lightgray;
-      "
-    >
-      <CCol col="12" sm="2">
+      ">
+      <CCol col="12" sm="3">
         <h1>Mese corrente</h1>
       </CCol>
-      <CCol col="12" sm="3">
-        <CWidgetBrand
-          color="broker"
-          :rightHeader="accessi_totali.Broker_totale_m"
-          rightFooter="Totali"
-          :leftHeader="accessi_totali.Broker_unici_m"
-          leftFooter="univoci"
-        >
-          <span class="py-3">
-            <i class="fas fa-car-alt fa-3x"></i>
-            <br />
-            Piattaforma<br />Assicurazioni
-          </span>
-        </CWidgetBrand>
-      </CCol>
-      <CCol col="12" sm="3">
-        <CWidgetBrand
-          color="rami"
-          :rightHeader="accessi_totali.Rami_totale_m"
-          rightFooter="Totali"
-          :leftHeader="accessi_totali.Rami_unici_m"
-          leftFooter="univoci"
-        >
-          <span class="py-3">
-            <i class="fas fa-user-tie fa-3x"></i>
-            <br />
-            Piattaforma<br />Professionisti
-          </span>
-        </CWidgetBrand>
-      </CCol>
-      <CCol col="12" sm="3">
-        <CWidgetBrand
-          color="energy"
-          :rightHeader="accessi_totali.Energy_totale_m"
-          rightFooter="Totali"
-          :leftHeader="accessi_totali.Energy_unici_m"
-          leftFooter="univoci"
-        >
-          <span class="py-3">
-            <i class="far fa-lightbulb fa-3x"></i>
-            <br />
-            Piattaforma<br />Energia
-          </span>
-        </CWidgetBrand>
+      <CCol col="12" sm="9">
+        <v-progress-circular :size="50" color="amber" indeterminate></v-progress-circular>
       </CCol>
     </CRow>
-    <CRow>
-      <CCol col="12" sm="2">
-        <h1>Oggi</h1>
-      </CCol>
+    <CRow v-show="!spin" style="
+        border-top: 1px solid lightgray;
+        border-bottom: 1px solid lightgray;
+      ">
       <CCol col="12" sm="3">
-        <CWidgetBrand
-          color="broker"
-          :rightHeader="accessi_totali.Broker_totale_d"
-          rightFooter="Totali"
-          :leftHeader="accessi_totali.Broker_unici_d"
-          leftFooter="univoci"
-        >
+        <h1>Mese corrente</h1>
+      </CCol>
+      <CCol col="12" sm="2">
+        <CWidgetBrand color="broker" :rightHeader="accessi_totali.Broker_totale_m" rightFooter="Totali"
+          :leftHeader="accessi_totali.Broker_unici_m" leftFooter="univoci">
           <span class="py-3">
             <i class="fas fa-car-alt fa-3x"></i>
             <br />
@@ -126,14 +85,9 @@
           </span>
         </CWidgetBrand>
       </CCol>
-      <CCol col="12" sm="3">
-        <CWidgetBrand
-          color="rami"
-          :rightHeader="accessi_totali.Rami_totale_d"
-          rightFooter="Totali"
-          :leftHeader="accessi_totali.Rami_unici_d"
-          leftFooter="univoci"
-        >
+      <CCol col="12" sm="2">
+        <CWidgetBrand color="rami" :rightHeader="accessi_totali.Rami_totale_m" rightFooter="Totali"
+          :leftHeader="accessi_totali.Rami_unici_m" leftFooter="univoci">
           <span class="py-3">
             <i class="fas fa-user-tie fa-3x"></i>
             <br />
@@ -141,14 +95,19 @@
           </span>
         </CWidgetBrand>
       </CCol>
-      <CCol col="12" sm="3">
-        <CWidgetBrand
-          color="energy"
-          :rightHeader="accessi_totali.Energy_totale_d"
-          rightFooter="Totali"
-          :leftHeader="accessi_totali.Energy_unici_d"
-          leftFooter="univoci"
-        >
+      <CCol col="12" sm="2">
+        <CWidgetBrand color="nlt" :rightHeader="accessi_totali.NLT_totale_m" rightFooter="Totali"
+          :leftHeader="accessi_totali.NLT_unici_m" leftFooter="univoci">
+          <span class="py-3">
+            <i class="fas fa-car-side fa-3x"></i>
+            <br />
+            Piattaforma<br />Noleggio lungo termine
+          </span>
+        </CWidgetBrand>
+      </CCol>
+      <CCol col="12" sm="2">
+        <CWidgetBrand color="energy" :rightHeader="accessi_totali.Energy_totale_m" rightFooter="Totali"
+          :leftHeader="accessi_totali.Energy_unici_m" leftFooter="univoci">
           <span class="py-3">
             <i class="far fa-lightbulb fa-3x"></i>
             <br />
@@ -156,6 +115,64 @@
           </span>
         </CWidgetBrand>
       </CCol>
+
+    </CRow>
+    <CRow v-show="spin" style="
+        border-top: 1px solid lightgray;
+        border-bottom: 1px solid lightgray;
+      ">
+      <CCol col="12" sm="3">
+        <h1>Oggi</h1>
+      </CCol>
+      <CCol col="12" sm="9">
+        <v-progress-circular :size="50" color="green" indeterminate></v-progress-circular>
+      </CCol>
+    </CRow>
+    <CRow v-show="!spin">
+      <CCol col="12" sm="3">
+        <h1>Oggi</h1>
+      </CCol>
+      <CCol col="12" sm="2">
+        <CWidgetBrand color="broker" :rightHeader="accessi_totali.Broker_totale_d" rightFooter="Totali"
+          :leftHeader="accessi_totali.Broker_unici_d" leftFooter="univoci">
+          <span class="py-3">
+            <i class="fas fa-car-alt fa-3x"></i>
+            <br />
+            Piattaforma<br />Assicurazioni
+          </span>
+        </CWidgetBrand>
+      </CCol>
+      <CCol col="12" sm="2">
+        <CWidgetBrand color="rami" :rightHeader="accessi_totali.Rami_totale_d" rightFooter="Totali"
+          :leftHeader="accessi_totali.Rami_unici_d" leftFooter="univoci">
+          <span class="py-3">
+            <i class="fas fa-user-tie fa-3x"></i>
+            <br />
+            Piattaforma<br />Professionisti
+          </span>
+        </CWidgetBrand>
+      </CCol>
+      <CCol col="12" sm="2">
+        <CWidgetBrand color="nlt" :rightHeader="accessi_totali.NLT_totale_d" rightFooter="Totali"
+          :leftHeader="accessi_totali.NLT_unici_d" leftFooter="univoci">
+          <span class="py-3">
+            <i class="fas fa-car-side fa-3x"></i>
+            <br />
+            Piattaforma<br />Noleggio lungo termine
+          </span>
+        </CWidgetBrand>
+      </CCol>
+      <CCol col="12" sm="2">
+        <CWidgetBrand color="energy" :rightHeader="accessi_totali.Energy_totale_d" rightFooter="Totali"
+          :leftHeader="accessi_totali.Energy_unici_d" leftFooter="univoci">
+          <span class="py-3">
+            <i class="far fa-lightbulb fa-3x"></i>
+            <br />
+            Piattaforma<br />Energia
+          </span>
+        </CWidgetBrand>
+      </CCol>
+
     </CRow>
     <!-- <CRow>
       <vc-date-picker
@@ -175,8 +192,10 @@
 <script>
 import axios from "axios";
 export default {
+  name: "Accessi piattaforme",
   data() {
     return {
+      spin: true,
       accessi_totali: [],
       attrs: [
         {
@@ -204,10 +223,11 @@ export default {
         await axios
           .post(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.get_accessi_totali
+            this.$custom_json.api_url +
+            this.$custom_json.ep_api.get_accessi_totali
           )
           .then((response) => {
+            this.spin = false;
             this.accessi_totali = response.data;
             console.log(this.accessi_totali.Broker_totale);
           });
@@ -222,10 +242,16 @@ export default {
 .bg-broker {
   background-color: #1f4b6b !important;
 }
+
 .bg-rami {
   background-color: #607d8b !important;
 }
+
 .bg-energy {
   background-color: green !important;
+}
+
+.c-vr {
+  margin-bottom: 12px !important;
 }
 </style>

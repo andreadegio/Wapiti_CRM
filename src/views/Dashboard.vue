@@ -295,7 +295,7 @@ export default {
     async set_aua() {
       console.log("Accesso Aua");
       // console.log("valore di AUA" + localStorage.getItem("AUA"));
-      if (localStorage.getItem("AUA")) {
+      if (localStorage.getItem("AUA") == false) {
         // console.log("registro");
         let params = {
           utente: localStorage.getItem("userID"),

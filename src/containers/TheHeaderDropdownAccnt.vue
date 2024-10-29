@@ -153,13 +153,13 @@
       <CDropdownItem to="/Accessi_stat" v-show="admin">
         <i class="fas fa-chart-bar"></i> <span class="pl-1">Accessi</span>
       </CDropdownItem>
-      <CDropdownItem href="https://www.abyway.it/Monitor/GestioneMonitor.html" target="_blank" v-if="admin">
+      <CDropdownItem href="https://www.abyway.it/Monitor/GestioneMonitor.html" target="_blank" v-show="admin">
         <i class="fas fa-tv"></i> <span class="pl-1">Gestione TV</span>
       </CDropdownItem>
       <CDropdownItem to="/Crm" v-if="accessoCRM">
         <i class="fas fa-address-book"></i> <span class="pl-1">CRM</span>
       </CDropdownItem>
-      <CDropdownItem @click="vaiSuAbyNext1" v-show="is_abilitato_rami">
+      <CDropdownItem @click="vaiSuAbyNext1" v-if="is_abilitato_rami">
         <i class="fas fa-fire-extinguisher"></i> <span class="pl-1">Piattaforma Professionisti</span>
       </CDropdownItem>
       <CDropdownHeader tag="div" class="text-center" color="light" v-if="user.Is_Abilitato_Elearning">
