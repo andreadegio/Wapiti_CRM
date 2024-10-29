@@ -129,33 +129,25 @@
         <CHeaderNavLink>
           <div @click="aggiornaSede()" id="user_option" class="c-avatar"
             v-c-tooltip="{ content: 'OPZIONI', placement: 'bottom-end' }">
-            <CIcon name="cil-user" style="margin-right: 0 !important" />
-            <!-- <img src="img/avatars/7.jpg" class="c-avatar-img" /> -->
+            <i class="far fa-user"></i>
           </div>
         </CHeaderNavLink>
       </template>
       <CDropdownHeader tag="div" class="text-center" color="light" v-if="admin">
         <strong>Utility</strong>
       </CDropdownHeader>
+      <CDropdownItem to="/Accessi_stat" v-show="admin">
+        <i class="fas fa-chart-bar"></i> <span class="pl-1">Accessi</span>
+      </CDropdownItem>
       <CDropdownItem href="https://www.abyway.it/Monitor/GestioneMonitor.html" target="_blank" v-if="admin">
         <i class="fas fa-tv"></i> <span class="pl-1">Gestione TV</span>
       </CDropdownItem>
       <CDropdownItem to="/Crm" v-if="accessoCRM">
         <i class="fas fa-address-book"></i> <span class="pl-1">CRM</span>
       </CDropdownItem>
-
       <CDropdownItem @click="vaiSuAbyNext1" v-show="is_abilitato_rami">
         <i class="fas fa-fire-extinguisher"></i> <span class="pl-1">Piattaforma Professionisti</span>
       </CDropdownItem>
-      <!-- <CDropdownItem to="/Calendario" v-if="admin">
-        <i class="far fa-calendar-alt"></i>
-        <span class="pl-1">Appuntamenti</span>
-      </CDropdownItem> 
-       <CDropdownItem to="/Accessi_stat" v-if="admin">
-        <i class="far fa-chart-bar"> </i> <span class="pl-1">Accessi</span>
-      </CDropdownItem> -->
-
-
       <CDropdownHeader tag="div" class="text-center" color="light" v-if="user.Is_Abilitato_Elearning">
         <strong>Formazione</strong>
       </CDropdownHeader>
@@ -165,8 +157,6 @@
       <CDropdownItem to="/e-learning">
         <i class="fas fa-user-graduate"></i> <span class="pl-1">Aby Academy</span>
       </CDropdownItem>
-
-
       <CDropdownHeader tag="div" class="text-center" color="light">
         <strong>Account</strong>
       </CDropdownHeader>
@@ -175,12 +165,10 @@
         <span class="pl-1">Genera Firma</span>
       </CDropdownItem>
       <CDropdownItem @click="Get_user()">
-        <CIcon name="cil-user" /> Profilo
+        <i class="far fa-user"></i> <span class="pl-1">Profilo</span>
       </CDropdownItem>
       <CDropdownItem @click="Logout()">
-        <!-- <CHeaderNavLink to="login"> -->
         <CIcon :content="$options.logout_ico" /> Logout
-        <!-- </CHeaderNavLink> -->
       </CDropdownItem>
     </CDropdown>
   </div>

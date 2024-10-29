@@ -119,7 +119,7 @@
             </CCardLink>
           </div>
           <div class="col-sm" v-else>
-            <CCardLink @click="vaiSuSelly">
+            <CCardLink @click="conta_accesso('NLT'); vaiSuSelly">
               <CCard class="text-center elevation-6 portali-btn grow" body-wrapper style="
                   height: 200px;
                   background-image: url('img/buttons/NLT.png');
@@ -334,6 +334,9 @@ export default {
                 break;
               case "energy":
                 this.loginEnergy();
+                break;
+              case "NLT":
+                this.vaiSuSelly();
                 break;
               case "rami":
                 if (this.urlRami) {
