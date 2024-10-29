@@ -12,7 +12,7 @@
         <div class="d-flex align-items-center">
           <CContainer fluid>
             <CRow class="justify-content-center">
-              <CCol md="10">
+              <CCol>
                 <CCard>
                   <CCardBody align="center">
                     <h1>{{ user.Nominativo }}</h1>
@@ -43,7 +43,7 @@
                     </div>
 
                     <CRow class="py-4" style="justify-content: center">
-                      <CCol sm="3" class="text-center mx-2 border">
+                      <CCol sm="2" class="text-center mx-2 border">
                         <CRow align-horizontal="center" class="bg-broker"><span class="py-3 intestazione_accessi">
                             <i class="fas fa-car-alt fa-3x"></i>
                             <br />
@@ -57,7 +57,7 @@
                           </div>
                         </CRow>
                       </CCol>
-                      <CCol sm="3" class="text-center mx-2 border">
+                      <CCol sm="2" class="text-center mx-2 border">
                         <CRow align-horizontal="center" class="bg-rami"><span class="py-3 intestazione_accessi">
                             <i class="fas fa-user-tie fa-3x"></i>
                             <br />
@@ -71,7 +71,21 @@
                           </div>
                         </CRow>
                       </CCol>
-                      <CCol sm="3" class="text-center mx-2 border">
+                      <CCol sm="2" class="text-center mx-2 border">
+                        <CRow align-horizontal="center" class="bg-nlt"><span class="py-3 intestazione_accessi">
+                            <i class="fas fa-car-side fa-3x"></i>
+                            <br />
+                            Piattaforma<br />Noleggio</span></CRow>
+                        <CRow align-horizontal="center">
+                          <div v-show="user.Abilitato_Noleggio_4YL" class="py-3" style="color: green">
+                            <i class="fas fa-check fa-3x"></i>
+                          </div>
+                          <div v-show="!user.Abilitato_Noleggio_4YL" class="py-3" style="color: red">
+                            <i class="fas fa-times fa-3x"></i>
+                          </div>
+                        </CRow>
+                      </CCol>
+                      <CCol sm="2" class="text-center mx-2 border">
                         <CRow align-horizontal="center" class="bg-energy"><span class="py-3 intestazione_accessi">
                             <i class="far fa-lightbulb fa-3x"></i>
                             <br />
