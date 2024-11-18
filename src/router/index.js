@@ -63,6 +63,11 @@ const ModificaContenuti = () =>
   import(
     /* webpackChunkName: "Commerciale" */ "@/views/commerciale/ModificaContenuti"
   );
+// View - Amministrazione
+const Amministrazione = () =>
+  import(
+    /* webpackChunkName: "Amministrazione" */ "@/views/amministrazione/amministrazione"
+  );
 
 // Views - Statistiche
 const Statistiche = () =>
@@ -208,6 +213,11 @@ function configRoutes() {
           name: "AdminCommerciale_settore",
           props: true,
           component: AdminCommerciale,
+        },
+        {
+          path: "/Amministrazione",
+          name: "Amministrazione",
+          component: Amministrazione,
         },
         {
           path: "/Comingsoon",

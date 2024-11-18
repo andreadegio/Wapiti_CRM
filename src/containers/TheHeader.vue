@@ -42,14 +42,15 @@
             <CBadge v-show="notificheFormazione > 0" color="danger" class="badgeNotifiche">{{ notificheFormazione }}
             </CBadge>
           </CNavItem>
-          <CNavItem :class="$route.path == '/Comingsoon' ? 'active' : ''" class="grow" :to="{ path: '/Comingsoon' }"
-            target="_self"><i class="fas fa-calculator"></i> Amministrazione</CNavItem>
+          <CNavItem :class="$route.path == '/Comingsoon' ? 'active' : ''" class="grow"
+            :to="{ path: '/Amministrazione' }" target="_self"><i class="fas fa-calculator"></i> Amministrazione
+          </CNavItem>
           <CNavItem :class="$route.path == '/Documentale'
-          ? $route.path == '/Documentale/Intermediario'
-            ? 'active'
-            : 'active'
-          : ''
-        " class="grow" :to="{ path: '/Documentale' }" target="_self"><i class="fas fa-file-signature"></i>
+            ? $route.path == '/Documentale/Intermediario'
+              ? 'active'
+              : 'active'
+            : ''
+            " class="grow" :to="{ path: '/Documentale' }" target="_self"><i class="fas fa-file-signature"></i>
             Documentale</CNavItem>
         </CNav>
       </CCol>
