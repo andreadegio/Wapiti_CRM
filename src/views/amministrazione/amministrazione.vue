@@ -80,6 +80,7 @@ export default {
             isRami: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Rami,
             isEnergy: JSON.parse(localStorage.getItem("chisono_data")).Abilitato_Energy,
             isNext2: true,
+            urlAmministrazioneNext2: localStorage.getItem("urlAmministrazioneNext2"),
         }
     },
     methods: {
@@ -98,14 +99,13 @@ export default {
                     case "ramiNext":
                         this.setLoading(false, 10 * 1000);
 
-                        await this.abyNext2();
+                        await this.amministrazioneNext2();
 
-                        if (this.urlRamiNext2) {
-                            window.location.href = this.urlRamiNext2;
+                        if (this.urlAmministrazioneNext2) {
+                            window.location.href = this.urlAmministrazioneNext2;
                         } else {
-                            window.location.href = localStorage.getItem("urlRamiNext2");
+                            window.location.href = localStorage.getItem("urlAmministrazioneNext2");
                         }
-
                         break;
                     default:
                         break;
@@ -116,9 +116,15 @@ export default {
             }
             // alert("uno in più per " + settore + " è entrato " + this.userID);
         },
-        async abyNext2() {
-            // =================== ACCESSO PER ABYNEXT 2 ===============================
-            let baseUrlNext2 = this.$custom_json.ep_api.baseUrlNext2;
+        // attiva/disattiva il loader, emettendo un evento
+        // che viene ascoltato da TheContainer
+        // se specificato un timeout, il loader torna allo stato precedente
+        setLoading(is_loading, timeout_ms = null) {
+            this.$emit("set-loading", is_loading, timeout_ms);
+        },
+        async amministrazioneNext2() {
+            // =================== ACCESSO AREA AMMINISTRAZIONE PER ABYNEXT 2 ===============================
+            let amministrazioneUrlNext2 = this.$custom_json.ep_api.amministrazioneUrlNext2;
             try {
                 let userID = localStorage.getItem("userID");
                 var paramNext2 = {
@@ -135,8 +141,8 @@ export default {
                     );
 
                 localStorage.setItem(
-                    "urlRamiNext2",
-                    baseUrlNext2 + "?token=" + response.data.token
+                    "urlAmministrazioneNext2",
+                    amministrazioneUrlNext2 + "?token=" + response.data.token
                 );
             } catch (error) {
                 console.log("impossibile recuperare jwt rami " + error);

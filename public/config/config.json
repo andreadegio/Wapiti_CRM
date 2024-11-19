@@ -21,6 +21,7 @@
     "getUrlRami": "Rami/getUrl",
     "getUrlNext2": "Rami/getUrlNext2",
     "baseUrlNext2": "https://abynextp-staging.aby.it/",
+    "amministrazioneUrlNext2": "https://abynextp-staging.aby.it/home?amm=1&",
     "searchImg": "Utility/searchImg",
     "categorie": "Commerciale/getCategorie",
     "area": "Commerciale/getArea",
