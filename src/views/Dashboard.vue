@@ -154,15 +154,7 @@
               <contattiAby :recapitiParent="recapiti" class="h-100" />
             </CCol>
           </div>
-          <!-- <div class="col-sm p-0">
-            <CCol class="h-100">
-              <NewsMondo
-                class="h-100"
-                :newsParent="news_mondo"
-                @reload_mondo="reload_mondo()"
-              />
-            </CCol>
-          </div> -->
+
         </div>
       </CCol>
       <CCol md="1"> </CCol>
