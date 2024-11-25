@@ -21,7 +21,6 @@
     "getUrlRami": "Rami/getUrl",
     "getUrlNext2": "Rami/getUrlNext2",
     "baseUrlNext2": "https://abynextp-staging.aby.it/",
-    "amministrazioneUrlNext2": "https://abynextp-staging.aby.it/home?amm=1&",
     "searchImg": "Utility/searchImg",
     "categorie": "Commerciale/getCategorie",
     "area": "Commerciale/getArea",
@@ -122,8 +121,8 @@
   },
   "amministrazione": {
     "auto": "https://broker.abybroker.it/BN2023-test/AreaAmministrazione.aspx",
-    "energia": "https://abyenergy.it/gestionale/AreaAmministrazione.aspx",
-    "rami": "https://broker.abybroker.it/BN2023-test/AreaAmministrazione.aspx"
+    "energia": "https://abyenergy.it/Test/accesso.aspx?r=staging&ReturnUrl=/test/areaamministrazione.aspx",
+    "rami": "https://abynextp-staging.aby.it/?amm=1&"
   },
   "login_url": "https://broker.abybroker.it/accesso/login.aspx?r=staging",
   "login_url_energy": "https://abyenergy.it/Test/accesso.aspx?r=staging",

@@ -1,10 +1,13 @@
 <template>
-    <div>
+    <div id="cover" class="min-vh-100" style="
+      background: rgb(255, 255, 255) url('img/filigranaAmministrazione.jpg') no-repeat scroll
+        0% 0%;
+    ">
         <div style="text-align: center;" class="py-5">
-            <h1>Area amministrativa</h1>
+
         </div>
         <CRow>
-            <CCol>
+            <CCol sm="1">
 
             </CCol>
             <CCol>
@@ -64,7 +67,7 @@
                     </CCardLink>
                 </div>
             </CCol>
-            <CCol>
+            <CCol sm="1">
 
             </CCol>
         </CRow>
@@ -116,6 +119,44 @@ export default {
             }
             // alert("uno in più per " + settore + " è entrato " + this.userID);
         },
+        loginEnergy() {
+            // console.log("invio il form di login");
+            // Creo un form
+            var EnergyForm = document.createElement("form");
+            EnergyForm.name = "formLogin";
+            EnergyForm.target = "_self";
+            EnergyForm.method = "POST";
+            EnergyForm.action = this.$custom_json.amministrazione.energia;
+
+            // Creo l'input per l'user
+            var EnergyFormUser = document.createElement("input");
+            EnergyFormUser.type = "hidden";
+            EnergyFormUser.name = "user";
+            EnergyFormUser.value = localStorage.getItem("user");
+
+            // Creo l'input per la passwd
+            var EnergyFormPwd = document.createElement("input");
+            EnergyFormPwd.type = "hidden";
+            EnergyFormPwd.name = "password";
+            EnergyFormPwd.value = localStorage.getItem("pwd");
+
+            // Creo l'input per il token
+            var EnergyFormToken = document.createElement("input");
+            EnergyFormToken.type = "hidden";
+            EnergyFormToken.name = "72aeb0fc-7bd8-11e5-b78d-00505693441e";
+            EnergyFormToken.value = "securetoken";
+
+            // Aggiungo i campi al form
+            EnergyForm.appendChild(EnergyFormUser);
+            EnergyForm.appendChild(EnergyFormPwd);
+            EnergyForm.appendChild(EnergyFormToken);
+
+            // Aggiungo il form al dom
+            document.body.appendChild(EnergyForm);
+
+            // Invio la richiesta
+            EnergyForm.submit();
+        },
         // attiva/disattiva il loader, emettendo un evento
         // che viene ascoltato da TheContainer
         // se specificato un timeout, il loader torna allo stato precedente
@@ -124,7 +165,7 @@ export default {
         },
         async amministrazioneNext2() {
             // =================== ACCESSO AREA AMMINISTRAZIONE PER ABYNEXT 2 ===============================
-            let amministrazioneUrlNext2 = this.$custom_json.ep_api.amministrazioneUrlNext2;
+            let amministrazioneUrlNext2 = this.$custom_json.amministrazione.rami;
             try {
                 let userID = localStorage.getItem("userID");
                 var paramNext2 = {
@@ -142,7 +183,7 @@ export default {
 
                 localStorage.setItem(
                     "urlAmministrazioneNext2",
-                    amministrazioneUrlNext2 + "?token=" + response.data.token
+                    amministrazioneUrlNext2 + "token=" + response.data.token
                 );
             } catch (error) {
                 console.log("impossibile recuperare jwt rami " + error);
@@ -151,3 +192,10 @@ export default {
     }
 }
 </script>
+<style scoped>
+#cover {
+    background-size: cover !important;
+    background-position: right !important;
+    max-width: none !important;
+}
+</style>
