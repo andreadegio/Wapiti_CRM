@@ -15,7 +15,6 @@
       <CCol md="1"> </CCol>
       <CCol sm="10" md="10">
         <div class="row">
-
           <!-- BROKERNET RCA -->
           <div class="col-sm">
             <CCardLink target="_self" @click="conta_accesso('broker')">

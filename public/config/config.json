@@ -119,12 +119,16 @@
     "Documentale_Whistleblowing": "Documentale_Whistleblowing",
     "Download_Documentale_Whistleblowing": "Download_Documentale_Whistleblowing/"
   },
+  "amministrazione": {
+    "auto": "https://broker.abybroker.it/BN2023-test/AreaAmministrazione.aspx",
+    "energia": "https://abyenergy.it/Test/accesso.aspx?r=staging&ReturnUrl=/test/areaamministrazione.aspx",
+    "rami": "https://abynextp-staging.aby.it/?amm=1&"
+  },
   "login_url": "https://broker.abybroker.it/accesso/login.aspx?r=staging",
   "login_url_energy": "https://abyenergy.it/Test/accesso.aspx?r=staging",
   "logout_url_energy": "https://abyenergy.it/Test/logout.aspx",
   "logout_url": "https://broker.abybroker.it/BN2023-test/logout.aspx",
   "logout_aua_url": "https://broker.abybroker.it/BN2023-test/Logout_aua.aspx",
-
   "selly_nlt": {
     "url_accesso": "https://broker.abybroker.it/accessonuovo-test",
     "endpoint_auth_token": "/selly/genera-auth-token",
