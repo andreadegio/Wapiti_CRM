@@ -66,6 +66,22 @@
                         </CCard>
                     </CCardLink>
                 </div>
+                <div class="col-sm" v-if="!isEnergy">
+                    <CCardLink to="Comingsoon_gas" target="_self">
+                        <CCard class="text-center elevation-6 portali-btn grow" body-wrapper style="
+                  height: 200px;
+                  background-image: url('img/buttons/energy.png');
+                  background-position: center;
+                  z-index: 0;
+                  background-size: cover;
+                ">
+                            <CCardTitle class="grow titolo_piattaforme">
+                                <span class="portali">Piattaforma</span>
+                                <h1 class="pulsante_portali">ENERGIA</h1>
+                            </CCardTitle>
+                        </CCard>
+                    </CCardLink>
+                </div>
             </CCol>
             <CCol sm="1">
 
