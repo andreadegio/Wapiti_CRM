@@ -9,58 +9,39 @@
             <span class="tabs-nav"> Comunicazioni</span>
           </template>
           <CCardGroup class="latest">
-            <div
-              class="col-lg-3 col-sm-6 px-0 pb-0"
-              v-for="(item, index) in post"
-              :key="index"
-            >
-              <CCard
-                class="mx-1 pt-2 card_materiale card_post pb-0 mb-0"
-                :style="{ '--bgColor': item.color_settore }"
-              >
-                <CLink
-                  :to="{
-                    name: 'Comunicazione',
-                    params: {
-                      notizia: item.titolo,
-                      id: item.id,
-                      lista_post: post,
-                    },
-                  }"
-                >
-                  <CCardHeader class="text-uppercase pt-0 titolo_color"
-                    ><strong class="titolo_color">
+            <div class="col-lg-3 col-sm-6 px-0 pb-0" v-for="(item, index) in post" :key="index">
+              <CCard class="mx-1 pt-2 card_materiale card_post pb-0 mb-0" :style="{ '--bgColor': item.color_settore }">
+                <CLink :to="{
+                  name: 'Comunicazione',
+                  params: {
+                    notizia: item.titolo,
+                    id: item.id,
+                    lista_post: post,
+                  },
+                }">
+                  <CCardHeader class="text-uppercase pt-0 titolo_color"><strong class="titolo_color">
                       <u>{{ item.label_settore }}</u>
-                    </strong></CCardHeader
-                  >
-                  <CCardImg
-                    :src="$custom_json.base_url + item.copertina"
-                    style="height: 15rem; object-fit: cover"
-                    alt="- IMPOSSIBILE CARICARE -"
-                  >
+                    </strong></CCardHeader>
+                  <CCardImg :src="$custom_json.base_url + item.copertina" style="height: 15rem; object-fit: cover"
+                    alt="- IMPOSSIBILE CARICARE -">
                   </CCardImg>
-                  <CBadge
-                    v-if="
-                      lista_nuovi != null && lista_nuovi.includes(item.id_post)
-                    "
-                    color="danger"
-                    class="badgeNuovo"
-                    >Nuovo
+                  <CBadge v-if="
+                    lista_nuovi != null && lista_nuovi.includes(item.id_post)
+                  " color="danger" class="badgeNuovo">Nuovo
                   </CBadge>
                   <CCardBody class="py-0 px-1" style="min-height: 5rem">
                     <div class="text-right">
                       <cite> {{ item.data_ins | formatDate }}</cite>
                     </div>
                     <h2 class="text-center">
-                      {{ item.titolo | truncate(20, "[...]") }}
+                      <span v-html="item.titolo"></span>
                     </h2>
 
                     <!-- <div
                 v-html="$options.filters.truncate(item.contenuto, 50, ' [...]')"
               ></div> -->
                   </CCardBody>
-                  <CCardFooter class="text-center py-2"
-                    ><strong>Leggi di più...</strong>
+                  <CCardFooter class="text-center py-2"><strong>Leggi di più...</strong>
                   </CCardFooter>
                 </CLink>
               </CCard>
@@ -89,43 +70,25 @@
             <span class="tabs-nav"> Comunicazioni</span>
           </template>
           <CCardGroup class="latest">
-            <div
-              class="col-lg-3 col-sm-6 px-0 pb-0"
-              v-for="(item, index) in post"
-              :key="index"
-            >
-              <CCard
-                class="mx-1 pt-2 card_materiale card_post pb-0 mb-0"
-                :style="{ '--bgColor': item.color_settore }"
-              >
-                <CLink
-                  :to="{
-                    name: 'Comunicazione',
-                    params: {
-                      notizia: item.titolo,
-                      id: item.id,
-                      lista_post: post,
-                    },
-                  }"
-                >
-                  <CCardHeader class="text-uppercase pt-0 titolo_color"
-                    ><strong class="titolo_color">
+            <div class="col-lg-3 col-sm-6 px-0 pb-0" v-for="(item, index) in post" :key="index">
+              <CCard class="mx-1 pt-2 card_materiale card_post pb-0 mb-0" :style="{ '--bgColor': item.color_settore }">
+                <CLink :to="{
+                  name: 'Comunicazione',
+                  params: {
+                    notizia: item.titolo,
+                    id: item.id,
+                    lista_post: post,
+                  },
+                }">
+                  <CCardHeader class="text-uppercase pt-0 titolo_color"><strong class="titolo_color">
                       <u>{{ item.label_settore }}</u>
-                    </strong></CCardHeader
-                  >
-                  <CCardImg
-                    :src="$custom_json.base_url + item.copertina"
-                    style="height: 15rem; object-fit: cover"
-                    alt="- IMPOSSIBILE CARICARE -"
-                  >
+                    </strong></CCardHeader>
+                  <CCardImg :src="$custom_json.base_url + item.copertina" style="height: 15rem; object-fit: cover"
+                    alt="- IMPOSSIBILE CARICARE -">
                   </CCardImg>
-                  <CBadge
-                    v-if="
-                      lista_nuovi != null && lista_nuovi.includes(item.id_post)
-                    "
-                    color="danger"
-                    class="badgeNuovo"
-                    >Nuovo
+                  <CBadge v-if="
+                    lista_nuovi != null && lista_nuovi.includes(item.id_post)
+                  " color="danger" class="badgeNuovo">Nuovo
                   </CBadge>
                   <CCardBody class="py-0 px-1" style="min-height: 10rem">
                     <div class="text-right">
@@ -137,8 +100,7 @@
                 v-html="$options.filters.truncate(item.contenuto, 50, ' [...]')"
               ></div> -->
                   </CCardBody>
-                  <CCardFooter class="text-center py-2"
-                    ><strong>Leggi di più...</strong>
+                  <CCardFooter class="text-center py-2"><strong>Leggi di più...</strong>
                   </CCardFooter>
                 </CLink>
               </CCard>
@@ -196,8 +158,8 @@ export default {
         await axios
           .post(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.get_toSee,
+            this.$custom_json.api_url +
+            this.$custom_json.ep_api.get_toSee,
             { params }
           )
           .then((response) => {
@@ -220,8 +182,8 @@ export default {
         await axios
           .post(
             this.$custom_json.base_url +
-              this.$custom_json.api_url +
-              this.$custom_json.ep_api.lista_post,
+            this.$custom_json.api_url +
+            this.$custom_json.ep_api.lista_post,
             { params },
             {
               header: {
@@ -245,15 +207,18 @@ export default {
 };
 </script>
 <style scoped>
-.tab-pane.active{
+.tab-pane.active {
   background-color: white !important;
 }
+
 a {
   color: #1f4b6b !important;
 }
+
 .new_fluid {
   display: grid;
 }
+
 .card_post::before {
   content: "";
   display: block;
@@ -262,22 +227,24 @@ a {
   left: 0;
   width: 50%;
   height: 8px;
-  background: linear-gradient(
-    to right,
-    var(--bgColor) 60%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(to right,
+      var(--bgColor) 60%,
+      rgba(255, 255, 255, 0) 100%);
   /* border-top: 6px solid var(--bgColor); */
 }
+
 .titolo_color {
   color: var(--bgColor) !important;
 }
+
 .latest a:hover {
   text-decoration: none;
 }
+
 .tabs-nav {
   font-size: 1.5rem !important;
 }
+
 .badgeNuovo {
   position: absolute;
   z-index: 99;
@@ -288,12 +255,13 @@ a {
     0 6px 10px 0 rgba(0, 0, 0, 0.55), 0 1px 18px 0 rgba(223, 78, 78, 0.83) !important;
   font-size: 90% !important;
 }
+
 @media screen and (max-width: 600px) {
   li {
     border: 1px solid #1f4b6b;
   }
 
-  .tabs-nav{
+  .tabs-nav {
     font-size: 1rem !important;
   }
 
