@@ -54,7 +54,7 @@
       <template #actions="row">
         <td v-if="(row.item.id_segnalatore &&
           row.item.id_referente == user.idUtente) ||
-          (row.item.id_segnalatore == null && row.item.user_ins_id == user.idUtente) || user.idUtente == 140 || user.idUtente == 1006 || user.idUtente == 14 || user.idUtente == 3982
+          (row.item.id_segnalatore == null && row.item.user_ins_id == user.idUtente) || user.idUtente == 140 || user.idUtente == 1006 || user.idUtente == 14 || user.idUtente == 3982 || user.idUtente == 6291
         ">
           <div class="d-flex">
             <Attivazione v-if="gridType === 'attivazione_account'" class="ml-2" :itemId="row.item.id"
