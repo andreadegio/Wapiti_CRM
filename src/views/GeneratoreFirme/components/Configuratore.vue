@@ -7,6 +7,8 @@
       <v-radio label="Aby Store" color="red" value="STORE"></v-radio>
       <v-radio label="Aby Servizi" color="red" value="SERVIZI"></v-radio>
       <v-radio label="Aby Energy" color="red" value="ENERGY"></v-radio>
+      <v-radio label="Aby Power" color="red" value="POWER"></v-radio>
+      <v-radio label="Wapiti" color="red" value="WAPITI"></v-radio>
       <v-radio label="Navèrt" color="red darken-3" value="NAV"></v-radio>
       <v-radio label="Patrocinium" color="red darken-3" value="PAT"></v-radio>
     </v-radio-group>

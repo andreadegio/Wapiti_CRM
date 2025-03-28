@@ -99,9 +99,11 @@
       <SignatureAbyPoint class="preview" v-show="company == 'POINT'" :recapiti="recapiti" />
       <SignatureAbyStore class="preview" v-show="company == 'STORE'" :recapiti="recapiti" />
       <SignatureAbyEnergy class="preview" v-show="company == 'ENERGY'" :recapiti="recapiti" />
+      <SignatureAbyPower class="preview" v-show="company == 'POWER'" :recapiti="recapiti" />
       <SignatureAbyServizi class="preview" v-show="company == 'SERVIZI'" :recapiti="recapiti" />
       <SignatureNavert class="preview" v-show="company == 'NAV'" :recapiti="recapiti" />
       <SignaturePatrocinium class="preview" v-show="company == 'PAT'" :recapiti="recapiti" />
+      <SignatureWapiti class="preview" v-show="company == 'WAPITI'" :recapiti="recapiti" />
     </div>
   </div>
 </template>
@@ -114,6 +116,8 @@ import SignatureAbyPoint from "./components/SignAbyPoint.vue";
 import SignatureAbyStore from "./components/SignAbyStore.vue";
 import SignatureNavert from "./components/SignNavert.vue";
 import SignaturePatrocinium from "./components/SignPatrocinium.vue";
+import SignatureWapiti from "./components/SignWapiti.vue";
+import SignatureAbyPower from "./components/SignAbyPower.vue";
 import Configuratore from "./components/Configuratore.vue";
 
 export default {
@@ -126,6 +130,8 @@ export default {
     SignatureAbyStore,
     SignatureNavert,
     SignaturePatrocinium,
+    SignatureWapiti,
+    SignatureAbyPower,
     Configuratore,
   },
   data() {
