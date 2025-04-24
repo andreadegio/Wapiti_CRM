@@ -157,7 +157,7 @@
                       "
                       target="_blank"
                     >
-                      43122 via Giorgio Gastaldi 3, Parma
+                      Via Colorno 57, 43122 Parma
                     </a>
                   </td>
                 </tr>
@@ -244,7 +244,8 @@
       align="center"
       style="font-weight: 500; font-family: Montserrat; font-size: 10px"
     >
-      Wapiti Srl. - Partita IVA e Codice fiscale: 03097710341 - Nuero REA: PR-360923
+      Wapiti Srl. - Partita IVA e Codice fiscale: 03097710341 - Nuero REA: PR-360923 - Iscrizione RUI: B000776592<br>
+      Capitale sociale € 100.000
     </div>
     <div
       style="
